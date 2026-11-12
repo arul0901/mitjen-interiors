@@ -1,0 +1,469 @@
+/* ==========================================================================
+   HOW IT WORKS — 3 EASY STEPS TO GET INTERIOR DESIGN
+   - Single row on warm off-white (--ed-bg: #F5F2EC) with subtle left ambient glow
+   - Left column 25-30% width, three portrait cards to the right (16-20px gap)
+   - Rich structured boxes with milestones & deliverables (no empty void)
+   - Hover effect: dark photo fade-in (0.5s) with gentle zoom-out (1.08 -> 1.0, 0.8s)
+   - Text color transitions to white (0.4s), outlined number stroke shifts to gold (#c19a5b)
+   - Responsive: 3 cols (desktop) -> 2 cols (tablet) -> 1 col (mobile)
+   ========================================================================== */
+
+.hiw-section {
+  position: relative;
+  background-color: var(--ed-bg, #F5F2EC);
+  color: var(--ed-text-primary, #25231F);
+  overflow: hidden;
+  padding: clamp(54px, 7vw, 90px) 0;
+  box-sizing: border-box;
+}
+
+/* Subtle, very light gradient / glow on the left side */
+.hiw-glow {
+  position: absolute;
+  top: 10%;
+  left: -8%;
+  width: 44%;
+  height: 80%;
+  background: radial-gradient(circle at 30% 50%, rgba(243, 237, 226, 0.85) 0%, rgba(245, 242, 236, 0) 70%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Overall Layout Container */
+.hiw-container {
+  position: relative;
+  z-index: 2;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding-left: clamp(20px, 4vw, 40px);
+  padding-right: clamp(20px, 4vw, 40px);
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: clamp(28px, 3.5vw, 52px);
+  box-sizing: border-box;
+}
+
+/* --------------------------------------------------------------------------
+   1. Left Intro Column (takes about 25–30% of the width)
+   -------------------------------------------------------------------------- */
+.hiw-intro-col {
+  flex: 0 0 clamp(260px, 28%, 340px);
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+/* Eyebrow: 90px gold line + uppercase gold label */
+.hiw-eyebrow-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.hiw-gold-line {
+  display: inline-block;
+  width: 90px;
+  height: 1px;
+  background-color: var(--ed-muted-gold, #c19a5b);
+  flex-shrink: 0;
+}
+
+.hiw-eyebrow-label {
+  font-family: var(--font-architectural, 'Space Grotesk', sans-serif);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ed-muted-gold, #c19a5b);
+  white-space: nowrap;
+}
+
+/* Heading: bold high-contrast serif */
+.hiw-heading {
+  font-family: var(--font-heading, 'Playfair Display', 'Libre Baskerville', 'Cormorant Garamond', Georgia, serif);
+  font-size: clamp(30px, 3.2vw, 40px);
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--ed-text-primary, #10151f);
+  margin: 0 0 16px 0;
+  letter-spacing: -0.015em;
+}
+
+/* Paragraph: clean sans-serif */
+.hiw-paragraph {
+  font-family: var(--font-content, 'Inter', 'Roboto', 'Manrope', sans-serif);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ed-text-secondary, #4a4f57);
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   2. Step Cards Grid (3 equal-width columns with ~16–20px gap)
+   -------------------------------------------------------------------------- */
+.hiw-cards-grid {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  box-sizing: border-box;
+}
+
+/* Individual Step Card:
+   - Well-structured box with rich content (zero empty dead space)
+   - White background with delicate shadow
+   - Smooth photo cross-fade on hover
+*/
+.hiw-card {
+  position: relative;
+  background-color: #ffffff;
+  border-radius: 18px;
+  border: 1px solid rgba(37, 35, 31, 0.09);
+  box-shadow: 0 10px 36px rgba(0, 0, 0, 0.04);
+  padding: 26px 22px 22px;
+  min-height: 480px;
+  box-sizing: border-box;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  outline: none;
+  transition: box-shadow 0.4s ease, transform 0.4s ease;
+}
+
+.hiw-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.12);
+}
+
+.hiw-card:focus-visible {
+  outline: 2px solid var(--ed-muted-gold, #c19a5b);
+  outline-offset: 2px;
+}
+
+/* Background image layer (absolutely positioned inset: 0) */
+.hiw-card-bg-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.5s cubic-bezier(0.22, 0.7, 0.2, 1);
+}
+
+/* Gentle zoom-out: scale from 1.08 to 1.0 over 0.8s */
+.hiw-card-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1.08);
+  transition: transform 0.8s ease;
+  will-change: transform;
+}
+
+/* Dark overlay (rgba(12, 16, 24, 0.72)) */
+.hiw-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(12, 16, 24, 0.78) 0%, rgba(12, 16, 24, 0.88) 100%);
+}
+
+/* Foreground content container */
+.hiw-card-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* Header: Outlined Number + Stage Pill */
+.hiw-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+/* Large outlined number: 46px, rounded geometric sans, thin 1.5px pale-gold stroke */
+.hiw-card-number {
+  font-family: 'Poppins', 'Inter', 'Space Grotesk', var(--font-architectural, sans-serif);
+  font-size: clamp(40px, 3vw, 46px);
+  font-weight: 700;
+  line-height: 1;
+  display: inline-block;
+  color: transparent;
+  -webkit-text-stroke: 1.5px #e6d3ab;
+  flex-shrink: 0;
+  transition: -webkit-text-stroke 0.4s ease;
+}
+
+.hiw-stage-pill {
+  font-family: var(--font-architectural, sans-serif);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--ed-muted-gold, #c19a5b);
+  background: rgba(193, 154, 91, 0.1);
+  border: 1px solid rgba(193, 154, 91, 0.22);
+  padding: 4px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: all 0.4s ease;
+}
+
+/* Body: Title, Description, Deliverables */
+.hiw-card-body {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+/* Title: bold serif, ~20px, #10151f */
+.hiw-card-title {
+  font-family: var(--font-heading, 'Playfair Display', 'Libre Baskerville', 'Cormorant Garamond', Georgia, serif);
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.28;
+  color: var(--ed-text-primary, #10151f);
+  margin: 0 0 10px 0;
+  letter-spacing: -0.01em;
+  transition: color 0.4s ease;
+}
+
+/* Description: sans-serif, ~13.5px, 1.55 line-height, #555a62 */
+.hiw-card-desc {
+  font-family: var(--font-content, 'Inter', 'Roboto', 'Manrope', sans-serif);
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: var(--ed-text-secondary, #555a62);
+  margin: 0 0 16px 0;
+  transition: color 0.4s ease;
+}
+
+/* Deliverables Bullet List (Structured Content) */
+.hiw-deliv-list {
+  list-style: none;
+  padding: 12px 0 0 0;
+  margin: 0 0 16px 0;
+  border-top: 1px solid rgba(37, 35, 31, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  transition: border-color 0.4s ease;
+}
+
+.hiw-deliv-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-family: var(--font-content, sans-serif);
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: var(--ed-text-primary, #25231F);
+  transition: color 0.4s ease;
+}
+
+.hiw-deliv-item svg {
+  width: 14px;
+  height: 14px;
+  color: #7B3036;
+  flex-shrink: 0;
+  margin-top: 2px;
+  transition: color 0.4s ease;
+}
+
+/* Footer: Duration Tag + Subtle Cue */
+.hiw-card-footer {
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid rgba(37, 35, 31, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  transition: border-color 0.4s ease;
+}
+
+.hiw-duration-tag {
+  font-family: var(--font-architectural, sans-serif);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: #777168;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: color 0.4s ease;
+}
+
+.hiw-hover-cue {
+  font-family: var(--font-architectural, sans-serif);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--ed-muted-gold, #c19a5b);
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: color 0.4s ease;
+}
+
+/* --------------------------------------------------------------------------
+   3. Hover Interactions (The Key Effect)
+   - Background photo fades in (0.5s ease)
+   - Gentle image zoom-out from 1.08 to 1.0 (0.8s)
+   - Title, description and deliverables turn crisp white
+   - Outlined number stroke shifts to a stronger gold (#c19a5b)
+   -------------------------------------------------------------------------- */
+.hiw-card:hover .hiw-card-bg-layer,
+.hiw-card:focus-visible .hiw-card-bg-layer {
+  opacity: 1;
+}
+
+.hiw-card:hover .hiw-card-bg-img,
+.hiw-card:focus-visible .hiw-card-bg-img {
+  transform: scale(1.0);
+}
+
+.hiw-card:hover .hiw-card-number,
+.hiw-card:focus-visible .hiw-card-number {
+  -webkit-text-stroke: 1.5px #c19a5b;
+}
+
+.hiw-card:hover .hiw-stage-pill,
+.hiw-card:focus-visible .hiw-stage-pill {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.hiw-card:hover .hiw-card-title,
+.hiw-card:focus-visible .hiw-card-title {
+  color: #ffffff;
+}
+
+.hiw-card:hover .hiw-card-desc,
+.hiw-card:focus-visible .hiw-card-desc {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.hiw-card:hover .hiw-deliv-list,
+.hiw-card:focus-visible .hiw-deliv-list {
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.hiw-card:hover .hiw-deliv-item,
+.hiw-card:focus-visible .hiw-deliv-item {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.hiw-card:hover .hiw-deliv-item svg,
+.hiw-card:focus-visible .hiw-deliv-item svg {
+  color: #e6d3ab;
+}
+
+.hiw-card:hover .hiw-card-footer,
+.hiw-card:focus-visible .hiw-card-footer {
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.hiw-card:hover .hiw-duration-tag,
+.hiw-card:focus-visible .hiw-duration-tag {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.hiw-card:hover .hiw-hover-cue,
+.hiw-card:focus-visible .hiw-hover-cue {
+  color: #e6d3ab;
+}
+
+/* --------------------------------------------------------------------------
+   4. Responsive Breakpoints
+   - Tablet: cards go 2 per row
+   - Mobile: stack 1 per column with intro on top
+   -------------------------------------------------------------------------- */
+@media (max-width: 1180px) {
+  .hiw-container {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .hiw-intro-col {
+    flex: 0 0 auto;
+    max-width: 100%;
+  }
+
+  .hiw-cards-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (max-width: 940px) {
+  .hiw-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+}
+
+@media (max-width: 640px) {
+  .hiw-section {
+    padding: 44px 0;
+  }
+
+  .hiw-container {
+    padding-left: 18px;
+    padding-right: 18px;
+    gap: 28px;
+  }
+
+  .hiw-gold-line {
+    width: 50px;
+  }
+
+  .hiw-heading {
+    font-size: 26px;
+  }
+
+  .hiw-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .hiw-card {
+    min-height: auto;
+    padding: 24px 20px 20px;
+  }
+
+  .hiw-card-number {
+    font-size: 44px;
+  }
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .hiw-card,
+  .hiw-card-bg-layer,
+  .hiw-card-bg-img,
+  .hiw-card-title,
+  .hiw-card-desc,
+  .hiw-deliv-item,
+  .hiw-deliv-item svg,
+  .hiw-stage-pill {
+    transition: none !important;
+  }
+}

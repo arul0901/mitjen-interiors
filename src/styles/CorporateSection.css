@@ -1,0 +1,806 @@
+/* ==========================================================================
+   HUMAN ARCHITECTURAL CORPORATE SECTION STYLES
+   Editorial 2-Column Architectural Project Showcase
+   Modeled strictly on the reference video and architectural aesthetic
+   ========================================================================== */
+
+.corporate-human-section {
+  padding: clamp(56px, 7vw, 96px) var(--pad, 32px);
+  background: #F5F2EC;
+  color: #242522;
+  position: relative;
+  width: 100%;
+  max-width: 100vw;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  border-top: 1px solid rgba(36, 37, 34, 0.12);
+}
+
+.corporate-human-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* --------------------------------------------------------------------------
+   Desktop View Display Rules
+   -------------------------------------------------------------------------- */
+.corporate-desktop-view {
+  display: block;
+  width: 100%;
+}
+
+.corporate-mobile-portfolio-view {
+  display: none;
+}
+
+/* --------------------------------------------------------------------------
+   1. Section Editorial Introduction
+   -------------------------------------------------------------------------- */
+.corporate-desk-header {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: clamp(2rem, 3.5vw, 4rem);
+  align-items: end;
+  margin-bottom: clamp(2.6rem, 4vw, 3.6rem);
+}
+
+.corporate-desk-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.corporate-desk-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-architectural, 'Space Grotesk', sans-serif);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #6a7557;
+  margin-bottom: 0.2rem;
+}
+
+.corporate-desk-kicker::before {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #6a7557;
+}
+
+.corporate-desk-heading {
+  font-family: var(--font-heading, 'Cormorant Garamond', Georgia, serif);
+  font-size: clamp(2.2rem, 3.4vw, 3.2rem);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  color: #242522;
+  margin: 0;
+  text-wrap: balance;
+  max-width: 34rem;
+}
+
+.corporate-desk-header-right {
+  display: flex;
+  align-items: flex-end;
+}
+
+.corporate-desk-lead {
+  margin: 0;
+  font-family: var(--font-content, 'Manrope', sans-serif);
+  font-size: clamp(0.92rem, 1.1vw, 1.02rem);
+  line-height: 1.68;
+  color: rgba(36, 37, 34, 0.78);
+  font-weight: 400;
+  max-width: 32rem;
+}
+
+/* --------------------------------------------------------------------------
+   2. 2-Column Editorial Grid Showcase (Hover-Expand Interactive Cards)
+   Default: Image occupies full width, text is hidden
+   Hover: Image shrinks to 38% on left, text smoothly expands on right
+   -------------------------------------------------------------------------- */
+.corporate-desk-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2.4rem, 3.2vw, 3.2rem) clamp(2.8rem, 4.2vw, 4.2rem);
+  margin-top: 1rem;
+}
+
+.corporate-desk-card {
+  display: flex;
+  align-items: stretch;
+  border-top: 1px solid rgba(36, 37, 34, 0.22);
+  padding-top: 1.3rem;
+  padding-bottom: 0.5rem;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Image container: defaultly takes 100% width, shrinks to 38% on hover */
+.corporate-desk-media {
+  flex: 0 0 100%;
+  width: 100%;
+  max-width: 100%;
+  height: clamp(270px, 22vw, 310px);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--sand, #D8C8B4);
+  position: relative;
+  box-sizing: border-box;
+  transition: flex-basis 0.65s cubic-bezier(0.2, 0.8, 0.2, 1),
+              max-width 0.65s cubic-bezier(0.2, 0.8, 0.2, 1),
+              width 0.65s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.corporate-desk-card:hover .corporate-desk-media,
+.corporate-desk-card:focus-within .corporate-desk-media {
+  flex: 0 0 38%;
+  max-width: 38%;
+  width: 38%;
+}
+
+.corporate-desk-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.85s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.corporate-desk-card:hover .corporate-desk-img,
+.corporate-desk-card:focus-within .corporate-desk-img {
+  transform: scale(1.05);
+}
+
+/* Default corner badge on image that gracefully hides on hover */
+.corporate-desk-media-badge {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(21, 22, 20, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #FAF8F5;
+  font-family: var(--font-architectural, 'Space Grotesk', sans-serif);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.corporate-desk-media-badge .badge-sep {
+  opacity: 0.5;
+}
+
+.corporate-desk-card:hover .corporate-desk-media-badge,
+.corporate-desk-card:focus-within .corporate-desk-media-badge {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+/* Text area body: defaultly max-width 0 & hidden, smoothly expands and reveals on hover */
+.corporate-desk-body {
+  flex: 1 1 62%;
+  min-width: 0;
+  max-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  padding-left: 0;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  transition: max-width 0.65s cubic-bezier(0.2, 0.8, 0.2, 1),
+              padding-left 0.65s cubic-bezier(0.2, 0.8, 0.2, 1),
+              opacity 0.45s ease;
+}
+
+.corporate-desk-card:hover .corporate-desk-body,
+.corporate-desk-card:focus-within .corporate-desk-body {
+  max-width: 62%;
+  padding-left: clamp(1.2rem, 1.6vw, 1.6rem);
+  opacity: 1;
+  pointer-events: auto;
+  transition-delay: 0.05s;
+}
+
+/* Inner text container with natural min-width to avoid squishing during expansion */
+.corporate-desk-body-inner {
+  width: 100%;
+  min-width: 260px;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(20px);
+  transition: transform 0.65s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.corporate-desk-card:hover .corporate-desk-body-inner,
+.corporate-desk-card:focus-within .corporate-desk-body-inner {
+  transform: translateX(0);
+}
+
+.corporate-desk-tag {
+  display: block;
+  font-family: var(--font-architectural, 'Space Grotesk', sans-serif);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #6a7557;
+  margin-bottom: 0.45rem;
+}
+
+.corporate-desk-card-title {
+  font-family: var(--font-heading, 'Cormorant Garamond', Georgia, serif);
+  font-size: clamp(1.35rem, 1.7vw, 1.75rem);
+  font-weight: 400;
+  line-height: 1.15;
+  color: #242522;
+  margin: 0 0 0.65rem 0;
+  letter-spacing: -0.01em;
+}
+
+.corporate-desk-card-desc {
+  margin: 0 0 0.95rem 0;
+  font-family: var(--font-content, 'Manrope', sans-serif);
+  font-size: 0.88rem;
+  line-height: 1.62;
+  color: rgba(36, 37, 34, 0.82);
+  font-weight: 400;
+}
+
+.corporate-desk-materials {
+  font-family: var(--font-content, 'Manrope', sans-serif);
+  font-size: 0.76rem;
+  line-height: 1.6;
+  color: rgba(36, 37, 34, 0.72);
+}
+
+.corporate-desk-materials-label {
+  display: block;
+  font-family: var(--font-architectural, 'Space Grotesk', sans-serif);
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #242522;
+  margin-bottom: 0.35rem;
+}
+
+.corporate-desk-materials-list {
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   3. Bottom Consultation CTA Strip
+   -------------------------------------------------------------------------- */
+.corporate-desk-cta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem 2rem;
+  margin-top: clamp(2.8rem, 4vw, 3.8rem);
+  padding: clamp(1.4rem, 2vw, 1.8rem) clamp(1.8rem, 2.5vw, 2.4rem);
+  background: var(--sand, #D8C8B4);
+  border-radius: 14px;
+}
+
+.corporate-desk-cta-content {
+  max-width: 650px;
+}
+
+.corporate-desk-cta-heading {
+  font-family: var(--font-heading, 'Cormorant Garamond', Georgia, serif);
+  font-size: clamp(1.4rem, 1.8vw, 1.85rem);
+  font-weight: 400;
+  line-height: 1.15;
+  margin: 0;
+  color: #242522;
+  letter-spacing: -0.01em;
+}
+
+.corporate-desk-cta-desc {
+  margin: 0.35rem 0 0 0;
+  font-family: var(--font-content, 'Manrope', sans-serif);
+  font-size: 0.88rem;
+  color: rgba(36, 37, 34, 0.85);
+  line-height: 1.55;
+  font-weight: 400;
+}
+
+.corporate-desk-cta-btn {
+  flex: none;
+  background: #151613;
+  color: #F5F2EC;
+  border: 1px solid #151613;
+  border-radius: 999px;
+  padding: 0.95rem 1.8rem;
+  font-family: var(--font-architectural, 'Space Grotesk', sans-serif);
+  font-size: 0.70rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.25s ease, background-color 0.25s ease, color 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.corporate-desk-cta-btn:hover {
+  background: #2a2c28;
+  color: #FFFFFF;
+  transform: translateY(-2px);
+}
+
+/* --------------------------------------------------------------------------
+   4. Intermediate Breakpoint (769px - 1024px)
+   -------------------------------------------------------------------------- */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .corporate-desk-header {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+
+  .corporate-desk-grid {
+    grid-template-columns: 1fr;
+    gap: 2.2rem;
+  }
+
+  .corporate-desk-media {
+    height: 270px;
+  }
+
+  .corporate-desk-card:hover .corporate-desk-media,
+  .corporate-desk-card:focus-within .corporate-desk-media {
+    flex: 0 0 34%;
+    max-width: 34%;
+    width: 34%;
+  }
+
+  .corporate-desk-card:hover .corporate-desk-body,
+  .corporate-desk-card:focus-within .corporate-desk-body {
+    max-width: 66%;
+  }
+
+  .corporate-desk-cta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.4rem;
+  }
+}
+
+
+/* ==========================================================================
+   MOBILE EDITORIAL VIEWPORT (<= 768px)
+   "DESIGNED AROUND WHAT MATTERS."
+   Editorial-style accordion portfolio with interactive expandable cards
+   ========================================================================== */
+@media (max-width: 768px) {
+  .corporate-desktop-view {
+    display: none !important;
+  }
+
+  /* Warm ivory editorial canvas on mobile matching reference */
+  .corporate-human-section {
+    background-color: var(--ivory, #FAF8F5) !important;
+    color: var(--ink, #151614) !important;
+    padding: clamp(48px, 8vw, 76px) var(--pad, 16px) !important;
+    border-top: 1px solid rgba(21, 22, 20, 0.08) !important;
+  }
+
+  .corporate-mobile-portfolio-view {
+    display: flex !important;
+    flex-direction: column;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    gap: 22px;
+  }
+
+  /* 1. Section Introduction */
+  .corporate-mobile-intro {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .corporate-mobile-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-architectural, 'Space Grotesk', sans-serif);
+    font-size: 0.70rem;
+    font-weight: 600;
+    letter-spacing: 0.20em;
+    text-transform: uppercase;
+    color: var(--olive, #777B61);
+  }
+
+  .corporate-mobile-eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--olive, #777B61);
+    flex-shrink: 0;
+  }
+
+  .corporate-mobile-heading {
+    font-family: var(--font-heading, 'Cormorant Garamond', Georgia, serif);
+    font-size: clamp(2.1rem, 7.8vw, 2.75rem);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+    text-transform: uppercase;
+    color: var(--ink, #151614);
+    margin: 2px 0 0 0;
+  }
+
+  .corporate-mobile-intro-desc {
+    font-family: var(--font-content, 'Manrope', sans-serif);
+    font-size: 0.90rem;
+    line-height: 1.6;
+    color: #4A4D46;
+    margin: 4px 0 0 0;
+    max-width: 580px;
+  }
+
+  /* 2. Vertically Stacked Expandable Practice Cards */
+  .corporate-mobile-cards-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .corporate-mobile-card {
+    position: relative;
+    width: 100%;
+    border-radius: 14px;
+    overflow: hidden;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: height 0.42s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.3s ease,
+                transform 0.25s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.20);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .corporate-mobile-card.is-collapsed {
+    height: 98px;
+  }
+
+  .corporate-mobile-card.is-expanded {
+    height: 350px;
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.35);
+  }
+
+  .corporate-mobile-card:focus-visible {
+    outline: 2px solid var(--sand, #D8C8B4);
+    outline-offset: 2px;
+  }
+
+  /* Full-bleed background photo & atmospheric dark scrim */
+  .corporate-mobile-media {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .corporate-mobile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transform: scale(1.02);
+    transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .corporate-mobile-card.is-expanded .corporate-mobile-img {
+    transform: scale(1.06);
+  }
+
+  .corporate-mobile-scrim {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.52) 0%, rgba(0, 0, 0, 0.72) 100%);
+    transition: background 0.4s ease;
+  }
+
+  .corporate-mobile-scrim.is-expanded {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.45) 0%,
+      rgba(0, 0, 0, 0.25) 30%,
+      rgba(0, 0, 0, 0.85) 75%,
+      rgba(0, 0, 0, 0.96) 100%
+    );
+  }
+
+  /* Card Inner Content Layout */
+  .corporate-mobile-inner {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+  }
+
+  .corporate-mobile-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .corporate-mobile-card-badge {
+    font-family: var(--font-architectural, 'Space Grotesk', sans-serif);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.90);
+  }
+
+  .corporate-mobile-toggle-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: #FFFFFF;
+    flex-shrink: 0;
+    transition: transform 0.25s ease;
+  }
+
+  .corporate-mobile-bottom {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .corporate-mobile-card-title {
+    font-family: var(--font-heading, 'Cormorant Garamond', Georgia, serif);
+    font-size: clamp(1.35rem, 5.2vw, 1.65rem);
+    font-weight: 400;
+    line-height: 1.2;
+    color: #FFFFFF;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+
+  /* Expanding Body Details */
+  .corporate-mobile-card.is-collapsed .corporate-mobile-expanded-content {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    margin-top: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, max-height 0.35s ease;
+  }
+
+  .corporate-mobile-card.is-expanded .corporate-mobile-expanded-content {
+    opacity: 1;
+    max-height: 220px;
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: opacity 0.35s ease 0.1s, max-height 0.4s ease;
+  }
+
+  .corporate-mobile-meta {
+    font-family: var(--font-architectural, 'Space Grotesk', sans-serif);
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--sand, #D8C8B4);
+    letter-spacing: 0.08em;
+  }
+
+  .corporate-mobile-card-desc {
+    font-family: var(--font-content, 'Manrope', sans-serif);
+    font-size: 0.84rem;
+    line-height: 1.52;
+    color: rgba(255, 255, 255, 0.88);
+    margin: 0;
+  }
+
+  .corporate-mobile-materials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 4px;
+  }
+
+  .corporate-mobile-crumb {
+    font-family: var(--font-architectural, 'Space Grotesk', sans-serif);
+    font-size: 0.62rem;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--sand, #D8C8B4);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    padding: 3px 8px;
+    border-radius: 9999px;
+    white-space: nowrap;
+  }
+
+  .corporate-mobile-actions {
+    margin-top: 4px;
+  }
+
+  .corporate-mobile-explore-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-architectural, 'Space Grotesk', sans-serif);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    text-decoration: none;
+    border-bottom: 1.5px solid #FFFFFF;
+    padding-bottom: 2px;
+    width: fit-content;
+    transition: color 0.25s ease, border-color 0.25s ease;
+  }
+
+  .corporate-mobile-explore-link:hover {
+    color: var(--sand, #D8C8B4);
+    border-color: var(--sand, #D8C8B4);
+  }
+
+  /* 3. The Complete Picture Narrative Note on Mobile */
+  .corporate-mobile-complete-card {
+    background: #FFFFFF;
+    border: 1px solid rgba(21, 22, 20, 0.08);
+    border-left: 3px solid var(--olive, #777B61);
+    border-radius: 12px;
+    padding: 18px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    box-sizing: border-box;
+    width: 100%;
+    margin-top: 4px;
+  }
+
+  .corporate-mobile-complete-label {
+    font-family: var(--font-architectural, 'Space Grotesk', sans-serif);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--olive, #777B61);
+  }
+
+  .corporate-mobile-complete-text {
+    font-family: var(--font-content, 'Manrope', sans-serif);
+    font-size: 0.86rem;
+    line-height: 1.55;
+    color: #3E423A;
+    margin: 0;
+  }
+
+  /* 4. Section Bottom Archive Navigation Link */
+  .corporate-mobile-archive-row {
+    padding-top: 6px;
+    margin-bottom: 4px;
+  }
+
+  .corporate-mobile-archive-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-architectural, 'Space Grotesk', sans-serif);
+    font-size: 0.76rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink, #151614);
+    text-decoration: none;
+    border-bottom: 1.5px solid var(--ink, #151614);
+    padding-bottom: 3px;
+    transition: color 0.25s ease, border-color 0.25s ease;
+  }
+
+  .corporate-mobile-archive-link:hover {
+    color: var(--olive, #777B61);
+    border-color: var(--olive, #777B61);
+  }
+
+  /* 4. Studio Consultation Card on Mobile (Clean, compact, no empty black space) */
+  .corporate-mobile-consult-card {
+    background: #181A17;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 16px;
+    padding: 22px 20px;
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  .corporate-mobile-consult-text h4 {
+    font-family: var(--font-heading, 'Cormorant Garamond', Georgia, serif);
+    font-size: clamp(1.25rem, 4.6vw, 1.45rem);
+    font-weight: 400;
+    color: #FAF8F5;
+    margin: 0 0 6px 0;
+    line-height: 1.22;
+    letter-spacing: -0.01em;
+  }
+
+  .corporate-mobile-consult-text p {
+    font-family: var(--font-content, 'Manrope', sans-serif);
+    font-size: 0.84rem;
+    line-height: 1.52;
+    color: rgba(250, 248, 245, 0.76);
+    margin: 0;
+  }
+
+  .corporate-mobile-consult-btn {
+    width: 100%;
+    min-height: 48px;
+    border-radius: 9999px;
+    background: var(--sand, #D8C8B4);
+    color: var(--ink, #151614);
+    font-family: var(--font-architectural, 'Space Grotesk', sans-serif);
+    font-size: 0.76rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.25s ease, transform 0.25s ease;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  }
+
+  .corporate-mobile-consult-btn:hover {
+    background: #FFFFFF;
+    transform: translateY(-1px);
+  }
+}
