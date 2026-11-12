@@ -1,0 +1,16 @@
+<svg width="140" height="140" viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Circle radius = 50 -> circumference = 314.15px -->
+    <path id="badgeCircle" d="M 70, 70 m -50, 0 a 50,50 0 1,1 100,0 a 50,50 0 1,1 -100,0" />
+  </defs>
+  <!-- Outer dotted boundary ring -->
+  <circle cx="70" cy="70" r="66" stroke="#caa05c" stroke-width="1" stroke-opacity="0.4" stroke-dasharray="3 3"/>
+  <!-- Circular Text -->
+  <text font-family="'Plus Jakarta Sans', 'Montserrat', sans-serif" font-size="10" font-weight="700" letter-spacing="3.8" fill="#caa05c" text-transform="uppercase">
+    <textPath href="#badgeCircle" startOffset="0%">
+      MITJEN • ARCHITECTURE • INTERIOR •
+    </textPath>
+  </text>
+  <!-- Inner boundary ring -->
+  <circle cx="70" cy="70" r="34" stroke="#caa05c" stroke-width="1" stroke-opacity="0.3"/>
+</svg>

@@ -1,0 +1,365 @@
+<?php include "header.php" ?>
+<main>
+    <!-- Start Page Header Section -->
+    <section class="cs_page_header_style_1 cs_bg_filed cs_gray_bg position-relative"
+      data-src="assets/img/page-header-bg1.webp">
+      <div class="cs_overlay cs_primary_bg position-absolute"></div>
+      <div class="container">
+        <div class="cs_page_header_content text-center">
+          <h1 class="cs_page_header_title cs_fs_80 cs_bold cs_white_color cs_mb_16">SERVICES DETAILS</h1>
+          <ol class="breadcrumb cs_center mb-0">
+            <li class="breadcrumb-item"><a href="https://html.laralink.com/" aria-label="Back to home button">Home</a>
+            </li>
+            <li class="breadcrumb-item active">Service Details</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+    <!-- End Page Header Section -->
+    <!-- Start Sliding Text Section -->
+    <div class="cs_horizontal_slider cs_type_1 cs_accent_bg cs_primary_font">
+      <div class="cs_slider_inner">
+        <div class="cs_sliding_content cs_fs_24 cs_bold cs_white_color">
+          <span>BUILDING DESIGN</span>
+          <img src="assets/img/star-shape.svg" alt="Star shape">
+          <span>CONSTRUCTION</span>
+          <img src="assets/img/star-shape.svg" alt="Star shape">
+          <span>CONSTRUCTION</span>
+          <img src="assets/img/star-shape.svg" alt="Star shape">
+          <span>RENOVATION & REMODELING</span>
+          <img src="assets/img/star-shape.svg" alt="Star shape">
+          <span>INTERIOR & EXPERIOR DESIGN</span>
+          <img src="assets/img/star-shape.svg" alt="Star shape">
+          <span>RNTAL HOUSE</span>
+          <img src="assets/img/star-shape.svg" alt="Star shape">
+          <span>LUXURY HOME</span>
+          <img src="assets/img/star-shape.svg" alt="Star shape">
+          <span>NSTERRESTING STAGES</span>
+          <img src="assets/img/star-shape.svg" alt="Star shape">
+        </div>
+        <div class="cs_sliding_content cs_fs_24 cs_bold cs_white_color">
+          <span>BUILDING DESIGN</span>
+          <img src="assets/img/star-shape.svg" alt="Star shape">
+          <span>CONSTRUCTION</span>
+          <img src="assets/img/star-shape.svg" alt="Star shape">
+          <span>CONSTRUCTION</span>
+          <img src="assets/img/star-shape.svg" alt="Star shape">
+          <span>RENOVATION & REMODELING</span>
+          <img src="assets/img/star-shape.svg" alt="Star shape">
+          <span>INTERIOR & EXPERIOR DESIGN</span>
+          <img src="assets/img/star-shape.svg" alt="Star shape">
+          <span>RNTAL HOUSE</span>
+          <img src="assets/img/star-shape.svg" alt="Star shape">
+          <span>LUXURY HOME</span>
+          <img src="assets/img/star-shape.svg" alt="Star shape">
+          <span>NSTERRESTING STAGES</span>
+          <img src="assets/img/star-shape.svg" alt="Star shape">
+        </div>
+      </div>
+    </div>
+    <!-- End Sliding Text Section -->
+    <!-- Start Service Details Section -->
+    <section>
+      <div class="cs_height_120 cs_height_lg_80"></div>
+      <div class="container">
+        <div class="row cs_gap_y_40">
+          <div class="col-xl-4 col-lg-5">
+            <aside class="cs_sidebar_style_3">
+              <div class="cs_sidebar_widget">
+                <div class="cs_service_list_wrapper cs_gray_bg cs_radius_10">
+                  <h2 class="cs_widget_title cs_fs_30 cs_semibold cs_mb_40 cs_mb_lg_30">OUR SERVICES</h2>
+                  <ul class="cs_service_list cs_mp_0 cs_fs_18 cs_bold cs_primary_font cs_primary_color text-uppercase">
+                    <li>
+                      <a href="service-details.html">
+                        <span>INTERIOR 2D/3DLAYOUTS</span>
+                        <span><svg width="13" height="13" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 7H13M13 7L7.5 1.5M13 7L7.5 12.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg></span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="service-details.html">
+                        <span>RENOVATION AND REMODELING</span>
+                        <span><svg width="13" height="13" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 7H13M13 7L7.5 1.5M13 7L7.5 12.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg></span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="service-details.html">
+                        <span>OUTDOOR & LANDSCAPE DESIGN</span>
+                        <span><svg width="13" height="13" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 7H13M13 7L7.5 1.5M13 7L7.5 12.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg></span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="service-details.html">
+                        <span>INTERIOR DESIGN CONSTRUCTION</span>
+                        <span><svg width="13" height="13" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 7H13M13 7L7.5 1.5M13 7L7.5 12.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg></span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="service-details.html">
+                        <span>COMMERCIAL INTERIOR DESIGN</span>
+                        <span><svg width="13" height="13" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 7H13M13 7L7.5 1.5M13 7L7.5 12.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg></span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="service-details.html">
+                        <span>RESIDENTIAL INTERIOR DESIGN</span>
+                        <span><svg width="13" height="13" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 7H13M13 7L7.5 1.5M13 7L7.5 12.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg></span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="cs_sidebar_widget">
+                <div class="cs_contact_card cs_accent_bg cs_radius_10">
+                  <div class="cs_contact_card_inner cs_bg_filed text-center" data-src="assets/img/contact-img1.webp">
+                    <span class="cs_contact_icon cs_center cs_mb_24">
+                      <img src="assets/img/icons/cell.svg" alt="Phone icon">
+                    </span>
+                    <div class="cs_contact_info">
+                      <h3 class="cs_contact_title cs_fs_30 cs_semibold cs_white_color cs_mb_16">CONTUCT US NOW</h3>
+                      <p class="cs_contact_subtitle cs_white_color cs_mb_16">Architecture and interior design blend
+                        creativity with functionality, shaping spaces that aesthetic harmony of a building.</p>
+                      <a href="tel:+123456789" class="cs_fs_18 cs_bold cs_white_color cs_primary_font">CALL - +(123) 456
+                        - 789</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </aside>
+          </div>
+          <div class="col-xl-8 col-lg-7">
+            <div class="cs_service_details">
+              <div class="cs_service_banner cs_radius_10">
+                <img src="assets/img/service-img-26.webp" alt="Service banner">
+              </div>
+              <article>
+                <h2>ABOUT THE SERVICES</h2>
+                <p>Architecture is the art and science of designing buildings and spaces that balance beauty,
+                  functionality, and sustainability. It shapes how people live, work, and interact with their
+                  environment by combining creative is vision with technical expertise. </p>
+                <p>It shapes how people live, work, and interact with their environment by combining creative vision
+                  with technical expertise. From residential homes to commercial complexes and urban landmarks,
+                  architecture focuses on structural integrity, efficient use of space, and aesthetic appeal.</p>
+              </article>
+              <article>
+                <h2>WHY CHOOSE THIS SERVICES</h2>
+                <p>Architecture is the art and science of designing buildings and spaces that balance beauty,
+                  functionality, and sustainability. It shapes how people live, work, and interact with their
+                  environment by combining creative is vision with technical expertise. </p>
+              </article>
+            </div>
+            <div class="cs_design_features_wrapper">
+              <div class="cs_iconbox_style_3">
+                <span class="cs_iconbox_icon cs_center cs_mb_20">
+                  <img src="assets/img/icons/3dart.svg" alt="3D art and design planning icon">
+                </span>
+                <div class="cs_iconbox_info">
+                  <h3 class="cs_iconbox_title cs_fs_24 cs_semibold cs_mb_16 text-uppercase">
+                    <a href="service-details.html" aria-label="Learn more about Design & Planning services">Design &
+                      Planning</a>
+                  </h3>
+                  <p class="cs_iconbox_subtitle cs_mb_21">Architecture and interior design blend creativity with
+                    functionality, shaping spaces that aesthetic harmony of a building.</p>
+                  <a href="service-details.html" aria-label="Get started with Design & Planning services now"
+                    class="cs_text_btn_style_1 cs_fs_14 cs_bold cs_accent_color text-uppercase">
+                    <span>Get Started Now</span>
+                    <span><svg width="13" height="13" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 7H13M13 7L7.5 1.5M13 7L7.5 12.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg></span>
+                  </a>
+                </div>
+              </div>
+              <div class="cs_iconbox_style_3">
+                <span class="cs_iconbox_icon cs_center cs_mb_20">
+                  <img src="assets/img/icons/innovation.svg" alt="Innovation and 3D architecture icon">
+                </span>
+                <div class="cs_iconbox_info">
+                  <h3 class="cs_iconbox_title cs_fs_24 cs_semibold cs_mb_16 text-uppercase">
+                    <a href="service-details.html" aria-label="Learn more about 3D Architect Design services">3D
+                      ARCHITECT DESIGN</a>
+                  </h3>
+                  <p class="cs_iconbox_subtitle cs_mb_21">Architecture and interior design blend creativity with
+                    functionality, shaping spaces that aesthetic harmony of a building.</p>
+                  <a href="service-details.html" aria-label="Get started with 3D Architect Design services now"
+                    class="cs_text_btn_style_1 cs_fs_14 cs_bold cs_accent_color text-uppercase">
+                    <span>Get Started Now</span>
+                    <span><svg width="13" height="13" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 7H13M13 7L7.5 1.5M13 7L7.5 12.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg></span>
+                  </a>
+                </div>
+              </div>
+              <div class="cs_iconbox_style_3">
+                <span class="cs_iconbox_icon cs_center cs_mb_20">
+                  <img src="assets/img/icons/decor.svg" alt="Decor and art design icon">
+                </span>
+                <div class="cs_iconbox_info">
+                  <h3 class="cs_iconbox_title cs_fs_24 cs_semibold cs_mb_16 text-uppercase">
+                    <a href="service-details.html" aria-label="Learn more about Decor & Art Design services">DECOR &amp;
+                      ART DESIGN</a>
+                  </h3>
+                  <p class="cs_iconbox_subtitle cs_mb_21">Architecture and interior design blend creativity with
+                    functionality, shaping spaces that aesthetic harmony of a building.</p>
+                  <a href="service-details.html" aria-label="Get started with Decor & Art Design services now"
+                    class="cs_text_btn_style_1 cs_fs_14 cs_bold cs_accent_color text-uppercase">
+                    <span>Get Started Now</span>
+                    <span><svg width="13" height="13" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 7H13M13 7L7.5 1.5M13 7L7.5 12.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg></span>
+                  </a>
+                </div>
+              </div>
+              <div class="cs_iconbox_style_3">
+                <span class="cs_iconbox_icon cs_center cs_mb_20">
+                  <img src="assets/img/icons/tailored.svg" alt="Tailored unmatched design experience icon">
+                </span>
+                <div class="cs_iconbox_info">
+                  <h3 class="cs_iconbox_title cs_fs_24 cs_semibold cs_mb_16 text-uppercase">
+                    <a href="service-details.html"
+                      aria-label="Learn more about Unmatched Design Experience services">UNMATCHED DESIGN EXPERIENCE</a>
+                  </h3>
+                  <p class="cs_iconbox_subtitle cs_mb_21">Architecture and interior design blend creativity with
+                    functionality, shaping spaces that aesthetic harmony of a building.</p>
+                  <a href="service-details.html" aria-label="Get started with Unmatched Design Experience services now"
+                    class="cs_text_btn_style_1 cs_fs_14 cs_bold cs_accent_color text-uppercase">
+                    <span>Get Started Now</span>
+                    <span><svg width="13" height="13" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 7H13M13 7L7.5 1.5M13 7L7.5 12.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg></span>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="cs_height_40 cs_height_lg_40"></div>
+            <p class="mb-0">From residential homes to commercial complexes and urban landmarks, architecture focuses on
+              structural integrity, efficient use of space, and aesthetic appeal.</p>
+            <div class="cs_height_60 cs_height_lg_40"></div>
+            <div class="cs_other_services">
+              <h3 class="cs_fs_30 cs_semibold cs_mb_40 cs_mb_lg_30 text-uppercase">KEY ELEMENTS OF INTERIOR DESIGN</h3>
+              <ul class="cs_other_service_list cs_bold cs_primary_color cs_primary_font cs_mp_0">
+                <li>
+                  <img src="assets/img/icons/check.svg" alt="Checkmark icon">
+                  <span>WE PROVIDE HIGH QUALITY DESIGN SERVICES</span>
+                </li>
+                <li>
+                  <img src="assets/img/icons/check.svg" alt="Checkmark icon">
+                  <span>FLEXIBLE WITH ANY STRUCTURE OF THE BUILDING</span>
+                </li>
+                <li>
+                  <img src="assets/img/icons/check.svg" alt="Checkmark icon">
+                  <span>PROJECT ON TIME AND LOEST DESIGN</span>
+                </li>
+                <li>
+                  <img src="assets/img/icons/check.svg" alt="Checkmark icon">
+                  <span>COMMITMENT TO CUSTOMER SERVICES</span>
+                </li>
+                <li>
+                  <img src="assets/img/icons/check.svg" alt="Checkmark icon">
+                  <span>SCIENTIFIC SKILLS FOR GETTING A BETTER RESULT</span>
+                </li>
+                <li>
+                  <img src="assets/img/icons/check.svg" alt="Checkmark icon">
+                  <span>EXPERIENCED TIME SERVED ENGINEERS</span>
+                </li>
+                <li>
+                  <img src="assets/img/icons/check.svg" alt="Checkmark icon">
+                  <span>RENOVATIONS BENEFIT OF SERVICES</span>
+                </li>
+                <li>
+                  <img src="assets/img/icons/check.svg" alt="Checkmark icon">
+                  <span>WE ARE CONFIDENT ABOUT OUR PROJECT</span>
+                </li>
+              </ul>
+            </div>
+            <div class="cs_height_60 cs_height_lg_40"></div>
+            <div class="cs_faq_area">
+              <div class="cs_faq_header cs_mb_40 cs_mb_lg_30">
+                <h3 class="cs_fs_30 cs_semibold cs_mb_16 text-uppercase">FREQUENTLY ASKED QUESTIONS</h3>
+                <p class="mb-0">It shapes how people live, work, and interact with their environment by combining
+                  creative vision with technical expertise. From residential homes to commercial complexes and urban
+                  landmarks, architecture focuses on structural integrity, efficient use of space, and aesthetic appeal.
+                </p>
+              </div>
+              <hr class="m-0">
+              <div class="cs_accordians_wrapper_2">
+                <div class="cs_accordian cs_style_2">
+                  <div class="cs_accordian_head position-relative">
+                    <h3 class="cs_accordian_title cs_fs_24 cs_bold text-uppercase mb-0">WHAT INTERIOR DESIGN SERVICES
+                    </h3>
+                    <span class="cs_accordian_toggler"></span>
+                  </div>
+                  <div class="cs_accordian_body">Architecture is the art and science of designing buildings and spaces
+                    that balance beauty, functionality, and sustainability. It shapes how people live, work, and
+                    interact with their environment by combining creative vision with technical expertise.</div>
+                </div>
+                <div class="cs_accordian cs_style_2">
+                  <div class="cs_accordian_head position-relative">
+                    <h3 class="cs_accordian_title cs_fs_24 cs_bold text-uppercase mb-0">WHAT SERVICES DO YOU OFFER ?
+                    </h3>
+                    <span class="cs_accordian_toggler"></span>
+                  </div>
+                  <div class="cs_accordian_body">Architecture is the art and science of designing buildings and spaces
+                    that balance beauty, functionality, and sustainability. It shapes how people live, work, and
+                    interact with their environment by combining creative vision with technical expertise</div>
+                </div>
+                <div class="cs_accordian cs_style_2">
+                  <div class="cs_accordian_head position-relative">
+                    <h3 class="cs_accordian_title cs_fs_24 cs_bold text-uppercase mb-0">WHAT IS YOUR DESIGN PROCEAA ?
+                    </h3>
+                    <span class="cs_accordian_toggler"></span>
+                  </div>
+                  <div class="cs_accordian_body">Architecture is the art and science of designing buildings and spaces
+                    that balance beauty, functionality, and sustainability. It shapes how people live, work, and
+                    interact with their environment by combining creative vision with technical expertise</div>
+                </div>
+                <div class="cs_accordian cs_style_2">
+                  <div class="cs_accordian_head position-relative">
+                    <h3 class="cs_accordian_title cs_fs_24 cs_bold text-uppercase mb-0">HOW DO YOU ESTABLISH YOUR DESIGN
+                      FEES ?</h3>
+                    <span class="cs_accordian_toggler"></span>
+                  </div>
+                  <div class="cs_accordian_body">Architecture is the art and science of designing buildings and spaces
+                    that balance beauty, functionality, and sustainability. It shapes how people live, work, and
+                    interact with their environment by combining creative vision with technical expertise.</div>
+                </div>
+                <div class="cs_accordian cs_style_2">
+                  <div class="cs_accordian_head position-relative">
+                    <h3 class="cs_accordian_title cs_fs_24 cs_bold text-uppercase mb-0">WILL I NEED PLANNING PERMISSION
+                      FFOR MY PROJECT ?</h3>
+                    <span class="cs_accordian_toggler"></span>
+                  </div>
+                  <div class="cs_accordian_body">Architecture is the art and science of designing buildings and spaces
+                    that balance beauty, functionality, and sustainability. It shapes how people live, work, and
+                    interact with their environment by combining creative vision with technical expertise.</div>
+                </div>
+                <div class="cs_accordian cs_style_2">
+                  <div class="cs_accordian_head position-relative">
+                    <h3 class="cs_accordian_title cs_fs_24 cs_bold text-uppercase mb-0">HOW LONG DOES A TYPICAL PROJECT
+                      TAKE ?</h3>
+                    <span class="cs_accordian_toggler"></span>
+                  </div>
+                  <div class="cs_accordian_body">Architecture is the art and science of designing buildings and spaces
+                    that balance beauty, functionality, and sustainability. It shapes how people live, work, and
+                    interact with their environment by combining creative vision with technical expertise.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cs_height_120 cs_height_lg_80"></div>
+    </section>
+    <!-- End Service Details Section -->
+  </main>
+<?php include "footer.php" ?>
