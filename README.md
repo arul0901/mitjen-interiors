@@ -43,47 +43,46 @@ npm run preview
 
 The alternative homepage demos (`index-2.html`, `home-v2.html` through `home-v6.html`) are not active routes. All original pages remain in `original-source/` for reference.
 
-## Parallax 3D Interior Hero
+## 3D Fly-Through Hero
 
-The landing page (`/`) features an interactive depth-parallax 3D interior hero stage (`ParallaxRoomStage`) built with Three.js, React Three Fiber (R3F), and custom GLSL displacement shaders. Flat 2D photographs are turned into interactive 3D spatial environments using AI-generated depth maps without needing heavy 3D meshes, GLTF models, or real-time lights.
+The homepage (`/`) features an interactive, real-time 3D architectural fly-through of a luxury single-storey residence (`FlyThroughStage`) mounted seamlessly below the headline hero section. As the visitor scrolls down the page, the camera glides along Catmull-Rom 3D splines through the rooms (Living Room $\rightarrow$ Kitchen & Dining $\rightarrow$ Master Bedroom $\rightarrow$ Covered Terrace & Pool Deck), accompanied by a continuous day-to-night lighting shift tied to scroll progress.
 
-### Features
-- **Depth-Displacement Shader**: High-performance cover-fit vertex and fragment shaders with 6% base edge margin, 4-tap blurred depth sampling, and 2-step depth-refined parallax displacement clamped to $|\text{offset}| \le 0.02$.
-- **Spatial Transitions**: Depth-aware room transitions where near objects switch first ($A \rightarrow B$), combined with a cinematic $4\%$ "walking through" zoom.
-- **Natural Interaction**: Smoothed cursor parallax tracking (lerp 0.06), automatic Lissajous idle drift ($x=\sin(0.25t)\cdot 0.5, y=\cos(0.2t)\cdot 0.3$) after 2s of inactivity, and gyroscope tilt on mobile with iOS permission gating.
-- **Autoplay & Physics Scrubbing**: 6000ms room autoplay with 1400ms `power3.inOut` GSAP transition, pointer drag/swipe with momentum decay (0.95), and ArrowLeft / ArrowRight keyboard navigation.
-- **Architectural Framing**: Top and bottom architectural curved SVG masks (`#ffffff`) preserving pure white, minimal black/white aesthetics.
-- **Robust Fallbacks & Accessibility**: Respects `prefers-reduced-motion` (freezes idle drift and transitions, limits parallax to 0.01), underlying poster image fallback that fades out over 600ms, procedural canvas fallbacks if an asset is missing, and automatic render pausing via IntersectionObserver and `visibilitychange` when offscreen.
+### Strict Zero-UI Design
+The stage contains strictly 3D visuals only:
+- **No on-screen controls**: No room indicators, lines, dots, arrows, previous/next buttons, or progress bars.
+- **No text/labels**: No room captions, labels, badges, or scroll/drag prompts.
+- **No spinners**: An under-canvas still poster (`public/rooms/01-living.webp`) fades out over 600ms once the 3D scene finishes mounting.
+- **Clean interaction**: Driven 100% by native page scroll with smooth damping (`lambda: 4.0`), cubic-bezier inertia matching the site menu, plus a subtle, invisible mouse parallax on desktop ($\pm 0.15\text{m}$, lerp 0.05). No custom cursor states or touch hijacking.
 
-### Rooms & Assets
-1. **01-living.webp** (`public/rooms/01-living.webp`, `public/rooms/01-living-depth.png`) - Minimalist living room with oak floor and floor-to-ceiling windows.
-2. **02-kitchen.webp** (`public/rooms/02-kitchen.webp`, `public/rooms/02-kitchen-depth.png`) - Contemporary minimalist kitchen with white marble island and dark accents.
-3. **03-bedroom.webp** (`public/rooms/03-bedroom.webp`, `public/rooms/03-bedroom-depth.png`) - Serene neutral bedroom with natural linen textures and soft diffused light.
-4. **04-bathroom.webp** (`public/rooms/04-bathroom.webp`, `public/rooms/04-bathroom-depth.png`) - Minimal luxury bathroom with freestanding tub and clean lines.
-5. **05-dining.webp** (`public/rooms/05-dining.webp`, `public/rooms/05-dining-depth.png`) - Scandinavian architectural dining space with oak dining table.
-6. **06-terrace.webp** (`public/rooms/06-terrace.webp`, `public/rooms/06-terrace-depth.png`) - Indoor-outdoor covered architectural terrace with garden views.
+### Scene Architecture & Scale
+- **Real 1:1 Scale**: 1 unit = 1 meter, ceiling height 2.8m, camera height ~1.5m.
+- **Open-Concept Portals**: Wide 2.8m+ openings between zones so the camera never clips partition walls.
+- **PBR Materials**: Scandinavian white oak floors, crisp off-white architectural plaster, dark aluminum window mullions, bouclé linen upholstery, travertine coffee table, and an infinity pool with crystal turquoise reflections.
+- **Poly Haven HDRIs**:
+  - `daylight.hdr` (`public/hdri/daylight.hdr`): Morning to midday ambient fill and reflections (CC0).
+  - `dusk.hdr` (`public/hdri/dusk.hdr`): Twilight dusk reflections (CC0).
+- **Procedural Model**: Zero multi-megabyte GLTF load lag; sub-250KB gzipped lazy chunk.
 
-Full image licenses and photographer attributions are documented in [`CREDITS.md`](./CREDITS.md).
+### Lighting & Day-to-Night Progression
+Driven smoothly by `progress` ($0.0 \rightarrow 1.0$):
+1. **$0.00 - 0.25$ (Living Room - Morning)**: Warm directional morning sun angle from the left, soft ambient fill, glowing window planes.
+2. **$0.25 - 0.50$ (Kitchen/Dining - Midday)**: High neutral natural daylight, sharp island highlights.
+3. **$0.50 - 0.75$ (Master Bedroom - Golden Hour)**: Low angled golden sunset light, warm interior bedside lamps fade in.
+4. **$0.75 - 1.00$ (Terrace - Dusk / Blue Hour)**: Deep blue-hour twilight sky, glowing underwater pool perimeter ribbon, warm interior lamps.
 
-### Generating Depth Maps
-To re-generate or update the 8-bit grayscale depth maps using `Depth-Anything-V2-Small-hf`:
+### Performance & Fallbacks
+- **GSAP ScrollTrigger Pin**: The stage pins for 400vh on desktop (300vh on mobile) with `anticipatePin: 1` and `pinSpacing: true`, integrating with Lenis smooth scroll without layout shifts or parent overflow clipping.
+- **Device Gating**: On mobile or low-end hardware (`hardwareConcurrency <= 4` or `deviceMemory <= 4`), post-processing (Bloom, SMAA, Vignette) is automatically bypassed and DPR is capped at 1.25.
+- **Off-Screen Pause**: `frameloop` switches from `"always"` to `"never"` via `IntersectionObserver` and `visibilitychange` when offscreen or the tab is hidden.
+- **prefers-reduced-motion**: Disables pin, sway, and idle creep; displays a static living room camera view.
+- **WebGL Fallback**: If WebGL is unavailable or blocked, crossfades smoothly across 4 pre-rendered stills as the user scrolls past.
 
-```bash
-npm run depth
-```
-
-This runs `scripts/make_depth.py`, which:
-1. Loads original or raw photos from `raw/` or `public/rooms/`.
-2. Estimates metric relative disparity with Depth-Anything-V2.
-3. Normalizes disparity to full 0–255 range (White = Near, Black = Far).
-4. Applies a 1.5px Gaussian blur to eliminate high-frequency stair-stepping.
-5. Saves 1280px 8-bit grayscale PNGs to `public/rooms/01-living-depth.png` through `06-terrace-depth.png`.
-
-### Tuning Notes
-- **Tears at edges**: Lower `uStrength` (default 0.035 desktop, 0.025 mobile) or increase Gaussian blur on the depth map.
-- **Looks flat**: Increase `uStrength` toward 0.045 (never exceed 0.05).
-- **Warped foreground objects** (table legs, thin lamps): Paint them flat white (255) in the depth map PNG to anchor them to the near plane.
-- **Slow on phones**: Resize source images to 1920px instead of 2560px and cap device pixel ratio (DPR) at 1.5.
+### Tuning & Configuration
+- **Waypoints & Splines**: Edit `CAMERA_PATH_POINTS` and `CAMERA_LOOKAT_POINTS` in [`src/data/houseRooms.ts`](./src/data/houseRooms.ts).
+- **Pin Length**: Adjust `pinDistanceDesktop` (default `+=400%`) or `pinDistanceMobile` (default `+=300%`) in [`src/hooks/useScrollProgress.ts`](./src/hooks/useScrollProgress.ts).
+- **Time-of-Day Keyframes**: Adjust colors, sun coordinates, and lamp intensities in `TIME_OF_DAY_KEYFRAMES` in [`src/data/houseRooms.ts`](./src/data/houseRooms.ts).
+- **Bloom & Post-Processing**: Tune `luminanceThreshold`, `intensity`, and `mipmapBlur` in [`src/components/FlyThroughStage.tsx`](./src/components/FlyThroughStage.tsx).
+- **Reverting to Marquee**: In [`src/pages/Home.tsx`](./src/pages/Home.tsx), set `const SHOW_LEGACY_MARQUEE = true;`.
 
 ## Migration status
 

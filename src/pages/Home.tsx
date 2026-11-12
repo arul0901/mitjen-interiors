@@ -1,10 +1,14 @@
 import React, { useEffect, Suspense, lazy } from "react";
 
-// Lazy-load the WebGL Parallax Stage chunk (< 250KB gzipped)
+// Lazy-load hero visual stages (< 250KB gzipped initial)
+const FlyThroughStage = lazy(() => import("../components/FlyThroughStage"));
 const ParallaxRoomStage = lazy(() => import("../components/ParallaxRoomStage"));
 
-// Feature flag: set to true to display the legacy text marquee strip
-const SHOW_LEGACY_MARQUEE = false;
+// Feature flag: easily switch between hero visual modes:
+// "flythrough"     -> Real-time 3D house fly-through hero (active default)
+// "depth-parallax" -> WebGL 2D depth-displacement parallax hero
+// "marquee"        -> Legacy HTML text marquee strip
+const HERO_MODE: "flythrough" | "depth-parallax" | "marquee" = "flythrough";
 
 export default function Home() {
   useEffect(() => {
@@ -96,23 +100,23 @@ export default function Home() {
 </div>
 </div>
 </section>
-{SHOW_LEGACY_MARQUEE ? (
+{HERO_MODE === "marquee" ? (
   <div className={"cs_horizontal_slider cs_primary_bg cs_bg_filed cs_primary_font"} data-src={"/assets/img/text-bg1.webp"}>
     <div className={"cs_slider_inner"}>
       <div className={"cs_sliding_content cs_fs_64 cs_bold cs_white_color"}>INTERIOR ARCHITECTURE SPACE . HIGH - END INTERIOR DESIGN. INNOVATE DESIGN IN CANADA</div>
       <div className={"cs_sliding_content cs_fs_64 cs_bold cs_white_color"}>INTERIOR ARCHITECTURE SPACE . HIGH - END INTERIOR DESIGN. INNOVATE DESIGN IN CANADA</div>
     </div>
   </div>
-) : (
+) : HERO_MODE === "depth-parallax" ? (
   <Suspense
     fallback={
       <div
-        className={"cs_parallax_hero_skeleton"}
+        className={"cs_hero_skeleton"}
         style={{
           width: "calc(100% - 32px)",
           maxWidth: "1400px",
-          height: "60vh",
-          margin: "20px auto",
+          height: "70vh",
+          margin: "16px auto",
           borderRadius: "20px",
           backgroundColor: "#fafafa",
         }}
@@ -120,6 +124,24 @@ export default function Home() {
     }
   >
     <ParallaxRoomStage />
+  </Suspense>
+) : (
+  <Suspense
+    fallback={
+      <div
+        className={"cs_hero_skeleton"}
+        style={{
+          width: "calc(100% - 32px)",
+          maxWidth: "1400px",
+          height: "70vh",
+          margin: "16px auto",
+          borderRadius: "20px",
+          backgroundColor: "#fafafa",
+        }}
+      />
+    }
+  >
+    <FlyThroughStage />
   </Suspense>
 )}
 <section className={"cs_about_style_4 cs_white_color"}>
