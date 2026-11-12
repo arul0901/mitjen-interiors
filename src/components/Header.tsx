@@ -64,7 +64,7 @@ export default function Header() {
                 <nav aria-label={"Main navigation"} className={"cs_nav"}>
                   <div className={`cs_nav_list_wrapper ${isMenuOpen ? "active" : ""}`}>
                     {/* Mobile drawer header with logo and close button */}
-                    <div className={"cs_mobile_nav_header d-lg-none"}>
+                    <div className={"cs_mobile_nav_header d-xl-none"}>
                       <a aria-label={"Home page"} className={"cs_site_brand"} href={"/"} onClick={closeMenu}>
                         <img alt={"Mitjen"} className={"cs_site_logo"} src={"/assets/img/logo2.svg"} />
                       </a>
@@ -131,7 +131,7 @@ export default function Header() {
                     </ul>
 
                     {/* Mobile drawer quick actions footer */}
-                    <div className={"cs_mobile_nav_footer d-lg-none"}>
+                    <div className={"cs_mobile_nav_footer d-xl-none"}>
                       <a
                         href={"/contact"}
                         className={"cs_btn_style_1 cs_fs_14 cs_bold cs_primary_font cs_radius_50 w-100 justify-content-center text-center"}

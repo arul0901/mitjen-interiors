@@ -1,14 +1,6 @@
-import React, { useEffect, Suspense, lazy } from "react";
-
-// Lazy-load hero visual stages (< 250KB gzipped initial)
-const FlyThroughStage = lazy(() => import("../components/FlyThroughStage"));
-const ParallaxRoomStage = lazy(() => import("../components/ParallaxRoomStage"));
-
-// Feature flag: easily switch between hero visual modes:
-// "flythrough"     -> Real-time 3D house fly-through hero (active default)
-// "depth-parallax" -> WebGL 2D depth-displacement parallax hero
-// "marquee"        -> Legacy HTML text marquee strip
-const HERO_MODE: "flythrough" | "depth-parallax" | "marquee" = "flythrough";
+import React, { useEffect } from "react";
+import BeforeAfterTransformation from "../components/BeforeAfterTransformation";
+import PanoramaViewer from "../components/PanoramaViewer";
 
 export default function Home() {
   useEffect(() => {
@@ -100,50 +92,12 @@ export default function Home() {
 </div>
 </div>
 </section>
-{HERO_MODE === "marquee" ? (
-  <div className={"cs_horizontal_slider cs_primary_bg cs_bg_filed cs_primary_font"} data-src={"/assets/img/text-bg1.webp"}>
-    <div className={"cs_slider_inner"}>
-      <div className={"cs_sliding_content cs_fs_64 cs_bold cs_white_color"}>INTERIOR ARCHITECTURE SPACE . HIGH - END INTERIOR DESIGN. INNOVATE DESIGN IN CANADA</div>
-      <div className={"cs_sliding_content cs_fs_64 cs_bold cs_white_color"}>INTERIOR ARCHITECTURE SPACE . HIGH - END INTERIOR DESIGN. INNOVATE DESIGN IN CANADA</div>
-    </div>
-  </div>
-) : HERO_MODE === "depth-parallax" ? (
-  <Suspense
-    fallback={
-      <div
-        className={"cs_hero_skeleton"}
-        style={{
-          width: "calc(100% - 32px)",
-          maxWidth: "1400px",
-          height: "70vh",
-          margin: "16px auto",
-          borderRadius: "20px",
-          backgroundColor: "#fafafa",
-        }}
-      />
-    }
-  >
-    <ParallaxRoomStage />
-  </Suspense>
-) : (
-  <Suspense
-    fallback={
-      <div
-        className={"cs_hero_skeleton"}
-        style={{
-          width: "calc(100% - 32px)",
-          maxWidth: "1400px",
-          height: "70vh",
-          margin: "16px auto",
-          borderRadius: "20px",
-          backgroundColor: "#fafafa",
-        }}
-      />
-    }
-  >
-    <FlyThroughStage />
-  </Suspense>
-)}
+<div className={"cs_horizontal_slider cs_primary_bg cs_bg_filed cs_primary_font"} data-src={"/assets/img/text-bg1.webp"}>
+<div className={"cs_slider_inner"}>
+<div className={"cs_sliding_content cs_fs_64 cs_bold cs_white_color"}>INTERIOR ARCHITECTURE SPACE . HIGH - END INTERIOR DESIGN. INNOVATE DESIGN IN CANADA</div>
+<div className={"cs_sliding_content cs_fs_64 cs_bold cs_white_color"}>INTERIOR ARCHITECTURE SPACE . HIGH - END INTERIOR DESIGN. INNOVATE DESIGN IN CANADA</div>
+</div>
+</div>
 <section className={"cs_about_style_4 cs_white_color"}>
 <div className={"cs_height_30 cs_height_lg_80"}></div>
 <div className={"container"}>
@@ -466,6 +420,13 @@ export default function Home() {
 <div className={"cs_shadow_text cs_fs_200 cs_bold cs_primary_font"}>ARCHITECTURE</div>
 </div>
 </section>
+
+{/* Interactive Architectural Before & After Transformations */}
+<BeforeAfterTransformation />
+
+{/* Interactive 360° Interior Panoramic Atelier */}
+<PanoramaViewer />
+
 <section>
 <div className={"cs_height_120 cs_height_lg_80"}></div>
 <div className={"container"}>
