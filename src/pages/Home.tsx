@@ -1,4 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, Suspense, lazy } from "react";
+
+// Lazy-load the WebGL Parallax Stage chunk (< 250KB gzipped)
+const ParallaxRoomStage = lazy(() => import("../components/ParallaxRoomStage"));
+
+// Feature flag: set to true to display the legacy text marquee strip
+const SHOW_LEGACY_MARQUEE = false;
 
 export default function Home() {
   useEffect(() => {
@@ -90,12 +96,32 @@ export default function Home() {
 </div>
 </div>
 </section>
-<div className={"cs_horizontal_slider cs_primary_bg cs_bg_filed cs_primary_font"} data-src={"/assets/img/text-bg1.webp"}>
-<div className={"cs_slider_inner"}>
-<div className={"cs_sliding_content cs_fs_64 cs_bold cs_white_color"}>INTERIOR ARCHITECTURE SPACE . HIGH - END INTERIOR DESIGN. INNOVATE DESIGN IN CANADA</div>
-<div className={"cs_sliding_content cs_fs_64 cs_bold cs_white_color"}>INTERIOR ARCHITECTURE SPACE . HIGH - END INTERIOR DESIGN. INNOVATE DESIGN IN CANADA</div>
-</div>
-</div>
+{SHOW_LEGACY_MARQUEE ? (
+  <div className={"cs_horizontal_slider cs_primary_bg cs_bg_filed cs_primary_font"} data-src={"/assets/img/text-bg1.webp"}>
+    <div className={"cs_slider_inner"}>
+      <div className={"cs_sliding_content cs_fs_64 cs_bold cs_white_color"}>INTERIOR ARCHITECTURE SPACE . HIGH - END INTERIOR DESIGN. INNOVATE DESIGN IN CANADA</div>
+      <div className={"cs_sliding_content cs_fs_64 cs_bold cs_white_color"}>INTERIOR ARCHITECTURE SPACE . HIGH - END INTERIOR DESIGN. INNOVATE DESIGN IN CANADA</div>
+    </div>
+  </div>
+) : (
+  <Suspense
+    fallback={
+      <div
+        className={"cs_parallax_hero_skeleton"}
+        style={{
+          width: "calc(100% - 32px)",
+          maxWidth: "1400px",
+          height: "60vh",
+          margin: "20px auto",
+          borderRadius: "20px",
+          backgroundColor: "#fafafa",
+        }}
+      />
+    }
+  >
+    <ParallaxRoomStage />
+  </Suspense>
+)}
 <section className={"cs_about_style_4 cs_white_color"}>
 <div className={"cs_height_30 cs_height_lg_80"}></div>
 <div className={"container"}>
