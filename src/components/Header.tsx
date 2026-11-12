@@ -88,30 +88,28 @@ export default function Header() {
                         <a aria-label={"About Us"} href={"/about"} onClick={closeMenu}>About Us</a>
                       </li>
                       <li className={`menu-item-has-children ${isSubmenuOpen ? "active" : ""}`}>
-                        <div className={"cs_menu_item_header"}>
-                          <a aria-label={"Services"} href={"/services"} onClick={closeMenu}>Services</a>
-                          <span
-                            className={`cs_menu_dropdown_toggle ${isSubmenuOpen ? "active" : ""}`}
-                            role={"button"}
-                            tabIndex={0}
-                            aria-label={"Toggle submenu"}
-                            aria-expanded={isSubmenuOpen}
-                            onClick={(e) => {
+                        <a aria-label={"Services"} href={"/services"} onClick={closeMenu}>Services</a>
+                        <span
+                          className={`cs_menu_dropdown_toggle ${isSubmenuOpen ? "active" : ""}`}
+                          role={"button"}
+                          tabIndex={0}
+                          aria-label={"Toggle submenu"}
+                          aria-expanded={isSubmenuOpen}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            setIsSubmenuOpen((prev) => !prev);
+                          }}
+                          onKeyDown={(e) => {
+                            if (e.key === "Enter" || e.key === " ") {
                               e.preventDefault();
                               e.stopPropagation();
                               setIsSubmenuOpen((prev) => !prev);
-                            }}
-                            onKeyDown={(e) => {
-                              if (e.key === "Enter" || e.key === " ") {
-                                e.preventDefault();
-                                e.stopPropagation();
-                                setIsSubmenuOpen((prev) => !prev);
-                              }
-                            }}
-                          >
-                            <span></span>
-                          </span>
-                        </div>
+                            }
+                          }}
+                        >
+                          <span></span>
+                        </span>
                         <ul
                           aria-label={"Services submenu"}
                           className={`cs_dropdown_list cs_mp_0 ${isSubmenuOpen ? "cs_submenu_open" : ""}`}

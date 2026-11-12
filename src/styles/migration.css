@@ -198,27 +198,21 @@ h1, h2, h3, h4, h5, h6, p, a, span, li, button, input, textarea {
     padding-left: 12px;
   }
 
-  /* Submenu expandable item */
-  .cs_menu_item_header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  /* Submenu expandable item on mobile drawer */
+  .cs_site_header .cs_nav .menu-item-has-children {
+    position: relative;
   }
 
-  .cs_menu_item_header a {
-    flex: 1;
-    padding: 13px 8px;
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--white-color, #ffffff) !important;
-    text-shadow: none !important;
-    text-decoration: none;
+  .cs_site_header .cs_nav .menu-item-has-children > a {
+    padding-right: 48px !important;
   }
 
-  .cs_menu_item_header .cs_menu_dropdown_toggle {
-    position: static !important;
-    width: 44px !important;
-    height: 44px !important;
+  .cs_site_header .cs_nav .menu-item-has-children > .cs_menu_dropdown_toggle {
+    position: absolute !important;
+    top: 0 !important;
+    right: 0 !important;
+    width: 48px !important;
+    height: 48px !important;
     padding: 0 !important;
     display: flex !important;
     align-items: center;
@@ -227,6 +221,7 @@ h1, h2, h3, h4, h5, h6, p, a, span, li, button, input, textarea {
     background: transparent;
     border: none;
     color: var(--white-color, #ffffff);
+    z-index: 5;
   }
 
   .cs_dropdown_list.cs_submenu_open {
@@ -285,6 +280,23 @@ h1, h2, h3, h4, h5, h6, p, a, span, li, button, input, textarea {
   .cs_mobile_nav_backdrop.active {
     opacity: 1;
     pointer-events: auto;
+  }
+}
+
+/* Desktop header nav alignment */
+@media (min-width: 1200px) {
+  .cs_site_header .cs_nav .cs_nav_list > li.menu-item-has-children {
+    height: inherit !important;
+    display: inline-flex !important;
+    align-items: center !important;
+  }
+  .cs_site_header .cs_nav .cs_nav_list > li.menu-item-has-children > a {
+    display: inline-flex !important;
+    align-items: center !important;
+    height: inherit !important;
+  }
+  .cs_site_header .cs_nav .menu-item-has-children > .cs_menu_dropdown_toggle {
+    display: none !important;
   }
 }
 
