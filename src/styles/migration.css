@@ -80,6 +80,9 @@ h1, h2, h3, h4, h5, h6, p, a, span, li, button, input, textarea {
 
 /* 3. Mobile Header & Navigation Drawer */
 @media (max-width: 1199px) {
+  .cs_site_header {
+    z-index: 1050 !important;
+  }
   .cs_site_header .cs_main_header_in {
     height: 72px !important;
   }
@@ -107,100 +110,135 @@ h1, h2, h3, h4, h5, h6, p, a, span, li, button, input, textarea {
     top: 0;
   }
 
-  /* Drawer container */
+  /* Drawer container - isolated GPU layer without WebKit tile glitches */
   .cs_site_header .cs_nav .cs_nav_list_wrapper {
     position: fixed !important;
     top: 0 !important;
-    right: -100vw !important;
+    right: 0 !important;
+    bottom: 0 !important;
     left: auto !important;
-    width: min(85vw, 360px) !important;
-    height: 100vh !important;
+    width: min(85vw, 340px) !important;
+    height: 100% !important;
     height: 100dvh !important;
-    background-color: var(--primary-color, #171717) !important;
-    color: var(--white-color, #ffffff) !important;
-    z-index: 1050 !important;
+    background: #171717 !important;
+    background-color: #171717 !important;
+    color: #ffffff !important;
+    z-index: 1060 !important;
     padding: 24px 20px 30px !important;
     display: flex !important;
     flex-direction: column !important;
     overflow-y: auto !important;
-    -webkit-overflow-scrolling: touch;
-    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.45);
-    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), right 0.35s ease !important;
+    overflow-x: hidden !important;
+    box-shadow: -12px 0 36px rgba(0, 0, 0, 0.7) !important;
+    transform: translate3d(100%, 0, 0) !important;
+    -webkit-transform: translate3d(100%, 0, 0) !important;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s !important;
+    -webkit-transition: -webkit-transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    isolation: isolate !important;
+    -webkit-backface-visibility: hidden !important;
+    backface-visibility: hidden !important;
   }
 
   .cs_site_header .cs_nav .cs_nav_list_wrapper.active {
-    right: 0 !important;
-    left: auto !important;
-    transform: translateX(0) !important;
+    transform: translate3d(0, 0, 0) !important;
+    -webkit-transform: translate3d(0, 0, 0) !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
   }
 
   /* Drawer header with logo and close button */
   .cs_mobile_nav_header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-bottom: 18px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-    margin-bottom: 18px;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding-bottom: 16px !important;
+    margin-bottom: 16px !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    width: 100% !important;
+    flex-shrink: 0 !important;
+  }
+
+  .cs_mobile_nav_header .cs_site_logo {
+    max-height: 28px !important;
+    width: auto !important;
+    display: block !important;
   }
 
   .cs_close_nav_btn {
-    width: 42px;
-    height: 42px;
-    background: rgba(255, 255, 255, 0.1);
-    color: var(--white-color, #ffffff);
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.2s ease, transform 0.2s ease;
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: 50% !important;
+    cursor: pointer !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: background-color 0.2s ease, transform 0.2s ease, border-color 0.2s ease !important;
+    padding: 0 !important;
   }
 
   .cs_close_nav_btn:hover,
   .cs_close_nav_btn:focus-visible {
-    background: var(--accent-color, #c89d66);
-    color: #ffffff;
-    transform: rotate(90deg);
+    background: var(--accent-color, #c89d66) !important;
+    border-color: var(--accent-color, #c89d66) !important;
+    color: #ffffff !important;
+    transform: rotate(90deg) !important;
   }
 
   /* Nav list in drawer */
   .cs_site_header .cs_nav .cs_nav_list {
-    flex: 1;
-    overflow-y: auto;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    list-style: none;
+    flex: 1 1 auto !important;
+    overflow: visible !important;
+    overflow-y: visible !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0 !important;
+    list-style: none !important;
+    width: 100% !important;
+    height: auto !important;
   }
 
   .cs_site_header .cs_nav .cs_nav_list > li {
-    width: 100%;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    position: relative !important;
+    margin: 0 !important;
   }
 
   .cs_site_header .cs_nav .cs_nav_list > li > a {
-    display: block;
-    padding: 13px 8px;
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--white-color, #ffffff) !important;
+    display: flex !important;
+    align-items: center !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 48px !important;
+    padding: 13px 4px !important;
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    color: #ffffff !important;
     text-shadow: none !important;
-    text-decoration: none;
-    transition: color 0.2s ease, padding-left 0.2s ease;
+    text-decoration: none !important;
+    font-family: var(--font-subheading) !important;
+    transition: color 0.2s ease, padding-left 0.2s ease !important;
   }
 
   .cs_site_header .cs_nav .cs_nav_list > li > a:hover {
     color: var(--accent-color, #c89d66) !important;
-    padding-left: 12px;
+    padding-left: 8px !important;
   }
 
   /* Submenu expandable item on mobile drawer */
   .cs_site_header .cs_nav .menu-item-has-children {
-    position: relative;
+    position: relative !important;
   }
 
   .cs_site_header .cs_nav .menu-item-has-children > a {
@@ -215,30 +253,54 @@ h1, h2, h3, h4, h5, h6, p, a, span, li, button, input, textarea {
     height: 48px !important;
     padding: 0 !important;
     display: flex !important;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    background: transparent;
-    border: none;
-    color: var(--white-color, #ffffff);
-    z-index: 5;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    background: transparent !important;
+    border: none !important;
+    color: #ffffff !important;
+    z-index: 5 !important;
+    transition: transform 0.25s ease !important;
+  }
+
+  .cs_site_header .cs_nav .menu-item-has-children.active > .cs_menu_dropdown_toggle {
+    transform: rotate(180deg) !important;
+  }
+
+  .cs_dropdown_list {
+    display: none !important;
   }
 
   .cs_dropdown_list.cs_submenu_open {
     display: block !important;
+    position: static !important;
     padding: 6px 0 10px 16px !important;
-    background: rgba(255, 255, 255, 0.04);
-    border-radius: 8px;
-    margin: 4px 0 10px;
-    list-style: none;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-radius: 8px !important;
+    margin: 4px 0 10px 0 !important;
+    list-style: none !important;
+    width: 100% !important;
+    border: none !important;
+    box-shadow: none !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  .cs_dropdown_list.cs_submenu_open li {
+    width: 100% !important;
+    border: none !important;
   }
 
   .cs_dropdown_list.cs_submenu_open li a {
-    padding: 10px 12px;
-    font-size: 15px;
+    padding: 10px 12px !important;
+    font-size: 15px !important;
+    font-weight: 400 !important;
     color: rgba(255, 255, 255, 0.82) !important;
-    display: block;
-    text-decoration: none;
+    display: block !important;
+    text-decoration: none !important;
+    font-family: var(--font-subheading) !important;
+    min-height: 40px !important;
   }
 
   .cs_dropdown_list.cs_submenu_open li a:hover {
@@ -247,9 +309,11 @@ h1, h2, h3, h4, h5, h6, p, a, span, li, button, input, textarea {
 
   /* Mobile drawer quick actions footer */
   .cs_mobile_nav_footer {
-    padding-top: 18px;
-    margin-top: auto;
-    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    padding-top: 20px !important;
+    margin-top: auto !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+    width: 100% !important;
+    flex-shrink: 0 !important;
   }
 
   .cs_mobile_contact_meta p {
@@ -264,22 +328,24 @@ h1, h2, h3, h4, h5, h6, p, a, span, li, button, input, textarea {
     font-weight: 700;
   }
 
-  /* Backdrop */
+  /* Backdrop - solid dark dimming, NO backdrop-filter to prevent iOS WebKit tile glitches */
   .cs_mobile_nav_backdrop {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.65);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    z-index: 1040;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.35s ease;
+    position: fixed !important;
+    inset: 0 !important;
+    background: rgba(0, 0, 0, 0.75) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    z-index: 1040 !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    transition: opacity 0.3s ease, visibility 0.3s !important;
   }
 
   .cs_mobile_nav_backdrop.active {
-    opacity: 1;
-    pointer-events: auto;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
   }
 }
 
@@ -2027,4 +2093,179 @@ select,
   font-weight: 400 !important;
   line-height: 1 !important;
   letter-spacing: 0.03em !important;
+}
+
+/* ==========================================================================
+   THE ART OF EXCEPTIONAL LIVING: Mobile Optimization
+   Preserves original 3D card flips, typography hierarchy, and visual balance
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .cs_exceptional_living_section .cs_exceptional_top_spacer,
+  .cs_exceptional_living_section .cs_height_120 {
+    height: 40px !important;
+  }
+
+  .cs_exceptional_living_section .cs_exceptional_mid_spacer,
+  .cs_exceptional_living_section .cs_height_60 {
+    height: 24px !important;
+  }
+
+  .cs_exceptional_living_section {
+    padding-bottom: 24px;
+  }
+
+  /* Responsive Heading */
+  .cs_exceptional_living_section .cs_section_subtitle {
+    font-size: 10.5px !important;
+    letter-spacing: 0.16em !important;
+    margin-bottom: 8px !important;
+    padding-left: 16px !important;
+  }
+
+  .cs_exceptional_living_section .cs_section_subtitle::before {
+    width: 6px !important;
+    height: 6px !important;
+    top: 3px !important;
+  }
+
+  .cs_exceptional_living_section .cs_section_title {
+    font-size: clamp(1.28rem, 4.2vw, 1.7rem) !important;
+    line-height: 1.18 !important;
+    letter-spacing: -0.01em !important;
+    margin-bottom: 0 !important;
+    padding: 0 10px;
+    max-width: 340px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    text-align: center !important;
+    word-break: normal !important;
+  }
+
+  .cs_exceptional_living_section .cs_section_title .word {
+    overflow: visible !important;
+  }
+
+  .cs_exceptional_living_section .cs_section_title .word_inner {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+
+  /* Grid & Card Proportions: Clean, Compact, Zero Endless Scroll */
+  .cs_exceptional_living_section .cs_grid_style_5 {
+    gap: 24px !important;
+  }
+
+  .cs_exceptional_living_section .cs_card_style_7 {
+    gap: 12px !important;
+  }
+
+  .cs_exceptional_living_section .cs_card_style_7 .cs_card_thumbnail {
+    width: 100% !important;
+    aspect-ratio: 16 / 10 !important;
+    max-height: 230px !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+    box-shadow: 0 6px 20px -6px rgba(0, 0, 0, 0.12) !important;
+  }
+
+  .cs_exceptional_living_section .cs_card_style_7 .cs_card_thumbnail img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+
+  .cs_exceptional_living_section .cs_card_style_7 .cs_card_info {
+    padding: 0 4px;
+  }
+
+  .cs_exceptional_living_section .cs_card_style_7 .cs_card_title {
+    font-size: 1.15rem !important;
+    line-height: 1.2 !important;
+    margin-bottom: 6px !important;
+    letter-spacing: 0.02em !important;
+  }
+
+  .cs_exceptional_living_section .cs_card_style_7 .cs_card_title a {
+    color: #1A1A1A !important;
+    text-decoration: none;
+    transition: color 0.25s ease;
+  }
+
+  .cs_exceptional_living_section .cs_card_style_7 .cs_card_title a:hover {
+    color: var(--accent-color, #8B7355) !important;
+  }
+
+  .cs_exceptional_living_section .cs_card_style_7 .cs_card_subtitle {
+    font-size: 0.835rem !important;
+    line-height: 1.45 !important;
+    color: #6B635B !important;
+    margin-bottom: 10px !important;
+    max-width: 340px;
+  }
+
+  .cs_exceptional_living_section .cs_card_style_7 .cs_text_btn_style_1 {
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.12em !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    color: var(--accent-color, #8B7355) !important;
+  }
+
+  .cs_exceptional_living_section .cs_card_style_7 .cs_text_btn_style_1 svg {
+    transition: transform 0.25s ease;
+  }
+
+  .cs_exceptional_living_section .cs_card_style_7:hover .cs_text_btn_style_1 svg {
+    transform: translateX(4px);
+  }
+}
+
+@media (max-width: 480px) {
+  .cs_exceptional_living_section .cs_exceptional_top_spacer,
+  .cs_exceptional_living_section .cs_height_120 {
+    height: 32px !important;
+  }
+
+  .cs_exceptional_living_section .cs_exceptional_mid_spacer,
+  .cs_exceptional_living_section .cs_height_60 {
+    height: 18px !important;
+  }
+
+  .cs_exceptional_living_section .cs_section_title {
+    font-size: 1.4rem !important;
+    line-height: 1.15 !important;
+  }
+
+  .cs_exceptional_living_section .cs_grid_style_5 {
+    gap: 18px !important;
+  }
+
+  .cs_exceptional_living_section .cs_card_style_7 .cs_card_thumbnail {
+    aspect-ratio: 16 / 9.5 !important;
+    max-height: 200px !important;
+    border-radius: 10px !important;
+  }
+
+  .cs_exceptional_living_section .cs_card_style_7 .cs_card_title {
+    font-size: 1.05rem !important;
+  }
+
+  .cs_exceptional_living_section .cs_card_style_7 .cs_card_subtitle {
+    font-size: 0.785rem !important;
+    line-height: 1.4 !important;
+    margin-bottom: 8px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cs_section_title .word_inner,
+  .cs_grid_style_5 .cs_card_style_7 {
+    transform: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+  }
 }

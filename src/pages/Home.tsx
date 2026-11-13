@@ -102,14 +102,14 @@ export default function Home() {
 </div>
 <AboutSection />
 <ServiceCards />
-<section>
-<div className={"cs_height_120 cs_height_lg_80"}></div>
+<section className={"cs_exceptional_living_section"} aria-label={"Our Services - The Art of Exceptional Living"}>
+<div className={"cs_height_120 cs_height_lg_80 cs_exceptional_top_spacer"}></div>
 <div className={"container"}>
 <div className={"cs_section_heading_style_1 cs_center_column text-center"}>
 <p className={"cs_section_subtitle cs_bold cs_accent_color cs_mb_20 text-uppercase"}>OUR SERVICES</p>
 <h2 className={"cs_section_title cs_fs_53 cs_semibold text-uppercase mb-0"}>THE ART OF EXCEPTIONAL LIVING</h2>
 </div>
-<div className={"cs_height_60 cs_height_lg_50"}></div>
+<div className={"cs_height_60 cs_height_lg_50 cs_exceptional_mid_spacer"}></div>
 <div className={"cs_grid_style_5"}>
 <div className={"cs_card_style_7"}>
 <a href={"/services/details"} className={"cs_card_thumbnail cs_radius_10"} aria-label={"View Elite Craftsmanship service details"}>
@@ -382,18 +382,16 @@ export default function Home() {
 </div>
 </div>
 <div className={"cs_height_50 cs_height_lg_40"}></div>
-<div className={"cs_shadow_text cs_fs_200 cs_bold cs_primary_font"}>ARCHITECTURE</div>
 </div>
 </section>
 
 {/* Interactive Architectural Before & After Transformations */}
-<BeforeAfterTransformation />
 
-{/* Interactive 360° Interior Panoramic Atelier */}
-<PanoramaViewer />
+
+
 
 <section>
-<div className={"cs_height_120 cs_height_lg_80"}></div>
+
 <div className={"container"}>
 <div className={"cs_section_heading_style_1 cs_center_column text-center"}>
 <p className={"cs_section_subtitle cs_bold cs_accent_color cs_mb_20 text-uppercase"}>WHY CHOOSE US</p>
