@@ -15,35 +15,35 @@ export const AboutSection: React.FC = () => {
   };
 
   return (
-    <section className="Mitjen-section-wrapper Mitjen-about-section" aria-labelledby="about-Mitjen-title">
-      <div className="Mitjen-container">
+    <section className="bespoke-section-wrapper bespoke-about-section" aria-labelledby="about-bespoke-title">
+      <div className="bespoke-container">
         <Reveal staggerIndex={0}>
-          <div className="Mitjen-panel">
-            <div className="Mitjen-about-grid">
+          <div className="bespoke-panel">
+            <div className="bespoke-about-grid">
               {/* Left Column: Heading, Description & Left Side Picture ONLY */}
               <div className="bespoke-about-left-col">
                 <div>
-                  <span className="Mitjen-eyebrow">{eyebrow}</span>
-                  <h2 id="about-Mitjen-title" className="Mitjen-h2">
+                  <span className="bespoke-eyebrow">{eyebrow}</span>
+                  <h2 id="about-bespoke-title" className="bespoke-h2">
                     {title}
                   </h2>
-                  <p className="Mitjen-desc">
+                  <p className="bespoke-desc">
                     {description}
                   </p>
                 </div>
 
                 {/* Picture on Left Side ONLY: Anchors to flush baseline with adjacent cards */}
                 <div className="bespoke-about-left-photo-wrap">
-                  <imgMitjen
+                  <img
                     src={leftPicture}
                     alt={leftPictureAlt || 'Bespoke architecture living space'}
-                    className="bespoke-aboutMitjenhoto"
-                    loading="lazyMitjen
+                    className="bespoke-about-left-photo"
+                    loading="lazy"
                     width="600"
-                  height="400"
+                    height="400"
                   />
                   <div className="bespoke-about-photo-badge" aria-hidden="true">
-                    <span>{leftPictuMitjen}</span>
+                    <span>{leftPictureBadge}</span>
                   </div>
                 </div>
               </div>
@@ -57,7 +57,7 @@ export const AboutSection: React.FC = () => {
                     aria-label={`${feature.title} - ${feature.copy}`}
                   >
                     <div>
-                      {/* IconiMitjenWhite Mitjenr Icon Badge */}
+                      {/* Iconic 56px White Circular Icon Badge */}
                       <div className="bespoke-icon-circle" aria-hidden="true">
                         {renderIcon(feature.icon)}
                       </div>
@@ -68,26 +68,26 @@ export const AboutSection: React.FC = () => {
 
                       {/* 3-Point Architectural Feature Checklist */}
                       <ul className="bespoke-card-feature-list">
-                        {feature.highlMitjenap((h) => (
+                        {feature.highlights.map((h) => (
                           <li key={h} className="bespoke-card-feature-item">
                             <svg
                               width="14"
-                              height=Mitjen
+                              height="14"
                               viewBox="0 0 14 14"
                               fill="none"
                               xmlns="http://www.w3.org/2000/svg"
                               aria-hidden="true"
-                            >Mitjen
+                            >
                               <path
                                 d="M2.5 7.5L5.5 10.5L11.5 3.5"
                                 stroke="var(--accent)"
                                 strokeWidth="1.6"
-                                strokMitjenp="round"
-                                stroMitjenoin="round"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
                               />
                             </svg>
                             <span>{h}</span>
-                          </li>Mitjen
+                          </li>
                         ))}
                       </ul>
 

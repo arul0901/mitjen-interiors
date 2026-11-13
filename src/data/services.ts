@@ -1,5 +1,5 @@
 // PLACEHOLDER: replace with real client testimonials, real numbers and real projects before launch
-// Brand: Mitjen Architecture Studio
+// Brand: Bespoke Architecture Studio
 
 export interface AboutFeature {
   id: string;
@@ -39,12 +39,12 @@ export interface ServiceItem {
 }
 
 export const aboutData: AboutSectionData = {
-  eyebrow: 'ABOUT Mitjen',
+  eyebrow: 'ABOUT BESPOKE',
   title: 'Spaces that reflect who you are.',
   description:
     'Every detail matters. From concept to completion, we create interiors that are elegant, functional, and uniquely yours.',
   leftPicture: '/images/projects/01-serene.webp',
-  leftPictureAlt: 'Mitjen architecture living space with warm daylight and refined materials',
+  leftPictureAlt: 'Bespoke architecture living space with warm daylight and refined materials',
   leftPictureBadge: 'ARCHITECTURAL DISCIPLINE • EST. 2010',
   features: [
     {
@@ -60,7 +60,7 @@ export const aboutData: AboutSectionData = {
         'Natural daylight & circulation studies',
         'Acoustic balance & calm zoning'
       ],
-      tags: ['Spatial Planning', 'Mitjen Joinery']
+      tags: ['Spatial Planning', 'Bespoke Joinery']
     },
     {
       id: 'timeless-aesthetics',
@@ -89,7 +89,7 @@ export const servicesData: ServiceItem[] = [
     description: 'Beautiful homes designed around your lifestyle.',
     copy: 'Beautiful homes designed around your lifestyle.',
     image: '/images/services/residential.webp',
-    alt: 'Mitjen residential interior living space with warm neutral tones and soft daylight',
+    alt: 'Bespoke residential interior living space with warm neutral tones and soft daylight',
     aspectRatio: '16/10',
     href: '/portfolio',
     linkText: 'VIEW PROJECTS',
