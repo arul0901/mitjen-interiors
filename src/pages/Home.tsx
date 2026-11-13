@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import BeforeAfterTransformation from "../components/BeforeAfterTransformation";
 import PanoramaViewer from "../components/PanoramaViewer";
 import AboutSection from "../components/sections/About";
+import ServiceCards from "../components/sections/ServiceCards";
 
 export default function Home() {
   useEffect(() => {
@@ -100,6 +101,7 @@ export default function Home() {
 </div>
 </div>
 <AboutSection />
+<ServiceCards />
 <section>
 <div className={"cs_height_120 cs_height_lg_80"}></div>
 <div className={"container"}>

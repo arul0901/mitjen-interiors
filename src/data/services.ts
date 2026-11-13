@@ -20,12 +20,16 @@ export interface AboutSectionData {
 export interface ServiceItem {
   id: string;
   title: string;
+  titleLines: [string, string];
   category: string;
   description: string;
+  copy: string;
   image: string;
+  alt: string;
   aspectRatio: string;
   href: string;
-  features: string[];
+  linkText: string;
+  features?: string[];
 }
 
 export const aboutData: AboutSectionData = {
@@ -56,22 +60,30 @@ export const aboutData: AboutSectionData = {
 export const servicesData: ServiceItem[] = [
   {
     id: 'residential',
-    title: 'Bespoke Residential Architecture',
+    title: 'Residential Interiors',
+    titleLines: ['Residential', 'Interiors'],
     category: 'Private Living',
-    description: 'Harmonious private sanctuaries and family villas shaped around natural daylight, quiet circulation, and tactile materiality.',
+    description: 'Beautiful homes designed around your lifestyle.',
+    copy: 'Beautiful homes designed around your lifestyle.',
     image: '/images/services/residential.webp',
+    alt: 'Bespoke residential interior living space with warm neutral tones and soft daylight',
     aspectRatio: '16/10',
-    href: '/services/residential-interior-design',
+    href: '/portfolio',
+    linkText: 'VIEW PROJECTS',
     features: ['Custom Millwork', 'Spatial Masterplanning', 'Lighting Atmosphere', 'Material Sourcing']
   },
   {
     id: 'commercial',
-    title: 'Commercial & Workplace Environments',
+    title: 'Commercial Interiors',
+    titleLines: ['Commercial', 'Interiors'],
     category: 'Brand Experience',
-    description: 'Executive headquarters, flagship showrooms, and collaborative ateliers engineered to elevate culture and brand character.',
+    description: 'Inspiring spaces that elevate brand and experience.',
+    copy: 'Inspiring spaces that elevate brand and experience.',
     image: '/images/services/commercial.webp',
+    alt: 'Contemporary commercial architecture and workspace environment',
     aspectRatio: '16/10',
-    href: '/services/commercial-interior-design',
+    href: '/portfolio',
+    linkText: 'VIEW PROJECTS',
     features: ['Acoustic Engineering', 'Workplace Strategy', 'Experiential Retail', 'Sustainable Fitouts']
   }
 ];

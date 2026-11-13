@@ -17,7 +17,7 @@ export const AboutSection: React.FC = () => {
   };
 
   return (
-    <section className="bespoke-section-wrapper" aria-labelledby="about-bespoke-title">
+    <section className="bespoke-section-wrapper bespoke-about-section" aria-labelledby="about-bespoke-title" style={{ paddingBottom: '24px' }}>
       <div className="bespoke-container">
         <Reveal staggerIndex={0}>
           <div className="bespoke-panel p-6 sm:p-10" style={{ padding: 'clamp(24px, 4vw, 40px)' }}>
