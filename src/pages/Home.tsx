@@ -194,14 +194,14 @@ export default function Home() {
 </div>
 </div>
 </section>
-<section>
-<div className={"cs_height_120 cs_height_lg_80"}></div>
+<section className={"cs_some_spaces_section"} aria-label={"Our Projects - Some Spaces Some Iconic"}>
+<div className={"cs_height_120 cs_height_lg_80 cs_some_spaces_top_spacer"}></div>
 <div className={"container"}>
-<div className={"cs_section_heading_style_1"}>
+<div className={"cs_section_heading_style_1 cs_center_column text-center"}>
 <p className={"cs_section_subtitle cs_bold cs_accent_color cs_mb_20 text-uppercase"}>OUR PROJECT</p>
 <h2 className={"cs_section_title cs_fs_53 cs_semibold text-uppercase mb-0"}>SOME SPACES SOME ICONIC.</h2>
 </div>
-<div className={"cs_height_60 cs_height_lg_50"}></div>
+<div className={"cs_height_60 cs_height_lg_50 cs_some_spaces_mid_spacer"}></div>
 <div className={"cs_grid_style_4"}>
 <div className={"cs_card_style_6 cs_gray_bg cs_radius_10"}>
 <a href={"/portfolio/details"} className={"cs_card_thumbnail"} aria-label={"View BAROXXI VEIG'S MUSEUM project details"}>
@@ -341,7 +341,7 @@ export default function Home() {
 </div>
 </div>
 </div>
-<div className={"cs_height_120 cs_height_lg_80"}></div>
+<div className={"cs_height_120 cs_height_lg_80 cs_some_spaces_bottom_spacer"}></div>
 </section>
 <section className={"cs_skills_layout_1"}>
 <div className={"container"}>

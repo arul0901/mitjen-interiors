@@ -2263,9 +2263,231 @@ select,
 
 @media (prefers-reduced-motion: reduce) {
   .cs_section_title .word_inner,
-  .cs_grid_style_5 .cs_card_style_7 {
+  .cs_grid_style_5 .cs_card_style_7,
+  .cs_grid_style_4 .cs_card_style_6 {
     transform: none !important;
     opacity: 1 !important;
     filter: none !important;
+  }
+}
+
+/* ==========================================================================
+   SOME SPACES SOME ICONIC (OUR PROJECT): Mobile Optimization
+   Preserves original desktop interactive accordion, pill badges, and typography
+   ========================================================================== */
+
+@media (max-width: 991px) {
+  .cs_some_spaces_section .cs_grid_style_4 {
+    display: flex;
+    flex-direction: column;
+    gap: 22px !important;
+  }
+
+  .cs_some_spaces_section .cs_card_style_6 {
+    width: 100% !important;
+    height: auto !important;
+    flex-direction: column !important;
+    border-radius: 14px !important;
+    overflow: hidden !important;
+    border: 1px solid rgba(139, 115, 85, 0.14) !important;
+    box-shadow: 0 8px 24px -8px rgba(60, 40, 20, 0.08) !important;
+    background-color: var(--card-bg, #FAF8F5) !important;
+  }
+
+  .cs_some_spaces_section .cs_card_style_6 .cs_card_thumbnail {
+    width: 100% !important;
+    height: auto !important;
+    max-height: 240px !important;
+    aspect-ratio: 16 / 10 !important;
+    border-radius: 13px 13px 0 0 !important;
+    overflow: hidden !important;
+    position: relative !important;
+  }
+
+  .cs_some_spaces_section .cs_card_style_6 .cs_card_thumbnail img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+
+  .cs_some_spaces_section .cs_card_style_6 .cs_card_content_wrapper {
+    width: 100% !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    overflow: visible !important;
+    position: static !important;
+  }
+
+  .cs_some_spaces_section .cs_card_style_6 .cs_card_content {
+    position: static !important;
+    width: 100% !important;
+    height: auto !important;
+    padding: 18px 16px 20px !important;
+    gap: 12px !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    box-sizing: border-box !important;
+  }
+
+  .cs_some_spaces_section .cs_card_header {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+    margin-bottom: 0 !important;
+  }
+
+  .cs_some_spaces_section .cs_card_title {
+    font-size: 1.15rem !important;
+    line-height: 1.25 !important;
+    margin-bottom: 0 !important;
+    letter-spacing: 0.01em !important;
+  }
+
+  .cs_some_spaces_section .cs_card_title a {
+    color: #1A1A1A !important;
+    text-decoration: none;
+    transition: color 0.25s ease;
+  }
+
+  .cs_some_spaces_section .cs_card_title a:hover {
+    color: var(--accent-color, #8B7355) !important;
+  }
+
+  /* Compact Category Pill Badge on Mobile */
+  .cs_some_spaces_section .cs_btn_style_1 {
+    height: 28px !important;
+    padding: 0 10px 0 12px !important;
+    font-size: 10px !important;
+    letter-spacing: 0.08em !important;
+    flex-shrink: 0 !important;
+    order: -1 !important; /* Positions category pill badge above title on mobile */
+  }
+
+  .cs_some_spaces_section .cs_btn_style_1 .cs_btn_icon {
+    width: 18px !important;
+    height: 18px !important;
+    margin-left: 5px !important;
+  }
+
+  .cs_some_spaces_section .cs_card_desc {
+    margin-top: 0 !important;
+  }
+
+  .cs_some_spaces_section .cs_card_desc hr {
+    margin: 8px 0 10px !important;
+    border-color: rgba(139, 115, 85, 0.18) !important;
+  }
+
+  .cs_some_spaces_section .cs_card_subtitle {
+    font-size: 0.825rem !important;
+    line-height: 1.45 !important;
+    color: #6B635B !important;
+    margin-bottom: 10px !important;
+    max-width: 100% !important;
+    -webkit-line-clamp: 2 !important;
+  }
+
+  .cs_some_spaces_section .cs_text_btn_style_1 {
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.12em !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    color: var(--accent-color, #8B7355) !important;
+  }
+
+  .cs_some_spaces_section .cs_text_btn_style_1 svg {
+    transition: transform 0.25s ease;
+  }
+
+  .cs_some_spaces_section .cs_card_style_6:hover .cs_text_btn_style_1 svg {
+    transform: translateX(4px);
+  }
+}
+
+/* Mobile Spacers & Heading Scaling */
+@media (max-width: 768px) {
+  .cs_some_spaces_section .cs_some_spaces_top_spacer,
+  .cs_some_spaces_section .cs_height_120:first-child {
+    height: 40px !important;
+  }
+
+  .cs_some_spaces_section .cs_some_spaces_mid_spacer,
+  .cs_some_spaces_section .cs_height_60 {
+    height: 24px !important;
+  }
+
+  .cs_some_spaces_section .cs_some_spaces_bottom_spacer {
+    height: 40px !important;
+  }
+
+  .cs_some_spaces_section .cs_section_subtitle {
+    font-size: 10.5px !important;
+    letter-spacing: 0.16em !important;
+    margin-bottom: 8px !important;
+    padding-left: 16px !important;
+  }
+
+  .cs_some_spaces_section .cs_section_subtitle::before {
+    width: 6px !important;
+    height: 6px !important;
+    top: 3px !important;
+  }
+
+  .cs_some_spaces_section .cs_section_title {
+    font-size: clamp(1.32rem, 4.4vw, 1.75rem) !important;
+    line-height: 1.18 !important;
+    letter-spacing: -0.015em !important;
+    margin-bottom: 0 !important;
+    padding: 0 10px;
+    text-align: center !important;
+    max-width: 300px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .cs_some_spaces_section .cs_section_title .word {
+    overflow: visible !important;
+  }
+
+  .cs_some_spaces_section .cs_section_title .word_inner {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .cs_some_spaces_section .cs_some_spaces_top_spacer {
+    height: 32px !important;
+  }
+
+  .cs_some_spaces_section .cs_some_spaces_mid_spacer {
+    height: 18px !important;
+  }
+
+  .cs_some_spaces_section .cs_some_spaces_bottom_spacer {
+    height: 32px !important;
+  }
+
+  .cs_some_spaces_section .cs_grid_style_4 {
+    gap: 16px !important;
+  }
+
+  .cs_some_spaces_section .cs_card_style_6 .cs_card_thumbnail {
+    aspect-ratio: 16 / 9.5 !important;
+    max-height: 200px !important;
+  }
+
+  .cs_some_spaces_section .cs_card_title {
+    font-size: 1.05rem !important;
+  }
+
+  .cs_some_spaces_section .cs_card_content {
+    padding: 14px 14px 16px !important;
+    gap: 10px !important;
   }
 }
