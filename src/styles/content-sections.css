@@ -969,3 +969,377 @@
   background-color: var(--ink);
   transform: scale(1.25);
 }
+
+/* ==========================================================================
+   WHY CHOOSE MITJEN: Architectural Discipline & Distinction Section
+   ========================================================================== */
+.bespoke-why-choose-section {
+  background-color: var(--page);
+  padding: clamp(38px, 4.8vw, 68px) 0;
+  width: 100%;
+  overflow-x: clip;
+  box-sizing: border-box;
+}
+
+.bespoke-why-choose-header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto clamp(28px, 3.6vw, 44px) auto;
+}
+
+.bespoke-why-choose-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.bespoke-why-choose-kicker-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--accent);
+}
+
+.bespoke-why-choose-title {
+  font-family: var(--font-display, 'Cormorant Garamond', serif);
+  font-size: clamp(1.85rem, 3.4vw, 2.6rem);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 0 0 12px 0;
+}
+
+.bespoke-why-choose-title span {
+  display: inline-block;
+}
+
+.bespoke-why-choose-subtitle {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: clamp(0.85rem, 1.2vw, 0.95rem);
+  line-height: 1.55;
+  color: var(--muted);
+  margin: 0 auto;
+  max-width: 580px;
+}
+
+@media (max-width: 640px) {
+  .bespoke-why-choose-title {
+    font-size: 1.5rem;
+    line-height: 1.2;
+    padding: 0 8px;
+  }
+  .bespoke-why-choose-title span {
+    display: block;
+  }
+  .bespoke-why-choose-subtitle {
+    font-size: 0.82rem;
+    padding: 0 8px;
+  }
+}
+
+.bespoke-why-choose-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(16px, 2vw, 24px);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.bespoke-why-choose-grid > div {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+}
+
+@media (max-width: 991px) {
+  .bespoke-why-choose-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .bespoke-why-choose-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+.bespoke-why-choose-card {
+  background-color: var(--surface);
+  border-radius: 18px;
+  border: 1px solid rgba(139, 115, 85, 0.16);
+  box-shadow: 0 4px 18px -6px rgba(60, 40, 20, 0.05);
+  padding: clamp(18px, 2.2vw, 26px);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s ease,
+              border-color 0.35s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 640px) {
+  .bespoke-why-choose-card {
+    padding: 16px 14px;
+    border-radius: 16px;
+  }
+}
+
+.bespoke-why-choose-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px -10px rgba(60, 40, 20, 0.12);
+  border-color: rgba(139, 115, 85, 0.35);
+}
+
+.bespoke-why-choose-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 640px) {
+  .bespoke-why-choose-card-top {
+    margin-bottom: 12px;
+  }
+}
+
+.bespoke-why-choose-icon-badge {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background-color: #FAF8F5;
+  border: 1px solid rgba(139, 115, 85, 0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.35s ease;
+}
+
+@media (max-width: 640px) {
+  .bespoke-why-choose-icon-badge {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+  }
+  .bespoke-why-choose-icon-badge svg {
+    width: 17px;
+    height: 17px;
+  }
+}
+
+.bespoke-why-choose-card:hover .bespoke-why-choose-icon-badge {
+  transform: scale(1.08);
+  background-color: #FFFFFF;
+}
+
+.bespoke-why-choose-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.bespoke-why-choose-tag {
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
+  font-size: 9.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--taupe);
+  background: rgba(139, 115, 85, 0.08);
+  padding: 4px 8px;
+  border-radius: 20px;
+}
+
+@media (max-width: 640px) {
+  .bespoke-why-choose-tag {
+    font-size: 8px;
+    letter-spacing: 0.05em;
+    padding: 2.5px 6px;
+    white-space: nowrap;
+  }
+}
+
+.bespoke-why-choose-num {
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(26, 26, 26, 0.35);
+  letter-spacing: 0.05em;
+}
+
+.bespoke-why-choose-card-title {
+  font-family: var(--font-display, 'Cormorant Garamond', serif);
+  font-size: clamp(1.22rem, 1.5vw, 1.38rem);
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0 0 8px 0;
+  letter-spacing: -0.01em;
+}
+
+@media (max-width: 640px) {
+  .bespoke-why-choose-card-title {
+    font-size: 1.15rem;
+    margin-bottom: 6px;
+  }
+}
+
+.bespoke-why-choose-card-text {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.835rem;
+  line-height: 1.55;
+  color: var(--muted);
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .bespoke-why-choose-card-text {
+    font-size: 0.78rem;
+    line-height: 1.45;
+  }
+}
+
+.bespoke-why-choose-card-accent {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.bespoke-why-choose-card:hover .bespoke-why-choose-card-accent {
+  opacity: 1;
+}
+
+/* Footer Banner within Why Choose */
+.bespoke-why-choose-footer-banner {
+  margin-top: clamp(28px, 3.8vw, 44px);
+  background-color: var(--surface);
+  border-radius: 18px;
+  border: 1px solid rgba(139, 115, 85, 0.18);
+  box-shadow: 0 6px 20px -8px rgba(60, 40, 20, 0.06);
+  padding: clamp(18px, 2.5vw, 26px) clamp(20px, 3vw, 32px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+@media (max-width: 768px) {
+  .bespoke-why-choose-footer-banner {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+    padding: 20px 16px;
+    border-radius: 16px;
+  }
+}
+
+.bespoke-why-choose-footer-text {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+@media (max-width: 768px) {
+  .bespoke-why-choose-footer-text {
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+}
+
+.bespoke-why-choose-footer-quote-mark {
+  font-family: var(--font-display, 'Cormorant Garamond', serif);
+  font-size: 2.2rem;
+  line-height: 0.8;
+  color: var(--accent);
+  opacity: 0.7;
+}
+
+@media (max-width: 768px) {
+  .bespoke-why-choose-footer-quote-mark {
+    display: none;
+  }
+}
+
+.bespoke-why-choose-footer-quote {
+  font-family: var(--font-display, 'Cormorant Garamond', serif);
+  font-size: clamp(0.95rem, 1.25vw, 1.1rem);
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--ink);
+  margin: 0;
+  max-width: 620px;
+}
+
+@media (max-width: 768px) {
+  .bespoke-why-choose-footer-quote {
+    font-size: 0.88rem;
+  }
+}
+
+.bespoke-why-choose-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #FFFFFF;
+  background-color: var(--ink);
+  padding: 12px 24px;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: background-color 0.25s ease, transform 0.25s ease;
+  flex-shrink: 0;
+}
+
+@media (max-width: 640px) {
+  .bespoke-why-choose-btn {
+    font-size: 10px;
+    padding: 10px 20px;
+    width: 100%;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+}
+
+.bespoke-why-choose-btn svg {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bespoke-why-choose-btn:hover {
+  background-color: var(--accent);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+}
+
+.bespoke-why-choose-btn:hover svg {
+  transform: translateX(4px);
+}
+

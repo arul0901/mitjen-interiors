@@ -3,6 +3,7 @@ import BeforeAfterTransformation from "../components/BeforeAfterTransformation";
 import PanoramaViewer from "../components/PanoramaViewer";
 import AboutSection from "../components/sections/About";
 import ServiceCards from "../components/sections/ServiceCards";
+import WhyChooseSection from "../components/sections/WhyChoose";
 import TestimonialsSection from "../components/sections/Testimonials";
 
 export default function Home() {
@@ -391,114 +392,7 @@ export default function Home() {
 
 
 
-<section>
-
-<div className={"container"}>
-<div className={"cs_section_heading_style_1 cs_center_column text-center"}>
-<p className={"cs_section_subtitle cs_bold cs_accent_color cs_mb_20 text-uppercase"}>WHY CHOOSE US</p>
-<h2 className={"cs_section_title cs_fs_60 cs_semibold mb-0"}>WHY CHOOSE Mitjen</h2>
-</div>
-<div className={"cs_height_60 cs_height_lg_50"}></div>
-<div className={"row cs_gap_y_30"}>
-<div className={"col-md-6"}>
-<div className={"cs_iconbox_style_5 cs_gray_bg cs_radius_10"}>
-<span className={"cs_iconbox_icon cs_center cs_radius_10"}>
-<img src={"/assets/img/icons/expertise.svg"} alt={"Icon"} />
-</span>
-<div className={"cs_iconbox_info"}>
-<div className={"cs_iconbox_header cs_mb_10"}>
-<h3 className={"cs_iconbox_title cs_fs_24 cs_bold mb-0 text-uppercase"}>TRUSTED EXPERTISE</h3>
-<span className={"cs_iconbox_index cs_fs_24 cs_bold cs_primary_font"}>01</span>
-</div>
-<p className={"cs_iconbox_subtitle mb-0"}>Architecture is the art and science of designing buildings and  vision with technical expertise. From Is residential homes to Is commercial complexes and urban landmarks.</p>
-</div>
-</div>
-</div>
-<div className={"col-md-6"}>
-<div className={"cs_iconbox_style_5 cs_gray_bg cs_radius_10"}>
-<span className={"cs_iconbox_icon cs_center cs_radius_10"}>
-<img src={"/assets/img/icons/design.svg"} alt={"Icon"} />
-</span>
-<div className={"cs_iconbox_info"}>
-<div className={"cs_iconbox_header cs_mb_10"}>
-<h3 className={"cs_iconbox_title cs_fs_24 cs_bold mb-0 text-uppercase"}>TAILORED DESIGNS</h3>
-<span className={"cs_iconbox_index cs_fs_24 cs_bold cs_primary_font"}>02</span>
-</div>
-<p className={"cs_iconbox_subtitle mb-0"}>Architecture is the art and science of designing buildings and  vision with technical expertise. From Is residential homes to Is commercial complexes and urban landmarks.</p>
-</div>
-</div>
-</div>
-<div className={"col-md-6"}>
-<div className={"cs_iconbox_style_5 cs_gray_bg cs_radius_10"}>
-<span className={"cs_iconbox_icon cs_center cs_radius_10"}>
-<img src={"/assets/img/icons/chair3.svg"} alt={"Icon"} />
-</span>
-<div className={"cs_iconbox_info"}>
-<div className={"cs_iconbox_header cs_mb_10"}>
-<h3 className={"cs_iconbox_title cs_fs_24 cs_bold mb-0 text-uppercase"}>SEMLESS PROCESS</h3>
-<span className={"cs_iconbox_index cs_fs_24 cs_bold cs_primary_font"}>03</span>
-</div>
-<p className={"cs_iconbox_subtitle mb-0"}>Architecture is the art and science of designing buildings and  vision with technical expertise. From Is residential homes to Is commercial complexes and urban landmarks.</p>
-</div>
-</div>
-</div>
-<div className={"col-md-6"}>
-<div className={"cs_iconbox_style_5 cs_gray_bg cs_radius_10"}>
-<span className={"cs_iconbox_icon cs_center cs_radius_10"}>
-<img src={"/assets/img/icons/quality.svg"} alt={"Icon"} />
-</span>
-<div className={"cs_iconbox_info"}>
-<div className={"cs_iconbox_header cs_mb_10"}>
-<h3 className={"cs_iconbox_title cs_fs_24 cs_bold mb-0 text-uppercase"}>LASTING QUALITY</h3>
-<span className={"cs_iconbox_index cs_fs_24 cs_bold cs_primary_font"}>04</span>
-</div>
-<p className={"cs_iconbox_subtitle mb-0"}>Architecture is the art and science of designing buildings and  vision with technical expertise. From Is residential homes to Is commercial complexes and urban landmarks.</p>
-</div>
-</div>
-</div>
-<div className={"col-md-6"}>
-<div className={"cs_iconbox_style_5 cs_gray_bg cs_radius_10"}>
-<span className={"cs_iconbox_icon cs_center cs_radius_10"}>
-<img src={"/assets/img/icons/design.svg"} alt={"Icon"} />
-</span>
-<div className={"cs_iconbox_info"}>
-<div className={"cs_iconbox_header cs_mb_10"}>
-<h3 className={"cs_iconbox_title cs_fs_24 cs_bold mb-0 text-uppercase"}>CLEAR COMMUNICATION</h3>
-<span className={"cs_iconbox_index cs_fs_24 cs_bold cs_primary_font"}>05</span>
-</div>
-<p className={"cs_iconbox_subtitle mb-0"}>Architecture is the art and science of designing buildings and  vision with technical expertise. From Is residential homes to Is commercial complexes and urban landmarks.</p>
-</div>
-</div>
-</div>
-<div className={"col-md-6"}>
-<div className={"cs_iconbox_style_5 cs_gray_bg cs_radius_10"}>
-<span className={"cs_iconbox_icon cs_center cs_radius_10"}>
-<img src={"/assets/img/icons/expertise.svg"} alt={"Icon"} />
-</span>
-<div className={"cs_iconbox_info"}>
-<div className={"cs_iconbox_header cs_mb_10"}>
-<h3 className={"cs_iconbox_title cs_fs_24 cs_bold mb-0 text-uppercase"}>SKILED TEAM</h3>
-<span className={"cs_iconbox_index cs_fs_24 cs_bold cs_primary_font"}>06</span>
-</div>
-<p className={"cs_iconbox_subtitle mb-0"}>Architecture is the art and science of designing buildings and  vision with technical expertise. From Is residential homes to Is commercial complexes and urban landmarks.</p>
-</div>
-</div>
-</div>
-</div>
-<div className={"cs_height_40 cs_height_lg_40"}></div>
-<div className={"cs_why_choose_summery cs_center_column text-center"}>
-<p className={"cs_summery cs_mb_30"}>Architecture is the art and science of designing buildings and spaces that balance beauty,<br /> environment by combining creative vision with technical expertise. From Is residential homes to <br /> commercial complexes and urban landmarks.</p>
-<a href={"/about"} className={"cs_text_btn_style_1 cs_fs_14 cs_bold cs_accent_color"} aria-label={"Learn more about us"}>
-<span>READ MORE</span>
-<span aria-hidden={"true"}>
-<svg width={"13"} height={"13"} viewBox={"0 0 14 14"} fill={"none"} xmlns={"http://www.w3.org/2000/svg"}>
-<path d={"M1 7H13M13 7L7.5 1.5M13 7L7.5 12.5"} stroke={"currentColor"} strokeWidth={"1.8"} strokeLinecap={"round"} strokeLinejoin={"round"}></path>
-</svg>
-</span>
-</a>
-</div>
-</div>
-</section>
+<WhyChooseSection />
 <TestimonialsSection />
 <section className={"cs_cta_style_2 cs_primary_bg cs_bg_fixed position-relative"} data-src={"/assets/img/cta-bg2.webp"} aria-label={"Call to action - Unlock your dream home today"}>
 <div className={"cs_cta_overlay position-absolute"} aria-hidden={"true"}></div>
