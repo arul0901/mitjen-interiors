@@ -1,6 +1,4 @@
 import { useEffect } from "react";
-import MaterialsGallery from "../components/MaterialsGallery";
-import HowItWorksSection from "../components/HowItWorksSection";
 
 const pageTitle = "Our Portfolio";
 
@@ -199,12 +197,6 @@ export default function Portfolio() {
         </div>
         <div className={"cs_height_120 cs_height_lg_80"}></div>
       </section>
-
-      {/* 4. How It Works — 3 Easy Steps to Get Interior Design */}
-      <HowItWorksSection />
-
-      {/* 5. Interior Craft & Detail — Materials & Surfaces Gallery */}
-      <MaterialsGallery />
     </main>
   );
 }

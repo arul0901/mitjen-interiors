@@ -1,4 +1,6 @@
 import { useEffect } from "react";
+import HowItWorksSection from "../components/HowItWorksSection";
+import MaterialsGallery from "../components/MaterialsGallery";
 
 const pageTitle = "About Us";
 
@@ -402,68 +404,6 @@ export default function About() {
             </div>
           </div>
 
-          {/* 4-Stage Studio Creation Journey */}
-          <div className={"cs_mb_60"}>
-            <div className={"cs_section_heading_style_1 text-center cs_mb_50"}>
-              <p className={"cs_section_subtitle cs_bold cs_accent_color cs_mb_16 text-uppercase"}>
-                THE STUDIO METHODOLOGY
-              </p>
-              <h3 className={"cs_section_title cs_fs_40 cs_semibold text-uppercase mb-0"}>
-                FROM INTUITIVE VISION TO LIVING SANCTUARY
-              </h3>
-            </div>
-
-            <div className={"row cs_gap_y_24"}>
-              {/* Step 1 */}
-              <div className={"col-lg-3 col-sm-6"}>
-                <div className={"cs_process_step_card"}>
-                  <div className={"cs_process_number"}>01</div>
-                  <h4 className={"cs_process_title"}>Spatial Discovery</h4>
-                  <p className={"cs_process_desc"}>
-                    Deep lifestyle consultation, orientation vectors, sun studies, and zoning feasibility to define
-                    the emotional and functional foundation.
-                  </p>
-                </div>
-              </div>
-
-              {/* Step 2 */}
-              <div className={"col-lg-3 col-sm-6"}>
-                <div className={"cs_process_step_card"}>
-                  <div className={"cs_process_number"}>02</div>
-                  <h4 className={"cs_process_title"}>Schematic Immersion</h4>
-                  <p className={"cs_process_desc"}>
-                    Volumetric spatial modeling, photorealistic lighting studies, and curated tactile material boards
-                    to experience the home before ground is broken.
-                  </p>
-                </div>
-              </div>
-
-              {/* Step 3 */}
-              <div className={"col-lg-3 col-sm-6"}>
-                <div className={"cs_process_step_card"}>
-                  <div className={"cs_process_number"}>03</div>
-                  <h4 className={"cs_process_title"}>Atelier Procurement</h4>
-                  <p className={"cs_process_desc"}>
-                    Direct quarry block selection, master joiner collaborations, custom hardware fabrication, and
-                    stringent quality benchmark audits.
-                  </p>
-                </div>
-              </div>
-
-              {/* Step 4 */}
-              <div className={"col-lg-3 col-sm-6"}>
-                <div className={"cs_process_step_card"}>
-                  <div className={"cs_process_number"}>04</div>
-                  <h4 className={"cs_process_title"}>Turnkey Handover</h4>
-                  <p className={"cs_process_desc"}>
-                    White-glove site governance, bespoke art & furniture staging, acoustic calibration, and complete
-                    turnkey keys presentation.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
           {/* Studio Impact & Excellence Metrics */}
           <div className={"cs_stats_ribbon"}>
             <div className={"row cs_gap_y_24 align-items-center"}>
@@ -496,6 +436,12 @@ export default function About() {
         </div>
         <div className={"cs_height_120 cs_height_lg_80"}></div>
       </section>
+
+      {/* Interactive 3-Stage Client Journey */}
+      <HowItWorksSection />
+
+      {/* Interior Craft & Detail — Materials & Millwork Gallery */}
+      <MaterialsGallery />
 
       {/* 7. Call To Action Strip */}
       <section
