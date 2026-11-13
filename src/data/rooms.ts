@@ -30,6 +30,8 @@ export interface RoomData {
 
 export interface WalkthroughRoom {
   id: string;
+  number: string;
+  eyebrow: string;
   from: number;
   to: number;
   title: string;
@@ -39,52 +41,74 @@ export interface WalkthroughRoom {
 
 export const WALKTHROUGH_ROOMS: WalkthroughRoom[] = [
   {
-    id: "living-space",
-    from: 0.19,
+    id: "entrance-gallery",
+    number: "01",
+    eyebrow: "Arrival Gallery",
+    from: 0.0,
+    to: 0.17,
+    title: "The Entrance Gallery",
+    tagline: "Board-formed concrete meets seamless desert light.",
+    side: "left",
+  },
+  {
+    id: "living-pavilion",
+    number: "02",
+    eyebrow: "Living Pavilion",
+    from: 0.14,
     to: 0.31,
-    title: "The Living Space",
-    tagline: "Where the day gathers.",
+    title: "The Living Pavilion",
+    tagline: "Expansive glass proportions shaped around calm daylight.",
+    side: "right",
+  },
+  {
+    id: "living-lounge",
+    number: "03",
+    eyebrow: "Lounge & Salon",
+    from: 0.28,
+    to: 0.45,
+    title: "The Living Lounge",
+    tagline: "Warm European oak, tactile textiles, and quiet gatherings.",
     side: "left",
   },
   {
     id: "dining-room",
-    from: 0.32,
-    to: 0.45,
+    number: "04",
+    eyebrow: "Dining Salon",
+    from: 0.42,
+    to: 0.59,
     title: "The Dining Room",
-    tagline: "Made for long tables, longer evenings.",
+    tagline: "Made for long tables, warm conversations, and longer evenings.",
     side: "right",
   },
   {
     id: "kitchen",
-    from: 0.48,
-    to: 0.61,
-    title: "The Kitchen",
-    tagline: "Honest materials, quiet function.",
+    number: "05",
+    eyebrow: "Culinary Studio",
+    from: 0.56,
+    to: 0.73,
+    title: "The Culinary Studio",
+    tagline: "Cast concrete monoliths, tailored joinery, and quiet function.",
     side: "left",
   },
   {
     id: "primary-suite",
-    from: 0.64,
-    to: 0.77,
-    title: "Primary Suite",
-    tagline: "A room that holds the light.",
+    number: "06",
+    eyebrow: "Primary Suite",
+    from: 0.70,
+    to: 0.87,
+    title: "The Primary Suite",
+    tagline: "A peaceful private sanctuary opening to the morning garden.",
     side: "right",
-  },
-  {
-    id: "garden-room",
-    from: 0.79,
-    to: 0.92,
-    title: "The Garden Room",
-    tagline: "Where the interior meets the garden.",
-    side: "left",
   },
   {
     id: "bath",
-    from: 0.93,
+    number: "07",
+    eyebrow: "Stone Sanctuary",
+    from: 0.84,
     to: 1.0,
     title: "The Bath",
-    tagline: "Stone, water, stillness.",
-    side: "right",
+    tagline: "Carved travertine, brushed metal, water, and stillness.",
+    side: "left",
   },
 ];
 

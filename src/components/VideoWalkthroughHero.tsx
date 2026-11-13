@@ -95,54 +95,54 @@ export default function VideoWalkthroughHero() {
     return Math.max(0, 1 - progress / 0.04);
   }, [progress]);
 
-  // Compute transform & opacity for room titles
-  const getRoomStyle = (room: WalkthroughRoom) => {
-    const { from, to, id } = room;
-    const range = to - from;
-    const enterEnd = from + range * 0.25;
-    const leaveStart = to - range * 0.2;
+  // Compute transform & opacity for room titles with continuous, gap-free cross-fading
+  const getRoomStyle = (room: WalkthroughRoom, index: number) => {
+    const { from, to } = room;
+    const isFirst = index === 0;
+    const isLast = index === WALKTHROUGH_ROOMS.length - 1;
 
-    if (progress < from) {
-      return { opacity: 0, transform: "translateY(24px)", filter: "blur(6px)" };
+    // Cross-fade blend window (progress fraction)
+    const blend = 0.035;
+    const enterStart = from;
+    const enterEnd = isFirst ? 0 : from + blend;
+    const leaveStart = isLast ? 1.0 : to - blend;
+    const leaveEnd = to;
+
+    if (progress < enterStart) {
+      return { opacity: 0, transform: "translateY(18px)", filter: "blur(5px)", pointerEvents: "none" as const };
     }
 
     // Entering phase
-    if (progress >= from && progress < enterEnd) {
-      const t = (progress - from) / (range * 0.25);
-      const eased = t * t * (3 - 2 * t); // smoothstep
-      const y = (1 - eased) * 24;
-      const blur = (1 - eased) * 6;
+    if (progress < enterEnd) {
+      const t = (progress - enterStart) / (enterEnd - enterStart);
+      const eased = t * t * (3 - 2 * t);
       return {
         opacity: eased,
-        transform: `translateY(${y}px)`,
-        filter: `blur(${blur}px)`,
+        transform: `translateY(${(1 - eased) * 18}px)`,
+        filter: `blur(${(1 - eased) * 4}px)`,
+        pointerEvents: "none" as const,
       };
     }
 
     // Fully active phase
-    if (progress >= enterEnd && (id === "bath" || progress <= leaveStart)) {
-      return { opacity: 1, transform: "translateY(0px)", filter: "blur(0px)" };
+    if (progress <= leaveStart) {
+      return { opacity: 1, transform: "translateY(0px)", filter: "blur(0px)", pointerEvents: "auto" as const };
     }
 
-    // Leaving phase (The Bath holds to the end)
-    if (id === "bath") {
-      return { opacity: 1, transform: "translateY(0px)", filter: "blur(0px)" };
-    }
-
-    if (progress > leaveStart && progress <= to) {
-      const t = (progress - leaveStart) / (range * 0.2);
+    // Leaving phase
+    if (progress <= leaveEnd) {
+      const t = (progress - leaveStart) / (leaveEnd - leaveStart);
       const eased = t * t * (3 - 2 * t);
-      const y = -eased * 24;
-      const blur = eased * 6;
       return {
         opacity: Math.max(0, 1 - eased),
-        transform: `translateY(${y}px)`,
-        filter: `blur(${blur}px)`,
+        transform: `translateY(${-eased * 18}px)`,
+        filter: `blur(${eased * 4}px)`,
+        pointerEvents: "none" as const,
       };
     }
 
     // Beyond range
-    return { opacity: 0, transform: "translateY(-24px)", filter: "blur(6px)" };
+    return { opacity: 0, transform: "translateY(-18px)", filter: "blur(5px)", pointerEvents: "none" as const };
   };
 
   // =========================================================================
@@ -175,6 +175,7 @@ export default function VideoWalkthroughHero() {
         <div className="hero-walkthrough-reduced-grid">
           {WALKTHROUGH_ROOMS.map((r) => (
             <div key={r.id} className="hero-walkthrough-reduced-item">
+              <span className="hero-walkthrough-reduced-badge">{r.number} • {r.eyebrow}</span>
               <h3>{r.title}</h3>
               <p>{r.tagline}</p>
             </div>
@@ -243,9 +244,10 @@ export default function VideoWalkthroughHero() {
           </div>
         )}
 
-        {/* Room Titles Overlay */}
-        {WALKTHROUGH_ROOMS.map((room) => {
-          const style = getRoomStyle(room);
+        {/* Room Titles Overlay - Continuous content across every single frame */}
+        {WALKTHROUGH_ROOMS.map((room, index) => {
+          const style = getRoomStyle(room, index);
+          if (style.opacity <= 0) return null;
           return (
             <div
               key={room.id}
@@ -254,13 +256,33 @@ export default function VideoWalkthroughHero() {
                 opacity: style.opacity,
                 transform: style.transform,
                 filter: style.filter,
+                pointerEvents: style.pointerEvents,
               }}
             >
+              <div className="hero-walkthrough-eyebrow">
+                <span className="hero-walkthrough-num">{room.number}</span>
+                <span className="hero-walkthrough-sep" aria-hidden="true">/ 07</span>
+                <span className="hero-walkthrough-dot" aria-hidden="true">•</span>
+                <span className="hero-walkthrough-category">{room.eyebrow}</span>
+              </div>
               <h2 className="hero-walkthrough-title">{room.title}</h2>
               <p className="hero-walkthrough-tagline">{room.tagline}</p>
             </div>
           );
         })}
+
+        {/* Discreet Spatial Progress Rail */}
+        <div className="hero-walkthrough-rail" aria-hidden="true">
+          <div className="hero-walkthrough-rail-track">
+            <div
+              className="hero-walkthrough-rail-bar"
+              style={{ height: `${Math.min(100, Math.max(0, progress * 100))}%` }}
+            />
+          </div>
+          <span className="hero-walkthrough-rail-label">
+            {String(Math.min(7, Math.max(1, Math.floor(progress * 7) + 1))).padStart(2, '0')} / 07
+          </span>
+        </div>
       </div>
     </section>
   );
