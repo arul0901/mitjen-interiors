@@ -8,12 +8,17 @@ export interface AboutFeature {
   copy: string;
   linkText: string;
   href: string;
+  image: string;
+  alt: string;
+  badge?: string;
 }
 
 export interface AboutSectionData {
   eyebrow: string;
   title: string;
   description: string;
+  leadImage?: string;
+  leadImageAlt?: string;
   features: AboutFeature[];
 }
 
@@ -37,6 +42,8 @@ export const aboutData: AboutSectionData = {
   title: 'Spaces that reflect who you are.',
   description:
     'Every detail matters. From concept to completion, we create interiors that are elegant, functional, and uniquely yours.',
+  leadImage: '/images/projects/01-serene.webp',
+  leadImageAlt: 'Architectural interior living space detail with natural lighting',
   features: [
     {
       id: 'thoughtful-design',
@@ -44,7 +51,10 @@ export const aboutData: AboutSectionData = {
       icon: 'line',
       copy: 'Intentional layouts that enhance the way you live.',
       linkText: 'LEARN MORE',
-      href: '/services'
+      href: '/services',
+      image: '/images/concept/concept-1.webp',
+      alt: 'Minimalist living room layout with warm oak finishes',
+      badge: 'SPATIAL HARMONY'
     },
     {
       id: 'timeless-aesthetics',
@@ -52,7 +62,10 @@ export const aboutData: AboutSectionData = {
       icon: 'heart',
       copy: 'Designs that balance beauty and function for lasting impact.',
       linkText: 'LEARN MORE',
-      href: '/services'
+      href: '/services',
+      image: '/images/concept/concept-2.webp',
+      alt: 'Architectural materials, travertine stone and linen finishes',
+      badge: 'TACTILE FINISHES'
     }
   ]
 };
