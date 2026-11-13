@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import BeforeAfterTransformation from "../components/BeforeAfterTransformation";
 import PanoramaViewer from "../components/PanoramaViewer";
+import AboutSection from "../components/sections/About";
 
 export default function Home() {
   useEffect(() => {
@@ -98,45 +99,7 @@ export default function Home() {
 <div className={"cs_sliding_content cs_fs_64 cs_bold cs_white_color"}>INTERIOR ARCHITECTURE SPACE . HIGH - END INTERIOR DESIGN. INNOVATE DESIGN IN CANADA</div>
 </div>
 </div>
-<section className={"cs_about_style_4 cs_white_color"}>
-<div className={"cs_height_30 cs_height_lg_80"}></div>
-<div className={"container"}>
-<div className={"cs_section_heading_style_1 cs_type_5"}>
-<div className={"cs_section_heading_left cs_mb_lg_30"}>
-<p className={"cs_section_subtitle cs_bold cs_accent_color cs_mb_20 text-uppercase"}>ABOUT US</p>
-<h2 className={"cs_section_title cs_fs_53 cs_semibold text-uppercase mb-0"}>ROOTED IN ELEGANCE BUILT ON INTUITION</h2>
-</div>
-<div className={"cs_section_heading_right"}>
-<a href={"/about"} className={"cs_btn_style_1 cs_fs_14 cs_bold cs_primary_font cs_radius_50 text-uppercase"} aria-label={"Learn more about our company"}>
-<span>MORE about US</span>
-<span className={"cs_btn_icon cs_radius_100 cs_center"} aria-hidden={"true"}>
-<svg width={"13"} height={"13"} viewBox={"0 0 14 14"} fill={"none"} xmlns={"http://www.w3.org/2000/svg"}>
-<path d={"M1 7H13M13 7L7.5 1.5M13 7L7.5 12.5"} stroke={"currentColor"} strokeWidth={"1.8"} strokeLinecap={"round"} strokeLinejoin={"round"}></path>
-</svg>
-</span>
-</a>
-</div>
-</div>
-<div className={"cs_height_20 cs_height_lg_20"}></div>
-<div className={"row cs_gap_y_24"}>
-<div className={"col-lg-5 order-lg-2"}>
-<div className={"cs_about_thumbnail cs_radius_10"}>
-<img src={"/assets/img/about-img7.webp"} alt={"About image"} />
-</div>
-</div>
-<div className={"col-lg-7"}>
-<div className={"cs_about_content"}>
-<p className={"cs_desc cs_black_color cs_mb_20"}>Architecture is the art and science of designing buildings and spaces that balance beauty, environment by combining creative vision with technical expertise. From residential homes to commercial complexes and urban landmarks, architecture focuses on structural integrity, efficient use of space, and aesthetic appeal.</p>
-<p className={"cs_desc cs_black_color cs_mb_40"}>Modern architecture also emphasizes eco-friendly materials, energy efficiency, and innovative design solutions to create comfortable, durable.</p>
-<div className={"cs_about_img"}>
-<img src={"/assets/img/about-img6.webp"} alt={"About image"} />
-</div>
-</div>
-</div>
-</div>
-</div>
-<div className={"cs_height_30 cs_height_lg_80"}></div>
-</section>
+<AboutSection />
 <section>
 <div className={"cs_height_120 cs_height_lg_80"}></div>
 <div className={"container"}>
