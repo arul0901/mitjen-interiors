@@ -57,13 +57,17 @@ export const AboutSection: React.FC = () => {
                     aria-label={`${feature.title} - ${feature.copy}`}
                   >
                     <div>
-                      {/* Iconic 56px White Circular Icon Badge */}
-                      <div className="bespoke-icon-circle" aria-hidden="true">
-                        {renderIcon(feature.icon)}
+                      {/* Responsive Card Header: Compact & Aligned */}
+                      <div className="bespoke-card-header">
+                        <div className="bespoke-icon-circle" aria-hidden="true">
+                          {renderIcon(feature.icon)}
+                        </div>
+                        <div className="bespoke-card-title-group">
+                          <h3 className="bespoke-card-title">{feature.title}</h3>
+                          <span className="bespoke-card-subtitle">{feature.subtitle}</span>
+                        </div>
                       </div>
 
-                      <h3 className="bespoke-card-title">{feature.title}</h3>
-                      <span className="bespoke-card-subtitle">{feature.subtitle}</span>
                       <p className="bespoke-card-copy">{feature.copy}</p>
 
                       {/* 3-Point Architectural Feature Checklist */}

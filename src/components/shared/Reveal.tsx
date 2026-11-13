@@ -17,7 +17,12 @@ export const Reveal: React.FC<RevealProps> = ({
   as: Component = 'div',
 }) => {
   const [ref, isInView] = useInView<HTMLDivElement>({ threshold, triggerOnce: true });
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(() => {
+    if (typeof window !== 'undefined' && window.matchMedia) {
+      return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    }
+    return false;
+  });
 
   useEffect(() => {
     if (typeof window !== 'undefined' && window.matchMedia) {
@@ -58,3 +63,4 @@ export const Reveal: React.FC<RevealProps> = ({
 };
 
 export default Reveal;
+

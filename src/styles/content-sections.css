@@ -18,19 +18,19 @@
   --card-hover-shadow: 0 16px 40px -12px rgba(60, 40, 20, 0.12);
 }
 
-/* Scoped Section Wrapper */
+/* Scoped Section Wrapper: Compact, Refined Architectural Rhythm */
 .bespoke-section-wrapper {
   background-color: var(--page);
   color: var(--ink);
   font-family: var(--font-body, 'DM Sans', sans-serif);
-  padding: clamp(48px, 6vw, 84px) 0;
+  padding: clamp(32px, 4vw, 52px) 0;
   width: 100%;
   box-sizing: border-box;
 }
 
 @media (max-width: 768px) {
   .bespoke-section-wrapper {
-    padding: clamp(28px, 5vw, 40px) 0;
+    padding: 20px 0;
   }
 }
 
@@ -38,33 +38,33 @@
   max-width: 1280px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: clamp(16px, 4vw, 40px);
-  padding-right: clamp(16px, 4vw, 40px);
+  padding-left: clamp(16px, 3.5vw, 36px);
+  padding-right: clamp(16px, 3.5vw, 36px);
   width: 100%;
   box-sizing: border-box;
 }
 
 @media (max-width: 640px) {
   .bespoke-container {
-    padding-left: 14px;
-    padding-right: 14px;
+    padding-left: 12px;
+    padding-right: 12px;
   }
 }
 
 /* Panel Styling: Soft, seamless, professional architectural finish */
 .bespoke-panel {
   background-color: var(--surface);
-  border-radius: 24px;
+  border-radius: 20px;
   box-shadow: var(--section-shadow);
   border: 1px solid rgba(139, 115, 85, 0.15);
-  padding: clamp(28px, 4vw, 44px);
+  padding: clamp(22px, 3vw, 34px);
   box-sizing: border-box;
 }
 
 @media (max-width: 640px) {
   .bespoke-panel {
-    border-radius: 18px;
-    padding: 20px 16px;
+    border-radius: 15px;
+    padding: 16px 13px;
   }
 }
 
@@ -76,27 +76,45 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
   display: block;
 }
 
 .bespoke-h2 {
   font-family: var(--font-display);
-  font-size: clamp(2.1rem, 4.2vw, 3.1rem);
+  font-size: clamp(1.85rem, 3.4vw, 2.5rem);
   font-weight: 400;
   letter-spacing: -0.02em;
-  line-height: 1.05;
+  line-height: 1.08;
   color: var(--ink);
-  margin: 0 0 16px 0;
+  margin: 0 0 12px 0;
 }
 
 .bespoke-desc {
   font-family: var(--font-body, 'DM Sans', sans-serif);
-  font-size: 0.88rem;
-  line-height: 1.6;
+  font-size: 0.85rem;
+  line-height: 1.5;
   color: var(--muted);
   max-width: 360px;
   margin: 0;
+}
+
+@media (max-width: 640px) {
+  .bespoke-eyebrow {
+    font-size: 10px;
+    margin-bottom: 6px;
+  }
+
+  .bespoke-h2 {
+    font-size: 1.55rem;
+    line-height: 1.12;
+    margin-bottom: 8px;
+  }
+
+  .bespoke-desc {
+    font-size: 0.8rem;
+    line-height: 1.42;
+  }
 }
 
 /* Shared Component: PillButton */
@@ -182,26 +200,26 @@
    ========================================================================== */
 
 .bespoke-about-section {
-  padding-bottom: 24px;
+  padding-bottom: 18px;
 }
 
 @media (max-width: 768px) {
   .bespoke-about-section {
-    padding-bottom: 16px;
+    padding-bottom: 12px;
   }
 }
 
 .bespoke-about-grid {
   display: grid;
-  grid-template-columns: 1.15fr 1fr 1fr;
-  gap: 24px;
+  grid-template-columns: 1.12fr 1fr 1fr;
+  gap: clamp(14px, 1.6vw, 20px);
   align-items: stretch;
 }
 
 @media (max-width: 1024px) {
   .bespoke-about-grid {
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 12px;
   }
 }
 
@@ -217,20 +235,22 @@
   position: relative;
   width: 100%;
   flex: 1 1 auto;
-  min-height: 220px;
-  border-radius: 16px;
+  min-height: 180px;
+  border-radius: 14px;
   overflow: hidden;
-  margin-top: 24px;
-  box-shadow: 0 10px 30px -10px rgba(60, 40, 20, 0.14);
-  border: 1px solid rgba(139, 115, 85, 0.16);
+  margin-top: 16px;
+  box-shadow: 0 8px 24px -8px rgba(60, 40, 20, 0.12);
+  border: 1px solid rgba(139, 115, 85, 0.15);
   background-color: var(--card);
 }
 
 @media (max-width: 1024px) {
   .bespoke-about-left-photo-wrap {
-    min-height: 240px;
-    aspect-ratio: 16 / 10;
-    margin-top: 20px;
+    min-height: 160px;
+    max-height: 200px;
+    aspect-ratio: 16 / 9;
+    margin-top: 12px;
+    border-radius: 12px;
   }
 }
 
@@ -249,16 +269,16 @@
 
 .bespoke-about-photo-badge {
   position: absolute;
-  bottom: 12px;
-  left: 12px;
-  background: rgba(20, 18, 16, 0.80);
+  bottom: 10px;
+  left: 10px;
+  background: rgba(20, 18, 16, 0.82);
   backdrop-filter: blur(8px);
   color: #FFFFFF;
   font-family: var(--font-subheading, 'Manrope', sans-serif);
-  font-size: 10px;
+  font-size: 9.5px;
   font-weight: 600;
   letter-spacing: 0.12em;
-  padding: 6px 14px;
+  padding: 5px 12px;
   border-radius: 9999px;
   z-index: 2;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
@@ -267,10 +287,10 @@
 /* Right Side Feature Cards: Clean, Rich, NO Pictures, Zero Empty Space */
 .bespoke-about-card {
   background-color: var(--card);
-  border-radius: 18px;
+  border-radius: 16px;
   border: 1px solid rgba(139, 115, 85, 0.14);
   box-shadow: var(--card-shadow);
-  padding: 28px 24px;
+  padding: clamp(16px, 1.8vw, 22px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -283,13 +303,13 @@
 
 @media (max-width: 640px) {
   .bespoke-about-card {
-    padding: 20px 16px;
-    border-radius: 16px;
+    padding: 14px 13px;
+    border-radius: 13px;
   }
 }
 
 .bespoke-about-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-3px);
   box-shadow: var(--card-hover-shadow);
   border-color: rgba(139, 115, 85, 0.35);
 }
@@ -299,19 +319,56 @@
   outline-offset: 3px;
 }
 
-/* 56px White Icon Circle Badge */
+/* Responsive Card Header */
+.bespoke-card-header {
+  display: block;
+}
+
+@media (max-width: 640px) {
+  .bespoke-card-header {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    margin-bottom: 8px;
+  }
+}
+
+.bespoke-card-title-group {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Circular White Icon Circle Badge */
 .bespoke-icon-circle {
-  width: 56px;
-  height: 56px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   background-color: #FFFFFF;
-  box-shadow: 0 4px 16px rgba(60, 40, 20, 0.08);
+  box-shadow: 0 4px 14px rgba(60, 40, 20, 0.08);
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--accent);
-  margin-bottom: 20px;
+  margin-bottom: 12px;
+  flex-shrink: 0;
   transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.bespoke-icon-circle svg {
+  width: 20px;
+  height: 20px;
+}
+
+@media (max-width: 640px) {
+  .bespoke-icon-circle {
+    width: 36px;
+    height: 36px;
+    margin-bottom: 0;
+  }
+  .bespoke-icon-circle svg {
+    width: 17px;
+    height: 17px;
+  }
 }
 
 .bespoke-about-card:hover .bespoke-icon-circle {
@@ -320,54 +377,92 @@
 
 .bespoke-card-title {
   font-family: var(--font-subheading, 'Manrope', sans-serif);
-  font-size: 1.25rem;
+  font-size: clamp(1.1rem, 1.25vw, 1.22rem);
   font-weight: 600;
   letter-spacing: -0.01em;
   color: var(--ink);
-  margin: 0 0 6px 0;
+  margin: 0 0 3px 0;
+}
+
+@media (max-width: 640px) {
+  .bespoke-card-title {
+    font-size: 1.05rem;
+    margin: 0;
+  }
 }
 
 .bespoke-card-subtitle {
   font-family: var(--font-subheading, 'Manrope', sans-serif);
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.12em;
   color: var(--accent);
-  margin: 0 0 12px 0;
+  margin: 0 0 8px 0;
   display: block;
+}
+
+@media (max-width: 640px) {
+  .bespoke-card-subtitle {
+    font-size: 9.5px;
+    margin: 0;
+  }
 }
 
 .bespoke-card-copy {
   font-family: var(--font-body, 'DM Sans', sans-serif);
-  font-size: 0.88rem;
-  line-height: 1.55;
+  font-size: 0.835rem;
+  line-height: 1.48;
   color: var(--muted);
-  margin: 0 0 16px 0;
+  margin: 0 0 12px 0;
+}
+
+@media (max-width: 640px) {
+  .bespoke-card-copy {
+    font-size: 0.775rem;
+    line-height: 1.38;
+    margin: 0 0 8px 0;
+  }
 }
 
 /* 3-Point Architecture Checklist to Fill Card Space Authentically */
 .bespoke-card-feature-list {
   list-style: none;
   padding: 0;
-  margin: 0 0 16px 0;
+  margin: 0 0 12px 0;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 5px;
+}
+
+@media (max-width: 640px) {
+  .bespoke-card-feature-list {
+    gap: 4px;
+    margin-bottom: 8px;
+  }
 }
 
 .bespoke-card-feature-item {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 7px;
   font-family: var(--font-body, 'DM Sans', sans-serif);
-  font-size: 0.82rem;
-  line-height: 1.35;
+  font-size: 0.795rem;
+  line-height: 1.3;
   color: var(--ink);
+}
+
+@media (max-width: 640px) {
+  .bespoke-card-feature-item {
+    font-size: 0.76rem;
+    line-height: 1.25;
+  }
 }
 
 .bespoke-card-feature-item svg {
   flex-shrink: 0;
+  width: 13px;
+  height: 13px;
   color: var(--accent);
 }
 
@@ -375,31 +470,51 @@
 .bespoke-card-tag-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
-  margin-bottom: 16px;
+  gap: 5px;
+  margin-bottom: 12px;
+}
+
+@media (max-width: 640px) {
+  .bespoke-card-tag-row {
+    gap: 4px;
+    margin-bottom: 8px;
+  }
 }
 
 .bespoke-card-tag {
   font-family: var(--font-subheading, 'Manrope', sans-serif);
-  font-size: 9.5px;
+  font-size: 8.5px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.12em;
   color: var(--accent);
-  background-color: rgba(139, 115, 85, 0.10);
-  padding: 4px 10px;
+  background-color: rgba(139, 115, 85, 0.08);
+  padding: 2.5px 7px;
   border-radius: 9999px;
-  border: 1px solid rgba(139, 115, 85, 0.18);
+  border: 1px solid rgba(139, 115, 85, 0.16);
+}
+
+@media (max-width: 640px) {
+  .bespoke-card-tag {
+    font-size: 8px;
+    padding: 2px 6px;
+  }
 }
 
 /* Card Action Footer with Clean Divider */
 .bespoke-card-footer {
   margin-top: auto;
-  padding-top: 16px;
+  padding-top: 12px;
   border-top: 1px solid rgba(227, 220, 211, 0.85);
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+@media (max-width: 640px) {
+  .bespoke-card-footer {
+    padding-top: 8px;
+  }
 }
 
 /* ==========================================================================
@@ -408,32 +523,32 @@
 
 .bespoke-services-section {
   padding-top: 0;
-  padding-bottom: clamp(48px, 6vw, 84px);
+  padding-bottom: clamp(32px, 4vw, 54px);
 }
 
 @media (max-width: 768px) {
   .bespoke-services-section {
-    padding-bottom: clamp(28px, 5vw, 40px);
+    padding-bottom: 20px;
   }
 }
 
 .bespoke-services-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
+  gap: clamp(14px, 1.8vw, 20px);
 }
 
 @media (max-width: 768px) {
   .bespoke-services-grid {
     grid-template-columns: 1fr;
-    gap: 14px;
+    gap: 11px;
   }
 }
 
 .bespoke-service-card {
   display: block;
   position: relative;
-  border-radius: 18px;
+  border-radius: 16px;
   overflow: hidden;
   text-decoration: none;
   aspect-ratio: 16 / 10;
@@ -445,8 +560,8 @@
 
 @media (max-width: 640px) {
   .bespoke-service-card {
-    aspect-ratio: 16 / 9;
-    border-radius: 14px;
+    aspect-ratio: 16 / 8.5;
+    border-radius: 13px;
   }
 }
 
@@ -498,27 +613,27 @@
   flex-direction: column;
   justify-content: flex-end;
   align-items: flex-start;
-  padding: clamp(20px, 3.5vw, 36px);
-  max-width: 440px;
+  padding: clamp(18px, 2.5vw, 28px);
+  max-width: 400px;
   z-index: 2;
   box-sizing: border-box;
 }
 
 @media (max-width: 640px) {
   .bespoke-service-card-content {
-    padding: 16px 14px;
-    max-width: 310px;
+    padding: 13px 14px;
+    max-width: 320px;
   }
 }
 
 .bespoke-service-card-title {
   font-family: var(--font-display);
   color: #FFFFFF;
-  font-size: clamp(1.45rem, 3.2vw, 1.95rem);
+  font-size: clamp(1.35rem, 2.4vw, 1.75rem);
   font-weight: 500;
-  line-height: 1.1;
+  line-height: 1.08;
   letter-spacing: -0.015em;
-  margin: 0 0 8px 0;
+  margin: 0 0 6px 0;
 }
 
 .bespoke-service-card-title span {
@@ -527,35 +642,35 @@
 
 @media (max-width: 640px) {
   .bespoke-service-card-title {
-    font-size: 1.35rem;
-    margin: 0 0 5px 0;
+    font-size: 1.2rem;
+    margin: 0 0 4px 0;
   }
 }
 
 .bespoke-service-card-copy {
   font-family: var(--font-body, 'DM Sans', sans-serif);
-  font-size: 0.875rem;
-  color: rgba(255, 255, 255, 0.88);
-  line-height: 1.4;
-  margin: 0 0 16px 0;
-  max-width: 340px;
+  font-size: 0.825rem;
+  color: rgba(255, 255, 255, 0.90);
+  line-height: 1.38;
+  margin: 0 0 12px 0;
+  max-width: 310px;
 }
 
 @media (max-width: 640px) {
   .bespoke-service-card-copy {
-    font-size: 0.785rem;
-    margin: 0 0 10px 0;
-    max-width: 260px;
-    line-height: 1.35;
+    font-size: 0.76rem;
+    margin: 0 0 8px 0;
+    max-width: 270px;
+    line-height: 1.3;
   }
 }
 
 .bespoke-service-card-link {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 7px;
   font-family: var(--font-subheading, 'Manrope', sans-serif);
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.14em;
@@ -564,8 +679,8 @@
 
 @media (max-width: 640px) {
   .bespoke-service-card-link {
-    font-size: 10px;
-    gap: 6px;
+    font-size: 9.5px;
+    gap: 5px;
   }
 }
 
