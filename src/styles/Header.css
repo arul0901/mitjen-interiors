@@ -425,7 +425,9 @@ header#hd.menu-open .burger {
 .mobile-nav-kicker,
 .mobile-nav-links-list,
 .mobile-services-container,
-.mobile-nav-bottom {
+.mobile-nav-bottom,
+.mobile-nav-drag-handle,
+.mobile-nav-dismiss-pill {
   display: none;
 }
 
@@ -439,6 +441,15 @@ header#hd.menu-open .burger {
 
   header#hd.solid {
     background: rgba(247, 245, 240, 0.98);
+  }
+
+  header#hd.menu-open {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100dvh;
+    pointer-events: auto;
+    z-index: 105;
   }
 
   .header-desktop-cta {
@@ -464,21 +475,27 @@ header#hd.menu-open .burger {
     inset: 0;
     width: 100vw;
     height: 100dvh;
+    max-height: 100dvh;
     background: #151614;
     background-image: radial-gradient(circle at 85% 15%, rgba(119, 123, 97, 0.22) 0%, transparent 65%);
     color: #FAF8F5;
+    display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: stretch;
-    padding: calc(72px + env(safe-area-inset-top, 0px)) 24px calc(24px + env(safe-area-inset-bottom, 0px));
+    padding: calc(52px + env(safe-area-inset-top, 0px)) 24px calc(24px + env(safe-area-inset-bottom, 0px));
     gap: 0;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    touch-action: pan-y !important;
+    overscroll-behavior-y: contain;
     z-index: 105;
     transform: translateY(-100%);
     opacity: 0;
     visibility: hidden;
-    transition: transform 0.42s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, visibility 0.42s;
+    transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, visibility 0.38s;
+    will-change: transform;
   }
 
   nav#nav.open {
@@ -487,9 +504,63 @@ header#hd.menu-open .burger {
     visibility: visible;
   }
 
+  nav#nav.dragging {
+    transition: none !important;
+  }
+
+  /* Mobile Drag Handle & Swipe Hint */
+  .mobile-nav-drag-handle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 4px 0 14px;
+    cursor: pointer;
+    touch-action: none;
+    width: 100%;
+    user-select: none;
+    -webkit-user-select: none;
+    flex-shrink: 0;
+  }
+
+  .drag-handle-pill {
+    width: 38px;
+    height: 4px;
+    border-radius: 999px;
+    background: rgba(245, 242, 236, 0.32);
+    transition: background-color 0.2s ease, width 0.2s ease, transform 0.2s ease;
+  }
+
+  .mobile-nav-drag-handle:hover .drag-handle-pill,
+  .mobile-nav-drag-handle:active .drag-handle-pill {
+    background: var(--sand, #c5a059);
+    width: 48px;
+    transform: scaleY(1.2);
+  }
+
+  .drag-handle-hint {
+    font-family: var(--font-architectural, sans-serif);
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(245, 242, 236, 0.45);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: color 0.2s ease;
+  }
+
+  .mobile-nav-drag-handle:hover .drag-handle-hint,
+  .mobile-nav-drag-handle:active .drag-handle-hint {
+    color: var(--sand, #c5a059);
+  }
+
   .mobile-nav-header {
     display: block;
     margin-bottom: 8px;
+    flex-shrink: 0;
   }
 
   .mobile-nav-kicker {
@@ -632,9 +703,39 @@ header#hd.menu-open .burger {
     display: flex;
     flex-direction: column;
     gap: 16px;
-    margin-top: 24px;
-    padding-top: 20px;
+    margin-top: auto;
+    padding-top: 24px;
+    padding-bottom: 24px;
     border-top: 1px solid rgba(245, 242, 236, 0.14);
+    flex-shrink: 0;
+  }
+
+  .mobile-nav-dismiss-pill {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: rgba(245, 242, 236, 0.06);
+    color: rgba(245, 242, 236, 0.7);
+    border: 1px solid rgba(245, 242, 236, 0.12);
+    border-radius: 999px;
+    font-family: var(--font-architectural, sans-serif);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 12px 20px;
+    cursor: pointer;
+    margin-top: 6px;
+    transition: all 0.2s ease;
+  }
+
+  .mobile-nav-dismiss-pill:hover,
+  .mobile-nav-dismiss-pill:active {
+    background: rgba(245, 242, 236, 0.12);
+    color: #FAF8F5;
+    border-color: rgba(245, 242, 236, 0.25);
   }
 
   .mobile-nav-cta-btn {

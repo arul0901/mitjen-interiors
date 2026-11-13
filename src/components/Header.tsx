@@ -141,6 +141,116 @@ export const Header: React.FC = () => {
     setIsServicesDropdownOpen(false);
   }, [location.pathname]);
 
+  // Touch Swipe Gesture State & Handler
+  const touchStartYRef = useRef<number | null>(null);
+  const touchStartXRef = useRef<number | null>(null);
+  const touchDeltaYRef = useRef<number>(0);
+  const touchDeltaXRef = useRef<number>(0);
+  const navRef = useRef<HTMLElement>(null);
+  const [dragTranslateY, setDragTranslateY] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+
+  // Swipe on closed header bar to pull open
+  const handleHeaderTouchStart = (e: React.TouchEvent) => {
+    if (isMenuOpen) return;
+    touchStartYRef.current = e.touches[0].clientY;
+    touchStartXRef.current = e.touches[0].clientX;
+  };
+
+  const handleHeaderTouchEnd = (e: React.TouchEvent) => {
+    if (isMenuOpen || touchStartYRef.current === null) return;
+    const endY = e.changedTouches[0].clientY;
+    const dy = endY - touchStartYRef.current;
+    if (dy > 45) {
+      setIsMenuOpen(true);
+    }
+    touchStartYRef.current = null;
+    touchStartXRef.current = null;
+  };
+
+  // Global edge-swipe from right edge to open mobile menu
+  useEffect(() => {
+    let edgeStartX = 0;
+    let edgeStartY = 0;
+
+    const handleWindowTouchStart = (e: TouchEvent) => {
+      if (isMenuOpen) return;
+      edgeStartX = e.touches[0].clientX;
+      edgeStartY = e.touches[0].clientY;
+    };
+
+    const handleWindowTouchEnd = (e: TouchEvent) => {
+      if (isMenuOpen) return;
+      const endX = e.changedTouches[0].clientX;
+      const endY = e.changedTouches[0].clientY;
+      const dx = endX - edgeStartX;
+      const dy = endY - edgeStartY;
+
+      // Swiped inward from right edge (within 40px of edge, moving left > 50px)
+      if (edgeStartX > window.innerWidth - 45 && dx < -50 && Math.abs(dx) > Math.abs(dy)) {
+        setIsMenuOpen(true);
+      }
+    };
+
+    window.addEventListener('touchstart', handleWindowTouchStart, { passive: true });
+    window.addEventListener('touchend', handleWindowTouchEnd, { passive: true });
+    return () => {
+      window.removeEventListener('touchstart', handleWindowTouchStart);
+      window.removeEventListener('touchend', handleWindowTouchEnd);
+    };
+  }, [isMenuOpen]);
+
+  // Swipe on open navigation drawer to dismiss
+  const handleNavTouchStart = (e: React.TouchEvent) => {
+    touchStartYRef.current = e.touches[0].clientY;
+    touchStartXRef.current = e.touches[0].clientX;
+    touchDeltaYRef.current = 0;
+    touchDeltaXRef.current = 0;
+  };
+
+  const handleNavTouchMove = (e: React.TouchEvent) => {
+    if (touchStartYRef.current === null || touchStartXRef.current === null) return;
+    const curY = e.touches[0].clientY;
+    const curX = e.touches[0].clientX;
+    const dy = curY - touchStartYRef.current;
+    const dx = curX - touchStartXRef.current;
+    touchDeltaYRef.current = dy;
+    touchDeltaXRef.current = dx;
+
+    const nav = navRef.current;
+    const isAtTop = !nav || nav.scrollTop <= 2;
+
+    // If dragging upward (dy < 0) when at top of drawer, track finger with soft resistance
+    if (dy < 0 && isAtTop && Math.abs(dy) > Math.abs(dx) * 0.7) {
+      setIsDragging(true);
+      setDragTranslateY(dy * 0.75);
+    }
+  };
+
+  const handleNavTouchEnd = () => {
+    const dy = touchDeltaYRef.current;
+    const dx = touchDeltaXRef.current;
+    const nav = navRef.current;
+    const isAtTop = !nav || nav.scrollTop <= 6;
+
+    // Check if swipe qualifies as a close gesture:
+    // 1. Swiped UP by more than 40px when near top
+    const isSwipeUp = isAtTop && dy < -40 && Math.abs(dy) > Math.abs(dx) * 0.7;
+    // 2. Swiped HORIZONTALLY (left or right) by more than 50px
+    const isSwipeHorizontal = Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.2;
+
+    if (isSwipeUp || isSwipeHorizontal) {
+      closeMenu();
+    }
+
+    setIsDragging(false);
+    setDragTranslateY(0);
+    touchStartYRef.current = null;
+    touchStartXRef.current = null;
+    touchDeltaYRef.current = 0;
+    touchDeltaXRef.current = 0;
+  };
+
   const toggleMenu = () => {
     const nextState = !isMenuOpen;
     setIsMenuOpen(nextState);
@@ -165,6 +275,8 @@ export const Header: React.FC = () => {
     <header
       id="hd"
       className={`${isSolid || !isHome ? 'solid' : ''} ${isMenuOpen ? 'menu-open' : ''}`}
+      onTouchStart={handleHeaderTouchStart}
+      onTouchEnd={handleHeaderTouchEnd}
     >
       <Link className="logo" to="/" onClick={closeMenu} aria-label="Mitjen Interiors">
         <span className="logo-typed-text">{typedLogo || 'M'}</span>
@@ -172,7 +284,35 @@ export const Header: React.FC = () => {
       </Link>
 
       {/* Navigation: Responsive Dual Desktop / Mobile Drawer Architecture */}
-      <nav id="nav" aria-label="Primary Navigation" className={isMenuOpen ? 'open' : ''}>
+      <nav
+        id="nav"
+        ref={navRef}
+        aria-label="Primary Navigation"
+        className={`${isMenuOpen ? 'open' : ''} ${isDragging ? 'dragging' : ''}`}
+        onTouchStart={handleNavTouchStart}
+        onTouchMove={handleNavTouchMove}
+        onTouchEnd={handleNavTouchEnd}
+        style={
+          isDragging && dragTranslateY !== 0
+            ? { transform: `translateY(${dragTranslateY}px)`, transition: 'none' }
+            : undefined
+        }
+      >
+        {/* Luxury Swipe Indicator / Drag Handle Pill */}
+        <div
+          className="mobile-nav-drag-handle"
+          onClick={closeMenu}
+          aria-label="Swipe up to close navigation"
+        >
+          <span className="drag-handle-pill" />
+          <span className="drag-handle-hint">
+            <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor">
+              <path d="M1 5L5 1L9 5" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            Swipe up to close
+          </span>
+        </div>
+
         {/* Mobile Header Label */}
         <div className="mobile-nav-header">
           <span className="mobile-nav-kicker">STUDIO DIRECTORY</span>
@@ -470,6 +610,19 @@ export const Header: React.FC = () => {
               </span>
             </div>
           </div>
+
+          {/* Bottom Swipe/Dismiss Pill */}
+          <button
+            type="button"
+            className="mobile-nav-dismiss-pill"
+            onClick={closeMenu}
+            aria-label="Close navigation menu"
+          >
+            <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor">
+              <path d="M1 1L13 13M1 13L13 1" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            <span>Close Navigation</span>
+          </button>
         </div>
       </nav>
 
