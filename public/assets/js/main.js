@@ -1321,9 +1321,13 @@
       $(".cs_team_style_1").off(".socialAnimation");
       $(".cs_text_btn_style_2").off(".buttonAnimation");
 
-      //Kill all ScrollTriggers
+      //Kill all legacy ScrollTriggers (preserve React component triggers like hero-walkthrough)
       if (typeof ScrollTrigger !== "undefined") {
-        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+        ScrollTrigger.getAll().forEach((trigger) => {
+          if (trigger.vars?.id !== "hero-walkthrough" && !trigger.trigger?.classList?.contains("hero-walkthrough-section")) {
+            trigger.kill();
+          }
+        });
       }
       console.log("GSAP animations cleaned up");
     }

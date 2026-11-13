@@ -41,48 +41,45 @@ npm run preview
 | `/faq` | `FAQ.tsx` | `faq.html` |
 | `/contact` | `Contact.tsx` | `contact.php` |
 
-The alternative homepage demos (`index-2.html`, `home-v2.html` through `home-v6.html`) are not active routes. All original pages remain in `original-source/` for reference.
+## Walkthrough Hero (Scroll-Scrubbed Video)
 
-## 3D Fly-Through Hero
+The homepage features a pinned, full-bleed scroll-scrubbed video walkthrough hero (`<VideoWalkthroughHero />`), replacing the legacy image-marquee strip. As the visitor scrolls, the camera glides continuously through the modern residence while room titles dynamically transition over the footage.
 
-The homepage (`/`) features an interactive, real-time 3D architectural fly-through of a luxury single-storey residence (`FlyThroughStage`) mounted seamlessly below the headline hero section. As the visitor scrolls down the page, the camera glides along Catmull-Rom 3D splines through the rooms (Living Room $\rightarrow$ Kitchen & Dining $\rightarrow$ Master Bedroom $\rightarrow$ Covered Terrace & Pool Deck), accompanied by a continuous day-to-night lighting shift tied to scroll progress.
+### Pipeline & Encoding
 
-### Strict Zero-UI Design
-The stage contains strictly 3D visuals only:
-- **No on-screen controls**: No room indicators, lines, dots, arrows, previous/next buttons, or progress bars.
-- **No text/labels**: No room captions, labels, badges, or scroll/drag prompts.
-- **No spinners**: An under-canvas still poster (`public/rooms/01-living.webp`) fades out over 600ms once the 3D scene finishes mounting.
-- **Clean interaction**: Driven 100% by native page scroll with smooth damping (`lambda: 4.0`), cubic-bezier inertia matching the site menu, plus a subtle, invisible mouse parallax on desktop ($\pm 0.15\text{m}$, lerp 0.05). No custom cursor states or touch hijacking.
+- **Source video:** Place your footage at `raw/walkthrough.mp4` (git-ignored).
+- **Run encoding:**
+  ```bash
+  npm run encode:video
+  ```
+  This command invokes `scripts/encode-video.mjs` to generate:
+  - `public/hero/walkthrough.mp4`: H.264 desktop version with every frame an IDR keyframe (`-g 1`, CRF 24) for instant bi-directional scrubbing.
+  - `public/hero/walkthrough-mobile.mp4`: 1080w mobile version (`-g 1`, CRF 28) optimized for cellular bandwidth.
+  - `public/hero/walkthrough.webm`: Multi-threaded VP9 encode (`-g 1`, CRF 34).
+  - `public/hero/poster.webp`: High-resolution first-frame poster preloaded via `<link rel="preload">` for instantaneous paint.
+  - `public/hero/frames/` & `frames.json`: 240 WebP frame sequence (1280px wide) used for iOS Safari, data-saver connections, and jank fallback.
 
-### Scene Architecture & Scale
-- **Real 1:1 Scale**: 1 unit = 1 meter, ceiling height 2.8m, camera height ~1.5m.
-- **Open-Concept Portals**: Wide 2.8m+ openings between zones so the camera never clips partition walls.
-- **PBR Materials**: Scandinavian white oak floors, crisp off-white architectural plaster, dark aluminum window mullions, bouclé linen upholstery, travertine coffee table, and an infinity pool with crystal turquoise reflections.
-- **Poly Haven HDRIs**:
-  - `daylight.hdr` (`public/hdri/daylight.hdr`): Morning to midday ambient fill and reflections (CC0).
-  - `dusk.hdr` (`public/hdri/dusk.hdr`): Twilight dusk reflections (CC0).
-- **Procedural Model**: Zero multi-megabyte GLTF load lag; sub-250KB gzipped lazy chunk.
+### Cache Headers
 
-### Lighting & Day-to-Night Progression
-Driven smoothly by `progress` ($0.0 \rightarrow 1.0$):
-1. **$0.00 - 0.25$ (Living Room - Morning)**: Warm directional morning sun angle from the left, soft ambient fill, glowing window planes.
-2. **$0.25 - 0.50$ (Kitchen/Dining - Midday)**: High neutral natural daylight, sharp island highlights.
-3. **$0.50 - 0.75$ (Master Bedroom - Golden Hour)**: Low angled golden sunset light, warm interior bedside lamps fade in.
-4. **$0.75 - 1.00$ (Terrace - Dusk / Blue Hour)**: Deep blue-hour twilight sky, glowing underwater pool perimeter ribbon, warm interior lamps.
+For deployment on Vercel, Netlify, or Apache/Nginx, configure aggressive caching on `/hero/*`:
+```http
+Cache-Control: public, max-age=31536000, immutable
+```
 
-### Performance & Fallbacks
-- **GSAP ScrollTrigger Pin**: The stage pins for 400vh on desktop (300vh on mobile) with `anticipatePin: 1` and `pinSpacing: true`, integrating with Lenis smooth scroll without layout shifts or parent overflow clipping.
-- **Device Gating**: On mobile or low-end hardware (`hardwareConcurrency <= 4` or `deviceMemory <= 4`), post-processing (Bloom, SMAA, Vignette) is automatically bypassed and DPR is capped at 1.25.
-- **Off-Screen Pause**: `frameloop` switches from `"always"` to `"never"` via `IntersectionObserver` and `visibilitychange` when offscreen or the tab is hidden.
-- **prefers-reduced-motion**: Disables pin, sway, and idle creep; displays a static living room camera view.
-- **WebGL Fallback**: If WebGL is unavailable or blocked, crossfades smoothly across 4 pre-rendered stills as the user scrolls past.
+### Reverting to Legacy Marquee
 
-### Tuning & Configuration
-- **Waypoints & Splines**: Edit `CAMERA_PATH_POINTS` and `CAMERA_LOOKAT_POINTS` in [`src/data/houseRooms.ts`](./src/data/houseRooms.ts).
-- **Pin Length**: Adjust `pinDistanceDesktop` (default `+=400%`) or `pinDistanceMobile` (default `+=300%`) in [`src/hooks/useScrollProgress.ts`](./src/hooks/useScrollProgress.ts).
-- **Time-of-Day Keyframes**: Adjust colors, sun coordinates, and lamp intensities in `TIME_OF_DAY_KEYFRAMES` in [`src/data/houseRooms.ts`](./src/data/houseRooms.ts).
-- **Bloom & Post-Processing**: Tune `luminanceThreshold`, `intensity`, and `mipmapBlur` in [`src/components/FlyThroughStage.tsx`](./src/components/FlyThroughStage.tsx).
-- **Reverting to Marquee**: In [`src/pages/Home.tsx`](./src/pages/Home.tsx), set `const SHOW_LEGACY_MARQUEE = true;`.
+To instantly revert back to the original image-marquee strip, open `src/pages/Home.tsx` and toggle the feature flag:
+```ts
+const SHOW_LEGACY_MARQUEE = true;
+```
+
+### Tuning Notes
+
+- **Scrub feels laggy:** In `src/components/VideoWalkthroughHero.tsx`, raise the smoothing constant from `6` to `10` in `useScrollScrubVideo({ smoothing: 10 })`, or verify the source video was encoded with `-g 1`.
+- **Page feels too long or short:** In `src/hooks/useScrollScrubVideo.ts`, adjust the pin distance end value (`+=600%` desktop, `+=450%` mobile).
+- **A title is early or late:** In `src/data/rooms.ts`, adjust the `{ from, to }` progress milestones inside `WALKTHROUGH_ROOMS`.
+- **Big download on mobile:** In `scripts/encode-video.mjs`, raise mobile CRF to `30`, extract 960px frames, or lower frame target from `240` to `180`.
+
 
 ## Migration status
 

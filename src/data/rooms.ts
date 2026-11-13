@@ -28,6 +28,66 @@ export interface RoomData {
   alt: string;
 }
 
+export interface WalkthroughRoom {
+  id: string;
+  from: number;
+  to: number;
+  title: string;
+  tagline: string;
+  side: "left" | "right";
+}
+
+export const WALKTHROUGH_ROOMS: WalkthroughRoom[] = [
+  {
+    id: "living-space",
+    from: 0.19,
+    to: 0.31,
+    title: "The Living Space",
+    tagline: "Where the day gathers.",
+    side: "left",
+  },
+  {
+    id: "dining-room",
+    from: 0.32,
+    to: 0.45,
+    title: "The Dining Room",
+    tagline: "Made for long tables, longer evenings.",
+    side: "right",
+  },
+  {
+    id: "kitchen",
+    from: 0.48,
+    to: 0.61,
+    title: "The Kitchen",
+    tagline: "Honest materials, quiet function.",
+    side: "left",
+  },
+  {
+    id: "primary-suite",
+    from: 0.64,
+    to: 0.77,
+    title: "Primary Suite",
+    tagline: "A room that holds the light.",
+    side: "right",
+  },
+  {
+    id: "garden-room",
+    from: 0.79,
+    to: 0.92,
+    title: "The Garden Room",
+    tagline: "Where the interior meets the garden.",
+    side: "left",
+  },
+  {
+    id: "bath",
+    from: 0.93,
+    to: 1.0,
+    title: "The Bath",
+    tagline: "Stone, water, stillness.",
+    side: "right",
+  },
+];
+
 export const ROOMS: RoomData[] = [
   {
     id: "01-living",
@@ -41,7 +101,7 @@ export const ROOMS: RoomData[] = [
     title: "Culinary Studio",
     image: "/rooms/02-kitchen.webp",
     depth: "/rooms/02-kitchen-depth.png",
-    alt: "Contemporary open-concept kitchen with bespoke cabinetry and island",
+    alt: "Contemporary open-concept kitchen with Mitjen cabinetry and island",
   },
   {
     id: "03-bedroom",

@@ -7,7 +7,8 @@
     "dev": "vite",
     "typecheck": "tsc --noEmit",
     "build": "tsc -b && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "encode:video": "node scripts/encode-video.mjs"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.9",
