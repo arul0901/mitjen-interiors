@@ -191,7 +191,7 @@ export default function VideoWalkthroughHero() {
   }
 
   // =========================================================================
-  // Standard Scroll-Scrubbed View
+  // Standard Scroll-Scrubbed View (Full Rectangle Banner)
   // =========================================================================
   return (
     <section
@@ -201,16 +201,6 @@ export default function VideoWalkthroughHero() {
       aria-label="Walkthrough of a bespoke residence"
     >
       <div className="hero-walkthrough-viewport">
-        {/* Curved Top Mask (White SVG) */}
-        <div className="hero-walkthrough-mask hero-walkthrough-mask-top" aria-hidden="true">
-          <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
-            <path
-              d="M0 0H1440V50C1440 50 1200 100 720 100C240 100 0 50 0 50V0Z"
-              fill="#ffffff"
-            />
-          </svg>
-        </div>
-
         {/* Media Layer: Video OR Canvas */}
         {useCanvasMode ? (
           <canvas
@@ -239,7 +229,7 @@ export default function VideoWalkthroughHero() {
         {/* Subtle Film Grain (Static SVG, 4% opacity) */}
         <div className="hero-walkthrough-grain" aria-hidden="true" />
 
-        {/* Bottom Legibility Gradient (35% height) */}
+        {/* Bottom Legibility Gradient */}
         <div className="hero-walkthrough-gradient" aria-hidden="true" />
 
         {/* Intro Hint: "Scroll to enter" (visible 0 - 0.04) */}
@@ -271,16 +261,6 @@ export default function VideoWalkthroughHero() {
             </div>
           );
         })}
-
-        {/* Curved Bottom Mask (White SVG) */}
-        <div className="hero-walkthrough-mask hero-walkthrough-mask-bottom" aria-hidden="true">
-          <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
-            <path
-              d="M0 100H1440V50C1440 50 1200 0 720 0C240 0 0 50 0 50V100Z"
-              fill="#ffffff"
-            />
-          </svg>
-        </div>
       </div>
     </section>
   );
