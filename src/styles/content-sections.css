@@ -1,0 +1,229 @@
+/* ==========================================================================
+   FOUNDATION DESIGN TOKENS & UTILITIES FOR BESPOKE ARCHITECTURE STUDIO
+   Scoped to sections under the hero
+   ========================================================================== */
+
+:root {
+  --page: #F4F0EA;
+  --surface: #FAF8F5;
+  --card: #EFE9E1;
+  --taupe: #8F7B66;
+  --accent: #8B7355;
+  --ink: #1A1A1A;
+  --muted: #6B635B;
+  --line: #E3DCD3;
+  --font-display: var(--font-heading, 'Cormorant Garamond', serif);
+  --section-shadow: 0 10px 40px -12px rgba(60, 40, 20, 0.12);
+}
+
+/* Scoped Section Wrapper */
+.bespoke-section-wrapper {
+  background-color: var(--page);
+  color: var(--ink);
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  padding: clamp(64px, 8vw, 96px) 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.bespoke-container {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(16px, 4vw, 40px);
+  padding-right: clamp(16px, 4vw, 40px);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Panel, Card & Pill Radii */
+.bespoke-panel {
+  background-color: var(--surface);
+  border-radius: 24px;
+  box-shadow: var(--section-shadow);
+  border: 1px solid var(--line);
+  box-sizing: border-box;
+}
+
+.bespoke-card {
+  background-color: var(--card);
+  border-radius: 16px;
+  border: 1px solid rgba(227, 220, 211, 0.6);
+  box-sizing: border-box;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+}
+
+.bespoke-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--section-shadow);
+  border-color: rgba(139, 115, 85, 0.3);
+}
+
+/* Shared Typography System */
+.bespoke-eyebrow {
+  color: var(--accent);
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.bespoke-h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4.5vw, 3.25rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  color: var(--ink);
+  margin: 0 0 16px 0;
+}
+
+.bespoke-desc {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--muted);
+  max-width: 320px;
+  margin: 0;
+}
+
+/* Shared Component: PillButton */
+.bespoke-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 24px;
+  background-color: #1A1A1A;
+  color: #FFFFFF !important;
+  border-radius: 9999px;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+.bespoke-pill-btn:hover {
+  background-color: #262626;
+  transform: translateY(-1px);
+}
+
+.bespoke-pill-btn .btn-arrow-icon {
+  display: inline-block;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bespoke-pill-btn:hover .btn-arrow-icon {
+  transform: translateX(3px);
+}
+
+.bespoke-pill-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Shared Component: ArrowLink */
+.bespoke-arrow-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ink);
+  text-decoration: none;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  transition: color 0.25s ease;
+}
+
+.bespoke-arrow-link:hover {
+  color: var(--accent);
+}
+
+.bespoke-arrow-link .arrow-icon {
+  display: inline-block;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bespoke-arrow-link:hover .arrow-icon,
+.bespoke-card:hover .bespoke-arrow-link .arrow-icon {
+  transform: translateX(4px);
+}
+
+.bespoke-arrow-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* About Section Specific Layout */
+.bespoke-about-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 1024px) {
+  .bespoke-about-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+.bespoke-about-card {
+  padding: 24px;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-decoration: none;
+  color: inherit;
+}
+
+@media (max-width: 1024px) {
+  .bespoke-about-card {
+    min-height: auto;
+  }
+}
+
+.bespoke-icon-circle {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: #FFFFFF;
+  box-shadow: 0 4px 16px rgba(60, 40, 20, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  margin-bottom: 20px;
+}
+
+.bespoke-card-title {
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 0 0 10px 0;
+}
+
+.bespoke-card-copy {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--muted);
+  margin: 0 0 24px 0;
+}
