@@ -76,8 +76,8 @@ export const TestimonialsSection: React.FC = () => {
     }
   };
 
-  const cardWidth = isMobile ? 160 : 220;
-  const cardHeight = isMobile ? 220 : 300;
+  const cardWidth = isMobile ? 155 : 196;
+  const cardHeight = isMobile ? 215 : 262;
   const activeItem: TestimonialItem = testimonialsData[activeIndex];
 
   const handleCardClick = (index: number, isActive: boolean) => {
@@ -128,7 +128,7 @@ export const TestimonialsSection: React.FC = () => {
             <div
               className="bespoke-fanned-track"
               style={{
-                height: `${cardHeight + (isMobile ? 36 : 48)}px`,
+                height: `${cardHeight + (isMobile ? 32 : 40)}px`,
               }}
             >
               {testimonialsData.map((item, index) => {
@@ -142,7 +142,7 @@ export const TestimonialsSection: React.FC = () => {
 
                 // Fanned Card Positioning Formulas
                 const tx = offset * 0.62 * cardWidth;
-                const ty = Math.abs(offset) * (isMobile ? 10 : 14);
+                const ty = Math.abs(offset) * (isMobile ? 9 : 12);
                 const rot = offset * 6;
                 const sc = 1 - Math.abs(offset) * 0.12;
                 const zIndex = 10 - Math.abs(offset);

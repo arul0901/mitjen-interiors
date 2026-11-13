@@ -500,7 +500,6 @@ export default function Home() {
 </div>
 </section>
 <TestimonialsSection />
-<div className={"cs_height_50 cs_height_lg_80"}></div>
 <section className={"cs_cta_style_2 cs_primary_bg cs_bg_fixed position-relative"} data-src={"/assets/img/cta-bg2.webp"} aria-label={"Call to action - Unlock your dream home today"}>
 <div className={"cs_cta_overlay position-absolute"} aria-hidden={"true"}></div>
 <div className={"container"}>
