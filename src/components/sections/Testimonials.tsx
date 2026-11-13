@@ -27,46 +27,42 @@ export const TestimonialsSection: React.FC = () => {
     setActiveIndex((prev) => (prev + 1) % total);
   }, [total]);
 
-  // Pointer drag/swipe interaction with 50px threshold
-  const isDragging = useRef(false);
+  // Pointer drag/swipe interaction (drag threshold: 40px)
+  const isPointerDown = useRef(false);
   const startX = useRef(0);
   const currentX = useRef(0);
+  const hasMoved = useRef(false);
 
   const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
-    isDragging.current = true;
+    isPointerDown.current = true;
+    hasMoved.current = false;
     startX.current = e.clientX;
     currentX.current = e.clientX;
-    try {
-      e.currentTarget.setPointerCapture(e.pointerId);
-    } catch {}
   };
 
   const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (!isDragging.current) return;
+    if (!isPointerDown.current) return;
     currentX.current = e.clientX;
+    if (Math.abs(e.clientX - startX.current) > 10) {
+      hasMoved.current = true;
+    }
   };
 
-  const handlePointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (!isDragging.current) return;
+  const handlePointerUp = () => {
+    if (!isPointerDown.current) return;
     const diff = currentX.current - startX.current;
-    if (Math.abs(diff) >= 50) {
+    if (Math.abs(diff) >= 40) {
       if (diff > 0) {
         handlePrev();
       } else {
         handleNext();
       }
     }
-    isDragging.current = false;
-    try {
-      e.currentTarget.releasePointerCapture(e.pointerId);
-    } catch {}
+    isPointerDown.current = false;
   };
 
-  const handlePointerCancel = (e: React.PointerEvent<HTMLDivElement>) => {
-    isDragging.current = false;
-    try {
-      e.currentTarget.releasePointerCapture(e.pointerId);
-    } catch {}
+  const handlePointerCancel = () => {
+    isPointerDown.current = false;
   };
 
   // Keyboard navigation when focused
@@ -84,19 +80,17 @@ export const TestimonialsSection: React.FC = () => {
   const cardHeight = isMobile ? 220 : 300;
   const activeItem: TestimonialItem = testimonialsData[activeIndex];
 
-  // 3-dot pagination relative mapping
-  // Left dot: index 0 or previous
-  // Center dot: active if in middle
-  // Right dot: index last or next
-  const activeDotIndex = activeIndex <= 1 ? 0 : activeIndex === 2 ? 1 : 2;
-
-  const handleDotClick = (dotIndex: number) => {
-    if (dotIndex === 0) {
-      setActiveIndex(0);
-    } else if (dotIndex === 1) {
-      setActiveIndex(2);
+  const handleCardClick = (index: number, isActive: boolean) => {
+    // If user dragged more than 15px, don't trigger click action
+    if (hasMoved.current && Math.abs(currentX.current - startX.current) >= 15) {
+      return;
+    }
+    if (isActive) {
+      // Clicking the active center image advances to next image
+      handleNext();
     } else {
-      setActiveIndex(total - 1);
+      // Clicking any side image brings it directly to center
+      setActiveIndex(index);
     }
   };
 
@@ -159,11 +153,7 @@ export const TestimonialsSection: React.FC = () => {
                   <div
                     key={item.id}
                     className={`bespoke-fanned-card ${isActive ? 'is-active' : ''}`}
-                    onClick={() => {
-                      if (!isActive) {
-                        setActiveIndex(index);
-                      }
-                    }}
+                    onClick={() => handleCardClick(index, isActive)}
                     style={{
                       width: `${cardWidth}px`,
                       height: `${cardHeight}px`,
@@ -174,8 +164,8 @@ export const TestimonialsSection: React.FC = () => {
                       pointerEvents: isVisible ? 'auto' : 'none',
                     }}
                     role="button"
-                    tabIndex={isActive ? 0 : -1}
-                    aria-label={`${item.name}, ${item.role}`}
+                    tabIndex={0}
+                    aria-label={`${item.name}, ${item.role}. Click to view.`}
                   >
                     {/* Clipped Card Media & Gradient */}
                     <div className="bespoke-fanned-card-inner">
@@ -237,23 +227,23 @@ export const TestimonialsSection: React.FC = () => {
               </div>
             </div>
 
-            {/* 3 Clickable Dots Below */}
+            {/* Clickable Dots matching total number of images */}
             <div
               className="bespoke-fanned-dots"
               role="tablist"
               aria-label="Testimonial slides"
             >
-              {[0, 1, 2].map((dotIdx) => (
+              {testimonialsData.map((item, dotIdx) => (
                 <button
-                  key={dotIdx}
+                  key={item.id}
                   type="button"
-                  onClick={() => handleDotClick(dotIdx)}
+                  onClick={() => setActiveIndex(dotIdx)}
                   className={`bespoke-fanned-dot ${
-                    dotIdx === activeDotIndex ? 'active' : ''
+                    dotIdx === activeIndex ? 'active' : ''
                   }`}
-                  aria-label={`Go to testimonial group ${dotIdx + 1}`}
+                  aria-label={`Go to testimonial ${dotIdx + 1}: ${item.name}`}
                   role="tab"
-                  aria-selected={dotIdx === activeDotIndex}
+                  aria-selected={dotIdx === activeIndex}
                 />
               ))}
             </div>

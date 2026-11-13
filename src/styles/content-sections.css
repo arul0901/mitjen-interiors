@@ -773,7 +773,7 @@
 }
 
 .bespoke-fanned-card.is-active {
-  cursor: default;
+  cursor: pointer;
   box-shadow: 0 20px 50px -12px rgba(60, 40, 20, 0.26);
 }
 
@@ -935,22 +935,37 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  margin-top: 22px;
+  gap: 10px;
+  margin-top: 24px;
 }
 
 .bespoke-fanned-dot {
-  width: 7px;
-  height: 7px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background-color: var(--line);
   border: none;
   padding: 0;
   cursor: pointer;
+  position: relative;
   transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+.bespoke-fanned-dot::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 28px;
+  height: 28px;
+  transform: translate(-50%, -50%);
+}
+
+.bespoke-fanned-dot:hover {
+  background-color: var(--taupe);
 }
 
 .bespoke-fanned-dot.active {
   background-color: var(--ink);
-  transform: scale(1.2);
+  transform: scale(1.25);
 }
