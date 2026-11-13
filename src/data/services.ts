@@ -1,16 +1,14 @@
 // PLACEHOLDER: replace with real client testimonials, real numbers and real projects before launch
-// Brand: Bespoke Architecture Studio
+// Brand: Mitjen Architecture Studio
 
 export interface AboutFeature {
   id: string;
   title: string;
+  subtitle: string;
   icon: 'line' | 'heart';
   copy: string;
   linkText: string;
   href: string;
-  image: string;
-  alt: string;
-  badge?: string;
   highlights: string[];
   tags: string[];
 }
@@ -19,9 +17,9 @@ export interface AboutSectionData {
   eyebrow: string;
   title: string;
   description: string;
-  leadImage?: string;
-  leadImageAlt?: string;
-  stats?: Array<{ value: string; label: string }>;
+  leftPicture: string;
+  leftPictureAlt: string;
+  leftPictureBadge: string;
   features: AboutFeature[];
 }
 
@@ -41,51 +39,43 @@ export interface ServiceItem {
 }
 
 export const aboutData: AboutSectionData = {
-  eyebrow: 'ABOUT BESPOKE',
+  eyebrow: 'ABOUT Mitjen',
   title: 'Spaces that reflect who you are.',
   description:
     'Every detail matters. From concept to completion, we create interiors that are elegant, functional, and uniquely yours.',
-  leadImage: '/images/projects/01-serene.webp',
-  leadImageAlt: 'Architectural interior living space detail with natural lighting',
-  stats: [
-    { value: '15+', label: 'Years of Practice' },
-    { value: '150+', label: 'Curated Works' },
-    { value: '100%', label: 'Turnkey Delivery' }
-  ],
+  leftPicture: '/images/projects/01-serene.webp',
+  leftPictureAlt: 'Mitjen architecture living space with warm daylight and refined materials',
+  leftPictureBadge: 'ARCHITECTURAL DISCIPLINE • EST. 2010',
   features: [
     {
       id: 'thoughtful-design',
       title: 'Thoughtful Design',
+      subtitle: 'Spatial Layouts & Flow',
       icon: 'line',
-      copy: 'Intentional layouts shaped around daily rituals, natural daylight, and quiet circulation. Every space is engineered for effortless living and intuitive flow.',
+      copy: 'Intentional layouts shaped around daily rituals, natural daylight, and circulation. Every space is engineered for effortless living and intuitive flow.',
       linkText: 'LEARN MORE',
       href: '/services',
-      image: '/images/concept/concept-1.webp',
-      alt: 'Minimalist living room layout with warm oak finishes',
-      badge: 'SPATIAL HARMONY',
       highlights: [
         'Custom millwork & tailored joinery',
         'Natural daylight & circulation studies',
         'Acoustic balance & calm zoning'
       ],
-      tags: ['Spatial Planning', 'Bespoke Joinery']
+      tags: ['Spatial Planning', 'Mitjen Joinery']
     },
     {
       id: 'timeless-aesthetics',
       title: 'Timeless Aesthetics',
+      subtitle: 'Tactile Materials & Patina',
       icon: 'heart',
-      copy: 'Designs that balance beauty and function for lasting impact. We curate tactile palettes of natural stone, warm oak, and textiles that patina with grace over decades.',
+      copy: 'Designs that balance beauty and function for lasting impact. We curate tactile palettes of natural stone, warm oak, and textiles that mature gracefully over decades.',
       linkText: 'LEARN MORE',
       href: '/services',
-      image: '/images/concept/concept-2.webp',
-      alt: 'Architectural materials, travertine stone and linen finishes',
-      badge: 'TACTILE FINISHES',
       highlights: [
         'Tactile travertine & European oak',
         'Layered ambient architectural lighting',
         'Enduring proportions free of fast trends'
       ],
-      tags: ['Natural Materials', 'Living Patina']
+      tags: ['Natural Stone', 'Timeless Textures']
     }
   ]
 };
@@ -99,7 +89,7 @@ export const servicesData: ServiceItem[] = [
     description: 'Beautiful homes designed around your lifestyle.',
     copy: 'Beautiful homes designed around your lifestyle.',
     image: '/images/services/residential.webp',
-    alt: 'Bespoke residential interior living space with warm neutral tones and soft daylight',
+    alt: 'Mitjen residential interior living space with warm neutral tones and soft daylight',
     aspectRatio: '16/10',
     href: '/portfolio',
     linkText: 'VIEW PROJECTS',

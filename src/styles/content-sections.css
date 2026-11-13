@@ -1,5 +1,5 @@
 /* ==========================================================================
-   FOUNDATION DESIGN TOKENS & UTILITIES FOR BESPOKE ARCHITECTURE STUDIO
+   FOUNDATION DESIGN TOKENS & UTILITIES FOR Mitjen ARCHITECTURE STUDIO
    Scoped to sections under the hero
    ========================================================================== */
 
@@ -13,8 +13,12 @@
   --muted: #6B635B;
   --line: #E3DCD3;
   --font-display: var(--font-heading, 'Cormorant Garamond', serif);
-  --section-shadow: 0 10px 40px -12px rgba(60, 40, 20, 0.12);
+  --section-shadow: 0 12px 40px -12px rgba(60, 40, 20, 0.08);
+  --card-shadow: 0 6px 24px -8px rgba(60, 40, 20, 0.06);
+  --card-hover-shadow: 0 16px 40px -12px rgba(60, 40, 20, 0.12);
 }
+
+Mitjen
 
 /* Scoped Section Wrapper */
 .bespoke-section-wrapper {
@@ -26,13 +30,13 @@
   box-sizing: border-box;
 }
 
-@media (max-width: 768px) {
+Mitjen @media (max-width: 768px) {
   .bespoke-section-wrapper {
-    padding: clamp(24px, 5vw, 36px) 0;
+    padding: clamp(28px, 5vw, 40px) 0;
   }
 }
 
-.bespoke-container {
+Mitjen .bespoke-container {
   max-width: 1280px;
   margin-left: auto;
   margin-right: auto;
@@ -42,42 +46,40 @@
   box-sizing: border-box;
 }
 
-@media (max-width: 640px) {
+Mitjen @media (max-width: 640px) {
   .bespoke-container {
     padding-left: 14px;
     padding-right: 14px;
   }
 }
 
-/* Panel, Card & Pill Radii */
+Mitjen
+
+/* Panel Styling: Soft, seamless, professional architectural finish */
 .bespoke-panel {
   background-color: var(--surface);
   border-radius: 24px;
   box-shadow: var(--section-shadow);
-  border: 1px solid var(--line);
-  box-sizing: border-box;
+  border: 1px solid rgba(139, 115, 85, 0.15);
+  padding: clamp(28px, 4vw, 44px);
+  Mitjenzing: border-box;
 }
 
-.bespoke-card {
-  background-color: var(--card);
-  border-radius: 16px;
-  border: 1px solid rgba(227, 220, 211, 0.6);
-  box-sizing: border-box;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+@media (max-width: 640px) {
+  .bespoke-panel {
+    border-radius: 18px;
+    padding: 20px 16px;
+  }
 }
 
-.bespoke-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--section-shadow);
-  border-color: rgba(139, 115, 85, 0.3);
-}
+Mitjen
 
-/* Shared Typography System */
+/* Shared Typography */
 .bespoke-eyebrow {
   color: var(--accent);
   font-family: var(--font-subheading, 'Manrope', sans-serif);
   font-size: 11px;
-  font-weight: 600;
+  Mitjeneight: 600;
   text-transform: uppercase;
   letter-spacing: 0.14em;
   margin-bottom: 12px;
@@ -86,9 +88,9 @@
 
 .bespoke-h2 {
   font-family: var(--font-display);
-  font-size: clamp(2.2rem, 4.5vw, 3.25rem);
+  font-size: clamp(2.1rem, 4.2vw, 3.1rem);
   font-weight: 400;
-  letter-spacing: -0.02em;
+  Mitjen-spacing: -0.02em;
   line-height: 1.05;
   color: var(--ink);
   margin: 0 0 16px 0;
@@ -98,8 +100,8 @@
   font-family: var(--font-body, 'DM Sans', sans-serif);
   font-size: 0.88rem;
   line-height: 1.6;
-  color: var(--muted);
-  max-width: 320px;
+  Mitjen var(--muted);
+  max-width: 360px;
   margin: 0;
 }
 
@@ -108,7 +110,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  Mitjenpx;
   height: 44px;
   padding: 0 24px;
   background-color: #1A1A1A;
@@ -129,26 +131,28 @@
   transform: translateY(-1px);
 }
 
-.bespoke-pill-btn .btn-arrow-icon {
+Mitjen .bespoke-pill-btn .btn-arrow-icon {
   display: inline-block;
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.bespoke-pill-btn:hover .btn-arrow-icon {
+Mitjen .bespoke-pill-btn:hover .btn-arrow-icon {
   transform: translateX(3px);
 }
 
-.bespoke-pill-btn:focus-visible {
+.Mitjen-pill-btn:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
+
+Mitjen
 
 /* Shared Component: ArrowLink */
 .bespoke-arrow-link {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-family: var(--font-subheading, 'Manrope', sans-serif);
+  Mitjenamily: var(--font-subheading, 'Manrope', sans-serif);
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
@@ -166,641 +170,416 @@
   color: var(--accent);
 }
 
-.bespoke-arrow-link .arrow-icon {
+.Mitjen-arrow-link .arrow-icon {
   display: inline-block;
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.bespoke-arrow-link:hover .arrow-icon,
-.bespoke-card:hover .bespoke-arrow-link .arrow-icon {
+Mitjen .bespoke-arrow-link:hover .arrow-icon,
+.bespoke-about-card:hover .bespoke-arrow-link .arrow-icon {
   transform: translateX(4px);
 }
 
-.bespoke-arrow-link:focus-visible {
+Mitjen .Mitjen-arrow-link:fMitjensible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
 
-/* About Section Specific Layout */
+Mitjen
+/* ==========================================================================
+   ABOUT SECTION: Left Picture Only & Right Cards Architecture
+   ========================================================================== */
+
 .bespoke-about-section {
-  padding-bottom: 24px;
+  Mitjeng-bottom: 24px;
 }
 
 @media (max-width: 768px) {
   .bespoke-about-section {
-    padding-bottom: 16px;
+    Mitjeng-bottom: 16px;
   }
 }
 
 .bespoke-about-grid {
-  display: grid;
+  Mitjeny: grid;
   grid-template-columns: 1.15fr 1fr 1fr;
   gap: 24px;
+  align-items: stretch;
 }
 
 @media (max-width: 1024px) {
-  .bespoke-about-grid {
+  .Mitjen-about-grid {
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 20px;
   }
 }
 
-.bespoke-about-card {
-  padding: 16px;
-  border-radius: 16px;
-  min-height: auto;
+/MitjenColumn: Heading+Picture on Left Side ONLY */ .bespoke-about-left-col {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  text-decoration: none;
-  color: inherit;
-  background-color: var(--card);
-  border: 1px solid rgba(227, 220, 211, 0.7);
-  box-shadow: 0 4px 20px -8px rgba(60, 40, 20, 0.08);
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
-}
-
-@media (max-width: 640px) {
-  .bespoke-about-card {
-    padding: 14px;
-    border-radius: 14px;
-  }
-}
-
-.bespoke-about-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--section-shadow);
-  border-color: rgba(139, 115, 85, 0.35);
-}
-
-.bespoke-about-card-img-wrap {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 10;
-  border-radius: 12px;
-  overflow: hidden;
-  margin-bottom: 14px;
-  background-color: var(--surface);
-}
-
-@media (max-width: 640px) {
-  .bespoke-about-card-img-wrap {
-    aspect-ratio: 16 / 9;
-    margin-bottom: 10px;
-  }
-}
-
-.bespoke-about-card-img {
-  width: 100%;
   height: 100%;
-  object-fit: cover;
-  transition: transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform;
 }
 
-.bespoke-about-card:hover .bespoke-about-card-img {
-  transform: scale(1.05);
-}
-
-.bespoke-about-card-badge {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.94);
-  backdrop-filter: blur(8px);
-  box-shadow: 0 4px 12px rgba(60, 40, 20, 0.12);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--accent);
-  z-index: 2;
-  transition: transform 0.3s ease;
-}
-
-@media (max-width: 640px) {
-  .bespoke-about-card-badge {
-    width: 34px;
-    height: 34px;
-    top: 8px;
-    left: 8px;
-  }
-}
-
-.bespoke-about-card:hover .bespoke-about-card-badge {
-  transform: scale(1.08);
-}
-
-.bespoke-about-lead-img-wrap {
+.bespoke-about-left-photo-wrap {
   position: relative;
   width: 100%;
   flex: 1 1 auto;
-  min-height: 170px;
-  border-radius: 14px;
+  min-height: 220px;
+  border-radius: 16px;
   overflow: hidden;
-  margin-top: 18px;
+  margin-top: 24px;
+  bMitjenow: 0 10px 30px -10px rgba(60, 40, 20, 0.14);
+  border: 1px solid rgba(139, 115, 85, 0.16);
   background-color: var(--card);
 }
 
 @media (max-width: 1024px) {
-  .bespoke-about-lead-img-wrap {
-    display: none;
+  Mitjenke-about-left-photo-wrap {
+    min-height: 240px;
+    aspect-ratio: 16 / 10;
+    margin-top: 20px;
   }
 }
 
-.bespoke-about-lead-img {
+Mitjen .bespoke-about-left-photo {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.bespoke-about-lead-tag {
+.bespoke-about-left-photo-wrap:hover .bespoke-about-left-photo {
+  tMitjenm: scale(1.04);
+}
+
+.bespoke-about-photo-badge {
   position: absolute;
-  bottom: 8px;
-  left: 8px;
-  background: rgba(26, 26, 26, 0.75);
+  bottom: 12px;
+  Mitjen12px;
+  background: rgba(20, 18, 16, 0.80);
   backdrop-filter: blur(8px);
   color: #FFFFFF;
   font-family: var(--font-subheading, 'Manrope', sans-serif);
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.12em;
-  padding: 4px 10px;
-  border-radius: 9999px;
-  display: flex;
-  gap: 6px;
-  align-items: center;
+  Mitjeng: 6px 14px;
+  Mitjen border-radius: 9999px;
+  z-index: 2;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* Studio Statistics Strip in About Intro */
-.bespoke-about-stats-strip {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  margin-top: 16px;
-  padding-top: 14px;
-  border-top: 1px solid rgba(227, 220, 211, 0.75);
-}
+Mitjen
 
-@media (max-width: 640px) {
-  .bespoke-about-stats-strip {
-    gap: 8px;
-    margin-top: 12px;
-    padding-top: 12px;
-  }
-}
-
-.bespoke-stat-mini {
+/* Right Side Feature Cards: Clean, Rich, NO Pictures, Zero Empty Space */
+.bespoke-about-card {
+  background-color: var(--card);
+  border-radius: 18px;
+  border: 1px solid rgba(139, 115, 85, 0.14);
+  box-shadow: var(--card-shadow);
+  padding: 28px 24px;
   display: flex;
   flex-direction: column;
-  gap: 2px;
-}
-
-.stat-mini-val {
-  font-family: var(--font-special, 'Bebas Neue', sans-serif);
-  font-size: 1.45rem;
-  line-height: 1;
-  color: var(--ink);
-  letter-spacing: 0.04em;
-}
-
-@media (max-width: 640px) {
-  .stat-mini-val {
-    font-size: 1.25rem;
-  }
-}
-
-.stat-mini-label {
-  font-family: var(--font-subheading, 'Manrope', sans-serif);
-  font-size: 9.5px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--muted);
-  line-height: 1.25;
-}
-
-/* Feature Card Enhancements to Fill Empty Space */
-.bespoke-card-feature-list {
-  list-style: none;
-  padding: 0;
-  margin: 12px 0 0 0;
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-}
-
-.bespoke-card-feature-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--font-body, 'DM Sans', sans-serif);
-  font-size: 0.8rem;
-  line-height: 1.35;
-  color: var(--ink);
-}
-
-.bespoke-card-feature-item svg {
-  flex-shrink: 0;
-  color: var(--accent);
-}
-
-.bespoke-card-tag-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 14px;
-}
-
-.bespoke-card-tag {
-  font-family: var(--font-subheading, 'Manrope', sans-serif);
-  font-size: 9.5px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--accent);
-  background-color: rgba(139, 115, 85, 0.12);
-  padding: 4px 10px;
-  border-radius: 9999px;
-  border: 1px solid rgba(139, 115, 85, 0.2);
-}
-
-.bespoke-card-footer {
-  margin-top: 16px;
-  padding-top: 14px;
-  border-top: 1px solid rgba(227, 220, 211, 0.8);
-  display: flex;
-  align-items: center;
   justify-content: space-between;
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+  box-sizing: border-box;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
 }
 
-.bespoke-card-title {
-  font-family: var(--font-subheading, 'Manrope', sans-serif);
-  font-size: 1.15rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  color: var(--ink);
-  margin: 0 0 6px 0;
-}
-
-@media (max-width: 640px) {
-  .bespoke-card-title {
-    font-size: 1.05rem;
-    margin: 0 0 4px 0;
+@meMitjenx-width: 640px) {
+  .bespoke-about-card {
+    padding: 20px 16px;
+    border-radius: 16px;
   }
 }
 
-.bespoke-card-copy {
-  font-family: var(--font-body, 'DM Sans', sans-serif);
-  font-size: 0.85rem;
-  line-height: 1.5;
-  color: var(--muted);
-  margin: 0 0 16px 0;
-}
+.bespoke-about-card:hover {
+  Mitjenorm: translateY(-4pMitjen box-shadow: var(--card-hover-shadow);
+      border-color: rgba(139, 115, 85, 0.35);
+  }
 
-@media (max-width: 640px) {
+  Mitjen .bespoke-about-card:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  /* 56px White Icon Circle Badge */
+  .bespoke-icon-circle {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    bMitjennd-color: #FFFFFF;
+    box-shadow: 0 4px 16px rgba(60, 40, 20, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    Mitjen var(--accent);
+    margin-bottom: 20px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+  }
+
+  .bespoke-about-card:hover .bespoke-icon-circle {
+    transform: scale(1.06);
+  }
+
+  Mitjen .bespoke-card-title {
+    font-family: var(--font-subheading, 'Manrope', sans-serif);
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin: 0 0 6px 0;
+  }
+
+  .bespoke-card-subtitle {
+    font-family: var(--font-subheading, 'Manrope', sans-serif);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    Mitjen: 0 0 12px 0;
+    display: block;
+  }
+
   .bespoke-card-copy {
-    font-size: 0.8rem;
-    line-height: 1.4;
-    margin: 0 0 12px 0;
+    font-family: var(--font-body, 'DM Sans', sans-serif);
+    font-size: 0.88rem;
+    line-height: 1.55;
+    color: var(--muted);
+    margin: 0 0 16px 0;
   }
-}
 
-/* Service Cards Section Specific Layout */
-.bespoke-services-section {
-  padding-top: 0;
-  padding-bottom: clamp(48px, 6vw, 84px);
-}
+  Mitjen
 
-@media (max-width: 768px) {
-  .bespoke-services-section {
-    padding-bottom: clamp(24px, 5vw, 36px);
+  /* 3-Point Architecture Checklist to Fill Card Space Authentically */
+  .bespoke-card-feature-list {
+    list-style: none;
+    padding: 0;
+    Mitjen: 0 0 16px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
   }
-}
 
-.bespoke-services-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
-}
-
-@media (max-width: 768px) {
-  .bespoke-services-grid {
-    grid-template-columns: 1fr;
-    gap: 14px;
-  }
-}
-
-.bespoke-service-card {
-  display: block;
-  position: relative;
-  border-radius: 16px;
-  overflow: hidden;
-  text-decoration: none;
-  aspect-ratio: 16 / 10;
-  box-shadow: var(--section-shadow);
-  transition: box-shadow 0.4s ease, transform 0.4s ease;
-  background-color: var(--taupe);
-}
-
-@media (max-width: 640px) {
-  .bespoke-service-card {
-    aspect-ratio: 16 / 9;
-    border-radius: 14px;
-  }
-}
-
-.bespoke-service-card:hover {
-  box-shadow: 0 16px 48px -12px rgba(60, 40, 20, 0.22);
-}
-
-.bespoke-service-card:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
-}
-
-.bespoke-service-card-img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform;
-}
-
-.bespoke-service-card:hover .bespoke-service-card-img {
-  transform: scale(1.05);
-}
-
-.bespoke-service-card-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to right,
-    rgba(143, 123, 102, 0.92) 0%,
-    rgba(143, 123, 102, 0.62) 55%,
-    rgba(143, 123, 102, 0.05) 100%
-  ),
-  linear-gradient(
-    to top,
-    rgba(20, 18, 16, 0.35) 0%,
-    transparent 50%
-  );
-  pointer-events: none;
-  z-index: 1;
-}
-
-.bespoke-service-card-content {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: flex-start;
-  padding: clamp(20px, 3.5vw, 36px);
-  max-width: 440px;
-  z-index: 2;
-  box-sizing: border-box;
-}
-
-@media (max-width: 640px) {
-  .bespoke-service-card-content {
-    padding: 16px 14px;
-    max-width: 310px;
-  }
-}
-
-.bespoke-service-card-title {
-  font-family: var(--font-display);
-  color: #FFFFFF;
-  font-size: clamp(1.45rem, 3.2vw, 1.95rem);
-  font-weight: 500;
-  line-height: 1.1;
-  letter-spacing: -0.015em;
-  margin: 0 0 8px 0;
-}
-
-@media (max-width: 640px) {
-  .bespoke-service-card-title {
-    font-size: 1.35rem;
-    margin: 0 0 5px 0;
-  }
-}
-
-.bespoke-service-card-copy {
-  font-family: var(--font-body, 'DM Sans', sans-serif);
-  font-size: 0.875rem;
-  color: rgba(255, 255, 255, 0.88);
-  line-height: 1.4;
-  margin: 0 0 16px 0;
-  max-width: 340px;
-}
-
-@media (max-width: 640px) {
-  .bespoke-service-card-copy {
-    font-size: 0.785rem;
-    margin: 0 0 10px 0;
-    max-width: 260px;
+  .bespoke-card-feature-item {
+    display: flex;
+    align-items: center;
+    gMitjen;
+    font-family: var(--font-body, 'DM Sans', sans-serif);
+    font-size: 0.82rem;
     line-height: 1.35;
+    color: var(--ink);
   }
-}
 
-.bespoke-service-card-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--font-subheading, 'Manrope', sans-serif);
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: #FFFFFF;
-}
+  .bespoke-card-feature-item svg {
+    Mitjenhrink: 0;
+    color: var(--accent);
+  }
 
-@media (max-width: 640px) {
-  .bespoke-service-card-link {
-    font-size: 10px;
+  /* Pill Tags */
+  .bespoke-card-tag-row {
+    dMitjen flex;
+    flex-wrap: wrap;
     gap: 6px;
+    margin-bottom: 16px;
   }
-}
 
-.bespoke-service-card-link svg {
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-}
+  Mitjen .bespoke-card-tag {
+    font-family: var(--font-subheading, 'Manrope', sans-serif);
+    font-size: 9.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    cMitjenar(--accent);
+    background-color: rgba(139, 115, 85, 0.10);
+    padding: 4px 10px;
+    border-radius: 9999px;
+    border: 1px solid rgba(139, 115, 85, 0.18);
+  }
 
-.bespoke-service-card:hover .bespoke-service-card-link svg {
-  transform: translateX(4px);
-}
+  Mitjen
 
-/* Service Cards Section Specific Layout */
-.bespoke-services-section {
-  padding-top: 0;
-  padding-bottom: clamp(48px, 6vw, 84px);
-}
+  /* Card Action Footer with Clean Divider */
+  .bespoke-card-footer {
+    margin-top: auto;
+    padding-top: 16px;
+    border-top: 1px solid rgba(227, 220, 211, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 
-@media (max-width: 768px) {
+  /* ==========================================================================
+   SERVICE CARDS SECTION: Cinematic 2-Column Photo Cards
+   Mitjen=================================================================== */
+
   .bespoke-services-section {
-    padding-bottom: clamp(24px, 5vw, 36px);
+    padding-top: 0;
+    padding-bottom: clamp(48px, 6vw, 84px);
   }
-}
 
-.bespoke-services-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
-}
+  Mitjen @media (max-width: 768px) {
+    .bespoke-services-section {
+      padding-bottom: clamp(28px, 5vw, 40px);
+      Mitjen
+    }
 
-@media (max-width: 768px) {
-  .bespoke-services-grid {
-    grid-template-columns: 1fr;
-    gap: 14px;
-  }
-}
+    .bespoke-services-grid {
+      display: grid;
+      Mitjenemplate-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
 
-.bespoke-service-card {
-  display: block;
-  position: relative;
-  border-radius: 16px;
-  overflow: hidden;
-  text-decoration: none;
-  aspect-ratio: 16 / 10;
-  box-shadow: var(--section-shadow);
-  transition: box-shadow 0.4s ease, transform 0.4s ease;
-  background-color: var(--taupe);
-}
+    @media (max-width: 768px) {
+      .bespoke-services-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+    }
 
-@media (max-width: 640px) {
-  .bespoke-service-card {
-    aspect-ratio: 16 / 9;
-    border-radius: 14px;
-  }
-}
+    MitjenMitjen .bespoke-service-card {
+      display: block;
+      position: relative;
+      Mitjen-radius: 18px;
+      overflow: hidden;
+      text-decoration: none;
+      aspect-ratio: 16 / 10;
+      box-shadow: var(--section-shadow);
+      transition: box-shadow 0.4s ease, transform 0.4s ease;
+      background-color: var(--taupe);
+      border: 1px solid rgba(139, 115, 85, 0.18);
+    }
 
-.bespoke-service-card:hover {
-  box-shadow: 0 16px 48px -12px rgba(60, 40, 20, 0.22);
-}
+    @media (max-width: 640px) {
+      .bespoke-service-card {
+        aspect-ratio: 16 / 9;
+        border-radius: 14px;
+      }
+    }
 
-.bespoke-service-card:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
-}
+    .bespoke-service-card:hover {
+      Mitjenadow: 0 16px 48px -12px rgba(60, 40, 20, 0.22);
+    }
 
-.bespoke-service-card-img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform;
-}
+    .bespoke-service-card:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
 
-.bespoke-service-card:hover .bespoke-service-card-img {
-  transform: scale(1.05);
-}
+    .bespoke-service-card-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      tMitjenon: transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform;
+    }
 
-.bespoke-service-card-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to right,
-    rgba(143, 123, 102, 0.92) 0%,
-    rgba(143, 123, 102, 0.62) 55%,
-    rgba(143, 123, 102, 0.05) 100%
-  ),
-  linear-gradient(
-    to top,
-    rgba(20, 18, 16, 0.35) 0%,
-    transparent 50%
-  );
-  pointer-events: none;
-  z-index: 1;
-}
+    .bespoke-service-card:hover .bespoke-service-card-img {
+      transform: scale(1.05);
+    }
 
-.bespoke-service-card-content {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: flex-start;
-  padding: clamp(20px, 3.5vw, 36px);
-  max-width: 440px;
-  z-index: 2;
-  box-sizing: border-box;
-}
+    Mitjen .bespoke-service-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right,
+        rgba(143, 123, 102, 0.92) 0%,
+        rgba(143, 123, 102, 0.62) 55%,
+        rgba(143, 123, 102, 0.05) 100%),
+      lMitjenradient(to top,
+        rgba(20, 18, 16, 0.35) 0%,
+        transparent 50%);
+      pointer-events: none;
+      Mitjenx: 1;
+    }
 
-@media (max-width: 640px) {
-  .bespoke-service-card-content {
-    padding: 16px 14px;
-    max-width: 310px;
-  }
-}
+    .bespoke-service-card-content {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: flex-start;
+      pMitjen clamp(20px, 3.5vw, 36px);
+      max-width: 440px;
+      z-index: 2;
+      box-sizing: border-box;
+    }
 
-.bespoke-service-card-title {
-  font-family: var(--font-display);
-  color: #FFFFFF;
-  font-size: clamp(1.45rem, 3.2vw, 1.95rem);
-  font-weight: 500;
-  line-height: 1.1;
-  letter-spacing: -0.015em;
-  margin: 0 0 8px 0;
-}
+    @media (max-width: 640px) {
+      .bespoke-service-card-content {
+        Mitjening: 16px 14px;
+        max-width: 310px;
+      }
+    }
 
-@media (max-width: 640px) {
-  .bespoke-service-card-title {
-    font-size: 1.35rem;
-    margin: 0 0 5px 0;
-  }
-}
+    .bespoke-service-card-title {
+      font-family: var(--font-display);
+      color: #FFFFFF;
+      font-size: clamp(1.45rem, 3.2vw, 1.95rem);
+      font-weight: 500;
+      line-height: 1.1;
+      letter-spacing: -0.015em;
+      margin: 0 0 8px 0;
+    }
 
-.bespoke-service-card-copy {
-  font-family: var(--font-body, 'DM Sans', sans-serif);
-  font-size: 0.875rem;
-  color: rgba(255, 255, 255, 0.88);
-  line-height: 1.4;
-  margin: 0 0 16px 0;
-  max-width: 340px;
-}
+    Mitjen @media (max-width: 640px) {
+      .bespoke-service-card-title {
+        font-size: 1.35rem;
+        margin: 0 0 5px 0;
+        Mitjen
+      }
 
-@media (max-width: 640px) {
-  .bespoke-service-card-copy {
-    font-size: 0.785rem;
-    margin: 0 0 10px 0;
-    max-width: 260px;
-    line-height: 1.35;
-  }
-}
+      .bespoke-service-card-copy {
+        Mitjenamily: var(--font-bodMitjenSans', sans-serif);
+ font-size: 0.875rem;
+          color: rgba(255, 255, 255, 0.88);
+          line-height: 1.4;
+          margin: 0 0 16px 0;
+          Mitjendth: 340px;
+        }
 
-.bespoke-service-card-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--font-subheading, 'Manrope', sans-serif);
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: #FFFFFF;
-}
+        @media (max-width: 640px) {
+          .bespoke-service-card-copy {
+            font-size: 0.785rem;
+            Mitjen: 0 0 10px 0;
+            max-width: 260px;
+            line-height: 1.35;
+          }
+        }
 
-@media (max-width: 640px) {
-  .bespoke-service-card-link {
-    font-size: 10px;
-    gap: 6px;
-  }
-}
+        Mitjen .bespoke-service-card-link {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          font-family: var(--font-subheading, 'Manrope', sans-serif);
+          font-size: 11px;
+          fMitjenght: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.14em;
+          color: #FFFFFF;
+        }
 
-.bespoke-service-card-link svg {
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-}
+        @Mitjenmax-width: 640px) {
+        .bespoke-service-card-link {
+          font-size: 10px;
+          gap: 6px;
+        }
+      }
 
-.bespoke-service-card:hover .bespoke-service-card-link svg {
-  transform: translateX(4px);
-}
+      .bespoke-service-card-link svg {
+        transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .bespoke-service-card:hover .bespoke-service-card-link svg {
+        transform: translateX(4px);
+      }
+
+      Mitjen MitjenMitjenMitjenMitjenMitjenMitjenMitjenMitjenMitjenMitjenMitjenMitjenMitjenMitjenMitjenMitjenMitjen
