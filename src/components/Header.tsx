@@ -11,7 +11,7 @@ export const Header: React.FC = () => {
   const { openInquiry } = useInquiry();
 
   const isServicesActive = location.pathname.startsWith('/services');
-  const isProjectsActive = location.pathname.startsWith('/project');
+  const isPortfolioActive = location.pathname.startsWith('/portfolio') || location.pathname.startsWith('/project');
   const isHome = location.pathname === '/';
 
   // State for Desktop Services Dropdown and Mobile Services Accordion
@@ -59,43 +59,12 @@ export const Header: React.FC = () => {
     };
   }, []);
 
-  // Typewriting animation for Header Logo text
-  const FULL_LOGO_TEXT = 'Mitjen Interiors';
-  const [typedLogo, setTypedLogo] = useState(() => {
-    if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      return FULL_LOGO_TEXT;
-    }
-    return '';
-  });
-  const [isLogoTyping, setIsLogoTyping] = useState(() => {
-    if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      return false;
-    }
-    return true;
-  });
-
-  useEffect(() => {
-    if (!isLogoTyping) return;
-
-    let charIndex = 0;
-    const interval = setInterval(() => {
-      charIndex++;
-      setTypedLogo(FULL_LOGO_TEXT.slice(0, charIndex));
-      if (charIndex >= FULL_LOGO_TEXT.length) {
-        clearInterval(interval);
-        setTimeout(() => setIsLogoTyping(false), 2400);
-      }
-    }, 75);
-
-    return () => clearInterval(interval);
-  }, [isLogoTyping]);
-
   // Scroll listener for solid navbar state
   useEffect(() => {
     const handleScroll = () => {
       const y = window.scrollY;
       const h = window.innerHeight;
-      const threshold = isHome ? h * 0.8 : 40;
+      const threshold = isHome ? h * 0.4 : 30;
       setIsSolid(y > threshold && !isMenuOpen);
     };
 
@@ -104,15 +73,18 @@ export const Header: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isMenuOpen, isHome]);
 
-  // Lock background scroll when mobile menu is open
+  // Lock background scroll and hide scrollup button when mobile menu is open
   useEffect(() => {
     if (isMenuOpen) {
       document.body.style.overflow = 'hidden';
+      document.body.classList.add('cs_menu_open');
     } else {
       document.body.style.overflow = '';
+      document.body.classList.remove('cs_menu_open');
     }
     return () => {
       document.body.style.overflow = '';
+      document.body.classList.remove('cs_menu_open');
     };
   }, [isMenuOpen]);
 
@@ -186,7 +158,7 @@ export const Header: React.FC = () => {
       const dx = endX - edgeStartX;
       const dy = endY - edgeStartY;
 
-      // Swiped inward from right edge (within 40px of edge, moving left > 50px)
+      // Swiped inward from right edge (within 45px of edge, moving left > 50px)
       if (edgeStartX > window.innerWidth - 45 && dx < -50 && Math.abs(dx) > Math.abs(dy)) {
         setIsMenuOpen(true);
       }
@@ -278,9 +250,15 @@ export const Header: React.FC = () => {
       onTouchStart={handleHeaderTouchStart}
       onTouchEnd={handleHeaderTouchEnd}
     >
-      <Link className="logo" to="/" onClick={closeMenu} aria-label="Mitjen Interiors">
-        <span className="logo-typed-text">{typedLogo || 'M'}</span>
-        {isLogoTyping && <span className="header-typewriter-caret" aria-hidden="true" />}
+      {/* Official Gold & White Vector Brand Logo */}
+      <Link className="logo" to="/" onClick={closeMenu} aria-label="Mitjen Interiors Home">
+        <img
+          src="/assets/img/logo2.svg"
+          alt="Mitjen Interiors"
+          className="header-logo-img"
+          width="124"
+          height="28"
+        />
       </Link>
 
       {/* Navigation: Responsive Dual Desktop / Mobile Drawer Architecture */}
@@ -328,11 +306,11 @@ export const Header: React.FC = () => {
             Home
           </Link>
           <Link
-            to="/projects"
-            className={`nav-desktop-link ${isProjectsActive ? 'on' : ''}`}
+            to="/about"
+            className={`nav-desktop-link ${location.pathname === '/about' ? 'on' : ''}`}
             onClick={closeAllMenus}
           >
-            Projects
+            About Us
           </Link>
 
           {/* Desktop Services Dropdown */}
@@ -443,18 +421,18 @@ export const Header: React.FC = () => {
           </div>
 
           <Link
-            to="/about"
-            className={`nav-desktop-link ${location.pathname === '/about' ? 'on' : ''}`}
+            to="/portfolio"
+            className={`nav-desktop-link ${isPortfolioActive ? 'on' : ''}`}
             onClick={closeAllMenus}
           >
-            About
+            Portfolio
           </Link>
           <Link
             to="/contact"
             className={`nav-desktop-link ${location.pathname === '/contact' ? 'on' : ''}`}
             onClick={closeAllMenus}
           >
-            Contact
+            Contact Us
           </Link>
         </div>
 
@@ -466,16 +444,16 @@ export const Header: React.FC = () => {
             onClick={closeAllMenus}
           >
             <span>Home</span>
-            <span style={{ fontSize: '1rem', opacity: 0.5 }}>01</span>
+            <span style={{ fontSize: '0.9rem', opacity: 0.5 }}>01</span>
           </Link>
 
           <Link
-            to="/projects"
-            className={`mobile-nav-link ${isProjectsActive ? 'on' : ''}`}
+            to="/about"
+            className={`mobile-nav-link ${location.pathname === '/about' ? 'on' : ''}`}
             onClick={closeAllMenus}
           >
-            <span>Projects</span>
-            <span style={{ fontSize: '1rem', opacity: 0.5 }}>02</span>
+            <span>About Us</span>
+            <span style={{ fontSize: '0.9rem', opacity: 0.5 }}>02</span>
           </Link>
 
           {/* Mobile Services Accordion */}
@@ -495,7 +473,7 @@ export const Header: React.FC = () => {
                   viewBox="0 0 12 8"
                   fill="none"
                   stroke="currentColor"
-                  strokeWidth="1.8"
+                  strokeWidth="1.6"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 >
@@ -511,7 +489,7 @@ export const Header: React.FC = () => {
                 onClick={closeAllMenus}
               >
                 <span className="mobile-sub-title">01 · Corporate Works</span>
-                <span className="mobile-sub-desc">Executive offices, headquarters & studios</span>
+                <span className="mobile-sub-desc">Executive offices, studios & collaborative suites</span>
               </Link>
 
               <Link
@@ -520,7 +498,7 @@ export const Header: React.FC = () => {
                 onClick={closeAllMenus}
               >
                 <span className="mobile-sub-title">02 · Residential Works</span>
-                <span className="mobile-sub-desc">Bespoke villas, apartments & residences</span>
+                <span className="mobile-sub-desc">Luxury villas, penthouses & private residences</span>
               </Link>
 
               <Link
@@ -544,12 +522,12 @@ export const Header: React.FC = () => {
           </div>
 
           <Link
-            to="/about"
-            className={`mobile-nav-link ${location.pathname === '/about' ? 'on' : ''}`}
+            to="/portfolio"
+            className={`mobile-nav-link ${isPortfolioActive ? 'on' : ''}`}
             onClick={closeAllMenus}
           >
-            <span>About Us</span>
-            <span style={{ fontSize: '1rem', opacity: 0.5 }}>04</span>
+            <span>Portfolio</span>
+            <span style={{ fontSize: '0.9rem', opacity: 0.5 }}>04</span>
           </Link>
 
           <Link
@@ -557,24 +535,23 @@ export const Header: React.FC = () => {
             className={`mobile-nav-link ${location.pathname === '/contact' ? 'on' : ''}`}
             onClick={closeAllMenus}
           >
-            <span>Contact</span>
-            <span style={{ fontSize: '1rem', opacity: 0.5 }}>05</span>
+            <span>Contact Us</span>
+            <span style={{ fontSize: '0.9rem', opacity: 0.5 }}>05</span>
           </Link>
         </div>
 
         {/* 3. Mobile Nav Drawer Bottom (Primary Action & Contact Details) */}
         <div className="mobile-nav-bottom">
-          <button
-            type="button"
+          <Link
+            to="/contact"
             className="mobile-nav-cta-btn"
-            onClick={() => {
-              closeMenu();
-              openInquiry('Start Your Project — Mobile Navigation');
-            }}
+            onClick={closeMenu}
           >
-            <span>Start Your Project</span>
-            <span>→</span>
-          </button>
+            <span>GET IN TOUCH</span>
+            <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor">
+              <path d="M1 7H13M13 7L7.5 1.5M13 7L7.5 12.5" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </Link>
 
           <div className="mobile-nav-meta-grid">
             <div className="mobile-meta-item">
@@ -626,35 +603,38 @@ export const Header: React.FC = () => {
         </div>
       </nav>
 
-      {/* Right Actions: Desktop CTA + Mobile Quick Consult + Burger */}
+      {/* Right Actions: Desktop Search + Desktop Gold CTA + Mobile Burger */}
       <div className="header-actions-wrap">
-        {/* Desktop CTA Button */}
+        {/* Search trigger button */}
         <button
           type="button"
-          className="header-desktop-cta"
-          onClick={() => {
-            closeMenu();
-            openInquiry();
-          }}
+          className="header-search-btn"
+          onClick={() => openInquiry('Project Inquiry & Search')}
+          aria-label="Search or enquire"
         >
-          <span>Book a Consult</span>
-          <svg width="14" height="10" viewBox="0 0 16 10" fill="none" stroke="currentColor">
-            <path d="M0 5h15M11 1l4 4-4 4" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          <svg fill="none" height="19" viewBox="0 0 24 24" width="19" stroke="currentColor">
+            <path
+              d="M21 21L16.65 16.65M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </svg>
         </button>
 
-        {/* Mobile Quick CTA in header bar */}
-        <button
-          type="button"
-          className="header-mobile-cta"
-          onClick={() => {
-            closeMenu();
-            openInquiry();
-          }}
-          aria-label="Start a project enquiry"
+        {/* Desktop Gold CTA Button */}
+        <Link
+          to="/contact"
+          className="header-desktop-cta"
+          onClick={closeMenu}
         >
-          <span>Start Project</span>
-        </button>
+          <span>GET IN TOUCH</span>
+          <span className="cta-arrow-circle" aria-hidden="true">
+            <svg width="11" height="11" viewBox="0 0 14 14" fill="none" stroke="currentColor">
+              <path d="M1 7H13M13 7L7.5 1.5M13 7L7.5 12.5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </span>
+        </Link>
 
         {/* Animated 3-Line Hamburger to X Menu Button */}
         <button
