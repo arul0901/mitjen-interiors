@@ -16,6 +16,7 @@
   user-select: none;
   -webkit-user-select: none;
   outline: none;
+  touch-action: pan-y;
 }
 
 @supports (height: 100svh) {
@@ -53,6 +54,7 @@
   transform: translateZ(0);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+  will-change: opacity;
 }
 
 .cs-showcase-bg-img.active {
@@ -168,7 +170,7 @@
 }
 
 /* ==========================================================================
-   NAVIGATION BAR & INDICATORS
+   NAVIGATION BAR & INDICATORS (Desktop Layout)
    ========================================================================== */
 
 .cs-showcase-nav {
@@ -184,15 +186,11 @@
 }
 
 /* Arrow controls */
-.cs-showcase-arrows {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
 .cs-showcase-arrow-btn {
   width: 44px;
   height: 44px;
+  min-width: 44px;
+  min-height: 44px;
   border-radius: 50%;
   border: 1px solid rgba(255, 255, 255, 0.22);
   background: rgba(18, 19, 18, 0.45);
@@ -205,6 +203,7 @@
   cursor: pointer;
   transition: all 0.25s ease;
   padding: 0;
+  flex-shrink: 0;
 }
 
 .cs-showcase-arrow-btn:hover {
@@ -295,10 +294,10 @@
 }
 
 /* ==========================================================================
-   MOBILE RESPONSIVE ADJUSTMENTS
+   TABLET RESPONSIVE ADJUSTMENTS (768px - 900px)
    ========================================================================== */
 
-@media (max-width: 900px) {
+@media (max-width: 900px) and (min-width: 768px) {
   .cs-showcase-indicator-label {
     display: none;
   }
@@ -313,67 +312,136 @@
   }
 }
 
-@media (max-width: 768px) {
+/* ==========================================================================
+   MOBILE-FIRST PRESENTATION (<768px)
+   Dedicated mobile layout, typography scale, 44x44 touch targets,
+   focal object positioning, and performance optimizations.
+   ========================================================================== */
+
+@media (max-width: 767px) {
+  .cs-showcase-root {
+    height: 82vh;
+    height: 82svh;
+    min-height: 520px;
+    max-height: 720px;
+  }
+
+  /* Deep multi-stop bottom legibility gradient for high contrast */
+  .cs-showcase-gradient-bottom {
+    height: 56%;
+    background: linear-gradient(
+      to top,
+      rgba(10, 11, 10, 0.94) 0%,
+      rgba(10, 11, 10, 0.72) 32%,
+      rgba(10, 11, 10, 0.28) 65%,
+      transparent 100%
+    );
+  }
+
+  /* Centered mobile content overlay */
   .cs-showcase-content {
     left: 5%;
     right: 5%;
     max-width: 90%;
     text-align: center;
     align-items: center;
-    bottom: clamp(86px, 14vh, 110px);
+    bottom: clamp(74px, 12vh, 92px);
   }
 
+  /* Eyebrow badge: 9.5px - 11px */
   .cs-showcase-eyebrow {
-    font-size: 0.6875rem;
-    padding: 4px 14px;
-    background: rgba(18, 19, 18, 0.55);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    font-size: clamp(9.5px, 2.6vw, 11px);
+    letter-spacing: 0.16em;
+    padding: 4px 12px;
+    gap: 6px;
+    background: rgba(18, 19, 18, 0.75);
     border-radius: 999px;
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.14);
     margin-bottom: 8px;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 
+  /* Main section title: 24px - 32px */
   .cs-showcase-title {
-    font-size: clamp(1.85rem, 8vw, 2.75rem);
-    line-height: 1.02;
+    font-size: clamp(24px, 6.5vw, 32px);
+    line-height: 1.05;
     margin-bottom: 8px;
     letter-spacing: -0.015em;
-    text-shadow: 0 3px 20px rgba(0, 0, 0, 0.95);
+    text-wrap: balance;
+    text-shadow: 0 3px 18px rgba(0, 0, 0, 0.95), 0 1px 3px rgba(0, 0, 0, 0.9);
   }
 
+  /* Supporting description: 12px - 14px */
   .cs-showcase-description {
-    font-size: clamp(0.8125rem, 3.4vw, 0.9375rem);
-    line-height: 1.4;
-    max-width: 340px;
-    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.95);
+    font-size: clamp(12px, 3.2vw, 14px);
+    line-height: 1.45;
+    max-width: min(340px, 86vw);
+    text-wrap: balance;
+    color: rgba(255, 255, 255, 0.92);
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.95);
   }
 
+  /* Mobile Navigation Row: Flanked arrow controls + 7 indicators */
   .cs-showcase-nav {
-    left: 4%;
-    right: 4%;
-    bottom: 20px;
-    justify-content: center;
-    gap: 12px;
-  }
-
-  .cs-showcase-arrows {
-    display: none; /* Swipe gestures prioritized on mobile */
-  }
-
-  .cs-showcase-indicators {
+    left: 12px;
+    right: 12px;
+    bottom: 16px;
     justify-content: center;
     gap: 8px;
-    max-width: 100%;
   }
 
+  /* 44x44px touch-target chevron buttons on mobile */
+  .cs-showcase-arrow-btn {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+    background: rgba(18, 19, 18, 0.75);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .cs-showcase-arrow-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* Compact 7 dash indicators */
+  .cs-showcase-indicators {
+    justify-content: center;
+    gap: 6px;
+    max-width: calc(100% - 104px);
+    flex: 1;
+  }
+
+  .cs-showcase-indicator-label {
+    display: none;
+  }
+
+  /* Touch target min 44px height via padding */
   .cs-showcase-indicator-btn {
-    min-width: 28px;
-    max-width: 44px;
-    padding: 12px 0;
+    min-width: 22px;
+    max-width: 36px;
+    height: 44px;
+    padding: 20px 0;
+    justify-content: center;
   }
 
   .cs-showcase-indicator-track {
     height: 3px;
+  }
+}
+
+/* Accessibility: prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .cs-showcase-bg-img,
+  .cs-showcase-content,
+  .cs-showcase-arrow-btn,
+  .cs-showcase-indicator-track,
+  .cs-showcase-indicator-bar {
+    transition: none !important;
+    animation: none !important;
   }
 }

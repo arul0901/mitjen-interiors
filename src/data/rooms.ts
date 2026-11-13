@@ -35,6 +35,9 @@ export interface ShowcaseSlide {
   title: string;
   description: string;
   image: string;
+  mobileImage?: string;
+  objectPosition?: string;
+  mobileObjectPosition?: string;
   alt: string;
 }
 
@@ -46,6 +49,8 @@ export const CINEMATIC_SHOWCASE_SLIDES: ShowcaseSlide[] = [
     title: "The Entrance Gallery",
     description: "A contemplative architectural entryway framed by board-formed concrete, seamless glazing, and tranquil desert light.",
     image: "/hero/poster.webp",
+    objectPosition: "center center",
+    mobileObjectPosition: "35% center",
     alt: "Architectural entryway with board-formed concrete walls and floor-to-ceiling glass",
   },
   {
@@ -55,6 +60,8 @@ export const CINEMATIC_SHOWCASE_SLIDES: ShowcaseSlide[] = [
     title: "The Living Pavilion",
     description: "Expansive floor-to-ceiling glass architecture framing desert horizons, anchored by tailored seating and balanced natural daylight.",
     image: "/hero/frames/f0036.webp",
+    objectPosition: "center center",
+    mobileObjectPosition: "50% 65%",
     alt: "Living pavilion with expansive glass walls, tailored lounge seating, and landscape artwork",
   },
   {
@@ -64,6 +71,8 @@ export const CINEMATIC_SHOWCASE_SLIDES: ShowcaseSlide[] = [
     title: "The Living Lounge",
     description: "Intimate low-slung seating, leather poufs, and tactile wood paneling crafted for quiet relaxation and restorative evenings.",
     image: "/images/projects/06-atelier.webp",
+    objectPosition: "center center",
+    mobileObjectPosition: "50% 75%",
     alt: "Architectural living lounge with modern sofa, leather seating, ribbon window, and brass lamp",
   },
   {
@@ -73,6 +82,8 @@ export const CINEMATIC_SHOWCASE_SLIDES: ShowcaseSlide[] = [
     title: "The Dining Room",
     description: "A sculptural solid oak dining table illuminated by custom linear lighting, crafted for memorable feasts and enduring gatherings.",
     image: "/hero/frames/f0071.webp",
+    objectPosition: "center center",
+    mobileObjectPosition: "50% 65%",
     alt: "Sculptural solid oak dining table and chairs with linear chandelier and architectural shelving",
   },
   {
@@ -82,6 +93,8 @@ export const CINEMATIC_SHOWCASE_SLIDES: ShowcaseSlide[] = [
     title: "The Culinary Studio",
     description: "Monolithic waterfall marble island counters, tailored oak cabinetry, and integrated chef-grade appliances for effortless culinary craft.",
     image: "/images/projects/05-clay-house.webp",
+    objectPosition: "center center",
+    mobileObjectPosition: "50% 72%",
     alt: "Contemporary culinary kitchen with waterfall marble island, oak cabinetry, and minimalist stools",
   },
   {
@@ -91,6 +104,8 @@ export const CINEMATIC_SHOWCASE_SLIDES: ShowcaseSlide[] = [
     title: "The Primary Suite",
     description: "A serene master bedroom sanctuary with an oak platform bed, integrated architectural lighting, and seamless views to the private courtyard.",
     image: "/hero/frames/f0176.webp",
+    objectPosition: "center center",
+    mobileObjectPosition: "60% 70%",
     alt: "Master bedroom suite with oak platform bed, linen bedding, and glass doors opening to courtyard garden",
   },
   {
@@ -100,6 +115,8 @@ export const CINEMATIC_SHOWCASE_SLIDES: ShowcaseSlide[] = [
     title: "The Bath",
     description: "A luxury wellness sanctuary featuring a freestanding carved stone soaking tub, dual travertine vanities, and meditative daylight.",
     image: "/hero/frames/f0240.webp",
+    objectPosition: "center center",
+    mobileObjectPosition: "72% 55%",
     alt: "Luxury bathroom with freestanding stone soaking tub, travertine vanity counter, and etched glass window",
   },
 ];

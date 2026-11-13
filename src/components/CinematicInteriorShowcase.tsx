@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useCallback, useMemo } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import { CINEMATIC_SHOWCASE_SLIDES, ShowcaseSlide } from "../data/rooms";
 import "../styles/CinematicInteriorShowcase.css";
 
@@ -31,6 +31,10 @@ export default function CinematicInteriorShowcase({
   // Autoplay indicator progress (0 .. 1)
   const [indicatorProgress, setIndicatorProgress] = useState<number>(0);
   const [isPaused, setIsPaused] = useState<boolean>(false);
+  const [isIntersecting, setIsIntersecting] = useState<boolean>(true);
+
+  // Mobile viewport detection
+  const [isMobile, setIsMobile] = useState<boolean>(false);
 
   // Container refs & tracking
   const containerRef = useRef<HTMLElement | null>(null);
@@ -44,12 +48,51 @@ export default function CinematicInteriorShowcase({
   const autoplayStartTimeRef = useRef<number>(Date.now());
   const pausedProgressRef = useRef<number>(0);
 
-  // Touch swipe refs
+  // Touch swipe refs (with horizontal vs vertical disambiguation)
   const touchStartXRef = useRef<number>(0);
   const touchStartYRef = useRef<number>(0);
   const touchDeltaXRef = useRef<number>(0);
+  const touchDeltaYRef = useRef<number>(0);
 
-  // 1. Preload adjacent slide images to eliminate loading stalls
+  // 1. Detect mobile viewport width (<768px)
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile, { passive: true });
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  // 2. Pause when section is offscreen via IntersectionObserver
+  useEffect(() => {
+    if (typeof window === "undefined" || !containerRef.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsIntersecting(entry.isIntersecting);
+      },
+      { threshold: 0.15 }
+    );
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  // 3. Pause when tab/window is hidden
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+    const handleVisibility = () => {
+      if (document.hidden) {
+        setIsPaused(true);
+      } else {
+        setIsPaused(false);
+      }
+    };
+    document.addEventListener("visibilitychange", handleVisibility);
+    return () => document.removeEventListener("visibilitychange", handleVisibility);
+  }, []);
+
+  // 4. Preload adjacent slide images to eliminate loading stalls
   useEffect(() => {
     if (typeof window === "undefined" || slides.length === 0) return;
     const nextIdx = (activeSlide + 1) % slides.length;
@@ -167,9 +210,9 @@ export default function CinematicInteriorShowcase({
     goToSlide(activeSlideRef.current - 1);
   }, [goToSlide]);
 
-  // Autoplay ticker loop with pause support
+  // Autoplay ticker loop with pause and offscreen awareness
   useEffect(() => {
-    if (stageRef.current !== "IDLE" || isPaused) {
+    if (stageRef.current !== "IDLE" || isPaused || !isIntersecting) {
       if (autoplayRafRef.current) {
         cancelAnimationFrame(autoplayRafRef.current);
         autoplayRafRef.current = null;
@@ -198,7 +241,7 @@ export default function CinematicInteriorShowcase({
         cancelAnimationFrame(autoplayRafRef.current);
       }
     };
-  }, [isPaused, activeSlide, autoplayInterval, nextSlide]);
+  }, [isPaused, isIntersecting, activeSlide, autoplayInterval, nextSlide]);
 
   // Keyboard navigation (local + global window listener when not focusing form inputs)
   useEffect(() => {
@@ -230,28 +273,44 @@ export default function CinematicInteriorShowcase({
     [prevSlide, nextSlide]
   );
 
-  // Touch swipe handling
+  // Touch swipe handling with horizontal vs vertical gesture disambiguation
   const handleTouchStart = (e: React.TouchEvent) => {
     const touch = e.touches[0];
     touchStartXRef.current = touch.clientX;
     touchStartYRef.current = touch.clientY;
     touchDeltaXRef.current = 0;
+    touchDeltaYRef.current = 0;
     setIsPaused(true);
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
     const touch = e.touches[0];
     touchDeltaXRef.current = touch.clientX - touchStartXRef.current;
+    touchDeltaYRef.current = touch.clientY - touchStartYRef.current;
   };
 
   const handleTouchEnd = () => {
     setIsPaused(false);
-    const threshold = 45; // 45px swipe threshold
-    if (touchDeltaXRef.current < -threshold) {
-      nextSlide();
-    } else if (touchDeltaXRef.current > threshold) {
-      prevSlide();
+    const dx = touchDeltaXRef.current;
+    const dy = touchDeltaYRef.current;
+    const isHorizontal = Math.abs(dx) > Math.abs(dy);
+    const threshold = 40; // 40px swipe threshold
+
+    if (isHorizontal && Math.abs(dx) > threshold) {
+      if (dx < 0) {
+        nextSlide();
+      } else {
+        prevSlide();
+      }
     }
+  };
+
+  // Resolve responsive object-position (art-directed mobile focus)
+  const getObjectPosition = (slide: ShowcaseSlide): string => {
+    if (isMobile && slide.mobileObjectPosition) {
+      return slide.mobileObjectPosition;
+    }
+    return slide.objectPosition || "center center";
   };
 
   // Active content reference
@@ -275,7 +334,7 @@ export default function CinematicInteriorShowcase({
     >
       <div className="cs-showcase-viewport">
         {/* ===================================================================
-            BACKGROUND IMAGE LAYERS (Crossfade synchronisation)
+            BACKGROUND IMAGE LAYERS (Crossfade synchronisation & Art-directed positioning)
             =================================================================== */}
         <div className="cs-showcase-bg-layer" aria-hidden="true">
           {/* Active authoritative slide background image */}
@@ -284,7 +343,10 @@ export default function CinematicInteriorShowcase({
             src={currentSlideData.image}
             alt={currentSlideData.alt}
             className="cs-showcase-bg-img active"
-            style={{ opacity: 1 }}
+            style={{
+              opacity: 1,
+              objectPosition: getObjectPosition(currentSlideData),
+            }}
           />
 
           {/* Incoming slide background image during active crossfade */}
@@ -296,6 +358,7 @@ export default function CinematicInteriorShowcase({
               className="cs-showcase-bg-img incoming"
               style={{
                 opacity: incomingOpacity,
+                objectPosition: getObjectPosition(incomingSlideData),
                 transition: "opacity 0.9s cubic-bezier(0.25, 1, 0.5, 1)",
               }}
             />
@@ -339,32 +402,20 @@ export default function CinematicInteriorShowcase({
         </div>
 
         {/* ===================================================================
-            BOTTOM NAVIGATION & INDICATORS
+            BOTTOM NAVIGATION & INDICATORS (Desktop & Mobile Friendly)
             =================================================================== */}
         <div className="cs-showcase-nav">
-          {/* Arrow navigation buttons */}
-          <div className="cs-showcase-arrows" aria-label="Slide navigation arrows">
-            <button
-              type="button"
-              className="cs-showcase-arrow-btn"
-              onClick={prevSlide}
-              aria-label="Previous interior space"
-            >
-              <svg viewBox="0 0 24 24">
-                <path d="M15 18l-6-6 6-6" />
-              </svg>
-            </button>
-            <button
-              type="button"
-              className="cs-showcase-arrow-btn"
-              onClick={nextSlide}
-              aria-label="Next interior space"
-            >
-              <svg viewBox="0 0 24 24">
-                <path d="M9 18l6-6-6-6" />
-              </svg>
-            </button>
-          </div>
+          {/* Mobile Previous Button (Min 44x44px touch target) */}
+          <button
+            type="button"
+            className="cs-showcase-arrow-btn cs-showcase-prev-btn"
+            onClick={prevSlide}
+            aria-label="Previous interior space"
+          >
+            <svg viewBox="0 0 24 24">
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
+          </button>
 
           {/* 7 Slide Indicators */}
           <div
@@ -401,6 +452,18 @@ export default function CinematicInteriorShowcase({
               );
             })}
           </div>
+
+          {/* Mobile Next Button (Min 44x44px touch target) */}
+          <button
+            type="button"
+            className="cs-showcase-arrow-btn cs-showcase-next-btn"
+            onClick={nextSlide}
+            aria-label="Next interior space"
+          >
+            <svg viewBox="0 0 24 24">
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+          </button>
         </div>
       </div>
     </section>
