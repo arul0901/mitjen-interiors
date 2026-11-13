@@ -3,8 +3,11 @@ import { WALKTHROUGH_ROOMS, WalkthroughRoom } from "../data/rooms";
 import { useScrollScrubVideo } from "../hooks/useScrollScrubVideo";
 import { useFrameSequence } from "../hooks/useFrameSequence";
 import "../styles/VideoWalkthroughHero.css";
+import CinematicInteriorShowcase from "./CinematicInteriorShowcase";
 
-export default function VideoWalkthroughHero() {
+export { CinematicInteriorShowcase };
+
+export function ScrollWalkthroughVideoHero() {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -287,3 +290,5 @@ export default function VideoWalkthroughHero() {
     </section>
   );
 }
+
+export default CinematicInteriorShowcase;

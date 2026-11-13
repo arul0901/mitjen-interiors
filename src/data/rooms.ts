@@ -28,6 +28,82 @@ export interface RoomData {
   alt: string;
 }
 
+export interface ShowcaseSlide {
+  id: string;
+  number: string;
+  eyebrow: string;
+  title: string;
+  description: string;
+  image: string;
+  alt: string;
+}
+
+export const CINEMATIC_SHOWCASE_SLIDES: ShowcaseSlide[] = [
+  {
+    id: "entrance-gallery",
+    number: "01",
+    eyebrow: "Arrival Gallery",
+    title: "The Entrance Gallery",
+    description: "A contemplative architectural entryway framed by board-formed concrete, seamless glazing, and tranquil desert light.",
+    image: "/hero/poster.webp",
+    alt: "Architectural entryway with board-formed concrete walls and floor-to-ceiling glass",
+  },
+  {
+    id: "living-pavilion",
+    number: "02",
+    eyebrow: "Living Pavilion",
+    title: "The Living Pavilion",
+    description: "Expansive floor-to-ceiling glass architecture framing desert horizons, anchored by tailored seating and balanced natural daylight.",
+    image: "/hero/frames/f0036.webp",
+    alt: "Living pavilion with expansive glass walls, tailored lounge seating, and landscape artwork",
+  },
+  {
+    id: "living-lounge",
+    number: "03",
+    eyebrow: "Lounge & Salon",
+    title: "The Living Lounge",
+    description: "Intimate low-slung seating, leather poufs, and tactile wood paneling crafted for quiet relaxation and restorative evenings.",
+    image: "/images/projects/06-atelier.webp",
+    alt: "Architectural living lounge with modern sofa, leather seating, ribbon window, and brass lamp",
+  },
+  {
+    id: "dining-room",
+    number: "04",
+    eyebrow: "Dining Salon",
+    title: "The Dining Room",
+    description: "A sculptural solid oak dining table illuminated by custom linear lighting, crafted for memorable feasts and enduring gatherings.",
+    image: "/hero/frames/f0071.webp",
+    alt: "Sculptural solid oak dining table and chairs with linear chandelier and architectural shelving",
+  },
+  {
+    id: "culinary-studio",
+    number: "05",
+    eyebrow: "Culinary Studio",
+    title: "The Culinary Studio",
+    description: "Monolithic waterfall marble island counters, tailored oak cabinetry, and integrated chef-grade appliances for effortless culinary craft.",
+    image: "/images/projects/05-clay-house.webp",
+    alt: "Contemporary culinary kitchen with waterfall marble island, oak cabinetry, and minimalist stools",
+  },
+  {
+    id: "primary-suite",
+    number: "06",
+    eyebrow: "Primary Suite",
+    title: "The Primary Suite",
+    description: "A serene master bedroom sanctuary with an oak platform bed, integrated architectural lighting, and seamless views to the private courtyard.",
+    image: "/hero/frames/f0176.webp",
+    alt: "Master bedroom suite with oak platform bed, linen bedding, and glass doors opening to courtyard garden",
+  },
+  {
+    id: "bath",
+    number: "07",
+    eyebrow: "Stone Sanctuary",
+    title: "The Bath",
+    description: "A luxury wellness sanctuary featuring a freestanding carved stone soaking tub, dual travertine vanities, and meditative daylight.",
+    image: "/hero/frames/f0240.webp",
+    alt: "Luxury bathroom with freestanding stone soaking tub, travertine vanity counter, and etched glass window",
+  },
+];
+
 export interface WalkthroughRoom {
   id: string;
   number: string;

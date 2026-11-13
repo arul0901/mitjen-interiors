@@ -5,7 +5,7 @@ import AboutSection from "../components/sections/About";
 import ServiceCards from "../components/sections/ServiceCards";
 import WhyChooseSection from "../components/sections/WhyChoose";
 import TestimonialsSection from "../components/sections/Testimonials";
-import VideoWalkthroughHero from "../components/VideoWalkthroughHero";
+import CinematicInteriorShowcase from "../components/CinematicInteriorShowcase";
 
 // Feature flag: set to true to restore legacy text-marquee or legacy hero banner
 const SHOW_LEGACY_MARQUEE = false;
@@ -111,7 +111,7 @@ export default function Home() {
 </div>
 </div>
 )}
-<VideoWalkthroughHero />
+<CinematicInteriorShowcase />
 <AboutSection />
 <ServiceCards />
 <section className={"cs_exceptional_living_section"} aria-label={"Our Services - The Art of Exceptional Living"}>
