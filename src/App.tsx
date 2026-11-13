@@ -1,5 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { InquiryProvider } from "./context/InquiryContext";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
@@ -73,53 +74,55 @@ function NotFound() {
  */
 export default function App() {
   return (
-    <BrowserRouter>
-      <LegacyPageEffects />
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/services/details" element={<ServiceDetails />} />
-        <Route path="/portfolio" element={<Portfolio />} />
-        <Route path="/portfolio/details" element={<PortfolioDetails />} />
-        <Route path="/team" element={<Team />} />
-        <Route path="/team/details" element={<TeamDetails />} />
-        <Route path="/blog" element={<Blog />} />
-        <Route path="/blog/details" element={<BlogDetails />} />
-        <Route path="/pricing" element={<Pricing />} />
-        <Route path="/faq" element={<FAQ />} />
-        <Route path="/contact" element={<Contact />} />
+    <InquiryProvider>
+      <BrowserRouter>
+        <LegacyPageEffects />
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/services/details" element={<ServiceDetails />} />
+          <Route path="/portfolio" element={<Portfolio />} />
+          <Route path="/portfolio/details" element={<PortfolioDetails />} />
+          <Route path="/team" element={<Team />} />
+          <Route path="/team/details" element={<TeamDetails />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/details" element={<BlogDetails />} />
+          <Route path="/pricing" element={<Pricing />} />
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="/contact" element={<Contact />} />
 
-        {/* Preserve the original static/PHP URLs for bookmarks and shared links. */}
-        <Route path="/index.php" element={<Navigate to="/" replace />} />
-        <Route path="/index.html" element={<Navigate to="/" replace />} />
-        <Route path="/about.php" element={<Navigate to="/about" replace />} />
-        <Route path="/about-us" element={<Navigate to="/about" replace />} />
-        <Route path="/about-us.html" element={<Navigate to="/about" replace />} />
-        <Route path="/services.html" element={<Navigate to="/services" replace />} />
-        <Route path="/services.php" element={<Navigate to="/services" replace />} />
-        <Route path="/service.php" element={<Navigate to="/services/details" replace />} />
-        <Route path="/service-details" element={<Navigate to="/services/details" replace />} />
-        <Route path="/service-details.html" element={<Navigate to="/services/details" replace />} />
-        <Route path="/project.php" element={<Navigate to="/portfolio" replace />} />
-        <Route path="/portfolio.html" element={<Navigate to="/portfolio" replace />} />
-        <Route path="/portfolio-details" element={<Navigate to="/portfolio/details" replace />} />
-        <Route path="/portfolio-details.html" element={<Navigate to="/portfolio/details" replace />} />
-        <Route path="/team.html" element={<Navigate to="/team" replace />} />
-        <Route path="/team-details" element={<Navigate to="/team/details" replace />} />
-        <Route path="/team-details.html" element={<Navigate to="/team/details" replace />} />
-        <Route path="/blog.html" element={<Navigate to="/blog" replace />} />
-        <Route path="/blog-details" element={<Navigate to="/blog/details" replace />} />
-        <Route path="/blog-details.html" element={<Navigate to="/blog/details" replace />} />
-        <Route path="/pricing.html" element={<Navigate to="/pricing" replace />} />
-        <Route path="/faq.html" element={<Navigate to="/faq" replace />} />
-        <Route path="/contact.php" element={<Navigate to="/contact" replace />} />
-        <Route path="/contact-us" element={<Navigate to="/contact" replace />} />
-        <Route path="/contact-us.html" element={<Navigate to="/contact" replace />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-      <Footer />
-    </BrowserRouter>
+          {/* Preserve the original static/PHP URLs for bookmarks and shared links. */}
+          <Route path="/index.php" element={<Navigate to="/" replace />} />
+          <Route path="/index.html" element={<Navigate to="/" replace />} />
+          <Route path="/about.php" element={<Navigate to="/about" replace />} />
+          <Route path="/about-us" element={<Navigate to="/about" replace />} />
+          <Route path="/about-us.html" element={<Navigate to="/about" replace />} />
+          <Route path="/services.html" element={<Navigate to="/services" replace />} />
+          <Route path="/services.php" element={<Navigate to="/services" replace />} />
+          <Route path="/service.php" element={<Navigate to="/services/details" replace />} />
+          <Route path="/service-details" element={<Navigate to="/services/details" replace />} />
+          <Route path="/service-details.html" element={<Navigate to="/services/details" replace />} />
+          <Route path="/project.php" element={<Navigate to="/portfolio" replace />} />
+          <Route path="/portfolio.html" element={<Navigate to="/portfolio" replace />} />
+          <Route path="/portfolio-details" element={<Navigate to="/portfolio/details" replace />} />
+          <Route path="/portfolio-details.html" element={<Navigate to="/portfolio/details" replace />} />
+          <Route path="/team.html" element={<Navigate to="/team" replace />} />
+          <Route path="/team-details" element={<Navigate to="/team/details" replace />} />
+          <Route path="/team-details.html" element={<Navigate to="/team/details" replace />} />
+          <Route path="/blog.html" element={<Navigate to="/blog" replace />} />
+          <Route path="/blog-details" element={<Navigate to="/blog/details" replace />} />
+          <Route path="/blog-details.html" element={<Navigate to="/blog/details" replace />} />
+          <Route path="/pricing.html" element={<Navigate to="/pricing" replace />} />
+          <Route path="/faq.html" element={<Navigate to="/faq" replace />} />
+          <Route path="/contact.php" element={<Navigate to="/contact" replace />} />
+          <Route path="/contact-us" element={<Navigate to="/contact" replace />} />
+          <Route path="/contact-us.html" element={<Navigate to="/contact" replace />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+        <Footer />
+      </BrowserRouter>
+    </InquiryProvider>
   );
 }
