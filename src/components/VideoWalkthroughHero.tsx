@@ -89,12 +89,11 @@ export default function VideoWalkthroughHero() {
     progress,
   });
 
-  // Scroll to enter hint opacity
+  // Scroll to enter hint opacity (fades out as user scrolls 0 -> 0.04)
   const hintOpacity = useMemo(() => {
-    if (hasScrolledPastHint) return 0;
     if (progress > 0.04) return 0;
     return Math.max(0, 1 - progress / 0.04);
-  }, [progress, hasScrolledPastHint]);
+  }, [progress]);
 
   // Compute transform & opacity for room titles
   const getRoomStyle = (room: WalkthroughRoom) => {
