@@ -3,6 +3,7 @@ import BeforeAfterTransformation from "../components/BeforeAfterTransformation";
 import PanoramaViewer from "../components/PanoramaViewer";
 import AboutSection from "../components/sections/About";
 import ServiceCards from "../components/sections/ServiceCards";
+import TestimonialsSection from "../components/sections/Testimonials";
 
 export default function Home() {
   useEffect(() => {
@@ -498,130 +499,7 @@ export default function Home() {
 </div>
 </div>
 </section>
-<section className={"cs_testimonial_style_4 position-relative"}>
-<div className={"cs_height_120 cs_height_lg_80"}></div>
-<div className={"container"}>
-<div className={"row cs_gap_y_40"}>
-<div className={"col-lg-5 col-xl-6"}>
-<div className={"cs_testimonial_left cs_white_bg position-relative z-2"}>
-<div className={"cs_section_heading_style_1 cs_mb_10"}>
-<p className={"cs_section_subtitle cs_bold cs_accent_color cs_mb_20 text-uppercase"}>TESTIMONIALS</p>
-<h2 className={"cs_section_title cs_fs_53 cs_semibold cs_mb_30"}>STORIES FROM CLIENTS</h2>
-<p className={"mb-0"}>Architecture is the art and science of designing buildings and spaces that balance
-                  beauty, environment by combining creative vision with technical expertise.</p>
-</div>
-<div className={"cs_arrow_shape"}>
-<svg width={"626"} height={"197"} viewBox={"0 0 626 197"} fill={"none"} xmlns={"http://www.w3.org/2000/svg"}>
-<path opacity={"0.3"} d={"M625.713 5.77344L615.713 -6.53267e-05V11.5469L625.713 5.77344ZM1 5.77344H0V185.89H1H2V5.77344H1ZM11 195.89V196.89H399.888V195.89V194.89H11V195.89ZM409.888 185.89H410.888V15.7734H409.888H408.888V185.89H409.888ZM419.888 5.77344V6.77344H616.713V5.77344V4.77344H419.888V5.77344ZM409.888 15.7734H410.888C410.888 10.8029 414.917 6.77344 419.888 6.77344V5.77344V4.77344C413.813 4.77344 408.888 9.69831 408.888 15.7734H409.888ZM399.888 195.89V196.89C405.963 196.89 410.888 191.965 410.888 185.89H409.888H408.888C408.888 190.86 404.858 194.89 399.888 194.89V195.89ZM1 185.89H0C0 191.965 4.92487 196.89 11 196.89V195.89V194.89C6.02944 194.89 2 190.86 2 185.89H1Z"} fill={"#D9D9D9"}></path>
-</svg>
-</div>
-</div>
-</div>
-<div className={"col-lg-7 col-xl-6"}>
-<div className={"cs_testimonial_right cs_overflow_visible z-1"}>
-<div className={"swiper"} data-autoplay={"0"} data-loop={"0"} data-center={"0"} data-speed={"800"} data-variable-width={"0"} data-slides-per-view={"responsive"} data-gap={"24"} data-effect={"slide"} data-mobile-sm={"1"} data-mobile={"1"} data-tablet-sm={"1"} data-tablet={"2"} data-laptop={"2"} data-desktop={"2"} data-desktop-lg={"2"}>
-<div className={"swiper-wrapper"}>
-<div className={"swiper-slide"}>
-<div className={"cs_client_review cs_gray_bg cs_radius_10"}>
-<div className={"cs_testimonial_rating cs_mb_20"} aria-label={"5 out of 5 stars rating"}>
-<div className={"cs_rating_stars"}>
-<svg width={"18"} height={"18"} viewBox={"0 0 24 24"} fill={"currentColor"} xmlns={"http://www.w3.org/2000/svg"} aria-hidden={"true"}><path d={"M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z"}></path></svg>
-<svg width={"18"} height={"18"} viewBox={"0 0 24 24"} fill={"currentColor"} xmlns={"http://www.w3.org/2000/svg"} aria-hidden={"true"}><path d={"M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z"}></path></svg>
-<svg width={"18"} height={"18"} viewBox={"0 0 24 24"} fill={"currentColor"} xmlns={"http://www.w3.org/2000/svg"} aria-hidden={"true"}><path d={"M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z"}></path></svg>
-<svg width={"18"} height={"18"} viewBox={"0 0 24 24"} fill={"currentColor"} xmlns={"http://www.w3.org/2000/svg"} aria-hidden={"true"}><path d={"M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z"}></path></svg>
-<svg width={"18"} height={"18"} viewBox={"0 0 24 24"} fill={"currentColor"} xmlns={"http://www.w3.org/2000/svg"} aria-hidden={"true"}><path d={"M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z"}></path></svg>
-</div>
-</div>
-<p className={"cs_client_comment mb-0"}>Commercial complexes and urban landmarks, architecture focuses
-                        Is on structural integrity, efficient use of space, and aesthetic.</p>
-<div className={"mt-auto"}>
-<hr className={"cs_mb_30 mt-0"} />
-<div className={"cs_avatar_style_1"}>
-<span className={"cs_avatar_icon cs_radius_5"}>
-<img src={"/assets/img/avatar-3.webp"} alt={"Avatar"} />
-</span>
-<div className={"cs_avatar_info"}>
-<h3 className={"cs_avatar_title cs_fs_18 cs_bold cs_mb_7 text-uppercase"}>ESTHER HOWARD</h3>
-<p className={"cs_avatar_sibtitle cs_fs_14 mb-0 text-uppercase"}>FOUNDER & CEO</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div className={"swiper-slide"}>
-<div className={"cs_client_review cs_gray_bg cs_radius_10"}>
-<div className={"cs_testimonial_rating cs_mb_20"} aria-label={"5 out of 5 stars rating"}>
-<div className={"cs_rating_stars"}>
-<svg width={"18"} height={"18"} viewBox={"0 0 24 24"} fill={"currentColor"} xmlns={"http://www.w3.org/2000/svg"} aria-hidden={"true"}><path d={"M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z"}></path></svg>
-<svg width={"18"} height={"18"} viewBox={"0 0 24 24"} fill={"currentColor"} xmlns={"http://www.w3.org/2000/svg"} aria-hidden={"true"}><path d={"M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z"}></path></svg>
-<svg width={"18"} height={"18"} viewBox={"0 0 24 24"} fill={"currentColor"} xmlns={"http://www.w3.org/2000/svg"} aria-hidden={"true"}><path d={"M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z"}></path></svg>
-<svg width={"18"} height={"18"} viewBox={"0 0 24 24"} fill={"currentColor"} xmlns={"http://www.w3.org/2000/svg"} aria-hidden={"true"}><path d={"M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z"}></path></svg>
-<svg width={"18"} height={"18"} viewBox={"0 0 24 24"} fill={"currentColor"} xmlns={"http://www.w3.org/2000/svg"} aria-hidden={"true"}><path d={"M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z"}></path></svg>
-</div>
-</div>
-<p className={"cs_client_comment mb-0"}>Commercial complexes and urban landmarks, architecture focuses
-                        Is on structural integrity, efficient use of space, and aesthetic.</p>
-<div className={"mt-auto"}>
-<hr className={"cs_mb_30 mt-0"} />
-<div className={"cs_avatar_style_1"}>
-<span className={"cs_avatar_icon cs_radius_5"}>
-<img src={"/assets/img/avatar-4.webp"} alt={"Avatar"} />
-</span>
-<div className={"cs_avatar_info"}>
-<h3 className={"cs_avatar_title cs_fs_18 cs_bold cs_mb_7 text-uppercase"}>ASTER HOWARD</h3>
-<p className={"cs_avatar_sibtitle cs_fs_14 mb-0 text-uppercase"}>FOUNDER & CEO</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div className={"swiper-slide"}>
-<div className={"cs_client_review cs_gray_bg cs_radius_10"}>
-<div className={"cs_testimonial_rating cs_mb_20"} aria-label={"5 out of 5 stars rating"}>
-<div className={"cs_rating_stars"}>
-<svg width={"18"} height={"18"} viewBox={"0 0 24 24"} fill={"currentColor"} xmlns={"http://www.w3.org/2000/svg"} aria-hidden={"true"}><path d={"M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z"}></path></svg>
-<svg width={"18"} height={"18"} viewBox={"0 0 24 24"} fill={"currentColor"} xmlns={"http://www.w3.org/2000/svg"} aria-hidden={"true"}><path d={"M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z"}></path></svg>
-<svg width={"18"} height={"18"} viewBox={"0 0 24 24"} fill={"currentColor"} xmlns={"http://www.w3.org/2000/svg"} aria-hidden={"true"}><path d={"M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z"}></path></svg>
-<svg width={"18"} height={"18"} viewBox={"0 0 24 24"} fill={"currentColor"} xmlns={"http://www.w3.org/2000/svg"} aria-hidden={"true"}><path d={"M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z"}></path></svg>
-<svg width={"18"} height={"18"} viewBox={"0 0 24 24"} fill={"currentColor"} xmlns={"http://www.w3.org/2000/svg"} aria-hidden={"true"}><path d={"M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z"}></path></svg>
-</div>
-</div>
-<p className={"cs_client_comment mb-0"}>Commercial complexes and urban landmarks, architecture focuses
-                        Is on structural integrity, efficient use of space, and aesthetic.</p>
-<div className={"mt-auto"}>
-<hr className={"cs_mb_30 mt-0"} />
-<div className={"cs_avatar_style_1"}>
-<span className={"cs_avatar_icon cs_radius_5"}>
-<img src={"/assets/img/avatar-3.webp"} alt={"Avatar"} />
-</span>
-<div className={"cs_avatar_info"}>
-<h3 className={"cs_avatar_title cs_fs_18 cs_bold cs_mb_7 text-uppercase"}>JOHN PHILIPE</h3>
-<p className={"cs_avatar_sibtitle cs_fs_14 mb-0 text-uppercase"}>FOUNDER & CEO</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div className={"cs_height_0 cs_height_lg_40"}></div>
-<div className={"cs_swiper_arrow_style_1"}>
-<div className={"slider-prev cs_center cs_radius_100"} aria-label={"Previous testimonial"}>
-<svg width={"16"} height={"16"} viewBox={"0 0 16 16"} fill={"none"} xmlns={"http://www.w3.org/2000/svg"} aria-hidden={"true"}>
-<path d={"M15 8H1M1 8L8 1M1 8L8 15"} stroke={"currentColor"} strokeWidth={"1.8"} strokeLinecap={"round"} strokeLinejoin={"round"}></path>
-</svg>
-</div>
-<div className={"slider-next cs_center cs_radius_100"} aria-label={"Next testimonial"}>
-<svg width={"16"} height={"16"} viewBox={"0 0 16 16"} fill={"none"} xmlns={"http://www.w3.org/2000/svg"} aria-hidden={"true"}>
-<path d={"M1 8H15M15 8L8 1M15 8L8 15"} stroke={"currentColor"} strokeWidth={"1.8"} strokeLinecap={"round"} strokeLinejoin={"round"}></path>
-</svg>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
+<TestimonialsSection />
 <div className={"cs_height_50 cs_height_lg_80"}></div>
 <section className={"cs_cta_style_2 cs_primary_bg cs_bg_fixed position-relative"} data-src={"/assets/img/cta-bg2.webp"} aria-label={"Call to action - Unlock your dream home today"}>
 <div className={"cs_cta_overlay position-absolute"} aria-hidden={"true"}></div>
