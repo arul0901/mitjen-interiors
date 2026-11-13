@@ -32,7 +32,6 @@ export const ServiceCards: React.FC = () => {
                 <div className="bespoke-service-card-content">
                   <h3 className="bespoke-service-card-title">
                     <span>{service.titleLines[0]}</span>
-                    <br />
                     <span>{service.titleLines[1]}</span>
                   </h3>
 

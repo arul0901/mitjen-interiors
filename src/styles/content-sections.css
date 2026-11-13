@@ -521,6 +521,10 @@
   margin: 0 0 8px 0;
 }
 
+.bespoke-service-card-title span {
+  display: block;
+}
+
 @media (max-width: 640px) {
   .bespoke-service-card-title {
     font-size: 1.35rem;

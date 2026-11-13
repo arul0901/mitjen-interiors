@@ -36,3 +36,4 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
 };
 
 export default SectionHeading;
+
