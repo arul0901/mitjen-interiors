@@ -56,7 +56,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  font-family: var(--font-architectural, 'Space Grotesk', sans-serif);
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
   font-size: 0.65rem;
   font-weight: 600;
   letter-spacing: 0.22em;
@@ -75,7 +75,7 @@
 }
 
 .corporate-desk-heading {
-  font-family: var(--font-heading, 'Cormorant Garamond', Georgia, serif);
+  font-family: var(--font-heading, 'Cormorant Garamond', serif);
   font-size: clamp(2.2rem, 3.4vw, 3.2rem);
   font-weight: 400;
   line-height: 1.1;
@@ -93,7 +93,7 @@
 
 .corporate-desk-lead {
   margin: 0;
-  font-family: var(--font-content, 'Manrope', sans-serif);
+  font-family: var(--font-body, 'DM Sans', sans-serif);
   font-size: clamp(0.92rem, 1.1vw, 1.02rem);
   line-height: 1.68;
   color: rgba(36, 37, 34, 0.78);
@@ -165,6 +165,14 @@
 }
 
 /* Default corner badge on image that gracefully hides on hover */
+
+.corporate-desk-media-badge .badge-num {
+  font-family: var(--font-special, 'Bebas Neue', sans-serif) !important;
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+}
+
 .corporate-desk-media-badge {
   position: absolute;
   bottom: 14px;
@@ -177,7 +185,7 @@
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   color: #FAF8F5;
-  font-family: var(--font-architectural, 'Space Grotesk', sans-serif);
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
   font-size: 0.62rem;
   font-weight: 600;
   letter-spacing: 0.16em;
@@ -194,7 +202,15 @@
 }
 
 .corporate-desk-card:hover .corporate-desk-media-badge,
-.corporate-desk-card:focus-within .corporate-desk-media-badge {
+.corporate-desk-card:focus-within 
+.corporate-desk-media-badge .badge-num {
+  font-family: var(--font-special, 'Bebas Neue', sans-serif) !important;
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+}
+
+.corporate-desk-media-badge {
   opacity: 0;
   transform: translateY(6px);
 }
@@ -243,7 +259,7 @@
 
 .corporate-desk-tag {
   display: block;
-  font-family: var(--font-architectural, 'Space Grotesk', sans-serif);
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
   font-size: 0.62rem;
   font-weight: 600;
   letter-spacing: 0.16em;
@@ -253,7 +269,7 @@
 }
 
 .corporate-desk-card-title {
-  font-family: var(--font-heading, 'Cormorant Garamond', Georgia, serif);
+  font-family: var(--font-heading, 'Cormorant Garamond', serif);
   font-size: clamp(1.35rem, 1.7vw, 1.75rem);
   font-weight: 400;
   line-height: 1.15;
@@ -264,7 +280,7 @@
 
 .corporate-desk-card-desc {
   margin: 0 0 0.95rem 0;
-  font-family: var(--font-content, 'Manrope', sans-serif);
+  font-family: var(--font-body, 'DM Sans', sans-serif);
   font-size: 0.88rem;
   line-height: 1.62;
   color: rgba(36, 37, 34, 0.82);
@@ -272,7 +288,7 @@
 }
 
 .corporate-desk-materials {
-  font-family: var(--font-content, 'Manrope', sans-serif);
+  font-family: var(--font-body, 'DM Sans', sans-serif);
   font-size: 0.76rem;
   line-height: 1.6;
   color: rgba(36, 37, 34, 0.72);
@@ -280,7 +296,7 @@
 
 .corporate-desk-materials-label {
   display: block;
-  font-family: var(--font-architectural, 'Space Grotesk', sans-serif);
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
   font-size: 0.58rem;
   font-weight: 600;
   letter-spacing: 0.16em;
@@ -312,7 +328,7 @@
 }
 
 .corporate-desk-cta-heading {
-  font-family: var(--font-heading, 'Cormorant Garamond', Georgia, serif);
+  font-family: var(--font-heading, 'Cormorant Garamond', serif);
   font-size: clamp(1.4rem, 1.8vw, 1.85rem);
   font-weight: 400;
   line-height: 1.15;
@@ -323,7 +339,7 @@
 
 .corporate-desk-cta-desc {
   margin: 0.35rem 0 0 0;
-  font-family: var(--font-content, 'Manrope', sans-serif);
+  font-family: var(--font-body, 'DM Sans', sans-serif);
   font-size: 0.88rem;
   color: rgba(36, 37, 34, 0.85);
   line-height: 1.55;
@@ -337,7 +353,7 @@
   border: 1px solid #151613;
   border-radius: 999px;
   padding: 0.95rem 1.8rem;
-  font-family: var(--font-architectural, 'Space Grotesk', sans-serif);
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
   font-size: 0.70rem;
   font-weight: 600;
   letter-spacing: 0.14em;
@@ -434,7 +450,7 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    font-family: var(--font-architectural, 'Space Grotesk', sans-serif);
+    font-family: var(--font-subheading, 'Manrope', sans-serif);
     font-size: 0.70rem;
     font-weight: 600;
     letter-spacing: 0.20em;
@@ -451,7 +467,7 @@
   }
 
   .corporate-mobile-heading {
-    font-family: var(--font-heading, 'Cormorant Garamond', Georgia, serif);
+    font-family: var(--font-heading, 'Cormorant Garamond', serif);
     font-size: clamp(2.1rem, 7.8vw, 2.75rem);
     font-weight: 400;
     line-height: 1.1;
@@ -462,7 +478,7 @@
   }
 
   .corporate-mobile-intro-desc {
-    font-family: var(--font-content, 'Manrope', sans-serif);
+    font-family: var(--font-body, 'DM Sans', sans-serif);
     font-size: 0.90rem;
     line-height: 1.6;
     color: #4A4D46;
@@ -569,7 +585,7 @@
   }
 
   .corporate-mobile-card-badge {
-    font-family: var(--font-architectural, 'Space Grotesk', sans-serif);
+    font-family: var(--font-subheading, 'Manrope', sans-serif);
     font-size: 0.68rem;
     font-weight: 600;
     letter-spacing: 0.16em;
@@ -595,7 +611,7 @@
   }
 
   .corporate-mobile-card-title {
-    font-family: var(--font-heading, 'Cormorant Garamond', Georgia, serif);
+    font-family: var(--font-heading, 'Cormorant Garamond', serif);
     font-size: clamp(1.35rem, 5.2vw, 1.65rem);
     font-weight: 400;
     line-height: 1.2;
@@ -625,7 +641,7 @@
   }
 
   .corporate-mobile-meta {
-    font-family: var(--font-architectural, 'Space Grotesk', sans-serif);
+    font-family: var(--font-subheading, 'Manrope', sans-serif);
     font-size: 0.72rem;
     font-weight: 500;
     color: var(--sand, #D8C8B4);
@@ -633,7 +649,7 @@
   }
 
   .corporate-mobile-card-desc {
-    font-family: var(--font-content, 'Manrope', sans-serif);
+    font-family: var(--font-body, 'DM Sans', sans-serif);
     font-size: 0.84rem;
     line-height: 1.52;
     color: rgba(255, 255, 255, 0.88);
@@ -648,7 +664,7 @@
   }
 
   .corporate-mobile-crumb {
-    font-family: var(--font-architectural, 'Space Grotesk', sans-serif);
+    font-family: var(--font-subheading, 'Manrope', sans-serif);
     font-size: 0.62rem;
     letter-spacing: 0.10em;
     text-transform: uppercase;
@@ -668,7 +684,7 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-family: var(--font-architectural, 'Space Grotesk', sans-serif);
+    font-family: var(--font-subheading, 'Manrope', sans-serif);
     font-size: 0.72rem;
     font-weight: 600;
     letter-spacing: 0.14em;
@@ -703,7 +719,7 @@
   }
 
   .corporate-mobile-complete-label {
-    font-family: var(--font-architectural, 'Space Grotesk', sans-serif);
+    font-family: var(--font-subheading, 'Manrope', sans-serif);
     font-size: 0.68rem;
     font-weight: 600;
     letter-spacing: 0.18em;
@@ -712,7 +728,7 @@
   }
 
   .corporate-mobile-complete-text {
-    font-family: var(--font-content, 'Manrope', sans-serif);
+    font-family: var(--font-body, 'DM Sans', sans-serif);
     font-size: 0.86rem;
     line-height: 1.55;
     color: #3E423A;
@@ -729,7 +745,7 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-family: var(--font-architectural, 'Space Grotesk', sans-serif);
+    font-family: var(--font-subheading, 'Manrope', sans-serif);
     font-size: 0.76rem;
     font-weight: 600;
     letter-spacing: 0.16em;
@@ -762,7 +778,7 @@
   }
 
   .corporate-mobile-consult-text h4 {
-    font-family: var(--font-heading, 'Cormorant Garamond', Georgia, serif);
+    font-family: var(--font-heading, 'Cormorant Garamond', serif);
     font-size: clamp(1.25rem, 4.6vw, 1.45rem);
     font-weight: 400;
     color: #FAF8F5;
@@ -772,7 +788,7 @@
   }
 
   .corporate-mobile-consult-text p {
-    font-family: var(--font-content, 'Manrope', sans-serif);
+    font-family: var(--font-body, 'DM Sans', sans-serif);
     font-size: 0.84rem;
     line-height: 1.52;
     color: rgba(250, 248, 245, 0.76);
@@ -785,7 +801,7 @@
     border-radius: 9999px;
     background: var(--sand, #D8C8B4);
     color: var(--ink, #151614);
-    font-family: var(--font-architectural, 'Space Grotesk', sans-serif);
+    font-family: var(--font-subheading, 'Manrope', sans-serif);
     font-size: 0.76rem;
     font-weight: 600;
     letter-spacing: 0.14em;

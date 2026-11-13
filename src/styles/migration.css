@@ -285,18 +285,30 @@ h1, h2, h3, h4, h5, h6, p, a, span, li, button, input, textarea {
 
 /* Desktop header nav alignment */
 @media (min-width: 1200px) {
-  .cs_site_header .cs_nav .cs_nav_list > li.menu-item-has-children {
-    height: inherit !important;
-    display: inline-flex !important;
+  .cs_site_header .cs_nav .cs_nav_list {
+    display: flex !important;
     align-items: center !important;
+    justify-content: center !important;
+    height: 100% !important;
   }
-  .cs_site_header .cs_nav .cs_nav_list > li.menu-item-has-children > a {
+  .cs_site_header .cs_nav .cs_nav_list > li {
+    height: 100% !important;
     display: inline-flex !important;
     align-items: center !important;
-    height: inherit !important;
+    vertical-align: middle !important;
+    margin-bottom: 0 !important;
+  }
+  .cs_site_header .cs_nav .cs_nav_list > li > a {
+    display: inline-flex !important;
+    align-items: center !important;
+    height: 100% !important;
+    margin: 0 !important;
   }
   .cs_site_header .cs_nav .menu-item-has-children > .cs_menu_dropdown_toggle {
     display: none !important;
+  }
+  .cs_site_header.cs_style_2.cs_sticky_active .menu-item-has-children > a::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6' fill='none'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23ffffff' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") !important;
   }
 }
 
@@ -1827,4 +1839,192 @@ a, button, [role="button"] {
   .cs_discipline_body {
     padding: 24px 20px;
   }
+}
+
+
+/* ==========================================================================
+   Global 4-Font Architectural Typography System
+   1. Primary Headings (H1-H6): Cormorant Garamond (400, 500, 600)
+   2. Subheadings & Navigation: Manrope (400, 500, 600, 700)
+   3. Body Content, Buttons, Forms: DM Sans (400, 500, 600, 700)
+   4. Special Typography, Stats, Identifiers: Bebas Neue (400)
+   ========================================================================== */
+
+:root {
+  --font-heading: 'Cormorant Garamond', Georgia, serif;
+  --font-subheading: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-special: 'Bebas Neue', 'Impact', sans-serif;
+
+  --primary-font: var(--font-heading);
+  --secondary-font: var(--font-body);
+  --font-architectural: var(--font-subheading);
+  --font-content: var(--font-body);
+}
+
+/* 1. Base Headings (H1 - H6) & Editorial Headings */
+h1, h2, h3, h4, h5, h6,
+.cs_hero_title,
+.cs_section_title,
+.cs_page_header_title,
+.cs_cta_title,
+.cs_card_title,
+.cs_widget_heading,
+.cs_heading_font,
+.cs_portfolio_title,
+.cs_post_title,
+.cs_iconbox_title,
+.cs_banner_title,
+.cs_about_title {
+  font-family: var(--font-heading) !important;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+  color: var(--primary-color, #171717);
+}
+
+h1, .cs_hero_title, .cs_page_header_title {
+  font-size: clamp(34px, 4.8vw, 56px) !important;
+  line-height: 1.1 !important;
+  font-weight: 500 !important;
+}
+
+h2, .cs_section_title {
+  font-size: clamp(26px, 3.6vw, 42px) !important;
+  line-height: 1.18 !important;
+  font-weight: 500 !important;
+}
+
+h3, .cs_cta_title {
+  font-size: clamp(22px, 2.6vw, 32px) !important;
+  line-height: 1.24 !important;
+  font-weight: 500 !important;
+}
+
+h4, .cs_card_title {
+  font-size: clamp(18px, 2vw, 24px) !important;
+  line-height: 1.28 !important;
+  font-weight: 600 !important;
+}
+
+h5 {
+  font-size: clamp(16px, 1.6vw, 19px) !important;
+  line-height: 1.34 !important;
+  font-weight: 600 !important;
+}
+
+h6 {
+  font-size: clamp(14px, 1.4vw, 16px) !important;
+  line-height: 1.4 !important;
+  font-weight: 600 !important;
+}
+
+/* 2. Subheadings, Section Eyebrows, Tags & Navigation */
+.cs_section_subtitle,
+.cs_hero_subtitle,
+.cs_ba_kicker,
+.cs_pano_kicker,
+.cs_discipline_kicker,
+.corporate-desk-kicker,
+.hiw-eyebrow-label,
+.cs_philosophy_tag,
+.cs_subheading_font,
+.cs_portfolio_subtitle,
+.cs_post_subtitle,
+.cs_about_subtitle {
+  font-family: var(--font-subheading) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  line-height: 1.4 !important;
+}
+
+/* Navigation Links, Dropdown Items, Breadcrumbs */
+.cs_site_header .cs_nav_list > li > a,
+.cs_site_header .cs_dropdown_list li a,
+.cs_nav_list a,
+.breadcrumb,
+.breadcrumb-item,
+.breadcrumb-item a,
+.cs_footer_menu_list li a,
+.cs_mobile_contact_meta a {
+  font-family: var(--font-subheading) !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.02em;
+}
+
+/* 3. Body Content, Paragraphs, Lists & Descriptions */
+body,
+html,
+p,
+li,
+.cs_hero_desc,
+.cs_card_desc,
+.cs_desc,
+.cs_client_comment,
+.cs_about_desc,
+.cs_iconbox_subtitle,
+.cs_body_font,
+.cs_post_desc,
+.cs_footer_desc,
+.cs_newsletter_desc {
+  font-family: var(--font-body) !important;
+  font-weight: 400;
+  line-height: 1.68;
+}
+
+/* Buttons, Calls to Action, Chips & Form Controls */
+.cs_btn_style_1,
+.cs_text_btn_style_1,
+.cs_header_cta a,
+button.cs_btn,
+.cs_btn_white,
+.btn,
+.cs_discipline_chip,
+.cs_pano_tab_btn {
+  font-family: var(--font-body) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+}
+
+label,
+.form-label,
+.cs_form_field label {
+  font-family: var(--font-body) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+}
+
+input,
+textarea,
+select,
+.form-control,
+.cs_form_field input,
+.cs_form_field textarea {
+  font-family: var(--font-body) !important;
+  font-weight: 400 !important;
+}
+
+/* 4. Special Typography: Statistics, Counters, Oversized Numbers & Identifiers */
+.odometer,
+.odometer-digit,
+.cs_funfact_number,
+.cs_stat_number,
+.cs_iconbox_index,
+.cs_process_number,
+.hiw-card-number,
+.badge-num,
+.cs_shadow_text,
+.cs_special_font,
+.cs_progress_in span,
+.cs_sliding_content,
+.cs_counter_number,
+.cs_stat_value,
+.corporate-desk-media-badge .badge-num {
+  font-family: var(--font-special) !important;
+  font-weight: 400 !important;
+  line-height: 1 !important;
+  letter-spacing: 0.03em !important;
 }

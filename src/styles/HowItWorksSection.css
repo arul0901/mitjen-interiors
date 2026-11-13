@@ -73,7 +73,7 @@
 }
 
 .hiw-eyebrow-label {
-  font-family: var(--font-architectural, 'Space Grotesk', sans-serif);
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.18em;
@@ -82,20 +82,20 @@
   white-space: nowrap;
 }
 
-/* Heading: bold high-contrast serif */
+/* Heading: Cormorant Garamond luxury serif */
 .hiw-heading {
-  font-family: var(--font-heading, 'Playfair Display', 'Libre Baskerville', 'Cormorant Garamond', Georgia, serif);
+  font-family: var(--font-heading, 'Cormorant Garamond', Georgia, serif);
   font-size: clamp(30px, 3.2vw, 40px);
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.2;
   color: var(--ed-text-primary, #10151f);
   margin: 0 0 16px 0;
   letter-spacing: -0.015em;
 }
 
-/* Paragraph: clean sans-serif */
+/* Paragraph: clean DM Sans */
 .hiw-paragraph {
-  font-family: var(--font-content, 'Inter', 'Roboto', 'Manrope', sans-serif);
+  font-family: var(--font-body, 'DM Sans', sans-serif);
   font-size: 14px;
   line-height: 1.6;
   color: var(--ed-text-secondary, #4a4f57);
@@ -197,11 +197,11 @@
   margin-bottom: 16px;
 }
 
-/* Large outlined number: 46px, rounded geometric sans, thin 1.5px pale-gold stroke */
+/* Large outlined number: 46px Bebas Neue */
 .hiw-card-number {
-  font-family: 'Poppins', 'Inter', 'Space Grotesk', var(--font-architectural, sans-serif);
+  font-family: var(--font-special, 'Bebas Neue', sans-serif);
   font-size: clamp(40px, 3vw, 46px);
-  font-weight: 700;
+  font-weight: 400;
   line-height: 1;
   display: inline-block;
   color: transparent;
@@ -211,7 +211,7 @@
 }
 
 .hiw-stage-pill {
-  font-family: var(--font-architectural, sans-serif);
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
   font-size: 0.62rem;
   font-weight: 600;
   letter-spacing: 0.10em;
@@ -233,11 +233,11 @@
   flex-grow: 1;
 }
 
-/* Title: bold serif, ~20px, #10151f */
+/* Title: Cormorant Garamond luxury serif */
 .hiw-card-title {
-  font-family: var(--font-heading, 'Playfair Display', 'Libre Baskerville', 'Cormorant Garamond', Georgia, serif);
+  font-family: var(--font-heading, 'Cormorant Garamond', Georgia, serif);
   font-size: 1.25rem;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.28;
   color: var(--ed-text-primary, #10151f);
   margin: 0 0 10px 0;
@@ -245,9 +245,9 @@
   transition: color 0.4s ease;
 }
 
-/* Description: sans-serif, ~13.5px, 1.55 line-height, #555a62 */
+/* Description: DM Sans */
 .hiw-card-desc {
-  font-family: var(--font-content, 'Inter', 'Roboto', 'Manrope', sans-serif);
+  font-family: var(--font-body, 'DM Sans', sans-serif);
   font-size: 0.86rem;
   line-height: 1.55;
   color: var(--ed-text-secondary, #555a62);
@@ -271,7 +271,7 @@
   display: flex;
   align-items: flex-start;
   gap: 8px;
-  font-family: var(--font-content, sans-serif);
+  font-family: var(--font-body, 'DM Sans', sans-serif);
   font-size: 0.78rem;
   line-height: 1.45;
   color: var(--ed-text-primary, #25231F);
@@ -301,7 +301,7 @@
 }
 
 .hiw-duration-tag {
-  font-family: var(--font-architectural, sans-serif);
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
   font-size: 0.72rem;
   font-weight: 500;
   letter-spacing: 0.04em;
@@ -312,7 +312,7 @@
 }
 
 .hiw-hover-cue {
-  font-family: var(--font-architectural, sans-serif);
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
   font-size: 0.72rem;
   font-weight: 500;
   letter-spacing: 0.04em;
