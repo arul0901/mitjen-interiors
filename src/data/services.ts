@@ -11,6 +11,8 @@ export interface AboutFeature {
   image: string;
   alt: string;
   badge?: string;
+  highlights: string[];
+  tags: string[];
 }
 
 export interface AboutSectionData {
@@ -19,6 +21,7 @@ export interface AboutSectionData {
   description: string;
   leadImage?: string;
   leadImageAlt?: string;
+  stats?: Array<{ value: string; label: string }>;
   features: AboutFeature[];
 }
 
@@ -44,28 +47,45 @@ export const aboutData: AboutSectionData = {
     'Every detail matters. From concept to completion, we create interiors that are elegant, functional, and uniquely yours.',
   leadImage: '/images/projects/01-serene.webp',
   leadImageAlt: 'Architectural interior living space detail with natural lighting',
+  stats: [
+    { value: '15+', label: 'Years of Practice' },
+    { value: '150+', label: 'Curated Works' },
+    { value: '100%', label: 'Turnkey Delivery' }
+  ],
   features: [
     {
       id: 'thoughtful-design',
       title: 'Thoughtful Design',
       icon: 'line',
-      copy: 'Intentional layouts that enhance the way you live.',
+      copy: 'Intentional layouts shaped around daily rituals, natural daylight, and quiet circulation. Every space is engineered for effortless living and intuitive flow.',
       linkText: 'LEARN MORE',
       href: '/services',
       image: '/images/concept/concept-1.webp',
       alt: 'Minimalist living room layout with warm oak finishes',
-      badge: 'SPATIAL HARMONY'
+      badge: 'SPATIAL HARMONY',
+      highlights: [
+        'Custom millwork & tailored joinery',
+        'Natural daylight & circulation studies',
+        'Acoustic balance & calm zoning'
+      ],
+      tags: ['Spatial Planning', 'Bespoke Joinery']
     },
     {
       id: 'timeless-aesthetics',
       title: 'Timeless Aesthetics',
       icon: 'heart',
-      copy: 'Designs that balance beauty and function for lasting impact.',
+      copy: 'Designs that balance beauty and function for lasting impact. We curate tactile palettes of natural stone, warm oak, and textiles that patina with grace over decades.',
       linkText: 'LEARN MORE',
       href: '/services',
       image: '/images/concept/concept-2.webp',
       alt: 'Architectural materials, travertine stone and linen finishes',
-      badge: 'TACTILE FINISHES'
+      badge: 'TACTILE FINISHES',
+      highlights: [
+        'Tactile travertine & European oak',
+        'Layered ambient architectural lighting',
+        'Enduring proportions free of fast trends'
+      ],
+      tags: ['Natural Materials', 'Living Patina']
     }
   ]
 };

@@ -296,10 +296,11 @@
 .bespoke-about-lead-img-wrap {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9;
-  border-radius: 12px;
+  flex: 1 1 auto;
+  min-height: 170px;
+  border-radius: 14px;
   overflow: hidden;
-  margin-top: 20px;
+  margin-top: 18px;
   background-color: var(--card);
 }
 
@@ -310,6 +311,8 @@
 }
 
 .bespoke-about-lead-img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -332,6 +335,108 @@
   display: flex;
   gap: 6px;
   align-items: center;
+}
+
+/* Studio Statistics Strip in About Intro */
+.bespoke-about-stats-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(227, 220, 211, 0.75);
+}
+
+@media (max-width: 640px) {
+  .bespoke-about-stats-strip {
+    gap: 8px;
+    margin-top: 12px;
+    padding-top: 12px;
+  }
+}
+
+.bespoke-stat-mini {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.stat-mini-val {
+  font-family: var(--font-special, 'Bebas Neue', sans-serif);
+  font-size: 1.45rem;
+  line-height: 1;
+  color: var(--ink);
+  letter-spacing: 0.04em;
+}
+
+@media (max-width: 640px) {
+  .stat-mini-val {
+    font-size: 1.25rem;
+  }
+}
+
+.stat-mini-label {
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
+  font-size: 9.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  line-height: 1.25;
+}
+
+/* Feature Card Enhancements to Fill Empty Space */
+.bespoke-card-feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.bespoke-card-feature-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.8rem;
+  line-height: 1.35;
+  color: var(--ink);
+}
+
+.bespoke-card-feature-item svg {
+  flex-shrink: 0;
+  color: var(--accent);
+}
+
+.bespoke-card-tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 14px;
+}
+
+.bespoke-card-tag {
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
+  font-size: 9.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  background-color: rgba(139, 115, 85, 0.12);
+  padding: 4px 10px;
+  border-radius: 9999px;
+  border: 1px solid rgba(139, 115, 85, 0.2);
+}
+
+.bespoke-card-footer {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(227, 220, 211, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .bespoke-card-title {
@@ -364,6 +469,173 @@
     line-height: 1.4;
     margin: 0 0 12px 0;
   }
+}
+
+/* Service Cards Section Specific Layout */
+.bespoke-services-section {
+  padding-top: 0;
+  padding-bottom: clamp(48px, 6vw, 84px);
+}
+
+@media (max-width: 768px) {
+  .bespoke-services-section {
+    padding-bottom: clamp(24px, 5vw, 36px);
+  }
+}
+
+.bespoke-services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 768px) {
+  .bespoke-services-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+}
+
+.bespoke-service-card {
+  display: block;
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  text-decoration: none;
+  aspect-ratio: 16 / 10;
+  box-shadow: var(--section-shadow);
+  transition: box-shadow 0.4s ease, transform 0.4s ease;
+  background-color: var(--taupe);
+}
+
+@media (max-width: 640px) {
+  .bespoke-service-card {
+    aspect-ratio: 16 / 9;
+    border-radius: 14px;
+  }
+}
+
+.bespoke-service-card:hover {
+  box-shadow: 0 16px 48px -12px rgba(60, 40, 20, 0.22);
+}
+
+.bespoke-service-card:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.bespoke-service-card-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.bespoke-service-card:hover .bespoke-service-card-img {
+  transform: scale(1.05);
+}
+
+.bespoke-service-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(143, 123, 102, 0.92) 0%,
+    rgba(143, 123, 102, 0.62) 55%,
+    rgba(143, 123, 102, 0.05) 100%
+  ),
+  linear-gradient(
+    to top,
+    rgba(20, 18, 16, 0.35) 0%,
+    transparent 50%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.bespoke-service-card-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: clamp(20px, 3.5vw, 36px);
+  max-width: 440px;
+  z-index: 2;
+  box-sizing: border-box;
+}
+
+@media (max-width: 640px) {
+  .bespoke-service-card-content {
+    padding: 16px 14px;
+    max-width: 310px;
+  }
+}
+
+.bespoke-service-card-title {
+  font-family: var(--font-display);
+  color: #FFFFFF;
+  font-size: clamp(1.45rem, 3.2vw, 1.95rem);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  margin: 0 0 8px 0;
+}
+
+@media (max-width: 640px) {
+  .bespoke-service-card-title {
+    font-size: 1.35rem;
+    margin: 0 0 5px 0;
+  }
+}
+
+.bespoke-service-card-copy {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.4;
+  margin: 0 0 16px 0;
+  max-width: 340px;
+}
+
+@media (max-width: 640px) {
+  .bespoke-service-card-copy {
+    font-size: 0.785rem;
+    margin: 0 0 10px 0;
+    max-width: 260px;
+    line-height: 1.35;
+  }
+}
+
+.bespoke-service-card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #FFFFFF;
+}
+
+@media (max-width: 640px) {
+  .bespoke-service-card-link {
+    font-size: 10px;
+    gap: 6px;
+  }
+}
+
+.bespoke-service-card-link svg {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bespoke-service-card:hover .bespoke-service-card-link svg {
+  transform: translateX(4px);
 }
 
 /* Service Cards Section Specific Layout */

@@ -5,7 +5,7 @@ import Reveal from '../shared/Reveal';
 import '../../styles/content-sections.css';
 
 export const AboutSection: React.FC = () => {
-  const { eyebrow, title, description, features, leadImage, leadImageAlt } = aboutData;
+  const { eyebrow, title, description, features, leadImage, leadImageAlt, stats } = aboutData;
 
   const renderIcon = (iconType: string) => {
     if (iconType === 'heart') {
@@ -20,8 +20,15 @@ export const AboutSection: React.FC = () => {
         <Reveal staggerIndex={0}>
           <div className="bespoke-panel">
             <div className="bespoke-about-grid">
-              {/* Left Column: Heading, Description & Desktop Editorial Preview */}
-              <div className="flex flex-col justify-between" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+              {/* Left Column: Heading, Description, Studio Stats & Flush Baseline Photo */}
+              <div
+                className="bespoke-about-intro-col"
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  height: '100%',
+                }}
+              >
                 <div>
                   <span className="bespoke-eyebrow">{eyebrow}</span>
                   <h2 id="about-bespoke-title" className="bespoke-h2">
@@ -30,9 +37,21 @@ export const AboutSection: React.FC = () => {
                   <p className="bespoke-desc">
                     {description}
                   </p>
+
+                  {/* Studio Stats Strip to balance content density */}
+                  {stats && stats.length > 0 && (
+                    <div className="bespoke-about-stats-strip">
+                      {stats.map((s) => (
+                        <div key={s.label} className="bespoke-stat-mini">
+                          <span className="stat-mini-val">{s.value}</span>
+                          <span className="stat-mini-label">{s.label}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
-                {/* Editorial Photo on Desktop (hidden on mobile to keep mobile ultra-compact) */}
+                {/* Editorial Photo on Desktop that expands to match cards baseline exactly */}
                 {leadImage && (
                   <div className="bespoke-about-lead-img-wrap">
                     <img
@@ -52,7 +71,7 @@ export const AboutSection: React.FC = () => {
                 )}
               </div>
 
-              {/* Two Feature Cards with Curated Architectural Imagery */}
+              {/* Two Feature Cards: Enriched with Highlights and Tags to fill empty space */}
               {features.map((feature, index) => (
                 <Reveal key={feature.id} staggerIndex={index + 1} className="h-full">
                   <a
@@ -84,9 +103,48 @@ export const AboutSection: React.FC = () => {
 
                       <h3 className="bespoke-card-title">{feature.title}</h3>
                       <p className="bespoke-card-copy">{feature.copy}</p>
+
+                      {/* 3-Point Architectural Feature Checklist to eliminate empty space */}
+                      {feature.highlights && feature.highlights.length > 0 && (
+                        <ul className="bespoke-card-feature-list">
+                          {feature.highlights.map((h) => (
+                            <li key={h} className="bespoke-card-feature-item">
+                              <svg
+                                width="14"
+                                height="14"
+                                viewBox="0 0 14 14"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                                aria-hidden="true"
+                              >
+                                <path
+                                  d="M2.5 7.5L5.5 10.5L11.5 3.5"
+                                  stroke="var(--accent)"
+                                  strokeWidth="1.6"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                />
+                              </svg>
+                              <span>{h}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+
+                      {/* Pill Tags Row */}
+                      {feature.tags && feature.tags.length > 0 && (
+                        <div className="bespoke-card-tag-row">
+                          {feature.tags.map((tag) => (
+                            <span key={tag} className="bespoke-card-tag">
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      )}
                     </div>
 
-                    <div style={{ marginTop: 'auto', paddingTop: '8px' }}>
+                    {/* Integrated Footer with Divider */}
+                    <div className="bespoke-card-footer">
                       <span className="bespoke-arrow-link" aria-hidden="true">
                         <span>{feature.linkText}</span>
                         <svg
