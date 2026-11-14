@@ -71,13 +71,13 @@ export default function Home() {
 <div className={"row cs_gap_y_40"}>
 <div className={"col-sm-6"}>
 <div className={"cs_card_style_7"}>
-<a href={"/services/details"} className={"cs_card_thumbnail cs_radius_10 cs_mb_20"} aria-label={"View Lecturer Office Building project details"}>
+<a href={"#"} className={"cs_card_thumbnail cs_radius_10 cs_mb_20"} aria-label={"View Lecturer Office Building project details"}>
 <img src={"/assets/img/service-img-12.webp"} alt={"Lecturer Office Building exterior view 1"} />
 <img src={"/assets/img/service-img-13.webp"} alt={"Lecturer Office Building exterior view 2"} />
 </a>
 <div className={"cs_card_info"}>
 <h2 className={"cs_card_title cs_fs_18 cs_bold cs_white_color cs_mb_16 text-uppercase"}>
-<a href={"/services/details"} aria-label={"Lecturer Office Building - project title link"}>LECTURER OFFICE BUILDING</a>
+<a href={"#"} aria-label={"Lecturer Office Building - project title link"}>LECTURER OFFICE BUILDING</a>
 </h2>
 <p className={"cs_card_subtitle cs_white_color mb-0"}>It shapes how people live, work, and interact with their environment by technical expertise.</p>
 </div>
@@ -85,13 +85,13 @@ export default function Home() {
 </div>
 <div className={"col-sm-6"}>
 <div className={"cs_card_style_7"}>
-<a href={"/services/details"} className={"cs_card_thumbnail cs_radius_10 cs_mb_20"} aria-label={"View White Blocks House project details"}>
+<a href={"#"} className={"cs_card_thumbnail cs_radius_10 cs_mb_20"} aria-label={"View White Blocks House project details"}>
 <img src={"/assets/img/service-img-13.webp"} alt={"White Blocks House exterior view 1"} />
 <img src={"/assets/img/service-img-12.webp"} alt={"White Blocks House exterior view 2"} />
 </a>
 <div className={"cs_card_info"}>
 <h2 className={"cs_card_title cs_fs_18 cs_bold cs_white_color cs_mb_16 text-uppercase"}>
-<a href={"/services/details"} aria-label={"White Blocks House - project title link"}>WHITE BLOCKS HOUSE</a>
+<a href={"#"} aria-label={"White Blocks House - project title link"}>WHITE BLOCKS HOUSE</a>
 </h2>
 <p className={"cs_card_subtitle cs_white_color mb-0"}>It shapes how people live, work, and interact with their environment by technical expertise.</p>
 </div>
@@ -124,15 +124,15 @@ export default function Home() {
 <div className={"cs_height_60 cs_height_lg_50 cs_exceptional_mid_spacer"}></div>
 <div className={"cs_grid_style_5"}>
 <div className={"cs_card_style_7"}>
-<a href={"/services/details"} className={"cs_card_thumbnail cs_radius_10"} aria-label={"Understanding Your Needs - Initial Requirements & Direction"}>
+<a href={"#"} className={"cs_card_thumbnail cs_radius_10"} aria-label={"Understanding Your Needs - Initial Requirements & Direction"}>
 <img src={"/assets/images/projects/image1.jpg"} alt={"Understanding Your Needs - Requirements, preferences and budget"} />
 </a>
 <div className={"cs_card_info"}>
 <h3 className={"cs_card_title cs_fs_24 cs_bold cs_mb_16 text-uppercase"}>
-<a href={"/services/details"} aria-label={"Understanding Your Needs service link"}>UNDERSTANDING YOUR NEEDS</a>
+<a href={"#"} aria-label={"Understanding Your Needs service link"}>UNDERSTANDING YOUR NEEDS</a>
 </h3>
 <p className={"cs_card_subtitle cs_mb_20"}>We begin by understanding your requirements, preferences and budget to establish the right direction for your project.</p>
-<a href={"/services/details"} className={"cs_text_btn_style_1 cs_fs_14 cs_bold cs_accent_color"} aria-label={"Discover more - Understanding Your Needs"}>
+<a href={"#"} className={"cs_text_btn_style_1 cs_fs_14 cs_bold cs_accent_color"} aria-label={"Discover more - Understanding Your Needs"}>
 <span>DISCOVER MORE</span>
 <span aria-hidden={"true"}>
 <svg width={"13"} height={"13"} viewBox={"0 0 14 14"} fill={"none"} xmlns={"http://www.w3.org/2000/svg"}>
@@ -143,15 +143,15 @@ export default function Home() {
 </div>
 </div>
 <div className={"cs_card_style_7"}>
-<a href={"/services/details"} className={"cs_card_thumbnail cs_radius_10"} aria-label={"Concept & Materials - Finishes and Palettes"}>
+<a href={"#"} className={"cs_card_thumbnail cs_radius_10"} aria-label={"Concept & Materials - Finishes and Palettes"}>
 <img src={"/assets/images/projects/image10.jpg"} alt={"Concept & Materials - Colours, materials and finishes"} />
 </a>
 <div className={"cs_card_info"}>
 <h3 className={"cs_card_title cs_fs_24 cs_bold cs_mb_16 text-uppercase"}>
-<a href={"/services/details"} aria-label={"Concept & Materials service link"}>CONCEPT &amp; MATERIALS</a>
+<a href={"#"} aria-label={"Concept & Materials service link"}>CONCEPT &amp; MATERIALS</a>
 </h3>
 <p className={"cs_card_subtitle cs_mb_20"}>Colours, materials and finishes come together to shape a design that reflects your preferences and project requirements.</p>
-<a href={"/services/details"} className={"cs_text_btn_style_1 cs_fs_14 cs_bold cs_accent_color"} aria-label={"Discover more - Concept & Materials"}>
+<a href={"#"} className={"cs_text_btn_style_1 cs_fs_14 cs_bold cs_accent_color"} aria-label={"Discover more - Concept & Materials"}>
 <span>DISCOVER MORE</span>
 <span aria-hidden={"true"}>
 <svg width={"13"} height={"13"} viewBox={"0 0 14 14"} fill={"none"} xmlns={"http://www.w3.org/2000/svg"}>
@@ -162,15 +162,15 @@ export default function Home() {
 </div>
 </div>
 <div className={"cs_card_style_7"}>
-<a href={"/services/details"} className={"cs_card_thumbnail cs_radius_10"} aria-label={"Precision In Production - CNC and Custom Detailing"}>
+<a href={"#"} className={"cs_card_thumbnail cs_radius_10"} aria-label={"Precision In Production - CNC and Custom Detailing"}>
 <img src={"/assets/images/projects/image4.jpg"} alt={"Precision In Production - Custom furniture and precision components"} />
 </a>
 <div className={"cs_card_info"}>
 <h3 className={"cs_card_title cs_fs_24 cs_bold cs_mb_16 text-uppercase"}>
-<a href={"/services/details"} aria-label={"Precision In Production service link"}>PRECISION IN PRODUCTION</a>
+<a href={"#"} aria-label={"Precision In Production service link"}>PRECISION IN PRODUCTION</a>
 </h3>
 <p className={"cs_card_subtitle cs_mb_20"}>From custom furniture to detailed components, we craft everything with care and attention to detail.</p>
-<a href={"/services/details"} className={"cs_text_btn_style_1 cs_fs_14 cs_bold cs_accent_color"} aria-label={"Discover more - Precision In Production"}>
+<a href={"#"} className={"cs_text_btn_style_1 cs_fs_14 cs_bold cs_accent_color"} aria-label={"Discover more - Precision In Production"}>
 <span>DISCOVER MORE</span>
 <span aria-hidden={"true"}>
 <svg width={"13"} height={"13"} viewBox={"0 0 14 14"} fill={"none"} xmlns={"http://www.w3.org/2000/svg"}>
@@ -181,15 +181,15 @@ export default function Home() {
 </div>
 </div>
 <div className={"cs_card_style_7"}>
-<a href={"/services/details"} className={"cs_card_thumbnail cs_radius_10"} aria-label={"Project Execution & Handover - Turnkey Delivery"}>
+<a href={"#"} className={"cs_card_thumbnail cs_radius_10"} aria-label={"Project Execution & Handover - Turnkey Delivery"}>
 <img src={"/assets/images/projects/image3.jpg"} alt={"Project Execution & Handover - Approved design through execution"} />
 </a>
 <div className={"cs_card_info"}>
 <h3 className={"cs_card_title cs_fs_24 cs_bold cs_mb_16 text-uppercase"}>
-<a href={"/services/details"} aria-label={"Project Execution & Handover service link"}>PROJECT EXECUTION &amp; HANDOVER</a>
+<a href={"#"} aria-label={"Project Execution & Handover service link"}>PROJECT EXECUTION &amp; HANDOVER</a>
 </h3>
 <p className={"cs_card_subtitle cs_mb_20"}>We take the approved design through execution, working towards a finished space that reflects the agreed plan.</p>
-<a href={"/services/details"} className={"cs_text_btn_style_1 cs_fs_14 cs_bold cs_accent_color"} aria-label={"Discover more - Project Execution & Handover"}>
+<a href={"#"} className={"cs_text_btn_style_1 cs_fs_14 cs_bold cs_accent_color"} aria-label={"Discover more - Project Execution & Handover"}>
 <span>DISCOVER MORE</span>
 <span aria-hidden={"true"}>
 <svg width={"13"} height={"13"} viewBox={"0 0 14 14"} fill={"none"} xmlns={"http://www.w3.org/2000/svg"}>
