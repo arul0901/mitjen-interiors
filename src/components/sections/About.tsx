@@ -36,7 +36,7 @@ export const AboutSection: React.FC = () => {
                 <div className="bespoke-about-left-photo-wrap">
                   <img
                     src={leftPicture}
-                    alt={leftPictureAlt || 'Bespoke architecture living space'}
+                    alt={leftPictureAlt || 'Mitjen Interiors bespoke living space'}
                     className="bespoke-about-left-photo"
                     loading="lazy"
                     width="600"
@@ -51,9 +51,8 @@ export const AboutSection: React.FC = () => {
               {/* Right Side Feature Cards: Clean, Rich, NO Pictures, Zero Empty Space */}
               {features.map((feature, index) => (
                 <Reveal key={feature.id} staggerIndex={index + 1} className="h-full">
-                  <a
-                    href={feature.href || '/services'}
-                    className="bespoke-about-card group"
+                  <div
+                    className="bespoke-about-card"
                     aria-label={`${feature.title} - ${feature.copy}`}
                   >
                     <div>
@@ -63,8 +62,10 @@ export const AboutSection: React.FC = () => {
                           {renderIcon(feature.icon)}
                         </div>
                         <div className="bespoke-card-title-group">
+                          <span className="bespoke-eyebrow" style={{ fontSize: '10px', marginBottom: '2px', display: 'block' }}>
+                            {feature.subtitle}
+                          </span>
                           <h3 className="bespoke-card-title">{feature.title}</h3>
-                          <span className="bespoke-card-subtitle">{feature.subtitle}</span>
                         </div>
                       </div>
 
@@ -105,29 +106,39 @@ export const AboutSection: React.FC = () => {
                       </div>
                     </div>
 
-                    {/* Integrated Action Footer with Clean Divider */}
-                    <div className="bespoke-card-footer">
-                      <span className="bespoke-arrow-link" aria-hidden="true">
-                        <span>{feature.linkText}</span>
-                        <svg
-                          className="arrow-icon"
-                          width="12"
-                          height="12"
-                          viewBox="0 0 12 12"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
+                    {/* Integrated Action Footer with Multi-button Navigation */}
+                    <div className="bespoke-card-footer" style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                      <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', alignItems: 'center' }}>
+                        <a
+                          href={feature.href}
+                          className="cs_text_btn_style_1 cs_fs_13 cs_bold cs_accent_color"
+                          style={{ textDecoration: 'none' }}
                         >
-                          <path
-                            d="M2 6H10M10 6L6.5 2.5M10 6L6.5 9.5"
-                            stroke="currentColor"
-                            strokeWidth="1.5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                      </span>
+                          <span>{feature.linkText}</span>
+                        </a>
+                        {feature.secondaryLinkText && (
+                          <a
+                            href={feature.secondaryHref}
+                            className="cs_text_btn_style_1 cs_fs_13 cs_bold"
+                            style={{ color: '#444444', textDecoration: 'none' }}
+                          >
+                            <span>{feature.secondaryLinkText}</span>
+                          </a>
+                        )}
+                      </div>
+                      {feature.accentLinkText && (
+                        <div>
+                          <a
+                            href={feature.accentHref}
+                            className="cs_text_btn_style_1 cs_fs_13 cs_bold cs_accent_color"
+                            style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '4px' }}
+                          >
+                            <span>{feature.accentLinkText}</span>
+                          </a>
+                        </div>
+                      )}
                     </div>
-                  </a>
+                  </div>
                 </Reveal>
               ))}
             </div>

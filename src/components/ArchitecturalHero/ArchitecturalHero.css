@@ -1,0 +1,142 @@
+
+.architectural-hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+  background: #171512;
+}
+
+.architectural-hero__scene {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.architectural-hero__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  user-select: none;
+  pointer-events: none;
+}
+
+.architectural-hero__image:first-child {
+  z-index: 1;
+}
+
+.architectural-hero__image:nth-child(2) { z-index: 2; }
+.architectural-hero__image:nth-child(3) { z-index: 3; }
+.architectural-hero__image:nth-child(4) { z-index: 4; }
+.architectural-hero__image:nth-child(5) { z-index: 5; }
+.architectural-hero__image:nth-child(6) { z-index: 6; }
+
+.architectural-hero__shade {
+  position: absolute;
+  inset: 0;
+  z-index: 7;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(15, 13, 11, 0.38),
+      transparent 65%
+    ),
+    linear-gradient(
+      0deg,
+      rgba(15, 13, 11, 0.25),
+      transparent 40%
+    );
+}
+
+.architectural-hero__brand {
+  position: absolute;
+  z-index: 8;
+  top: 32px;
+  left: 5%;
+  color: #fff;
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  font-weight: 500;
+}
+
+.architectural-hero__copy {
+  position: absolute;
+  z-index: 8;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  color: #fff;
+  pointer-events: none;
+}
+
+.architectural-hero__headline span {
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+.architectural-hero__headline h1 {
+  margin: 16px 0 0;
+  font-family: Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(42px, 6vw, 88px);
+  line-height: 1.04;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+}
+
+.architectural-hero__progress {
+  position: absolute;
+  z-index: 8;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 12px;
+  color: #fff;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  white-space: nowrap;
+}
+
+.architectural-hero__line {
+  width: 1px;
+  height: 38px;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+@media (max-width: 768px) {
+  .architectural-hero {
+    min-height: 540px;
+  }
+
+  .architectural-hero__image {
+    object-position: center;
+  }
+
+  .architectural-hero__brand {
+    top: 22px;
+    left: 22px;
+  }
+
+  .architectural-hero__progress {
+    bottom: 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .architectural-hero__progress {
+    display: none;
+  }
+}

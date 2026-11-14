@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import type { ServicePageData } from '../data/servicesData';
 import { SEO } from './common/SEO';
@@ -24,15 +24,32 @@ export const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({ data }
     );
   };
 
-  const serviceNavItems = [
+  // Dynamic sub-service navigation based on current category
+  const subPracticeItems = useMemo(() => {
+    return data.servicesSection.cards.slice(0, 4).map((c) => ({
+      name: c.title,
+      path: `${data.seo.canonical}#${c.id}`
+    }));
+  }, [data]);
+
+  const serviceNavItems = useMemo(() => [
     { name: 'Residential Interior Design', path: '/services/residential-interior-design' },
     { name: 'Commercial Interior Design', path: '/services/commercial-interior-design' },
     { name: 'Corporate Interior Design', path: '/services/corporate-interior-design' },
-    { name: 'Modular Kitchen Planning', path: '/services/residential-interior-design#kitchen' },
-    { name: 'Wardrobe & Storage Solutions', path: '/services/residential-interior-design#wardrobe' },
-    { name: 'Living & Social Sanctuaries', path: '/services/residential-interior-design#living' },
-    { name: 'Turnkey Civil & Execution', path: '/services/residential-interior-design#turnkey' },
-  ];
+    ...subPracticeItems
+  ], [subPracticeItems]);
+
+  useEffect(() => {
+    if (location.hash) {
+      const hash = location.hash.replace('#', '');
+      const el = document.getElementById(hash) || document.getElementById(`res-${hash}`) || document.getElementById(`corp-${hash}`) || document.getElementById(`com-${hash}`);
+      if (el) {
+        setTimeout(() => {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 120);
+      }
+    }
+  }, [location.hash, location.pathname]);
 
   const guidanceTopics = [
     { icon: 'spatial-flow', title: 'Living & dining spatial flow & entertainment walls' },
@@ -192,9 +209,11 @@ export const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({ data }
               {/* Vertical Services Navigation Stack */}
               <nav className="clinic-services-nav" aria-label="Our Interior Practices">
                 {serviceNavItems.map((item) => {
-                  const isActive =
-                    location.pathname === item.path ||
-                    (item.path.startsWith('/services/residential') && location.pathname.includes('residential') && !location.hash);
+                  const isHashItem = item.path.includes('#');
+                  const itemHash = isHashItem ? item.path.split('#')[1] : '';
+                  const isActive = isHashItem
+                    ? location.hash === `#${itemHash}`
+                    : location.pathname === item.path && !location.hash;
                   return (
                     <Link
                       key={item.name}
@@ -397,8 +416,9 @@ export const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({ data }
               </p>
 
               <div className="clinic-scope-list">
-                {data.servicesSection.cards.slice(0, 5).map((card) => (
-                  <div key={card.id} className="clinic-scope-item">
+                {data.servicesSection.cards.map((card) => (
+                  <div key={card.id} id={card.id} className="clinic-scope-item">
+                    <span id={card.id.replace(/^(res|com|corp)-/, '')} style={{ position: 'relative', top: '-80px', display: 'block', visibility: 'hidden' }} />
                     <h3 className="clinic-scope-heading">{card.title}</h3>
                     <p className="clinic-scope-text">{card.description}</p>
                     <ul className="clinic-feature-bullets">

@@ -2148,52 +2148,121 @@ select,
    THE ART OF EXCEPTIONAL LIVING: Single-Image Display (Desktop + Mobile)
    Overrides legacy 2-image 3D flip so single images render visibly & beautifully
    ========================================================================== */
-.cs_grid_style_5 .cs_card_style_7,
-.cs_grid_style_5 .cs_card_style_7:nth-child(even),
-.cs_grid_style_5 .cs_card_style_7:nth-child(odd),
-.cs_exceptional_living_section .cs_card_style_7 {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 18px !important;
-  height: 100% !important;
-}
-
 .cs_card_style_7 .cs_card_thumbnail,
-.cs_grid_style_5 .cs_card_style_7 .cs_card_thumbnail,
 .cs_exceptional_living_section .cs_card_style_7 .cs_card_thumbnail {
-  order: 1 !important;
   display: block !important;
   position: relative !important;
   width: 100% !important;
-  aspect-ratio: 16 / 11 !important;
-  height: 230px !important;
-  min-height: 200px !important;
-  max-height: 240px !important;
   overflow: hidden !important;
   border-radius: 12px !important;
   perspective: none !important;
 }
 
-.cs_card_style_7 .cs_card_info,
-.cs_grid_style_5 .cs_card_style_7 .cs_card_info,
-.cs_exceptional_living_section .cs_card_style_7 .cs_card_info {
-  order: 2 !important;
-  display: flex !important;
-  flex-direction: column !important;
-  flex: 1 1 auto !important;
+/* ==========================================================================
+   THE ART OF EXCEPTIONAL LIVING: Precision Staggered Rhythm (Desktop)
+   Retains original alternating rhythm:
+   - Cols 1 & 3 (odd): Image on TOP (240px), Gap (24px), Text on BOTTOM (216px)
+   - Cols 2 & 4 (even): Text on TOP (216px), Gap (24px), Image on BOTTOM (240px)
+   Perfect 480px total height, zero vertical drift, perfectly aligned baselines
+   ========================================================================== */
+@media (min-width: 992px) {
+  .cs_exceptional_living_section .cs_grid_style_5 {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 32px 24px !important;
+    align-items: stretch !important;
+  }
+
+  .cs_exceptional_living_section .cs_card_style_7 {
+    display: flex !important;
+    height: 480px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Odd cards (Cols 1 & 3): Image on top, Text on bottom */
+  .cs_exceptional_living_section .cs_card_style_7:nth-child(odd) {
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+  }
+
+  .cs_exceptional_living_section .cs_card_style_7:nth-child(odd) .cs_card_thumbnail {
+    height: 240px !important;
+    width: 100% !important;
+    margin-bottom: 24px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .cs_exceptional_living_section .cs_card_style_7:nth-child(odd) .cs_card_info {
+    height: 216px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* Even cards (Cols 2 & 4): Text on top, Image on bottom */
+  .cs_exceptional_living_section .cs_card_style_7:nth-child(even) {
+    flex-direction: column-reverse !important;
+    justify-content: flex-start !important;
+  }
+
+  .cs_exceptional_living_section .cs_card_style_7:nth-child(even) .cs_card_thumbnail {
+    height: 240px !important;
+    width: 100% !important;
+    margin-top: 24px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .cs_exceptional_living_section .cs_card_style_7:nth-child(even) .cs_card_info {
+    height: 216px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    flex-shrink: 0 !important;
+  }
+
+  .cs_exceptional_living_section .cs_card_style_7 .cs_card_title {
+    margin-bottom: 12px !important;
+  }
+
+  .cs_exceptional_living_section .cs_card_style_7 .cs_card_subtitle {
+    margin-bottom: 16px !important;
+    line-height: 1.5 !important;
+    color: #666666 !important;
+    flex-grow: 1 !important;
+  }
+
+  .cs_exceptional_living_section .cs_card_style_7 .cs_text_btn_style_1 {
+    margin-top: auto !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    font-weight: 700 !important;
+  }
 }
 
-.cs_grid_style_5 .cs_card_style_7 .cs_card_title {
-  margin-bottom: 10px !important;
-}
+@media (min-width: 769px) and (max-width: 991px) {
+  .cs_exceptional_living_section .cs_grid_style_5 {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 32px 24px !important;
+  }
 
-.cs_grid_style_5 .cs_card_style_7 .cs_card_subtitle {
-  margin-bottom: 16px !important;
-  flex-grow: 1 !important;
-}
+  .cs_exceptional_living_section .cs_card_style_7 {
+    display: flex !important;
+    flex-direction: column !important;
+    height: auto !important;
+  }
 
-.cs_grid_style_5 .cs_card_style_7 .cs_text_btn_style_1 {
-  margin-top: auto !important;
+  .cs_exceptional_living_section .cs_card_style_7 .cs_card_thumbnail {
+    height: 230px !important;
+    width: 100% !important;
+    margin-bottom: 16px !important;
+  }
+
+  .cs_exceptional_living_section .cs_card_style_7 .cs_card_info {
+    height: auto !important;
+  }
 }
 
 .cs_card_style_7 .cs_card_thumbnail img,
@@ -2703,6 +2772,90 @@ select,
     height: 14px !important;
     margin: 0 10px !important;
   }
+}
+
+/* ==========================================================================
+   ABOUT PAGE: Editorial Image Collages (Desktop Alignment & Styling)
+   ========================================================================== */
+.cs_about_style_7 .cs_about_img_wrapper {
+  position: relative !important;
+  width: 100% !important;
+  padding-left: 26% !important;
+  padding-bottom: 48px !important;
+}
+
+.cs_about_style_7 .cs_about_img1 {
+  width: 100% !important;
+  border-radius: 14px !important;
+  overflow: hidden !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08) !important;
+}
+
+.cs_about_style_7 .cs_about_img1 img {
+  width: 100% !important;
+  height: 420px !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+
+.cs_about_style_7 .cs_about_img2 {
+  position: absolute !important;
+  left: 0 !important;
+  bottom: 0 !important;
+  width: 58% !important;
+  max-width: 280px !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  border: 4px solid #ffffff !important;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.16) !important;
+  z-index: 2 !important;
+}
+
+.cs_about_style_7 .cs_about_img2 img {
+  width: 100% !important;
+  height: 240px !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+
+.cs_about_style_1.cs_type_1 .cs_about_img_wrapper {
+  position: relative !important;
+  width: 100% !important;
+  padding: 0 40px 40px 0 !important;
+}
+
+.cs_about_style_1.cs_type_1 .cs_about_img1 {
+  width: 100% !important;
+  border-radius: 14px !important;
+  overflow: hidden !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08) !important;
+}
+
+.cs_about_style_1.cs_type_1 .cs_about_img1 img {
+  width: 100% !important;
+  height: 440px !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+
+.cs_about_style_1.cs_type_1 .cs_about_img2 {
+  position: absolute !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 50% !important;
+  max-width: 270px !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  border: 4px solid #ffffff !important;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.16) !important;
+  z-index: 2 !important;
+}
+
+.cs_about_style_1.cs_type_1 .cs_about_img2 img {
+  width: 100% !important;
+  height: 200px !important;
+  object-fit: cover !important;
+  display: block !important;
 }
 
 /* 4. Section 3: Studio Story / About Mitjen (.cs_about_style_7) */

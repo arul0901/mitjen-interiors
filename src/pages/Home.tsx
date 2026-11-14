@@ -114,26 +114,26 @@ export default function Home() {
 <ScrollWalkthroughVideoHero />
 <AboutSection />
 <ServiceCards />
-<section className={"cs_exceptional_living_section"} aria-label={"Our Services - The Art of Exceptional Living"}>
+<section id={"approach"} className={"cs_exceptional_living_section"} aria-label={"Our Approach - A Clear Process. A Better Space."}>
 <div className={"cs_height_120 cs_height_lg_80 cs_exceptional_top_spacer"}></div>
 <div className={"container"}>
 <div className={"cs_section_heading_style_1 cs_center_column text-center"}>
-<p className={"cs_section_subtitle cs_bold cs_accent_color cs_mb_20 text-uppercase"}>OUR SERVICES</p>
-<h2 className={"cs_section_title cs_fs_53 cs_semibold text-uppercase mb-0"}>THE ART OF EXCEPTIONAL LIVING</h2>
+<p className={"cs_section_subtitle cs_bold cs_accent_color cs_mb_20 text-uppercase"}>OUR APPROACH</p>
+<h2 className={"cs_section_title cs_fs_53 cs_semibold text-uppercase mb-0"}>A CLEAR PROCESS. A BETTER SPACE.</h2>
 </div>
 <div className={"cs_height_60 cs_height_lg_50 cs_exceptional_mid_spacer"}></div>
 <div className={"cs_grid_style_5"}>
 <div className={"cs_card_style_7"}>
-<a href={"/services/details"} className={"cs_card_thumbnail cs_radius_10"} aria-label={"View Elite Craftsmanship service details"}>
-<img src={"/assets/images/projects/image1.jpg"} alt={"Elite Craftsmanship bespoke interior living"} />
+<a href={"/services/details"} className={"cs_card_thumbnail cs_radius_10"} aria-label={"Understanding Your Needs - Initial Requirements & Direction"}>
+<img src={"/assets/images/projects/image1.jpg"} alt={"Understanding Your Needs - Requirements, preferences and budget"} />
 </a>
 <div className={"cs_card_info"}>
 <h3 className={"cs_card_title cs_fs_24 cs_bold cs_mb_16 text-uppercase"}>
-<a href={"/services/details"} aria-label={"Elite Craftsmanship - service title link"}>ELITE CRAFTSMANSHIP</a>
+<a href={"/services/details"} aria-label={"Understanding Your Needs service link"}>UNDERSTANDING YOUR NEEDS</a>
 </h3>
-<p className={"cs_card_subtitle cs_mb_20"}>Master-crafted bespoke finishes, precision millwork, and refined architectural detailing.</p>
-<a href={"/services/details"} className={"cs_text_btn_style_1 cs_fs_14 cs_bold cs_accent_color"} aria-label={"More services - Elite Craftsmanship"}>
-<span>MORE SERVICES</span>
+<p className={"cs_card_subtitle cs_mb_20"}>We begin by understanding your requirements, preferences and budget to establish the right direction for your project.</p>
+<a href={"/services/details"} className={"cs_text_btn_style_1 cs_fs_14 cs_bold cs_accent_color"} aria-label={"Discover more - Understanding Your Needs"}>
+<span>DISCOVER MORE</span>
 <span aria-hidden={"true"}>
 <svg width={"13"} height={"13"} viewBox={"0 0 14 14"} fill={"none"} xmlns={"http://www.w3.org/2000/svg"}>
 <path d={"M1 7H13M13 7L7.5 1.5M13 7L7.5 12.5"} stroke={"currentColor"} strokeWidth={"1.8"} strokeLinecap={"round"} strokeLinejoin={"round"}></path>
@@ -143,16 +143,16 @@ export default function Home() {
 </div>
 </div>
 <div className={"cs_card_style_7"}>
-<a href={"/services/details"} className={"cs_card_thumbnail cs_radius_10"} aria-label={"View Personalized Design service details"}>
-<img src={"/assets/images/projects/image10.jpg"} alt={"Personalized Design minimalist luxury lounge"} />
+<a href={"/services/details"} className={"cs_card_thumbnail cs_radius_10"} aria-label={"Concept & Materials - Finishes and Palettes"}>
+<img src={"/assets/images/projects/image10.jpg"} alt={"Concept & Materials - Colours, materials and finishes"} />
 </a>
 <div className={"cs_card_info"}>
 <h3 className={"cs_card_title cs_fs_24 cs_bold cs_mb_16 text-uppercase"}>
-<a href={"/services/details"} aria-label={"Personalized Design - service title link"}>PERSONALIZED DESIGN</a>
+<a href={"/services/details"} aria-label={"Concept & Materials service link"}>CONCEPT &amp; MATERIALS</a>
 </h3>
-<p className={"cs_card_subtitle cs_mb_20"}>Tailored spatial layouts and curated interiors designed around your unique lifestyle.</p>
-<a href={"/services/details"} className={"cs_text_btn_style_1 cs_fs_14 cs_bold cs_accent_color"} aria-label={"More services - Personalized Design"}>
-<span>MORE SERVICES</span>
+<p className={"cs_card_subtitle cs_mb_20"}>Colours, materials and finishes come together to shape a design that reflects your preferences and project requirements.</p>
+<a href={"/services/details"} className={"cs_text_btn_style_1 cs_fs_14 cs_bold cs_accent_color"} aria-label={"Discover more - Concept & Materials"}>
+<span>DISCOVER MORE</span>
 <span aria-hidden={"true"}>
 <svg width={"13"} height={"13"} viewBox={"0 0 14 14"} fill={"none"} xmlns={"http://www.w3.org/2000/svg"}>
 <path d={"M1 7H13M13 7L7.5 1.5M13 7L7.5 12.5"} stroke={"currentColor"} strokeWidth={"1.8"} strokeLinecap={"round"} strokeLinejoin={"round"}></path>
@@ -162,16 +162,16 @@ export default function Home() {
 </div>
 </div>
 <div className={"cs_card_style_7"}>
-<a href={"/services/details"} className={"cs_card_thumbnail cs_radius_10"} aria-label={"View Exclusive Locations service details"}>
-<img src={"/assets/images/projects/image4.jpg"} alt={"Exclusive Locations palatial architectural gallery"} />
+<a href={"/services/details"} className={"cs_card_thumbnail cs_radius_10"} aria-label={"Precision In Production - CNC and Custom Detailing"}>
+<img src={"/assets/images/projects/image4.jpg"} alt={"Precision In Production - Custom furniture and precision components"} />
 </a>
 <div className={"cs_card_info"}>
 <h3 className={"cs_card_title cs_fs_24 cs_bold cs_mb_16 text-uppercase"}>
-<a href={"/services/details"} aria-label={"Exclusive Locations - service title link"}>EXCLUSIVE LOCATIONS</a>
+<a href={"/services/details"} aria-label={"Precision In Production service link"}>PRECISION IN PRODUCTION</a>
 </h3>
-<p className={"cs_card_subtitle cs_mb_20"}>Architectural residences and luxury spaces sited in premier landmark destinations.</p>
-<a href={"/services/details"} className={"cs_text_btn_style_1 cs_fs_14 cs_bold cs_accent_color"} aria-label={"More services - Exclusive Locations"}>
-<span>MORE SERVICES</span>
+<p className={"cs_card_subtitle cs_mb_20"}>From custom furniture to detailed components, we craft everything with care and attention to detail.</p>
+<a href={"/services/details"} className={"cs_text_btn_style_1 cs_fs_14 cs_bold cs_accent_color"} aria-label={"Discover more - Precision In Production"}>
+<span>DISCOVER MORE</span>
 <span aria-hidden={"true"}>
 <svg width={"13"} height={"13"} viewBox={"0 0 14 14"} fill={"none"} xmlns={"http://www.w3.org/2000/svg"}>
 <path d={"M1 7H13M13 7L7.5 1.5M13 7L7.5 12.5"} stroke={"currentColor"} strokeWidth={"1.8"} strokeLinecap={"round"} strokeLinejoin={"round"}></path>
@@ -181,16 +181,16 @@ export default function Home() {
 </div>
 </div>
 <div className={"cs_card_style_7"}>
-<a href={"/services/details"} className={"cs_card_thumbnail cs_radius_10"} aria-label={"View Luxury Experience service details"}>
-<img src={"/assets/images/projects/image3.jpg"} alt={"Luxury Experience grand dining banquet"} />
+<a href={"/services/details"} className={"cs_card_thumbnail cs_radius_10"} aria-label={"Project Execution & Handover - Turnkey Delivery"}>
+<img src={"/assets/images/projects/image3.jpg"} alt={"Project Execution & Handover - Approved design through execution"} />
 </a>
 <div className={"cs_card_info"}>
 <h3 className={"cs_card_title cs_fs_24 cs_bold cs_mb_16 text-uppercase"}>
-<a href={"/services/details"} aria-label={"Luxury Experience - service title link"}>LUXURY EXPERIENCE</a>
+<a href={"/services/details"} aria-label={"Project Execution & Handover service link"}>PROJECT EXECUTION &amp; HANDOVER</a>
 </h3>
-<p className={"cs_card_subtitle cs_mb_20"}>Turnkey interior curation, concierge project execution, and seamless design delivery.</p>
-<a href={"/services/details"} className={"cs_text_btn_style_1 cs_fs_14 cs_bold cs_accent_color"} aria-label={"More services - Luxury Experience"}>
-<span>MORE SERVICES</span>
+<p className={"cs_card_subtitle cs_mb_20"}>We take the approved design through execution, working towards a finished space that reflects the agreed plan.</p>
+<a href={"/services/details"} className={"cs_text_btn_style_1 cs_fs_14 cs_bold cs_accent_color"} aria-label={"Discover more - Project Execution & Handover"}>
+<span>DISCOVER MORE</span>
 <span aria-hidden={"true"}>
 <svg width={"13"} height={"13"} viewBox={"0 0 14 14"} fill={"none"} xmlns={"http://www.w3.org/2000/svg"}>
 <path d={"M1 7H13M13 7L7.5 1.5M13 7L7.5 12.5"} stroke={"currentColor"} strokeWidth={"1.8"} strokeLinecap={"round"} strokeLinejoin={"round"}></path>
@@ -202,27 +202,27 @@ export default function Home() {
 </div>
 </div>
 </section>
-<section className={"cs_some_spaces_section"} aria-label={"Our Projects - Some Spaces Some Iconic"}>
+<section className={"cs_some_spaces_section"} aria-label={"Our Projects - Spaces We’re Proud to Have Built."}>
 <div className={"cs_height_120 cs_height_lg_80 cs_some_spaces_top_spacer"}></div>
 <div className={"container"}>
 <div className={"cs_section_heading_style_1 cs_center_column text-center"}>
-<p className={"cs_section_subtitle cs_bold cs_accent_color cs_mb_20 text-uppercase"}>OUR PROJECT</p>
-<h2 className={"cs_section_title cs_fs_53 cs_semibold text-uppercase mb-0"}>SOME SPACES SOME ICONIC.</h2>
+<p className={"cs_section_subtitle cs_bold cs_accent_color cs_mb_20 text-uppercase"}>OUR PROJECTS</p>
+<h2 className={"cs_section_title cs_fs_53 cs_semibold text-uppercase mb-0"}>SPACES WE’RE PROUD TO HAVE BUILT.</h2>
 </div>
 <div className={"cs_height_60 cs_height_lg_50 cs_some_spaces_mid_spacer"}></div>
 <div className={"cs_grid_style_4"}>
 <div className={"cs_card_style_6 cs_gray_bg cs_radius_10"}>
-<a href={"/portfolio/details"} className={"cs_card_thumbnail"} aria-label={"View Contemporary Luxury Residence project details"}>
-<img src={"/assets/images/projects/image18.jpg"} alt={"Contemporary Luxury Residence - Minimalist Living Lounge"} />
+<a href={"/portfolio"} className={"cs_card_thumbnail"} aria-label={"View Vintage Finish Interior project details"}>
+<img src={"/assets/images/projects/image18.jpg"} alt={"Vintage Finish Interior, Race Course, Coimbatore"} />
 </a>
 <div className={"cs_card_content_wrapper position-relative"}>
 <div className={"cs_card_content"}>
 <div className={"cs_card_header"}>
 <h3 className={"cs_card_title cs_fs_18 cs_bold cs_mb_20"}>
-<a href={"/portfolio/details"} aria-label={"Contemporary Luxury Residence project"}>CONTEMPORARY RESIDENCE</a>
+<a href={"/portfolio"} aria-label={"Vintage Finish Interior project"}>VINTAGE FINISH INTERIOR, RACE COURSE, COIMBATORE</a>
 </h3>
-<a href={"/portfolio/details"} className={"cs_btn_style_1 cs_fs_14 cs_bold cs_primary_font cs_radius_50"} aria-label={"View RESIDENTIAL category projects"}>
-<span>RESIDENTIAL</span>
+<a href={"/portfolio"} className={"cs_btn_style_1 cs_fs_14 cs_bold cs_primary_font cs_radius_50"} aria-label={"View PU PAINT WORK category projects"}>
+<span>PU PAINT WORK ↗</span>
 <span className={"cs_btn_icon cs_radius_100 cs_center"} aria-hidden={"true"}>
 <svg width={"13"} height={"13"} viewBox={"0 0 14 14"} fill={"none"} xmlns={"http://www.w3.org/2000/svg"}>
 <path d={"M1 7H13M13 7L7.5 1.5M13 7L7.5 12.5"} stroke={"currentColor"} strokeWidth={"1.8"} strokeLinecap={"round"} strokeLinejoin={"round"}></path>
@@ -232,8 +232,8 @@ export default function Home() {
 </div>
 <div className={"cs_card_desc"}>
 <hr className={"cs_mb_20 mt-0"} aria-hidden={"true"} />
-<p className={"cs_card_subtitle cs_mb_18"}>Buildings and spaces that balance beauty, environment by combining creative.</p>
-<a href={"/portfolio/details"} aria-label={"Explore more architecture and design projects"} className={"cs_text_btn_style_1 cs_fs_14 cs_bold cs_accent_color"}>
+<p className={"cs_card_subtitle cs_mb_18"}>A vintage-inspired look brought to life with carefully finished PU paint detailing.</p>
+<a href={"/portfolio"} aria-label={"Explore projects - Vintage Finish Interior"} className={"cs_text_btn_style_1 cs_fs_14 cs_bold cs_accent_color"}>
 <span>EXPLORE PROJECTS</span>
 <span aria-hidden={"true"}>
 <svg width={"13"} height={"13"} viewBox={"0 0 14 14"} fill={"none"} xmlns={"http://www.w3.org/2000/svg"}>
@@ -246,17 +246,17 @@ export default function Home() {
 </div>
 </div>
 <div className={"cs_card_style_6 cs_gray_bg cs_radius_10 active"} aria-current={"true"}>
-<a href={"/portfolio/details"} className={"cs_card_thumbnail"} aria-label={"View Palatial Heritage Gallery project details"}>
-<img src={"/assets/images/projects/image4.jpg"} alt={"Palatial Architectural Corridor - Arched Gallery"} />
+<a href={"/portfolio"} className={"cs_card_thumbnail"} aria-label={"View Interior Project, KR Pura details"}>
+<img src={"/assets/images/projects/image4.jpg"} alt={"Interior Project, KR Pura, Bangalore"} />
 </a>
 <div className={"cs_card_content_wrapper position-relative"}>
 <div className={"cs_card_content"}>
 <div className={"cs_card_header"}>
 <h3 className={"cs_card_title cs_fs_18 cs_bold cs_mb_20"}>
-<a href={"/portfolio/details"} aria-label={"Palatial Heritage Gallery project"}>PALATIAL GALLERY</a>
+<a href={"/portfolio"} aria-label={"Interior Project, KR Pura, Bangalore project"}>INTERIOR PROJECT, KR PURA, BANGALORE</a>
 </h3>
-<a href={"/portfolio/details"} className={"cs_btn_style_1 cs_fs_14 cs_bold cs_primary_font cs_radius_50"} aria-label={"View ARCHITECTURE category projects"}>
-<span>ARCHITECTURE</span>
+<a href={"/portfolio"} className={"cs_btn_style_1 cs_fs_14 cs_bold cs_primary_font cs_radius_50"} aria-label={"View INTERIOR DESIGN category projects"}>
+<span>INTERIOR DESIGN ↗</span>
 <span className={"cs_btn_icon cs_radius_100 cs_center"} aria-hidden={"true"}>
 <svg width={"13"} height={"13"} viewBox={"0 0 14 14"} fill={"none"} xmlns={"http://www.w3.org/2000/svg"}>
 <path d={"M1 7H13M13 7L7.5 1.5M13 7L7.5 12.5"} stroke={"currentColor"} strokeWidth={"1.8"} strokeLinecap={"round"} strokeLinejoin={"round"}></path>
@@ -266,8 +266,8 @@ export default function Home() {
 </div>
 <div className={"cs_card_desc"}>
 <hr className={"cs_mb_20 mt-0"} aria-hidden={"true"} />
-<p className={"cs_card_subtitle cs_mb_18"}>Buildings and spaces that balance beauty, environment by combining creative.</p>
-<a href={"/portfolio/details"} aria-label={"Explore more architecture and design projects"} className={"cs_text_btn_style_1 cs_fs_14 cs_bold cs_accent_color"}>
+<p className={"cs_card_subtitle cs_mb_18"}>A well-planned interior featuring clean detailing and a cohesive design finish.</p>
+<a href={"/portfolio"} aria-label={"Explore projects - KR Pura Bangalore"} className={"cs_text_btn_style_1 cs_fs_14 cs_bold cs_accent_color"}>
 <span>EXPLORE PROJECTS</span>
 <span aria-hidden={"true"}>
 <svg width={"13"} height={"13"} viewBox={"0 0 14 14"} fill={"none"} xmlns={"http://www.w3.org/2000/svg"}>
@@ -280,17 +280,17 @@ export default function Home() {
 </div>
 </div>
 <div className={"cs_card_style_6 cs_gray_bg cs_radius_10"}>
-<a href={"/portfolio/details"} className={"cs_card_thumbnail"} aria-label={"View Classical Dining Banquet project details"}>
-<img src={"/assets/images/projects/image3.jpg"} alt={"Grand Classical Dining Salon"} />
+<a href={"/portfolio"} className={"cs_card_thumbnail"} aria-label={"View Office Interior, Tidal Park details"}>
+<img src={"/assets/images/projects/image3.jpg"} alt={"Office Interior, Tidal Park"} />
 </a>
 <div className={"cs_card_content_wrapper position-relative"}>
 <div className={"cs_card_content"}>
 <div className={"cs_card_header"}>
 <h3 className={"cs_card_title cs_fs_18 cs_bold cs_mb_20"}>
-<a href={"/portfolio/details"} aria-label={"Classical Dining Banquet project"}>CLASSICAL SALON</a>
+<a href={"/portfolio"} aria-label={"Office Interior, Tidal Park project"}>OFFICE INTERIOR, TIDAL PARK</a>
 </h3>
-<a href={"/portfolio/details"} className={"cs_btn_style_1 cs_fs_14 cs_bold cs_primary_font cs_radius_50"} aria-label={"View INTERIOR category projects"}>
-<span>INTERIOR</span>
+<a href={"/portfolio"} className={"cs_btn_style_1 cs_fs_14 cs_bold cs_primary_font cs_radius_50"} aria-label={"View INTERIOR DESIGN category projects"}>
+<span>INTERIOR DESIGN ↗</span>
 <span className={"cs_btn_icon cs_radius_100 cs_center"} aria-hidden={"true"}>
 <svg width={"13"} height={"13"} viewBox={"0 0 14 14"} fill={"none"} xmlns={"http://www.w3.org/2000/svg"}>
 <path d={"M1 7H13M13 7L7.5 1.5M13 7L7.5 12.5"} stroke={"currentColor"} strokeWidth={"1.8"} strokeLinecap={"round"} strokeLinejoin={"round"}></path>
@@ -300,8 +300,8 @@ export default function Home() {
 </div>
 <div className={"cs_card_desc"}>
 <hr className={"cs_mb_20 mt-0"} aria-hidden={"true"} />
-<p className={"cs_card_subtitle cs_mb_18"}>Buildings and spaces that balance beauty, environment by combining creative.</p>
-<a href={"/portfolio/details"} aria-label={"Explore more architecture and design projects"} className={"cs_text_btn_style_1 cs_fs_14 cs_bold cs_accent_color"}>
+<p className={"cs_card_subtitle cs_mb_18"}>A functional workspace planned around how teams work, with clean detailing and a polished finish.</p>
+<a href={"/portfolio"} aria-label={"Explore projects - Tidal Park"} className={"cs_text_btn_style_1 cs_fs_14 cs_bold cs_accent_color"}>
 <span>EXPLORE PROJECTS</span>
 <span aria-hidden={"true"}>
 <svg width={"13"} height={"13"} viewBox={"0 0 14 14"} fill={"none"} xmlns={"http://www.w3.org/2000/svg"}>
@@ -314,17 +314,17 @@ export default function Home() {
 </div>
 </div>
 <div className={"cs_card_style_6 cs_gray_bg cs_radius_10"}>
-<a href={"/portfolio/details"} className={"cs_card_thumbnail"} aria-label={"View Artisan Wood-Paneled Lounge project details"}>
-<img src={"/assets/images/projects/image5.jpg"} alt={"Artisan Wood-Paneled Lounge and Salon"} />
+<a href={"/portfolio"} className={"cs_card_thumbnail"} aria-label={"View Corporate Site Interior details"}>
+<img src={"/assets/images/projects/image5.jpg"} alt={"Corporate Site Interior"} />
 </a>
 <div className={"cs_card_content_wrapper position-relative"}>
 <div className={"cs_card_content"}>
 <div className={"cs_card_header"}>
 <h3 className={"cs_card_title cs_fs_18 cs_bold cs_mb_20"}>
-<a href={"/portfolio/details"} aria-label={"Artisan Wood-Paneled Lounge project"}>BESPOKE TIMBER LOUNGE</a>
+<a href={"/portfolio"} aria-label={"Corporate Site Interior project"}>CORPORATE SITE INTERIOR</a>
 </h3>
-<a href={"/portfolio/details"} className={"cs_btn_style_1 cs_fs_14 cs_bold cs_primary_font cs_radius_50"} aria-label={"View BESPOKE category projects"}>
-<span>BESPOKE</span>
+<a href={"/portfolio"} className={"cs_btn_style_1 cs_fs_14 cs_bold cs_primary_font cs_radius_50"} aria-label={"View WORKSPACE DESIGN category projects"}>
+<span>WORKSPACE DESIGN ↗</span>
 <span className={"cs_btn_icon cs_radius_100 cs_center"} aria-hidden={"true"}>
 <svg width={"13"} height={"13"} viewBox={"0 0 14 14"} fill={"none"} xmlns={"http://www.w3.org/2000/svg"}>
 <path d={"M1 7H13M13 7L7.5 1.5M13 7L7.5 12.5"} stroke={"currentColor"} strokeWidth={"1.8"} strokeLinecap={"round"} strokeLinejoin={"round"}></path>
@@ -334,8 +334,8 @@ export default function Home() {
 </div>
 <div className={"cs_card_desc"}>
 <hr className={"cs_mb_20 mt-0"} aria-hidden={"true"} />
-<p className={"cs_card_subtitle cs_mb_18"}>Buildings and spaces that balance beauty, environment by combining creative.</p>
-<a href={"/portfolio/details"} aria-label={"Explore more architecture and design projects"} className={"cs_text_btn_style_1 cs_fs_14 cs_bold cs_accent_color"}>
+<p className={"cs_card_subtitle cs_mb_18"}>A professional workspace shaped around functional layouts and a considered interior finish.</p>
+<a href={"/portfolio"} aria-label={"Explore projects - Corporate Site Interior"} className={"cs_text_btn_style_1 cs_fs_14 cs_bold cs_accent_color"}>
 <span>EXPLORE PROJECTS</span>
 <span aria-hidden={"true"}>
 <svg width={"13"} height={"13"} viewBox={"0 0 14 14"} fill={"none"} xmlns={"http://www.w3.org/2000/svg"}>
@@ -356,33 +356,33 @@ export default function Home() {
 <div className={"row cs_gap_y_40 align-items-center"}>
 <div className={"col-lg-6"}>
 <div className={"cs_skill_thumbnail"}>
-<img src={"/assets/images/projects/image9.jpg"} alt={"The Core Company Values - Gallery Foyer"} />
+<img src={"/assets/images/projects/image9.jpg"} alt={"Mitjen Capabilities - Modern machinery and precision execution"} />
 </div>
 </div>
 <div className={"col-lg-6"}>
 <div className={"cs_skill_info"}>
 <div className={"cs_section_heading_style_1 cs_mb_30"}>
-<p className={"cs_section_subtitle cs_bold cs_accent_color cs_mb_20 text-uppercase"}>OUR SKILLS</p>
-<h2 className={"cs_section_title cs_fs_53 cs_bold cs_mb_16"}>THE CORE COMPANY VALUES</h2>
-<p className={"mb-0"}>Architecture and interior design blend creativity with functionality, shaping spaces that aesthetic harmony of a building, while interior design breathes life into it with thoughtful layouts, textures, colors, and materials. </p>
+<p className={"cs_section_subtitle cs_bold cs_accent_color cs_mb_20 text-uppercase"}>OUR CAPABILITIES</p>
+<h2 className={"cs_section_title cs_fs_53 cs_bold cs_mb_16"}>TECHNOLOGY THAT SHAPES QUALITY.</h2>
+<p className={"mb-0"}>Good interiors need the right tools as well as good ideas. The right technology helps us plan clearly, produce accurately and finish every detail with care, so the final space matches what you imagined.</p>
 </div>
 <div className={"cs_skill_progress_wrapper"}>
 <div className={"cs_skill_progress"}>
-<div className={"cs_progress_head cs_fs_24 cs_semibold cs_primary_color cs_primary_font cs_mb_20"}>Interior Sketch</div>
-<div className={"cs_progress"} data-progress={"65"}>
-<div className={"cs_progress_in"}><span className={"cs_fs_24 cs_semibold cs_primary_color cs_primary_font"}>65%</span></div>
+<div className={"cs_progress_head cs_fs_24 cs_semibold cs_primary_color cs_primary_font cs_mb_20"}>GERMAN MACHINERY</div>
+<div className={"cs_progress"} data-progress={"98"}>
+<div className={"cs_progress_in"}><span className={"cs_fs_24 cs_semibold cs_primary_color cs_primary_font"}>98%</span></div>
 </div>
 </div>
 <div className={"cs_skill_progress"}>
-<div className={"cs_progress_head cs_fs_24 cs_semibold cs_primary_color cs_primary_font cs_mb_20"}>3D Modeling</div>
-<div className={"cs_progress"} data-progress={"85"}>
-<div className={"cs_progress_in"}><span className={"cs_fs_24 cs_semibold cs_primary_color cs_primary_font"}>85%</span></div>
+<div className={"cs_progress_head cs_fs_24 cs_semibold cs_primary_color cs_primary_font cs_mb_20"}>CNC DETAILING</div>
+<div className={"cs_progress"} data-progress={"96"}>
+<div className={"cs_progress_in"}><span className={"cs_fs_24 cs_semibold cs_primary_color cs_primary_font"}>96%</span></div>
 </div>
 </div>
 <div className={"cs_skill_progress"}>
-<div className={"cs_progress_head cs_fs_24 cs_semibold cs_primary_color cs_primary_font cs_mb_20"}>2D Planning</div>
-<div className={"cs_progress"} data-progress={"55"}>
-<div className={"cs_progress_in"}><span className={"cs_fs_24 cs_semibold cs_primary_color cs_primary_font"}>55%</span></div>
+<div className={"cs_progress_head cs_fs_24 cs_semibold cs_primary_color cs_primary_font cs_mb_20"}>2D &amp; 3D VISUALS</div>
+<div className={"cs_progress"} data-progress={"94"}>
+<div className={"cs_progress_in"}><span className={"cs_fs_24 cs_semibold cs_primary_color cs_primary_font"}>94%</span></div>
 </div>
 </div>
 </div>
@@ -414,9 +414,9 @@ export default function Home() {
 </svg>
 </span>
 </div>
-<h2 className={"cs_cta_title cs_fs_96 cs_bold cs_white_color cs_mb_60 cs_mb_lg_40"}>UNLOCK YOUR DREAM HOME TODAY</h2>
-<a href={"/contact"} aria-label={"Book an appointment through our contact page"} className={"cs_btn_style_1 cs_fs_14 cs_bold cs_primary_font cs_radius_50"}>
-<span>BOOK APPOINTMENT</span>
+<h2 className={"cs_cta_title cs_fs_96 cs_bold cs_white_color cs_mb_60 cs_mb_lg_40"}>LET&apos;S BRING YOUR SPACE TO LIFE</h2>
+<a href={"/contact"} aria-label={"Start your project with Mitjen Interiors"} className={"cs_btn_style_1 cs_fs_14 cs_bold cs_primary_font cs_radius_50"}>
+<span>START YOUR PROJECT</span>
 <span className={"cs_btn_icon cs_radius_100 cs_center"} aria-hidden={"true"}>
 <svg width={"13"} height={"13"} viewBox={"0 0 14 14"} fill={"none"} xmlns={"http://www.w3.org/2000/svg"}>
 <path d={"M1 7H13M13 7L7.5 1.5M13 7L7.5 12.5"} stroke={"currentColor"} strokeWidth={"1.8"} strokeLinecap={"round"} strokeLinejoin={"round"}></path>

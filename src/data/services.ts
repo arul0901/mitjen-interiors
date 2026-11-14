@@ -1,5 +1,5 @@
-// PLACEHOLDER: replace with real client testimonials, real numbers and real projects before launch
-// Brand: Bespoke Architecture Studio
+// Brand: Mitjen Interiors
+// Craft Interior Studio, Coimbatore
 
 export interface AboutFeature {
   id: string;
@@ -9,6 +9,10 @@ export interface AboutFeature {
   copy: string;
   linkText: string;
   href: string;
+  secondaryLinkText?: string;
+  secondaryHref?: string;
+  accentLinkText?: string;
+  accentHref?: string;
   highlights: string[];
   tags: string[];
 }
@@ -39,43 +43,51 @@ export interface ServiceItem {
 }
 
 export const aboutData: AboutSectionData = {
-  eyebrow: 'ABOUT BESPOKE',
-  title: 'Spaces that reflect who you are.',
+  eyebrow: 'ABOUT MITJEN INTERIORS',
+  title: 'Where Your Vision Meets Our Craftsmanship.',
   description:
-    'Every detail matters. From concept to completion, we create interiors that are elegant, functional, and uniquely yours.',
+    'We bring thoughtful design, creative ideas and skilled execution together to create spaces that look exceptional, work beautifully and feel uniquely yours.',
   leftPicture: '/assets/images/projects/image1.jpg',
-  leftPictureAlt: 'Bespoke architecture living space with warm daylight and refined materials',
-  leftPictureBadge: 'ARCHITECTURAL DISCIPLINE • EST. 2010',
+  leftPictureAlt: 'Mitjen Interiors bespoke architectural living space',
+  leftPictureBadge: '15+ YEARS OF EXPERIENCE · 2,000+ PROJECTS',
   features: [
     {
-      id: 'thoughtful-design',  
-      title: 'Thoughtful Design',
-      subtitle: 'Spatial Layouts & Flow',
+      id: 'space-planning',
+      title: 'Space Planning & Functionality',
+      subtitle: 'CREATIVITY IN EVERY DETAIL',
       icon: 'line',
-      copy: 'Intentional layouts shaped around daily rituals, natural daylight, and circulation. Every space is engineered for effortless living and intuitive flow.',
-      linkText: 'LEARN MORE',
+      copy: 'A well-designed interior starts with understanding how a space needs to work. From layout to the finer details, every element makes your space more comfortable and practical.',
+      linkText: 'EXPLORE SERVICES',
       href: '/services',
+      secondaryLinkText: 'OUR STORY',
+      secondaryHref: '/about',
+      accentLinkText: 'CONNECT NOW →',
+      accentHref: '/contact',
       highlights: [
-        'Custom millwork & tailored joinery',
-        'Natural daylight & circulation studies',
-        'Acoustic balance & calm zoning'
+        'Purpose-driven space planning',
+        '2D and 3D design visualisation',
+        'Custom furniture and tailored solutions'
       ],
-      tags: ['Spatial Planning', 'Bespoke Joinery']
+      tags: ['Space Planning', '3D Visuals', 'Custom Furniture']
     },
     {
-      id: 'timeless-aesthetics',
-      title: 'Timeless Aesthetics',
-      subtitle: 'Tactile Materials & Patina',
+      id: 'precision-build',
+      title: 'Precision Build & Execution',
+      subtitle: 'CRAFTED WITH PRECISION',
       icon: 'heart',
-      copy: 'Designs that balance beauty and function for lasting impact. We curate tactile palettes of natural stone, warm oak, and textiles that mature gracefully over decades.',
-      linkText: 'LEARN MORE',
-      href: '/services',
+      copy: "An interior's quality shows in its details. With custom furniture capabilities, CNC detailing and German machinery, we bring design concepts to life with precision.",
+      linkText: 'DISCOVER OUR APPROACH',
+      href: '/#approach',
+      secondaryLinkText: 'EXPLORE PROJECTS',
+      secondaryHref: '/portfolio',
+      accentLinkText: 'CONNECT NOW →',
+      accentHref: '/contact',
       highlights: [
-        'Tactile travertine & European oak',
-        'Layered ambient architectural lighting',
-        'Enduring proportions free of fast trends'
+        'Custom furniture solutions',
+        'CNC detailing and precision machinery',
+        'Turnkey interior execution'
       ],
-      tags: ['Natural Stone', 'Timeless Textures']
+      tags: ['German Machinery', 'CNC Detailing', 'Turnkey Execution']
     }
   ]
 };
@@ -86,27 +98,41 @@ export const servicesData: ServiceItem[] = [
     title: 'Residential Interiors',
     titleLines: ['Residential', 'Interiors'],
     category: 'Private Living',
-    description: 'Beautiful homes designed around your lifestyle.',
-    copy: 'Beautiful homes designed around your lifestyle.',
-    image: '/images/services/residential.webp',
-    alt: 'Bespoke residential interior living space with warm neutral tones and soft daylight',
+    description: 'Thoughtfully designed homes shaped around your lifestyle and everyday comfort.',
+    copy: 'Thoughtfully designed homes shaped around your lifestyle and everyday comfort.',
+    image: '/assets/images/projects/image18.jpg',
+    alt: 'Thoughtfully designed residential homes shaped around your lifestyle and comfort',
     aspectRatio: '16/10',
-    href: '/portfolio',
-    linkText: 'VIEW PROJECTS',
-    features: ['Custom Millwork', 'Spatial Masterplanning', 'Lighting Atmosphere', 'Material Sourcing']
+    href: '/services/details',
+    linkText: 'LEARN MORE →',
+    features: ['Modular Kitchens', 'Custom Wardrobes', 'Living Spaces', 'Pooja Units']
   },
   {
     id: 'commercial',
     title: 'Commercial Interiors',
     titleLines: ['Commercial', 'Interiors'],
     category: 'Brand Experience',
-    description: 'Inspiring spaces that elevate brand and experience.',
-    copy: 'Inspiring spaces that elevate brand and experience.',
-    image: '/images/services/commercial.webp',
-    alt: 'Contemporary commercial architecture and workspace environment',
+    description: 'Commercial spaces that reflect your brand and elevate the customer experience.',
+    copy: 'Commercial spaces that reflect your brand and elevate the customer experience.',
+    image: '/assets/images/projects/image4.jpg',
+    alt: 'Commercial spaces that reflect your brand and elevate customer experience',
     aspectRatio: '16/10',
-    href: '/portfolio',
-    linkText: 'VIEW PROJECTS',
-    features: ['Acoustic Engineering', 'Workplace Strategy', 'Experiential Retail', 'Sustainable Fitouts']
+    href: '/services/details',
+    linkText: 'LEARN MORE →',
+    features: ['Retail Boutiques', 'Experience Centers', 'Hospitality', 'Showrooms']
+  },
+  {
+    id: 'corporate',
+    title: 'Corporate Interiors',
+    titleLines: ['Corporate', 'Interiors'],
+    category: 'Workspaces',
+    description: "Purposeful offices that balance functionality, professional aesthetics and your team's needs.",
+    copy: "Purposeful offices that balance functionality, professional aesthetics and your team's needs.",
+    image: '/assets/images/projects/image3.jpg',
+    alt: "Purposeful corporate offices balancing functionality, aesthetics and team needs",
+    aspectRatio: '16/10',
+    href: '/services/details',
+    linkText: 'LEARN MORE →',
+    features: ['Executive Cabins', 'Conference Suites', 'Ergonomic Workstations', 'Acoustics']
   }
 ];

@@ -131,12 +131,10 @@ export const WhyChooseSection: React.FC = () => {
               <span>WHY CHOOSE MITJEN</span>
             </div>
             <h2 className="bespoke-why-choose-title">
-              <span>Architectural Discipline</span>{' '}
-              <span>&amp; Distinction</span>
+              <span>What Makes Mitjen Interiors Different?</span>
             </h2>
             <p className="bespoke-why-choose-subtitle">
-              Six core principles behind our craft — ensuring uncompromising spatial clarity,
-              material honesty, and bespoke execution.
+              Every interior project comes with its own needs and expectations. At Mitjen Interiors, we bring experience, thoughtful planning and careful execution together to create spaces that work for the people who use them.
             </p>
           </div>
         </Reveal>
@@ -176,16 +174,15 @@ export const WhyChooseSection: React.FC = () => {
                 “
               </span>
               <p className="bespoke-why-choose-footer-quote">
-                Architecture is the balance of beauty and environment — combining creative vision
-                with technical expertise to shape how you live.
+                Every space has a purpose. Our approach is to understand it, plan it thoughtfully and bring the design to life with care.
               </p>
             </div>
             <a
-              href="/about"
+              href="/#approach"
               className="bespoke-why-choose-btn"
-              aria-label="Learn more about our architectural philosophy"
+              aria-label="Explore our interior design approach"
             >
-              <span>EXPLORE STUDIO PHILOSOPHY</span>
+              <span>EXPLORE OUR APPROACH</span>
               <svg
                 width="14"
                 height="14"

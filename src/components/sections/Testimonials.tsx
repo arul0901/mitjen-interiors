@@ -101,11 +101,10 @@ export const TestimonialsSection: React.FC = () => {
     >
       <div className="bespoke-container">
         <Reveal staggerIndex={0}>
-          {/* Centered Heading: 2 lines */}
+          {/* Centered Heading: 1 line */}
           <div className="bespoke-testimonials-header">
             <h2 className="bespoke-testimonials-title">
-              <span>Voices from those</span>
-              <span>we&apos;ve designed for.</span>
+              <span>Voices Behind Every Space We Create.</span>
             </h2>
           </div>
         </Reveal>

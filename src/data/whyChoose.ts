@@ -11,58 +11,57 @@ export const whyChooseData: WhyChooseItem[] = [
   {
     id: '01',
     index: '01',
-    title: 'Trusted Expertise',
+    title: 'EXPERIENCE THAT MATTERS',
     subtitle:
-      'Over a decade of architectural rigor, structural mastery, and multidisciplinary execution across complex private residences and commercial venues.',
-    tag: 'Rigor & Mastery',
+      'With 15+ years of experience and 2,000+ projects, we bring practical knowledge and confidence to every new space, whatever its size or style.',
+    tag: '15+ Yrs · 2,000+ Projects',
     iconType: 'expertise'
   },
   {
     id: '02',
     index: '02',
-    title: 'Tailored Designs',
+    title: 'DESIGNS THAT FEEL PERSONAL',
     subtitle:
-      'Every space is an intimate reflection of your lifestyle and identity. Bespoke spatial layouts engineered around your daily rituals and vision.',
-    tag: 'Custom Proportions',
+      'Every project starts with listening to your preferences and requirements, so the finished space reflects the way you want to live or work.',
+    tag: 'Tailored Solutions',
     iconType: 'design'
   },
   {
     id: '03',
     index: '03',
-    title: 'Seamless Process',
+    title: 'ATTENTION TO EVERY DETAIL',
     subtitle:
-      'From schematic architectural planning and 3D visualization through site coordination and final turnkey handover, we oversee every milestone.',
-    tag: 'Turnkey Delivery',
-    iconType: 'process'
+      'From the overall layout to the finishing touches, we focus on the small details that bring an interior together and give it a refined finish.',
+    tag: 'Refined Finishing',
+    iconType: 'quality'
   },
   {
     id: '04',
     index: '04',
-    title: 'Lasting Quality',
+    title: 'CAREFUL PRODUCTION',
     subtitle:
-      'Honest, tactile materials sourced to mature gracefully over time. Natural timber, architectural stone, and precision joinery built to endure.',
-    tag: 'Enduring Craft',
-    iconType: 'quality'
+      'Modern machinery and skilled production help turn approved designs into accurate, well-finished furniture and interior elements.',
+    tag: 'German Tech & CNC',
+    iconType: 'process'
   },
   {
     id: '05',
     index: '05',
-    title: 'Clear Communication',
+    title: 'DESIGN TO EXECUTION',
     subtitle:
-      'Transparent budgeting, fixed timeline tracking, and direct principal architect involvement throughout every design iteration.',
-    tag: 'Full Transparency',
+      'With turnkey execution options, we support your project from approved design through to completion, keeping every stage connected.',
+    tag: 'Turnkey Support',
     iconType: 'communication'
   },
   {
     id: '06',
     index: '06',
-    title: 'Skilled Collective',
+    title: 'GUIDED BY EXPERIENCE',
     subtitle:
-      'A dedicated in-house studio collective comprising licensed architects, interior designers, spatial planners, and master craftsmen.',
-    tag: 'In-House Studio',
+      'Led by V. Saravana Kumar, Mitjen Interiors combines design understanding with hands-on project knowledge to guide every project from start to finish.',
+    tag: 'Studio Leadership',
     iconType: 'team'
   }
 ];
 
 export default whyChooseData;
-
