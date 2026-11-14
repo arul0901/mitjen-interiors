@@ -2148,16 +2148,52 @@ select,
    THE ART OF EXCEPTIONAL LIVING: Single-Image Display (Desktop + Mobile)
    Overrides legacy 2-image 3D flip so single images render visibly & beautifully
    ========================================================================== */
+.cs_grid_style_5 .cs_card_style_7,
+.cs_grid_style_5 .cs_card_style_7:nth-child(even),
+.cs_grid_style_5 .cs_card_style_7:nth-child(odd),
+.cs_exceptional_living_section .cs_card_style_7 {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 18px !important;
+  height: 100% !important;
+}
+
 .cs_card_style_7 .cs_card_thumbnail,
+.cs_grid_style_5 .cs_card_style_7 .cs_card_thumbnail,
 .cs_exceptional_living_section .cs_card_style_7 .cs_card_thumbnail {
+  order: 1 !important;
   display: block !important;
   position: relative !important;
   width: 100% !important;
   aspect-ratio: 16 / 11 !important;
-  min-height: 220px !important;
+  height: 230px !important;
+  min-height: 200px !important;
+  max-height: 240px !important;
   overflow: hidden !important;
   border-radius: 12px !important;
   perspective: none !important;
+}
+
+.cs_card_style_7 .cs_card_info,
+.cs_grid_style_5 .cs_card_style_7 .cs_card_info,
+.cs_exceptional_living_section .cs_card_style_7 .cs_card_info {
+  order: 2 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 1 1 auto !important;
+}
+
+.cs_grid_style_5 .cs_card_style_7 .cs_card_title {
+  margin-bottom: 10px !important;
+}
+
+.cs_grid_style_5 .cs_card_style_7 .cs_card_subtitle {
+  margin-bottom: 16px !important;
+  flex-grow: 1 !important;
+}
+
+.cs_grid_style_5 .cs_card_style_7 .cs_text_btn_style_1 {
+  margin-top: auto !important;
 }
 
 .cs_card_style_7 .cs_card_thumbnail img,

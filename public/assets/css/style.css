@@ -7863,7 +7863,7 @@ label {
 }
 
 .cs_grid_style_5 .cs_card_style_7:nth-child(even) {
-  flex-direction: column-reverse;
+  flex-direction: column;
 }
 
 @media (max-width: 991px) {
@@ -10741,14 +10741,46 @@ i.fa-instagram::before {
 .cs_page_header_title, .cs_page_header_style_1 h1, .cs_page_header_content h1, h1.cs_page_header_title { color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; text-shadow: 0 2px 28px rgba(0, 0, 0, 0.95), 0 4px 50px rgba(0, 0, 0, 0.8) !important; }
 
 /* The Art of Exceptional Living (.cs_card_style_7) - Single Image Display */
+.cs_grid_style_5 .cs_card_style_7,
+.cs_grid_style_5 .cs_card_style_7:nth-child(even),
+.cs_grid_style_5 .cs_card_style_7:nth-child(odd) {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 18px !important;
+  height: 100% !important;
+}
+
 .cs_card_style_7 .cs_card_thumbnail {
+  order: 1 !important;
   display: block !important;
   position: relative !important;
   width: 100% !important;
   aspect-ratio: 16 / 11 !important;
-  min-height: 220px !important;
+  height: 230px !important;
+  min-height: 200px !important;
+  max-height: 240px !important;
   overflow: hidden !important;
   border-radius: 12px !important;
+}
+
+.cs_card_style_7 .cs_card_info {
+  order: 2 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 1 1 auto !important;
+}
+
+.cs_card_style_7 .cs_card_title {
+  margin-bottom: 10px !important;
+}
+
+.cs_card_style_7 .cs_card_subtitle {
+  margin-bottom: 16px !important;
+  flex-grow: 1 !important;
+}
+
+.cs_card_style_7 .cs_text_btn_style_1 {
+  margin-top: auto !important;
 }
 
 .cs_card_style_7 .cs_card_thumbnail img {

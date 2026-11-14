@@ -131,7 +131,7 @@ export default function Home() {
 <h3 className={"cs_card_title cs_fs_24 cs_bold cs_mb_16 text-uppercase"}>
 <a href={"/services/details"} aria-label={"Elite Craftsmanship - service title link"}>ELITE CRAFTSMANSHIP</a>
 </h3>
-<p className={"cs_card_subtitle cs_mb_20"}>Architecture is the art and science of designing buildings and spaces that Is balance beauty.</p>
+<p className={"cs_card_subtitle cs_mb_20"}>Master-crafted bespoke finishes, precision millwork, and refined architectural detailing.</p>
 <a href={"/services/details"} className={"cs_text_btn_style_1 cs_fs_14 cs_bold cs_accent_color"} aria-label={"More services - Elite Craftsmanship"}>
 <span>MORE SERVICES</span>
 <span aria-hidden={"true"}>
@@ -150,7 +150,7 @@ export default function Home() {
 <h3 className={"cs_card_title cs_fs_24 cs_bold cs_mb_16 text-uppercase"}>
 <a href={"/services/details"} aria-label={"Personalized Design - service title link"}>PERSONALIZED DESIGN</a>
 </h3>
-<p className={"cs_card_subtitle cs_mb_20"}>Architecture is the art and science of designing buildings and spaces that Is balance beauty.</p>
+<p className={"cs_card_subtitle cs_mb_20"}>Tailored spatial layouts and curated interiors designed around your unique lifestyle.</p>
 <a href={"/services/details"} className={"cs_text_btn_style_1 cs_fs_14 cs_bold cs_accent_color"} aria-label={"More services - Personalized Design"}>
 <span>MORE SERVICES</span>
 <span aria-hidden={"true"}>
@@ -169,7 +169,7 @@ export default function Home() {
 <h3 className={"cs_card_title cs_fs_24 cs_bold cs_mb_16 text-uppercase"}>
 <a href={"/services/details"} aria-label={"Exclusive Locations - service title link"}>EXCLUSIVE LOCATIONS</a>
 </h3>
-<p className={"cs_card_subtitle cs_mb_20"}>Architecture is the art and science of designing buildings and spaces that Is balance beauty.</p>
+<p className={"cs_card_subtitle cs_mb_20"}>Architectural residences and luxury spaces sited in premier landmark destinations.</p>
 <a href={"/services/details"} className={"cs_text_btn_style_1 cs_fs_14 cs_bold cs_accent_color"} aria-label={"More services - Exclusive Locations"}>
 <span>MORE SERVICES</span>
 <span aria-hidden={"true"}>
@@ -188,7 +188,7 @@ export default function Home() {
 <h3 className={"cs_card_title cs_fs_24 cs_bold cs_mb_16 text-uppercase"}>
 <a href={"/services/details"} aria-label={"Luxury Experience - service title link"}>LUXURY EXPERIENCE</a>
 </h3>
-<p className={"cs_card_subtitle cs_mb_20"}>Architecture is the art and science of designing buildings and spaces that Is balance beauty.</p>
+<p className={"cs_card_subtitle cs_mb_20"}>Turnkey interior curation, concierge project execution, and seamless design delivery.</p>
 <a href={"/services/details"} className={"cs_text_btn_style_1 cs_fs_14 cs_bold cs_accent_color"} aria-label={"More services - Luxury Experience"}>
 <span>MORE SERVICES</span>
 <span aria-hidden={"true"}>
