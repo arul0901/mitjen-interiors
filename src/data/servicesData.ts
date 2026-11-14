@@ -154,12 +154,12 @@ export const SERVICES_DATA: Record<string, ServicePageData> = {
         'space-saving home interiors',
         'custom home interior solutions'
       ],
-      ogImage: '/assets/mitijen/home1.jpeg'
+      ogImage: '/images/Residential/Residential1.jpeg'
     },
     hero: {
       headline: 'Bespoke Residential Sanctuaries Shaped for Modern Living',
       supportingText: 'Curated private homes, luxury villas, and penthouse apartments sculpted around natural daylight, tactile materiality, and bespoke architectural joinery.',
-      bgImage: '/assets/hero_cinematic.jpg',
+      bgImage: '/images/Residential/Residential1.jpeg',
       primaryCtaText: 'Schedule Design Consultation',
       secondaryCtaText: 'Explore Residential Practice'
     },
@@ -228,7 +228,7 @@ export const SERVICES_DATA: Record<string, ServicePageData> = {
             'Integrated architectural storage to eliminate visual clutter',
             'Balcony and indoor garden integration'
           ],
-          image: '/assets/mitijen/home1.jpeg',
+          image: '/images/Residential/Residential1.jpeg',
           imageAlt: 'Contemporary apartment living room interior featuring natural oak joinery and warm ambient lighting'
         },
         {
@@ -241,7 +241,7 @@ export const SERVICES_DATA: Record<string, ServicePageData> = {
             'Seamless indoor-outdoor courtyard transitions',
             'Cohesive architectural finishes across levels'
           ],
-          image: '/assets/CL.jpg',
+          image: '/images/Residential/Residential2.jpeg',
           imageAlt: 'Expansive villa interior with monolithic stone elements, linen furnishings, and garden views'
         },
         {
@@ -254,7 +254,7 @@ export const SERVICES_DATA: Record<string, ServicePageData> = {
             'Zoned conversational and reading corners',
             'Sculptural cove wash lighting and dimmable mood fixtures'
           ],
-          image: '/assets/transformations/lounge_after.jpg',
+          image: '/images/Residential/Residential3.jpeg',
           imageAlt: 'Warm modern living room salon with bespoke low-slung credenza and refined upholstery'
         },
         {
@@ -267,7 +267,7 @@ export const SERVICES_DATA: Record<string, ServicePageData> = {
             'Integrated reading illumination and blackout drapery pockets',
             'Private dressing niches and vanity extensions'
           ],
-          image: '/assets/mitijen/bedroom.jpeg',
+          image: '/images/Residential/Residential4.jpeg',
           imageAlt: 'Serene master bedroom suite featuring natural timber wall paneling and layered neutral textiles'
         },
         {
@@ -280,7 +280,7 @@ export const SERVICES_DATA: Record<string, ServicePageData> = {
             'Concealed appliances, pantries, and deep pull-out organisers',
             'Durable, heat-resistant, and stain-resistant surface selections'
           ],
-          image: '/assets/mitijen/kitchen.jpeg',
+          image: '/images/Residential/Residential5.jpeg',
           imageAlt: 'Modern minimalist kitchen pavilion with monolithic island, fluted wood detailing, and built-in appliances'
         },
         {
@@ -293,7 +293,7 @@ export const SERVICES_DATA: Record<string, ServicePageData> = {
             'Fluted glass or timber pocket doors with internal LED lighting',
             'De-humidified joinery design and durable soft-close fittings'
           ],
-          image: '/assets/craft_wardrobe.jpg',
+          image: '/images/Residential/Residential6.jpeg',
           imageAlt: 'Custom architectural walk-in wardrobe with warm internal lighting and tailored wooden shelving'
         },
         {
@@ -306,7 +306,7 @@ export const SERVICES_DATA: Record<string, ServicePageData> = {
             'Floating stone or timber vanity counters with under-glow lights',
             'Anti-fog backlit mirrors and quiet exhaust ventilation'
           ],
-          image: '/assets/panorama_bath.jpg',
+          image: '/images/Residential/Residential7.jpeg',
           imageAlt: 'Spa-like master bathroom with freestanding stone tub, backlit organic vanity mirror, and marble finishes'
         },
         {
@@ -319,7 +319,7 @@ export const SERVICES_DATA: Record<string, ServicePageData> = {
             'Floor-to-ceiling vertical storage utilization',
             'Visual sightline extensions with pocket screens and mirrors'
           ],
-          image: '/assets/craft_joinery.jpg',
+          image: '/images/Residential/Residential1.jpeg',
           imageAlt: 'Smart compact apartment joinery design showing integrated shelving, study desk, and hidden storage'
         }
       ]
@@ -521,14 +521,14 @@ export const SERVICES_DATA: Record<string, ServicePageData> = {
         category: 'Business & Retail Spaces',
         slug: '/services/commercial-interior-design',
         description: 'Explore customer-focused retail stores, boutique hospitality venues, and showrooms designed for memorable brand experiences.',
-        image: '/assets/CS.jpg'
+        image: '/images/Commercial/Commercial1.jpeg'
       },
       {
         title: 'Corporate Office Interior Design',
         category: 'Workplaces & Headquarters',
         slug: '/services/corporate-interior-design',
         description: 'Discover high-performance corporate workspaces balancing collaborative energy, private focus, and architectural identity.',
-        image: '/assets/I2.jpg'
+        image: '/images/Corporate/Corporate1.jpeg'
       }
     ],
     finalCta: {
@@ -559,12 +559,12 @@ export const SERVICES_DATA: Record<string, ServicePageData> = {
         'commercial space planning',
         'brand-focused interiors'
       ],
-      ogImage: '/assets/CS.jpg'
+      ogImage: '/images/Commercial/Commercial1.jpeg'
     },
     hero: {
       headline: 'Experiential Commercial Spaces Designed Around Your Brand',
       supportingText: 'Sculptural retail flagships, dining pavilions, and boutique commercial environments where spatial choreography and tactile materials elevate brand presence.',
-      bgImage: '/assets/CS.jpg',
+      bgImage: '/images/Commercial/Commercial1.jpeg',
       primaryCtaText: 'Discuss Your Commercial Project',
       secondaryCtaText: 'Explore Commercial Portfolio'
     },
@@ -597,7 +597,7 @@ export const SERVICES_DATA: Record<string, ServicePageData> = {
             'Flexible modular display fixtures and perimeter shelving',
             'High-CRI accent lighting to showcase merchandise accurately'
           ],
-          image: '/assets/CS.jpg',
+          image: '/images/Commercial/Commercial1.jpeg',
           imageAlt: 'Luxury retail boutique interior with sculptural stone display plinths and warm perimeter illumination'
         },
         {
@@ -610,7 +610,7 @@ export const SERVICES_DATA: Record<string, ServicePageData> = {
             'Hospitality consultation bars and private client lounges',
             'Interactive digital display integration and gallery sightlines'
           ],
-          image: '/assets/CP.jpg',
+          image: '/images/Commercial/Commercial2.jpeg',
           imageAlt: 'Expansive architectural showroom with monolithic materials, natural light, and curated product display vignettes'
         },
         {
@@ -623,7 +623,7 @@ export const SERVICES_DATA: Record<string, ServicePageData> = {
             'Acoustic ceiling baffles and reverberation management',
             'Durable, stain-resistant commercial hospitality finishes'
           ],
-          image: '/assets/mitijen/warm1.jpeg',
+          image: '/images/Commercial/Commercial3.jpeg',
           imageAlt: 'Warm contemporary café and dining pavilion featuring timber seating, natural plaster walls, and warm pendant lights'
         },
         {
@@ -636,7 +636,7 @@ export const SERVICES_DATA: Record<string, ServicePageData> = {
             'Discreet acoustic zoning between active styling and relaxing wash bays',
             'Concealed plumbing and chemical-resistant work surfaces'
           ],
-          image: '/assets/mitijen/deco1.jpeg',
+          image: '/images/Commercial/Commercial4.jpeg',
           imageAlt: 'Modern beauty salon and wellness studio with organic mirrors, soft fluted paneling, and warm neutral tones'
         },
         {
@@ -649,7 +649,7 @@ export const SERVICES_DATA: Record<string, ServicePageData> = {
             'Comfortable lounge seating with accessible power points',
             'Branded architectural backdrop walls and curated reading displays'
           ],
-          image: '/assets/craft_credenza.jpg',
+          image: '/images/Commercial/Commercial5.jpeg',
           imageAlt: 'Architectural reception area with bespoke wooden desk, Japanese shoji partition, and warm cove wash lighting'
         },
         {
@@ -662,7 +662,7 @@ export const SERVICES_DATA: Record<string, ServicePageData> = {
             'Integrated micro-LED strip lighting inside joinery',
             'Tactile base materials: travertine, brass, blackened steel, and oak'
           ],
-          image: '/assets/craft_shelving.jpg',
+          image: '/images/Commercial/Commercial6.jpeg',
           imageAlt: 'Minimalist commercial display shelving showcasing curated artisanal objects with warm integrated lighting'
         },
         {
@@ -675,7 +675,7 @@ export const SERVICES_DATA: Record<string, ServicePageData> = {
             'Optical sightline widening techniques and mirror placements',
             'Distinctive architectural storefront framing that attracts foot traffic'
           ],
-          image: '/assets/forma_facade.jpg',
+          image: '/images/Commercial/Commercial1.jpeg',
           imageAlt: 'Boutique commercial storefront and interior featuring grand archways, natural stone, and warm ambient warmth'
         },
         {
@@ -688,7 +688,7 @@ export const SERVICES_DATA: Record<string, ServicePageData> = {
             'Demolition and structural reconfiguration planning',
             'Phased implementation planning to minimize business downtime'
           ],
-          image: '/assets/PHOTO.jpg',
+          image: '/images/Commercial/Commercial2.jpeg',
           imageAlt: 'Renovated contemporary commercial interior with soaring ceilings, structural brickwork, and minimalist modern furniture'
         }
       ]
@@ -905,14 +905,14 @@ export const SERVICES_DATA: Record<string, ServicePageData> = {
         category: 'Private Homes & Villas',
         slug: '/services/residential-interior-design',
         description: 'Explore bespoke residential sanctuaries designed around natural light, honest materials, and everyday living routines.',
-        image: '/assets/mitijen/home1.jpeg'
+        image: '/images/Residential/Residential1.jpeg'
       },
       {
         title: 'Corporate Office Interior Design',
         category: 'Workplaces & Headquarters',
         slug: '/services/corporate-interior-design',
         description: 'Discover modern workplace interiors engineered for collaboration, acoustic clarity, and organizational identity.',
-        image: '/assets/I2.jpg'
+        image: '/images/Corporate/Corporate1.jpeg'
       }
     ],
     finalCta: {
@@ -944,12 +944,12 @@ export const SERVICES_DATA: Record<string, ServicePageData> = {
         'executive office design',
         'collaborative workspace design'
       ],
-      ogImage: '/assets/I2.jpg'
+      ogImage: '/images/Corporate/Corporate1.jpeg'
     },
     hero: {
       headline: 'High-Performance Workplaces Built Around Visionary Teams',
       supportingText: 'Intelligent office architecture and executive suites balancing deep acoustic focus, agile collaboration, and an authentic reflection of corporate culture.',
-      bgImage: '/assets/I2.jpg',
+      bgImage: '/images/Corporate/Corporate1.jpeg',
       primaryCtaText: 'Plan Workplace Transformation',
       secondaryCtaText: 'Consult Our Architects'
     },
@@ -982,7 +982,7 @@ export const SERVICES_DATA: Record<string, ServicePageData> = {
             'Integrated structural cabling, power management, and HVAC coordination',
             'Unified architectural design language reflecting corporate identity'
           ],
-          image: '/assets/I2.jpg',
+          image: '/images/Corporate/Corporate1.jpeg',
           imageAlt: 'Contemporary corporate headquarters interior with sculptural staircase, open workspaces, and natural timber details'
         },
         {
@@ -995,7 +995,7 @@ export const SERVICES_DATA: Record<string, ServicePageData> = {
             'Discrete security turnstile and access control integration',
             'Executive guest lounge seating with integrated charging connectivity'
           ],
-          image: '/assets/craft_stone_vanity.jpg',
+          image: '/images/Corporate/Corporate2.jpeg',
           imageAlt: 'Sophisticated corporate reception foyer with natural stone desk, architectural wall fins, and ambient lighting'
         },
         {
@@ -1008,7 +1008,7 @@ export const SERVICES_DATA: Record<string, ServicePageData> = {
             'Acoustically insulated walls and double-glazed private partitions',
             'Curated art display niches, personal book collections, and credenzas'
           ],
-          image: '/assets/transformations/bedroom_after.jpg',
+          image: '/images/Corporate/Corporate3.jpeg',
           imageAlt: 'Executive private office suite featuring bespoke wooden joinery, private lounge chairs, and warm architectural lighting'
         },
         {
@@ -1021,7 +1021,7 @@ export const SERVICES_DATA: Record<string, ServicePageData> = {
             'Acoustic wall paneling and micro-perforated ceiling baffles',
             'Camera-flattering lighting and optimal digital screen sightlines'
           ],
-          image: '/assets/I3.jpg',
+          image: '/images/Corporate/Corporate4.jpeg',
           imageAlt: 'Modern corporate conference room featuring integrated boardroom table, acoustic treatments, and digital display wall'
         },
         {
@@ -1034,7 +1034,7 @@ export const SERVICES_DATA: Record<string, ServicePageData> = {
             'Sound-absorbing felt dividers and carpet tile zoning',
             'Indirect, low-glare LED illumination reducing digital screen eye strain'
           ],
-          image: '/assets/mitijen/deco3.jpeg',
+          image: '/images/Corporate/Corporate5.jpeg',
           imageAlt: 'Open-plan office interior with natural daylight, ergonomic workstations, and integrated acoustic ceiling treatments'
         },
         {
@@ -1047,7 +1047,7 @@ export const SERVICES_DATA: Record<string, ServicePageData> = {
             'Writable glass surfaces and mobile pin-boards',
             'Semi-enclosed acoustic booths for quick 3–4 person syncs'
           ],
-          image: '/assets/mitijen/deco2.jpeg',
+          image: '/images/Corporate/Corporate6.jpeg',
           imageAlt: 'Agile team collaboration zone with comfortable modular seating, warm wood finishes, and informal workshop tables'
         },
         {
@@ -1060,7 +1060,7 @@ export const SERVICES_DATA: Record<string, ServicePageData> = {
             'Independent silent ventilation and sensor-activated lighting',
             'Compact ergonomic worksurfaces and task lighting'
           ],
-          image: '/assets/mitijen/dressingtable.jpeg',
+          image: '/images/Corporate/Corporate7.jpeg',
           imageAlt: 'Private acoustic focus room and video call booth with warm timber paneling and integrated task light'
         },
         {
@@ -1073,7 +1073,7 @@ export const SERVICES_DATA: Record<string, ServicePageData> = {
             'Dining tables, high counters, and comfortable lounge banquettes',
             'Spillover capacity for all-hands meetings and company celebrations'
           ],
-          image: '/assets/mitijen/deco-kitchen.jpeg',
+          image: '/images/Corporate/Corporate1.jpeg',
           imageAlt: 'Contemporary office pantry and breakout lounge with stone kitchen island, café seating, and greenery'
         }
       ]
@@ -1296,14 +1296,14 @@ export const SERVICES_DATA: Record<string, ServicePageData> = {
         category: 'Private Residences & Villas',
         slug: '/services/residential-interior-design',
         description: 'Explore bespoke residential sanctuaries designed around natural light, honest materials, and everyday living routines.',
-        image: '/assets/mitijen/home1.jpeg'
+        image: '/images/Residential/Residential1.jpeg'
       },
       {
         title: 'Commercial Interior Design',
         category: 'Retail & Hospitality Venues',
         slug: '/services/commercial-interior-design',
         description: 'Discover customer-focused retail stores, boutique hospitality venues, and showrooms designed for memorable brand experiences.',
-        image: '/assets/CS.jpg'
+        image: '/images/Commercial/Commercial1.jpeg'
       }
     ],
     finalCta: {

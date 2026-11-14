@@ -24,20 +24,11 @@ export const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({ data }
     );
   };
 
-  // Dynamic sub-service navigation based on current category
-  const subPracticeItems = useMemo(() => {
-    return data.servicesSection.cards.slice(0, 4).map((c) => ({
-      name: c.title,
-      path: `${data.seo.canonical}#${c.id}`
-    }));
-  }, [data]);
-
   const serviceNavItems = useMemo(() => [
     { name: 'Residential Interior Design', path: '/services/residential-interior-design' },
     { name: 'Commercial Interior Design', path: '/services/commercial-interior-design' },
     { name: 'Corporate Interior Design', path: '/services/corporate-interior-design' },
-    ...subPracticeItems
-  ], [subPracticeItems]);
+  ], []);
 
   useEffect(() => {
     if (location.hash) {

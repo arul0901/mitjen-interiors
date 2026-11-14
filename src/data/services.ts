@@ -100,10 +100,10 @@ export const servicesData: ServiceItem[] = [
     category: 'Private Living',
     description: 'Thoughtfully designed homes shaped around your lifestyle and everyday comfort.',
     copy: 'Thoughtfully designed homes shaped around your lifestyle and everyday comfort.',
-    image: '/assets/images/projects/image18.jpg',
+    image: '/images/Residential/Residential1.jpeg',
     alt: 'Thoughtfully designed residential homes shaped around your lifestyle and comfort',
     aspectRatio: '16/10',
-    href: '/services/details',
+    href: '/services/residential-interior-design',
     linkText: 'LEARN MORE →',
     features: ['Modular Kitchens', 'Custom Wardrobes', 'Living Spaces', 'Pooja Units']
   },
@@ -114,10 +114,10 @@ export const servicesData: ServiceItem[] = [
     category: 'Brand Experience',
     description: 'Commercial spaces that reflect your brand and elevate the customer experience.',
     copy: 'Commercial spaces that reflect your brand and elevate the customer experience.',
-    image: '/assets/images/projects/image4.jpg',
+    image: '/images/Commercial/Commercial1.jpeg',
     alt: 'Commercial spaces that reflect your brand and elevate customer experience',
     aspectRatio: '16/10',
-    href: '/services/details',
+    href: '/services/commercial-interior-design',
     linkText: 'LEARN MORE →',
     features: ['Retail Boutiques', 'Experience Centers', 'Hospitality', 'Showrooms']
   },
@@ -128,10 +128,10 @@ export const servicesData: ServiceItem[] = [
     category: 'Workspaces',
     description: "Purposeful offices that balance functionality, professional aesthetics and your team's needs.",
     copy: "Purposeful offices that balance functionality, professional aesthetics and your team's needs.",
-    image: '/assets/images/projects/image3.jpg',
+    image: '/images/Corporate/Corporate1.jpeg',
     alt: "Purposeful corporate offices balancing functionality, aesthetics and team needs",
     aspectRatio: '16/10',
-    href: '/services/details',
+    href: '/services/corporate-interior-design',
     linkText: 'LEARN MORE →',
     features: ['Executive Cabins', 'Conference Suites', 'Ergonomic Workstations', 'Acoustics']
   }

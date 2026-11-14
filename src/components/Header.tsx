@@ -357,28 +357,13 @@ export const Header: React.FC = () => {
               </div>
 
               <Link
-                to="/services/corporate-interior-design"
-                className={`header-dropdown-item ${location.pathname === '/services/corporate-interior-design' ? 'is-active' : ''}`}
-                onClick={closeAllMenus}
-                role="menuitem"
-              >
-                <div className="dropdown-item-header">
-                  <span className="dropdown-item-index">01</span>
-                  <span className="dropdown-item-title">Corporate Works</span>
-                </div>
-                <p className="dropdown-item-desc">
-                  Offices, executive headquarters & collaborative studios
-                </p>
-              </Link>
-
-              <Link
                 to="/services/residential-interior-design"
                 className={`header-dropdown-item ${location.pathname === '/services/residential-interior-design' ? 'is-active' : ''}`}
                 onClick={closeAllMenus}
                 role="menuitem"
               >
                 <div className="dropdown-item-header">
-                  <span className="dropdown-item-index">02</span>
+                  <span className="dropdown-item-index">01</span>
                   <span className="dropdown-item-title">Residential Works</span>
                 </div>
                 <p className="dropdown-item-desc">
@@ -393,7 +378,7 @@ export const Header: React.FC = () => {
                 role="menuitem"
               >
                 <div className="dropdown-item-header">
-                  <span className="dropdown-item-index">03</span>
+                  <span className="dropdown-item-index">02</span>
                   <span className="dropdown-item-title">Commercial Works</span>
                 </div>
                 <p className="dropdown-item-desc">
@@ -401,20 +386,18 @@ export const Header: React.FC = () => {
                 </p>
               </Link>
 
-              <div className="header-dropdown-divider" />
-
               <Link
-                to="/services"
-                className={`header-dropdown-item header-dropdown-footer ${location.pathname === '/services' ? 'is-active' : ''}`}
+                to="/services/corporate-interior-design"
+                className={`header-dropdown-item ${location.pathname === '/services/corporate-interior-design' ? 'is-active' : ''}`}
                 onClick={closeAllMenus}
                 role="menuitem"
               >
                 <div className="dropdown-item-header">
-                  <span className="dropdown-item-title">All Services & Practices</span>
-                  <span className="dropdown-arrow-icon" aria-hidden="true">→</span>
+                  <span className="dropdown-item-index">03</span>
+                  <span className="dropdown-item-title">Corporate Works</span>
                 </div>
                 <p className="dropdown-item-desc">
-                  Explore complete methodology & full practice directory
+                  Offices, executive headquarters & collaborative studios
                 </p>
               </Link>
             </div>
@@ -484,20 +467,11 @@ export const Header: React.FC = () => {
 
             <div className={`mobile-services-drawer ${isMobileServicesOpen ? 'is-open' : ''}`}>
               <Link
-                to="/services/corporate-interior-design"
-                className={`mobile-sub-link ${location.pathname === '/services/corporate-interior-design' ? 'is-active' : ''}`}
-                onClick={closeAllMenus}
-              >
-                <span className="mobile-sub-title">01 · Corporate Works</span>
-                <span className="mobile-sub-desc">Executive offices, studios & collaborative suites</span>
-              </Link>
-
-              <Link
                 to="/services/residential-interior-design"
                 className={`mobile-sub-link ${location.pathname === '/services/residential-interior-design' ? 'is-active' : ''}`}
                 onClick={closeAllMenus}
               >
-                <span className="mobile-sub-title">02 · Residential Works</span>
+                <span className="mobile-sub-title">01 · Residential Works</span>
                 <span className="mobile-sub-desc">Luxury villas, penthouses & private residences</span>
               </Link>
 
@@ -506,11 +480,18 @@ export const Header: React.FC = () => {
                 className={`mobile-sub-link ${location.pathname === '/services/commercial-interior-design' ? 'is-active' : ''}`}
                 onClick={closeAllMenus}
               >
-                <span className="mobile-sub-title">03 · Commercial Works</span>
+                <span className="mobile-sub-title">02 · Commercial Works</span>
                 <span className="mobile-sub-desc">Showrooms, retail & hospitality venues</span>
               </Link>
 
-              
+              <Link
+                to="/services/corporate-interior-design"
+                className={`mobile-sub-link ${location.pathname === '/services/corporate-interior-design' ? 'is-active' : ''}`}
+                onClick={closeAllMenus}
+              >
+                <span className="mobile-sub-title">03 · Corporate Works</span>
+                <span className="mobile-sub-desc">Executive offices, studios & collaborative suites</span>
+              </Link>
             </div>
           </div>
 

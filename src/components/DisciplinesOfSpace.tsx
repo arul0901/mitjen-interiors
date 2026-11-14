@@ -20,10 +20,10 @@ export const DISCIPLINES: DisciplineItem[] = [
     subtitle: "Mitjen villas, private penthouses & luxury apartments",
     description:
       "Crafted around natural light, diurnal living patterns, and acoustic peace. We sculpt spaces where family life unfolds in effortless harmony and tactile comfort.",
-    image: "/assets/mitijen/home1.jpeg",
+    image: "/images/Residential/Residential1.jpeg",
     keyMaterials: ["Honed Italian Travertine", "Quarter-Sawn White Oak", "Natural Linen Upholstery", "Concealed Warm Brass Reveals"],
     scale: "2,500 – 18,000 Sq.Ft Volume",
-    link: "/services/details",
+    link: "/services/residential-interior-design",
   },
   {
     id: "commercial",
@@ -32,10 +32,10 @@ export const DISCIPLINES: DisciplineItem[] = [
     subtitle: "Flagship showrooms, boutique cafes & experiential spaces",
     description:
       "Interiors engineered to captivate attention and elevate the visitor journey. Every sightline, material transition, and lighting scene reinforces the brand identity.",
-    image: "/assets/mitijen/warm1.jpeg",
+    image: "/images/Commercial/Commercial1.jpeg",
     keyMaterials: ["Hand-Patinated Architectural Bronze", "Fluted Smoked Glass", "Seamless Micro-Cement", "Custom Sconces"],
     scale: "1,800 – 25,000 Sq.Ft Volume",
-    link: "/services/details",
+    link: "/services/commercial-interior-design",
   },
   {
     id: "corporate",
@@ -44,10 +44,10 @@ export const DISCIPLINES: DisciplineItem[] = [
     subtitle: "Executive headquarters, private suites & collaborative studios",
     description:
       "High-performance work environments balancing private executive contemplation with collaborative flow, cutting-edge acoustic isolation, and discreet technology.",
-    image: "/assets/mitijen/home3.jpeg",
+    image: "/images/Corporate/Corporate1.jpeg",
     keyMaterials: ["Solid American Walnut", "Acoustic Decoupled Fabric Panels", "Architectural Steel Mullions", "Circadian LED"],
     scale: "3,000 – 35,000 Sq.Ft Volume",
-    link: "/services/details",
+    link: "/services/corporate-interior-design",
   },
 ];
 
