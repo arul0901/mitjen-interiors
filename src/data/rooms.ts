@@ -121,6 +121,8 @@ export const CINEMATIC_SHOWCASE_SLIDES: ShowcaseSlide[] = [
   },
 ];
 
+
+
 export interface WalkthroughRoom {
   id: string;
   number: string;
