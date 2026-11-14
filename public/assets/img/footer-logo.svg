@@ -1,14 +1,14 @@
-<svg width="842" height="221" viewBox="0 0 842 221" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="842" height="210" viewBox="0 0 842 210" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="footerTextGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#242424" stop-opacity="0.85"/>
-      <stop offset="100%" stop-color="#141414" stop-opacity="0.4"/>
+      <stop offset="0%" stop-color="#141210" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#2A2420" stop-opacity="0.95"/>
     </linearGradient>
   </defs>
-  <!-- Main bold Architectural Wordmark: MITJEN -->
-  <text x="50%" y="155" text-anchor="middle" font-family="'Plus Jakarta Sans', 'Inter', 'Montserrat', sans-serif" font-weight="900" font-size="152" fill="url(#footerTextGrad)" letter-spacing="24">MITJEN</text>
-  <!-- Sleek outline stroke for depth -->
-  <text x="50%" y="155" text-anchor="middle" font-family="'Plus Jakarta Sans', 'Inter', 'Montserrat', sans-serif" font-weight="900" font-size="152" fill="none" stroke="#caa05c" stroke-width="1.2" stroke-opacity="0.25" letter-spacing="24">MITJEN</text>
-  <!-- Subtitle line -->
-  <text x="50%" y="196" text-anchor="middle" font-family="'Plus Jakarta Sans', 'Montserrat', sans-serif" font-weight="600" font-size="13" fill="#caa05c" letter-spacing="9" opacity="0.75">ARCHITECTURE &amp; INTERIOR DESIGN</text>
+  <!-- Main bold Architectural Wordmark: MITJEN - Crisp, Dark, Prominently Visible -->
+  <text x="50%" y="145" text-anchor="middle" font-family="'Plus Jakarta Sans', 'Inter', 'Montserrat', sans-serif" font-weight="900" font-size="152" fill="url(#footerTextGrad)" letter-spacing="24">MITJEN</text>
+  <!-- Sleek subtle luxury gold outline stroke -->
+  <text x="50%" y="145" text-anchor="middle" font-family="'Plus Jakarta Sans', 'Inter', 'Montserrat', sans-serif" font-weight="900" font-size="152" fill="none" stroke="#B8966A" stroke-width="1.2" stroke-opacity="0.45" letter-spacing="24">MITJEN</text>
+  <!-- Subtitle line: Sharp and elegant -->
+  <text x="50%" y="188" text-anchor="middle" font-family="'Plus Jakarta Sans', 'Montserrat', sans-serif" font-weight="700" font-size="14" fill="#B8966A" letter-spacing="10" opacity="0.95">ARCHITECTURE &amp; INTERIOR DESIGN</text>
 </svg>

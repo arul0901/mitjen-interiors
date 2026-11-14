@@ -8,17 +8,7 @@ export default function Footer() {
 <div className={"cs_height_120 cs_height_lg_80"}></div>
 <div className={"container"}>
 <div className={"cs_footer_logo cs_center_column text-center position-relative"}>
-<img alt={"Footer logo"} src={"/assets/img/footer-logo.svg"} />
-<div className={"cs_logo_text_wrapper cs_center cs_gray_bg cs_radius_100"}>
-<div className={"cs_text_logo position-absolute"}>
-<img alt={"Text logo"} src={"/assets/img/logo-text.svg"} />
-</div>
-<span aria-hidden={"true"} className={"cs_arrow_icon cs_center cs_radius_100 position-absolute"}>
-<svg fill={"none"} height={"12"} viewBox={"0 0 24 12"} width={"22"} xmlns={"http://www.w3.org/2000/svg"}>
-<path d={"M1 6H23M23 6L17.5 1M23 6L17.5 11"} stroke={"currentColor"} strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"}></path>
-</svg>
-</span>
-</div>
+<img alt={"Mitjen Interiors Footer Logo"} src={"/assets/img/footer-logo.svg"} />
 </div>
 </div>
 <div className={"cs_footer_main"}>

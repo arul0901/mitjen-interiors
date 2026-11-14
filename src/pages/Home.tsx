@@ -218,24 +218,16 @@ export default function Home() {
 <div className={"cs_card_content_wrapper position-relative"}>
 <div className={"cs_card_content"}>
 <div className={"cs_card_header"}>
-<h3 className={"cs_card_title cs_fs_18 cs_bold cs_mb_20"}>
+<h3 className={"cs_card_title cs_fs_18 cs_bold cs_mb_0"}>
 <a href={"/portfolio"} aria-label={"Vintage Finish Interior project"}>VINTAGE FINISH INTERIOR, RACE COURSE, COIMBATORE</a>
 </h3>
-<a href={"/portfolio"} className={"cs_btn_style_1 cs_fs_14 cs_bold cs_primary_font cs_radius_50"} aria-label={"View PU PAINT WORK category projects"}>
-<span>PU PAINT WORK ↗</span>
-<span className={"cs_btn_icon cs_radius_100 cs_center"} aria-hidden={"true"}>
-<svg width={"13"} height={"13"} viewBox={"0 0 14 14"} fill={"none"} xmlns={"http://www.w3.org/2000/svg"}>
-<path d={"M1 7H13M13 7L7.5 1.5M13 7L7.5 12.5"} stroke={"currentColor"} strokeWidth={"1.8"} strokeLinecap={"round"} strokeLinejoin={"round"}></path>
-</svg>
-</span>
-</a>
 </div>
 <div className={"cs_card_desc"}>
 <hr className={"cs_mb_20 mt-0"} aria-hidden={"true"} />
-<p className={"cs_card_subtitle cs_mb_18"}>A vintage-inspired look brought to life with carefully finished PU paint detailing.</p>
-<a href={"/portfolio"} aria-label={"Explore projects - Vintage Finish Interior"} className={"cs_text_btn_style_1 cs_fs_14 cs_bold cs_accent_color"}>
-<span>EXPLORE PROJECTS</span>
-<span aria-hidden={"true"}>
+<p className={"cs_card_subtitle cs_mb_20"}>A vintage-inspired look brought to life with carefully finished PU paint detailing.</p>
+<a href={"/portfolio"} className={"cs_btn_style_1 cs_fs_14 cs_bold cs_primary_font cs_radius_50"} aria-label={"View PU PAINT WORK category projects"}>
+<span>PU PAINT WORK ↗</span>
+<span className={"cs_btn_icon cs_radius_100 cs_center"} aria-hidden={"true"}>
 <svg width={"13"} height={"13"} viewBox={"0 0 14 14"} fill={"none"} xmlns={"http://www.w3.org/2000/svg"}>
 <path d={"M1 7H13M13 7L7.5 1.5M13 7L7.5 12.5"} stroke={"currentColor"} strokeWidth={"1.8"} strokeLinecap={"round"} strokeLinejoin={"round"}></path>
 </svg>
@@ -252,24 +244,16 @@ export default function Home() {
 <div className={"cs_card_content_wrapper position-relative"}>
 <div className={"cs_card_content"}>
 <div className={"cs_card_header"}>
-<h3 className={"cs_card_title cs_fs_18 cs_bold cs_mb_20"}>
+<h3 className={"cs_card_title cs_fs_18 cs_bold cs_mb_0"}>
 <a href={"/portfolio"} aria-label={"Interior Project, KR Pura, Bangalore project"}>INTERIOR PROJECT, KR PURA, BANGALORE</a>
 </h3>
-<a href={"/portfolio"} className={"cs_btn_style_1 cs_fs_14 cs_bold cs_primary_font cs_radius_50"} aria-label={"View INTERIOR DESIGN category projects"}>
-<span>INTERIOR DESIGN ↗</span>
-<span className={"cs_btn_icon cs_radius_100 cs_center"} aria-hidden={"true"}>
-<svg width={"13"} height={"13"} viewBox={"0 0 14 14"} fill={"none"} xmlns={"http://www.w3.org/2000/svg"}>
-<path d={"M1 7H13M13 7L7.5 1.5M13 7L7.5 12.5"} stroke={"currentColor"} strokeWidth={"1.8"} strokeLinecap={"round"} strokeLinejoin={"round"}></path>
-</svg>
-</span>
-</a>
 </div>
 <div className={"cs_card_desc"}>
 <hr className={"cs_mb_20 mt-0"} aria-hidden={"true"} />
-<p className={"cs_card_subtitle cs_mb_18"}>A well-planned interior featuring clean detailing and a cohesive design finish.</p>
-<a href={"/portfolio"} aria-label={"Explore projects - KR Pura Bangalore"} className={"cs_text_btn_style_1 cs_fs_14 cs_bold cs_accent_color"}>
-<span>EXPLORE PROJECTS</span>
-<span aria-hidden={"true"}>
+<p className={"cs_card_subtitle cs_mb_20"}>A well-planned interior featuring clean detailing and a cohesive design finish.</p>
+<a href={"/portfolio"} className={"cs_btn_style_1 cs_fs_14 cs_bold cs_primary_font cs_radius_50"} aria-label={"View INTERIOR DESIGN category projects"}>
+<span>INTERIOR DESIGN ↗</span>
+<span className={"cs_btn_icon cs_radius_100 cs_center"} aria-hidden={"true"}>
 <svg width={"13"} height={"13"} viewBox={"0 0 14 14"} fill={"none"} xmlns={"http://www.w3.org/2000/svg"}>
 <path d={"M1 7H13M13 7L7.5 1.5M13 7L7.5 12.5"} stroke={"currentColor"} strokeWidth={"1.8"} strokeLinecap={"round"} strokeLinejoin={"round"}></path>
 </svg>
@@ -286,24 +270,16 @@ export default function Home() {
 <div className={"cs_card_content_wrapper position-relative"}>
 <div className={"cs_card_content"}>
 <div className={"cs_card_header"}>
-<h3 className={"cs_card_title cs_fs_18 cs_bold cs_mb_20"}>
+<h3 className={"cs_card_title cs_fs_18 cs_bold cs_mb_0"}>
 <a href={"/portfolio"} aria-label={"Office Interior, Tidal Park project"}>OFFICE INTERIOR, TIDAL PARK</a>
 </h3>
-<a href={"/portfolio"} className={"cs_btn_style_1 cs_fs_14 cs_bold cs_primary_font cs_radius_50"} aria-label={"View INTERIOR DESIGN category projects"}>
-<span>INTERIOR DESIGN ↗</span>
-<span className={"cs_btn_icon cs_radius_100 cs_center"} aria-hidden={"true"}>
-<svg width={"13"} height={"13"} viewBox={"0 0 14 14"} fill={"none"} xmlns={"http://www.w3.org/2000/svg"}>
-<path d={"M1 7H13M13 7L7.5 1.5M13 7L7.5 12.5"} stroke={"currentColor"} strokeWidth={"1.8"} strokeLinecap={"round"} strokeLinejoin={"round"}></path>
-</svg>
-</span>
-</a>
 </div>
 <div className={"cs_card_desc"}>
 <hr className={"cs_mb_20 mt-0"} aria-hidden={"true"} />
-<p className={"cs_card_subtitle cs_mb_18"}>A functional workspace planned around how teams work, with clean detailing and a polished finish.</p>
-<a href={"/portfolio"} aria-label={"Explore projects - Tidal Park"} className={"cs_text_btn_style_1 cs_fs_14 cs_bold cs_accent_color"}>
-<span>EXPLORE PROJECTS</span>
-<span aria-hidden={"true"}>
+<p className={"cs_card_subtitle cs_mb_20"}>A functional workspace planned around how teams work, with clean detailing and a polished finish.</p>
+<a href={"/portfolio"} className={"cs_btn_style_1 cs_fs_14 cs_bold cs_primary_font cs_radius_50"} aria-label={"View INTERIOR DESIGN category projects"}>
+<span>INTERIOR DESIGN ↗</span>
+<span className={"cs_btn_icon cs_radius_100 cs_center"} aria-hidden={"true"}>
 <svg width={"13"} height={"13"} viewBox={"0 0 14 14"} fill={"none"} xmlns={"http://www.w3.org/2000/svg"}>
 <path d={"M1 7H13M13 7L7.5 1.5M13 7L7.5 12.5"} stroke={"currentColor"} strokeWidth={"1.8"} strokeLinecap={"round"} strokeLinejoin={"round"}></path>
 </svg>
@@ -320,24 +296,16 @@ export default function Home() {
 <div className={"cs_card_content_wrapper position-relative"}>
 <div className={"cs_card_content"}>
 <div className={"cs_card_header"}>
-<h3 className={"cs_card_title cs_fs_18 cs_bold cs_mb_20"}>
+<h3 className={"cs_card_title cs_fs_18 cs_bold cs_mb_0"}>
 <a href={"/portfolio"} aria-label={"Corporate Site Interior project"}>CORPORATE SITE INTERIOR</a>
 </h3>
-<a href={"/portfolio"} className={"cs_btn_style_1 cs_fs_14 cs_bold cs_primary_font cs_radius_50"} aria-label={"View WORKSPACE DESIGN category projects"}>
-<span>WORKSPACE DESIGN ↗</span>
-<span className={"cs_btn_icon cs_radius_100 cs_center"} aria-hidden={"true"}>
-<svg width={"13"} height={"13"} viewBox={"0 0 14 14"} fill={"none"} xmlns={"http://www.w3.org/2000/svg"}>
-<path d={"M1 7H13M13 7L7.5 1.5M13 7L7.5 12.5"} stroke={"currentColor"} strokeWidth={"1.8"} strokeLinecap={"round"} strokeLinejoin={"round"}></path>
-</svg>
-</span>
-</a>
 </div>
 <div className={"cs_card_desc"}>
 <hr className={"cs_mb_20 mt-0"} aria-hidden={"true"} />
-<p className={"cs_card_subtitle cs_mb_18"}>A professional workspace shaped around functional layouts and a considered interior finish.</p>
-<a href={"/portfolio"} aria-label={"Explore projects - Corporate Site Interior"} className={"cs_text_btn_style_1 cs_fs_14 cs_bold cs_accent_color"}>
-<span>EXPLORE PROJECTS</span>
-<span aria-hidden={"true"}>
+<p className={"cs_card_subtitle cs_mb_20"}>A professional workspace shaped around functional layouts and a considered interior finish.</p>
+<a href={"/portfolio"} className={"cs_btn_style_1 cs_fs_14 cs_bold cs_primary_font cs_radius_50"} aria-label={"View WORKSPACE DESIGN category projects"}>
+<span>WORKSPACE DESIGN ↗</span>
+<span className={"cs_btn_icon cs_radius_100 cs_center"} aria-hidden={"true"}>
 <svg width={"13"} height={"13"} viewBox={"0 0 14 14"} fill={"none"} xmlns={"http://www.w3.org/2000/svg"}>
 <path d={"M1 7H13M13 7L7.5 1.5M13 7L7.5 12.5"} stroke={"currentColor"} strokeWidth={"1.8"} strokeLinecap={"round"} strokeLinejoin={"round"}></path>
 </svg>

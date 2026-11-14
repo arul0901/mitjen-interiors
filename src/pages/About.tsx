@@ -81,9 +81,6 @@ export default function About() {
                 <div className={"cs_about_img1 cs_radius_10"}>
                   <img src={"/assets/images/projects/image8.jpg"} alt={"Architectural interior showcase"} />
                 </div>
-                <div className={"cs_about_img2"}>
-                  <img src={"/assets/images/projects/image9.jpg"} alt={"Detail of curated materials"} />
-                </div>
               </div>
             </div>
             <div className={"col-lg-7"}>
@@ -241,9 +238,6 @@ export default function About() {
               <div className={"cs_about_img_wrapper position-relative"}>
                 <div className={"cs_about_img1 cs_radius_10"}>
                   <img src={"/assets/images/projects/image20.jpg"} alt={"Living space architectural execution"} />
-                </div>
-                <div className={"cs_about_img2"}>
-                  <img src={"/assets/images/projects/image11.jpg"} alt={"Bespoke millwork craftsmanship detail"} />
                 </div>
               </div>
             </div>

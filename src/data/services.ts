@@ -61,7 +61,7 @@ export const aboutData: AboutSectionData = {
       href: '/services',
       secondaryLinkText: 'OUR STORY',
       secondaryHref: '/about',
-      accentLinkText: 'CONNECT NOW →',
+      accentLinkText: 'CONNECT NOW',
       accentHref: '/contact',
       highlights: [
         'Purpose-driven space planning',
@@ -76,11 +76,11 @@ export const aboutData: AboutSectionData = {
       subtitle: 'CRAFTED WITH PRECISION',
       icon: 'heart',
       copy: "An interior's quality shows in its details. With custom furniture capabilities, CNC detailing and German machinery, we bring design concepts to life with precision.",
-      linkText: 'DISCOVER OUR APPROACH',
+      linkText: 'OUR APPROACH',
       href: '/#approach',
       secondaryLinkText: 'EXPLORE PROJECTS',
       secondaryHref: '/portfolio',
-      accentLinkText: 'CONNECT NOW →',
+      accentLinkText: 'CONNECT NOW',
       accentHref: '/contact',
       highlights: [
         'Custom furniture solutions',

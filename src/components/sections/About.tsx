@@ -106,36 +106,39 @@ export const AboutSection: React.FC = () => {
                       </div>
                     </div>
 
-                    {/* Integrated Action Footer with Multi-button Navigation */}
-                    <div className="bespoke-card-footer" style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                      <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', alignItems: 'center' }}>
+                    {/* Integrated Action Footer with Balanced Luxury Button Group */}
+                    <div className="bespoke-card-footer">
+                      <div className="bespoke-card-btn-row">
                         <a
                           href={feature.href}
-                          className="cs_text_btn_style_1 cs_fs_13 cs_bold cs_accent_color"
-                          style={{ textDecoration: 'none' }}
+                          className="bespoke-card-sub-btn"
+                          aria-label={`Explore ${feature.title}`}
                         >
                           <span>{feature.linkText}</span>
                         </a>
                         {feature.secondaryLinkText && (
                           <a
                             href={feature.secondaryHref}
-                            className="cs_text_btn_style_1 cs_fs_13 cs_bold"
-                            style={{ color: '#444444', textDecoration: 'none' }}
+                            className="bespoke-card-sub-btn bespoke-card-sub-btn-dark"
+                            aria-label={`View ${feature.secondaryLinkText}`}
                           >
                             <span>{feature.secondaryLinkText}</span>
                           </a>
                         )}
                       </div>
                       {feature.accentLinkText && (
-                        <div>
-                          <a
-                            href={feature.accentHref}
-                            className="cs_text_btn_style_1 cs_fs_13 cs_bold cs_accent_color"
-                            style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '4px' }}
-                          >
-                            <span>{feature.accentLinkText}</span>
-                          </a>
-                        </div>
+                        <a
+                          href={feature.accentHref}
+                          className="bespoke-card-cta-btn"
+                          aria-label="Connect now with Mitjen Interiors"
+                        >
+                          <span>{feature.accentLinkText}</span>
+                          <span className="bespoke-card-cta-arrow" aria-hidden="true">
+                            <svg width="12" height="12" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M1 7H13M13 7L7.5 1.5M13 7L7.5 12.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                          </span>
+                        </a>
                       )}
                     </div>
                   </div>
