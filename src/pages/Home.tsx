@@ -125,8 +125,7 @@ export default function Home() {
 <div className={"cs_grid_style_5"}>
 <div className={"cs_card_style_7"}>
 <a href={"/services/details"} className={"cs_card_thumbnail cs_radius_10"} aria-label={"View Elite Craftsmanship service details"}>
-<img src={"/assets/img/service-img-8.webp"} alt={"Elite Craftsmanship service image 1"} />
-<img src={"/assets/img/service-img-10.webp"} alt={"Elite Craftsmanship service image 2"} />
+<img src={"/assets/images/projects/image1.jpg"} alt={"Elite Craftsmanship bespoke interior living"} />
 </a>
 <div className={"cs_card_info"}>
 <h3 className={"cs_card_title cs_fs_24 cs_bold cs_mb_16 text-uppercase"}>
@@ -145,8 +144,7 @@ export default function Home() {
 </div>
 <div className={"cs_card_style_7"}>
 <a href={"/services/details"} className={"cs_card_thumbnail cs_radius_10"} aria-label={"View Personalized Design service details"}>
-<img src={"/assets/img/service-img-9.webp"} alt={"Personalized Design service image 1"} />
-<img src={"/assets/img/service-img-11.webp"} alt={"Personalized Design service image 2"} />
+<img src={"/assets/images/projects/image10.jpg"} alt={"Personalized Design minimalist luxury lounge"} />
 </a>
 <div className={"cs_card_info"}>
 <h3 className={"cs_card_title cs_fs_24 cs_bold cs_mb_16 text-uppercase"}>
@@ -165,8 +163,7 @@ export default function Home() {
 </div>
 <div className={"cs_card_style_7"}>
 <a href={"/services/details"} className={"cs_card_thumbnail cs_radius_10"} aria-label={"View Exclusive Locations service details"}>
-<img src={"/assets/img/service-img-10.webp"} alt={"Exclusive Locations service image 1"} />
-<img src={"/assets/img/service-img-8.webp"} alt={"Exclusive Locations service image 2"} />
+<img src={"/assets/images/projects/image4.jpg"} alt={"Exclusive Locations palatial architectural gallery"} />
 </a>
 <div className={"cs_card_info"}>
 <h3 className={"cs_card_title cs_fs_24 cs_bold cs_mb_16 text-uppercase"}>
@@ -185,8 +182,7 @@ export default function Home() {
 </div>
 <div className={"cs_card_style_7"}>
 <a href={"/services/details"} className={"cs_card_thumbnail cs_radius_10"} aria-label={"View Luxury Experience service details"}>
-<img src={"/assets/img/service-img-11.webp"} alt={"Luxury Experience service image 1"} />
-<img src={"/assets/img/service-img-9.webp"} alt={"Luxury Experience service image 2"} />
+<img src={"/assets/images/projects/image3.jpg"} alt={"Luxury Experience grand dining banquet"} />
 </a>
 <div className={"cs_card_info"}>
 <h3 className={"cs_card_title cs_fs_24 cs_bold cs_mb_16 text-uppercase"}>
@@ -216,17 +212,17 @@ export default function Home() {
 <div className={"cs_height_60 cs_height_lg_50 cs_some_spaces_mid_spacer"}></div>
 <div className={"cs_grid_style_4"}>
 <div className={"cs_card_style_6 cs_gray_bg cs_radius_10"}>
-<a href={"/portfolio/details"} className={"cs_card_thumbnail"} aria-label={"View BAROXXI VEIG'S MUSEUM project details"}>
-<img src={"/assets/img/portfolio-img-11.webp"} alt={"BAROXXI VEIG'S MUSEUM - Exterior view"} />
+<a href={"/portfolio/details"} className={"cs_card_thumbnail"} aria-label={"View Contemporary Luxury Residence project details"}>
+<img src={"/assets/images/projects/image18.jpg"} alt={"Contemporary Luxury Residence - Minimalist Living Lounge"} />
 </a>
 <div className={"cs_card_content_wrapper position-relative"}>
 <div className={"cs_card_content"}>
 <div className={"cs_card_header"}>
 <h3 className={"cs_card_title cs_fs_18 cs_bold cs_mb_20"}>
-<a href={"/portfolio/details"} aria-label={"BAROXXI VEIG'S MUSEUM project"}>BAROXXI VEIG'S MUSEUM</a>
+<a href={"/portfolio/details"} aria-label={"Contemporary Luxury Residence project"}>CONTEMPORARY RESIDENCE</a>
 </h3>
-<a href={"/portfolio/details"} className={"cs_btn_style_1 cs_fs_14 cs_bold cs_primary_font cs_radius_50"} aria-label={"View LANDSCAPE category projects"}>
-<span>LANDSCAPE</span>
+<a href={"/portfolio/details"} className={"cs_btn_style_1 cs_fs_14 cs_bold cs_primary_font cs_radius_50"} aria-label={"View RESIDENTIAL category projects"}>
+<span>RESIDENTIAL</span>
 <span className={"cs_btn_icon cs_radius_100 cs_center"} aria-hidden={"true"}>
 <svg width={"13"} height={"13"} viewBox={"0 0 14 14"} fill={"none"} xmlns={"http://www.w3.org/2000/svg"}>
 <path d={"M1 7H13M13 7L7.5 1.5M13 7L7.5 12.5"} stroke={"currentColor"} strokeWidth={"1.8"} strokeLinecap={"round"} strokeLinejoin={"round"}></path>
@@ -250,17 +246,17 @@ export default function Home() {
 </div>
 </div>
 <div className={"cs_card_style_6 cs_gray_bg cs_radius_10 active"} aria-current={"true"}>
-<a href={"/portfolio/details"} className={"cs_card_thumbnail"} aria-label={"View BAROXXI VEIG'S MUSEUM project details (current project)"}>
-<img src={"/assets/img/portfolio-img-12.webp"} alt={"BAROXXI VEIG'S MUSEUM - Interior view"} />
+<a href={"/portfolio/details"} className={"cs_card_thumbnail"} aria-label={"View Palatial Heritage Gallery project details"}>
+<img src={"/assets/images/projects/image4.jpg"} alt={"Palatial Architectural Corridor - Arched Gallery"} />
 </a>
 <div className={"cs_card_content_wrapper position-relative"}>
 <div className={"cs_card_content"}>
 <div className={"cs_card_header"}>
 <h3 className={"cs_card_title cs_fs_18 cs_bold cs_mb_20"}>
-<a href={"/portfolio/details"} aria-label={"BAROXXI VEIG'S MUSEUM project (current)"}>BAROXXI VEIG'S MUSEUM</a>
+<a href={"/portfolio/details"} aria-label={"Palatial Heritage Gallery project"}>PALATIAL GALLERY</a>
 </h3>
-<a href={"/portfolio/details"} className={"cs_btn_style_1 cs_fs_14 cs_bold cs_primary_font cs_radius_50"} aria-label={"View LANDSCAPE category projects"}>
-<span>LANDSCAPE</span>
+<a href={"/portfolio/details"} className={"cs_btn_style_1 cs_fs_14 cs_bold cs_primary_font cs_radius_50"} aria-label={"View ARCHITECTURE category projects"}>
+<span>ARCHITECTURE</span>
 <span className={"cs_btn_icon cs_radius_100 cs_center"} aria-hidden={"true"}>
 <svg width={"13"} height={"13"} viewBox={"0 0 14 14"} fill={"none"} xmlns={"http://www.w3.org/2000/svg"}>
 <path d={"M1 7H13M13 7L7.5 1.5M13 7L7.5 12.5"} stroke={"currentColor"} strokeWidth={"1.8"} strokeLinecap={"round"} strokeLinejoin={"round"}></path>
@@ -284,17 +280,17 @@ export default function Home() {
 </div>
 </div>
 <div className={"cs_card_style_6 cs_gray_bg cs_radius_10"}>
-<a href={"/portfolio/details"} className={"cs_card_thumbnail"} aria-label={"View BAROXXI VEIG'S MUSEUM project details"}>
-<img src={"/assets/img/portfolio-img-13.webp"} alt={"BAROXXI VEIG'S MUSEUM - Architectural detail"} />
+<a href={"/portfolio/details"} className={"cs_card_thumbnail"} aria-label={"View Classical Dining Banquet project details"}>
+<img src={"/assets/images/projects/image3.jpg"} alt={"Grand Classical Dining Salon"} />
 </a>
 <div className={"cs_card_content_wrapper position-relative"}>
 <div className={"cs_card_content"}>
 <div className={"cs_card_header"}>
 <h3 className={"cs_card_title cs_fs_18 cs_bold cs_mb_20"}>
-<a href={"/portfolio/details"} aria-label={"BAROXXI VEIG'S MUSEUM project"}>BAROXXI VEIG'S MUSEUM</a>
+<a href={"/portfolio/details"} aria-label={"Classical Dining Banquet project"}>CLASSICAL SALON</a>
 </h3>
-<a href={"/portfolio/details"} className={"cs_btn_style_1 cs_fs_14 cs_bold cs_primary_font cs_radius_50"} aria-label={"View LANDSCAPE category projects"}>
-<span>LANDSCAPE</span>
+<a href={"/portfolio/details"} className={"cs_btn_style_1 cs_fs_14 cs_bold cs_primary_font cs_radius_50"} aria-label={"View INTERIOR category projects"}>
+<span>INTERIOR</span>
 <span className={"cs_btn_icon cs_radius_100 cs_center"} aria-hidden={"true"}>
 <svg width={"13"} height={"13"} viewBox={"0 0 14 14"} fill={"none"} xmlns={"http://www.w3.org/2000/svg"}>
 <path d={"M1 7H13M13 7L7.5 1.5M13 7L7.5 12.5"} stroke={"currentColor"} strokeWidth={"1.8"} strokeLinecap={"round"} strokeLinejoin={"round"}></path>
@@ -318,17 +314,17 @@ export default function Home() {
 </div>
 </div>
 <div className={"cs_card_style_6 cs_gray_bg cs_radius_10"}>
-<a href={"/portfolio/details"} className={"cs_card_thumbnail"} aria-label={"View BAROXXI VEIG'S MUSEUM project details"}>
-<img src={"/assets/img/portfolio-img-14.webp"} alt={"BAROXXI VEIG'S MUSEUM - Landscape view"} />
+<a href={"/portfolio/details"} className={"cs_card_thumbnail"} aria-label={"View Artisan Wood-Paneled Lounge project details"}>
+<img src={"/assets/images/projects/image5.jpg"} alt={"Artisan Wood-Paneled Lounge and Salon"} />
 </a>
 <div className={"cs_card_content_wrapper position-relative"}>
 <div className={"cs_card_content"}>
 <div className={"cs_card_header"}>
 <h3 className={"cs_card_title cs_fs_18 cs_bold cs_mb_20"}>
-<a href={"/portfolio/details"} aria-label={"BAROXXI VEIG'S MUSEUM project"}>BAROXXI VEIG'S MUSEUM</a>
+<a href={"/portfolio/details"} aria-label={"Artisan Wood-Paneled Lounge project"}>BESPOKE TIMBER LOUNGE</a>
 </h3>
-<a href={"/portfolio/details"} className={"cs_btn_style_1 cs_fs_14 cs_bold cs_primary_font cs_radius_50"} aria-label={"View LANDSCAPE category projects"}>
-<span>LANDSCAPE</span>
+<a href={"/portfolio/details"} className={"cs_btn_style_1 cs_fs_14 cs_bold cs_primary_font cs_radius_50"} aria-label={"View BESPOKE category projects"}>
+<span>BESPOKE</span>
 <span className={"cs_btn_icon cs_radius_100 cs_center"} aria-hidden={"true"}>
 <svg width={"13"} height={"13"} viewBox={"0 0 14 14"} fill={"none"} xmlns={"http://www.w3.org/2000/svg"}>
 <path d={"M1 7H13M13 7L7.5 1.5M13 7L7.5 12.5"} stroke={"currentColor"} strokeWidth={"1.8"} strokeLinecap={"round"} strokeLinejoin={"round"}></path>
@@ -360,7 +356,7 @@ export default function Home() {
 <div className={"row cs_gap_y_40 align-items-center"}>
 <div className={"col-lg-6"}>
 <div className={"cs_skill_thumbnail"}>
-<img src={"/assets/img/skill-img-1.webp"} alt={"Skill image"} />
+<img src={"/assets/images/projects/image9.jpg"} alt={"The Core Company Values - Gallery Foyer"} />
 </div>
 </div>
 <div className={"col-lg-6"}>

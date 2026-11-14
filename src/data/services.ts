@@ -43,12 +43,12 @@ export const aboutData: AboutSectionData = {
   title: 'Spaces that reflect who you are.',
   description:
     'Every detail matters. From concept to completion, we create interiors that are elegant, functional, and uniquely yours.',
-  leftPicture: '/images/projects/01-serene.webp',
+  leftPicture: '/assets/images/projects/image1.jpg',
   leftPictureAlt: 'Bespoke architecture living space with warm daylight and refined materials',
   leftPictureBadge: 'ARCHITECTURAL DISCIPLINE • EST. 2010',
   features: [
     {
-      id: 'thoughtful-design',
+      id: 'thoughtful-design',  
       title: 'Thoughtful Design',
       subtitle: 'Spatial Layouts & Flow',
       icon: 'line',

@@ -2872,3 +2872,20 @@ select,
     line-height: 1.55 !important;
   }
 }
+
+/* ==========================================================================
+   GLOBAL BULLETPROOF BANNER HEADER STYLING
+   Guarantee white text across all deployment targets and cached stylesheets
+   ========================================================================== */
+header + main .cs_page_header_style_1 .cs_page_header_title,
+header ~ main .cs_page_header_style_1 .cs_page_header_title,
+.cs_page_header_style_1 .cs_page_header_title,
+.cs_page_header_style_1 h1,
+.cs_page_header_content h1,
+h1.cs_page_header_title,
+.cs_page_header_title {
+  color: #ffffff !important;
+  text-shadow: 0 2px 28px rgba(0, 0, 0, 0.95), 0 4px 50px rgba(0, 0, 0, 0.8) !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+

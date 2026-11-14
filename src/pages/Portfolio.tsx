@@ -90,8 +90,8 @@ export default function Portfolio() {
                 aria-label={"View project: House Architecture Design in Manhattan New York"}
               >
                 <img
-                  src={"/assets/img/portfolio-img-21.webp"}
-                  alt={"Modern house architecture design in Manhattan featuring contemporary exterior"}
+                  src={"/assets/images/projects/image1.jpg"}
+                  alt={"Luxury contemporary living salon with bespoke craftsmanship"}
                 />
               </a>
               <div className={"cs_card_info"}>
@@ -125,11 +125,11 @@ export default function Portfolio() {
               <a
                 href={"/portfolio/details"}
                 className={"cs_card_thumbnail cs_radius_10"}
-                aria-label={"View project: House Architecture Design in Manhattan New York"}
+                aria-label={"View project: Palatial Architectural Gallery"}
               >
                 <img
-                  src={"/assets/img/portfolio-img-22.webp"}
-                  alt={"Architectural house design in Manhattan showing innovative structure"}
+                  src={"/assets/images/projects/image4.jpg"}
+                  alt={"Palatial architectural gallery with vaulted arches and grand hallway"}
                 />
               </a>
               <div className={"cs_card_info"}>
@@ -139,9 +139,9 @@ export default function Portfolio() {
                 <h3 className={"cs_card_title cs_fs_53 cs_semibold cs_mb_20"}>
                   <a
                     href={"/portfolio/details"}
-                    aria-label={"House Architecture Design in Manhattan New York - project details"}
+                    aria-label={"Palatial Heritage Gallery Design - project details"}
                   >
-                    HOUSE ARCHITECTURE DESIGN IN MANHATTAN NEW YORK
+                    PALATIAL HERITAGE GALLERY & RESIDENCE
                   </a>
                 </h3>
                 <a
@@ -166,8 +166,8 @@ export default function Portfolio() {
                 aria-label={"View project: Interior Design in Brooklyn Heights New York"}
               >
                 <img
-                  src={"/assets/img/portfolio-img-23.webp"}
-                  alt={"Elegant interior design in Brooklyn Heights showing sophisticated living space"}
+                  src={"/assets/images/projects/image10.jpg"}
+                  alt={"Elegant minimalist interior design showing sophisticated living space"}
                 />
               </a>
               <div className={"cs_card_info"}>

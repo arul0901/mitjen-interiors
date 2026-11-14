@@ -10736,3 +10736,6 @@ i.fa-instagram::before {
 
 
 
+
+/* Forced White Page Header Banner Titles */
+.cs_page_header_title, .cs_page_header_style_1 h1, .cs_page_header_content h1, h1.cs_page_header_title { color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; text-shadow: 0 2px 28px rgba(0, 0, 0, 0.95), 0 4px 50px rgba(0, 0, 0, 0.8) !important; }

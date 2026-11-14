@@ -22,8 +22,8 @@ const CRAFT_DETAIL_ITEMS: CraftDetailItem[] = [
     category: 'LAYOUT & SPATIAL FLOW',
     title: 'LAYOUT & FLOW',
     editorialTitle: 'The Living Salon & Foyer Flow',
-    image: '/assets/mitijen/home1.jpeg',
-    detailImage: '/assets/mitijen/hom2.jpeg',
+    image: '/assets/images/projects/image1.jpg',
+    detailImage: '/assets/images/projects/image9.jpg',
     description: 'Well-planned arrangements that make movement feel natural while giving every part of the interior a clear purpose.',
     materials: ['Smart Spatial Planning', 'Natural Circulation', 'Balanced Proportions'],
     route: '/services'
@@ -34,8 +34,8 @@ const CRAFT_DETAIL_ITEMS: CraftDetailItem[] = [
     category: 'CUSTOM ELEMENTS & MILLWORK',
     title: 'CUSTOM ELEMENTS',
     editorialTitle: 'Bespoke Joinery & Architectural Storage',
-    image: '/assets/craft_joinery.jpg',
-    detailImage: '/assets/craft_wardrobe.jpg',
+    image: '/assets/images/projects/image11.jpg',
+    detailImage: '/assets/images/projects/image5.jpg',
     description: 'Tailored furniture, storage and joinery created to make better use of the available area while complementing the overall look.',
     materials: ['Acoustic White Oak', 'Concealed Shadow Gaps', 'Integrated Storage'],
     route: '/services'
@@ -46,8 +46,8 @@ const CRAFT_DETAIL_ITEMS: CraftDetailItem[] = [
     category: 'MATERIALS & SURFACE FINISHES',
     title: 'MATERIALS & FINISHES',
     editorialTitle: 'Tactile Stone & Natural Veneers',
-    image: '/assets/craft_stone_vanity.jpg',
-    detailImage: '/assets/craft_credenza.jpg',
+    image: '/assets/images/projects/image2.jpg',
+    detailImage: '/assets/images/projects/image3.jpg',
     description: 'Wood, glass, stone, textures and other finishes are carefully combined to create the right character for each interior.',
     materials: ['Honed Roman Travertine', 'Brushed Bronze Trim', 'Textured Lime Plaster'],
     route: '/services'
@@ -58,8 +58,8 @@ const CRAFT_DETAIL_ITEMS: CraftDetailItem[] = [
     category: 'LIGHTING & SPATIAL AMBIENCE',
     title: 'LIGHTING & AMBIENCE',
     editorialTitle: 'Layered Illumination & Warm Coves',
-    image: '/assets/mitijen/kitchen.jpeg',
-    detailImage: '/assets/mitijen/bedroom.jpeg',
+    image: '/assets/images/projects/image12.jpg',
+    detailImage: '/assets/images/projects/image10.jpg',
     description: 'Lighting is planned to support everyday use, highlight key features and create a comfortable atmosphere throughout the interior.',
     materials: ['Recessed 2700K Warm Cove', 'Low-Glare Task Lighting', 'Diffused Ambient Wash'],
     route: '/services'

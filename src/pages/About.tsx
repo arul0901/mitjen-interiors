@@ -79,10 +79,7 @@ export default function About() {
             <div className={"col-lg-5 order-lg-2"}>
               <div className={"cs_about_img_wrapper position-relative"}>
                 <div className={"cs_about_img1 cs_radius_10"}>
-                  <img src={"/assets/img/about-img10.webp"} alt={"Architectural interior showcase"} />
-                </div>
-                <div className={"cs_about_img2"}>
-                  <img src={"/assets/img/about-img11.webp"} alt={"Detail of curated materials"} />
+                  <img src={"/assets/images/projects/image8.jpg"} alt={"Architectural interior showcase"} />
                 </div>
               </div>
             </div>
@@ -159,7 +156,7 @@ export default function About() {
             <div className={"cs_grid_style_8"}>
               <div className={"cs_card_style_12"}>
                 <a href={"/services/details"} className={"cs_card_thumbnail cs_radius_10 cs_mb_45"} aria-label={"View details about Elite Craftsmanship service"}>
-                  <img src={"/assets/img/service-img-21.webp"} alt={"Luxury craftsmanship example showing detailed woodwork"} />
+                  <img src={"/assets/images/projects/image1.jpg"} alt={"Luxury craftsmanship example showing bespoke interior living room"} />
                 </a>
                 <div className={"cs_card_info"}>
                   <h3 className={"cs_card_title cs_fs_24 cs_semibold cs_mb_10 text-uppercase"}>
@@ -173,7 +170,7 @@ export default function About() {
 
               <div className={"cs_card_style_12"}>
                 <a href={"/services/details"} className={"cs_card_thumbnail cs_radius_10 cs_mb_45"} aria-label={"View details about Personalized Design service"}>
-                  <img src={"/assets/img/service-img-22.webp"} alt={"Custom design consultation showcasing personalized interior planning"} />
+                  <img src={"/assets/images/projects/image10.jpg"} alt={"Custom design consultation showcasing minimalist luxury lounge"} />
                 </a>
                 <div className={"cs_card_info"}>
                   <h3 className={"cs_card_title cs_fs_24 cs_semibold cs_mb_10 text-uppercase"}>
@@ -187,7 +184,7 @@ export default function About() {
 
               <div className={"cs_card_style_12"}>
                 <a href={"/services/details"} className={"cs_card_thumbnail cs_radius_10 cs_mb_45"} aria-label={"View details about Exclusive Locations service"}>
-                  <img src={"/assets/img/service-img-23.webp"} alt={"Premium property location with scenic views"} />
+                  <img src={"/assets/images/projects/image4.jpg"} alt={"Premium property location with palatial architectural gallery"} />
                 </a>
                 <div className={"cs_card_info"}>
                   <h3 className={"cs_card_title cs_fs_24 cs_semibold cs_mb_10 text-uppercase"}>
@@ -201,7 +198,7 @@ export default function About() {
 
               <div className={"cs_card_style_12"}>
                 <a href={"/services/details"} className={"cs_card_thumbnail cs_radius_10 cs_mb_45"} aria-label={"View details about Luxury Experience service"}>
-                  <img src={"/assets/img/service-img-24.webp"} alt={"Luxury lifestyle experience with premium amenities"} />
+                  <img src={"/assets/images/projects/image18.jpg"} alt={"Curated interiors and living experience with designer seating"} />
                 </a>
                 <div className={"cs_card_info"}>
                   <h3 className={"cs_card_title cs_fs_24 cs_semibold cs_mb_10 text-uppercase"}>
@@ -215,7 +212,7 @@ export default function About() {
 
               <div className={"cs_card_style_12"}>
                 <a href={"/services/details"} className={"cs_card_thumbnail cs_radius_10 cs_mb_45"} aria-label={"View details about Design and Planning service"}>
-                  <img src={"/assets/img/service-img-25.webp"} alt={"Architectural design and planning session"} />
+                  <img src={"/assets/images/projects/image5.jpg"} alt={"Architectural design and planning session in timber lounge"} />
                 </a>
                 <div className={"cs_card_info"}>
                   <h3 className={"cs_card_title cs_fs_24 cs_semibold cs_mb_10 text-uppercase"}>
@@ -240,10 +237,7 @@ export default function About() {
             <div className={"col-lg-6 order-lg-2"}>
               <div className={"cs_about_img_wrapper position-relative"}>
                 <div className={"cs_about_img1 cs_radius_10"}>
-                  <img src={"/assets/img/about-img1.webp"} alt={"Living space architectural execution"} />
-                </div>
-                <div className={"cs_about_img2"}>
-                  <img src={"/assets/img/about-img2.webp"} alt={"Refined dining and architectural finishes"} />
+                  <img src={"/assets/images/projects/image20.jpg"} alt={"Living space architectural execution"} />
                 </div>
               </div>
             </div>
@@ -331,8 +325,8 @@ export default function About() {
               <div className={"cs_philosophy_card"}>
                 <div className={"cs_philosophy_thumb"}>
                   <img
-                    src={"/assets/img/portfolio-img-21.webp"}
-                    alt={"Light and volumetric harmony in bespoke residence"}
+                    src={"/assets/images/projects/image4.jpg"}
+                    alt={"Light and volumetric harmony in palatial residence"}
                   />
                   <span className={"cs_philosophy_badge"}>01 / LIGHT</span>
                 </div>
@@ -358,7 +352,7 @@ export default function About() {
               <div className={"cs_philosophy_card"}>
                 <div className={"cs_philosophy_thumb"}>
                   <img
-                    src={"/assets/img/portfolio-img-22.webp"}
+                    src={"/assets/images/projects/image2.jpg"}
                     alt={"Honest materiality and bespoke joinery"}
                   />
                   <span className={"cs_philosophy_badge"}>02 / MATERIALITY</span>
@@ -385,7 +379,7 @@ export default function About() {
               <div className={"cs_philosophy_card"}>
                 <div className={"cs_philosophy_thumb"}>
                   <img
-                    src={"/assets/img/portfolio-img-23.webp"}
+                    src={"/assets/images/projects/image12.jpg"}
                     alt={"Zero tolerance precision and architectural permanence"}
                   />
                   <span className={"cs_philosophy_badge"}>03 / LONGEVITY</span>
@@ -498,7 +492,7 @@ export default function About() {
           <div className={"cs_height_60 cs_height_lg_50"}></div>
           <div className={"cs_testimonial_style_2"}>
             <div className={"cs_testimonial_thumbnail cs_radius_10"}>
-              <img src={"/assets/img/testimonial-img-2.webp"} alt={"Client testimonial interior"} />
+              <img src={"/assets/images/projects/image3.jpg"} alt={"Client testimonial interior - Classical dining salon"} />
             </div>
             <div className={"cs_testimonial_content"}>
               <div className={"cs_testimonial_rating cs_mb_30"}>
@@ -535,92 +529,6 @@ export default function About() {
                   <h3 className={"cs_avatar_title cs_fs_20 cs_bold cs_mb_10"}>MORGAN DUFRESNE</h3>
                   <p className={"cs_avatar_subtitle mb-0"}>Private Residence Owner, Montreal</p>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 9. FAQ Section */}
-      <section>
-        <div className={"cs_height_120 cs_height_lg_80"}></div>
-        <div className={"container"}>
-          <div className={"cs_section_heading_style_1 cs_center_column text-center"}>
-            <p className={"cs_section_subtitle cs_bold cs_accent_color text-uppercase cs_mb_20"}>
-              OUR FAQ
-            </p>
-            <h2 className={"cs_section_title cs_fs_53 cs_semibold text-uppercase mb-0"}>
-              FREQUENTLY ASKED QUESTIONS
-            </h2>
-          </div>
-          <div className={"cs_height_60 cs_height_lg_50"}></div>
-          <div className={"cs_accordians_wrapper_3"}>
-            <div className={"cs_accordian cs_style_4 cs_gray_bg cs_radius_10 active"}>
-              <div className={"cs_accordian_head position-relative"}>
-                <h3 className={"cs_accordian_title cs_fs_30 cs_semibold text-uppercase mb-0"}>
-                  WHAT INTERIOR & ARCHITECTURAL SERVICES DO YOU PROVIDE?
-                </h3>
-                <span className={"cs_accordian_toggler"}></span>
-              </div>
-              <div className={"cs_accordian_body"}>
-                We deliver comprehensive turnkey architectural and interior design services: from initial site orientation,
-                spatial volume studies, and municipal zoning permits, to custom millwork fabrication, lighting choreography,
-                and complete interior styling.
-              </div>
-            </div>
-
-            <div className={"cs_accordian cs_style_4 cs_gray_bg cs_radius_10"}>
-              <div className={"cs_accordian_head position-relative"}>
-                <h3 className={"cs_accordian_title cs_fs_30 cs_semibold text-uppercase mb-0"}>
-                  HOW DOES YOUR 4-STAGE DESIGN PROCESS WORK?
-                </h3>
-                <span className={"cs_accordian_toggler"}></span>
-              </div>
-              <div className={"cs_accordian_body"}>
-                Our practice is structured around four disciplined milestones: Discovery & Spatial Mapping,
-                Schematic 3D Prototyping, Atelier Sourcing & Engineering, and Turnkey Site Execution. Each phase
-                includes clear sign-off checkpoints and budget milestones.
-              </div>
-            </div>
-
-            <div className={"cs_accordian cs_style_4 cs_gray_bg cs_radius_10"}>
-              <div className={"cs_accordian_head position-relative"}>
-                <h3 className={"cs_accordian_title cs_fs_30 cs_semibold text-uppercase mb-0"}>
-                  HOW DO YOU ESTABLISH PROJECT DESIGN FEES?
-                </h3>
-                <span className={"cs_accordian_toggler"}></span>
-              </div>
-              <div className={"cs_accordian_body"}>
-                Design fees are structured transparently based on project scope, spatial complexity, and square footage.
-                Following an initial discovery session, we provide a detailed proposal detailing conceptual fees, technical
-                documentation, and on-site administration with zero hidden costs.
-              </div>
-            </div>
-
-            <div className={"cs_accordian cs_style_4 cs_gray_bg cs_radius_10"}>
-              <div className={"cs_accordian_head position-relative"}>
-                <h3 className={"cs_accordian_title cs_fs_30 cs_semibold text-uppercase mb-0"}>
-                  DO YOU MANAGE PLANNING PERMISSION AND MUNICIPAL APPROVALS?
-                </h3>
-                <span className={"cs_accordian_toggler"}></span>
-              </div>
-              <div className={"cs_accordian_body"}>
-                Yes. Our architectural team coordinates all municipal zoning filings, heritage board reviews, structural
-                engineering certifications, and building permit applications on behalf of the client.
-              </div>
-            </div>
-
-            <div className={"cs_accordian cs_style_4 cs_gray_bg cs_radius_10"}>
-              <div className={"cs_accordian_head position-relative"}>
-                <h3 className={"cs_accordian_title cs_fs_30 cs_semibold text-uppercase mb-0"}>
-                  HOW LONG DOES A TYPICAL RESIDENTIAL COMMISSION TAKE?
-                </h3>
-                <span className={"cs_accordian_toggler"}></span>
-              </div>
-              <div className={"cs_accordian_body"}>
-                A complete bespoke architectural residence typically spans 8 to 16 months depending on scale, municipal
-                permitting timelines, and custom millwork lead times. Full turnkey interior restorations often conclude
-                within 4 to 8 months.
               </div>
             </div>
           </div>
