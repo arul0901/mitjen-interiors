@@ -6794,13 +6794,13 @@ label {
   object-fit: cover;
 }
 
-.cs_card_style_7 .cs_card_thumbnail img:first-child {
+.cs_card_style_7 .cs_card_thumbnail img:first-child:not(:only-child) {
   backface-visibility: visible;
   transform-origin: right bottom;
   transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.cs_card_style_7 .cs_card_thumbnail img:last-child {
+.cs_card_style_7 .cs_card_thumbnail img:last-child:not(:only-child) {
   position: absolute;
   top: 0;
   left: 0;
@@ -6810,12 +6810,12 @@ label {
   transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.cs_card_style_7 .cs_card_thumbnail:hover img:first-child {
+.cs_card_style_7 .cs_card_thumbnail:hover img:first-child:not(:only-child) {
   transform-origin: top right;
   transform: rotateY(90deg);
 }
 
-.cs_card_style_7 .cs_card_thumbnail:hover img:last-child {
+.cs_card_style_7 .cs_card_thumbnail:hover img:last-child:not(:only-child) {
   transform: rotateY(0);
   transform-origin: left top;
 }
@@ -10739,3 +10739,35 @@ i.fa-instagram::before {
 
 /* Forced White Page Header Banner Titles */
 .cs_page_header_title, .cs_page_header_style_1 h1, .cs_page_header_content h1, h1.cs_page_header_title { color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; text-shadow: 0 2px 28px rgba(0, 0, 0, 0.95), 0 4px 50px rgba(0, 0, 0, 0.8) !important; }
+
+/* The Art of Exceptional Living (.cs_card_style_7) - Single Image Display */
+.cs_card_style_7 .cs_card_thumbnail {
+  display: block !important;
+  position: relative !important;
+  width: 100% !important;
+  aspect-ratio: 16 / 11 !important;
+  min-height: 220px !important;
+  overflow: hidden !important;
+  border-radius: 12px !important;
+}
+
+.cs_card_style_7 .cs_card_thumbnail img {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  backface-visibility: visible !important;
+  -webkit-backface-visibility: visible !important;
+  transform: none !important;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.cs_card_style_7:hover .cs_card_thumbnail img,
+.cs_card_style_7 .cs_card_thumbnail:hover img {
+  transform: scale(1.06) !important;
+}

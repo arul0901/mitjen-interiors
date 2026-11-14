@@ -2145,8 +2145,51 @@ select,
 }
 
 /* ==========================================================================
+   THE ART OF EXCEPTIONAL LIVING: Single-Image Display (Desktop + Mobile)
+   Overrides legacy 2-image 3D flip so single images render visibly & beautifully
+   ========================================================================== */
+.cs_card_style_7 .cs_card_thumbnail,
+.cs_exceptional_living_section .cs_card_style_7 .cs_card_thumbnail {
+  display: block !important;
+  position: relative !important;
+  width: 100% !important;
+  aspect-ratio: 16 / 11 !important;
+  min-height: 220px !important;
+  overflow: hidden !important;
+  border-radius: 12px !important;
+  perspective: none !important;
+}
+
+.cs_card_style_7 .cs_card_thumbnail img,
+.cs_card_style_7 .cs_card_thumbnail img:first-child,
+.cs_card_style_7 .cs_card_thumbnail img:last-child,
+.cs_exceptional_living_section .cs_card_style_7 .cs_card_thumbnail img,
+.cs_exceptional_living_section .cs_card_style_7 .cs_card_thumbnail img:first-child,
+.cs_exceptional_living_section .cs_card_style_7 .cs_card_thumbnail img:last-child {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  backface-visibility: visible !important;
+  -webkit-backface-visibility: visible !important;
+  transform: none !important;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.cs_card_style_7:hover .cs_card_thumbnail img,
+.cs_card_style_7 .cs_card_thumbnail:hover img,
+.cs_card_style_7 .cs_card_thumbnail:hover img:first-child,
+.cs_card_style_7 .cs_card_thumbnail:hover img:last-child {
+  transform: scale(1.06) !important;
+}
+
+/* ==========================================================================
    THE ART OF EXCEPTIONAL LIVING: Mobile Optimization
-   Preserves original 3D card flips, typography hierarchy, and visual balance
    ========================================================================== */
 
 @media (max-width: 768px) {
