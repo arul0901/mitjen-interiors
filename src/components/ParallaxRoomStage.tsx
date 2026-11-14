@@ -88,7 +88,7 @@ export default function ParallaxRoomStage({
   return (
     <section
       className={`cs_parallax_hero_section relative py-4 overflow-hidden ${className}`}
-      aria-label={"Bespoke Interior 3D Parallax Showcase"}
+      aria-label={"Mitjen Interior 3D Parallax Showcase"}
     >
       {/* Curved architectural mask - Top */}
       <div
@@ -181,7 +181,7 @@ export default function ParallaxRoomStage({
                 zIndex: 2,
               }}
               role={"img"}
-              aria-label={"Interior design preview of a bespoke residence"}
+              aria-label={"Interior design preview of a Mitjen residence"}
             >
               <Suspense fallback={null}>
                 <RoomPlane

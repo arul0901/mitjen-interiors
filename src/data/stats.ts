@@ -1,5 +1,5 @@
 // PLACEHOLDER: replace with real client testimonials, real numbers and real projects before launch
-// Brand: Bespoke Architecture Studio
+// Brand: Mitjen Architecture Studio
 
 export interface StatItem {
   id: string;
@@ -15,7 +15,7 @@ export const statsData: StatItem[] = [
     value: 150,
     suffix: '+',
     label: 'Curated Commissions',
-    description: 'Completed bespoke residential and commercial spaces across Southern India.'
+    description: 'Completed Mitjen residential and commercial spaces across Southern India.'
   },
   {
     id: 'experience',
@@ -39,3 +39,4 @@ export const statsData: StatItem[] = [
     description: 'Enduring relationships built on trust, budget fidelity, and punctual execution.'
   }
 ];
+

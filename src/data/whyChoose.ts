@@ -65,3 +65,4 @@ export const whyChooseData: WhyChooseItem[] = [
 ];
 
 export default whyChooseData;
+

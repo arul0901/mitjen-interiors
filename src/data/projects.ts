@@ -1,5 +1,5 @@
 // PLACEHOLDER: replace with real client testimonials, real numbers and real projects before launch
-// Brand: Bespoke Architecture Studio
+// Brand: Mitjen Architecture Studio
 
 export interface ProjectItem {
   id: string;
@@ -81,3 +81,4 @@ export const projectsData: ProjectItem[] = [
     href: '/portfolio/details'
   }
 ];
+

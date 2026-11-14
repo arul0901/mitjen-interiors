@@ -7,4 +7,6 @@ dist/
 .DS_Store
 Thumbs.db
 raw/
+public/hero/walkthrough.webm
+public/hero_new/
 

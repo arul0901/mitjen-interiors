@@ -50,3 +50,4 @@ for rel_path in assets_to_download:
         print(f"Failed {url}: {e}")
 
 print(f"\nTotal downloaded/verified: {success}/{len(assets_to_download)}")
+

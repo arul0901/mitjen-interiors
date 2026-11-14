@@ -261,12 +261,6 @@ export function ScrollWalkthroughVideoHero() {
                 pointerEvents: style.pointerEvents,
               }}
             >
-              <div className="hero-walkthrough-eyebrow">
-                <span className="hero-walkthrough-num">{room.number}</span>
-                <span className="hero-walkthrough-sep" aria-hidden="true">/ 07</span>
-                <span className="hero-walkthrough-dot" aria-hidden="true">•</span>
-                <span className="hero-walkthrough-category">{room.eyebrow}</span>
-              </div>
               <h2 className="hero-walkthrough-title">{room.title}</h2>
               <p className="hero-walkthrough-tagline">{room.tagline}</p>
             </div>

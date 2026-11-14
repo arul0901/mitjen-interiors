@@ -20,7 +20,7 @@ export const TRANSFORMATIONS: TransformationItem[] = [
     afterImage: "/assets/mitijen/BF&AF/KitchenAF.jpeg",
     thumbnail: "/assets/mitijen/BF&AF/KitchenAF.jpeg",
     beforeAlt: "Living room interior during renovation and structural planning",
-    afterAlt: "Elegant living room made for everyday living with bespoke joinery and warm lighting",
+    afterAlt: "Elegant living room made for everyday living with Mitjen joinery and warm lighting",
   },
   {
     id: "modular-kitchen",
@@ -331,3 +331,4 @@ export default function BeforeAfterTransformation({
     </section>
   );
 }
+

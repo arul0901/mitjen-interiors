@@ -606,21 +606,7 @@ export const Header: React.FC = () => {
       {/* Right Actions: Desktop Search + Desktop Gold CTA + Mobile Burger */}
       <div className="header-actions-wrap">
         {/* Search trigger button */}
-        <button
-          type="button"
-          className="header-search-btn"
-          onClick={() => openInquiry('Project Inquiry & Search')}
-          aria-label="Search or enquire"
-        >
-          <svg fill="none" height="19" viewBox="0 0 24 24" width="19" stroke="currentColor">
-            <path
-              d="M21 21L16.65 16.65M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </button>
+        
 
         {/* Desktop Gold CTA Button */}
         <Link

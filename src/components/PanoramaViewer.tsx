@@ -210,10 +210,10 @@ export default function PanoramaViewer({
   const toggleFullscreen = () => {
     if (!containerRef.current) return;
     if (!document.fullscreenElement) {
-      containerRef.current.requestFullscreen().catch(() => {});
+      containerRef.current.requestFullscreen().catch(() => { });
       setIsFullscreen(true);
     } else {
-      document.exitFullscreen().catch(() => {});
+      document.exitFullscreen().catch(() => { });
       setIsFullscreen(false);
     }
   };
@@ -229,7 +229,7 @@ export default function PanoramaViewer({
           </div>
           <div className={"cs_pano_header_right"}>
             <p className={"cs_pano_intro"}>
-              Step inside Mitjen’s bespoke architectural interiors. Drag in any direction to explore custom millwork,
+              Step inside Mitjen’s Mitjen architectural interiors. Drag in any direction to explore custom millwork,
               vein-matched stone surfaces, and natural daylight volumes.
             </p>
             <div className={"cs_pano_badges"}>
@@ -350,3 +350,4 @@ export default function PanoramaViewer({
     </section>
   );
 }
+

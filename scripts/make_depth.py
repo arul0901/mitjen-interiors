@@ -1,5 +1,5 @@
 """
-Depth map generation and stock image processor for Bespoke Architecture Studio Parallax Hero.
+Depth map generation and stock image processor for Mitjen Architecture Studio Parallax Hero.
 Uses HuggingFace pipeline with Depth-Anything-V2-Small-hf.
 """
 import os

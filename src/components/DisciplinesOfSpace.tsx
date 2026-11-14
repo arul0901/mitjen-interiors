@@ -17,7 +17,7 @@ export const DISCIPLINES: DisciplineItem[] = [
     id: "residential",
     tag: "01 · PRIVATE RESIDENCES",
     title: "Residential Sanctuary",
-    subtitle: "Bespoke villas, private penthouses & luxury apartments",
+    subtitle: "Mitjen villas, private penthouses & luxury apartments",
     description:
       "Crafted around natural light, diurnal living patterns, and acoustic peace. We sculpt spaces where family life unfolds in effortless harmony and tactile comfort.",
     image: "/assets/mitijen/home1.jpeg",
@@ -123,3 +123,4 @@ export default function DisciplinesOfSpace({
     </section>
   );
 }
+

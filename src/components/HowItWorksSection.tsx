@@ -53,7 +53,7 @@ const STEP_CARDS: HowItWorksCardData[] = [
     ],
     duration: 'Timeline: 6–10 Weeks',
     imageUrl: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=80',
-    imageAlt: 'Architectural interior lounge with bespoke dark timber millwork and cove lighting',
+    imageAlt: 'Architectural interior lounge with Mitjen dark timber millwork and cove lighting',
   },
 ];
 

@@ -46,7 +46,7 @@ export const CINEMATIC_SHOWCASE_SLIDES: ShowcaseSlide[] = [
     id: "entrance-gallery",
     number: "01",
     eyebrow: "Arrival Gallery",
-    title: "The Entrance Gallery",
+    title: "The Entrance",
     description: "A contemplative architectural entryway framed by board-formed concrete, seamless glazing, and tranquil desert light.",
     image: "/hero/poster.webp",
     objectPosition: "center center",
@@ -191,8 +191,8 @@ export const WALKTHROUGH_ROOMS: WalkthroughRoom[] = [
     eyebrow: "Primary Suite",
     from: 0.70,
     to: 0.87,
-    title: "The Primary Suite",
-    tagline: "A peaceful private sanctuary opening to the morning garden.",
+    title: "The Garden Room",
+    tagline: "Where the interior meets the garden.",
     side: "right",
   },
   {
@@ -202,7 +202,7 @@ export const WALKTHROUGH_ROOMS: WalkthroughRoom[] = [
     from: 0.84,
     to: 1.0,
     title: "The Bath",
-    tagline: "Carved travertine, brushed metal, water, and stillness.",
+    tagline: "Stone, water, stillness.",
     side: "left",
   },
 ];
