@@ -239,7 +239,7 @@ export const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({ data }
                 </button>
 
                 <div className="clinic-inquiry-meta">
-                  <span>In-person studio visit in Krishnagiri</span>
+                  <span>In-person studio visit in Coimbatore</span>
                   <span>·</span>
                   <span>Virtual 3D consultation available</span>
                 </div>
@@ -335,7 +335,7 @@ export const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({ data }
             {/* Section 2: What Can It Help With? */}
             <section className="clinic-content-section">
               <h2 className="clinic-section-title">
-                <span className="clinic-dash">—</span> {data.category} Interior Design in Krishnagiri: What Can It Help With?
+                <span className="clinic-dash">—</span> {data.category} Interior Design in Coimbatore: What Can It Help With?
               </h2>
 
               <p className="clinic-body-intro">
@@ -477,7 +477,7 @@ export const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({ data }
                 Ready to Commission Your Interior Transformation?
               </h3>
               <p className="clinic-bottom-desc">
-                Meet directly with our senior interior architects in Krishnagiri or book a virtual 3D design consultation.
+                Meet directly with our senior interior architects in Coimbatore or book a virtual 3D design consultation.
               </p>
               <div className="clinic-callout-actions">
                 <button type="button" onClick={() => openInquiry(`${data.category} — Schedule Consultation`)} className="clinic-btn-primary">

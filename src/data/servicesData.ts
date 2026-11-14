@@ -164,12 +164,12 @@ export const SERVICES_DATA: Record<string, ServicePageData> = {
       secondaryCtaText: 'Explore Residential Practice'
     },
     overview: {
-      sectionTag: 'Home Interior Architecture · Krishnagiri & Region',
+      sectionTag: 'Home Interior Architecture · Coimbatore & Region',
       title: 'Thoughtfully Planned Living Spaces for Modern Homeowners',
       leadParagraph: 'Whether you are taking handover of a new apartment, planning a custom duplex villa, or renovating your family home, our turnkey interior design service bridges aesthetic luxury with everyday practical comfort.',
       bodyParagraphs: [
         'A truly welcoming home starts long before paint and furniture—it begins with smart layout planning. We study how your household actually lives: mapping morning routines, maximizing natural daylight through windows, carving out hidden storage for clutter-free living, and creating smooth walking paths between living, dining, and kitchen areas.',
-        'From precision factory-manufactured modular kitchens and walk-in wardrobes to custom false ceilings and ambient mood lighting, Mitjen Interiors provides complete single-point execution across Krishnagiri, Hosur, and Bangalore. You get a committed project manager, transparent itemized pricing, and a guaranteed 45-day move-in schedule.'
+        'From precision factory-manufactured modular kitchens and walk-in wardrobes to custom false ceilings and ambient mood lighting, Mitjen Interiors provides complete single-point execution across Coimbatore, Hosur, and Bangalore. You get a committed project manager, transparent itemized pricing, and a guaranteed 45-day move-in schedule.'
       ],
       keyStats: [
         { value: 'Turnkey', label: 'Single-Point Project Execution' },
@@ -384,7 +384,7 @@ export const SERVICES_DATA: Record<string, ServicePageData> = {
           step: 'Stage 01',
           number: '01',
           title: 'Discovery & On-Site Consultation',
-          description: 'We meet in-person at your site in Krishnagiri, Hosur, or Bangalore. We measure walls, review natural lighting angles, and document your household routines, storage needs, and aesthetic preferences.',
+          description: 'We meet in-person at your site in Coimbatore, Hosur, or Bangalore. We measure walls, review natural lighting angles, and document your household routines, storage needs, and aesthetic preferences.',
           deliverables: 'As-built 2D measurements, lifestyle requirements brief, and initial scope outline'
         },
         {

@@ -216,3 +216,4 @@ export const ArchitecturalIcon: React.FC<ArchitecturalIconProps> = ({
 };
 
 export default ArchitecturalIcon;
+

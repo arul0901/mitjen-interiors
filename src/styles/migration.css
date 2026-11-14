@@ -1932,7 +1932,6 @@ a, button, [role="button"] {
 h1, h2, h3, h4, h5, h6,
 .cs_hero_title,
 .cs_section_title,
-.cs_page_header_title,
 .cs_cta_title,
 .cs_card_title,
 .cs_widget_heading,
@@ -1949,10 +1948,60 @@ h1, h2, h3, h4, h5, h6,
   color: var(--primary-color, #171717);
 }
 
-h1, .cs_hero_title, .cs_page_header_title {
+h1, .cs_hero_title {
   font-size: clamp(34px, 4.8vw, 56px) !important;
   line-height: 1.1 !important;
   font-weight: 500 !important;
+}
+
+/* Page Header Banners — Pristine High-Contrast White Text */
+.cs_page_header_title,
+.cs_page_header_style_1 .cs_page_header_title,
+.cs_page_header_style_1 h1 {
+  font-family: var(--font-heading, 'Cormorant Garamond', serif) !important;
+  font-size: clamp(38px, 5.5vw, 68px) !important;
+  line-height: 1.1 !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.04em !important;
+  color: #ffffff !important;
+  text-shadow: 0 2px 28px rgba(0, 0, 0, 0.9), 0 4px 48px rgba(0, 0, 0, 0.75) !important;
+}
+
+.cs_page_header_style_1 {
+  position: relative;
+  background-color: #0b0e11 !important;
+}
+
+.cs_page_header_style_1 .cs_overlay {
+  background: linear-gradient(180deg, rgba(11, 14, 17, 0.78) 0%, rgba(11, 14, 17, 0.55) 50%, rgba(11, 14, 17, 0.88) 100%) !important;
+  opacity: 0.75 !important;
+}
+
+.cs_page_header_style_1 .breadcrumb-item,
+.cs_page_header_style_1 .breadcrumb-item a {
+  color: rgba(255, 255, 255, 0.85) !important;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.85);
+}
+
+.cs_page_header_style_1 .breadcrumb-item.active {
+  color: #f3d492 !important;
+}
+
+.cs_page_header_style_1 .breadcrumb-item + .breadcrumb-item::before {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* Force .cs_white_color to always take precedence over dark heading defaults */
+.cs_white_color,
+h1.cs_white_color,
+h2.cs_white_color,
+h3.cs_white_color,
+h4.cs_white_color,
+p.cs_white_color,
+span.cs_white_color,
+div.cs_white_color,
+a.cs_white_color {
+  color: #ffffff !important;
 }
 
 h2, .cs_section_title {
