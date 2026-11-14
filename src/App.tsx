@@ -7,6 +7,9 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Services from "./pages/Services";
 import ServiceDetails from "./pages/ServiceDetails";
+import CommercialInteriorDesign from "./pages/CommercialInteriorDesign";
+import CorporateInteriorDesign from "./pages/CorporateInteriorDesign";
+import ResidentialInteriorDesign from "./pages/ResidentialInteriorDesign";
 import Portfolio from "./pages/Portfolio";
 import PortfolioDetails from "./pages/PortfolioDetails";
 import Team from "./pages/Team";
@@ -83,6 +86,9 @@ export default function App() {
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
           <Route path="/services/details" element={<ServiceDetails />} />
+          <Route path="/services/commercial-interior-design" element={<CommercialInteriorDesign />} />
+          <Route path="/services/corporate-interior-design" element={<CorporateInteriorDesign />} />
+          <Route path="/services/residential-interior-design" element={<ResidentialInteriorDesign />} />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/portfolio/details" element={<PortfolioDetails />} />
           <Route path="/team" element={<Team />} />
