@@ -2540,3 +2540,335 @@ select,
     gap: 10px !important;
   }
 }
+
+/* ==========================================================================
+   Comprehensive Mobile Optimization: About Page & Global Architecture Viewports
+   ========================================================================== */
+
+/* 1. Global Section Spacers on Mobile (< 991px & < 768px) */
+@media (max-width: 991px) {
+  .cs_height_120,
+  .cs_height_lg_80 {
+    height: 52px !important;
+  }
+  .cs_height_60,
+  .cs_height_lg_50 {
+    height: 28px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .cs_height_120,
+  .cs_height_lg_80 {
+    height: 40px !important;
+  }
+  .cs_height_60,
+  .cs_height_lg_50 {
+    height: 22px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .cs_height_120,
+  .cs_height_lg_80 {
+    height: 32px !important;
+  }
+  .cs_height_60,
+  .cs_height_lg_50 {
+    height: 16px !important;
+  }
+}
+
+/* 2. Global GSAP SplitText & Headings Anti-Stuck Opacity Fix */
+@media (max-width: 991px) {
+  .cs_section_title,
+  .cs_section_title *,
+  .cs_section_title .word,
+  .cs_section_title .word_inner,
+  .cs_fs_53,
+  .cs_fs_60,
+  .cs_about_text .cs_section_title,
+  .cs_skill_info .cs_section_title,
+  .cs_philosophy_section .cs_section_title {
+    opacity: 1 !important;
+    visibility: visible !important;
+    filter: none !important;
+    transform: none !important;
+  }
+
+  .cs_section_title {
+    font-size: clamp(24px, 6vw, 34px) !important;
+    line-height: 1.2 !important;
+    letter-spacing: -0.015em !important;
+  }
+}
+
+/* 3. Section 1 & Page Header Banners on Mobile */
+@media (max-width: 768px) {
+  .cs_page_header_style_1 {
+    padding: 110px 0 54px !important;
+  }
+  .cs_page_header_title,
+  .cs_page_header_style_1 .cs_page_header_title,
+  .cs_page_header_style_1 h1 {
+    font-size: clamp(30px, 8.5vw, 44px) !important;
+    letter-spacing: 0.05em !important;
+    margin-bottom: 12px !important;
+  }
+  .cs_horizontal_slider.cs_type_1 .cs_sliding_content {
+    font-size: 13px !important;
+    letter-spacing: 0.06em !important;
+  }
+  .cs_horizontal_slider.cs_type_1 .cs_sliding_content img {
+    width: 14px !important;
+    height: 14px !important;
+    margin: 0 10px !important;
+  }
+}
+
+/* 4. Section 3: Studio Story / About Mitjen (.cs_about_style_7) */
+@media (max-width: 991px) {
+  .cs_about_style_7 .cs_about_img_wrapper {
+    padding-left: 0 !important;
+    padding-bottom: 0 !important;
+    margin-bottom: 24px !important;
+    width: 100% !important;
+  }
+  .cs_about_style_7 .cs_about_img1 {
+    width: 100% !important;
+    overflow: hidden !important;
+    border-radius: 14px !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06) !important;
+  }
+  .cs_about_style_7 .cs_about_img1 img {
+    width: 100% !important;
+    height: 250px !important;
+    object-fit: cover !important;
+    display: block !important;
+  }
+  .cs_about_style_7 .cs_about_img2 {
+    display: none !important;
+  }
+  .cs_about_style_7 .cs_about_desc {
+    font-size: 14.5px !important;
+    line-height: 1.65 !important;
+    margin-bottom: 22px !important;
+  }
+  .cs_about_style_7 .cs_about_features {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 14px !important;
+    margin-bottom: 26px !important;
+  }
+  .cs_about_style_7 .cs_about_feature {
+    width: 100% !important;
+    padding: 18px 16px !important;
+    border-radius: 12px !important;
+  }
+  .cs_about_style_7 .cs_feature_header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    margin-bottom: 8px !important;
+  }
+  .cs_about_style_7 .cs_feature_title {
+    font-size: 17px !important;
+    letter-spacing: 0.02em !important;
+  }
+  .cs_about_style_7 .cs_feature_icon img {
+    width: 26px !important;
+    height: 26px !important;
+  }
+  .cs_about_style_7 .cs_feature_desc {
+    font-size: 13.5px !important;
+    line-height: 1.6 !important;
+    margin-bottom: 0 !important;
+  }
+}
+
+/* 5. Section 4: Our Expertise Showcase Strip (.cs_grid_style_8 / .cs_card_style_12) */
+@media (max-width: 991px) {
+  .cs_grid_style_8 {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+    width: 100% !important;
+    overflow: visible !important;
+  }
+  .cs_card_style_12 {
+    min-width: 0 !important;
+    width: 100% !important;
+    background: #ffffff !important;
+    border-radius: 14px !important;
+    padding: 16px !important;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04) !important;
+    border: 1px solid rgba(0, 0, 0, 0.06) !important;
+  }
+  .cs_card_style_12 .cs_card_thumbnail {
+    width: 100% !important;
+    height: 180px !important;
+    margin-bottom: 14px !important;
+    overflow: hidden !important;
+    border-radius: 10px !important;
+  }
+  .cs_card_style_12 .cs_card_thumbnail img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+  }
+  .cs_card_style_12 .cs_card_info {
+    border-top: none !important;
+    padding: 0 !important;
+  }
+  .cs_card_style_12 .cs_card_info::before {
+    display: none !important;
+  }
+  .cs_card_style_12 .cs_card_title {
+    font-size: 17px !important;
+    margin-bottom: 6px !important;
+    letter-spacing: 0.02em !important;
+  }
+  .cs_card_style_12 .cs_card_subtitle {
+    font-size: 13.5px !important;
+    line-height: 1.55 !important;
+    color: #666666 !important;
+    margin-bottom: 0 !important;
+  }
+}
+
+/* 6. Section 5: Why Choose Us (.cs_about_style_1.cs_type_1) */
+@media (max-width: 991px) {
+  .cs_about_style_1.cs_type_1 .cs_about_img_wrapper {
+    width: 100% !important;
+    padding: 0 !important;
+    margin-bottom: 24px !important;
+  }
+  .cs_about_style_1.cs_type_1 .cs_about_img1 {
+    width: 100% !important;
+    border-radius: 14px !important;
+    overflow: hidden !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06) !important;
+  }
+  .cs_about_style_1.cs_type_1 .cs_about_img1 img {
+    width: 100% !important;
+    height: 250px !important;
+    object-fit: cover !important;
+    display: block !important;
+  }
+  .cs_about_style_1.cs_type_1 .cs_about_img2 {
+    display: none !important;
+  }
+  .cs_about_style_1.cs_type_1 .cs_skill_progress_wrapper {
+    gap: 18px !important;
+  }
+  .cs_about_style_1.cs_type_1 .cs_skill_progress_wrapper .cs_progress_head {
+    width: 100% !important;
+    font-size: 13px !important;
+    letter-spacing: 0.04em !important;
+    line-height: 1.4 !important;
+    margin-bottom: 8px !important;
+  }
+  .cs_about_style_1.cs_type_1 .cs_progress.cs_type_1 {
+    height: 8px !important;
+  }
+}
+
+/* 7. Section 6: Philosophy Cards & Stats Ribbon */
+@media (max-width: 991px) {
+  .cs_philosophy_card {
+    margin-bottom: 18px !important;
+    border-radius: 14px !important;
+  }
+  .cs_philosophy_thumb {
+    height: 200px !important;
+  }
+  .cs_philosophy_body {
+    padding: 20px 16px !important;
+  }
+  .cs_philosophy_title {
+    font-size: 18px !important;
+    line-height: 1.3 !important;
+    margin-bottom: 10px !important;
+  }
+  .cs_philosophy_desc {
+    font-size: 13.5px !important;
+    line-height: 1.6 !important;
+    margin-bottom: 16px !important;
+  }
+  .cs_philosophy_chip {
+    font-size: 11px !important;
+    padding: 3px 8px !important;
+  }
+  .cs_stats_ribbon {
+    padding: 26px 14px !important;
+    border-radius: 16px !important;
+  }
+  .cs_stat_number {
+    font-size: 32px !important;
+    line-height: 1 !important;
+    margin-bottom: 4px !important;
+  }
+  .cs_stat_label {
+    font-size: 10.5px !important;
+    letter-spacing: 0.04em !important;
+    line-height: 1.35 !important;
+  }
+  .cs_stat_item {
+    padding: 6px 2px !important;
+  }
+}
+
+/* 8. Section 7: Grand Call To Action (.cs_cta_style_1) */
+@media (max-width: 768px) {
+  .cs_cta_style_1 {
+    padding: 60px 0 !important;
+  }
+  .cs_cta_style_1 .cs_cta_title {
+    font-size: clamp(26px, 7vw, 36px) !important;
+    line-height: 1.15 !important;
+    margin-bottom: 22px !important;
+  }
+  .cs_cta_style_1 .cs_logo_text_wrapper {
+    transform: scale(0.85);
+    margin-bottom: 18px !important;
+  }
+}
+
+/* 9. Section 8: Testimonials (.cs_testimonial_style_2) */
+@media (max-width: 768px) {
+  .cs_testimonial_style_2 .cs_testimonial_thumbnail img {
+    height: 220px !important;
+    object-fit: cover !important;
+    border-radius: 12px !important;
+    width: 100% !important;
+  }
+  .cs_testimonial_style_2 .cs_client_review blockquote {
+    font-size: 15px !important;
+    line-height: 1.55 !important;
+  }
+  .cs_testimonial_style_2 .cs_client_review blockquote:not(:last-child) {
+    margin-bottom: 14px !important;
+  }
+  .cs_testimonial_style_2 .cs_rating_summery {
+    font-size: 36px !important;
+  }
+}
+
+/* 10. Section 9: FAQ Accordions (.cs_accordians_wrapper_3) */
+@media (max-width: 768px) {
+  .cs_accordians_wrapper_3 .cs_accordian_title {
+    font-size: 14.5px !important;
+    line-height: 1.4 !important;
+    letter-spacing: 0.01em !important;
+    padding-right: 32px !important;
+  }
+  .cs_accordians_wrapper_3 .cs_accordian_head {
+    padding: 16px 14px !important;
+  }
+  .cs_accordians_wrapper_3 .cs_accordian_body {
+    padding: 0 14px 16px !important;
+    font-size: 13.5px !important;
+    line-height: 1.55 !important;
+  }
+}

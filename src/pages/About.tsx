@@ -19,7 +19,10 @@ export default function About() {
         <div className={"cs_overlay cs_primary_bg position-absolute"}></div>
         <div className={"container"}>
           <div className={"cs_page_header_content text-center"}>
-            <h1 className={"cs_page_header_title cs_fs_80 cs_bold cs_white_color cs_mb_16"}>
+            <h1
+              className={"cs_page_header_title cs_fs_80 cs_bold cs_white_color cs_mb_16"}
+              style={{ color: "#ffffff" }}
+            >
               ABOUT US
             </h1>
             <ol className={"breadcrumb cs_center mb-0"}>
