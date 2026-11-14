@@ -510,14 +510,7 @@ export const Header: React.FC = () => {
                 <span className="mobile-sub-desc">Showrooms, retail & hospitality venues</span>
               </Link>
 
-              <Link
-                to="/services"
-                className={`mobile-sub-link mobile-sub-overview ${location.pathname === '/services' ? 'is-active' : ''}`}
-                onClick={closeAllMenus}
-              >
-                <span className="mobile-sub-title">View All Practices & Services →</span>
-                <span className="mobile-sub-desc">Directory of all spatial disciplines</span>
-              </Link>
+              
             </div>
           </div>
 
