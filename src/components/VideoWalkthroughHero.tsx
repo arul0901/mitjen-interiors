@@ -230,10 +230,9 @@ export function ScrollWalkthroughVideoHero() {
           </video>
         )}
 
-        {/* Subtle Film Grain (Static SVG, 4% opacity) */}
+        {/* Ambient Overlays: Top & Bottom Legibility Gradients & Film Grain */}
+        <div className="hero-walkthrough-gradient-top" aria-hidden="true" />
         <div className="hero-walkthrough-grain" aria-hidden="true" />
-
-        {/* Bottom Legibility Gradient */}
         <div className="hero-walkthrough-gradient" aria-hidden="true" />
 
         {/* Intro Hint: "Scroll to enter" (visible 0 - 0.04) */}
@@ -291,4 +290,4 @@ export function ScrollWalkthroughVideoHero() {
   );
 }
 
-export default CinematicInteriorShowcase;
+export default ScrollWalkthroughVideoHero;
