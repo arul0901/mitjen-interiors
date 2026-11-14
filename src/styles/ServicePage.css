@@ -32,6 +32,12 @@
   box-sizing: border-box;
 }
 
+.arch-serv-hero-minimal {
+  min-height: clamp(210px, 26vh, 290px);
+  padding-top: calc(96px + env(safe-area-inset-top, 0px));
+  padding-bottom: clamp(28px, 3.8vh, 44px);
+}
+
 .arch-serv-hero-bg {
   position: absolute;
   inset: 0;
@@ -156,6 +162,18 @@
   margin: 0;
   max-width: 960px;
   text-shadow: 0 2px 24px rgba(0, 0, 0, 0.5);
+}
+
+.arch-serv-hero-title-clean {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-size: clamp(2.1rem, 4.4vw, 3.2rem);
+  font-weight: 500;
+  color: #f5f2ec;
+  line-height: 1.18;
+  letter-spacing: -0.015em;
+  margin: 0;
+  max-width: 960px;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.55);
 }
 
 .arch-serv-hero-sub {
@@ -1182,9 +1200,150 @@
   align-items: start;
 }
 
+.clinic-mobile-practice-bar {
+  display: none;
+}
+
 @media (max-width: 991px) {
+  .clinic-layout-container {
+    padding: 24px 16px 64px 16px;
+  }
+
   .clinic-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+  }
+
+  .clinic-main-content {
+    order: 1;
+    width: 100%;
+    gap: 32px;
+  }
+
+  .clinic-sidebar {
+    order: 2;
+    width: 100%;
+    margin-top: 12px;
+  }
+
+  .clinic-sticky-sidebar {
+    position: static;
+    top: auto;
+    gap: 24px;
+  }
+
+  .clinic-mobile-practice-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px 14px;
+    background: #ffffff;
+    border: 1px solid #e7e2d8;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+  }
+
+  .clinic-mobile-practice-label {
+    font-family: var(--font-architectural, 'Space Grotesk', sans-serif);
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #8c857b;
+    font-weight: 600;
+  }
+
+  .clinic-mobile-practice-chips {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 2px;
+  }
+
+  .clinic-mobile-practice-chips::-webkit-scrollbar {
+    display: none;
+  }
+
+  .clinic-mobile-chip {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    border-radius: 9999px;
+    border: 1px solid #e7e2d8;
+    background: #faf8f5;
+    color: #3b4048;
+    text-decoration: none;
+    min-height: 44px;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+  }
+
+  .clinic-mobile-chip.is-active {
+    background: #181c20;
+    color: #f5f2ec;
+    border-color: #181c20;
+  }
+
+  .clinic-callout-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .clinic-btn-primary,
+  .clinic-btn-outline {
+    width: 100%;
+    justify-content: center;
+    min-height: 48px;
+    box-sizing: border-box;
+  }
+
+  .clinic-pill-grid {
     grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .clinic-process-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .clinic-scope-item {
+    padding: 18px 20px;
+  }
+
+  .clinic-faq-btn {
+    padding: 16px 18px;
+    font-size: 1rem;
+    min-height: 48px;
+  }
+
+  .clinic-faq-answer {
+    padding: 0 18px 16px 18px;
+  }
+
+  .clinic-bottom-cta {
+    padding: 28px 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .arch-serv-hero-minimal {
+    min-height: clamp(170px, 22vh, 220px);
+    padding-top: calc(84px + env(safe-area-inset-top, 0px));
+    padding-bottom: 20px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .arch-serv-hero-title-clean {
+    font-size: clamp(1.6rem, 5.8vw, 2.2rem);
   }
 }
 
@@ -1553,9 +1712,23 @@
 }
 
 .clinic-pill-icon {
-  font-size: 1.35rem;
-  line-height: 1;
+  width: 38px;
+  height: 38px;
+  border-radius: 9px;
+  background: rgba(146, 117, 78, 0.08);
+  border: 1px solid rgba(146, 117, 78, 0.16);
+  color: #92754e;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
+  transition: all 0.25s ease;
+}
+
+.clinic-pill-card:hover .clinic-pill-icon {
+  background: #92754e;
+  color: #ffffff;
+  border-color: #92754e;
 }
 
 .clinic-pill-text {

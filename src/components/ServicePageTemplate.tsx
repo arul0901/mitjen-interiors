@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import type { ServicePageData } from '../data/servicesData';
 import { SEO } from './common/SEO';
 import { Breadcrumbs } from './common/Breadcrumbs';
+import { ArchitecturalIcon } from './common/ArchitecturalIcon';
 import { useInquiry } from '../context/useInquiry';
 import '../styles/ServicePage.css';
 
@@ -34,23 +35,23 @@ export const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({ data }
   ];
 
   const guidanceTopics = [
-    { icon: '🏠', title: 'Living & dining spatial flow & entertainment walls' },
-    { icon: '🍳', title: 'Ergonomic modular kitchen planning & pantries' },
-    { icon: '🛏️', title: 'Restful master bedroom suites & acoustic serenity' },
-    { icon: '🚪', title: 'Custom floor-to-ceiling walk-in wardrobes' },
-    { icon: '💡', title: 'Architectural cove lighting & false ceiling design' },
-    { icon: '🎨', title: 'Tactile veneers, natural stone & finish palettes' },
-    { icon: '📐', title: 'Space-saving solutions for compact apartments' },
-    { icon: '🔨', title: 'Turnkey civil execution & single-point handover' },
+    { icon: 'spatial-flow', title: 'Living & dining spatial flow & entertainment walls' },
+    { icon: 'kitchen', title: 'Ergonomic modular kitchen planning & pantries' },
+    { icon: 'bedroom', title: 'Restful master bedroom suites & acoustic serenity' },
+    { icon: 'wardrobe', title: 'Custom floor-to-ceiling walk-in wardrobes' },
+    { icon: 'lighting', title: 'Architectural cove lighting & false ceiling design' },
+    { icon: 'materials', title: 'Tactile veneers, natural stone & finish palettes' },
+    { icon: 'scale', title: 'Space-saving solutions for compact apartments' },
+    { icon: 'execution', title: 'Turnkey civil execution & single-point handover' },
   ];
 
   const challengeTriggers = [
-    { icon: '📦', title: 'Difficulty planning wardrobe storage or feeling cluttered' },
-    { icon: '☀️', title: 'Dark rooms, poor airflow or awkward pillar placements' },
-    { icon: '📋', title: 'Uncertainty about carpentry budgets & cost escalations' },
-    { icon: '🛡️', title: 'Concerns about plywood swelling, moisture or termites' },
-    { icon: '🔌', title: 'Confusion around electrical switches & plumbing positions' },
-    { icon: '🎨', title: 'Worry that different rooms won’t match or feel cohesive' },
+    { icon: 'storage', title: 'Difficulty planning wardrobe storage or feeling cluttered' },
+    { icon: 'sunlight', title: 'Dark rooms, poor airflow or awkward pillar placements' },
+    { icon: 'budget', title: 'Uncertainty about carpentry budgets & cost escalations' },
+    { icon: 'durability', title: 'Concerns about plywood swelling, moisture or termites' },
+    { icon: 'electrical', title: 'Confusion around electrical switches & plumbing positions' },
+    { icon: 'cohesion', title: 'Worry that different rooms won’t match or feel cohesive' },
   ];
 
 
@@ -142,9 +143,9 @@ export const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({ data }
       />
 
       {/* ====================================================================
-          1. ARCHITECTURAL EDITORIAL HERO
+          1. ARCHITECTURAL EDITORIAL HERO (Clean Minimal Canopy)
           ==================================================================== */}
-      <section className="arch-serv-hero" aria-label={`${data.category} Interior Architecture Header`}>
+      <section className="arch-serv-hero arch-serv-hero-minimal" aria-label={`${data.category} Interior Architecture Header`}>
         <div className="arch-serv-hero-bg">
           <img
             src={data.hero.bgImage}
@@ -171,52 +172,9 @@ export const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({ data }
             />
           </div>
 
-          <h1 className="arch-serv-hero-title">
-            {data.hero.headline}
+          <h1 className="arch-serv-hero-title arch-serv-hero-title-clean">
+            {data.category} Interior Design
           </h1>
-
-          <p className="arch-serv-hero-sub">
-            {data.hero.supportingText}
-          </p>
-
-          <div className="arch-serv-hero-actions">
-            <button
-              type="button"
-              onClick={() => openInquiry(`${data.category} — Hero Consultation`)}
-              className="arch-serv-btn-primary"
-            >
-              <span>{data.hero.primaryCtaText || 'Schedule Consultation'}</span>
-              <svg width="15" height="10" viewBox="0 0 15 10" fill="none" stroke="currentColor">
-                <path d="M0 5h13M9 1l4 4-4 4" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </button>
-
-            <a href="tel:+919444328555" className="arch-serv-btn-ghost">
-              <span>Call +91 94443 28555</span>
-            </a>
-          </div>
-
-          <div className="arch-serv-meta-ribbon" aria-label="Studio Commitments">
-            <div className="arch-meta-col">
-              <span className="arch-meta-val">150+</span>
-              <span className="arch-meta-lbl">Curated Spaces</span>
-            </div>
-            <div className="arch-meta-divider" aria-hidden="true" />
-            <div className="arch-meta-col">
-              <span className="arch-meta-val">100%</span>
-              <span className="arch-meta-lbl">Fixed-Price BOQ</span>
-            </div>
-            <div className="arch-meta-divider" aria-hidden="true" />
-            <div className="arch-meta-col">
-              <span className="arch-meta-val">10-Year</span>
-              <span className="arch-meta-lbl">Cabinetry Warranty</span>
-            </div>
-            <div className="arch-meta-divider" aria-hidden="true" />
-            <div className="arch-meta-col">
-              <span className="arch-meta-val">On-Time</span>
-              <span className="arch-meta-lbl">Guaranteed Handover</span>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -309,6 +267,27 @@ export const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({ data }
               RIGHT COLUMN: Exact Children's Clinic Content Rhythm
               ================================================================== */}
           <main className="clinic-main-content">
+            {/* Mobile Quick Practice Switcher (Visible on mobile/tablet) */}
+            <div className="clinic-mobile-practice-bar" aria-label="Practice Navigation">
+              <span className="clinic-mobile-practice-label">Select Practice</span>
+              <div className="clinic-mobile-practice-chips">
+                {serviceNavItems.slice(0, 3).map((item) => {
+                  const isActive =
+                    location.pathname === item.path ||
+                    (item.path.startsWith('/services/residential') && location.pathname.includes('residential') && !location.hash);
+                  return (
+                    <Link
+                      key={item.name}
+                      to={item.path}
+                      className={`clinic-mobile-chip ${isActive ? 'is-active' : ''}`}
+                    >
+                      {item.name.replace(' Interior Design', '')}
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+
             {/* Top Large Feature Image */}
             <div className="clinic-lead-media">
               <img
@@ -337,7 +316,7 @@ export const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({ data }
               {/* Callout Box with Left Accent Border */}
               <div className="clinic-callout-box">
                 <h3 className="clinic-callout-title">
-                  Planning your home interiors or taking handover of a new property?
+                  Planning your {data.category.toLowerCase()} interiors or taking handover of a new property?
                 </h3>
                 <p className="clinic-callout-desc">
                   Get personalized design guidance based on your floor plan, daylighting path, and lifestyle routines.
@@ -356,21 +335,23 @@ export const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({ data }
             {/* Section 2: What Can It Help With? */}
             <section className="clinic-content-section">
               <h2 className="clinic-section-title">
-                <span className="clinic-dash">—</span> Residential Interior Design in Krishnagiri: What Can It Help With?
+                <span className="clinic-dash">—</span> {data.category} Interior Design in Krishnagiri: What Can It Help With?
               </h2>
 
               <p className="clinic-body-intro">
-                Professional interior architecture helps homeowners understand their floor plan and address layout, storage, and lighting before execution begins.
+                Professional interior architecture helps clients understand their floor plan and address layout, storage, and lighting before execution begins.
               </p>
 
               <div className="clinic-guidance-box">
                 <h4 className="clinic-guidance-heading">
-                  Residential interior design may include guidance related to:
+                  {data.category} interior design may include guidance related to:
                 </h4>
                 <div className="clinic-pill-grid">
                   {guidanceTopics.map((g, idx) => (
                     <div key={idx} className="clinic-pill-card">
-                      <span className="clinic-pill-icon">{g.icon}</span>
+                      <span className="clinic-pill-icon">
+                        <ArchitecturalIcon name={g.icon} size={20} />
+                      </span>
                       <span className="clinic-pill-text">{g.title}</span>
                     </div>
                   ))}
@@ -381,11 +362,11 @@ export const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({ data }
             {/* Section 3: When Should You Seek Support? */}
             <section className="clinic-content-section">
               <h2 className="clinic-section-title">
-                <span className="clinic-dash">—</span> Home Interior Challenges That Need Professional Guidance
+                <span className="clinic-dash">—</span> Interior Challenges That Need Professional Guidance
               </h2>
 
               <p className="clinic-body-intro">
-                Every home has unique structural parameters. Rather than risking carpenter guesswork, unexpected cost spikes, or poor material choices, an architectural consultation addresses these concerns early.
+                Every space has unique structural parameters. Rather than risking carpenter guesswork, unexpected cost spikes, or poor material choices, an architectural consultation addresses these concerns early.
               </p>
 
               <div className="clinic-guidance-box">
@@ -395,7 +376,9 @@ export const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({ data }
                 <div className="clinic-pill-grid">
                   {challengeTriggers.map((c, idx) => (
                     <div key={idx} className="clinic-pill-card">
-                      <span className="clinic-pill-icon">{c.icon}</span>
+                      <span className="clinic-pill-icon">
+                        <ArchitecturalIcon name={c.icon} size={20} />
+                      </span>
                       <span className="clinic-pill-text">{c.title}</span>
                     </div>
                   ))}
@@ -406,7 +389,7 @@ export const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({ data }
             {/* Section 4: What Does Support Include? */}
             <section id="deliverables" className="clinic-content-section">
               <h2 className="clinic-section-title">
-                <span className="clinic-dash">—</span> What Does Our Residential Interior Design Include?
+                <span className="clinic-dash">—</span> What Does Our {data.category} Interior Design Include?
               </h2>
 
               <p className="clinic-body-intro">

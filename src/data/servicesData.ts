@@ -185,28 +185,28 @@ export const SERVICES_DATA: Record<string, ServicePageData> = {
       items: [
         {
           id: 'storage-clutter',
-          icon: '📦',
+          icon: 'storage',
           situation: 'Cramped Wardrobes & Overflowing Household Clutter',
           solution: 'Custom floor-to-ceiling modular wardrobes, deep pull-out kitchen pantries, and concealed TV credenzas designed to fit your family’s exact belongings.',
           highlight: 'Zero dead corners; maximum vertical storage utilization'
         },
         {
           id: 'dark-layouts',
-          icon: '☀️',
+          icon: 'sunlight',
           situation: 'Dark Rooms, Poor Airflow & Awkward Wall Placements',
           solution: 'We map sunlight angles, position reflective finishes, and use fluted glass architectural dividers to borrow daylight and keep airflow circulating freely.',
           highlight: 'Open-plan spaciousness without sacrificing private bedroom tranquility'
         },
         {
           id: 'budget-anxiety',
-          icon: '📋',
+          icon: 'budget',
           situation: 'Contractor Delays, Disappearing Carpenters & Budget Escalations',
           solution: 'Fixed-Price Bill of Quantities (BOQ) with guaranteed zero hidden charges, weekly photo reports, and on-time completion backed by studio commitments.',
           highlight: '100% transparent pricing before any carpentry begins'
         },
         {
           id: 'material-durability',
-          icon: '🛡️',
+          icon: 'durability',
           situation: 'Plywood Swelling, Moisture Leaks & Termite Damage',
           solution: 'We use exclusively 100% calibrated BWR/BWP grade waterproof marine ply, anti-termite core treatments, and German soft-close fittings (Blum & Hafele).',
           highlight: '10-year warranty on core joinery & hardware'
