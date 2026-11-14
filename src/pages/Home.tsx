@@ -213,7 +213,7 @@ export default function Home() {
 <div className={"cs_grid_style_4"}>
 <div className={"cs_card_style_6 cs_gray_bg cs_radius_10"}>
 <a href={"/portfolio"} className={"cs_card_thumbnail"} aria-label={"View Vintage Finish Interior project details"}>
-<img src={"/assets/images/projects/image18.jpg"} alt={"Vintage Finish Interior, Race Course, Coimbatore"} />
+<img src={"/images/Residential/Residential1.jpeg"} alt={"Vintage Finish Interior, Race Course, Coimbatore"} />
 </a>
 <div className={"cs_card_content_wrapper position-relative"}>
 <div className={"cs_card_content"}>
@@ -247,7 +247,7 @@ export default function Home() {
 </div>
 <div className={"cs_card_style_6 cs_gray_bg cs_radius_10 active"} aria-current={"true"}>
 <a href={"/portfolio"} className={"cs_card_thumbnail"} aria-label={"View Interior Project, KR Pura details"}>
-<img src={"/assets/images/projects/image4.jpg"} alt={"Interior Project, KR Pura, Bangalore"} />
+<img src={"/images/Residential/Residential2.jpeg"} alt={"Interior Project, KR Pura, Bangalore"} />
 </a>
 <div className={"cs_card_content_wrapper position-relative"}>
 <div className={"cs_card_content"}>
@@ -281,7 +281,7 @@ export default function Home() {
 </div>
 <div className={"cs_card_style_6 cs_gray_bg cs_radius_10"}>
 <a href={"/portfolio"} className={"cs_card_thumbnail"} aria-label={"View Office Interior, Tidal Park details"}>
-<img src={"/assets/images/projects/image3.jpg"} alt={"Office Interior, Tidal Park"} />
+<img src={"/images/Commercial/Commercial1.jpeg"} alt={"Office Interior, Tidal Park"} />
 </a>
 <div className={"cs_card_content_wrapper position-relative"}>
 <div className={"cs_card_content"}>
@@ -315,7 +315,7 @@ export default function Home() {
 </div>
 <div className={"cs_card_style_6 cs_gray_bg cs_radius_10"}>
 <a href={"/portfolio"} className={"cs_card_thumbnail"} aria-label={"View Corporate Site Interior details"}>
-<img src={"/assets/images/projects/image5.jpg"} alt={"Corporate Site Interior"} />
+<img src={"/images/Corporate/Corporate1.jpeg"} alt={"Corporate Site Interior"} />
 </a>
 <div className={"cs_card_content_wrapper position-relative"}>
 <div className={"cs_card_content"}>
