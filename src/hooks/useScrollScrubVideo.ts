@@ -109,7 +109,7 @@ export function useScrollScrubVideo({
     let lastTime = performance.now();
 
     const isMobile = window.matchMedia("(max-width: 768px)").matches;
-    const endDistance = isMobile ? "+=450%" : "+=600%";
+    const endDistance = isMobile ? "+=300%" : "+=600%";
 
     // Connect with Lenis if already present
     if (win.lenisInstance) {
@@ -127,7 +127,6 @@ export function useScrollScrubVideo({
       pin: true,
       anticipatePin: 0,
       pinSpacing: true,
-      pinType: "fixed",
       invalidateOnRefresh: true,
       fastScrollEnd: true,
       preventOverlaps: true,
@@ -140,17 +139,20 @@ export function useScrollScrubVideo({
     });
 
     // Ensure generated pin-spacer has explicit dark containment
-    const spacerEl = (triggerInstance as unknown as { spacer?: HTMLElement })?.spacer;
-    if (spacerEl) {
-      spacerEl.style.backgroundColor = "#000000";
-    }
+    const applySpacerDark = () => {
+      const spacerEl = (triggerInstance as unknown as { spacer?: HTMLElement })?.spacer;
+      if (spacerEl) {
+        spacerEl.style.backgroundColor = "#000000";
+      }
+      document.querySelectorAll<HTMLElement>('.pin-spacer, div[class*="pin-spacer"]').forEach((el) => {
+        el.style.backgroundColor = "#000000";
+      });
+    };
+    applySpacerDark();
 
     const handlePageReady = () => {
       activeScrollTrigger.refresh();
-      const readySpacer = (triggerInstance as unknown as { spacer?: HTMLElement })?.spacer;
-      if (readySpacer) {
-        readySpacer.style.backgroundColor = "#000000";
-      }
+      applySpacerDark();
     };
     window.addEventListener("mitjen:page-ready", handlePageReady);
 

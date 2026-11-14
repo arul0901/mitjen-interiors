@@ -131,7 +131,7 @@ html {
   background-color: var(--web-wash);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
@@ -143,8 +143,7 @@ html::-webkit-scrollbar {
 
 body {
   height: auto;
-  overflow: auto;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 body.scroll_off {

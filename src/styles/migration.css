@@ -5,10 +5,9 @@
 /* 1. Global Viewport & Reset */
 html,
 body {
-  overflow-x: hidden !important;
+  overflow-x: clip !important;
   max-width: 100vw;
   width: 100%;
-  position: relative;
   -webkit-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
   scroll-behavior: auto;
@@ -19,7 +18,8 @@ body {
   min-height: 100vh;
   width: 100%;
   max-width: 100%;
-  overflow-x: hidden;
+  overflow: visible;
+  overflow-x: clip;
 }
 
 /* Scroll lock when mobile drawer is open */

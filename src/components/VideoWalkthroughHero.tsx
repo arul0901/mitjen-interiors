@@ -205,6 +205,15 @@ export function ScrollWalkthroughVideoHero() {
       aria-label="Walkthrough of a bespoke residence"
     >
       <div className="hero-walkthrough-viewport">
+        {/* Underlay Poster fallback: guarantees high-fidelity visual content at all times */}
+        <img
+          src="/hero/poster.webp"
+          alt="Cinematic architectural residence interior"
+          className="hero-walkthrough-poster-bg"
+          fetchPriority="high"
+          aria-hidden="true"
+        />
+
         {/* Media Layer: Video OR Canvas */}
         {useCanvasMode ? (
           <canvas
@@ -222,11 +231,11 @@ export function ScrollWalkthroughVideoHero() {
             poster="/hero/poster.webp"
             aria-hidden="true"
           >
-            <source src="/hero/walkthrough.webm" type="video/webm" />
             <source
               src={isMobile ? "/hero/walkthrough-mobile.mp4" : "/hero/walkthrough.mp4"}
               type="video/mp4"
             />
+            <source src="/hero/walkthrough-mobile.mp4" type="video/mp4" />
           </video>
         )}
 

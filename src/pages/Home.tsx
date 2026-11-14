@@ -14,6 +14,12 @@ const SHOW_LEGACY_HERO_BANNER = false;
 export default function Home() {
   useEffect(() => {
     document.title = "Mitjen Interiors";
+    document.body.classList.add("home-dark-theme");
+    document.documentElement.classList.add("home-dark-theme");
+    return () => {
+      document.body.classList.remove("home-dark-theme");
+      document.documentElement.classList.remove("home-dark-theme");
+    };
   }, []);
 
   return <>
