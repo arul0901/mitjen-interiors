@@ -6,23 +6,35 @@
 .hero-walkthrough-section {
   position: relative;
   width: 100%;
-  background: #000000;
+  height: 100vh;
+  height: 100svh;
+  background: #000000 !important;
   overflow-x: clip;
   color: #ffffff;
 }
 
-/* 100vh pinned viewport */
+/* 100vh stable pinned viewport (100svh prevents mobile address-bar height jumping) */
 .hero-walkthrough-viewport {
   position: relative;
   width: 100%;
   height: 100vh;
   height: 100svh;
-  height: 100dvh;
-  background: #000000;
+  background: #000000 !important;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* GSAP pin-spacer containment: ensures zero white gaps or void during/after scroll */
+.pin-spacer,
+.pin-spacer:has(> .hero-walkthrough-section),
+div[class*="pin-spacer"] {
+  background-color: #000000 !important;
+}
+
+main.cs_home_main {
+  background-color: #0c0b0a;
 }
 
 /* Media element (video, canvas, poster) */
@@ -345,8 +357,8 @@
 .hero-walkthrough-reduced {
   position: relative;
   width: 100%;
-  background: #ffffff;
-  color: #141513;
+  background: #0c0b0a;
+  color: #FAF8F5;
   padding: 80px 24px 60px;
 }
 
@@ -355,7 +367,7 @@
   margin: 0 auto 48px;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
 
 .hero-walkthrough-reduced-hero img {
@@ -373,8 +385,8 @@
 }
 
 .hero-walkthrough-reduced-item {
-  background: #FAF8F5;
-  border: 1px solid rgba(20, 21, 19, 0.08);
+  background: #141513;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   padding: 24px;
 }
@@ -385,13 +397,13 @@
   font-weight: 500;
   text-transform: uppercase;
   margin: 0 0 8px 0;
-  color: #141513;
+  color: #FAF8F5;
 }
 
 .hero-walkthrough-reduced-item p {
   font-family: var(--font-subheading, 'Manrope', sans-serif);
   font-size: 0.9375rem;
-  color: #706B5F;
+  color: #d1ccb9;
   margin: 0;
 }
 

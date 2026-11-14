@@ -17,7 +17,7 @@ export default function Home() {
   }, []);
 
   return <>
-<main>
+<main className="cs_home_main">
 {SHOW_LEGACY_HERO_BANNER && (
 <section className={"cs_hero_style_4 cs_bg_filed cs_gray_bg position-relative"} data-src={"/assets/img/hero-banner1.webp"} aria-label={"Hero section - Architecture that connects people and places"}>
 <div className={"cs_hero_overlay position-absolute"} aria-hidden={"true"}></div>

@@ -99,6 +99,9 @@ export function useScrollScrubVideo({
 
     try {
       activeGsap.registerPlugin(activeScrollTrigger);
+      activeScrollTrigger.config({
+        ignoreMobileResize: true,
+      });
     } catch {}
 
     let triggerInstance: ScrollTrigger | null = null;
@@ -113,9 +116,6 @@ export function useScrollScrubVideo({
       win.lenisInstance.on("scroll", () => {
         activeScrollTrigger.update();
       });
-      activeGsap.ticker.add((time: number) => {
-        win.lenisInstance?.raf(time * 1000);
-      });
     }
 
     // Initialize ScrollTrigger
@@ -125,8 +125,12 @@ export function useScrollScrubVideo({
       start: "top top",
       end: endDistance,
       pin: true,
-      anticipatePin: 1,
+      anticipatePin: 0,
       pinSpacing: true,
+      pinType: "fixed",
+      invalidateOnRefresh: true,
+      fastScrollEnd: true,
+      preventOverlaps: true,
       scrub: true,
       onUpdate: (self) => {
         progressRef.current = self.progress;
@@ -135,8 +139,18 @@ export function useScrollScrubVideo({
       },
     });
 
+    // Ensure generated pin-spacer has explicit dark containment
+    const spacerEl = (triggerInstance as unknown as { spacer?: HTMLElement })?.spacer;
+    if (spacerEl) {
+      spacerEl.style.backgroundColor = "#000000";
+    }
+
     const handlePageReady = () => {
       activeScrollTrigger.refresh();
+      const readySpacer = (triggerInstance as unknown as { spacer?: HTMLElement })?.spacer;
+      if (readySpacer) {
+        readySpacer.style.backgroundColor = "#000000";
+      }
     };
     window.addEventListener("mitjen:page-ready", handlePageReady);
 

@@ -91,11 +91,15 @@
   });
 
   /*=============================================================
-   Run on window resize
+   Run on window resize (guarded to width-only changes to prevent mobile address bar thrashing)
   ===============================================================*/
+  let lastWinWidth = window.innerWidth;
   $(window).on("resize.mitjen", function () {
-    if (typeof ScrollTrigger !== "undefined") {
-      ScrollTrigger.refresh();
+    if (window.innerWidth !== lastWinWidth) {
+      lastWinWidth = window.innerWidth;
+      if (typeof ScrollTrigger !== "undefined") {
+        ScrollTrigger.refresh();
+      }
     }
   });
   /*=============================================================
@@ -796,6 +800,7 @@
     try {
       if (typeof ScrollTrigger !== "undefined") {
         gsap.registerPlugin(ScrollTrigger);
+        ScrollTrigger.config({ ignoreMobileResize: true });
       } else {
         console.warn("ScrollTrigger not loaded");
       }
@@ -1298,11 +1303,14 @@
       }
     }
 
-    //Resize Handler to Refresh ScrollTrigger
+    //Resize Handler to Refresh ScrollTrigger (guarded against address-bar changes)
     if (typeof ScrollTrigger !== "undefined") {
       let resizeTimer;
+      let lastRecordedWidth = window.innerWidth;
 
       $(window).on("resize", function () {
+        if (window.innerWidth === lastRecordedWidth) return;
+        lastRecordedWidth = window.innerWidth;
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(() => {
           ScrollTrigger.refresh();
