@@ -281,7 +281,7 @@ export const MaterialsGallery: React.FC = () => {
 
           {/* Section Bottom Archive Navigation */}
           <div className="corporate-mobile-archive-row">
-            <Link to="/portfolio" className="corporate-mobile-archive-link">
+            <Link to="/projects" className="corporate-mobile-archive-link">
               <span>EXPLORE FULL ARCHIVE</span>
               <span aria-hidden="true"> →</span>
             </Link>

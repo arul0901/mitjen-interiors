@@ -23,7 +23,7 @@ export const projectsData: ProjectItem[] = [
     location: 'Coimbatore, Tamil Nadu',
     year: '2025',
     image: '/images/projects/01-serene.webp',
-    href: '/portfolio/details'
+    href: '/projects/details'
   },
   {
     id: '02',
@@ -34,7 +34,7 @@ export const projectsData: ProjectItem[] = [
     location: 'Bangalore, Karnataka',
     year: '2025',
     image: '/images/projects/02-urban.webp',
-    href: '/portfolio/details'
+    href: '/projects/details'
   },
   {
     id: '03',
@@ -45,7 +45,7 @@ export const projectsData: ProjectItem[] = [
     location: 'Chennai, Tamil Nadu',
     year: '2024',
     image: '/images/projects/03-oak-loft.webp',
-    href: '/portfolio/details'
+    href: '/projects/details'
   },
   {
     id: '04',
@@ -56,7 +56,7 @@ export const projectsData: ProjectItem[] = [
     location: 'Hyderabad, Telangana',
     year: '2024',
     image: '/images/projects/04-horizon-office.webp',
-    href: '/portfolio/details'
+    href: '/projects/details'
   },
   {
     id: '05',
@@ -67,7 +67,7 @@ export const projectsData: ProjectItem[] = [
     location: 'Kochi, Kerala',
     year: '2024',
     image: '/images/projects/05-clay-house.webp',
-    href: '/portfolio/details'
+    href: '/projects/details'
   },
   {
     id: '06',
@@ -78,7 +78,7 @@ export const projectsData: ProjectItem[] = [
     location: 'Coimbatore, Tamil Nadu',
     year: '2023',
     image: '/images/projects/06-atelier.webp',
-    href: '/portfolio/details'
+    href: '/projects/details'
   }
 ];
 

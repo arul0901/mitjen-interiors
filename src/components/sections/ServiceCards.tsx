@@ -11,7 +11,7 @@ export const ServiceCards: React.FC = () => {
           {servicesData.map((service, index) => (
             <Reveal key={service.id} staggerIndex={index}>
               <a
-                href={service.href || '/portfolio'}
+                href={service.href || '/projects'}
                 className="bespoke-service-card group"
                 aria-label={`${service.title} - ${service.copy}`}
               >

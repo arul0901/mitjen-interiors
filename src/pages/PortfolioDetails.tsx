@@ -45,8 +45,8 @@ export default function PortfolioDetails() {
                 </a>
               </li>
               <li className={"breadcrumb-item"}>
-                <a href={"/portfolio"} aria-label={"Portfolio page"}>
-                  Portfolio
+                <a href={"/projects"} aria-label={"Projects page"}>
+                  Projects
                 </a>
               </li>
               <li className={"breadcrumb-item active"}>Project Details</li>

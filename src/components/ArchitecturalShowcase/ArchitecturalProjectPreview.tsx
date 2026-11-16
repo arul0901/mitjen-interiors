@@ -103,7 +103,7 @@ export const ArchitecturalProjectPreview: React.FC = () => {
           {ARCHITECTURAL_PROJECTS.map((project) => (
             <article key={project.id} className="arch-preview-card">
               <Link 
-                to={`/portfolio#${project.id}`} 
+                to={`/projects#${project.id}`} 
                 className="arch-preview-card-link"
                 aria-label={`View full project details for ${project.name} (${project.client || ''})`}
               >
@@ -176,7 +176,7 @@ export const ArchitecturalProjectPreview: React.FC = () => {
               Delve into our complete architectural specifications, room-by-room interior galleries, and the studio’s material craftsmanship catalogue.
             </p>
           </div>
-          <Link to="/portfolio" className="arch-preview-view-all-btn">
+          <Link to="/projects" className="arch-preview-view-all-btn">
             <span>VIEW ALL PROJECTS &amp; MATERIALS</span>
             <ArrowRight size={16} aria-hidden="true" />
           </Link>

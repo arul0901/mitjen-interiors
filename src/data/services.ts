@@ -79,7 +79,7 @@ export const aboutData: AboutSectionData = {
       linkText: 'OUR APPROACH',
       href: '/#approach',
       secondaryLinkText: 'EXPLORE PROJECTS',
-      secondaryHref: '/portfolio',
+      secondaryHref: '/projects',
       accentLinkText: 'CONNECT NOW',
       accentHref: '/contact',
       highlights: [

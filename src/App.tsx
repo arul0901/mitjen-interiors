@@ -10,6 +10,7 @@ import ServiceDetails from "./pages/ServiceDetails";
 import CommercialInteriorDesign from "./pages/CommercialInteriorDesign";
 import CorporateInteriorDesign from "./pages/CorporateInteriorDesign";
 import ResidentialInteriorDesign from "./pages/ResidentialInteriorDesign";
+import Projects from "./pages/Projects";
 import Portfolio from "./pages/Portfolio";
 import PortfolioDetails from "./pages/PortfolioDetails";
 import Team from "./pages/Team";
@@ -89,8 +90,10 @@ export default function App() {
           <Route path="/services/commercial-interior-design" element={<CommercialInteriorDesign />} />
           <Route path="/services/corporate-interior-design" element={<CorporateInteriorDesign />} />
           <Route path="/services/residential-interior-design" element={<ResidentialInteriorDesign />} />
-          <Route path="/portfolio" element={<Portfolio />} />
-          <Route path="/portfolio/details" element={<PortfolioDetails />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/projects/details" element={<PortfolioDetails />} />
+          <Route path="/portfolio" element={<Navigate to="/projects" replace />} />
+          <Route path="/portfolio/details" element={<Navigate to="/projects/details" replace />} />
           <Route path="/team" element={<Team />} />
           <Route path="/team/details" element={<TeamDetails />} />
           <Route path="/blog" element={<Blog />} />
@@ -110,10 +113,12 @@ export default function App() {
           <Route path="/service.php" element={<Navigate to="/services/details" replace />} />
           <Route path="/service-details" element={<Navigate to="/services/details" replace />} />
           <Route path="/service-details.html" element={<Navigate to="/services/details" replace />} />
-          <Route path="/project.php" element={<Navigate to="/portfolio" replace />} />
-          <Route path="/portfolio.html" element={<Navigate to="/portfolio" replace />} />
-          <Route path="/portfolio-details" element={<Navigate to="/portfolio/details" replace />} />
-          <Route path="/portfolio-details.html" element={<Navigate to="/portfolio/details" replace />} />
+          <Route path="/project" element={<Navigate to="/projects" replace />} />
+          <Route path="/project.php" element={<Navigate to="/projects" replace />} />
+          <Route path="/projects.html" element={<Navigate to="/projects" replace />} />
+          <Route path="/portfolio.html" element={<Navigate to="/projects" replace />} />
+          <Route path="/portfolio-details" element={<Navigate to="/projects/details" replace />} />
+          <Route path="/portfolio-details.html" element={<Navigate to="/projects/details" replace />} />
           <Route path="/team.html" element={<Navigate to="/team" replace />} />
           <Route path="/team-details" element={<Navigate to="/team/details" replace />} />
           <Route path="/team-details.html" element={<Navigate to="/team/details" replace />} />

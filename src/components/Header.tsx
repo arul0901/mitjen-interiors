@@ -11,7 +11,7 @@ export const Header: React.FC = () => {
   const { openInquiry } = useInquiry();
 
   const isServicesActive = location.pathname.startsWith('/services');
-  const isPortfolioActive = location.pathname.startsWith('/portfolio') || location.pathname.startsWith('/project');
+  const isProjectsActive = location.pathname.toLowerCase().startsWith('/project') || location.pathname.toLowerCase().startsWith('/portfolio');
   const isHome = location.pathname === '/';
 
   // State for Desktop Services Dropdown and Mobile Services Accordion
@@ -404,11 +404,11 @@ export const Header: React.FC = () => {
           </div>
 
           <Link
-            to="/portfolio"
-            className={`nav-desktop-link ${isPortfolioActive ? 'on' : ''}`}
+            to="/projects"
+            className={`nav-desktop-link ${isProjectsActive ? 'on' : ''}`}
             onClick={closeAllMenus}
           >
-            Portfolio
+            Projects
           </Link>
           <Link
             to="/contact"
@@ -496,11 +496,11 @@ export const Header: React.FC = () => {
           </div>
 
           <Link
-            to="/portfolio"
-            className={`mobile-nav-link ${isPortfolioActive ? 'on' : ''}`}
+            to="/projects"
+            className={`mobile-nav-link ${isProjectsActive ? 'on' : ''}`}
             onClick={closeAllMenus}
           >
-            <span>Portfolio</span>
+            <span>Projects</span>
             <span style={{ fontSize: '0.9rem', opacity: 0.5 }}>04</span>
           </Link>
 

@@ -29,7 +29,7 @@ const PROJECTS_DATA: ProjectItem[] = [
       'A vintage-inspired residence articulated with hand-finished Italian PU coatings, custom architectural joinery, and tailored spatial transitions.',
     image: '/images/Residential/Residential1.jpeg',
     imageAlt: 'Vintage Finish Interior, Race Course, Coimbatore',
-    href: '/portfolio',
+    href: '/projects',
   },
   {
     id: 'kr-pura',
@@ -42,7 +42,7 @@ const PROJECTS_DATA: ProjectItem[] = [
       'Clean geometric symmetry meets warm architectural materiality, featuring precision wardrobe detailing, bespoke ceiling planes, and integrated ambient lighting.',
     image: '/images/Residential/Residential2.jpeg',
     imageAlt: 'Interior Project, KR Pura, Bangalore',
-    href: '/portfolio',
+    href: '/projects',
   },
   {
     id: 'tidal-park',
@@ -55,7 +55,7 @@ const PROJECTS_DATA: ProjectItem[] = [
       'A high-performance modern workspace planned around agile team dynamics, acoustic zoning, ergonomic workstations, and refined corporate craft.',
     image: '/images/Commercial/Commercial1.jpeg',
     imageAlt: 'Office Interior, Tidal Park',
-    href: '/portfolio',
+    href: '/projects',
   },
   {
     id: 'corporate-site',
@@ -68,7 +68,7 @@ const PROJECTS_DATA: ProjectItem[] = [
       'A prestigious executive site balancing private client reception suites, high-spec meeting facilities, and understated luxury architectural finishes.',
     image: '/images/Corporate/Corporate1.jpeg',
     imageAlt: 'Corporate Site Interior',
-    href: '/portfolio',
+    href: '/projects',
   },
 ];
 
@@ -520,7 +520,7 @@ export const ProjectsSection: React.FC = () => {
         </header>
 
         {/* Quick Jump Ribbon */}
-        <nav className="photo-deck-ribbon" aria-label="Deck quick tabs">
+        {/* <nav className="photo-deck-ribbon" aria-label="Deck quick tabs">
           {PROJECTS_DATA.map((item, index) => {
             const isActive = index === activeIndex;
             return (
@@ -538,7 +538,7 @@ export const ProjectsSection: React.FC = () => {
               </button>
             );
           })}
-        </nav>
+        </nav> */}
 
         {/* ====================================================================
             2. THE EDITORIAL PROJECT CARD DECK
@@ -659,12 +659,12 @@ export const ProjectsSection: React.FC = () => {
             3. DECK FOOTER & STEPPER CONTROLS
             ==================================================================== */}
         <div className="photo-deck-footer">
-          {/* Left: View Full Portfolio */}
+          {/* Left: View Full Projects */}
           <div className="photo-deck-footer-left">
             <a 
-              href="/portfolio" 
+              href="/projects" 
               className="photo-deck-portfolio-link"
-              aria-label="Explore all projects in portfolio"
+              aria-label="Explore all projects"
             >
               <Layers size={14} aria-hidden="true" />
               <span>EXPLORE ALL PROJECTS</span>

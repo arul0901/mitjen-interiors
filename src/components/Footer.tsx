@@ -21,7 +21,7 @@ export default function Footer() {
 <li><Link aria-label={"About Us"} to={"/about"}>About Us</Link></li>
 <li><Link aria-label={"Meet The Team"} to={"/team"}>Meet The Team</Link></li>
 <li><Link aria-label={"Awards"} to={"/about"}>Awards</Link></li>
-<li><Link aria-label={"Projects"} to={"/portfolio"}>Projects</Link></li>
+<li><Link aria-label={"Projects"} to={"/projects"}>Projects</Link></li>
 <li><Link aria-label={"Testimonials"} to={"/about"}>Testimonials</Link></li>
 </ul>
 </div>
