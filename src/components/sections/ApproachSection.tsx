@@ -259,3 +259,4 @@ export const ApproachSection: React.FC = () => {
 };
 
 export default ApproachSection;
+
