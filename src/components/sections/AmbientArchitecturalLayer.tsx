@@ -15,11 +15,11 @@ interface FragmentConfig {
 }
 
 // Curated architectural detail fragments mapped 1:1 to the 4 selected projects:
-// Index 0: Vintage Finish Interior (Residential PU & Italian Craft)
-// Index 1: Contemporary Residence (KR Pura Villa Millwork & Symmetry)
-// Index 2: Agile Tech Workspace (Tidal Park Acoustic Craft & Benching)
-// Index 3: Corporate Headquarters (Executive Cladding, Glass & Marble)
-// Only clean, elegant item names (no "FIG" or numbering).
+// Index 0: Vintage Finish Interior (Residential Space · Race Course, Coimbatore)
+// Index 1: Contemporary Residence (Residential Villa · KR Pura, Bangalore)
+// Index 2: Agile Tech Workspace (Commercial Office · Tidal Park, Coimbatore)
+// Index 3: Corporate Headquarters (Executive Site · Commercial District, Coimbatore)
+// Every single label accurately describes the exact architectural space shown in the photograph.
 const LEFT_FRAGMENTS: FragmentConfig[] = [
   {
     id: 'l1',
@@ -32,12 +32,12 @@ const LEFT_FRAGMENTS: FragmentConfig[] = [
       '/images/Corporate/Corporate2.jpeg',
     ],
     labels: [
-      'PU JOINERY',
-      'CEILING GRID',
-      'ACOUSTIC BAFFLE',
-      'TIMBER VENEER',
+      'BEDROOM WARDROBE',
+      'LIVING SALON',
+      'SHOWROOM GALLERY',
+      'RECEPTION FOYER',
     ],
-    altText: 'Architectural joinery detail',
+    altText: 'Architectural space detail',
   },
   {
     id: 'l2',
@@ -50,12 +50,12 @@ const LEFT_FRAGMENTS: FragmentConfig[] = [
       '/images/Corporate/Corporate3.jpeg',
     ],
     labels: [
-      'TIMBER STRATA',
-      'WALL STRATA',
-      'GLAZED INTERFACE',
-      'MINIMAL PROFILE',
+      'DINING LOUNGE',
+      'DINING LOUNGE',
+      'CAFÉ & DINING',
+      'EXECUTIVE CABIN',
     ],
-    altText: 'Interior material strata',
+    altText: 'Interior architectural space',
   },
   {
     id: 'l3',
@@ -68,12 +68,12 @@ const LEFT_FRAGMENTS: FragmentConfig[] = [
       '/images/Corporate/Corporate4.jpeg',
     ],
     labels: [
-      'SPATIAL THRESHOLD',
-      'FLUTED JOINERY',
-      'LINEAR LIGHTING',
-      'MARBLE FACING',
+      'BEDROOM SUITE',
+      'BEDROOM WARDROBE',
+      'SALON & STUDIO',
+      'CONFERENCE ROOM',
     ],
-    altText: 'Bespoke architectural transition',
+    altText: 'Bespoke architectural space',
   },
 ];
 
@@ -89,12 +89,12 @@ const RIGHT_FRAGMENTS: FragmentConfig[] = [
       '/images/Corporate/Corporate5.jpeg',
     ],
     labels: [
-      'AMBIENT LIGHTING',
-      'ARCHWAY DETAIL',
-      'BOARDROOM SUITE',
-      'CONFERENCE ROOM',
+      'LIVING SALON',
+      'BEDROOM SUITE',
+      'RECEPTION FOYER',
+      'OPEN WORKSPACE',
     ],
-    altText: 'Architectural ambient lighting detail',
+    altText: 'Architectural interior space',
   },
   {
     id: 'r2',
@@ -107,12 +107,12 @@ const RIGHT_FRAGMENTS: FragmentConfig[] = [
       '/images/Corporate/Corporate6.jpeg',
     ],
     labels: [
-      'MILLED CONTOUR',
-      'VANITY SUITE',
-      'BREAKOUT LOUNGE',
-      'ATRIUM PORTAL',
+      'VILLA WARDROBE',
+      'VANITY & MIRROR',
+      'DISPLAY ARCHITECTURE',
+      'COLLABORATION ZONE',
     ],
-    altText: 'Bespoke contour geometry',
+    altText: 'Bespoke interior architecture',
   },
   {
     id: 'r3',
@@ -125,12 +125,12 @@ const RIGHT_FRAGMENTS: FragmentConfig[] = [
       '/images/Corporate/Corporate7.jpeg',
     ],
     labels: [
-      'STONE FIXTURE',
-      'WARDROBE PLANE',
-      'EXPOSED CEILING',
-      'EXECUTIVE SUITE',
+      'VANITY & MIRROR',
+      'LIVING SALON',
+      'RETAIL BOUTIQUE',
+      'FOCUS POD',
     ],
-    altText: 'Architectural elevation detail',
+    altText: 'Architectural space detail',
   },
 ];
 
