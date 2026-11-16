@@ -397,3 +397,4 @@ export const MATERIAL_SPECIFICATIONS: MaterialCategory[] = [
     note: 'Architectural 2700K–3000K high-CRI recessed spots, diffuse indirect coves, and signature minimalist fixtures.',
   },
 ];
+

@@ -1,22 +1,92 @@
 import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import ArchitecturalProjectShowcase from "../components/ArchitecturalShowcase/ArchitecturalProjectShowcase";
 
-const pageTitle = "Portfolio Details";
+const pageTitle = "Selected Projects — Architectural Details";
 
 export default function PortfolioDetails() {
+  const location = useLocation();
+
   useEffect(() => {
     document.title = `${pageTitle} | Mitjen Interiors`;
-  }, []);
+
+    if (location.hash) {
+      const id = location.hash.replace("#", "");
+      const timer = setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, [location.hash]);
 
   return (
-    <main>  <section className={"cs_page_header_style_1 cs_bg_filed cs_gray_bg position-relative"} data-src={"/assets/img/page-header-bg1.webp"}> <div className={"cs_overlay cs_primary_bg position-absolute"}></div> <div className={"container"}> <div className={"cs_page_header_content text-center"}> <h1 className={"cs_page_header_title cs_fs_80 cs_bold cs_white_color cs_mb_16"} style={{ color: "#ffffff" }}>PORTFOLIO DETAILS</h1> <ol className={"breadcrumb cs_center mb-0"}> <li className={"breadcrumb-item"}><a href={"/"} aria-label={"Back to home button"}>Home</a> </li> <li className={"breadcrumb-item active"}>Portfolio Details</li> </ol> </div> </div> </section>   <div className={"cs_horizontal_slider cs_type_1 cs_accent_bg cs_primary_font"}> <div className={"cs_slider_inner"}> <div className={"cs_sliding_content cs_fs_24 cs_bold cs_white_color"}> <span>BUILDING DESIGN</span> <img src={"/assets/img/star-shape.svg"} alt={"Star shape"} /> <span>CONSTRUCTION</span> <img src={"/assets/img/star-shape.svg"} alt={"Star shape"} /> <span>CONSTRUCTION</span> <img src={"/assets/img/star-shape.svg"} alt={"Star shape"} /> <span>RENOVATION & REMODELING</span> <img src={"/assets/img/star-shape.svg"} alt={"Star shape"} /> <span>INTERIOR & EXPERIOR DESIGN</span> <img src={"/assets/img/star-shape.svg"} alt={"Star shape"} /> <span>RNTAL HOUSE</span> <img src={"/assets/img/star-shape.svg"} alt={"Star shape"} /> <span>LUXURY HOME</span> <img src={"/assets/img/star-shape.svg"} alt={"Star shape"} /> <span>NSTERRESTING STAGES</span> <img src={"/assets/img/star-shape.svg"} alt={"Star shape"} /> </div> <div className={"cs_sliding_content cs_fs_24 cs_bold cs_white_color"}> <span>BUILDING DESIGN</span> <img src={"/assets/img/star-shape.svg"} alt={"Star shape"} /> <span>CONSTRUCTION</span> <img src={"/assets/img/star-shape.svg"} alt={"Star shape"} /> <span>CONSTRUCTION</span> <img src={"/assets/img/star-shape.svg"} alt={"Star shape"} /> <span>RENOVATION & REMODELING</span> <img src={"/assets/img/star-shape.svg"} alt={"Star shape"} /> <span>INTERIOR & EXPERIOR DESIGN</span> <img src={"/assets/img/star-shape.svg"} alt={"Star shape"} /> <span>RNTAL HOUSE</span> <img src={"/assets/img/star-shape.svg"} alt={"Star shape"} /> <span>LUXURY HOME</span> <img src={"/assets/img/star-shape.svg"} alt={"Star shape"} /> <span>NSTERRESTING STAGES</span> <img src={"/assets/img/star-shape.svg"} alt={"Star shape"} /> </div> </div> </div>   <section> <div className={"cs_height_120 cs_height_lg_80"}></div> <div className={"container"}> <div className={"row cs_gap_y_40"}> <div className={"col-lg-8"}> <div className={"cs_portfolio_details"}> <div className={"cs_portfolio_banner cs_radius_10 cs_mb_20"}> <img src={"/assets/images/projects/image1.jpg"} alt={"Portfolio banner - Bespoke living space"} /> </div> <p className={"cs_portfolio_category"}>Building Construction</p> <h2>Vehicle Manufacturing</h2> <p>Architecture is the art and science of designing buildings and spaces that balance beauty,
-                functionality, and sustainability. It shapes how people live, work, and interact with their environment
-                by combining creative vision with technical expertise. From residential homes to commercial complexes
-                and urban landmarks, architecture focuses on structural integrity, efficient use of space, and aesthetic
-                appeal.</p> <p>It shapes how people live, work, and interact with their environment by combining creative vision with
-                technical expertise. From residential homes to commercial complexes and urban landmarks, architecture
-                focuses on structural integrity, efficient use of space, and aesthetic appeal.</p> <div className={"cs_construction_feature"}> <h3>Constructing With Confidence</h3> <div className={"row cs_gap_y_30"}> <div className={"col-xl-6"}> <div className={"cs_feature_img cs_radius_10"}> <img src={"/assets/images/projects/image4.jpg"} alt={"Portfolio architecture and space planning"} /> </div> </div> <div className={"col-xl-6"}> <ul className={"cs_feature_list cs_fs_24 cs_semibold cs_primary_color cs_primary_font list-unstyled"}> <li> <img src={"/assets/img/icons/checkmark2.svg"} alt={"Checkmark icon"} /> <span>Brief Introduction Of The Company</span> </li> <li> <img src={"/assets/img/icons/checkmark2.svg"} alt={"Checkmark icon"} /> <span>Positive Feedback Satisfied Clients</span> </li> <li> <img src={"/assets/img/icons/checkmark2.svg"} alt={"Checkmark icon"} /> <span>Industrial Factories Warehouse</span> </li> <li> <img src={"/assets/img/icons/checkmark2.svg"} alt={"Checkmark icon"} /> <span>Core Values E.g Quality </span> </li> <li> <img src={"/assets/img/icons/checkmark2.svg"} alt={"Checkmark icon"} /> <span>Mission And Vission Statements.</span> </li> </ul> </div> </div> </div> <article> <h3>The Challenges Of Projects</h3> <p>It shapes how people live, work, and interact with their environment by combining creative vision
-                  with technical expertise. From residential homes to commercial complexes and urban landmarks,
-                  architecture focuses on structural integrity, efficient use of space, and aesthetic appeal.</p> </article> <div className={"cs_portfolio_gallery"}> <div className={"row cs_gap_y_24"}> <div className={"col-md-6"}> <div className={"cs_portfolio_img cs_radius_10"}> <img src={"/assets/images/projects/image2.jpg"} alt={"Refined dining suite"} /> </div> </div> <div className={"col-md-6"}> <div className={"cs_portfolio_img cs_radius_10"}> <img src={"/assets/images/projects/image10.jpg"} alt={"Minimalist living lounge"} /> </div> </div> </div> </div> </div> </div> <div className={"col-lg-4"}> <aside className={"cs_sidebar_style_2"}> <div className={"cs_sidebar_widget"}> <div className={"cs_clients_list_container cs_gray_bg cs_radius_10"}> <h3 className={"cs_widget_heading cs_fs_24 cs_bold cs_mb_30"}>Project Information</h3> <ul className={"cs_clients_list cs_mp_0"}> <li> <div className={"cs_avata_style_1"}> <span className={"cs_avatar_icon cs_center cs_radius_100"}> <img src={"/assets/img/avatar-10.webp"} alt={"Avatar"} /> </span> <div className={"cs_avatar_info"}> <p className={"cs_avatar_subtitle cs_mb_5 lh-1"}>Client :</p> <h3 className={"cs_avatar_title cs_fs_20 cs_semibold mb-0 lh-1"}>Josefine H. Smith</h3> </div> </div> </li> <li> <div className={"cs_avata_style_1"}> <span className={"cs_avatar_icon cs_center cs_radius_100"}> <img src={"/assets/img/avatar-12.webp"} alt={"Avatar"} /> </span> <div className={"cs_avatar_info"}> <p className={"cs_avatar_subtitle cs_mb_5 lh-1"}>Client :</p> <h3 className={"cs_avatar_title cs_fs_20 cs_semibold mb-0 lh-1"}>Josefine H. Smith</h3> </div> </div> </li> <li> <div className={"cs_avata_style_1"}> <span className={"cs_avatar_icon cs_center cs_radius_100"}> <img src={"/assets/img/avatar-8.webp"} alt={"Avatar"} /> </span> <div className={"cs_avatar_info"}> <p className={"cs_avatar_subtitle cs_mb_5 lh-1"}>Client :</p> <h3 className={"cs_avatar_title cs_fs_20 cs_semibold mb-0 lh-1"}>Josefine H. Smith</h3> </div> </div> </li> <li> <div className={"cs_avata_style_1"}> <span className={"cs_avatar_icon cs_center cs_radius_100"}> <img src={"/assets/img/avatar-5.webp"} alt={"Avatar"} /> </span> <div className={"cs_avatar_info"}> <p className={"cs_avatar_subtitle cs_mb_5 lh-1"}>Client :</p> <h3 className={"cs_avatar_title cs_fs_20 cs_semibold mb-0 lh-1"}>Josefine H. Smith</h3> </div> </div> </li> </ul> </div> </div> <div className={"cs_sidebar_widget"}> <div className={"cs_card_style_14 cs_center_column cs_primary_bg cs_radius_10 text-center"}> <span className={"cs_card_icon cs_center cs_accent_bg cs_radius_100 cs_mb_30"}> <img src={"/assets/img/icons/cell.svg"} alt={"Phone icon"} /> </span> <h3 className={"cs_card_title cs_fs_30 cs_bold cs_white_color cs_mb_16"}>Need Help ? Call Here</h3> <a href={"tel:+25669872564"} className={"cs_call_number cs_white_color"} aria-label={"Call us at plus two five six, six nine eight seven, two five six four"}>+256 6987 2564
-                  </a> </div> </div> </aside> </div> </div> </div> <div className={"cs_height_120 cs_height_lg_80"}></div> </section>  </main>
+    <main>
+      {/* 1. Page Header */}
+      <section
+        className={"cs_page_header_style_1 cs_bg_filed cs_gray_bg position-relative"}
+        data-src={"/assets/img/page-header-bg1.webp"}
+      >
+        <div className={"cs_overlay cs_primary_bg position-absolute"}></div>
+        <div className={"container"}>
+          <div className={"cs_page_header_content text-center"}>
+            <h1
+              className={"cs_page_header_title cs_fs_80 cs_bold cs_white_color cs_mb_16"}
+              style={{ color: "#ffffff" }}
+            >
+              PROJECT SPECIFICATIONS
+            </h1>
+            <ol className={"breadcrumb cs_center mb-0"}>
+              <li className={"breadcrumb-item"}>
+                <a href={"/"} aria-label={"Back to home button"}>
+                  Home
+                </a>
+              </li>
+              <li className={"breadcrumb-item"}>
+                <a href={"/portfolio"} aria-label={"Portfolio page"}>
+                  Portfolio
+                </a>
+              </li>
+              <li className={"breadcrumb-item active"}>Project Details</li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      {/* 2. Text Marquee Slider */}
+      <div className={"cs_horizontal_slider cs_type_1 cs_accent_bg cs_primary_font"}>
+        <div className={"cs_slider_inner"}>
+          <div className={"cs_sliding_content cs_fs_24 cs_bold cs_white_color"}>
+            <span>RESIDENTIAL INTERIORS</span>
+            <img src={"/assets/img/star-shape.svg"} alt={"Star shape"} />
+            <span>BESPOKE ARCHITECTURE</span>
+            <img src={"/assets/img/star-shape.svg"} alt={"Star shape"} />
+            <span>LUXURY VILLAS</span>
+            <img src={"/assets/img/star-shape.svg"} alt={"Star shape"} />
+            <span>CUSTOM MILLWORK</span>
+            <img src={"/assets/img/star-shape.svg"} alt={"Star shape"} />
+            <span>TURNKEY EXECUTION</span>
+            <img src={"/assets/img/star-shape.svg"} alt={"Star shape"} />
+          </div>
+          <div className={"cs_sliding_content cs_fs_24 cs_bold cs_white_color"}>
+            <span>RESIDENTIAL INTERIORS</span>
+            <img src={"/assets/img/star-shape.svg"} alt={"Star shape"} />
+            <span>BESPOKE ARCHITECTURE</span>
+            <img src={"/assets/img/star-shape.svg"} alt={"Star shape"} />
+            <span>LUXURY VILLAS</span>
+            <img src={"/assets/img/star-shape.svg"} alt={"Star shape"} />
+            <span>CUSTOM MILLWORK</span>
+            <img src={"/assets/img/star-shape.svg"} alt={"Star shape"} />
+            <span>TURNKEY EXECUTION</span>
+            <img src={"/assets/img/star-shape.svg"} alt={"Star shape"} />
+          </div>
+        </div>
+      </div>
+
+      {/* 3. Detailed Architectural Project Showcase */}
+      <ArchitecturalProjectShowcase />
+    </main>
   );
 }

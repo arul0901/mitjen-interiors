@@ -1,12 +1,26 @@
 import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import ArchitecturalProjectShowcase from "../components/ArchitecturalShowcase/ArchitecturalProjectShowcase";
 
-const pageTitle = "Our Portfolio";
+const pageTitle = "Selected Projects";
 
 export default function Portfolio() {
+  const location = useLocation();
+
   useEffect(() => {
     document.title = `${pageTitle} | Mitjen Interiors`;
-  }, []);
+
+    if (location.hash) {
+      const id = location.hash.replace("#", "");
+      const timer = setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, [location.hash]);
 
   return (
     <main>

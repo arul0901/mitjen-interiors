@@ -6,7 +6,7 @@ import ServiceCards from "../components/sections/ServiceCards";
 import WhyChooseSection from "../components/sections/WhyChoose";
 import TestimonialsSection from "../components/sections/Testimonials";
 import ScrollWalkthroughVideoHero from "../components/VideoWalkthroughHero";
-import ArchitecturalProjectShowcase from "../components/ArchitecturalShowcase/ArchitecturalProjectShowcase";
+import ArchitecturalProjectPreview from "../components/ArchitecturalShowcase/ArchitecturalProjectPreview";
 
 // Feature flag: set to true to restore legacy text-marquee or legacy hero banner
 const SHOW_LEGACY_MARQUEE = false;
@@ -209,8 +209,8 @@ export default function Home() {
 </div>
 </div>
 </section>
-{/* Premium Editorial Architectural Showcase — Mitijen Selected Residential Work */}
-<ArchitecturalProjectShowcase />
+{/* Editorial Architectural Selected Work Preview */}
+<ArchitecturalProjectPreview />
 <section className={"cs_skills_layout_1"}>
 <div className={"container"}>
 <div className={"row cs_gap_y_40 align-items-center"}>

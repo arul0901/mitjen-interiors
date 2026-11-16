@@ -766,3 +766,4 @@ export const ArchitecturalProjectShowcase: React.FC = () => {
 };
 
 export default ArchitecturalProjectShowcase;
+
