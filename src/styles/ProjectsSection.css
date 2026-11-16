@@ -23,7 +23,7 @@
   color: var(--deck-text-title) !important;
   font-family: var(--font-body, 'DM Sans', sans-serif);
   padding-top: clamp(40px, 5vw, 68px);
-  padding-bottom: clamp(44px, 5vw, 76px);
+  padding-bottom: clamp(48px, 6vw, 80px);
   position: relative;
   width: 100%;
   overflow-x: clip;
@@ -108,9 +108,9 @@
 .deck-compact-stage {
   position: relative;
   width: 100%;
-  max-width: 940px; /* Reduced from 1140px for a compact, refined presence */
+  max-width: 960px;
   margin: 0 auto;
-  padding-top: 44px; /* Space for subtle background cards peeking above */
+  padding-top: clamp(52px, 6vw, 76px); /* Room for stacked background cards peeking above */
   user-select: none;
   cursor: grab;
   touch-action: pan-y;
@@ -125,7 +125,7 @@
   display: flex;
   justify-content: center;
   gap: 7px;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
@@ -137,7 +137,7 @@
 }
 
 .deck-compact-ribbon-tab {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.85);
   border: 1px solid var(--deck-border);
   border-radius: 999px;
   padding: 5px 12px;
@@ -174,11 +174,13 @@
   line-height: 1;
 }
 
-/* Stack Container */
+/* Stack Container — Uniform Fixed Height */
 .deck-compact-stack {
   position: relative;
   width: 100%;
-  min-height: 385px; /* Compact height */
+  height: 480px; /* Exact uniform height on desktop */
+  box-sizing: border-box;
+  margin: 0;
 }
 
 /* ==========================================================================
@@ -189,11 +191,12 @@
   top: 0;
   left: 0;
   width: 100%;
+  height: 100%; /* All cards fill stack height exactly */
   background: var(--deck-card-bg);
   border: 1px solid var(--deck-border);
-  border-radius: 14px;
-  box-shadow: 0 12px 30px -8px rgba(60, 45, 30, 0.08),
-              0 2px 8px rgba(60, 45, 30, 0.03);
+  border-radius: 16px;
+  box-shadow: 0 16px 36px -12px rgba(40, 30, 20, 0.12),
+              0 2px 8px rgba(40, 30, 20, 0.04);
   transform-origin: center top;
   box-sizing: border-box;
   overflow: hidden;
@@ -202,6 +205,7 @@
 
 .deck-compact-card.is-front {
   cursor: grab;
+  z-index: 30;
 }
 
 .deck-compact-card.is-stacked {
@@ -212,22 +216,37 @@
   border-color: var(--deck-secondary);
 }
 
+/* CRITICAL: Hide interior details on stacked background cards so only top tabs peek out cleanly */
+.deck-compact-card.is-stacked .deck-compact-editorial-top,
+.deck-compact-card.is-stacked .deck-compact-action-row,
+.deck-compact-card.is-stacked .deck-compact-touch-arrows,
+.deck-compact-card.is-stacked .deck-compact-floating-pill {
+  display: none !important;
+}
+
 /* 2-Column Balanced Interior */
 .deck-compact-card-inner {
   display: grid;
-  grid-template-columns: 1fr 1.05fr;
+  grid-template-columns: 1fr 1.08fr;
   align-items: stretch;
-  min-height: 385px;
+  height: 100%;
+  width: 100%;
 }
 
 /* --- Left Column: Compact Editorial --- */
 .deck-compact-editorial {
-  padding: clamp(22px, 3vw, 36px);
+  padding: clamp(24px, 3.2vw, 40px);
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   box-sizing: border-box;
   background: #FFFFFF;
+  height: 100%;
+}
+
+.deck-compact-editorial-top {
+  display: flex;
+  flex-direction: column;
 }
 
 .deck-compact-meta-row {
@@ -290,7 +309,7 @@
 
 .deck-compact-title {
   font-family: var(--font-heading, 'Cormorant Garamond', serif);
-  font-size: clamp(1.28rem, 1.8vw, 1.68rem);
+  font-size: clamp(1.24rem, 1.7vw, 1.62rem);
   font-weight: 600;
   line-height: 1.22;
   letter-spacing: -0.01em;
@@ -319,7 +338,11 @@
   font-size: clamp(0.85rem, 1vw, 0.92rem);
   line-height: 1.6;
   color: var(--deck-text-body) !important;
-  margin: 0 0 20px 0;
+  margin: 0 0 16px 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .deck-compact-action-row {
@@ -378,16 +401,16 @@
 .deck-compact-visual {
   position: relative;
   background-color: #171513;
-  padding: 10px;
+  padding: 12px;
   box-sizing: border-box;
+  height: 100%;
 }
 
 .deck-compact-photo-frame {
   position: relative;
   width: 100%;
   height: 100%;
-  min-height: 360px;
-  border-radius: 10px;
+  border-radius: 12px;
   overflow: hidden;
 }
 
@@ -476,10 +499,12 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  margin-top: 30px;
-  padding-top: 18px;
+  margin-top: clamp(36px, 4.5vw, 52px);
+  padding-top: 22px;
   border-top: 1px dashed var(--deck-border);
   flex-wrap: wrap;
+  position: relative;
+  z-index: 40;
 }
 
 .deck-compact-portfolio-link {
@@ -567,28 +592,48 @@
    4. RESPONSIVE BREAKPOINTS (Tablets & Mobile View)
    ========================================================================== */
 @media (max-width: 900px) {
+  .deck-compact-stack {
+    height: 590px;
+  }
+
   .deck-compact-card-inner {
     grid-template-columns: 1fr;
+    height: 100%;
   }
 
   .deck-compact-visual {
     order: -1; /* Photography on top */
-    padding: 8px;
+    height: 260px;
+    padding: 10px;
   }
 
   .deck-compact-photo-frame {
-    min-height: 250px;
+    height: 100%;
   }
 
-  .deck-compact-stack {
-    min-height: 540px;
+  .deck-compact-editorial {
+    height: calc(100% - 260px);
+    padding: 20px 18px 22px;
+  }
+
+  .deck-compact-title {
+    font-size: 1.32rem;
+    line-height: 1.25;
+    margin-bottom: 8px;
+  }
+
+  .deck-compact-desc {
+    font-size: 0.85rem;
+    line-height: 1.55;
+    -webkit-line-clamp: 3;
+    margin-bottom: 14px;
   }
 }
 
 @media (max-width: 768px) {
   .deck-compact-root {
     padding-top: 32px;
-    padding-bottom: 36px;
+    padding-bottom: 40px;
   }
 
   .deck-compact-main-heading {
@@ -600,42 +645,11 @@
   }
 
   .deck-compact-stage {
-    padding-top: 36px;
+    padding-top: 48px;
   }
 
   .deck-compact-card {
-    border-radius: 12px;
-  }
-
-  .deck-compact-stack {
-    min-height: 500px;
-  }
-
-  .deck-compact-editorial {
-    padding: 18px 16px 20px;
-  }
-
-  .deck-compact-big-num {
-    font-size: 2.4rem;
-  }
-
-  .deck-compact-title {
-    font-size: 1.25rem;
-    margin-bottom: 8px;
-  }
-
-  .deck-compact-desc {
-    font-size: 0.84rem;
-    line-height: 1.58;
-    margin-bottom: 16px;
-  }
-
-  .deck-compact-photo-frame {
-    min-height: 210px;
-  }
-
-  .deck-compact-swipe-hint {
-    display: none;
+    border-radius: 14px;
   }
 
   .deck-compact-footer {
@@ -655,29 +669,48 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
+  .deck-compact-stack {
+    height: 560px;
+  }
+
+  .deck-compact-visual {
+    height: 220px;
+    padding: 8px;
+  }
+
+  .deck-compact-editorial {
+    height: calc(100% - 220px);
+    padding: 16px 14px 18px;
+  }
+
   .deck-compact-main-heading {
     font-size: 1.6rem;
   }
 
-  .deck-compact-stack {
-    min-height: 480px;
-  }
-
-  .deck-compact-photo-frame {
-    min-height: 185px;
-  }
-
-  .deck-compact-editorial {
-    padding: 14px 12px 16px;
+  .deck-compact-big-num {
+    font-size: 2.2rem;
   }
 
   .deck-compact-title {
     font-size: 1.15rem;
   }
 
+  .deck-compact-desc {
+    -webkit-line-clamp: 2;
+    margin-bottom: 12px;
+  }
+
   .deck-compact-cta-btn {
     width: 100%;
     justify-content: center;
+  }
+
+  .deck-compact-swipe-hint {
+    display: none;
+  }
+
+  .deck-compact-footer {
+    margin-top: 28px;
   }
 }

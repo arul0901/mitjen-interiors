@@ -134,16 +134,10 @@ export const ProjectsSection: React.FC = () => {
         const position = getDeckPosition(index, active);
         const isFront = position === 0;
 
-        // Controlled compact offsets and scaling:
-        // Position 0: front
-        // Position 1: -11px, scale 0.97
-        // Position 2: -22px, scale 0.94
-        // Position 3: -33px, scale 0.91
-        // Position 4: -44px, scale 0.88
-        // Position 5: -55px, scale 0.85
-        const offsetY = -position * 11;
-        const scaleVal = Math.max(1 - position * 0.03, 0.84);
-        const opacityVal = isFront ? 1 : Math.max(0.72 - position * 0.09, 0.3);
+        // Controlled uniform offsets and scaling
+        const offsetY = -position * 12;
+        const scaleVal = Math.max(1 - position * 0.035, 0.82);
+        const opacityVal = isFront ? 1 : Math.max(0.72 - position * 0.09, 0.28);
         const zIndexVal = 30 - position;
 
         if (immediate) {
@@ -175,19 +169,25 @@ export const ProjectsSection: React.FC = () => {
     [getDeckPosition]
   );
 
-  // Initial mount layout
+  // Initial mount layout and resize observer
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      applyDeckStyles(activeIndex, true);
-    }, stackContainerRef);
+    applyDeckStyles(activeIndex, true);
 
-    return () => ctx.revert();
+    const handleResize = () => {
+      applyDeckStyles(activeIndex, true);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      gsap.killTweensOf(cardRefs.current);
+    };
   }, [activeIndex, applyDeckStyles]);
 
   // ==========================================================================
   // CIRCULAR LEFT SWIPE (Next Project):
   // 01 -> 02 -> 03 -> 04 -> 05 -> 06 -> 01 (Infinite Loop)
-  // Front card (01) animates out left and goes to LAST position (06)
+  // Front card (01) animates out left and moves to LAST position (06)
   // ==========================================================================
   const triggerNext = useCallback(() => {
     if (isAnimatingRef.current) return;
@@ -197,30 +197,30 @@ export const ProjectsSection: React.FC = () => {
     const nextActive = (activeIndex + 1) % totalProjects;
 
     if (currentCard) {
-      // 1. Front card flies out smoothly to the left with subtle rotation
+      // 1. Front card flies out smoothly to the left with subtle tilt
       gsap.to(currentCard, {
         x: -window.innerWidth * 0.55,
-        rotation: -7,
+        rotation: -6,
         opacity: 0,
         scale: 0.94,
         duration: 0.38,
         ease: 'power2.inOut',
         onComplete: () => {
-          // Move this card to the back of the deck invisibly
+          // Immediately place at the back of the deck invisibly
           const lastPosition = totalProjects - 1;
           gsap.set(currentCard, {
             x: 0,
-            y: -lastPosition * 11,
+            y: -lastPosition * 12,
             rotation: 0,
-            scale: Math.max(1 - lastPosition * 0.03, 0.84),
+            scale: Math.max(1 - lastPosition * 0.035, 0.82),
             zIndex: 30 - lastPosition,
             opacity: 0,
           });
 
-          // Smoothly reveal at the back of stack
+          // Reveal gently at the back of stack
           gsap.to(currentCard, {
-            opacity: Math.max(0.72 - lastPosition * 0.09, 0.3),
-            duration: 0.25,
+            opacity: Math.max(0.72 - lastPosition * 0.09, 0.28),
+            duration: 0.22,
             ease: 'power1.out',
           });
 
@@ -233,17 +233,20 @@ export const ProjectsSection: React.FC = () => {
       cardRefs.current.forEach((cardEl, index) => {
         if (!cardEl || index === activeIndex) return;
         const newPosition = getDeckPosition(index, nextActive);
-        const offsetY = -newPosition * 11;
-        const scaleVal = Math.max(1 - newPosition * 0.03, 0.84);
-        const opacityVal = newPosition === 0 ? 1 : Math.max(0.72 - newPosition * 0.09, 0.3);
+        const isNewFront = newPosition === 0;
+        const offsetY = -newPosition * 12;
+        const scaleVal = Math.max(1 - newPosition * 0.035, 0.82);
+        const opacityVal = isNewFront ? 1 : Math.max(0.72 - newPosition * 0.09, 0.28);
         const zIndexVal = 30 - newPosition;
 
         gsap.to(cardEl, {
+          x: 0,
           y: offsetY,
+          rotation: 0,
           scale: scaleVal,
           opacity: opacityVal,
           zIndex: zIndexVal,
-          duration: 0.42,
+          duration: 0.4,
           ease: 'power3.out',
           overwrite: 'auto',
         });
@@ -270,7 +273,7 @@ export const ProjectsSection: React.FC = () => {
       gsap.set(incomingCard, {
         x: window.innerWidth * 0.55,
         y: 0,
-        rotation: 7,
+        rotation: 6,
         scale: 0.95,
         opacity: 0,
         zIndex: 35,
@@ -295,13 +298,15 @@ export const ProjectsSection: React.FC = () => {
       cardRefs.current.forEach((cardEl, index) => {
         if (!cardEl || index === prevActive) return;
         const newPosition = getDeckPosition(index, prevActive);
-        const offsetY = -newPosition * 11;
-        const scaleVal = Math.max(1 - newPosition * 0.03, 0.84);
-        const opacityVal = Math.max(0.72 - newPosition * 0.09, 0.3);
+        const offsetY = -newPosition * 12;
+        const scaleVal = Math.max(1 - newPosition * 0.035, 0.82);
+        const opacityVal = Math.max(0.72 - newPosition * 0.09, 0.28);
         const zIndexVal = 30 - newPosition;
 
         gsap.to(cardEl, {
+          x: 0,
           y: offsetY,
+          rotation: 0,
           scale: scaleVal,
           opacity: opacityVal,
           zIndex: zIndexVal,
@@ -316,31 +321,40 @@ export const ProjectsSection: React.FC = () => {
     }
   }, [activeIndex, getDeckPosition, totalProjects]);
 
-  // Direct card jump (when clicking visible deck tab)
+  // Direct card jump (when clicking visible deck tab or ribbon)
   const jumpToCard = useCallback(
     (targetIndex: number) => {
       if (targetIndex === activeIndex || isAnimatingRef.current) return;
       isAnimatingRef.current = true;
 
-      const currentCard = cardRefs.current[activeIndex];
-      if (currentCard) {
-        gsap.to(currentCard, {
-          y: 18,
-          scale: 0.92,
-          opacity: 0,
-          duration: 0.28,
-          ease: 'power2.in',
-          onComplete: () => {
-            setActiveIndex(targetIndex);
-            isAnimatingRef.current = false;
-          },
+      cardRefs.current.forEach((cardEl, index) => {
+        if (!cardEl) return;
+        const position = getDeckPosition(index, targetIndex);
+        const isFront = position === 0;
+        const offsetY = -position * 12;
+        const scaleVal = Math.max(1 - position * 0.035, 0.82);
+        const opacityVal = isFront ? 1 : Math.max(0.72 - position * 0.09, 0.28);
+        const zIndexVal = 30 - position;
+
+        gsap.to(cardEl, {
+          x: 0,
+          y: offsetY,
+          scale: scaleVal,
+          opacity: opacityVal,
+          rotation: 0,
+          zIndex: zIndexVal,
+          duration: 0.4,
+          ease: 'power3.out',
+          overwrite: 'auto',
         });
-      } else {
-        setActiveIndex(targetIndex);
+      });
+
+      setActiveIndex(targetIndex);
+      setTimeout(() => {
         isAnimatingRef.current = false;
-      }
+      }, 420);
     },
-    [activeIndex]
+    [activeIndex, getDeckPosition]
   );
 
   // Keyboard navigation
@@ -535,36 +549,38 @@ export const ProjectsSection: React.FC = () => {
                   <div className="deck-compact-card-inner">
                     {/* LEFT COLUMN: Compact Editorial Details */}
                     <div className="deck-compact-editorial">
-                      {/* Monogram Numeral & Portfolio Meta */}
-                      <div className="deck-compact-meta-row">
-                        <span className="deck-compact-big-num" aria-hidden="true">
-                          {item.numeral}
-                        </span>
-                        <div className="deck-compact-type-badge">
-                          <span className="deck-compact-phase-tag">PROJECT {item.step} / 0{totalProjects}</span>
-                          <span className="deck-compact-sub-tag">{item.typeLabel}</span>
+                      <div className="deck-compact-editorial-top">
+                        {/* Monogram Numeral & Portfolio Meta */}
+                        <div className="deck-compact-meta-row">
+                          <span className="deck-compact-big-num" aria-hidden="true">
+                            {item.numeral}
+                          </span>
+                          <div className="deck-compact-type-badge">
+                            <span className="deck-compact-phase-tag">PROJECT {item.step} / 0{totalProjects}</span>
+                            <span className="deck-compact-sub-tag">{item.typeLabel}</span>
+                          </div>
                         </div>
+
+                        {/* Location Badge */}
+                        <div className="deck-compact-loc-pill">
+                          <MapPin size={12} className="deck-compact-pin-icon" aria-hidden="true" />
+                          <span>{item.location}</span>
+                        </div>
+
+                        {/* Project Title */}
+                        <h3 className="deck-compact-title">
+                          <a href={item.href} aria-label={`${item.title} project details`}>
+                            {item.title}
+                          </a>
+                        </h3>
+
+                        <div className="deck-compact-gold-divider" aria-hidden="true" />
+
+                        {/* Project Description */}
+                        <p className="deck-compact-desc">
+                          {item.description}
+                        </p>
                       </div>
-
-                      {/* Location Badge */}
-                      <div className="deck-compact-loc-pill">
-                        <MapPin size={12} className="deck-compact-pin-icon" aria-hidden="true" />
-                        <span>{item.location}</span>
-                      </div>
-
-                      {/* Project Title */}
-                      <h3 className="deck-compact-title">
-                        <a href={item.href} aria-label={`${item.title} project details`}>
-                          {item.title}
-                        </a>
-                      </h3>
-
-                      <div className="deck-compact-gold-divider" aria-hidden="true" />
-
-                      {/* Project Description */}
-                      <p className="deck-compact-desc">
-                        {item.description}
-                      </p>
 
                       {/* Bottom Action Row */}
                       <div className="deck-compact-action-row">
