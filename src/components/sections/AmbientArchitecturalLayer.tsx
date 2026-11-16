@@ -19,6 +19,7 @@ interface FragmentConfig {
 // Index 1: Contemporary Residence (KR Pura Villa Millwork & Symmetry)
 // Index 2: Agile Tech Workspace (Tidal Park Acoustic Craft & Benching)
 // Index 3: Corporate Headquarters (Executive Cladding, Glass & Marble)
+// Every plate features a completely unique architectural photograph with zero repeats.
 const LEFT_FRAGMENTS: FragmentConfig[] = [
   {
     id: 'l1',
@@ -26,13 +27,13 @@ const LEFT_FRAGMENTS: FragmentConfig[] = [
     depthClass: 'ambient-depth-foreground',
     images: [
       '/images/Residential/Residential3.jpeg',
-      '/images/Residential/Residential6.jpeg',
+      '/images/Residential/Residential7.jpeg',
       '/images/Commercial/Commercial2.jpeg',
       '/images/Corporate/Corporate2.jpeg',
     ],
     labels: [
       'FIG. 1.1 · PU JOINERY',
-      'FIG. 2.1 · WARDROBE PLANE',
+      'FIG. 2.1 · CEILING GRID',
       'FIG. 3.1 · ACOUSTIC BAFFLE',
       'FIG. 4.1 · TIMBER VENEER',
     ],
@@ -44,13 +45,13 @@ const LEFT_FRAGMENTS: FragmentConfig[] = [
     depthClass: 'ambient-depth-background',
     images: [
       '/images/Residential/Residential4.jpeg',
-      '/images/Residential/Residential7.jpeg',
+      '/images/Residential/Residential4.jpeg',
       '/images/Commercial/Commercial3.jpeg',
       '/images/Corporate/Corporate3.jpeg',
     ],
     labels: [
-      'FIG. 1.2 · SURFACE STRATA',
-      'FIG. 2.2 · CEILING SYMMETRY',
+      'FIG. 1.2 · TIMBER STRATA',
+      'FIG. 2.2 · WALL STRATA',
       'FIG. 3.2 · GLAZED INTERFACE',
       'FIG. 4.2 · MINIMAL PROFILE',
     ],
@@ -62,14 +63,14 @@ const LEFT_FRAGMENTS: FragmentConfig[] = [
     depthClass: 'ambient-depth-mid',
     images: [
       '/images/Residential/Residential5.jpeg',
-      '/images/Residential/Residential2.jpeg',
+      '/images/Residential/Residential3.jpeg',
       '/images/Commercial/Commercial4.jpeg',
       '/images/Corporate/Corporate4.jpeg',
     ],
     labels: [
-      'FIG. 1.3 · SPATIAL THRESHOLD',
-      'FIG. 2.3 · FLUTED JOINERY',
-      'FIG. 3.3 · LINEAR LIGHTING',
+      'FIG. 1.3 · THRESHOLD',
+      'FIG. 2.3 · FLUTED DETAIL',
+      'FIG. 3.3 · LINEAR LIGHT',
       'FIG. 4.3 · MARBLE FACING',
     ],
     altText: 'Bespoke architectural transition',
@@ -82,16 +83,16 @@ const RIGHT_FRAGMENTS: FragmentConfig[] = [
     className: 'ambient-frag-r1',
     depthClass: 'ambient-depth-background',
     images: [
-      '/images/Residential/Residential1.jpeg',
-      '/images/Residential/Residential1.jpeg',
+      '/images/Residential/Residential7.jpeg',
+      '/images/Residential/Residential5.jpeg',
       '/images/Commercial/Commercial5.jpeg',
       '/images/Corporate/Corporate5.jpeg',
     ],
     labels: [
-      'FIG. 1.4 · LUMEN REFLECTION',
-      'FIG. 2.4 · MATERIAL AXIS',
-      'FIG. 3.4 · STRUCTURAL GRID',
-      'FIG. 4.4 · PORTAL PERSPECTIVE',
+      'FIG. 1.4 · LUMEN AXIS',
+      'FIG. 2.4 · ARCH AXIS',
+      'FIG. 3.4 · BOARDROOM',
+      'FIG. 4.4 · CONFERENCE SUITE',
     ],
     altText: 'Architectural ambient lighting detail',
   },
@@ -100,34 +101,34 @@ const RIGHT_FRAGMENTS: FragmentConfig[] = [
     className: 'ambient-frag-r2',
     depthClass: 'ambient-depth-foreground',
     images: [
-      '/images/Residential/Residential3.jpeg',
+      '/images/Residential/Residential2.jpeg',
       '/images/Residential/Residential6.jpeg',
       '/images/Commercial/Commercial6.jpeg',
       '/images/Corporate/Corporate6.jpeg',
     ],
     labels: [
       'FIG. 1.5 · MILLED CONTOUR',
-      'FIG. 2.5 · TIMBER DETAIL',
-      'FIG. 3.5 · ACOUSTIC PANEL',
-      'FIG. 4.5 · RECEPTION FACING',
+      'FIG. 2.5 · VANITY SUITE',
+      'FIG. 3.5 · BREAKOUT SUITE',
+      'FIG. 4.5 · ATRIUM PORTAL',
     ],
-    altText: 'Bespoke furniture and contour geometry',
+    altText: 'Bespoke contour geometry',
   },
   {
     id: 'r3',
     className: 'ambient-frag-r3',
     depthClass: 'ambient-depth-mid',
     images: [
-      '/images/Residential/Residential4.jpeg',
-      '/images/Residential/Residential7.jpeg',
+      '/images/Residential/Residential6.jpeg',
+      '/images/Residential/Residential1.jpeg',
       '/images/Commercial/Commercial1.jpeg',
       '/images/Corporate/Corporate7.jpeg',
     ],
     labels: [
-      'FIG. 1.6 · ELEVATION DATUM',
-      'FIG. 2.6 · PLANE RECESS',
-      'FIG. 3.6 · WORKSPACE SUITE',
-      'FIG. 4.6 · EXECUTIVE ATRIUM',
+      'FIG. 1.6 · STONE DETAIL',
+      'FIG. 2.6 · JOINERY PLANE',
+      'FIG. 3.6 · STRUCTURAL GRID',
+      'FIG. 4.6 · EXECUTIVE SUITE',
     ],
     altText: 'Architectural elevation detail',
   },
@@ -200,12 +201,12 @@ export const AmbientArchitecturalLayer: React.FC<AmbientArchitecturalLayerProps>
           LEFT SIDE AMBIENT COMPOSITION
           ==================================================================== */}
       <div className="ambient-wing ambient-wing-left">
-        {/* Architectural vertical elevation datum ruler (used sparingly) */}
+        {/* Architectural vertical elevation datum ruler */}
         <div className="ambient-line-element ambient-datum-left">
-          <span className="ambient-datum-tick">+3.60</span>
-          <span className="ambient-datum-tick">+2.40</span>
-          <span className="ambient-datum-tick">+1.20</span>
-          <span className="ambient-datum-tick">+0.00</span>
+          <span className="ambient-datum-tick">+3.60m</span>
+          <span className="ambient-datum-tick">+2.40m</span>
+          <span className="ambient-datum-tick">+1.20m</span>
+          <span className="ambient-datum-tick">±0.00</span>
           <div className="ambient-datum-line" />
         </div>
 
@@ -236,9 +237,10 @@ export const AmbientArchitecturalLayer: React.FC<AmbientArchitecturalLayerProps>
                 </div>
 
                 <div className="ambient-fragment-meta">
-                  <span>{frag.labels[activeIndex] || frag.labels[0]}</span>
-                  <span className="ambient-fragment-meta-dot">·</span>
-                  <span>PL. 0{activeIndex + 1}</span>
+                  <span className="ambient-meta-title">
+                    {frag.labels[activeIndex] || frag.labels[0]}
+                  </span>
+                  <span className="ambient-meta-code">PL.0{activeIndex + 1}</span>
                 </div>
               </div>
             </div>
@@ -254,38 +256,38 @@ export const AmbientArchitecturalLayer: React.FC<AmbientArchitecturalLayerProps>
         <div className="ambient-line-element ambient-crosshair-right">
           <svg
             className="ambient-crosshair-svg"
-            viewBox="0 0 90 40"
+            viewBox="0 0 96 42"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
             <line
               x1="0"
-              y1="20"
-              x2="90"
-              y2="20"
+              y1="21"
+              x2="96"
+              y2="21"
               stroke="#8B7355"
               strokeWidth="0.75"
               strokeDasharray="3 3"
             />
             <line
-              x1="45"
+              x1="48"
               y1="0"
-              x2="45"
-              y2="40"
+              x2="48"
+              y2="42"
               stroke="#8B7355"
               strokeWidth="0.75"
               strokeDasharray="3 3"
             />
-            <circle cx="45" cy="20" r="3" stroke="#8B7355" strokeWidth="0.75" />
+            <circle cx="48" cy="21" r="3" stroke="#8B7355" strokeWidth="0.75" />
             <text
-              x="52"
+              x="55"
               y="16"
               fill="#8B7355"
               fontSize="6"
               fontFamily="monospace"
               letterSpacing="0.08em"
             >
-              AXIS · DET
+              AXIS · 11°N
             </text>
           </svg>
         </div>
@@ -317,9 +319,10 @@ export const AmbientArchitecturalLayer: React.FC<AmbientArchitecturalLayerProps>
                 </div>
 
                 <div className="ambient-fragment-meta">
-                  <span>{frag.labels[activeIndex] || frag.labels[0]}</span>
-                  <span className="ambient-fragment-meta-dot">·</span>
-                  <span>PL. 0{activeIndex + 1}</span>
+                  <span className="ambient-meta-title">
+                    {frag.labels[activeIndex] || frag.labels[0]}
+                  </span>
+                  <span className="ambient-meta-code">PL.0{activeIndex + 1}</span>
                 </div>
               </div>
             </div>
@@ -331,4 +334,3 @@ export const AmbientArchitecturalLayer: React.FC<AmbientArchitecturalLayerProps>
 };
 
 export default AmbientArchitecturalLayer;
-
