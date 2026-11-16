@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import gsap from 'gsap';
-import { ArrowUpRight, ChevronLeft, ChevronRight, Layers } from 'lucide-react';
+import { ArrowUpRight, ChevronLeft, ChevronRight, Layers, ArrowRight } from 'lucide-react';
 import '../../styles/ProjectsSection.css';
 
 interface ProjectItem {
@@ -20,8 +20,8 @@ const PROJECTS_DATA: ProjectItem[] = [
   {
     id: 'vintage-finish',
     step: '01',
-    numeral: '1',
-    category: 'Residential Space · PU Craft',
+    numeral: '01',
+    category: 'RESIDENTIAL SPACE · PU CRAFT',
     title: 'Vintage Finish Interior',
     location: 'Race Course, Coimbatore',
     description:
@@ -33,8 +33,8 @@ const PROJECTS_DATA: ProjectItem[] = [
   {
     id: 'kr-pura',
     step: '02',
-    numeral: '2',
-    category: 'Residential Villa · Millwork',
+    numeral: '02',
+    category: 'RESIDENTIAL VILLA · MILLWORK',
     title: 'Contemporary Residence',
     location: 'KR Pura, Bangalore',
     description:
@@ -46,8 +46,8 @@ const PROJECTS_DATA: ProjectItem[] = [
   {
     id: 'tidal-park',
     step: '03',
-    numeral: '3',
-    category: 'Commercial Office · Acoustic Craft',
+    numeral: '03',
+    category: 'COMMERCIAL OFFICE · ACOUSTIC CRAFT',
     title: 'Agile Tech Workspace',
     location: 'Tidal Park, Coimbatore',
     description:
@@ -59,8 +59,8 @@ const PROJECTS_DATA: ProjectItem[] = [
   {
     id: 'corporate-site',
     step: '04',
-    numeral: '4',
-    category: 'Executive Site · Glass & Timber',
+    numeral: '04',
+    category: 'EXECUTIVE SITE · GLASS & TIMBER',
     title: 'Corporate Headquarters',
     location: 'Commercial District, Coimbatore',
     description:
@@ -80,44 +80,46 @@ interface DeckStackConfig {
   zIndex: number;
 }
 
-// Staggered photographic print placements (simulating a physical stack of photo proofs)
-const STACK_PRESETS: DeckStackConfig[] = [
-  // Position 0: Front active print sitting squarely in focus
-  { x: 0, y: 0, rotation: 0, scale: 1, opacity: 1, zIndex: 30 },
-  // Position 1: Peek to the right with gentle +2.5° paper tilt
-  { x: 18, y: -16, rotation: 2.5, scale: 0.98, opacity: 0.94, zIndex: 29 },
-  // Position 2: Peek to the left with gentle -2.2° paper tilt
-  { x: -16, y: -30, rotation: -2.2, scale: 0.95, opacity: 0.86, zIndex: 28 },
-  // Position 3: Deepest card peeking through with subtle +1.8° tilt
-  { x: 10, y: -42, rotation: 1.8, scale: 0.92, opacity: 0.76, zIndex: 27 },
+// Clean symmetrical vertical stack presets (mimicking the reference image deck)
+const DESKTOP_PRESETS: DeckStackConfig[] = [
+  // Position 0: Front active card in full focus
+  { x: 0, y: 0, rotation: 0, scale: 1, opacity: 1, zIndex: 10 },
+  // Position 1: Peek above with clean step
+  { x: 0, y: -16, rotation: 0, scale: 0.96, opacity: 0.88, zIndex: 9 },
+  // Position 2: Second step above
+  { x: 0, y: -32, rotation: 0, scale: 0.92, opacity: 0.68, zIndex: 8 },
+  // Position 3: Deepest step above
+  { x: 0, y: -48, rotation: 0, scale: 0.88, opacity: 0.48, zIndex: 7 },
+];
+
+const MOBILE_PRESETS: DeckStackConfig[] = [
+  { x: 0, y: 0, rotation: 0, scale: 1, opacity: 1, zIndex: 10 },
+  { x: 0, y: -12, rotation: 0, scale: 0.96, opacity: 0.88, zIndex: 9 },
+  { x: 0, y: -24, rotation: 0, scale: 0.92, opacity: 0.68, zIndex: 8 },
+  { x: 0, y: -36, rotation: 0, scale: 0.88, opacity: 0.48, zIndex: 7 },
 ];
 
 const getStackConfig = (position: number, isMobile: boolean): DeckStackConfig => {
-  const mult = isMobile ? 0.55 : 1;
-  const preset = STACK_PRESETS[position] || STACK_PRESETS[3];
-  return {
-    ...preset,
-    x: preset.x * mult,
-    y: preset.y * mult,
-    rotation: preset.rotation * mult,
-  };
+  const presets = isMobile ? MOBILE_PRESETS : DESKTOP_PRESETS;
+  return presets[position] || presets[presets.length - 1];
 };
 
 export const ProjectsSection: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const totalProjects = PROJECTS_DATA.length;
 
-  const stackContainerRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLElement | null)[]>([]);
   const isAnimatingRef = useRef<boolean>(false);
+  const unlockTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Gesture state
-  const isDraggingRef = useRef<boolean>(false);
-  const startCoordRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
-  const isHorizontalGestureRef = useRef<boolean | null>(null);
+  // Gesture state using Pointer Events
+  const isPointerDownRef = useRef<boolean>(false);
+  const pointerStartRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
+  const gestureOrientationRef = useRef<'horizontal' | 'vertical' | null>(null);
   const currentDeltaXRef = useRef<number>(0);
 
-  // Helper: Position in deck (0 = front, 1..total-1 = stacked behind)
+  // Calculate relative position of a card in the circular stack
+  // 0 = front card, 1 = behind front, 2 = behind 1, 3 = bottom of stack
   const getDeckPosition = useCallback(
     (cardIndex: number, currentActive: number) => {
       return (cardIndex - currentActive + totalProjects) % totalProjects;
@@ -125,7 +127,7 @@ export const ProjectsSection: React.FC = () => {
     [totalProjects]
   );
 
-  // Render static stacked positions for all cards using GSAP
+  // Apply static deck transforms without running into state locks
   const applyDeckStyles = useCallback(
     (active: number, immediate: boolean = false) => {
       const isMobile = window.innerWidth < 768;
@@ -142,7 +144,6 @@ export const ProjectsSection: React.FC = () => {
             opacity: cfg.opacity,
             rotation: cfg.rotation,
             zIndex: cfg.zIndex,
-            pointerEvents: position === 0 ? 'auto' : 'auto',
           });
         } else {
           gsap.to(cardEl, {
@@ -152,9 +153,8 @@ export const ProjectsSection: React.FC = () => {
             opacity: cfg.opacity,
             rotation: cfg.rotation,
             zIndex: cfg.zIndex,
-            pointerEvents: position === 0 ? 'auto' : 'auto',
-            duration: 0.44,
-            ease: 'power3.out',
+            duration: 0.4,
+            ease: 'power2.out',
             overwrite: 'auto',
           });
         }
@@ -163,7 +163,7 @@ export const ProjectsSection: React.FC = () => {
     [getDeckPosition]
   );
 
-  // Initial mount layout and resize observer
+  // Initial mount layout and resize listener (NO gsap.killTweensOf in cleanup!)
   useEffect(() => {
     applyDeckStyles(activeIndex, true);
 
@@ -174,59 +174,75 @@ export const ProjectsSection: React.FC = () => {
     window.addEventListener('resize', handleResize);
     return () => {
       window.removeEventListener('resize', handleResize);
-      gsap.killTweensOf(cardRefs.current);
+      if (unlockTimeoutRef.current) {
+        clearTimeout(unlockTimeoutRef.current);
+      }
     };
   }, [activeIndex, applyDeckStyles]);
 
+  // Guaranteed lock release to ensure buttons and gestures NEVER freeze
+  const releaseLock = useCallback(() => {
+    if (unlockTimeoutRef.current) {
+      clearTimeout(unlockTimeoutRef.current);
+      unlockTimeoutRef.current = null;
+    }
+    isAnimatingRef.current = false;
+  }, []);
+
+  const acquireLock = useCallback(() => {
+    isAnimatingRef.current = true;
+    if (unlockTimeoutRef.current) clearTimeout(unlockTimeoutRef.current);
+    // Guaranteed safety timeout: always unlocks after 450ms
+    unlockTimeoutRef.current = setTimeout(releaseLock, 450);
+  }, [releaseLock]);
+
   // ==========================================================================
-  // CIRCULAR LEFT SWIPE (Next Project):
-  // 01 -> 02 -> 03 -> 04 -> 01 (Infinite Loop)
-  // Front card (01) animates out left and moves to LAST position (04)
+  // CIRCULAR LEFT SWIPE (Next Project): 01 -> 02 -> 03 -> 04 -> 01 (Infinite)
+  // Front card flies out left, Card 02 moves to front, Card 01 moves to back
   // ==========================================================================
   const triggerNext = useCallback(() => {
     if (isAnimatingRef.current) return;
-    isAnimatingRef.current = true;
+    acquireLock();
 
     const currentCard = cardRefs.current[activeIndex];
     const nextActive = (activeIndex + 1) % totalProjects;
+    const isMobile = window.innerWidth < 768;
 
     if (currentCard) {
-      // 1. Front card flies out smoothly with subtle paper inertia
+      // 1. Front card flies out to the left
       gsap.to(currentCard, {
-        x: -window.innerWidth * 0.52,
-        rotation: -8,
+        x: -window.innerWidth * 0.45,
+        rotation: -4,
         opacity: 0,
         scale: 0.94,
-        duration: 0.38,
+        duration: 0.36,
         ease: 'power2.inOut',
         onComplete: () => {
-          // Immediately place at the back of the deck invisibly
+          // Immediately position at the bottom of the stack (Position 3)
           const lastPosition = totalProjects - 1;
-          const isMobile = window.innerWidth < 768;
           const cfg = getStackConfig(lastPosition, isMobile);
           gsap.set(currentCard, {
             x: cfg.x,
             y: cfg.y,
-            rotation: cfg.rotation,
+            rotation: 0,
             scale: cfg.scale,
             zIndex: cfg.zIndex,
             opacity: 0,
           });
 
-          // Reveal gently at the back of stack
+          // Fade into stack
           gsap.to(currentCard, {
             opacity: cfg.opacity,
-            duration: 0.22,
+            duration: 0.2,
             ease: 'power1.out',
           });
 
           setActiveIndex(nextActive);
-          isAnimatingRef.current = false;
+          releaseLock();
         },
       });
 
       // 2. All remaining cards in the stack advance one position forward
-      const isMobile = window.innerWidth < 768;
       cardRefs.current.forEach((cardEl, index) => {
         if (!cardEl || index === activeIndex) return;
         const newPosition = getDeckPosition(index, nextActive);
@@ -235,38 +251,39 @@ export const ProjectsSection: React.FC = () => {
         gsap.to(cardEl, {
           x: cfg.x,
           y: cfg.y,
-          rotation: cfg.rotation,
+          rotation: 0,
           scale: cfg.scale,
           opacity: cfg.opacity,
           zIndex: cfg.zIndex,
-          duration: 0.44,
-          ease: 'power3.out',
+          duration: 0.38,
+          ease: 'power2.out',
           overwrite: 'auto',
         });
       });
     } else {
       setActiveIndex(nextActive);
-      isAnimatingRef.current = false;
+      releaseLock();
     }
-  }, [activeIndex, getDeckPosition, totalProjects]);
+  }, [activeIndex, acquireLock, releaseLock, getDeckPosition, totalProjects]);
 
   // ==========================================================================
-  // CIRCULAR RIGHT SWIPE (Previous Project):
+  // CIRCULAR RIGHT SWIPE (Previous Project): 04 -> 01 -> 02 -> 03 (Infinite)
   // Last card comes to front, current front becomes second position
   // ==========================================================================
   const triggerPrev = useCallback(() => {
     if (isAnimatingRef.current) return;
-    isAnimatingRef.current = true;
+    acquireLock();
 
     const prevActive = (activeIndex - 1 + totalProjects) % totalProjects;
     const incomingCard = cardRefs.current[prevActive];
+    const isMobile = window.innerWidth < 768;
 
     if (incomingCard) {
-      // 1. Prepare incoming card offscreen to the right
+      // 1. Prepare incoming card offscreen to the left
       gsap.set(incomingCard, {
-        x: window.innerWidth * 0.52,
+        x: -window.innerWidth * 0.45,
         y: 0,
-        rotation: 8,
+        rotation: -4,
         scale: 0.96,
         opacity: 0,
         zIndex: 35,
@@ -279,16 +296,15 @@ export const ProjectsSection: React.FC = () => {
         rotation: 0,
         scale: 1,
         opacity: 1,
-        duration: 0.44,
-        ease: 'power3.out',
+        duration: 0.38,
+        ease: 'power2.out',
         onComplete: () => {
           setActiveIndex(prevActive);
-          isAnimatingRef.current = false;
+          releaseLock();
         },
       });
 
       // 3. Existing cards step back by one position
-      const isMobile = window.innerWidth < 768;
       cardRefs.current.forEach((cardEl, index) => {
         if (!cardEl || index === prevActive) return;
         const newPosition = getDeckPosition(index, prevActive);
@@ -297,26 +313,26 @@ export const ProjectsSection: React.FC = () => {
         gsap.to(cardEl, {
           x: cfg.x,
           y: cfg.y,
-          rotation: cfg.rotation,
+          rotation: 0,
           scale: cfg.scale,
           opacity: cfg.opacity,
           zIndex: cfg.zIndex,
-          duration: 0.44,
-          ease: 'power3.out',
+          duration: 0.38,
+          ease: 'power2.out',
           overwrite: 'auto',
         });
       });
     } else {
       setActiveIndex(prevActive);
-      isAnimatingRef.current = false;
+      releaseLock();
     }
-  }, [activeIndex, getDeckPosition, totalProjects]);
+  }, [activeIndex, acquireLock, releaseLock, getDeckPosition, totalProjects]);
 
-  // Direct card jump (when clicking visible deck tab or ribbon)
+  // Jump to specific card (from ribbon tabs or pagination dots)
   const jumpToCard = useCallback(
     (targetIndex: number) => {
       if (targetIndex === activeIndex || isAnimatingRef.current) return;
-      isAnimatingRef.current = true;
+      acquireLock();
 
       const isMobile = window.innerWidth < 768;
       cardRefs.current.forEach((cardEl, index) => {
@@ -329,20 +345,18 @@ export const ProjectsSection: React.FC = () => {
           y: cfg.y,
           scale: cfg.scale,
           opacity: cfg.opacity,
-          rotation: cfg.rotation,
+          rotation: 0,
           zIndex: cfg.zIndex,
-          duration: 0.42,
-          ease: 'power3.out',
+          duration: 0.38,
+          ease: 'power2.out',
           overwrite: 'auto',
         });
       });
 
       setActiveIndex(targetIndex);
-      setTimeout(() => {
-        isAnimatingRef.current = false;
-      }, 420);
+      setTimeout(releaseLock, 400);
     },
-    [activeIndex, getDeckPosition]
+    [activeIndex, acquireLock, releaseLock, getDeckPosition]
   );
 
   // Keyboard navigation
@@ -359,47 +373,61 @@ export const ProjectsSection: React.FC = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [triggerNext, triggerPrev]);
 
-  // Pointer & Touch Handlers (Guaranteed non-interference with vertical scroll)
-  const handleStart = (clientX: number, clientY: number, target: EventTarget | null) => {
-    if (isAnimatingRef.current) return;
-    const elem = target as HTMLElement;
-    if (elem.closest('a') || elem.closest('button')) return;
+  // ==========================================================================
+  // POINTER EVENTS GESTURE HANDLERS (Desktop Drag + Mobile Touch Swipe)
+  // Using setPointerCapture for unbreakable touch and mouse tracking
+  // ==========================================================================
+  const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.button !== 0 || isAnimatingRef.current) return;
 
-    isDraggingRef.current = true;
-    startCoordRef.current = { x: clientX, y: clientY };
-    isHorizontalGestureRef.current = null;
+    // Do not initiate drag if user clicked a link or button
+    const target = e.target as HTMLElement;
+    if (target.closest('a') || target.closest('button')) return;
+
+    try {
+      e.currentTarget.setPointerCapture(e.pointerId);
+    } catch (_) {
+      // Fallback if setPointerCapture is unsupported
+    }
+
+    isPointerDownRef.current = true;
+    pointerStartRef.current = { x: e.clientX, y: e.clientY };
+    gestureOrientationRef.current = null;
     currentDeltaXRef.current = 0;
   };
 
-  const handleMove = (clientX: number, clientY: number) => {
-    if (!isDraggingRef.current || isAnimatingRef.current) return;
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!isPointerDownRef.current || isAnimatingRef.current) return;
 
-    const deltaX = clientX - startCoordRef.current.x;
-    const deltaY = clientY - startCoordRef.current.y;
+    const deltaX = e.clientX - pointerStartRef.current.x;
+    const deltaY = e.clientY - pointerStartRef.current.y;
 
-    // Detect gesture orientation if not yet decided
-    if (isHorizontalGestureRef.current === null) {
+    // Determine gesture direction on first significant movement
+    if (gestureOrientationRef.current === null) {
       if (Math.abs(deltaY) > 8 && Math.abs(deltaY) > Math.abs(deltaX)) {
-        // Vertical scroll: release gesture to allow natural page scrolling
-        isHorizontalGestureRef.current = false;
-        isDraggingRef.current = false;
+        // Vertical scroll: release pointer so native page scroll continues smoothly
+        gestureOrientationRef.current = 'vertical';
+        isPointerDownRef.current = false;
+        try {
+          e.currentTarget.releasePointerCapture(e.pointerId);
+        } catch (_) {}
         return;
       } else if (Math.abs(deltaX) > 8) {
-        // Horizontal card swipe confirmed
-        isHorizontalGestureRef.current = true;
+        gestureOrientationRef.current = 'horizontal';
       }
     }
 
-    if (!isHorizontalGestureRef.current) return;
+    if (gestureOrientationRef.current !== 'horizontal') return;
 
     currentDeltaXRef.current = deltaX;
     const currentCard = cardRefs.current[activeIndex];
     if (currentCard) {
-      const rotation = deltaX * 0.025;
+      // Subtle rotation and scale feedback while dragging
+      const rotation = deltaX * 0.012;
       gsap.set(currentCard, {
         x: deltaX,
         rotation,
-        scale: 1 - Math.abs(deltaX) * 0.0003,
+        scale: 1 - Math.abs(deltaX) * 0.0002,
       });
 
       // Subtle dynamic lift on the card immediately behind
@@ -410,9 +438,7 @@ export const ProjectsSection: React.FC = () => {
         const isMobile = window.innerWidth < 768;
         const baseCfg = getStackConfig(1, isMobile);
         gsap.set(nextCard, {
-          x: baseCfg.x * (1 - progress),
           y: baseCfg.y * (1 - progress),
-          rotation: baseCfg.rotation * (1 - progress),
           scale: baseCfg.scale + (1 - baseCfg.scale) * progress,
           opacity: baseCfg.opacity + (1 - baseCfg.opacity) * progress,
         });
@@ -420,24 +446,28 @@ export const ProjectsSection: React.FC = () => {
     }
   };
 
-  const handleEnd = () => {
-    if (!isDraggingRef.current) return;
-    isDraggingRef.current = false;
+  const handlePointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!isPointerDownRef.current) return;
+    isPointerDownRef.current = false;
 
-    if (!isHorizontalGestureRef.current) {
+    try {
+      e.currentTarget.releasePointerCapture(e.pointerId);
+    } catch (_) {}
+
+    if (gestureOrientationRef.current !== 'horizontal') {
       currentDeltaXRef.current = 0;
       return;
     }
 
     const deltaX = currentDeltaXRef.current;
-    const swipeThreshold = 60; // Balanced threshold for mobile & desktop
+    const swipeThreshold = 45; // Effortless 45px swipe threshold
 
     if (deltaX < -swipeThreshold) {
       triggerNext();
     } else if (deltaX > swipeThreshold) {
       triggerPrev();
     } else {
-      // Snap back smoothly
+      // Snap card back smoothly to original position
       const currentCard = cardRefs.current[activeIndex];
       if (currentCard) {
         gsap.to(currentCard, {
@@ -445,15 +475,15 @@ export const ProjectsSection: React.FC = () => {
           y: 0,
           rotation: 0,
           scale: 1,
-          duration: 0.35,
-          ease: 'power3.out',
+          duration: 0.3,
+          ease: 'power2.out',
         });
       }
       applyDeckStyles(activeIndex, false);
     }
 
     currentDeltaXRef.current = 0;
-    isHorizontalGestureRef.current = null;
+    gestureOrientationRef.current = null;
   };
 
   return (
@@ -479,51 +509,44 @@ export const ProjectsSection: React.FC = () => {
           <div className="photo-deck-gold-line" aria-hidden="true" />
 
           <p className="photo-deck-descriptor">
-            A curated deck of physical architectural photographs documenting bespoke residential and corporate spaces.
+            A curated deck of architectural spaces documenting bespoke residential and corporate environments.
           </p>
         </header>
 
+        {/* Quick Jump Ribbon */}
+        <nav className="photo-deck-ribbon" aria-label="Deck quick tabs">
+          {PROJECTS_DATA.map((item, index) => {
+            const isActive = index === activeIndex;
+            return (
+              <button
+                key={item.id}
+                type="button"
+                onClick={() => jumpToCard(index)}
+                className={`photo-deck-ribbon-tab ${isActive ? 'is-active' : ''}`}
+                aria-selected={isActive}
+                role="tab"
+                aria-label={`Jump to project ${item.step}: ${item.title}`}
+              >
+                <span className="photo-ribbon-num">{item.step}</span>
+                <span className="photo-ribbon-name">{item.title}</span>
+              </button>
+            );
+          })}
+        </nav>
+
         {/* ====================================================================
-            2. THE PHYSICAL ARCHITECTURAL PHOTOGRAPH DECK
+            2. THE EDITORIAL PROJECT CARD DECK
             Continuously rotating stack: 01 -> 02 -> 03 -> 04 -> 01
             ==================================================================== */}
         <div 
           className="photo-deck-stage"
-          ref={stackContainerRef}
-          onMouseDown={(e) => {
-            if (e.button === 0) handleStart(e.clientX, e.clientY, e.target);
-          }}
-          onMouseMove={(e) => handleMove(e.clientX, e.clientY)}
-          onMouseUp={handleEnd}
-          onMouseLeave={handleEnd}
-          onTouchStart={(e) => handleStart(e.touches[0].clientX, e.touches[0].clientY, e.target)}
-          onTouchMove={(e) => handleMove(e.touches[0].clientX, e.touches[0].clientY)}
-          onTouchEnd={handleEnd}
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={handlePointerUp}
+          onPointerCancel={handlePointerUp}
           role="region"
-          aria-label="Physical Architectural Photograph Deck"
+          aria-label="Architectural Project Deck - Swipe or drag to browse"
         >
-          {/* Quick Jump Ribbon */}
-          <nav className="photo-deck-ribbon" aria-label="Deck quick tabs">
-            {PROJECTS_DATA.map((item, index) => {
-              const isActive = index === activeIndex;
-              return (
-                <button
-                  key={item.id}
-                  type="button"
-                  onClick={() => jumpToCard(index)}
-                  className={`photo-deck-ribbon-tab ${isActive ? 'is-active' : ''}`}
-                  aria-selected={isActive}
-                  role="tab"
-                  aria-label={`Jump to photograph ${item.step}: ${item.title}`}
-                >
-                  <span className="photo-ribbon-num">{item.step}</span>
-                  <span className="photo-ribbon-name">{item.title.split(',')[0]}</span>
-                </button>
-              );
-            })}
-          </nav>
-
-          {/* Staggered Photographic Prints Deck */}
           <div className="photo-deck-stack">
             {PROJECTS_DATA.map((item, index) => {
               const isFront = index === activeIndex;
@@ -538,72 +561,85 @@ export const ProjectsSection: React.FC = () => {
                   }}
                   aria-hidden={!isFront}
                 >
-                  <div className="photo-print-surface">
-                    {/* Architectural Hero Photograph Window */}
-                    <div className="photo-print-image-wrap">
+                  {/* Left Column: Project Editorial & Information */}
+                  <div className="photo-card-info">
+                    <div className="photo-card-info-top">
+                      <div className="photo-card-numeral" aria-hidden="true">
+                        {item.numeral}
+                      </div>
+                      
+                      <div className="photo-card-tag-row">
+                        <span className="photo-card-category">{item.category}</span>
+                      </div>
+
+                      <h3 className="photo-card-title">
+                        <a href={item.href} aria-label={`${item.title} project details`}>
+                          {item.title}
+                        </a>
+                      </h3>
+
+                      <div className="photo-card-location">
+                        <span className="photo-loc-pin" aria-hidden="true" />
+                        <span>{item.location}</span>
+                      </div>
+
+                      <p className="photo-card-desc">
+                        {item.description}
+                      </p>
+                    </div>
+
+                    <div className="photo-card-info-bottom">
+                      <a 
+                        href={item.href} 
+                        className="photo-card-cta"
+                        aria-label={`Explore ${item.title}`}
+                      >
+                        <span>EXPLORE PROJECT</span>
+                        <ArrowUpRight size={14} className="photo-cta-arrow" aria-hidden="true" />
+                      </a>
+
+                      <span className="photo-card-swipe-hint">
+                        SWIPE TO ROTATE
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Right Column: Architectural Photograph */}
+                  <div className="photo-card-media">
+                    <div className="photo-card-img-box">
                       <img 
                         src={item.image} 
                         alt={item.imageAlt} 
-                        className="photo-print-image" 
+                        className="photo-card-img" 
                         loading="lazy" 
                       />
-                      <div className="photo-print-grain" aria-hidden="true" />
+                      <div className="photo-card-overlay" aria-hidden="true" />
 
-                      {/* Translucent Archival Proof Stamp */}
-                      <div className="photo-print-stamp">
-                        <span className="photo-stamp-edition">PROOF · 0{totalProjects}</span>
-                        <span className="photo-stamp-sep">/</span>
-                        <span className="photo-stamp-num">PLATE {item.step}</span>
+                      {/* Archival Edition Stamp */}
+                      <div className="photo-card-stamp">
+                        <span className="photo-stamp-label">PROJECT</span>
+                        <span className="photo-stamp-sep">·</span>
+                        <span className="photo-stamp-num">{item.step} / 0{totalProjects}</span>
                       </div>
 
-                      {/* Quick Touch Stepper Chevrons */}
-                      <div className="photo-print-touch-nav">
+                      {/* On-Card Chevrons for Effortless Click Switching */}
+                      <div className="photo-touch-nav">
                         <button 
                           type="button" 
                           onClick={(e) => { e.stopPropagation(); triggerPrev(); }} 
-                          className="photo-touch-arrow"
-                          aria-label="Previous photograph"
+                          className="photo-touch-btn"
+                          aria-label="Previous project"
                         >
                           <ChevronLeft size={16} />
                         </button>
                         <button 
                           type="button" 
                           onClick={(e) => { e.stopPropagation(); triggerNext(); }} 
-                          className="photo-touch-arrow"
-                          aria-label="Next photograph"
+                          className="photo-touch-btn"
+                          aria-label="Next project"
                         >
                           <ChevronRight size={16} />
                         </button>
-                      </div>
-                    </div>
-
-                    {/* Fine-Art Bottom Margin: Minimal Integrated Caption */}
-                    <div className="photo-print-margin">
-                      <div className="photo-margin-left">
-                        <span className="photo-margin-index">{item.step}</span>
-                        <div className="photo-margin-text">
-                          <h3 className="photo-margin-title">
-                            <a href={item.href} aria-label={`${item.title} project details`}>
-                              {item.title}
-                            </a>
-                          </h3>
-                          <p className="photo-margin-meta">
-                            <span>{item.location}</span>
-                            <span className="photo-meta-dot">·</span>
-                            <span>{item.category}</span>
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="photo-margin-right">
-                        <a 
-                          href={item.href} 
-                          className="photo-margin-cta" 
-                          aria-label={`View ${item.title}`}
-                        >
-                          <span>VIEW ARCHIVE</span>
-                          <ArrowUpRight size={13} className="photo-cta-arrow" aria-hidden="true" />
-                        </a>
                       </div>
                     </div>
                   </div>
@@ -626,7 +662,7 @@ export const ProjectsSection: React.FC = () => {
             >
               <Layers size={14} aria-hidden="true" />
               <span>EXPLORE ALL PROJECTS</span>
-              <ArrowUpRight size={13} aria-hidden="true" />
+              <ArrowRight size={13} aria-hidden="true" />
             </a>
           </div>
 
@@ -638,7 +674,7 @@ export const ProjectsSection: React.FC = () => {
                 type="button"
                 onClick={() => jumpToCard(index)}
                 className={`photo-deck-dot ${index === activeIndex ? 'is-active' : ''}`}
-                aria-label={`Jump to photograph ${index + 1}`}
+                aria-label={`Jump to project ${index + 1}`}
               />
             ))}
           </div>
@@ -649,7 +685,7 @@ export const ProjectsSection: React.FC = () => {
               type="button" 
               onClick={triggerPrev} 
               className="photo-deck-step-arrow"
-              aria-label="Previous photograph"
+              aria-label="Previous project"
             >
               <ChevronLeft size={17} />
             </button>
@@ -662,7 +698,7 @@ export const ProjectsSection: React.FC = () => {
               type="button" 
               onClick={triggerNext} 
               className="photo-deck-step-arrow"
-              aria-label="Next photograph"
+              aria-label="Next project"
             >
               <ChevronRight size={17} />
             </button>
