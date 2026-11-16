@@ -208,11 +208,12 @@ export const ProjectsSection: React.FC = () => {
     const currentCard = cardRefs.current[activeIndex];
     const nextActive = (activeIndex + 1) % totalProjects;
     const isMobile = window.innerWidth < 768;
+    const flyDist = isMobile ? -window.innerWidth * 0.85 : -window.innerWidth * 0.45;
 
     if (currentCard) {
       // 1. Front card flies out to the left
       gsap.to(currentCard, {
-        x: -window.innerWidth * 0.45,
+        x: flyDist,
         rotation: -4,
         opacity: 0,
         scale: 0.94,
@@ -278,11 +279,12 @@ export const ProjectsSection: React.FC = () => {
     const prevActive = (activeIndex - 1 + totalProjects) % totalProjects;
     const incomingCard = cardRefs.current[prevActive];
     const isMobile = window.innerWidth < 768;
+    const flyDist = isMobile ? -window.innerWidth * 0.85 : -window.innerWidth * 0.45;
 
     if (incomingCard) {
       // 1. Prepare incoming card offscreen to the left
       gsap.set(incomingCard, {
-        x: -window.innerWidth * 0.45,
+        x: flyDist,
         y: 0,
         rotation: -4,
         scale: 0.96,
