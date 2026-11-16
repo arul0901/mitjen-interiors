@@ -1,4 +1,4 @@
-import React, { useState, useRef, TouchEvent } from 'react';
+import React, { useState, useRef } from 'react';
 import { ArrowUpRight, ChevronLeft, ChevronRight, MapPin } from 'lucide-react';
 import '../../styles/ProjectsSection.css';
 
@@ -6,9 +6,10 @@ interface ProjectItem {
   id: string;
   step: string;
   title: string;
-  shortTitle: string;
   location: string;
   category: string;
+  filterType: 'all' | 'residential' | 'commercial' | 'corporate';
+  typeLabel: string;
   description: string;
   image: string;
   imageAlt: string;
@@ -20,9 +21,10 @@ const PROJECTS_ITEMS: ProjectItem[] = [
     id: 'vintage-finish',
     step: '01',
     title: 'VINTAGE FINISH INTERIOR, RACE COURSE, COIMBATORE',
-    shortTitle: 'VINTAGE FINISH',
     location: 'Race Course, Coimbatore',
     category: 'PU PAINT WORK ↗',
+    filterType: 'residential',
+    typeLabel: 'Residential',
     description:
       'A vintage-inspired look brought to life with carefully finished PU paint detailing.',
     image: '/images/Residential/Residential1.jpeg',
@@ -33,9 +35,10 @@ const PROJECTS_ITEMS: ProjectItem[] = [
     id: 'kr-pura',
     step: '02',
     title: 'INTERIOR PROJECT, KR PURA, BANGALORE',
-    shortTitle: 'KR PURA PROJECT',
     location: 'KR Pura, Bangalore',
     category: 'INTERIOR DESIGN ↗',
+    filterType: 'residential',
+    typeLabel: 'Residential',
     description:
       'A well-planned interior featuring clean detailing and a cohesive design finish.',
     image: '/images/Residential/Residential2.jpeg',
@@ -46,9 +49,10 @@ const PROJECTS_ITEMS: ProjectItem[] = [
     id: 'tidal-park',
     step: '03',
     title: 'OFFICE INTERIOR, TIDAL PARK',
-    shortTitle: 'TIDAL PARK OFFICE',
     location: 'Tidal Park, Coimbatore',
     category: 'INTERIOR DESIGN ↗',
+    filterType: 'commercial',
+    typeLabel: 'Commercial',
     description:
       'A functional workspace planned around how teams work, with clean detailing and a polished finish.',
     image: '/images/Commercial/Commercial1.jpeg',
@@ -59,9 +63,10 @@ const PROJECTS_ITEMS: ProjectItem[] = [
     id: 'corporate-site',
     step: '04',
     title: 'CORPORATE SITE INTERIOR',
-    shortTitle: 'CORPORATE SITE',
     location: 'Corporate Workspace',
     category: 'WORKSPACE DESIGN ↗',
+    filterType: 'corporate',
+    typeLabel: 'Corporate',
     description:
       'A professional workspace shaped around functional layouts and a considered interior finish.',
     image: '/images/Corporate/Corporate1.jpeg',
@@ -70,297 +75,233 @@ const PROJECTS_ITEMS: ProjectItem[] = [
   },
 ];
 
+type FilterCategory = 'all' | 'residential' | 'commercial' | 'corporate';
+
 export const ProjectsSection: React.FC = () => {
-  const [activeProjectIndex, setActiveProjectIndex] = useState<number>(0);
-  const touchStartXRef = useRef<number | null>(null);
-  const touchEndXRef = useRef<number | null>(null);
+  const [selectedFilter, setSelectedFilter] = useState<FilterCategory>('all');
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [activeSlideIndex, setActiveSlideIndex] = useState<number>(0);
 
-  const totalProjects = PROJECTS_ITEMS.length;
-  const currentProject = PROJECTS_ITEMS[activeProjectIndex];
+  const filteredProjects = selectedFilter === 'all' 
+    ? PROJECTS_ITEMS 
+    : PROJECTS_ITEMS.filter((item) => item.filterType === selectedFilter);
 
-  const handleNext = () => {
-    setActiveProjectIndex((prev) => (prev + 1) % totalProjects);
-  };
-
-  const handlePrev = () => {
-    setActiveProjectIndex((prev) => (prev - 1 + totalProjects) % totalProjects);
-  };
-
-  // Touch handlers for mobile swipe navigation
-  const handleTouchStart = (e: TouchEvent) => {
-    touchStartXRef.current = e.targetTouches[0].clientX;
-  };
-
-  const handleTouchMove = (e: TouchEvent) => {
-    touchEndXRef.current = e.targetTouches[0].clientX;
-  };
-
-  const handleTouchEnd = () => {
-    if (touchStartXRef.current === null || touchEndXRef.current === null) return;
-    const distance = touchStartXRef.current - touchEndXRef.current;
-    const minSwipeDistance = 45; // Minimum px to trigger swipe
-
-    if (distance > minSwipeDistance) {
-      // Swiped left -> Next
-      handleNext();
-    } else if (distance < -minSwipeDistance) {
-      // Swiped right -> Prev
-      handlePrev();
+  const handleScrollPrev = () => {
+    if (scrollContainerRef.current) {
+      const cardWidth = scrollContainerRef.current.firstElementChild?.clientWidth || 360;
+      scrollContainerRef.current.scrollBy({ left: -(cardWidth + 24), behavior: 'smooth' });
     }
+  };
 
-    touchStartXRef.current = null;
-    touchEndXRef.current = null;
+  const handleScrollNext = () => {
+    if (scrollContainerRef.current) {
+      const cardWidth = scrollContainerRef.current.firstElementChild?.clientWidth || 360;
+      scrollContainerRef.current.scrollBy({ left: cardWidth + 24, behavior: 'smooth' });
+    }
+  };
+
+  const handleScroll = () => {
+    if (scrollContainerRef.current) {
+      const { scrollLeft, clientWidth } = scrollContainerRef.current;
+      const index = Math.round(scrollLeft / (clientWidth * 0.85));
+      setActiveSlideIndex(Math.min(Math.max(index, 0), filteredProjects.length - 1));
+    }
   };
 
   return (
     <section 
       id="projects" 
-      className="projects-section-root" 
+      className="projects-filmstrip-root" 
       aria-label="Our Projects - Spaces We’re Proud to Have Built."
     >
-      <div className="projects-container">
+      <div className="projects-filmstrip-container">
         {/* ====================================================================
-            1. SECTION EDITORIAL HEADER
+            1. SECTION EDITORIAL HEADER & ACTION BAR
             ==================================================================== */}
-        <header className="projects-header">
-          <div className="projects-header-badge">
-            <span className="projects-badge-dot" aria-hidden="true" />
-            <span className="projects-eyebrow">OUR PROJECTS</span>
+        <div className="projects-filmstrip-header-row">
+          <div className="projects-filmstrip-title-group">
+            <div className="projects-filmstrip-badge">
+              <span className="projects-filmstrip-dot" aria-hidden="true" />
+              <span className="projects-filmstrip-eyebrow">OUR PROJECTS</span>
+            </div>
+
+            <h2 className="projects-filmstrip-heading">
+              SPACES WE’RE PROUD TO HAVE BUILT.
+            </h2>
           </div>
 
-          <h2 className="projects-main-heading">
-            SPACES WE’RE PROUD TO HAVE BUILT.
-          </h2>
+          {/* Desktop Right Controls: View All + Slider Chevrons */}
+          <div className="projects-filmstrip-controls-group">
+            <a 
+              href="/portfolio" 
+              className="projects-view-all-link"
+              aria-label="View all projects in portfolio"
+            >
+              <span>VIEW PORTFOLIO</span>
+              <ArrowUpRight size={14} className="projects-view-all-arrow" aria-hidden="true" />
+            </a>
 
-          <div className="projects-gold-line" aria-hidden="true" />
-        </header>
-
-        {/* ====================================================================
-            2. DESKTOP PROJECT SELECTOR TABS
-            ==================================================================== */}
-        <nav className="projects-timeline-nav" aria-label="Project selector">
-          <div className="projects-timeline-track">
-            <div 
-              className="projects-timeline-progress-fill" 
-              style={{ width: `${(activeProjectIndex / (totalProjects - 1)) * 100}%` }}
-              aria-hidden="true"
-            />
-          </div>
-
-          <div className="projects-timeline-nodes">
-            {PROJECTS_ITEMS.map((item, index) => {
-              const isActive = index === activeProjectIndex;
-              const isPast = index < activeProjectIndex;
-              return (
-                <button
-                  key={item.id}
-                  type="button"
-                  onClick={() => setActiveProjectIndex(index)}
-                  className={`projects-timeline-node-btn ${isActive ? 'is-active' : ''} ${isPast ? 'is-past' : ''}`}
-                  aria-selected={isActive}
-                  role="tab"
-                  aria-label={`Project ${item.step}: ${item.title}`}
-                >
-                  <span className="projects-node-number">{item.step}</span>
-                  <span className="projects-node-label">{item.shortTitle}</span>
-                </button>
-              );
-            })}
-          </div>
-        </nav>
-
-        {/* ====================================================================
-            3. MOBILE STEPPER BAR (Touch Pills for Phone Screens)
-            ==================================================================== */}
-        <div className="projects-mobile-stepper-bar">
-          <div className="projects-mobile-step-pills">
-            {PROJECTS_ITEMS.map((item, index) => {
-              const isActive = index === activeProjectIndex;
-              return (
-                <button
-                  key={item.id}
-                  type="button"
-                  onClick={() => setActiveProjectIndex(index)}
-                  className={`projects-mobile-pill ${isActive ? 'is-active' : ''}`}
-                  aria-label={`Jump to Project ${item.step}`}
-                >
-                  <span className="projects-pill-num">{item.step}</span>
-                  <span className="projects-pill-text">{item.shortTitle}</span>
-                </button>
-              );
-            })}
+            <div className="projects-slider-arrows-wrap" aria-label="Carousel navigation">
+              <button 
+                type="button" 
+                onClick={handleScrollPrev} 
+                className="projects-slider-arrow-btn"
+                aria-label="Previous project"
+              >
+                <ChevronLeft size={18} />
+              </button>
+              <button 
+                type="button" 
+                onClick={handleScrollNext} 
+                className="projects-slider-arrow-btn"
+                aria-label="Next project"
+              >
+                <ChevronRight size={18} />
+              </button>
+            </div>
           </div>
         </div>
 
         {/* ====================================================================
-            4. CINEMATIC ARCHITECTURAL SHOWCASE STAGE (Touch Swipe Enabled)
+            2. CATEGORY FILTER PILLS (Touch-scrollable on mobile)
+            ==================================================================== */}
+        <div className="projects-filter-bar" role="tablist" aria-label="Project categories">
+          <button
+            type="button"
+            role="tab"
+            aria-selected={selectedFilter === 'all'}
+            onClick={() => setSelectedFilter('all')}
+            className={`projects-filter-btn ${selectedFilter === 'all' ? 'is-active' : ''}`}
+          >
+            <span>ALL SPACES</span>
+            <span className="projects-filter-count">{PROJECTS_ITEMS.length}</span>
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={selectedFilter === 'residential'}
+            onClick={() => setSelectedFilter('residential')}
+            className={`projects-filter-btn ${selectedFilter === 'residential' ? 'is-active' : ''}`}
+          >
+            <span>RESIDENTIAL</span>
+            <span className="projects-filter-count">2</span>
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={selectedFilter === 'commercial'}
+            onClick={() => setSelectedFilter('commercial')}
+            className={`projects-filter-btn ${selectedFilter === 'commercial' ? 'is-active' : ''}`}
+          >
+            <span>COMMERCIAL</span>
+            <span className="projects-filter-count">1</span>
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={selectedFilter === 'corporate'}
+            onClick={() => setSelectedFilter('corporate')}
+            className={`projects-filter-btn ${selectedFilter === 'corporate' ? 'is-active' : ''}`}
+          >
+            <span>CORPORATE</span>
+            <span className="projects-filter-count">1</span>
+          </button>
+        </div>
+
+        {/* ====================================================================
+            3. HORIZONTAL ARCHITECTURAL FILMSTRIP CAROUSEL
+            Touch-snap scroll on mobile, smooth track on desktop
             ==================================================================== */}
         <div 
-          className="projects-stage-wrapper"
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
-          onTouchEnd={handleTouchEnd}
+          className="projects-filmstrip-track" 
+          ref={scrollContainerRef}
+          onScroll={handleScroll}
+          role="region"
+          aria-label="Selected Projects Carousel"
         >
-          <div className="projects-stage-grid">
-            {/* LEFT / VISUAL: Photographic Plate */}
-            <div className="projects-stage-visual">
-              <div className="projects-visual-frame">
+          {filteredProjects.map((item) => (
+            <article key={item.id} className="project-folio-card">
+              {/* Photo Canvas */}
+              <a 
+                href={item.href} 
+                className="project-folio-canvas"
+                aria-label={`View ${item.title} details`}
+              >
                 <img 
-                  key={currentProject.image}
-                  src={currentProject.image} 
-                  alt={currentProject.imageAlt} 
-                  className="projects-stage-image" 
+                  src={item.image} 
+                  alt={item.imageAlt} 
+                  className="project-folio-img" 
                   loading="lazy" 
                 />
-                <div className="projects-visual-gradient" aria-hidden="true" />
+                <div className="project-folio-canvas-overlay" aria-hidden="true" />
                 
                 {/* Floating Category Pill */}
-                <div className="projects-visual-category-floating">
-                  <span className="projects-visual-category-pill">
-                    {currentProject.category}
-                  </span>
+                <div className="project-folio-category-floating">
+                  <span className="project-folio-category-pill">{item.category}</span>
                 </div>
 
-                {/* Floating Architectural Badge */}
-                <div className="projects-visual-badge">
-                  <span className="projects-visual-phase-text">
-                    PROJECT {currentProject.step} OF 0{totalProjects}
-                  </span>
-                </div>
+                {/* Floating Index Badge */}
+                <span className="project-folio-index-badge">{item.step}</span>
+              </a>
 
-                {/* Mobile Quick Tap Arrows Over Image */}
-                <div className="projects-image-arrows">
-                  <button 
-                    type="button" 
-                    onClick={handlePrev} 
-                    className="projects-img-nav-btn"
-                    aria-label="Previous project"
-                  >
-                    <ChevronLeft size={18} />
-                  </button>
-                  <button 
-                    type="button" 
-                    onClick={handleNext} 
-                    className="projects-img-nav-btn"
-                    aria-label="Next project"
-                  >
-                    <ChevronRight size={18} />
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* RIGHT / EDITORIAL: Architectural Details */}
-            <div className="projects-stage-editorial">
-              {/* Subtle architectural watermark number */}
-              <span className="projects-editorial-watermark" aria-hidden="true">
-                {currentProject.step}
-              </span>
-
-              <div className="projects-editorial-content">
-                <div className="projects-phase-eyebrow-row">
-                  <div className="projects-location-chip">
-                    <MapPin size={13} className="projects-location-icon" aria-hidden="true" />
-                    <span>{currentProject.location}</span>
+              {/* Editorial Content */}
+              <div className="project-folio-body">
+                <div className="project-folio-meta-row">
+                  <div className="project-folio-location">
+                    <MapPin size={12} className="project-folio-loc-icon" aria-hidden="true" />
+                    <span>{item.location}</span>
                   </div>
-                  <span className="projects-step-indicator">
-                    {activeProjectIndex + 1} / {totalProjects}
-                  </span>
+                  <span className="project-folio-type-tag">{item.typeLabel}</span>
                 </div>
 
-                <h3 className="projects-editorial-title">
-                  <a href={currentProject.href} aria-label={`${currentProject.title} project details`}>
-                    {currentProject.title}
+                <h3 className="project-folio-title">
+                  <a href={item.href} aria-label={`${item.title} project details`}>
+                    {item.title}
                   </a>
                 </h3>
 
-                <div className="projects-editorial-divider" aria-hidden="true" />
-
-                <p className="projects-editorial-desc">
-                  {currentProject.description}
+                <p className="project-folio-desc">
+                  {item.description}
                 </p>
 
-                {/* Action & Navigation Controls */}
-                <div className="projects-editorial-footer">
+                <div className="project-folio-footer">
                   <a 
-                    href={currentProject.href} 
-                    className="projects-editorial-cta" 
-                    aria-label={`View ${currentProject.category} category projects`}
+                    href={item.href} 
+                    className="project-folio-cta-link" 
+                    aria-label={`Explore ${item.title}`}
                   >
-                    <span>{currentProject.category}</span>
-                    <ArrowUpRight size={15} className="projects-cta-arrow" aria-hidden="true" />
-                  </a>
-
-                  {/* Stage Stepper Arrows */}
-                  <div className="projects-desktop-nav-cluster">
-                    <button 
-                      type="button" 
-                      onClick={handlePrev} 
-                      className="projects-nav-arrow-btn"
-                      aria-label="Previous project"
-                    >
-                      <ChevronLeft size={18} />
-                    </button>
-                    <span className="projects-nav-counter">
-                      {currentProject.step} <span className="projects-nav-slash">/</span> 0{totalProjects}
+                    <span>EXPLORE SPACE</span>
+                    <span className="project-folio-cta-icon" aria-hidden="true">
+                      <ArrowUpRight size={13} />
                     </span>
-                    <button 
-                      type="button" 
-                      onClick={handleNext} 
-                      className="projects-nav-arrow-btn"
-                      aria-label="Next project"
-                    >
-                      <ChevronRight size={18} />
-                    </button>
-                  </div>
+                  </a>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-
-        {/* ====================================================================
-            5. DESKTOP INTERACTIVE DOCK (4 Quick-Select Project Plates)
-            ==================================================================== */}
-        <div className="projects-dock-grid" role="tablist" aria-label="Project Overview Plates">
-          {PROJECTS_ITEMS.map((item, index) => {
-            const isActive = index === activeProjectIndex;
-            return (
-              <button
-                key={item.id}
-                type="button"
-                onClick={() => setActiveProjectIndex(index)}
-                className={`projects-dock-card ${isActive ? 'is-active' : ''}`}
-                role="tab"
-                aria-selected={isActive}
-                aria-label={`View ${item.title}`}
-              >
-                <div className="projects-dock-thumb">
-                  <img src={item.image} alt="" aria-hidden="true" loading="lazy" />
-                  <span className="projects-dock-num">{item.step}</span>
-                </div>
-                <div className="projects-dock-info">
-                  <span className="projects-dock-tag">{item.category}</span>
-                  <span className="projects-dock-title">{item.shortTitle}</span>
-                </div>
-              </button>
-            );
-          })}
-        </div>
-
-        {/* ====================================================================
-            6. MOBILE PAGINATION DOTS (Clear Visual Progress on Phones)
-            ==================================================================== */}
-        <div className="projects-mobile-dots" aria-hidden="true">
-          {PROJECTS_ITEMS.map((_, index) => (
-            <button
-              key={index}
-              type="button"
-              onClick={() => setActiveProjectIndex(index)}
-              className={`projects-dot ${index === activeProjectIndex ? 'is-active' : ''}`}
-              aria-label={`Go to project ${index + 1}`}
-            />
+            </article>
           ))}
+        </div>
+
+        {/* ====================================================================
+            4. MOBILE PROGRESS & NAVIGATION BAR
+            ==================================================================== */}
+        <div className="projects-mobile-bottom-bar">
+          <div className="projects-mobile-dots" aria-hidden="true">
+            {filteredProjects.map((_, index) => (
+              <span 
+                key={index} 
+                className={`projects-mobile-dot ${index === activeSlideIndex ? 'is-active' : ''}`} 
+              />
+            ))}
+          </div>
+
+          <a 
+            href="/portfolio" 
+            className="projects-mobile-view-all"
+            aria-label="View all projects in portfolio"
+          >
+            <span>VIEW ALL PROJECTS</span>
+            <ArrowUpRight size={13} aria-hidden="true" />
+          </a>
         </div>
       </div>
     </section>
