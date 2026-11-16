@@ -1,20 +1,20 @@
 /* ==========================================================================
-   MITIJEN INTERIORS — LUXURY ARCHITECTURAL CARD DECK SHOWCASE
+   MITIJEN INTERIORS — ARCHITECTURAL PHOTOGRAPHIC PROOF DECK
    Spaces We’re Proud to Have Built
+   Physical deck of overlapping fine-art photographic prints
    Continuous Circular Stacking (01 -> 02 -> 03 -> 04 -> 01)
-   Bg: #F1EDE7 | Secondary: #8B7355 | Authentic Editorial Reference Design
+   Bg: #F1EDE7 | Fine-art Archival Paper | Gallery Editorial
    ========================================================================== */
 
-.deck-compact-root {
+.photo-deck-root {
   --deck-bg: #F1EDE7;
-  --deck-card-bg: #FFFFFF;
+  --deck-paper: #FAF8F5;
   --deck-secondary: #8B7355;
   --deck-secondary-hover: #725D43;
   --deck-secondary-light: #C4B5A5;
   --deck-secondary-soft: rgba(139, 115, 85, 0.12);
   --deck-secondary-border: rgba(139, 115, 85, 0.28);
-  --deck-border: rgba(139, 115, 85, 0.18);
-  --deck-border-hover: #8B7355;
+  --deck-border: rgba(139, 115, 85, 0.2);
   --deck-text-title: #1C1A17;
   --deck-text-body: #47413A;
   --deck-text-muted: #7A7267;
@@ -30,7 +30,7 @@
   box-sizing: border-box;
 }
 
-.deck-compact-container {
+.photo-deck-container {
   width: 100%;
   max-width: 1240px;
   margin-left: auto;
@@ -43,13 +43,13 @@
 /* ==========================================================================
    1. EDITORIAL SECTION HEADER
    ========================================================================== */
-.deck-compact-header {
+.photo-deck-header {
   text-align: center;
   max-width: 820px;
   margin: 0 auto clamp(28px, 3.8vw, 44px);
 }
 
-.deck-compact-badge {
+.photo-deck-badge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -60,14 +60,14 @@
   border: 1px solid var(--deck-secondary-border);
 }
 
-.deck-compact-badge-dot {
+.photo-deck-badge-dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
   background-color: var(--deck-secondary);
 }
 
-.deck-compact-eyebrow {
+.photo-deck-eyebrow {
   font-family: var(--font-subheading, 'Manrope', sans-serif);
   font-size: 0.72rem;
   font-weight: 800;
@@ -76,7 +76,7 @@
   color: var(--deck-secondary) !important;
 }
 
-.deck-compact-main-heading {
+.photo-deck-main-heading {
   font-family: var(--font-heading, 'Cormorant Garamond', serif);
   font-size: clamp(2.1rem, 4vw, 3.4rem);
   line-height: 1.12;
@@ -87,14 +87,14 @@
   text-transform: uppercase;
 }
 
-.deck-compact-gold-line {
+.photo-deck-gold-line {
   width: 52px;
   height: 2px;
   background: var(--deck-secondary);
   margin: 0 auto 14px;
 }
 
-.deck-compact-descriptor {
+.photo-deck-descriptor {
   font-size: clamp(0.9rem, 1.15vw, 1.02rem);
   line-height: 1.62;
   color: var(--deck-text-body);
@@ -103,40 +103,41 @@
 }
 
 /* ==========================================================================
-   2. THE EDITORIAL STACKED CARD DECK (Reference-Accurate Design)
+   2. PHYSICAL ARCHITECTURAL PHOTOGRAPH DECK
    ========================================================================== */
-.deck-compact-stage {
+.photo-deck-stage {
   position: relative;
   width: 100%;
-  max-width: 960px;
+  max-width: 860px;
   margin: 0 auto;
-  padding-top: clamp(56px, 6.5vw, 80px); /* Clean room for cards stacked above */
+  padding-top: clamp(48px, 6vw, 72px);
+  padding-bottom: 12px;
   user-select: none;
   cursor: grab;
   touch-action: pan-y;
 }
 
-.deck-compact-stage:active {
+.photo-deck-stage:active {
   cursor: grabbing;
 }
 
-/* Ribbon Quick Tabs */
-.deck-compact-ribbon {
+/* Quick Jump Ribbon */
+.photo-deck-ribbon {
   display: flex;
   justify-content: center;
   gap: 8px;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   padding: 4px 2px;
 }
 
-.deck-compact-ribbon::-webkit-scrollbar {
+.photo-deck-ribbon::-webkit-scrollbar {
   display: none;
 }
 
-.deck-compact-ribbon-tab {
+.photo-deck-ribbon-tab {
   background: rgba(255, 255, 255, 0.88);
   border: 1px solid var(--deck-border);
   border-radius: 999px;
@@ -157,14 +158,14 @@
   -webkit-backdrop-filter: blur(6px);
 }
 
-.deck-compact-ribbon-tab:hover {
+.photo-deck-ribbon-tab:hover {
   background: #FFFFFF;
   color: var(--deck-text-title);
   border-color: var(--deck-secondary);
   transform: translateY(-1px);
 }
 
-.deck-compact-ribbon-tab.is-active {
+.photo-deck-ribbon-tab.is-active {
   background: var(--deck-secondary);
   color: #FFFFFF;
   border-color: var(--deck-secondary);
@@ -172,277 +173,146 @@
   transform: translateY(-1px);
 }
 
-.deck-ribbon-tab-num {
+.photo-ribbon-num {
   font-family: var(--font-special, 'Bebas Neue', sans-serif);
   font-size: 0.95rem;
   line-height: 1;
 }
 
-/* Stack Container — Fixed Uniform Dimensions */
-.deck-compact-stack {
+/* Staggered Photo Deck Stack */
+.photo-deck-stack {
   position: relative;
   width: 100%;
-  height: 480px; /* Reference proportion: cinematic wide 2:1 rectangle */
-  box-sizing: border-box;
-  margin: 0;
+  max-width: 740px;
+  height: 520px;
+  margin: 0 auto;
+  perspective: 1200px;
 }
 
 /* ==========================================================================
-   INDIVIDUAL DECK CARD (Pure, Minimal, Luxury Editorial Reference)
+   INDIVIDUAL FINE-ART PHOTOGRAPHIC PRINT
+   Thick Archival Paper + White Gallery Matte + Staggered Angles
    ========================================================================== */
-.deck-compact-card {
+.photo-deck-card {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%; /* All cards fill stack height exactly */
-  background: var(--deck-card-bg);
-  border: 1px solid rgba(139, 115, 85, 0.18);
-  border-radius: 24px;
-  box-shadow: 0 24px 50px -12px rgba(45, 35, 25, 0.12),
-              0 3px 12px rgba(45, 35, 25, 0.04);
-  transform-origin: center top;
+  height: 100%;
+  background: var(--deck-paper);
+  border: 1px solid rgba(139, 115, 85, 0.2);
+  border-radius: 8px; /* Classic archival paper cut, not a generic pill */
+  box-shadow: 0 32px 64px -16px rgba(28, 20, 14, 0.24),
+              0 12px 28px -6px rgba(28, 20, 14, 0.12),
+              inset 0 0 0 1px rgba(255, 255, 255, 0.95),
+              inset 0 1px 2px rgba(255, 255, 255, 0.9);
+  padding: 14px 14px 16px 14px;
   box-sizing: border-box;
-  overflow: hidden;
+  transform-origin: center center;
   will-change: transform, opacity;
   transition: border-color 0.25s ease;
 }
 
-.deck-compact-card.is-front {
+.photo-deck-card.is-front {
   cursor: grab;
   z-index: 30;
 }
 
-.deck-compact-card.is-stacked {
+.photo-deck-card.is-stacked {
   cursor: pointer;
 }
 
-.deck-compact-card.is-stacked:hover {
+.photo-deck-card.is-stacked:hover {
   border-color: var(--deck-secondary);
 }
 
-/* Hide interior text on background cards so the stacked tabs look pure, clean and graphic */
-.deck-compact-card.is-stacked .deck-compact-editorial > *,
-.deck-compact-card.is-stacked .deck-compact-touch-arrows,
-.deck-compact-card.is-stacked .deck-compact-floating-pill {
-  opacity: 0 !important;
-  visibility: hidden !important;
-  pointer-events: none !important;
-}
-
-/* 2-Column Split: 48% Editorial White, 52% Edge-to-Edge Architectural Photography */
-.deck-compact-card-inner {
-  display: grid;
-  grid-template-columns: 1fr 1.05fr;
-  align-items: stretch;
-  height: 100%;
+/* Surface Container */
+.photo-print-surface {
+  display: flex;
+  flex-direction: column;
   width: 100%;
-}
-
-/* --- Left Column: Architectural Editorial Space --- */
-.deck-compact-editorial {
-  padding: clamp(32px, 3.8vw, 48px);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  box-sizing: border-box;
-  background: #FFFFFF;
   height: 100%;
+  box-sizing: border-box;
 }
 
-.deck-compact-editorial-top {
-  display: flex;
-  flex-direction: column;
-}
-
-/* Faint Large Numeral (Exact Reference Match) */
-.deck-compact-numeral {
-  font-family: var(--font-heading, 'Cormorant Garamond', serif);
-  font-size: clamp(3.8rem, 5.2vw, 5.2rem);
-  font-weight: 300;
-  color: #E2DAD0;
-  line-height: 0.88;
-  margin-bottom: 16px;
-  user-select: none;
-  letter-spacing: -0.04em;
-}
-
-.deck-compact-eyebrow-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--font-subheading, 'Manrope', sans-serif);
-  font-size: 0.68rem;
-  font-weight: 800;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--deck-secondary);
-  margin-bottom: 10px;
-}
-
-.deck-eyebrow-dot {
-  color: var(--deck-border);
-}
-
-.deck-compact-title {
-  font-family: var(--font-heading, 'Cormorant Garamond', serif);
-  font-size: clamp(1.4rem, 2.1vw, 1.95rem);
-  font-weight: 600;
-  line-height: 1.18;
-  letter-spacing: -0.015em;
-  color: var(--deck-text-title);
-  margin: 0 0 16px 0;
-  text-transform: uppercase;
-}
-
-.deck-compact-title a {
-  color: var(--deck-text-title) !important;
-  text-decoration: none;
-  transition: color 0.22s ease;
-}
-
-.deck-compact-title a:hover {
-  color: var(--deck-secondary) !important;
-}
-
-.deck-compact-desc {
-  font-size: clamp(0.88rem, 1.05vw, 0.96rem);
-  line-height: 1.65;
-  color: var(--deck-text-body) !important;
-  margin: 0;
-  max-width: 420px;
-}
-
-/* Action Row */
-.deck-compact-action-row {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-top: auto;
-  flex-wrap: wrap;
-}
-
-.deck-compact-cta-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--deck-secondary);
-  color: #FFFFFF !important;
-  text-decoration: none;
-  padding: 11px 24px;
-  border-radius: 999px;
-  font-family: var(--font-subheading, 'Manrope', sans-serif);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 4px 14px rgba(139, 115, 85, 0.28);
-}
-
-.deck-compact-cta-btn:hover {
-  background: var(--deck-text-title);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(28, 26, 23, 0.22);
-}
-
-.deck-compact-cta-icon {
-  transition: transform 0.25s ease;
-}
-
-.deck-compact-cta-btn:hover .deck-compact-cta-icon {
-  transform: translate(2px, -2px);
-}
-
-.deck-compact-swipe-indicator {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--font-subheading, 'Manrope', sans-serif);
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--deck-text-muted);
-}
-
-.deck-indicator-bar {
-  width: 18px;
-  height: 1.5px;
-  background-color: var(--deck-secondary);
-}
-
-/* --- Right Column: Full-Bleed Architectural Photography (Flush, No Box Frame) --- */
-.deck-compact-visual {
+/* Architectural Hero Photograph Frame */
+.photo-print-image-wrap {
   position: relative;
   width: 100%;
-  height: 100%;
+  height: calc(100% - 56px);
+  border-radius: 4px;
   overflow: hidden;
   background-color: #E2DAD0;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
 }
 
-.deck-compact-photo {
+.photo-print-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  border-top-right-radius: 24px;
-  border-bottom-right-radius: 24px;
   transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.deck-compact-card:hover .deck-compact-photo {
-  transform: scale(1.04);
+.photo-deck-card:hover .photo-print-image {
+  transform: scale(1.03);
 }
 
-.deck-compact-veil {
+.photo-print-grain {
   position: absolute;
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(21, 19, 17, 0.15) 0%,
+    rgba(21, 19, 17, 0.06) 0%,
     transparent 45%,
-    rgba(21, 19, 17, 0.35) 100%
+    rgba(21, 19, 17, 0.32) 100%
   );
   pointer-events: none;
 }
 
-/* Top-Right Project Pill */
-.deck-compact-floating-pill {
+/* Translucent Archival Proof Stamp */
+.photo-print-stamp {
   position: absolute;
-  top: 18px;
-  right: 18px;
+  top: 14px;
+  right: 14px;
   z-index: 2;
-}
-
-.deck-compact-floating-pill span {
-  display: inline-block;
-  background: rgba(255, 255, 255, 0.92);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(250, 248, 245, 0.94);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   color: var(--deck-text-title);
+  border: 1px solid rgba(139, 115, 85, 0.25);
   border-radius: 999px;
-  padding: 5px 12px;
+  padding: 4px 12px;
   font-family: var(--font-subheading, 'Manrope', sans-serif);
-  font-size: 0.65rem;
+  font-size: 0.62rem;
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  border: 1px solid rgba(139, 115, 85, 0.2);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
 }
 
-/* Quick Floating Arrows */
-.deck-compact-touch-arrows {
+.photo-stamp-sep {
+  color: var(--deck-border);
+}
+
+.photo-stamp-num {
+  color: var(--deck-secondary);
+}
+
+/* Quick Touch Arrows */
+.photo-print-touch-nav {
   position: absolute;
-  bottom: 18px;
-  right: 18px;
+  bottom: 14px;
+  right: 14px;
   display: inline-flex;
-  gap: 8px;
+  gap: 7px;
   z-index: 2;
 }
 
-.deck-compact-arrow-btn {
+.photo-touch-arrow {
   width: 36px;
   height: 36px;
   border-radius: 50%;
@@ -454,19 +324,128 @@
   justify-content: center;
   cursor: pointer;
   transition: all 0.22s ease;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18);
 }
 
-.deck-compact-arrow-btn:hover {
+.photo-touch-arrow:hover {
   background: var(--deck-secondary);
   color: #FFFFFF;
   transform: scale(1.08);
 }
 
 /* ==========================================================================
-   3. BOTTOM FOOTER & STEPPER BAR
+   FINE-ART BOTTOM MARGIN: Integrated Minimal Architectural Caption
    ========================================================================== */
-.deck-compact-footer {
+.photo-print-margin {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  padding: 12px 6px 0 6px;
+  box-sizing: border-box;
+}
+
+.photo-margin-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.photo-margin-index {
+  font-family: var(--font-heading, 'Cormorant Garamond', serif);
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: var(--deck-secondary);
+  line-height: 1;
+  user-select: none;
+}
+
+.photo-margin-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.photo-margin-title {
+  font-family: var(--font-heading, 'Cormorant Garamond', serif);
+  font-size: 1.24rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-transform: uppercase;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.photo-margin-title a {
+  color: var(--deck-text-title) !important;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.photo-margin-title a:hover {
+  color: var(--deck-secondary) !important;
+}
+
+.photo-margin-meta {
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--deck-text-muted);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.photo-meta-dot {
+  color: var(--deck-secondary);
+}
+
+.photo-margin-right {
+  display: flex;
+  align-items: center;
+}
+
+.photo-margin-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--deck-secondary) !important;
+  text-decoration: none;
+  padding: 7px 15px;
+  border-radius: 999px;
+  border: 1px solid rgba(139, 115, 85, 0.28);
+  background: rgba(139, 115, 85, 0.06);
+  transition: all 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.photo-margin-cta:hover {
+  background: var(--deck-secondary);
+  color: #FFFFFF !important;
+  border-color: var(--deck-secondary);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(139, 115, 85, 0.25);
+}
+
+.photo-cta-arrow {
+  transition: transform 0.22s ease;
+}
+
+.photo-margin-cta:hover .photo-cta-arrow {
+  transform: translate(2px, -2px);
+}
+
+/* ==========================================================================
+   3. BOTTOM FOOTER & STEPPER CONTROLS
+   ========================================================================== */
+.photo-deck-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -479,7 +458,7 @@
   z-index: 40;
 }
 
-.deck-compact-portfolio-link {
+.photo-deck-portfolio-link {
   display: inline-flex;
   align-items: center;
   gap: 7px;
@@ -493,18 +472,18 @@
   transition: all 0.22s ease;
 }
 
-.deck-compact-portfolio-link:hover {
+.photo-deck-portfolio-link:hover {
   color: var(--deck-text-title) !important;
   gap: 10px;
 }
 
-.deck-compact-dots {
+.photo-deck-dots {
   display: inline-flex;
   align-items: center;
   gap: 8px;
 }
 
-.deck-compact-dot {
+.photo-deck-dot {
   width: 8px;
   height: 8px;
   border-radius: 999px;
@@ -515,18 +494,18 @@
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.deck-compact-dot.is-active {
+.photo-deck-dot.is-active {
   width: 26px;
   background: var(--deck-secondary);
 }
 
-.deck-compact-stepper {
+.photo-deck-stepper {
   display: inline-flex;
   align-items: center;
   gap: 10px;
 }
 
-.deck-compact-step-arrow {
+.photo-deck-step-arrow {
   width: 36px;
   height: 36px;
   border-radius: 50%;
@@ -541,21 +520,21 @@
   box-shadow: 0 2px 7px rgba(60, 45, 30, 0.05);
 }
 
-.deck-compact-step-arrow:hover {
+.photo-deck-step-arrow:hover {
   background: var(--deck-secondary);
   color: #FFFFFF;
   border-color: var(--deck-secondary);
   transform: scale(1.08);
 }
 
-.deck-compact-counter {
+.photo-deck-counter {
   font-family: var(--font-special, 'Bebas Neue', sans-serif);
   font-size: 1.15rem;
   letter-spacing: 0.06em;
   color: var(--deck-text-title);
 }
 
-.deck-compact-counter-slash {
+.photo-deck-counter-slash {
   color: var(--deck-secondary);
   margin: 0 2px;
 }
@@ -563,133 +542,103 @@
 /* ==========================================================================
    4. RESPONSIVE BREAKPOINTS (Tablets & Mobile View)
    ========================================================================== */
-@media (max-width: 900px) {
-  .deck-compact-stack {
-    height: 590px;
+@media (max-width: 850px) {
+  .photo-deck-stack {
+    max-width: 620px;
+    height: 480px;
   }
 
-  .deck-compact-card-inner {
-    grid-template-columns: 1fr;
-    height: 100%;
-  }
-
-  .deck-compact-visual {
-    order: -1; /* Photography on top */
-    height: 250px;
-  }
-
-  .deck-compact-photo {
-    border-radius: 24px 24px 0 0;
-  }
-
-  .deck-compact-editorial {
-    height: calc(100% - 250px);
-    padding: 24px 20px 24px;
-  }
-
-  .deck-compact-numeral {
-    font-size: 3.2rem;
-    margin-bottom: 8px;
-  }
-
-  .deck-compact-title {
-    font-size: 1.35rem;
-    line-height: 1.22;
-    margin-bottom: 10px;
-  }
-
-  .deck-compact-desc {
-    font-size: 0.86rem;
-    line-height: 1.55;
-    -webkit-line-clamp: 3;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+  .photo-margin-title {
+    font-size: 1.12rem;
   }
 }
 
 @media (max-width: 768px) {
-  .deck-compact-root {
+  .photo-deck-root {
     padding-top: 36px;
     padding-bottom: 44px;
   }
 
-  .deck-compact-main-heading {
+  .photo-deck-main-heading {
     font-size: 1.8rem;
   }
 
-  .deck-compact-descriptor {
+  .photo-deck-descriptor {
     font-size: 0.86rem;
   }
 
-  .deck-compact-stage {
-    padding-top: 50px;
+  .photo-deck-stage {
+    padding-top: 40px;
   }
 
-  .deck-compact-card {
-    border-radius: 20px;
+  .photo-deck-stack {
+    max-width: 500px;
+    height: 450px;
   }
 
-  .deck-compact-footer {
+  .photo-deck-card {
+    padding: 10px 10px 14px 10px;
+  }
+
+  .photo-print-image-wrap {
+    height: calc(100% - 50px);
+  }
+
+  .photo-print-margin {
+    height: 50px;
+    padding: 10px 4px 0 4px;
+  }
+
+  .photo-margin-index {
+    font-size: 1.5rem;
+  }
+
+  .photo-margin-title {
+    font-size: 1.05rem;
+  }
+
+  .photo-deck-footer {
     justify-content: center;
     gap: 16px;
   }
 
-  .deck-compact-footer-left {
+  .photo-deck-footer-left {
     width: 100%;
     text-align: center;
     order: 3;
   }
 
-  .deck-compact-portfolio-link {
+  .photo-deck-portfolio-link {
     justify-content: center;
     width: 100%;
   }
 }
 
-@media (max-width: 600px) {
-  .deck-compact-stack {
-    height: 560px;
+@media (max-width: 500px) {
+  .photo-deck-stack {
+    width: calc(100% - 24px);
+    max-width: 380px;
+    height: 420px;
   }
 
-  .deck-compact-visual {
-    height: 220px;
-  }
-
-  .deck-compact-editorial {
-    height: calc(100% - 220px);
-    padding: 18px 16px 20px;
-  }
-
-  .deck-compact-main-heading {
-    font-size: 1.6rem;
-  }
-
-  .deck-compact-numeral {
-    font-size: 2.8rem;
-    margin-bottom: 6px;
-  }
-
-  .deck-compact-title {
-    font-size: 1.2rem;
-    margin-bottom: 8px;
-  }
-
-  .deck-compact-desc {
-    -webkit-line-clamp: 2;
-    font-size: 0.84rem;
-  }
-
-  .deck-compact-cta-btn {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .deck-compact-swipe-indicator {
+  .photo-margin-cta span {
     display: none;
   }
 
-  .deck-compact-footer {
-    margin-top: 28px;
+  .photo-margin-cta {
+    padding: 6px 8px;
+    border-radius: 50%;
+  }
+
+  .photo-margin-title {
+    font-size: 0.98rem;
+  }
+
+  .photo-margin-meta {
+    font-size: 0.58rem;
+  }
+
+  .photo-deck-footer {
+    margin-top: 24px;
   }
 }
