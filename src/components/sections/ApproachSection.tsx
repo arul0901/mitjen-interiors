@@ -1,6 +1,14 @@
 import React, { useState } from 'react';
 import { useInquiry } from '../../context/useInquiry';
-import { ArrowRight, CheckCircle2, Sparkles, Compass, Layers, Wrench, KeyRound } from 'lucide-react';
+import { 
+  ArrowRight, 
+  ArrowLeft, 
+  CheckCircle2, 
+  Compass, 
+  Layers, 
+  Wrench, 
+  KeyRound 
+} from 'lucide-react';
 import '../../styles/ApproachSection.css';
 
 interface ApproachPhase {
@@ -32,7 +40,7 @@ const APPROACH_PHASES: ApproachPhase[] = [
     ],
     image: '/assets/images/projects/image1.jpg',
     imageAlt: 'Interior designer reviewing spatial plans and architectural drawing room',
-    icon: <Compass size={18} strokeWidth={1.75} aria-hidden="true" />,
+    icon: <Compass size={17} strokeWidth={1.75} aria-hidden="true" />,
   },
   {
     id: 'phase-concept',
@@ -49,7 +57,7 @@ const APPROACH_PHASES: ApproachPhase[] = [
     ],
     image: '/assets/images/projects/image10.jpg',
     imageAlt: 'Curated architectural material palette, lighting and bespoke finishes',
-    icon: <Layers size={18} strokeWidth={1.75} aria-hidden="true" />,
+    icon: <Layers size={17} strokeWidth={1.75} aria-hidden="true" />,
   },
   {
     id: 'phase-production',
@@ -66,7 +74,7 @@ const APPROACH_PHASES: ApproachPhase[] = [
     ],
     image: '/assets/images/projects/image4.jpg',
     imageAlt: 'Precision woodwork, custom cabinetry and architectural joinery',
-    icon: <Wrench size={18} strokeWidth={1.75} aria-hidden="true" />,
+    icon: <Wrench size={17} strokeWidth={1.75} aria-hidden="true" />,
   },
   {
     id: 'phase-handover',
@@ -83,13 +91,23 @@ const APPROACH_PHASES: ApproachPhase[] = [
     ],
     image: '/assets/images/projects/image3.jpg',
     imageAlt: 'Completed turnkey residential living salon ready for handover',
-    icon: <KeyRound size={18} strokeWidth={1.75} aria-hidden="true" />,
+    icon: <KeyRound size={17} strokeWidth={1.75} aria-hidden="true" />,
   },
 ];
 
 export const ApproachSection: React.FC = () => {
   const { openInquiry } = useInquiry();
   const [activePhaseIndex, setActivePhaseIndex] = useState<number>(0);
+
+  const activePhase = APPROACH_PHASES[activePhaseIndex];
+
+  const handlePrev = () => {
+    setActivePhaseIndex((prev) => (prev > 0 ? prev - 1 : APPROACH_PHASES.length - 1));
+  };
+
+  const handleNext = () => {
+    setActivePhaseIndex((prev) => (prev < APPROACH_PHASES.length - 1 ? prev + 1 : 0));
+  };
 
   return (
     <section 
@@ -99,7 +117,7 @@ export const ApproachSection: React.FC = () => {
     >
       <div className="approach-container">
         {/* ====================================================================
-            1. SECTION HEADER
+            1. COMPACT SECTION HEADER
             ==================================================================== */}
         <header className="approach-header">
           <div className="approach-header-badge">
@@ -119,7 +137,7 @@ export const ApproachSection: React.FC = () => {
         </header>
 
         {/* ====================================================================
-            2. STEP PROGRESSION TRACK (Desktop / Tablet Stepper)
+            2. STEP PROGRESSION TRACK (Responsive Stepper / Mobile Tab Bar)
             ==================================================================== */}
         <nav className="approach-nav-stepper" aria-label="Process stages">
           {APPROACH_PHASES.map((phase, idx) => {
@@ -146,52 +164,90 @@ export const ApproachSection: React.FC = () => {
         {/* ====================================================================
             3. FEATURED ACTIVE PHASE SHOWCASE (Editorial Deep Dive)
             ==================================================================== */}
-        <div className="approach-stage-spotlight" key={APPROACH_PHASES[activePhaseIndex].id}>
+        <div className="approach-stage-spotlight" key={activePhase.id}>
           <div className="approach-spotlight-grid">
             {/* Visual Canvas Column */}
             <div className="approach-spotlight-visual">
               <div className="approach-visual-frame">
                 <img
-                  src={APPROACH_PHASES[activePhaseIndex].image}
-                  alt={APPROACH_PHASES[activePhaseIndex].imageAlt}
+                  src={activePhase.image}
+                  alt={activePhase.imageAlt}
                   className="approach-visual-img"
                   loading="lazy"
                 />
                 <div className="approach-visual-overlay">
                   <span className="approach-visual-pill">
-                    {APPROACH_PHASES[activePhaseIndex].step} / 04
+                    {activePhase.step} / 04
                   </span>
                   <span className="approach-visual-tag">
-                    {APPROACH_PHASES[activePhaseIndex].phaseTag}
+                    {activePhase.phaseTag}
                   </span>
                 </div>
+              </div>
+
+              {/* Mobile Quick Stage Controller */}
+              <div className="approach-mobile-controls">
+                <button 
+                  type="button" 
+                  className="approach-mobile-nav-btn" 
+                  onClick={handlePrev} 
+                  aria-label="Previous approach stage"
+                >
+                  <ArrowLeft size={14} aria-hidden="true" />
+                  <span>PREV</span>
+                </button>
+                <div className="approach-mobile-dots">
+                  {APPROACH_PHASES.map((_, dotIdx) => (
+                    <button
+                      key={dotIdx}
+                      type="button"
+                      className={`approach-dot ${dotIdx === activePhaseIndex ? 'is-active' : ''}`}
+                      onClick={() => setActivePhaseIndex(dotIdx)}
+                      aria-label={`Jump to stage ${dotIdx + 1}`}
+                    />
+                  ))}
+                </div>
+                <button 
+                  type="button" 
+                  className="approach-mobile-nav-btn" 
+                  onClick={handleNext} 
+                  aria-label="Next approach stage"
+                >
+                  <span>NEXT</span>
+                  <ArrowRight size={14} aria-hidden="true" />
+                </button>
               </div>
             </div>
 
             {/* Narrative & Deliverables Column */}
             <div className="approach-spotlight-content">
-              <span className="approach-content-eyebrow">
-                {APPROACH_PHASES[activePhaseIndex].phaseTag}
-              </span>
+              <div className="approach-content-meta">
+                <span className="approach-content-eyebrow">
+                  {activePhase.phaseTag}
+                </span>
+                <span className="approach-content-stage-pill">
+                  STEP {activePhase.step}
+                </span>
+              </div>
 
               <h3 className="approach-content-title">
-                {APPROACH_PHASES[activePhaseIndex].title}
+                {activePhase.title}
               </h3>
 
               <p className="approach-content-subtitle">
-                {APPROACH_PHASES[activePhaseIndex].subtitle}
+                {activePhase.subtitle}
               </p>
 
               <p className="approach-content-desc">
-                {APPROACH_PHASES[activePhaseIndex].description}
+                {activePhase.description}
               </p>
 
               <div className="approach-deliverables-block">
                 <span className="approach-deliverables-heading">KEY ARCHITECTURAL DELIVERABLES</span>
                 <ul className="approach-deliverables-list">
-                  {APPROACH_PHASES[activePhaseIndex].deliverables.map((del, i) => (
+                  {activePhase.deliverables.map((del, i) => (
                     <li key={i} className="approach-deliverable-item">
-                      <CheckCircle2 size={16} className="approach-check-icon" aria-hidden="true" />
+                      <CheckCircle2 size={15} className="approach-check-icon" aria-hidden="true" />
                       <span>{del}</span>
                     </li>
                   ))}
@@ -202,13 +258,14 @@ export const ApproachSection: React.FC = () => {
                 <button
                   type="button"
                   className="approach-cta-btn"
-                  onClick={() => openInquiry(`Process Consultation: ${APPROACH_PHASES[activePhaseIndex].title}`)}
+                  onClick={() => openInquiry(`Process Consultation: ${activePhase.title}`)}
                 >
                   <span>CONSULT FOR THIS STAGE</span>
                   <ArrowRight size={14} aria-hidden="true" />
                 </button>
+
                 <div className="approach-stage-counter">
-                  STAGE <strong>{APPROACH_PHASES[activePhaseIndex].step}</strong> OF <strong>04</strong>
+                  STAGE <strong>{activePhase.step}</strong> OF <strong>04</strong>
                 </div>
               </div>
             </div>
@@ -216,42 +273,49 @@ export const ApproachSection: React.FC = () => {
         </div>
 
         {/* ====================================================================
-            4. FOUR-PHASE ARCHITECTURAL SUMMARY CARDS (Full Overview Grid)
+            4. FOUR-PHASE ARCHITECTURAL SUMMARY CARDS (Snap Carousel on Mobile)
             ==================================================================== */}
-        <div className="approach-cards-grid">
-          {APPROACH_PHASES.map((phase, idx) => {
-            const isSelected = idx === activePhaseIndex;
-            return (
-              <article 
-                key={phase.id} 
-                className={`approach-card ${isSelected ? 'selected' : ''}`}
-                onClick={() => setActivePhaseIndex(idx)}
-              >
-                <div className="approach-card-canvas">
-                  <img 
-                    src={phase.image} 
-                    alt={phase.imageAlt} 
-                    className="approach-card-img" 
-                    loading="lazy" 
-                  />
-                  <span className="approach-card-num">{phase.step}</span>
-                </div>
+        <div className="approach-cards-wrapper">
+          <div className="approach-cards-header-mobile">
+            <span className="approach-cards-kicker">ALL 4 PHASES OVERVIEW</span>
+            <span className="approach-cards-hint">Swipe horizontally to explore →</span>
+          </div>
 
-                <div className="approach-card-body">
-                  <span className="approach-card-tag">{phase.phaseTag.split('•')[1] || phase.phaseTag}</span>
-                  <h4 className="approach-card-title">{phase.title}</h4>
-                  <p className="approach-card-desc">{phase.description}</p>
-
-                  <div className="approach-card-footer">
-                    <span className="approach-card-action">
-                      <span>{isSelected ? 'CURRENTLY VIEWING' : 'EXPLORE STAGE'}</span>
-                      <ArrowRight size={13} aria-hidden="true" />
-                    </span>
+          <div className="approach-cards-grid">
+            {APPROACH_PHASES.map((phase, idx) => {
+              const isSelected = idx === activePhaseIndex;
+              return (
+                <article 
+                  key={phase.id} 
+                  className={`approach-card ${isSelected ? 'selected' : ''}`}
+                  onClick={() => setActivePhaseIndex(idx)}
+                >
+                  <div className="approach-card-canvas">
+                    <img 
+                      src={phase.image} 
+                      alt={phase.imageAlt} 
+                      className="approach-card-img" 
+                      loading="lazy" 
+                    />
+                    <span className="approach-card-num">{phase.step}</span>
                   </div>
-                </div>
-              </article>
-            );
-          })}
+
+                  <div className="approach-card-body">
+                    <span className="approach-card-tag">{phase.phaseTag.split('•')[1] || phase.phaseTag}</span>
+                    <h4 className="approach-card-title">{phase.title}</h4>
+                    <p className="approach-card-desc">{phase.description}</p>
+
+                    <div className="approach-card-footer">
+                      <span className="approach-card-action">
+                        <span>{isSelected ? 'CURRENTLY VIEWING' : 'EXPLORE STAGE'}</span>
+                        <ArrowRight size={13} aria-hidden="true" />
+                      </span>
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>
@@ -259,4 +323,3 @@ export const ApproachSection: React.FC = () => {
 };
 
 export default ApproachSection;
-
