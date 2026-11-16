@@ -6,6 +6,7 @@ import ServiceCards from "../components/sections/ServiceCards";
 import WhyChooseSection from "../components/sections/WhyChoose";
 import TestimonialsSection from "../components/sections/Testimonials";
 import ScrollWalkthroughVideoHero from "../components/VideoWalkthroughHero";
+import ArchitecturalProjectShowcase from "../components/ArchitecturalShowcase/ArchitecturalProjectShowcase";
 
 // Feature flag: set to true to restore legacy text-marquee or legacy hero banner
 const SHOW_LEGACY_MARQUEE = false;
@@ -208,123 +209,8 @@ export default function Home() {
 </div>
 </div>
 </section>
-<section className={"cs_some_spaces_section"} aria-label={"Our Projects - Spaces We’re Proud to Have Built."}>
-<div className={"cs_height_120 cs_height_lg_80 cs_some_spaces_top_spacer"}></div>
-<div className={"container"}>
-<div className={"cs_section_heading_style_1 cs_center_column text-center"}>
-<p className={"cs_section_subtitle cs_bold cs_accent_color cs_mb_20 text-uppercase"}>OUR PROJECTS</p>
-<h2 className={"cs_section_title cs_fs_53 cs_semibold text-uppercase mb-0"}>SPACES WE’RE PROUD TO HAVE BUILT.</h2>
-</div>
-<div className={"cs_height_60 cs_height_lg_50 cs_some_spaces_mid_spacer"}></div>
-<div className={"cs_grid_style_4"}>
-<div className={"cs_card_style_6 cs_gray_bg cs_radius_10"}>
-<a href={"/portfolio"} className={"cs_card_thumbnail"} aria-label={"View Vintage Finish Interior project details"}>
-<img src={"/images/Residential/Residential1.jpeg"} alt={"Vintage Finish Interior, Race Course, Coimbatore"} />
-</a>
-<div className={"cs_card_content_wrapper position-relative"}>
-<div className={"cs_card_content"}>
-<div className={"cs_card_header"}>
-<h3 className={"cs_card_title cs_fs_18 cs_bold cs_mb_0"}>
-<a href={"/portfolio"} aria-label={"Vintage Finish Interior project"}>VINTAGE FINISH INTERIOR, RACE COURSE, COIMBATORE</a>
-</h3>
-</div>
-<div className={"cs_card_desc"}>
-<hr className={"cs_mb_20 mt-0"} aria-hidden={"true"} />
-<p className={"cs_card_subtitle cs_mb_20"}>A vintage-inspired look brought to life with carefully finished PU paint detailing.</p>
-<a href={"/portfolio"} className={"cs_btn_style_1 cs_fs_14 cs_bold cs_primary_font cs_radius_50"} aria-label={"View PU PAINT WORK category projects"}>
-<span>PU PAINT WORK ↗</span>
-<span className={"cs_btn_icon cs_radius_100 cs_center"} aria-hidden={"true"}>
-<svg width={"13"} height={"13"} viewBox={"0 0 14 14"} fill={"none"} xmlns={"http://www.w3.org/2000/svg"}>
-<path d={"M1 7H13M13 7L7.5 1.5M13 7L7.5 12.5"} stroke={"currentColor"} strokeWidth={"1.8"} strokeLinecap={"round"} strokeLinejoin={"round"}></path>
-</svg>
-</span>
-</a>
-</div>
-</div>
-</div>
-</div>
-<div className={"cs_card_style_6 cs_gray_bg cs_radius_10 active"} aria-current={"true"}>
-<a href={"/portfolio"} className={"cs_card_thumbnail"} aria-label={"View Interior Project, KR Pura details"}>
-<img src={"/images/Residential/Residential2.jpeg"} alt={"Interior Project, KR Pura, Bangalore"} />
-</a>
-<div className={"cs_card_content_wrapper position-relative"}>
-<div className={"cs_card_content"}>
-<div className={"cs_card_header"}>
-<h3 className={"cs_card_title cs_fs_18 cs_bold cs_mb_0"}>
-<a href={"/portfolio"} aria-label={"Interior Project, KR Pura, Bangalore project"}>INTERIOR PROJECT, KR PURA, BANGALORE</a>
-</h3>
-</div>
-<div className={"cs_card_desc"}>
-<hr className={"cs_mb_20 mt-0"} aria-hidden={"true"} />
-<p className={"cs_card_subtitle cs_mb_20"}>A well-planned interior featuring clean detailing and a cohesive design finish.</p>
-<a href={"/portfolio"} className={"cs_btn_style_1 cs_fs_14 cs_bold cs_primary_font cs_radius_50"} aria-label={"View INTERIOR DESIGN category projects"}>
-<span>INTERIOR DESIGN ↗</span>
-<span className={"cs_btn_icon cs_radius_100 cs_center"} aria-hidden={"true"}>
-<svg width={"13"} height={"13"} viewBox={"0 0 14 14"} fill={"none"} xmlns={"http://www.w3.org/2000/svg"}>
-<path d={"M1 7H13M13 7L7.5 1.5M13 7L7.5 12.5"} stroke={"currentColor"} strokeWidth={"1.8"} strokeLinecap={"round"} strokeLinejoin={"round"}></path>
-</svg>
-</span>
-</a>
-</div>
-</div>
-</div>
-</div>
-<div className={"cs_card_style_6 cs_gray_bg cs_radius_10"}>
-<a href={"/portfolio"} className={"cs_card_thumbnail"} aria-label={"View Office Interior, Tidal Park details"}>
-<img src={"/images/Commercial/Commercial1.jpeg"} alt={"Office Interior, Tidal Park"} />
-</a>
-<div className={"cs_card_content_wrapper position-relative"}>
-<div className={"cs_card_content"}>
-<div className={"cs_card_header"}>
-<h3 className={"cs_card_title cs_fs_18 cs_bold cs_mb_0"}>
-<a href={"/portfolio"} aria-label={"Office Interior, Tidal Park project"}>OFFICE INTERIOR, TIDAL PARK</a>
-</h3>
-</div>
-<div className={"cs_card_desc"}>
-<hr className={"cs_mb_20 mt-0"} aria-hidden={"true"} />
-<p className={"cs_card_subtitle cs_mb_20"}>A functional workspace planned around how teams work, with clean detailing and a polished finish.</p>
-<a href={"/portfolio"} className={"cs_btn_style_1 cs_fs_14 cs_bold cs_primary_font cs_radius_50"} aria-label={"View INTERIOR DESIGN category projects"}>
-<span>INTERIOR DESIGN ↗</span>
-<span className={"cs_btn_icon cs_radius_100 cs_center"} aria-hidden={"true"}>
-<svg width={"13"} height={"13"} viewBox={"0 0 14 14"} fill={"none"} xmlns={"http://www.w3.org/2000/svg"}>
-<path d={"M1 7H13M13 7L7.5 1.5M13 7L7.5 12.5"} stroke={"currentColor"} strokeWidth={"1.8"} strokeLinecap={"round"} strokeLinejoin={"round"}></path>
-</svg>
-</span>
-</a>
-</div>
-</div>
-</div>
-</div>
-<div className={"cs_card_style_6 cs_gray_bg cs_radius_10"}>
-<a href={"/portfolio"} className={"cs_card_thumbnail"} aria-label={"View Corporate Site Interior details"}>
-<img src={"/images/Corporate/Corporate1.jpeg"} alt={"Corporate Site Interior"} />
-</a>
-<div className={"cs_card_content_wrapper position-relative"}>
-<div className={"cs_card_content"}>
-<div className={"cs_card_header"}>
-<h3 className={"cs_card_title cs_fs_18 cs_bold cs_mb_0"}>
-<a href={"/portfolio"} aria-label={"Corporate Site Interior project"}>CORPORATE SITE INTERIOR</a>
-</h3>
-</div>
-<div className={"cs_card_desc"}>
-<hr className={"cs_mb_20 mt-0"} aria-hidden={"true"} />
-<p className={"cs_card_subtitle cs_mb_20"}>A professional workspace shaped around functional layouts and a considered interior finish.</p>
-<a href={"/portfolio"} className={"cs_btn_style_1 cs_fs_14 cs_bold cs_primary_font cs_radius_50"} aria-label={"View WORKSPACE DESIGN category projects"}>
-<span>WORKSPACE DESIGN ↗</span>
-<span className={"cs_btn_icon cs_radius_100 cs_center"} aria-hidden={"true"}>
-<svg width={"13"} height={"13"} viewBox={"0 0 14 14"} fill={"none"} xmlns={"http://www.w3.org/2000/svg"}>
-<path d={"M1 7H13M13 7L7.5 1.5M13 7L7.5 12.5"} stroke={"currentColor"} strokeWidth={"1.8"} strokeLinecap={"round"} strokeLinejoin={"round"}></path>
-</svg>
-</span>
-</a>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div className={"cs_height_120 cs_height_lg_80 cs_some_spaces_bottom_spacer"}></div>
-</section>
+{/* Premium Editorial Architectural Showcase — Mitijen Selected Residential Work */}
+<ArchitecturalProjectShowcase />
 <section className={"cs_skills_layout_1"}>
 <div className={"container"}>
 <div className={"row cs_gap_y_40 align-items-center"}>
