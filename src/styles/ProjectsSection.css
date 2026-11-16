@@ -1,8 +1,8 @@
 /* ==========================================================================
-   MITIJEN INTERIORS — ELEVATED ARCHITECTURAL CARD DECK SHOWCASE
+   MITIJEN INTERIORS — LUXURY ARCHITECTURAL CARD DECK SHOWCASE
    Spaces We’re Proud to Have Built
    Continuous Circular Stacking (01 -> 02 -> 03 -> 04 -> 01)
-   Bg: #F1EDE7 | Secondary: #8B7355 | Luxury Architectural Editorial
+   Bg: #F1EDE7 | Secondary: #8B7355 | Authentic Editorial Reference Design
    ========================================================================== */
 
 .deck-compact-root {
@@ -13,7 +13,7 @@
   --deck-secondary-light: #C4B5A5;
   --deck-secondary-soft: rgba(139, 115, 85, 0.12);
   --deck-secondary-border: rgba(139, 115, 85, 0.28);
-  --deck-border: rgba(139, 115, 85, 0.2);
+  --deck-border: rgba(139, 115, 85, 0.18);
   --deck-border-hover: #8B7355;
   --deck-text-title: #1C1A17;
   --deck-text-body: #47413A;
@@ -22,8 +22,8 @@
   background-color: var(--deck-bg) !important;
   color: var(--deck-text-title) !important;
   font-family: var(--font-body, 'DM Sans', sans-serif);
-  padding-top: clamp(44px, 5.5vw, 76px);
-  padding-bottom: clamp(52px, 6.5vw, 88px);
+  padding-top: clamp(48px, 6vw, 84px);
+  padding-bottom: clamp(54px, 7vw, 92px);
   position: relative;
   width: 100%;
   overflow-x: clip;
@@ -46,7 +46,7 @@
 .deck-compact-header {
   text-align: center;
   max-width: 820px;
-  margin: 0 auto clamp(26px, 3.5vw, 42px);
+  margin: 0 auto clamp(28px, 3.8vw, 44px);
 }
 
 .deck-compact-badge {
@@ -58,7 +58,6 @@
   border-radius: 999px;
   background-color: var(--deck-secondary-soft);
   border: 1px solid var(--deck-secondary-border);
-  box-shadow: 0 2px 6px rgba(139, 115, 85, 0.08);
 }
 
 .deck-compact-badge-dot {
@@ -91,7 +90,7 @@
 .deck-compact-gold-line {
   width: 52px;
   height: 2px;
-  background: linear-gradient(90deg, transparent, var(--deck-secondary), transparent);
+  background: var(--deck-secondary);
   margin: 0 auto 14px;
 }
 
@@ -104,14 +103,14 @@
 }
 
 /* ==========================================================================
-   2. COMPACT STACKED CARD DECK STAGE
+   2. THE EDITORIAL STACKED CARD DECK (Reference-Accurate Design)
    ========================================================================== */
 .deck-compact-stage {
   position: relative;
   width: 100%;
-  max-width: 980px;
+  max-width: 960px;
   margin: 0 auto;
-  padding-top: clamp(52px, 6vw, 76px); /* Room for stacked background cards peeking above */
+  padding-top: clamp(56px, 6.5vw, 80px); /* Clean room for cards stacked above */
   user-select: none;
   cursor: grab;
   touch-action: pan-y;
@@ -126,7 +125,7 @@
   display: flex;
   justify-content: center;
   gap: 8px;
-  margin-bottom: 18px;
+  margin-bottom: 20px;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
@@ -179,17 +178,17 @@
   line-height: 1;
 }
 
-/* Stack Container — Uniform Fixed Height */
+/* Stack Container — Fixed Uniform Dimensions */
 .deck-compact-stack {
   position: relative;
   width: 100%;
-  height: 500px; /* Exact uniform height on desktop */
+  height: 480px; /* Reference proportion: cinematic wide 2:1 rectangle */
   box-sizing: border-box;
   margin: 0;
 }
 
 /* ==========================================================================
-   INDIVIDUAL DECK CARD (Elevated Architectural Editorial Proportions)
+   INDIVIDUAL DECK CARD (Pure, Minimal, Luxury Editorial Reference)
    ========================================================================== */
 .deck-compact-card {
   position: absolute;
@@ -198,10 +197,10 @@
   width: 100%;
   height: 100%; /* All cards fill stack height exactly */
   background: var(--deck-card-bg);
-  border: 1px solid var(--deck-border);
-  border-radius: 18px;
-  box-shadow: 0 24px 52px -14px rgba(44, 34, 24, 0.12),
-              0 3px 12px rgba(44, 34, 24, 0.04);
+  border: 1px solid rgba(139, 115, 85, 0.18);
+  border-radius: 24px;
+  box-shadow: 0 24px 50px -12px rgba(45, 35, 25, 0.12),
+              0 3px 12px rgba(45, 35, 25, 0.04);
   transform-origin: center top;
   box-sizing: border-box;
   overflow: hidden;
@@ -222,80 +221,27 @@
   border-color: var(--deck-secondary);
 }
 
-/* ==========================================================================
-   ARCHITECTURAL TOP TAB FOR STACKED VIEW (Visible when peeking above)
-   ========================================================================== */
-.deck-card-stacked-tab {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 38px;
-  padding: 0 22px;
-  background: #FAF8F5;
-  border-bottom: 1px solid rgba(139, 115, 85, 0.2);
-  box-sizing: border-box;
-}
-
-.deck-compact-card.is-front .deck-card-stacked-tab {
-  display: none !important;
-}
-
-.deck-stacked-tab-content {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.deck-stacked-num {
-  font-family: var(--font-special, 'Bebas Neue', sans-serif);
-  font-size: 0.95rem;
-  color: var(--deck-secondary);
-}
-
-.deck-stacked-sep {
-  color: var(--deck-border);
-  font-size: 0.8rem;
-}
-
-.deck-stacked-title {
-  font-family: var(--font-subheading, 'Manrope', sans-serif);
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--deck-text-title);
-}
-
-.deck-stacked-area {
-  font-family: var(--font-subheading, 'Manrope', sans-serif);
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  color: var(--deck-secondary);
-}
-
-/* CRITICAL: Hide interior details on stacked background cards so only top tabs peek out cleanly */
-.deck-compact-card.is-stacked .deck-compact-editorial-top,
-.deck-compact-card.is-stacked .deck-compact-action-row,
+/* Hide interior text on background cards so the stacked tabs look pure, clean and graphic */
+.deck-compact-card.is-stacked .deck-compact-editorial > *,
 .deck-compact-card.is-stacked .deck-compact-touch-arrows,
-.deck-compact-card.is-stacked .deck-compact-floating-pill,
-.deck-compact-card.is-stacked .deck-compact-archive-badge,
-.deck-compact-card.is-stacked .deck-compact-watermark {
-  display: none !important;
+.deck-compact-card.is-stacked .deck-compact-floating-pill {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }
 
-/* 2-Column Balanced Interior */
+/* 2-Column Split: 48% Editorial White, 52% Edge-to-Edge Architectural Photography */
 .deck-compact-card-inner {
   display: grid;
-  grid-template-columns: 1fr 1.08fr;
+  grid-template-columns: 1fr 1.05fr;
   align-items: stretch;
   height: 100%;
   width: 100%;
 }
 
-/* --- Left Column: Elevated Architectural Editorial --- */
+/* --- Left Column: Architectural Editorial Space --- */
 .deck-compact-editorial {
-  padding: clamp(24px, 3.2vw, 38px);
+  padding: clamp(32px, 3.8vw, 48px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -309,79 +255,43 @@
   flex-direction: column;
 }
 
-.deck-compact-meta-row {
-  display: flex;
-  align-items: baseline;
-  gap: 14px;
-  margin-bottom: 8px;
-}
-
-.deck-compact-big-num {
+/* Faint Large Numeral (Exact Reference Match) */
+.deck-compact-numeral {
   font-family: var(--font-heading, 'Cormorant Garamond', serif);
-  font-size: clamp(2.8rem, 4vw, 4.2rem);
-  font-weight: 600;
-  line-height: 0.85;
-  background: linear-gradient(135deg, #8B7355 0%, #C4B5A5 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-size: clamp(3.8rem, 5.2vw, 5.2rem);
+  font-weight: 300;
+  color: #E2DAD0;
+  line-height: 0.88;
+  margin-bottom: 16px;
   user-select: none;
   letter-spacing: -0.04em;
 }
 
-.deck-compact-type-badge {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.deck-compact-phase-tag {
+.deck-compact-eyebrow-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   font-family: var(--font-subheading, 'Manrope', sans-serif);
   font-size: 0.68rem;
   font-weight: 800;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--deck-secondary);
-}
-
-.deck-compact-sub-tag {
-  font-family: var(--font-subheading, 'Manrope', sans-serif);
-  font-size: 0.64rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--deck-text-muted);
-}
-
-.deck-compact-loc-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
   margin-bottom: 10px;
-  padding: 4px 10px;
-  border-radius: 999px;
-  background: rgba(139, 115, 85, 0.08);
-  border: 1px solid rgba(139, 115, 85, 0.22);
-  font-family: var(--font-subheading, 'Manrope', sans-serif);
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--deck-secondary);
-  align-self: flex-start;
 }
 
-.deck-compact-pin-icon {
-  color: var(--deck-secondary);
-  flex-shrink: 0;
+.deck-eyebrow-dot {
+  color: var(--deck-border);
 }
 
 .deck-compact-title {
   font-family: var(--font-heading, 'Cormorant Garamond', serif);
-  font-size: clamp(1.28rem, 1.8vw, 1.7rem);
+  font-size: clamp(1.4rem, 2.1vw, 1.95rem);
   font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-  margin: 0 0 10px 0;
+  line-height: 1.18;
+  letter-spacing: -0.015em;
+  color: var(--deck-text-title);
+  margin: 0 0 16px 0;
   text-transform: uppercase;
 }
 
@@ -395,100 +305,19 @@
   color: var(--deck-secondary) !important;
 }
 
-.deck-compact-gold-divider {
-  width: 40px;
-  height: 2px;
-  background: linear-gradient(90deg, var(--deck-secondary), transparent);
-  margin-bottom: 12px;
-}
-
-/* Architectural Specifications Ribbon */
-.deck-specs-strip {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #FAF8F5;
-  border: 1px solid rgba(139, 115, 85, 0.18);
-  border-radius: 10px;
-  padding: 8px 14px;
-  margin-bottom: 14px;
-}
-
-.deck-spec-cell {
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-}
-
-.deck-spec-label {
-  font-family: var(--font-subheading, 'Manrope', sans-serif);
-  font-size: 0.58rem;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--deck-text-muted);
-}
-
-.deck-spec-value {
-  font-family: var(--font-subheading, 'Manrope', sans-serif);
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: var(--deck-text-title);
-  white-space: nowrap;
-}
-
-.deck-spec-divider {
-  width: 1px;
-  height: 22px;
-  background-color: rgba(139, 115, 85, 0.22);
-}
-
 .deck-compact-desc {
-  font-size: clamp(0.85rem, 1vw, 0.92rem);
-  line-height: 1.6;
+  font-size: clamp(0.88rem, 1.05vw, 0.96rem);
+  line-height: 1.65;
   color: var(--deck-text-body) !important;
-  margin: 0 0 12px 0;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  margin: 0;
+  max-width: 420px;
 }
 
-/* Material Craft Palette */
-.deck-materials-row {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  flex-wrap: wrap;
-  margin-bottom: 12px;
-}
-
-.deck-material-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  background: rgba(139, 115, 85, 0.08);
-  border: 1px solid rgba(139, 115, 85, 0.2);
-  border-radius: 6px;
-  padding: 3px 8px;
-  font-family: var(--font-subheading, 'Manrope', sans-serif);
-  font-size: 0.62rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  color: var(--deck-secondary);
-}
-
-.deck-mat-dot {
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background-color: var(--deck-secondary);
-}
-
+/* Action Row */
 .deck-compact-action-row {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
   margin-top: auto;
   flex-wrap: wrap;
 }
@@ -496,11 +325,11 @@
 .deck-compact-cta-btn {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  background: linear-gradient(135deg, #8B7355 0%, #725D43 100%);
+  gap: 8px;
+  background: var(--deck-secondary);
   color: #FFFFFF !important;
   text-decoration: none;
-  padding: 10px 20px;
+  padding: 11px 24px;
   border-radius: 999px;
   font-family: var(--font-subheading, 'Manrope', sans-serif);
   font-size: 0.72rem;
@@ -525,41 +354,31 @@
   transform: translate(2px, -2px);
 }
 
-.deck-compact-swipe-hint {
+.deck-compact-swipe-indicator {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   font-family: var(--font-subheading, 'Manrope', sans-serif);
   font-size: 0.65rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--deck-text-muted);
-  border: 1px dashed var(--deck-border);
-  padding: 7px 14px;
-  border-radius: 999px;
 }
 
-.deck-compass-icon {
-  color: var(--deck-secondary);
+.deck-indicator-bar {
+  width: 18px;
+  height: 1.5px;
+  background-color: var(--deck-secondary);
 }
 
-/* --- Right Column: Architectural Photography --- */
+/* --- Right Column: Full-Bleed Architectural Photography (Flush, No Box Frame) --- */
 .deck-compact-visual {
-  position: relative;
-  background-color: #151311;
-  padding: 12px;
-  box-sizing: border-box;
-  height: 100%;
-}
-
-.deck-compact-photo-frame {
   position: relative;
   width: 100%;
   height: 100%;
-  border-radius: 14px;
   overflow: hidden;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+  background-color: #E2DAD0;
 }
 
 .deck-compact-photo {
@@ -567,6 +386,8 @@
   height: 100%;
   object-fit: cover;
   display: block;
+  border-top-right-radius: 24px;
+  border-bottom-right-radius: 24px;
   transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -579,81 +400,45 @@
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(21, 19, 17, 0.2) 0%,
+    rgba(21, 19, 17, 0.15) 0%,
     transparent 45%,
-    rgba(21, 19, 17, 0.45) 100%
+    rgba(21, 19, 17, 0.35) 100%
   );
   pointer-events: none;
 }
 
-/* Top-Left Archive Badge */
-.deck-compact-archive-badge {
-  position: absolute;
-  top: 14px;
-  left: 14px;
-  z-index: 2;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  background: rgba(21, 19, 17, 0.82);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  color: #D4C5B5;
-  border: 1px solid rgba(212, 197, 181, 0.25);
-  border-radius: 999px;
-  padding: 4px 10px;
-  font-family: var(--font-subheading, 'Manrope', sans-serif);
-  font-size: 0.62rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-/* Top-Right Category Pill */
+/* Top-Right Project Pill */
 .deck-compact-floating-pill {
   position: absolute;
-  top: 14px;
-  right: 14px;
+  top: 18px;
+  right: 18px;
   z-index: 2;
 }
 
 .deck-compact-floating-pill span {
   display: inline-block;
-  background: rgba(139, 115, 85, 0.92);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  color: #FFFFFF;
+  color: var(--deck-text-title);
   border-radius: 999px;
-  padding: 4px 11px;
+  padding: 5px 12px;
   font-family: var(--font-subheading, 'Manrope', sans-serif);
-  font-size: 0.64rem;
+  font-size: 0.65rem;
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+  border: 1px solid rgba(139, 115, 85, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
 }
 
-/* Bottom Architectural Watermark */
-.deck-compact-watermark {
-  position: absolute;
-  bottom: 14px;
-  left: 14px;
-  z-index: 2;
-  color: rgba(241, 237, 231, 0.7);
-  font-family: var(--font-subheading, 'Manrope', sans-serif);
-  font-size: 0.58rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  pointer-events: none;
-}
-
+/* Quick Floating Arrows */
 .deck-compact-touch-arrows {
   position: absolute;
-  bottom: 12px;
-  right: 12px;
+  bottom: 18px;
+  right: 18px;
   display: inline-flex;
-  gap: 7px;
+  gap: 8px;
   z-index: 2;
 }
 
@@ -661,7 +446,7 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.94);
+  background: rgba(255, 255, 255, 0.92);
   border: 1px solid rgba(139, 115, 85, 0.3);
   color: var(--deck-secondary);
   display: inline-flex;
@@ -686,7 +471,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  margin-top: clamp(36px, 4.5vw, 52px);
+  margin-top: clamp(38px, 4.8vw, 56px);
   padding-top: 22px;
   border-top: 1px dashed var(--deck-border);
   flex-wrap: wrap;
@@ -716,7 +501,7 @@
 .deck-compact-dots {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
+  gap: 8px;
 }
 
 .deck-compact-dot {
@@ -780,7 +565,7 @@
    ========================================================================== */
 @media (max-width: 900px) {
   .deck-compact-stack {
-    height: 610px;
+    height: 590px;
   }
 
   .deck-compact-card-inner {
@@ -791,41 +576,42 @@
   .deck-compact-visual {
     order: -1; /* Photography on top */
     height: 250px;
-    padding: 10px;
   }
 
-  .deck-compact-photo-frame {
-    height: 100%;
+  .deck-compact-photo {
+    border-radius: 24px 24px 0 0;
   }
 
   .deck-compact-editorial {
     height: calc(100% - 250px);
-    padding: 20px 18px 22px;
+    padding: 24px 20px 24px;
   }
 
-  .deck-compact-title {
-    font-size: 1.32rem;
-    line-height: 1.25;
+  .deck-compact-numeral {
+    font-size: 3.2rem;
     margin-bottom: 8px;
   }
 
-  .deck-specs-strip {
-    padding: 6px 10px;
+  .deck-compact-title {
+    font-size: 1.35rem;
+    line-height: 1.22;
     margin-bottom: 10px;
   }
 
   .deck-compact-desc {
-    font-size: 0.85rem;
+    font-size: 0.86rem;
     line-height: 1.55;
-    -webkit-line-clamp: 2;
-    margin-bottom: 10px;
+    -webkit-line-clamp: 3;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 }
 
 @media (max-width: 768px) {
   .deck-compact-root {
-    padding-top: 32px;
-    padding-bottom: 40px;
+    padding-top: 36px;
+    padding-bottom: 44px;
   }
 
   .deck-compact-main-heading {
@@ -837,11 +623,11 @@
   }
 
   .deck-compact-stage {
-    padding-top: 48px;
+    padding-top: 50px;
   }
 
   .deck-compact-card {
-    border-radius: 14px;
+    border-radius: 20px;
   }
 
   .deck-compact-footer {
@@ -863,55 +649,35 @@
 
 @media (max-width: 600px) {
   .deck-compact-stack {
-    height: 590px;
+    height: 560px;
   }
 
   .deck-compact-visual {
     height: 220px;
-    padding: 8px;
   }
 
   .deck-compact-editorial {
     height: calc(100% - 220px);
-    padding: 16px 14px 18px;
+    padding: 18px 16px 20px;
   }
 
   .deck-compact-main-heading {
     font-size: 1.6rem;
   }
 
-  .deck-compact-big-num {
-    font-size: 2.2rem;
+  .deck-compact-numeral {
+    font-size: 2.8rem;
+    margin-bottom: 6px;
   }
 
   .deck-compact-title {
-    font-size: 1.15rem;
-  }
-
-  .deck-specs-strip {
-    padding: 5px 8px;
+    font-size: 1.2rem;
     margin-bottom: 8px;
-  }
-
-  .deck-spec-label {
-    font-size: 0.52rem;
-  }
-
-  .deck-spec-value {
-    font-size: 0.65rem;
   }
 
   .deck-compact-desc {
     -webkit-line-clamp: 2;
-    margin-bottom: 10px;
-  }
-
-  .deck-materials-row {
-    display: none; /* Hide material chips on small mobile to keep generous whitespace */
-  }
-
-  .deck-compact-watermark {
-    display: none;
+    font-size: 0.84rem;
   }
 
   .deck-compact-cta-btn {
@@ -919,7 +685,7 @@
     justify-content: center;
   }
 
-  .deck-compact-swipe-hint {
+  .deck-compact-swipe-indicator {
     display: none;
   }
 

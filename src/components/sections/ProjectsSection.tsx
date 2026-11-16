@@ -1,19 +1,15 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import gsap from 'gsap';
-import { ArrowUpRight, ChevronLeft, ChevronRight, MapPin, Layers, Compass, Sparkles } from 'lucide-react';
+import { ArrowUpRight, ChevronLeft, ChevronRight, Layers } from 'lucide-react';
 import '../../styles/ProjectsSection.css';
 
 interface ProjectItem {
   id: string;
   step: string;
   numeral: string;
+  category: string;
   title: string;
   location: string;
-  category: string;
-  typeLabel: string;
-  year: string;
-  area: string;
-  materials: string[];
   description: string;
   image: string;
   imageAlt: string;
@@ -24,16 +20,12 @@ const PROJECTS_DATA: ProjectItem[] = [
   {
     id: 'vintage-finish',
     step: '01',
-    numeral: '01',
-    title: 'VINTAGE FINISH INTERIOR, RACE COURSE',
+    numeral: '1',
+    category: 'RESIDENTIAL ARCHITECTURE',
+    title: 'Vintage Finish Interior, Race Course',
     location: 'Race Course, Coimbatore',
-    category: 'PU PAINT WORK ↗',
-    typeLabel: 'Residential Villa',
-    year: '2024',
-    area: '4,600 SQ.FT',
-    materials: ['Satin PU Lacquer', 'Custom Fluting', 'Brushed Brass Inlays'],
     description:
-      'A bespoke vintage-inspired residence articulated with hand-finished Italian PU coatings, custom architectural joinery, and tailored spatial transitions.',
+      'A vintage-inspired residence articulated with hand-finished Italian PU coatings, custom architectural joinery, and tailored spatial transitions.',
     image: '/images/Residential/Residential1.jpeg',
     imageAlt: 'Vintage Finish Interior, Race Course, Coimbatore',
     href: '/portfolio',
@@ -41,14 +33,10 @@ const PROJECTS_DATA: ProjectItem[] = [
   {
     id: 'kr-pura',
     step: '02',
-    numeral: '02',
-    title: 'CONTEMPORARY RESIDENCE, KR PURA',
+    numeral: '2',
+    category: 'VILLA INTERIOR',
+    title: 'Contemporary Residence, KR Pura',
     location: 'KR Pura, Bangalore',
-    category: 'INTERIOR ARCHITECTURE ↗',
-    typeLabel: 'Luxury Residence',
-    year: '2024',
-    area: '3,850 SQ.FT',
-    materials: ['Fluted Timber', 'Concealed LED Coves', 'Italian Statuario'],
     description:
       'Clean geometric symmetry meets warm architectural materiality, featuring precision wardrobe detailing, bespoke ceiling planes, and integrated ambient lighting.',
     image: '/images/Residential/Residential2.jpeg',
@@ -58,14 +46,10 @@ const PROJECTS_DATA: ProjectItem[] = [
   {
     id: 'tidal-park',
     step: '03',
-    numeral: '03',
-    title: 'AGILE TECH WORKSPACE, TIDAL PARK',
+    numeral: '3',
+    category: 'COMMERCIAL FIT-OUT',
+    title: 'Agile Tech Workspace, Tidal Park',
     location: 'Tidal Park, Coimbatore',
-    category: 'COMMERCIAL FIT-OUT ↗',
-    typeLabel: 'Technology Office',
-    year: '2023',
-    area: '14,200 SQ.FT',
-    materials: ['Acoustic Wall Slats', 'German Hardware', 'Modular Workstations'],
     description:
       'A high-performance modern workspace planned around agile team dynamics, acoustic zoning, ergonomic workstations, and refined corporate craft.',
     image: '/images/Commercial/Commercial1.jpeg',
@@ -75,14 +59,10 @@ const PROJECTS_DATA: ProjectItem[] = [
   {
     id: 'corporate-site',
     step: '04',
-    numeral: '04',
-    title: 'HEADQUARTERS SITE & BOARDROOM',
+    numeral: '4',
+    category: 'EXECUTIVE HEADQUARTERS',
+    title: 'Corporate Headquarters & Boardroom',
     location: 'Commercial District, Coimbatore',
-    category: 'WORKSPACE DESIGN ↗',
-    typeLabel: 'Corporate Headquarters',
-    year: '2023',
-    area: '8,400 SQ.FT',
-    materials: ['Smoked Oak Veneer', 'Architectural Glass', 'Precision Joinery'],
     description:
       'A prestigious executive site balancing private client reception suites, high-spec meeting facilities, and understated luxury architectural finishes.',
     image: '/images/Corporate/Corporate1.jpeg',
@@ -121,10 +101,10 @@ export const ProjectsSection: React.FC = () => {
         const position = getDeckPosition(index, active);
         const isFront = position === 0;
 
-        // Controlled uniform offsets and scaling for 4-card deck
-        const offsetY = -position * 14;
-        const scaleVal = Math.max(1 - position * 0.04, 0.86);
-        const opacityVal = isFront ? 1 : Math.max(0.74 - position * 0.12, 0.32);
+        // Controlled uniform offsets and scaling inspired by physical editorial card deck
+        const offsetY = -position * 16;
+        const scaleVal = Math.max(1 - position * 0.038, 0.88);
+        const opacityVal = isFront ? 1 : Math.max(0.78 - position * 0.12, 0.38);
         const zIndexVal = 30 - position;
 
         if (immediate) {
@@ -197,16 +177,16 @@ export const ProjectsSection: React.FC = () => {
           const lastPosition = totalProjects - 1;
           gsap.set(currentCard, {
             x: 0,
-            y: -lastPosition * 14,
+            y: -lastPosition * 16,
             rotation: 0,
-            scale: Math.max(1 - lastPosition * 0.04, 0.86),
+            scale: Math.max(1 - lastPosition * 0.038, 0.88),
             zIndex: 30 - lastPosition,
             opacity: 0,
           });
 
           // Reveal gently at the back of stack
           gsap.to(currentCard, {
-            opacity: Math.max(0.74 - lastPosition * 0.12, 0.32),
+            opacity: Math.max(0.78 - lastPosition * 0.12, 0.38),
             duration: 0.22,
             ease: 'power1.out',
           });
@@ -221,9 +201,9 @@ export const ProjectsSection: React.FC = () => {
         if (!cardEl || index === activeIndex) return;
         const newPosition = getDeckPosition(index, nextActive);
         const isNewFront = newPosition === 0;
-        const offsetY = -newPosition * 14;
-        const scaleVal = Math.max(1 - newPosition * 0.04, 0.86);
-        const opacityVal = isNewFront ? 1 : Math.max(0.74 - newPosition * 0.12, 0.32);
+        const offsetY = -newPosition * 16;
+        const scaleVal = Math.max(1 - newPosition * 0.038, 0.88);
+        const opacityVal = isNewFront ? 1 : Math.max(0.78 - newPosition * 0.12, 0.38);
         const zIndexVal = 30 - newPosition;
 
         gsap.to(cardEl, {
@@ -285,9 +265,9 @@ export const ProjectsSection: React.FC = () => {
       cardRefs.current.forEach((cardEl, index) => {
         if (!cardEl || index === prevActive) return;
         const newPosition = getDeckPosition(index, prevActive);
-        const offsetY = -newPosition * 14;
-        const scaleVal = Math.max(1 - newPosition * 0.04, 0.86);
-        const opacityVal = Math.max(0.74 - newPosition * 0.12, 0.32);
+        const offsetY = -newPosition * 16;
+        const scaleVal = Math.max(1 - newPosition * 0.038, 0.88);
+        const opacityVal = Math.max(0.78 - newPosition * 0.12, 0.38);
         const zIndexVal = 30 - newPosition;
 
         gsap.to(cardEl, {
@@ -318,9 +298,9 @@ export const ProjectsSection: React.FC = () => {
         if (!cardEl) return;
         const position = getDeckPosition(index, targetIndex);
         const isFront = position === 0;
-        const offsetY = -position * 14;
-        const scaleVal = Math.max(1 - position * 0.04, 0.86);
-        const opacityVal = isFront ? 1 : Math.max(0.74 - position * 0.12, 0.32);
+        const offsetY = -position * 16;
+        const scaleVal = Math.max(1 - position * 0.038, 0.88);
+        const opacityVal = isFront ? 1 : Math.max(0.78 - position * 0.12, 0.38);
         const zIndexVal = 30 - position;
 
         gsap.to(cardEl, {
@@ -394,7 +374,7 @@ export const ProjectsSection: React.FC = () => {
     currentDeltaXRef.current = deltaX;
     const currentCard = cardRefs.current[activeIndex];
     if (currentCard) {
-      const rotation = deltaX * 0.03;
+      const rotation = deltaX * 0.025;
       gsap.set(currentCard, {
         x: deltaX,
         rotation,
@@ -407,9 +387,9 @@ export const ProjectsSection: React.FC = () => {
       if (nextCard && deltaX < 0) {
         const progress = Math.min(Math.abs(deltaX) / 180, 1);
         gsap.set(nextCard, {
-          y: -11 + 11 * progress,
-          scale: 0.97 + 0.03 * progress,
-          opacity: 0.63 + 0.37 * progress,
+          y: -16 + 16 * progress,
+          scale: 0.962 + 0.038 * progress,
+          opacity: 0.66 + 0.34 * progress,
         });
       }
     }
@@ -425,7 +405,7 @@ export const ProjectsSection: React.FC = () => {
     }
 
     const deltaX = currentDeltaXRef.current;
-    const swipeThreshold = 65; // Balanced threshold for mobile & desktop
+    const swipeThreshold = 60; // Balanced threshold for mobile & desktop
 
     if (deltaX < -swipeThreshold) {
       triggerNext();
@@ -464,7 +444,7 @@ export const ProjectsSection: React.FC = () => {
         <header className="deck-compact-header">
           <div className="deck-compact-badge">
             <span className="deck-compact-badge-dot" aria-hidden="true" />
-            <span className="deck-compact-eyebrow">OUR SELECTED PROJECTS · 04 CURATED SPACES</span>
+            <span className="deck-compact-eyebrow">OUR SELECTED PROJECTS</span>
           </div>
 
           <h2 className="deck-compact-main-heading">
@@ -474,12 +454,12 @@ export const ProjectsSection: React.FC = () => {
           <div className="deck-compact-gold-line" aria-hidden="true" />
 
           <p className="deck-compact-descriptor">
-            A continuous circular showcase of residential and workspace transformations shaped by architectural precision.
+            A continuous circular showcase of bespoke residential and workspace transformations shaped by architectural precision.
           </p>
         </header>
 
         {/* ====================================================================
-            2. THE COMPACT CIRCULAR CARD DECK
+            2. THE EDITORIAL STACKED CARD DECK (Inspired by physical editorial portfolio)
             Continuously rotating stack: 01 -> 02 -> 03 -> 04 -> 01
             ==================================================================== */}
         <div 
@@ -533,78 +513,33 @@ export const ProjectsSection: React.FC = () => {
                   }}
                   aria-hidden={!isFront}
                 >
-                  {/* ARCHITECTURAL TAB STRIP FOR STACKED VIEW */}
-                  <div className="deck-card-stacked-tab" aria-hidden={isFront}>
-                    <div className="deck-stacked-tab-content">
-                      <span className="deck-stacked-num">{item.step}</span>
-                      <span className="deck-stacked-sep">/</span>
-                      <span className="deck-stacked-title">{item.title.split(',')[0]}</span>
-                    </div>
-                    <span className="deck-stacked-area">{item.area}</span>
-                  </div>
-
                   <div className="deck-compact-card-inner">
-                    {/* LEFT COLUMN: Elevated Architectural Editorial */}
+                    {/* LEFT COLUMN: Pure Architectural Editorial Space */}
                     <div className="deck-compact-editorial">
                       <div className="deck-compact-editorial-top">
-                        {/* Monogram Numeral & Portfolio Meta */}
-                        <div className="deck-compact-meta-row">
-                          <span className="deck-compact-big-num" aria-hidden="true">
-                            {item.numeral}
-                          </span>
-                          <div className="deck-compact-type-badge">
-                            <span className="deck-compact-phase-tag">PROJECT {item.step} OF 0{totalProjects}</span>
-                            <span className="deck-compact-sub-tag">{item.typeLabel} · {item.year}</span>
-                          </div>
+                        {/* Large Subtle Editorial Numeral (Inspired by Reference Image) */}
+                        <div className="deck-compact-numeral" aria-hidden="true">
+                          {item.numeral}
                         </div>
 
-                        {/* Location Badge */}
-                        <div className="deck-compact-loc-pill">
-                          <MapPin size={12} className="deck-compact-pin-icon" aria-hidden="true" />
+                        {/* Category & Location Eyebrow */}
+                        <div className="deck-compact-eyebrow-tag">
+                          <span>{item.category}</span>
+                          <span className="deck-eyebrow-dot">·</span>
                           <span>{item.location}</span>
                         </div>
 
-                        {/* Project Title */}
+                        {/* Architectural Heading */}
                         <h3 className="deck-compact-title">
                           <a href={item.href} aria-label={`${item.title} project details`}>
                             {item.title}
                           </a>
                         </h3>
 
-                        <div className="deck-compact-gold-divider" aria-hidden="true" />
-
-                        {/* ARCHITECTURAL SPECIFICATIONS STRIP */}
-                        <div className="deck-specs-strip" aria-label="Project architectural specifications">
-                          <div className="deck-spec-cell">
-                            <span className="deck-spec-label">SCALE</span>
-                            <span className="deck-spec-value">{item.area}</span>
-                          </div>
-                          <div className="deck-spec-divider" aria-hidden="true" />
-                          <div className="deck-spec-cell">
-                            <span className="deck-spec-label">TYPOLOGY</span>
-                            <span className="deck-spec-value">{item.typeLabel}</span>
-                          </div>
-                          <div className="deck-spec-divider" aria-hidden="true" />
-                          <div className="deck-spec-cell">
-                            <span className="deck-spec-label">YEAR</span>
-                            <span className="deck-spec-value">{item.year}</span>
-                          </div>
-                        </div>
-
-                        {/* Project Description */}
+                        {/* Architectural Description */}
                         <p className="deck-compact-desc">
                           {item.description}
                         </p>
-
-                        {/* MATERIAL CRAFT PALETTE */}
-                        <div className="deck-materials-row" aria-label="Craft and material highlights">
-                          {item.materials.map((material, mIdx) => (
-                            <span key={mIdx} className="deck-material-chip">
-                              <span className="deck-mat-dot" aria-hidden="true" />
-                              {material}
-                            </span>
-                          ))}
-                        </div>
                       </div>
 
                       {/* Bottom Action Row */}
@@ -612,65 +547,52 @@ export const ProjectsSection: React.FC = () => {
                         <a 
                           href={item.href} 
                           className="deck-compact-cta-btn" 
-                          aria-label={`View ${item.title} in portfolio`}
+                          aria-label={`Explore ${item.title} in portfolio`}
                         >
-                          <span>{item.category}</span>
-                          <ArrowUpRight size={13} className="deck-compact-cta-icon" aria-hidden="true" />
+                          <span>EXPLORE SPACE</span>
+                          <ArrowUpRight size={14} className="deck-compact-cta-icon" aria-hidden="true" />
                         </a>
 
-                        <span className="deck-compact-swipe-hint">
-                          <Compass size={12} className="deck-compass-icon" aria-hidden="true" />
-                          <span>SWIPE TO ROTATE</span>
-                        </span>
+                        <div className="deck-compact-swipe-indicator" aria-hidden="true">
+                          <span className="deck-indicator-bar" />
+                          <span>SWIPE TO NAVIGATE</span>
+                        </div>
                       </div>
                     </div>
 
-                    {/* RIGHT COLUMN: Balanced Architectural Photography */}
+                    {/* RIGHT COLUMN: Full-Bleed Architectural Photography (Flush, No Dark Border) */}
                     <div className="deck-compact-visual">
-                      <div className="deck-compact-photo-frame">
-                        <img 
-                          src={item.image} 
-                          alt={item.imageAlt} 
-                          className="deck-compact-photo" 
-                          loading="lazy" 
-                        />
-                        <div className="deck-compact-veil" aria-hidden="true" />
+                      <img 
+                        src={item.image} 
+                        alt={item.imageAlt} 
+                        className="deck-compact-photo" 
+                        loading="lazy" 
+                      />
+                      <div className="deck-compact-veil" aria-hidden="true" />
 
-                        {/* Architectural Glass Archive Badge */}
-                        <div className="deck-compact-archive-badge">
-                          <Sparkles size={11} aria-hidden="true" />
-                          <span>CURATED ARCHIVE</span>
-                        </div>
+                      {/* Floating Glassmorphic Project Pill */}
+                      <div className="deck-compact-floating-pill">
+                        <span>PROJECT {item.step} / 0{totalProjects}</span>
+                      </div>
 
-                        {/* Floating Frosted Category Pill */}
-                        <div className="deck-compact-floating-pill">
-                          <span>{item.category}</span>
-                        </div>
-
-                        {/* Bottom Architectural Watermark */}
-                        <div className="deck-compact-watermark" aria-hidden="true">
-                          <span>MITIJEN INTERIORS · FOLIO {item.step}</span>
-                        </div>
-
-                        {/* Overlaid Mobile Quick Chevrons */}
-                        <div className="deck-compact-touch-arrows">
-                          <button 
-                            type="button" 
-                            onClick={(e) => { e.stopPropagation(); triggerPrev(); }} 
-                            className="deck-compact-arrow-btn"
-                            aria-label="Previous project in deck"
-                          >
-                            <ChevronLeft size={16} />
-                          </button>
-                          <button 
-                            type="button" 
-                            onClick={(e) => { e.stopPropagation(); triggerNext(); }} 
-                            className="deck-compact-arrow-btn"
-                            aria-label="Next project in deck"
-                          >
-                            <ChevronRight size={16} />
-                          </button>
-                        </div>
+                      {/* Overlaid Mobile Quick Chevrons */}
+                      <div className="deck-compact-touch-arrows">
+                        <button 
+                          type="button" 
+                          onClick={(e) => { e.stopPropagation(); triggerPrev(); }} 
+                          className="deck-compact-arrow-btn"
+                          aria-label="Previous project in deck"
+                        >
+                          <ChevronLeft size={16} />
+                        </button>
+                        <button 
+                          type="button" 
+                          onClick={(e) => { e.stopPropagation(); triggerNext(); }} 
+                          className="deck-compact-arrow-btn"
+                          aria-label="Next project in deck"
+                        >
+                          <ChevronRight size={16} />
+                        </button>
                       </div>
                     </div>
                   </div>
