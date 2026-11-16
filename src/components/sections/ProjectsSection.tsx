@@ -1,4 +1,5 @@
-import React, { useState, useRef, useEffect, TouchEvent, MouseEvent } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
+import gsap from 'gsap';
 import { ArrowUpRight, ChevronLeft, ChevronRight, MapPin, Layers } from 'lucide-react';
 import '../../styles/ProjectsSection.css';
 
@@ -16,7 +17,7 @@ interface ProjectItem {
   href: string;
 }
 
-const PROJECTS_ITEMS: ProjectItem[] = [
+const PROJECTS_DATA: ProjectItem[] = [
   {
     id: 'vintage-finish',
     step: '01',
@@ -26,7 +27,7 @@ const PROJECTS_ITEMS: ProjectItem[] = [
     category: 'PU PAINT WORK ↗',
     typeLabel: 'Residential Space',
     description:
-      'A vintage-inspired look brought to life with carefully finished PU paint detailing.',
+      'A vintage-inspired look brought to life with carefully finished PU paint detailing and bespoke custom millwork.',
     image: '/images/Residential/Residential1.jpeg',
     imageAlt: 'Vintage Finish Interior, Race Course, Coimbatore',
     href: '/portfolio',
@@ -40,7 +41,7 @@ const PROJECTS_ITEMS: ProjectItem[] = [
     category: 'INTERIOR DESIGN ↗',
     typeLabel: 'Residential Villa',
     description:
-      'A well-planned interior featuring clean detailing and a cohesive design finish.',
+      'A well-planned interior featuring clean detailing, warm material palettes, and a cohesive design finish.',
     image: '/images/Residential/Residential2.jpeg',
     imageAlt: 'Interior Project, KR Pura, Bangalore',
     href: '/portfolio',
@@ -54,7 +55,7 @@ const PROJECTS_ITEMS: ProjectItem[] = [
     category: 'INTERIOR DESIGN ↗',
     typeLabel: 'Commercial Office',
     description:
-      'A functional workspace planned around how teams work, with clean detailing and a polished finish.',
+      'A functional workspace planned around how teams work, with clean acoustic detailing and a polished finish.',
     image: '/images/Commercial/Commercial1.jpeg',
     imageAlt: 'Office Interior, Tidal Park',
     href: '/portfolio',
@@ -68,285 +69,488 @@ const PROJECTS_ITEMS: ProjectItem[] = [
     category: 'WORKSPACE DESIGN ↗',
     typeLabel: 'Corporate Headquarters',
     description:
-      'A professional workspace shaped around functional layouts and a considered interior finish.',
+      'A professional workspace shaped around functional layouts, integrated ambient lighting, and considered finishes.',
     image: '/images/Corporate/Corporate1.jpeg',
     imageAlt: 'Corporate Site Interior',
+    href: '/portfolio',
+  },
+  {
+    id: 'rs-puram',
+    step: '05',
+    numeral: '5',
+    title: 'CONTEMPORARY RESIDENCE, RS PURAM, COIMBATORE',
+    location: 'RS Puram, Coimbatore',
+    category: 'RESIDENTIAL DESIGN ↗',
+    typeLabel: 'Residential Living',
+    description:
+      'Expansive open-plan living articulated with bespoke natural timber panelling, minimal joinery, and tailored spatial zoning.',
+    image: '/images/Residential/Residential3.jpeg',
+    imageAlt: 'Contemporary Residence, RS Puram, Coimbatore',
+    href: '/portfolio',
+  },
+  {
+    id: 'executive-suite',
+    step: '06',
+    numeral: '6',
+    title: 'EXECUTIVE SUITE & BOARDROOM',
+    location: 'Tech Hub, Bengaluru',
+    category: 'COMMERCIAL FIT-OUT ↗',
+    typeLabel: 'Executive Boardroom',
+    description:
+      'A refined corporate boardroom combining precision acoustics, custom conference table craft, and concealed illumination.',
+    image: '/images/Commercial/Commercial2.jpeg',
+    imageAlt: 'Executive Suite & Boardroom, Bengaluru',
     href: '/portfolio',
   },
 ];
 
 export const ProjectsSection: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
-  const [dragOffset, setDragOffset] = useState<number>(0);
-  const [isDragging, setIsDragging] = useState<boolean>(false);
-  const [exitDirection, setExitDirection] = useState<'left' | 'right' | null>(null);
+  const totalProjects = PROJECTS_DATA.length;
 
-  const dragStartXRef = useRef<number | null>(null);
-  const totalProjects = PROJECTS_ITEMS.length;
+  const stackContainerRef = useRef<HTMLDivElement>(null);
+  const cardRefs = useRef<(HTMLElement | null)[]>([]);
+  const isAnimatingRef = useRef<boolean>(false);
+  const isDraggingRef = useRef<boolean>(false);
+  const dragStartXRef = useRef<number>(0);
+  const currentDeltaXRef = useRef<number>(0);
 
-  const triggerNext = () => {
-    if (exitDirection) return;
-    setExitDirection('left');
-    setTimeout(() => {
-      setActiveIndex((prev) => (prev + 1) % totalProjects);
-      setExitDirection(null);
-      setDragOffset(0);
-    }, 320);
+  // Helper to calculate depth relative to active card
+  const getDepth = useCallback(
+    (index: number, active: number) => {
+      return (index - active + totalProjects) % totalProjects;
+    },
+    [totalProjects]
+  );
+
+  // Position cards in their stacked deck layout using GSAP
+  const renderDeckLayout = useCallback(
+    (active: number, immediate: boolean = false) => {
+      cardRefs.current.forEach((cardEl, index) => {
+        if (!cardEl) return;
+        const depth = getDepth(index, active);
+        const isFront = depth === 0;
+
+        // Depth calculations: cards stacked above with stepped vertical offsets and scaling
+        const offsetY = -depth * 15;
+        const scaleVal = Math.max(1 - depth * 0.035, 0.82);
+        const opacityVal = isFront ? 1 : Math.max(0.78 - depth * 0.1, 0.35);
+        const zIndexVal = 30 - depth;
+
+        if (immediate) {
+          gsap.set(cardEl, {
+            x: 0,
+            y: offsetY,
+            scale: scaleVal,
+            opacity: opacityVal,
+            rotation: 0,
+            zIndex: zIndexVal,
+            pointerEvents: isFront ? 'auto' : 'auto',
+          });
+        } else {
+          gsap.to(cardEl, {
+            x: 0,
+            y: offsetY,
+            scale: scaleVal,
+            opacity: opacityVal,
+            rotation: 0,
+            zIndex: zIndexVal,
+            pointerEvents: isFront ? 'auto' : 'auto',
+            duration: 0.5,
+            ease: 'power3.out',
+            overwrite: 'auto',
+          });
+        }
+      });
+    },
+    [getDepth]
+  );
+
+  // Initialize deck layout on mount
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      renderDeckLayout(activeIndex, true);
+    }, stackContainerRef);
+
+    return () => ctx.revert();
+  }, [activeIndex, renderDeckLayout]);
+
+  // Transition to next card in deck (swiping left)
+  const triggerNext = useCallback(() => {
+    if (isAnimatingRef.current) return;
+    isAnimatingRef.current = true;
+
+    const currentCard = cardRefs.current[activeIndex];
+    const nextIndex = (activeIndex + 1) % totalProjects;
+
+    if (currentCard) {
+      // Animate current card sliding out to the left with natural slight rotation
+      gsap.to(currentCard, {
+        x: -window.innerWidth * 0.65,
+        rotation: -9,
+        opacity: 0,
+        scale: 0.94,
+        duration: 0.42,
+        ease: 'power2.inOut',
+        onComplete: () => {
+          setActiveIndex(nextIndex);
+          isAnimatingRef.current = false;
+        },
+      });
+
+      // Animate remaining cards stepping forward smoothly
+      cardRefs.current.forEach((cardEl, index) => {
+        if (!cardEl || index === activeIndex) return;
+        const newDepth = getDepth(index, nextIndex);
+        const offsetY = -newDepth * 15;
+        const scaleVal = Math.max(1 - newDepth * 0.035, 0.82);
+        const opacityVal = newDepth === 0 ? 1 : Math.max(0.78 - newDepth * 0.1, 0.35);
+        const zIndexVal = 30 - newDepth;
+
+        gsap.to(cardEl, {
+          y: offsetY,
+          scale: scaleVal,
+          opacity: opacityVal,
+          zIndex: zIndexVal,
+          duration: 0.46,
+          ease: 'power3.out',
+          overwrite: 'auto',
+        });
+      });
+    } else {
+      setActiveIndex(nextIndex);
+      isAnimatingRef.current = false;
+    }
+  }, [activeIndex, getDepth, totalProjects]);
+
+  // Transition to previous card in deck (swiping right)
+  const triggerPrev = useCallback(() => {
+    if (isAnimatingRef.current) return;
+    isAnimatingRef.current = true;
+
+    const prevIndex = (activeIndex - 1 + totalProjects) % totalProjects;
+    const prevCard = cardRefs.current[prevIndex];
+
+    if (prevCard) {
+      // Bring the previous card from offscreen right into the front position
+      gsap.set(prevCard, {
+        x: window.innerWidth * 0.65,
+        rotation: 9,
+        opacity: 0,
+        scale: 0.95,
+        zIndex: 35,
+      });
+
+      gsap.to(prevCard, {
+        x: 0,
+        y: 0,
+        rotation: 0,
+        opacity: 1,
+        scale: 1,
+        duration: 0.45,
+        ease: 'power3.out',
+        onComplete: () => {
+          setActiveIndex(prevIndex);
+          isAnimatingRef.current = false;
+        },
+      });
+
+      // Animate current and other cards stepping back in stack
+      cardRefs.current.forEach((cardEl, index) => {
+        if (!cardEl || index === prevIndex) return;
+        const newDepth = getDepth(index, prevIndex);
+        const offsetY = -newDepth * 15;
+        const scaleVal = Math.max(1 - newDepth * 0.035, 0.82);
+        const opacityVal = Math.max(0.78 - newDepth * 0.1, 0.35);
+        const zIndexVal = 30 - newDepth;
+
+        gsap.to(cardEl, {
+          y: offsetY,
+          scale: scaleVal,
+          opacity: opacityVal,
+          zIndex: zIndexVal,
+          duration: 0.45,
+          ease: 'power3.out',
+          overwrite: 'auto',
+        });
+      });
+    } else {
+      setActiveIndex(prevIndex);
+      isAnimatingRef.current = false;
+    }
+  }, [activeIndex, getDepth, totalProjects]);
+
+  // Jump directly to a card when clicking a stacked deck tab
+  const jumpToCard = useCallback(
+    (targetIndex: number) => {
+      if (targetIndex === activeIndex || isAnimatingRef.current) return;
+      isAnimatingRef.current = true;
+
+      const currentCard = cardRefs.current[activeIndex];
+      const targetCard = cardRefs.current[targetIndex];
+
+      if (currentCard && targetCard) {
+        // Slide out active card
+        gsap.to(currentCard, {
+          y: 20,
+          opacity: 0,
+          scale: 0.9,
+          duration: 0.3,
+          ease: 'power2.in',
+          onComplete: () => {
+            setActiveIndex(targetIndex);
+            isAnimatingRef.current = false;
+          },
+        });
+      } else {
+        setActiveIndex(targetIndex);
+        isAnimatingRef.current = false;
+      }
+    },
+    [activeIndex]
+  );
+
+  // Keyboard navigation for accessibility
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') {
+        triggerPrev();
+      } else if (e.key === 'ArrowRight') {
+        triggerNext();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [triggerNext, triggerPrev]);
+
+  // Pointer / Drag event handlers (Supports Mouse & Touch gestures seamlessly)
+  const handlePointerDown = (clientX: number, target: EventTarget | null) => {
+    if (isAnimatingRef.current) return;
+    const elem = target as HTMLElement;
+    // Don't drag when clicking links or buttons
+    if (elem.closest('a') || elem.closest('button')) return;
+
+    isDraggingRef.current = true;
+    dragStartXRef.current = clientX;
+    currentDeltaXRef.current = 0;
   };
 
-  const triggerPrev = () => {
-    if (exitDirection) return;
-    setExitDirection('right');
-    setTimeout(() => {
-      setActiveIndex((prev) => (prev - 1 + totalProjects) % totalProjects);
-      setExitDirection(null);
-      setDragOffset(0);
-    }, 320);
+  const handlePointerMove = (clientX: number) => {
+    if (!isDraggingRef.current || isAnimatingRef.current) return;
+    const deltaX = clientX - dragStartXRef.current;
+    currentDeltaXRef.current = deltaX;
+
+    const currentCard = cardRefs.current[activeIndex];
+    if (currentCard) {
+      // Dynamic resistance, translation and tilt rotation
+      const rotation = deltaX * 0.035;
+      gsap.set(currentCard, {
+        x: deltaX,
+        rotation,
+        scale: 1 - Math.abs(deltaX) * 0.0003,
+      });
+
+      // Subtle dynamic response on the card immediately behind
+      const nextCard = cardRefs.current[(activeIndex + 1) % totalProjects];
+      if (nextCard) {
+        const progress = Math.min(Math.abs(deltaX) / 220, 1);
+        gsap.set(nextCard, {
+          y: -15 + 15 * progress,
+          scale: 0.965 + 0.035 * progress,
+          opacity: 0.78 + 0.22 * progress,
+        });
+      }
+    }
   };
 
-  const jumpToCard = (index: number) => {
-    if (index === activeIndex || exitDirection) return;
-    const direction = index > activeIndex ? 'left' : 'right';
-    setExitDirection(direction);
-    setTimeout(() => {
-      setActiveIndex(index);
-      setExitDirection(null);
-      setDragOffset(0);
-    }, 320);
-  };
+  const handlePointerUp = () => {
+    if (!isDraggingRef.current) return;
+    isDraggingRef.current = false;
 
-  // Touch Swipe Handlers (Mobile)
-  const handleTouchStart = (e: TouchEvent) => {
-    dragStartXRef.current = e.touches[0].clientX;
-    setIsDragging(true);
-  };
+    const deltaX = currentDeltaXRef.current;
+    const swipeThreshold = 75; // Minimum px to trigger card transition
 
-  const handleTouchMove = (e: TouchEvent) => {
-    if (dragStartXRef.current === null) return;
-    const diff = e.touches[0].clientX - dragStartXRef.current;
-    // Bound the drag distance
-    setDragOffset(Math.max(Math.min(diff, 140), -140));
-  };
-
-  const handleTouchEnd = () => {
-    if (dragStartXRef.current === null) return;
-    setIsDragging(false);
-    if (dragOffset < -50) {
+    if (deltaX < -swipeThreshold) {
       triggerNext();
-    } else if (dragOffset > 50) {
+    } else if (deltaX > swipeThreshold) {
       triggerPrev();
     } else {
-      setDragOffset(0);
+      // Snap back smoothly if threshold not crossed
+      const currentCard = cardRefs.current[activeIndex];
+      if (currentCard) {
+        gsap.to(currentCard, {
+          x: 0,
+          y: 0,
+          rotation: 0,
+          scale: 1,
+          duration: 0.38,
+          ease: 'power3.out',
+        });
+      }
+      renderDeckLayout(activeIndex, false);
     }
-    dragStartXRef.current = null;
-  };
 
-  // Mouse Drag Handlers (Desktop)
-  const handleMouseDown = (e: MouseEvent) => {
-    // Only drag on left click and not on interactive buttons/links
-    if (e.button !== 0) return;
-    const target = e.target as HTMLElement;
-    if (target.closest('a') || target.closest('button')) return;
-    dragStartXRef.current = e.clientX;
-    setIsDragging(true);
-  };
-
-  const handleMouseMove = (e: MouseEvent) => {
-    if (!isDragging || dragStartXRef.current === null) return;
-    const diff = e.clientX - dragStartXRef.current;
-    setDragOffset(Math.max(Math.min(diff, 140), -140));
-  };
-
-  const handleMouseUp = () => {
-    if (!isDragging) return;
-    setIsDragging(false);
-    if (dragOffset < -50) {
-      triggerNext();
-    } else if (dragOffset > 50) {
-      triggerPrev();
-    } else {
-      setDragOffset(0);
-    }
-    dragStartXRef.current = null;
-  };
-
-  const handleMouseLeave = () => {
-    if (isDragging) {
-      handleMouseUp();
-    }
+    currentDeltaXRef.current = 0;
   };
 
   return (
     <section 
       id="projects" 
-      className="deck-section-root" 
+      className="deck-showcase-root" 
       aria-label="Our Projects - Spaces We’re Proud to Have Built."
     >
-      <div className="deck-container">
+      <div className="deck-showcase-container">
         {/* ====================================================================
             1. SECTION EDITORIAL HEADER
             ==================================================================== */}
-        <header className="deck-header">
-          <div className="deck-badge">
-            <span className="deck-badge-dot" aria-hidden="true" />
-            <span className="deck-eyebrow">OUR PROJECTS</span>
+        <header className="deck-showcase-header">
+          <div className="deck-showcase-badge">
+            <span className="deck-showcase-badge-dot" aria-hidden="true" />
+            <span className="deck-showcase-eyebrow">OUR SELECTED PROJECTS</span>
           </div>
 
-          <h2 className="deck-main-heading">
+          <h2 className="deck-showcase-main-heading">
             SPACES WE’RE PROUD TO HAVE BUILT.
           </h2>
 
-          <div className="deck-gold-line" aria-hidden="true" />
-          
-          <p className="deck-subheading">
-            Swipe or click through our deck of featured residential and corporate transformations.
+          <div className="deck-showcase-gold-line" aria-hidden="true" />
+
+          <p className="deck-showcase-descriptor">
+            Explore a tactile deck of residences and workspaces shaped around lifestyle, architectural precision, and enduring craftsmanship.
           </p>
         </header>
 
         {/* ====================================================================
-            2. THE INTERACTIVE STACKED CARD DECK STAGE
-            Cards stack with depth, scale, and vertical offsets
+            2. THE INTERACTIVE VERTICALLY STACKED CARD DECK
+            Physical card deck with smooth GSAP animations & touch swipe
             ==================================================================== */}
         <div 
-          className="deck-stage-wrapper"
-          onMouseDown={handleMouseDown}
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUp}
-          onMouseLeave={handleMouseLeave}
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
-          onTouchEnd={handleTouchEnd}
+          className="deck-stage-area"
+          ref={stackContainerRef}
+          onMouseDown={(e) => {
+            if (e.button === 0) handlePointerDown(e.clientX, e.target);
+          }}
+          onMouseMove={(e) => handlePointerMove(e.clientX)}
+          onMouseUp={handlePointerUp}
+          onMouseLeave={handlePointerUp}
+          onTouchStart={(e) => handlePointerDown(e.touches[0].clientX, e.target)}
+          onTouchMove={(e) => handlePointerMove(e.touches[0].clientX)}
+          onTouchEnd={handlePointerUp}
           role="region"
-          aria-label="Stacked Projects Card Deck"
+          aria-label="Interactive Project Card Deck"
         >
-          {/* Top Stack Peak Labels (Clickable tabs behind active card) */}
-          <div className="deck-top-tab-triggers" aria-label="Deck quick jump">
-            {PROJECTS_ITEMS.map((item, index) => {
+          {/* Top Stack Navigation Pills (Direct Tab Jumping) */}
+          <nav className="deck-top-ribbon" aria-label="Deck quick jump tabs">
+            {PROJECTS_DATA.map((item, index) => {
               const isActive = index === activeIndex;
               return (
                 <button
                   key={item.id}
                   type="button"
                   onClick={() => jumpToCard(index)}
-                  className={`deck-tab-pill ${isActive ? 'is-active' : ''}`}
+                  className={`deck-ribbon-tab ${isActive ? 'is-active' : ''}`}
+                  aria-selected={isActive}
+                  role="tab"
                   aria-label={`Jump to project ${item.step}: ${item.title}`}
                 >
-                  <span className="deck-tab-num">{item.step}</span>
-                  <span className="deck-tab-name">{item.location.split(',')[0]}</span>
+                  <span className="deck-ribbon-num">{item.step}</span>
+                  <span className="deck-ribbon-name">{item.location.split(',')[0]}</span>
                 </button>
               );
             })}
-          </div>
+          </nav>
 
-          {/* The Stack Container */}
-          <div className="deck-cards-stack-container">
-            {PROJECTS_ITEMS.map((item, index) => {
-              // Calculate relative stack depth (0 is active card in front)
-              const depth = (index - activeIndex + totalProjects) % totalProjects;
-              const isFront = depth === 0;
-
-              // Compute inline styles based on depth
-              // Stacked cards peek above with vertical offset and slight downscale
-              let translateY = -(depth * 14);
-              let scale = 1 - depth * 0.035;
-              let opacity = depth === 0 ? 1 : Math.max(0.7 - depth * 0.12, 0.4);
-              let zIndex = 20 - depth;
-              let transformString = `translate3d(0, ${translateY}px, 0) scale(${scale})`;
-
-              // If dragging the front card
-              if (isFront && isDragging && dragOffset !== 0) {
-                const rotate = dragOffset * 0.04;
-                transformString = `translate3d(${dragOffset}px, ${translateY}px, 0) rotate(${rotate}deg) scale(${scale})`;
-              } else if (isFront && exitDirection === 'left') {
-                transformString = `translate3d(-115%, ${translateY}px, 0) rotate(-7deg) scale(0.94)`;
-                opacity = 0;
-              } else if (isFront && exitDirection === 'right') {
-                transformString = `translate3d(115%, ${translateY}px, 0) rotate(7deg) scale(0.94)`;
-                opacity = 0;
-              }
+          {/* Cards Stack Stage */}
+          <div className="deck-cards-stack">
+            {PROJECTS_DATA.map((item, index) => {
+              const isFront = index === activeIndex;
+              const depth = getDepth(index, activeIndex);
 
               return (
                 <article
                   key={item.id}
-                  className={`deck-card ${isFront ? 'is-front' : 'is-stacked'} ${isFront && isDragging ? 'is-grabbing' : ''}`}
-                  style={{
-                    transform: transformString,
-                    zIndex,
-                    opacity,
-                    pointerEvents: isFront ? 'auto' : 'auto',
-                  }}
+                  ref={(el) => { cardRefs.current[index] = el; }}
+                  className={`deck-card-plate ${isFront ? 'is-front' : 'is-stacked'}`}
                   onClick={() => {
                     if (!isFront) jumpToCard(index);
                   }}
                   aria-hidden={!isFront}
                 >
-                  <div className="deck-card-inner">
-                    {/* LEFT COLUMN: Editorial Typography & Project Details */}
-                    <div className="deck-card-content">
+                  <div className="deck-card-plate-inner">
+                    {/* LEFT COLUMN: Editorial Typography & Architectural Specifications */}
+                    <div className="deck-card-editorial">
                       {/* Big Monogram Numeral */}
-                      <div className="deck-card-numeral-wrap">
-                        <span className="deck-card-big-num">{item.numeral}</span>
-                        <div className="deck-card-step-badge">
-                          <span className="deck-badge-label">PROJECT {item.step} OF 0{totalProjects}</span>
+                      <div className="deck-numeral-header">
+                        <span className="deck-numeral-digit" aria-hidden="true">
+                          {item.numeral}
+                        </span>
+                        <div className="deck-phase-meta">
+                          <span className="deck-meta-phase">PORTFOLIO {item.step} / 0{totalProjects}</span>
+                          <span className="deck-meta-type">{item.typeLabel}</span>
                         </div>
                       </div>
 
-                      <div className="deck-card-location-row">
-                        <MapPin size={13} className="deck-loc-icon" aria-hidden="true" />
-                        <span className="deck-loc-text">{item.location}</span>
-                        <span className="deck-type-tag">{item.typeLabel}</span>
+                      {/* Location Row */}
+                      <div className="deck-location-row">
+                        <MapPin size={13} className="deck-pin-icon" aria-hidden="true" />
+                        <span className="deck-location-label">{item.location}</span>
                       </div>
 
-                      <h3 className="deck-card-title">
+                      {/* Project Title */}
+                      <h3 className="deck-project-title">
                         <a href={item.href} aria-label={`${item.title} project details`}>
                           {item.title}
                         </a>
                       </h3>
 
-                      <p className="deck-card-desc">
+                      <div className="deck-editorial-gold-divider" aria-hidden="true" />
+
+                      {/* Verbatim Description */}
+                      <p className="deck-project-desc">
                         {item.description}
                       </p>
 
-                      <div className="deck-card-actions">
+                      {/* Action CTA & Drag Hint */}
+                      <div className="deck-editorial-bottom-action">
                         <a 
                           href={item.href} 
-                          className="deck-card-cta-btn" 
-                          aria-label={`View ${item.category} in portfolio`}
+                          className="deck-action-btn" 
+                          aria-label={`View ${item.title} in portfolio`}
                         >
                           <span>{item.category}</span>
-                          <span className="deck-cta-arrow" aria-hidden="true">
-                            <ArrowUpRight size={14} />
-                          </span>
+                          <ArrowUpRight size={14} className="deck-action-arrow" aria-hidden="true" />
                         </a>
 
-                        <span className="deck-swipe-hint-pill">
-                          <span>Swipe Card</span>
-                        </span>
+                        <div className="deck-drag-indicator-pill" aria-hidden="true">
+                          <span className="deck-drag-dot" />
+                          <span>DRAG TO FLICK</span>
+                        </div>
                       </div>
                     </div>
 
-                    {/* RIGHT COLUMN: Large Architectural Photography Plate */}
-                    <div className="deck-card-visual">
-                      <div className="deck-visual-frame">
+                    {/* RIGHT COLUMN: Large Architectural Photography */}
+                    <div className="deck-card-photo-panel">
+                      <div className="deck-photo-viewport">
                         <img 
                           src={item.image} 
                           alt={item.imageAlt} 
-                          className="deck-visual-img" 
+                          className="deck-photo-asset" 
                           loading="lazy" 
                         />
-                        <div className="deck-visual-gradient" aria-hidden="true" />
+                        <div className="deck-photo-gradient-veil" aria-hidden="true" />
 
-                        {/* Floating Pill on Photo */}
-                        <div className="deck-visual-category-floating">
-                          <span className="deck-visual-category-pill">{item.category}</span>
+                        {/* Floating Frosted Glass Category Pill */}
+                        <div className="deck-floating-category-tag">
+                          <span className="deck-glass-pill">{item.category}</span>
                         </div>
 
-                        {/* Mobile Swipe Buttons Overlaid */}
-                        <div className="deck-visual-mobile-arrows">
+                        {/* Image Overlaid Touch Arrows */}
+                        <div className="deck-photo-touch-controls">
                           <button 
                             type="button" 
                             onClick={(e) => { e.stopPropagation(); triggerPrev(); }} 
-                            className="deck-overlay-arrow-btn"
+                            className="deck-touch-arrow"
                             aria-label="Previous project in deck"
                           >
                             <ChevronLeft size={18} />
@@ -354,7 +558,7 @@ export const ProjectsSection: React.FC = () => {
                           <button 
                             type="button" 
                             onClick={(e) => { e.stopPropagation(); triggerNext(); }} 
-                            className="deck-overlay-arrow-btn"
+                            className="deck-touch-arrow"
                             aria-label="Next project in deck"
                           >
                             <ChevronRight size={18} />
@@ -370,56 +574,55 @@ export const ProjectsSection: React.FC = () => {
         </div>
 
         {/* ====================================================================
-            3. DECK CONTROLS & BOTTOM NAVIGATION BAR
-            Prev / Next arrows, progress dots, and View Portfolio link
+            3. DECK FOOTER NAVIGATION & COUNTER BAR
             ==================================================================== */}
-        <div className="deck-controls-bottom-bar">
+        <div className="deck-footer-bar">
           {/* Left: View All Portfolio Link */}
-          <div className="deck-bottom-left">
+          <div className="deck-footer-left">
             <a 
               href="/portfolio" 
-              className="deck-view-all-link"
+              className="deck-portfolio-link"
               aria-label="Explore all projects in portfolio"
             >
               <Layers size={15} aria-hidden="true" />
-              <span>EXPLORE ALL PROJECTS</span>
+              <span>VIEW FULL PORTFOLIO</span>
               <ArrowUpRight size={14} aria-hidden="true" />
             </a>
           </div>
 
-          {/* Center: Pagination Dots */}
-          <div className="deck-dots-group" aria-label="Deck pagination">
-            {PROJECTS_ITEMS.map((_, index) => (
+          {/* Center: Interactive Pagination Dots */}
+          <div className="deck-footer-dots" aria-label="Deck card selector">
+            {PROJECTS_DATA.map((_, index) => (
               <button
                 key={index}
                 type="button"
                 onClick={() => jumpToCard(index)}
-                className={`deck-dot ${index === activeIndex ? 'is-active' : ''}`}
-                aria-label={`Go to card ${index + 1}`}
+                className={`deck-footer-dot ${index === activeIndex ? 'is-active' : ''}`}
+                aria-label={`Jump to project card ${index + 1}`}
               />
             ))}
           </div>
 
-          {/* Right: Stepper Navigation Chevrons */}
-          <div className="deck-stepper-cluster">
+          {/* Right: Stepper Controls & Counter (01 / 06) */}
+          <div className="deck-footer-stepper">
             <button 
               type="button" 
               onClick={triggerPrev} 
               className="deck-stepper-btn"
-              aria-label="Previous card in deck"
+              aria-label="Previous project in deck"
             >
               <ChevronLeft size={18} />
             </button>
 
-            <span className="deck-counter-text">
-              0{activeIndex + 1} <span className="deck-slash">/</span> 0{totalProjects}
+            <span className="deck-stepper-counter">
+              0{activeIndex + 1} <span className="deck-counter-slash">/</span> 0{totalProjects}
             </span>
 
             <button 
               type="button" 
               onClick={triggerNext} 
               className="deck-stepper-btn"
-              aria-label="Next card in deck"
+              aria-label="Next project in deck"
             >
               <ChevronRight size={18} />
             </button>
