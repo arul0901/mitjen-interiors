@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import gsap from 'gsap';
 import { ArrowUpRight, ChevronLeft, ChevronRight, Layers, ArrowRight } from 'lucide-react';
+import { AmbientArchitecturalLayer } from './AmbientArchitecturalLayer';
 import '../../styles/ProjectsSection.css';
 
 interface ProjectItem {
@@ -492,6 +493,9 @@ export const ProjectsSection: React.FC = () => {
       className="photo-deck-root" 
       aria-label="Our Projects - Spaces We’re Proud to Have Built."
     >
+      {/* Ambient Architectural Motion Layer (Desktop Framing) */}
+      <AmbientArchitecturalLayer activeIndex={activeIndex} />
+
       <div className="photo-deck-container">
         {/* ====================================================================
             1. SECTION EDITORIAL HEADER

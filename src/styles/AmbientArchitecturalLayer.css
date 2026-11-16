@@ -1,0 +1,395 @@
+/* ==========================================================================
+   AMBIENT ARCHITECTURAL MOTION LAYER
+   Spaces We’re Proud to Have Built — Ambient Framing Composition
+   Desktop Only (> 1200px) | Zero Interaction Interference
+   ========================================================================== */
+
+:root {
+  /* ========================================================================
+     THREE EASY CUSTOMISATION CONTROLS
+     ======================================================================== */
+  --ambient-opacity: 0.78;     /* Overall decorative image visibility */
+  --ambient-speed: 22s;        /* Base floating animation duration */
+  --ambient-spread: 520px;     /* Horizontal distance from the center of card deck */
+}
+
+/* ==========================================================================
+   1. ROOT LAYER WRAPPER
+   Strictly behind all interactive elements; pointer-events none
+   ========================================================================== */
+.ambient-motion-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  overflow: hidden;
+  opacity: var(--ambient-opacity);
+  transition: opacity 0.5s ease;
+  contain: layout style paint;
+}
+
+/* Desktop only: Completely removed below 1200px */
+@media (max-width: 1200px) {
+  .ambient-motion-layer {
+    display: none !important;
+  }
+}
+
+/* ==========================================================================
+   2. AMBIENT WINGS (LEFT & RIGHT SIDES)
+   ========================================================================== */
+.ambient-wing {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  height: 100%;
+}
+
+.ambient-wing-left {
+  left: 0;
+}
+
+.ambient-wing-right {
+  right: 0;
+}
+
+/* ==========================================================================
+   3. INDIVIDUAL ARCHITECTURAL FRAGMENTS
+   Anchored relative to screen center via var(--ambient-spread)
+   ========================================================================== */
+.ambient-fragment {
+  position: absolute;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Inner wrapper applies the subtle mouse parallax offset */
+.ambient-fragment-parallax {
+  will-change: transform;
+  transform: translate3d(
+    calc(var(--parallax-x, 0px) * var(--p-factor, 0.4)),
+    calc(var(--parallax-y, 0px) * var(--p-factor, 0.4)),
+    0
+  );
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Fine-art photographic surface */
+.ambient-fragment-frame {
+  position: relative;
+  background: #FAF8F5;
+  border: 1px solid rgba(139, 115, 85, 0.22);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 16px 36px -8px rgba(35, 26, 18, 0.12),
+              0 4px 12px -2px rgba(35, 26, 18, 0.05);
+}
+
+/* Aspect-ratio container for smooth crossfades */
+.ambient-fragment-media {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #E6E0D8;
+}
+
+.ambient-fragment-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.05);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.ambient-fragment-img.is-active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Architectural crop vignette */
+.ambient-fragment-vignette {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(21, 19, 17, 0.04) 0%,
+    transparent 55%,
+    rgba(21, 19, 17, 0.22) 100%
+  );
+  pointer-events: none;
+}
+
+/* Minimal architectural figure caption */
+.ambient-fragment-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 8px;
+  background: rgba(250, 248, 245, 0.94);
+  border-top: 1px solid rgba(139, 115, 85, 0.16);
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #7A7267;
+}
+
+.ambient-fragment-meta-dot {
+  color: #8B7355;
+}
+
+/* Depth Styles: Background blurred layers vs Foreground sharp layers */
+.ambient-depth-background .ambient-fragment-frame {
+  filter: blur(2px);
+  opacity: 0.65;
+  box-shadow: none;
+}
+
+.ambient-depth-mid .ambient-fragment-frame {
+  opacity: 0.82;
+  filter: blur(0.8px);
+}
+
+.ambient-depth-foreground .ambient-fragment-frame {
+  opacity: 0.96;
+  filter: none;
+}
+
+/* Architectural plate corner registration marks */
+.ambient-corner-mark {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-color: rgba(139, 115, 85, 0.4);
+  border-style: solid;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.ambient-corner-tl {
+  top: 3px;
+  left: 3px;
+  border-width: 1px 0 0 1px;
+}
+
+.ambient-corner-br {
+  bottom: 3px;
+  right: 3px;
+  border-width: 0 1px 1px 0;
+}
+
+/* ==========================================================================
+   4. LEFT SIDE COMPOSITION (Asymmetric Placements)
+   ========================================================================== */
+
+/* L1: High-level vertical portrait fragment (Joinery / Interior Detail) */
+.ambient-frag-l1 {
+  top: 12%;
+  right: calc(50% + var(--ambient-spread) + 15px);
+  width: 170px;
+  height: 220px;
+  --p-factor: 0.5;
+  animation: ambientFloatA calc(var(--ambient-speed) * 0.95) ease-in-out infinite alternate;
+  animation-delay: -3s;
+}
+
+/* L2: Mid-level soft background detail (Material Strata / Ceiling Geometry) */
+.ambient-frag-l2 {
+  top: 48%;
+  right: calc(50% + var(--ambient-spread) + 95px);
+  width: 135px;
+  height: 185px;
+  --p-factor: 0.25;
+  animation: ambientFloatB calc(var(--ambient-speed) * 1.15) ease-in-out infinite alternate;
+  animation-delay: -9s;
+}
+
+/* L3: Low-level architectural landscape fragment (Threshold / Floor Transition) */
+.ambient-frag-l3 {
+  top: 73%;
+  right: calc(50% + var(--ambient-spread) - 5px);
+  width: 195px;
+  height: 135px;
+  --p-factor: 0.4;
+  animation: ambientFloatC calc(var(--ambient-speed) * 0.85) ease-in-out infinite alternate;
+  animation-delay: -14s;
+}
+
+/* ==========================================================================
+   5. RIGHT SIDE COMPOSITION (Asymmetric Placements)
+   ========================================================================== */
+
+/* R1: Upper-mid soft atmospheric fragment (Light / Volumetric Space) */
+.ambient-frag-r1 {
+  top: 16%;
+  left: calc(50% + var(--ambient-spread) + 90px);
+  width: 145px;
+  height: 195px;
+  --p-factor: 0.3;
+  animation: ambientFloatB calc(var(--ambient-speed) * 1.1) ease-in-out infinite alternate;
+  animation-delay: -6s;
+}
+
+/* R2: Central sharp focal detail (Fluted Wood / Acoustic Texture) */
+.ambient-frag-r2 {
+  top: 42%;
+  left: calc(50% + var(--ambient-spread) + 18px);
+  width: 180px;
+  height: 235px;
+  --p-factor: 0.55;
+  animation: ambientFloatA calc(var(--ambient-speed) * 0.9) ease-in-out infinite alternate;
+  animation-delay: -11s;
+}
+
+/* R3: Lower architectural line fragment (Elevation Datum / Scale Detail) */
+.ambient-frag-r3 {
+  top: 71%;
+  left: calc(50% + var(--ambient-spread) + 75px);
+  width: 165px;
+  height: 155px;
+  --p-factor: 0.35;
+  animation: ambientFloatC calc(var(--ambient-speed) * 1.25) ease-in-out infinite alternate;
+  animation-delay: -2s;
+}
+
+/* ==========================================================================
+   6. ARCHITECTURAL DRAFTING LINES & DATUM ELEMENTS (Sparingly Used)
+   ========================================================================== */
+.ambient-line-element {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Left vertical architectural elevation datum ruler */
+.ambient-datum-left {
+  top: 24%;
+  right: calc(50% + var(--ambient-spread) + 5px);
+  height: 320px;
+  width: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  opacity: 0.45;
+  animation: ambientDriftSlow calc(var(--ambient-speed) * 1.4) ease-in-out infinite alternate;
+  animation-delay: -5s;
+}
+
+.ambient-datum-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 1px;
+  background: repeating-linear-gradient(
+    180deg,
+    rgba(139, 115, 85, 0.4) 0px,
+    rgba(139, 115, 85, 0.4) 4px,
+    transparent 4px,
+    transparent 12px
+  );
+}
+
+.ambient-datum-tick {
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
+  font-size: 0.52rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #8B7355;
+  padding-right: 6px;
+}
+
+/* Right architectural crosshair with coordinate callout */
+.ambient-crosshair-right {
+  top: 36%;
+  left: calc(50% + var(--ambient-spread) + 12px);
+  width: 90px;
+  height: 40px;
+  opacity: 0.4;
+  animation: ambientDriftSlow calc(var(--ambient-speed) * 1.3) ease-in-out infinite alternate;
+  animation-delay: -8s;
+}
+
+.ambient-crosshair-svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* ==========================================================================
+   7. KEYFRAME ANIMATIONS (Subtle, Slow-Paced Floating & Drifting)
+   Different trajectories, amplitudes, and speeds prevent mechanical unison
+   ========================================================================== */
+@keyframes ambientFloatA {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(4px, -14px, 0);
+  }
+  100% {
+    transform: translate3d(-3px, 12px, 0);
+  }
+}
+
+@keyframes ambientFloatB {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(-5px, 16px, 0);
+  }
+  100% {
+    transform: translate3d(4px, -12px, 0);
+  }
+}
+
+@keyframes ambientFloatC {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(3px, -10px, 0);
+  }
+  100% {
+    transform: translate3d(-4px, 14px, 0);
+  }
+}
+
+@keyframes ambientDriftSlow {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, -18px, 0);
+  }
+}
+
+/* ==========================================================================
+   8. ACCESSIBILITY: RESPECT PREFERS-REDUCED-MOTION
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .ambient-fragment,
+  .ambient-fragment-parallax,
+  .ambient-datum-left,
+  .ambient-crosshair-right {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .ambient-fragment-img {
+    transition: opacity 0.3s ease !important;
+    transform: none !important;
+  }
+}
