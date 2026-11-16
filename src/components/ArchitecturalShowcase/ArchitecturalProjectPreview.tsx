@@ -187,3 +187,4 @@ export const ArchitecturalProjectPreview: React.FC = () => {
 };
 
 export default ArchitecturalProjectPreview;
+
