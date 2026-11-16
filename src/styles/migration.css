@@ -2145,6 +2145,127 @@ select,
 }
 
 /* ==========================================================================
+   OUR APPROACH (#approach / .cs_exceptional_living_section) &
+   OUR PROJECTS (.cs_some_spaces_section) &
+   OUR CAPABILITIES (.cs_skills_layout_1)
+   Warm luxury limestone palette: Bg #F1EDE7 | Secondary #8B7355
+   Guaranteed high-contrast & crisp architectural typography
+   ========================================================================== */
+.cs_exceptional_living_section,
+.cs_some_spaces_section,
+.cs_skills_layout_1 {
+  background-color: #F1EDE7 !important;
+  color: #1C1A17 !important;
+  position: relative;
+}
+
+/* Headings */
+.cs_exceptional_living_section .cs_section_title,
+.cs_some_spaces_section .cs_section_title,
+.cs_skills_layout_1 .cs_section_title {
+  color: #1C1A17 !important;
+  font-family: var(--font-heading, 'Cormorant Garamond', serif) !important;
+}
+
+.cs_exceptional_living_section .cs_section_title .word_inner,
+.cs_some_spaces_section .cs_section_title .word_inner,
+.cs_skills_layout_1 .cs_section_title .word_inner {
+  color: #1C1A17 !important;
+}
+
+/* Subtitle & Badges */
+.cs_exceptional_living_section .cs_section_subtitle,
+.cs_some_spaces_section .cs_section_subtitle,
+.cs_skills_layout_1 .cs_section_subtitle {
+  color: #8B7355 !important;
+}
+
+.cs_exceptional_living_section .cs_section_subtitle::before,
+.cs_some_spaces_section .cs_section_subtitle::before,
+.cs_skills_layout_1 .cs_section_subtitle::before {
+  background-color: #8B7355 !important;
+}
+
+/* Card titles and text in OUR APPROACH */
+.cs_exceptional_living_section .cs_card_style_7 .cs_card_title,
+.cs_exceptional_living_section .cs_card_style_7 .cs_card_title a {
+  color: #1C1A17 !important;
+}
+
+.cs_exceptional_living_section .cs_card_style_7 .cs_card_title a:hover {
+  color: #8B7355 !important;
+}
+
+.cs_exceptional_living_section .cs_card_style_7 .cs_card_subtitle {
+  color: #544E46 !important;
+}
+
+.cs_exceptional_living_section .cs_card_style_7 .cs_text_btn_style_1 {
+  color: #8B7355 !important;
+}
+
+/* Card titles and text in OUR PROJECTS */
+.cs_some_spaces_section .cs_card_style_6 {
+  background-color: #FFFFFF !important;
+  border: 1px solid rgba(139, 115, 85, 0.2) !important;
+}
+
+.cs_some_spaces_section .cs_card_style_6 .cs_card_title,
+.cs_some_spaces_section .cs_card_style_6 .cs_card_title a {
+  color: #1C1A17 !important;
+}
+
+.cs_some_spaces_section .cs_card_style_6 .cs_card_title a:hover {
+  color: #8B7355 !important;
+}
+
+.cs_some_spaces_section .cs_card_style_6 .cs_card_subtitle {
+  color: #544E46 !important;
+}
+
+.cs_some_spaces_section .cs_card_style_6 .cs_btn_style_1 {
+  background-color: #8B7355 !important;
+  border-color: #8B7355 !important;
+  color: #FFFFFF !important;
+}
+
+.cs_some_spaces_section .cs_card_style_6 .cs_btn_style_1:hover {
+  background-color: #1C1A17 !important;
+  border-color: #1C1A17 !important;
+  color: #FFFFFF !important;
+}
+
+.cs_some_spaces_section .cs_card_style_6 .cs_btn_style_1 .cs_btn_icon {
+  background-color: #FFFFFF !important;
+  color: #8B7355 !important;
+}
+
+.cs_some_spaces_section .cs_card_style_6 hr {
+  border-color: rgba(139, 115, 85, 0.2) !important;
+}
+
+/* Skills / Capabilities text */
+.cs_skills_layout_1 .cs_progress_head {
+  color: #1C1A17 !important;
+}
+
+.cs_skills_layout_1 .cs_progress_in span {
+  color: #8B7355 !important;
+}
+
+.cs_skills_layout_1 .cs_progress {
+  background-color: rgba(139, 115, 85, 0.15) !important;
+}
+
+.cs_skills_layout_1 .cs_progress_in {
+  background-color: #8B7355 !important;
+}
+
+.cs_skills_layout_1 p {
+  color: #544E46 !important;
+}
+
+/* ==========================================================================
    THE ART OF EXCEPTIONAL LIVING: Single-Image Display (Desktop + Mobile)
    Overrides legacy 2-image 3D flip so single images render visibly & beautifully
    ========================================================================== */
