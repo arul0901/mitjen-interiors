@@ -1,7 +1,7 @@
 /* ==========================================================================
-   MITIJEN INTERIORS — REDESIGNED "OUR APPROACH" SECTION
-   Compact, Luxury European Architectural Methodology
-   Bg: #F1EDE7 | Secondary: #8B7355 | Pure Content Preservation
+   MITIJEN INTERIORS — ELEVATED ARCHITECTURAL "OUR APPROACH"
+   Luxury European Editorial Stage + Interactive Timeline
+   Bg: #F1EDE7 | Secondary: #8B7355 | Mobile First Perfection
    ========================================================================== */
 
 .approach-section-root {
@@ -9,18 +9,20 @@
   --app-card-bg: #FFFFFF;
   --app-secondary: #8B7355;
   --app-secondary-hover: #725D43;
+  --app-secondary-light: #C4AD8F;
   --app-secondary-soft: rgba(139, 115, 85, 0.12);
+  --app-secondary-border: rgba(139, 115, 85, 0.28);
   --app-border: rgba(139, 115, 85, 0.22);
   --app-border-hover: #8B7355;
   --app-text-title: #1C1A17;
-  --app-text-body: #544E46;
+  --app-text-body: #47413A;
   --app-text-muted: #7A7267;
 
   background-color: var(--app-bg) !important;
   color: var(--app-text-title) !important;
   font-family: var(--font-body, 'DM Sans', sans-serif);
-  padding-top: clamp(48px, 6vw, 84px);
-  padding-bottom: clamp(48px, 6vw, 84px);
+  padding-top: clamp(40px, 5vw, 76px);
+  padding-bottom: clamp(44px, 5vw, 80px);
   position: relative;
   width: 100%;
   overflow-x: clip;
@@ -29,21 +31,21 @@
 
 .approach-container {
   width: 100%;
-  max-width: 1360px;
+  max-width: 1320px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: clamp(16px, 3.5vw, 48px);
-  padding-right: clamp(16px, 3.5vw, 48px);
+  padding-left: clamp(16px, 3.5vw, 44px);
+  padding-right: clamp(16px, 3.5vw, 44px);
   box-sizing: border-box;
 }
 
 /* ==========================================================================
-   1. SECTION HEADER
+   1. EDITORIAL SECTION HEADER
    ========================================================================== */
 .approach-header {
   text-align: center;
-  max-width: 800px;
-  margin: 0 auto clamp(28px, 4vw, 48px);
+  max-width: 820px;
+  margin: 0 auto clamp(24px, 3.5vw, 40px);
 }
 
 .approach-header-badge {
@@ -51,10 +53,10 @@
   align-items: center;
   gap: 8px;
   margin-bottom: 12px;
-  padding: 5px 14px;
+  padding: 5px 16px;
   border-radius: 999px;
   background-color: var(--app-secondary-soft);
-  border: 1px solid rgba(139, 115, 85, 0.28);
+  border: 1px solid var(--app-secondary-border);
 }
 
 .approach-badge-dot {
@@ -68,14 +70,14 @@
   font-family: var(--font-subheading, 'Manrope', sans-serif);
   font-size: 0.74rem;
   font-weight: 700;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
   color: var(--app-secondary) !important;
 }
 
 .approach-main-heading {
   font-family: var(--font-heading, 'Cormorant Garamond', serif);
-  font-size: clamp(2.1rem, 4vw, 3.6rem);
+  font-size: clamp(2.1rem, 4.2vw, 3.5rem);
   line-height: 1.15;
   font-weight: 600;
   letter-spacing: -0.015em;
@@ -85,196 +87,727 @@
 }
 
 .approach-gold-line {
-  width: 50px;
+  width: 52px;
   height: 2px;
   background-color: var(--app-secondary);
   margin: 0 auto;
 }
 
 /* ==========================================================================
-   2. FOUR-CARD ARCHITECTURAL METHODOLOGY GRID
+   2. DESKTOP TIMELINE STEPPER
    ========================================================================== */
-.approach-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: clamp(16px, 2vw, 24px);
+.approach-timeline-nav {
+  position: relative;
+  max-width: 1040px;
+  margin: 0 auto clamp(24px, 3vw, 36px);
+  padding: 0 10px;
 }
 
-.approach-card {
-  background: var(--app-card-bg);
-  border: 1px solid var(--app-border);
-  border-radius: 6px;
-  overflow: hidden;
+.approach-timeline-track {
+  position: absolute;
+  top: 18px;
+  left: 40px;
+  right: 40px;
+  height: 2px;
+  background-color: rgba(139, 115, 85, 0.22);
+  z-index: 1;
+}
+
+.approach-timeline-progress-fill {
+  height: 100%;
+  background-color: var(--app-secondary);
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.approach-timeline-nodes {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  z-index: 2;
+}
+
+.approach-timeline-node-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
   display: flex;
   flex-direction: column;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.3s ease,
-              border-color 0.3s ease;
-  box-shadow: 0 4px 18px -4px rgba(60, 45, 30, 0.05);
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  color: var(--app-text-muted);
+  transition: color 0.25s ease, transform 0.25s ease;
+  max-width: 180px;
+  text-align: center;
 }
 
-.approach-card:hover {
-  transform: translateY(-4px);
+.approach-timeline-node-btn:hover {
+  transform: translateY(-2px);
+  color: var(--app-text-title);
+}
+
+.approach-node-number {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #FFFFFF;
+  border: 2px solid rgba(139, 115, 85, 0.35);
+  font-family: var(--font-special, 'Bebas Neue', sans-serif);
+  font-size: 1.15rem;
+  letter-spacing: 0.04em;
+  color: var(--app-secondary);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 3px 8px rgba(60, 45, 30, 0.08);
+}
+
+.approach-node-label {
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: inherit;
+  white-space: nowrap;
+}
+
+.approach-timeline-node-btn.is-active .approach-node-number {
+  background: var(--app-secondary);
+  color: #FFFFFF;
+  border-color: var(--app-secondary);
+  transform: scale(1.15);
+  box-shadow: 0 0 0 5px rgba(139, 115, 85, 0.22);
+}
+
+.approach-timeline-node-btn.is-active .approach-node-label {
+  color: var(--app-text-title) !important;
+  font-weight: 800;
+}
+
+.approach-timeline-node-btn.is-past .approach-node-number {
+  border-color: var(--app-secondary);
+  background: #FFFFFF;
+  color: var(--app-secondary);
+}
+
+/* ==========================================================================
+   3. MOBILE STEPPER BAR (Touch Pills)
+   ========================================================================== */
+.approach-mobile-stepper-bar {
+  display: none;
+  width: 100%;
+  margin-bottom: 16px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.approach-mobile-stepper-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.approach-mobile-step-pills {
+  display: flex;
+  gap: 8px;
+  padding: 4px 2px;
+  min-width: 100%;
+}
+
+.approach-mobile-pill {
+  flex: 1;
+  min-width: 72px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: #FFFFFF;
+  border: 1px solid rgba(139, 115, 85, 0.25);
+  color: var(--app-text-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.approach-mobile-pill.is-active {
+  background: var(--app-secondary);
+  border-color: var(--app-secondary);
+  color: #FFFFFF;
+  box-shadow: 0 4px 12px rgba(139, 115, 85, 0.28);
+}
+
+.approach-pill-num {
+  font-family: var(--font-special, 'Bebas Neue', sans-serif);
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.approach-pill-text {
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ==========================================================================
+   4. ARCHITECTURAL SHOWCASE STAGE (Desktop & Mobile)
+   ========================================================================== */
+.approach-stage-wrapper {
+  background: var(--app-card-bg);
+  border: 1px solid var(--app-border);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 10px 32px -8px rgba(60, 45, 30, 0.08);
+  margin-bottom: clamp(20px, 3vw, 36px);
+  position: relative;
+  transition: border-color 0.3s ease;
+}
+
+.approach-stage-wrapper:hover {
   border-color: var(--app-border-hover);
-  box-shadow: 0 14px 32px -8px rgba(139, 115, 85, 0.16);
 }
 
-.approach-card-thumbnail {
+.approach-stage-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  align-items: stretch;
+  min-height: 480px;
+}
+
+/* --- Visual Side (Left) --- */
+.approach-stage-visual {
+  position: relative;
+  background-color: #171513;
+  overflow: hidden;
+  display: flex;
+}
+
+.approach-visual-frame {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 11;
+  height: 100%;
+  min-height: 380px;
   overflow: hidden;
-  background-color: #1C1A17;
 }
 
-.approach-card-img {
+.approach-stage-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   display: block;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: approachFadeIn 0.45s ease-out;
 }
 
-.approach-card:hover .approach-card-img {
-  transform: scale(1.05);
+@keyframes approachFadeIn {
+  from {
+    opacity: 0.7;
+    transform: scale(1.03);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
-.approach-card-step-badge {
+.approach-visual-gradient {
   position: absolute;
-  top: 10px;
-  left: 10px;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  color: var(--app-secondary);
-  font-family: var(--font-special, 'Bebas Neue', sans-serif);
-  font-size: 1.15rem;
-  padding: 3px 10px;
-  line-height: 1;
-  letter-spacing: 0.04em;
-  border-radius: 2px;
-  border: 1px solid rgba(139, 115, 85, 0.2);
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(28, 26, 23, 0.15) 0%,
+    transparent 40%,
+    rgba(28, 26, 23, 0.4) 100%
+  );
+  pointer-events: none;
 }
 
-.approach-card-info {
-  padding: 22px 20px 20px;
+.approach-visual-badge {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  background: rgba(28, 26, 23, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 6px 14px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  z-index: 2;
+}
+
+.approach-visual-phase-text {
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #F1EDE7;
+}
+
+/* Image Overlaid Quick Arrows */
+.approach-image-arrows {
+  position: absolute;
+  bottom: 18px;
+  right: 18px;
+  display: inline-flex;
+  gap: 8px;
+  z-index: 2;
+}
+
+.approach-img-nav-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(139, 115, 85, 0.3);
+  color: var(--app-secondary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.approach-img-nav-btn:hover {
+  background: var(--app-secondary);
+  color: #FFFFFF;
+  transform: scale(1.08);
+}
+
+/* --- Editorial Side (Right) --- */
+.approach-stage-editorial {
+  position: relative;
+  padding: clamp(28px, 4vw, 48px);
   display: flex;
   flex-direction: column;
-  flex: 1;
+  justify-content: center;
+  box-sizing: border-box;
+  background: #FFFFFF;
 }
 
-.approach-card-phase-tag {
-  font-family: var(--font-subheading, 'Manrope', sans-serif);
-  font-size: 0.68rem;
+.approach-editorial-watermark {
+  position: absolute;
+  top: -10px;
+  right: 16px;
+  font-family: var(--font-heading, 'Cormorant Garamond', serif);
+  font-size: clamp(6.5rem, 11vw, 10.5rem);
   font-weight: 700;
-  letter-spacing: 0.16em;
+  line-height: 1;
+  color: rgba(139, 115, 85, 0.07);
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+.approach-editorial-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.approach-phase-eyebrow-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.approach-phase-badge {
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--app-secondary);
-  margin-bottom: 6px;
 }
 
-.approach-card-title {
+.approach-step-indicator {
+  font-family: var(--font-special, 'Bebas Neue', sans-serif);
+  font-size: 1.15rem;
+  letter-spacing: 0.08em;
+  color: var(--app-secondary);
+}
+
+.approach-editorial-title {
   font-family: var(--font-heading, 'Cormorant Garamond', serif);
-  font-size: 1.35rem;
+  font-size: clamp(1.65rem, 2.5vw, 2.35rem);
   font-weight: 600;
-  line-height: 1.22;
+  line-height: 1.2;
   letter-spacing: -0.01em;
-  margin: 0 0 10px 0;
+  color: var(--app-text-title) !important;
+  margin: 0 0 14px 0;
   text-transform: uppercase;
 }
 
-.approach-card-title a {
-  color: var(--app-text-title) !important;
-  text-decoration: none;
-  transition: color 0.25s ease;
+.approach-editorial-divider {
+  width: 44px;
+  height: 2px;
+  background-color: var(--app-secondary);
+  margin-bottom: 18px;
 }
 
-.approach-card-title a:hover {
-  color: var(--app-secondary) !important;
-}
-
-.approach-card-desc {
-  font-size: 0.9rem;
-  line-height: 1.62;
+.approach-editorial-desc {
+  font-size: clamp(0.92rem, 1.15vw, 1.02rem);
+  line-height: 1.68;
   color: var(--app-text-body) !important;
-  margin: 0 0 20px 0;
-  flex-grow: 1;
+  margin: 0 0 24px 0;
 }
 
-.approach-card-cta-wrap {
-  margin-top: auto;
-  padding-top: 14px;
+/* Key Focus Points */
+.approach-focus-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 28px;
+  padding: 16px 18px;
+  background-color: var(--app-bg);
+  border-radius: 6px;
+  border-left: 3px solid var(--app-secondary);
+}
+
+.approach-focus-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--app-text-title);
+  letter-spacing: 0.02em;
+}
+
+.approach-focus-icon {
+  color: var(--app-secondary);
+  flex-shrink: 0;
+}
+
+/* Action & Stepper Cluster */
+.approach-editorial-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 18px;
   border-top: 1px dashed var(--app-border);
+  flex-wrap: wrap;
 }
 
-.approach-discover-btn {
+.approach-editorial-cta {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   font-family: var(--font-subheading, 'Manrope', sans-serif);
-  font-size: 0.74rem;
+  font-size: 0.78rem;
   font-weight: 700;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--app-secondary) !important;
   text-decoration: none;
-  transition: gap 0.25s ease, color 0.25s ease;
+  padding: 10px 18px;
+  border-radius: 4px;
+  background-color: var(--app-secondary-soft);
+  border: 1px solid var(--app-secondary-border);
+  transition: all 0.25s ease;
 }
 
-.approach-btn-arrow {
-  color: var(--app-secondary);
-  transition: transform 0.25s ease;
-}
-
-.approach-card:hover .approach-discover-btn {
-  color: var(--app-text-title) !important;
+.approach-editorial-cta:hover {
+  background-color: var(--app-secondary);
+  color: #FFFFFF !important;
   gap: 12px;
 }
 
-.approach-card:hover .approach-btn-arrow {
+.approach-cta-arrow {
+  transition: transform 0.25s ease;
+}
+
+.approach-editorial-cta:hover .approach-cta-arrow {
   transform: translateX(4px);
+}
+
+.approach-desktop-nav-cluster {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.approach-nav-arrow-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--app-bg);
+  border: 1px solid var(--app-secondary-border);
+  color: var(--app-secondary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.approach-nav-arrow-btn:hover {
+  background: var(--app-secondary);
+  color: #FFFFFF;
+}
+
+.approach-nav-counter {
+  font-family: var(--font-special, 'Bebas Neue', sans-serif);
+  font-size: 1.15rem;
+  letter-spacing: 0.06em;
   color: var(--app-text-title);
 }
 
+.approach-nav-slash {
+  color: var(--app-secondary);
+  margin: 0 2px;
+}
+
 /* ==========================================================================
-   3. RESPONSIVE OPTIMIZATIONS (Tablets & Mobile)
+   5. DESKTOP INTERACTIVE DOCK (4 Overview Plates)
+   ========================================================================= */
+.approach-dock-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(12px, 1.5vw, 20px);
+}
+
+.approach-dock-card {
+  background: #FFFFFF;
+  border: 1px solid var(--app-border);
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  text-align: left;
+  box-shadow: 0 3px 10px rgba(60, 45, 30, 0.04);
+}
+
+.approach-dock-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--app-border-hover);
+  box-shadow: 0 8px 20px -4px rgba(139, 115, 85, 0.16);
+}
+
+.approach-dock-card.is-active {
+  border-color: var(--app-secondary);
+  background: #FFFFFF;
+  box-shadow: 0 8px 24px -4px rgba(139, 115, 85, 0.24);
+  outline: 2px solid var(--app-secondary);
+  outline-offset: -1px;
+}
+
+.approach-dock-thumb {
+  position: relative;
+  width: 58px;
+  height: 58px;
+  border-radius: 5px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background-color: #171513;
+}
+
+.approach-dock-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.approach-dock-num {
+  position: absolute;
+  bottom: 3px;
+  left: 3px;
+  background: rgba(28, 26, 23, 0.85);
+  color: #FFFFFF;
+  font-family: var(--font-special, 'Bebas Neue', sans-serif);
+  font-size: 0.85rem;
+  padding: 1px 5px;
+  border-radius: 2px;
+  line-height: 1;
+}
+
+.approach-dock-info {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.approach-dock-tag {
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--app-secondary);
+  margin-bottom: 2px;
+}
+
+.approach-dock-title {
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--app-text-title);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ==========================================================================
+   6. MOBILE PAGINATION DOTS
    ========================================================================== */
-@media (max-width: 1024px) {
-  .approach-grid {
+.approach-mobile-dots {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.approach-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(139, 115, 85, 0.28);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.approach-dot.is-active {
+  width: 24px;
+  background: var(--app-secondary);
+}
+
+/* ==========================================================================
+   7. RESPONSIVE BREAKPOINTS (Tablets & Mobile View)
+   ========================================================================== */
+@media (max-width: 991px) {
+  .approach-stage-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .approach-stage-visual {
+    min-height: 320px;
+  }
+
+  .approach-visual-frame {
+    min-height: 320px;
+  }
+
+  .approach-dock-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
+  .approach-timeline-nav {
+    display: none; /* Replaced by sleek mobile stepper bar */
+  }
+
+  .approach-mobile-stepper-bar {
+    display: block;
+  }
+
+  .approach-dock-grid {
+    display: none; /* Replaced by mobile touch swipe and dots */
+  }
+
+  .approach-mobile-dots {
+    display: flex;
+  }
+
+  .approach-stage-wrapper {
+    margin-bottom: 0;
+    border-radius: 8px;
+  }
+
+  .approach-stage-editorial {
+    padding: 24px 18px 20px;
+  }
+
+  .approach-editorial-watermark {
+    font-size: 5rem;
+    top: 6px;
+    right: 10px;
+  }
+
+  .approach-editorial-title {
+    font-size: 1.45rem;
+    margin-bottom: 10px;
+  }
+
+  .approach-editorial-desc {
+    font-size: 0.88rem;
+    line-height: 1.62;
+    margin-bottom: 16px;
+  }
+
+  .approach-focus-list {
+    margin-bottom: 20px;
+    padding: 12px 14px;
+    gap: 8px;
+  }
+
+  .approach-focus-item {
+    font-size: 0.78rem;
+  }
+
+  .approach-editorial-footer {
+    gap: 12px;
+  }
+
+  .approach-editorial-cta {
+    font-size: 0.72rem;
+    padding: 8px 14px;
+  }
+}
+
+@media (max-width: 480px) {
   .approach-section-root {
-    padding-top: 36px;
+    padding-top: 32px;
     padding-bottom: 36px;
   }
 
-  .approach-header {
-    margin-bottom: 24px;
-  }
-
   .approach-main-heading {
-    font-size: 1.85rem;
+    font-size: 1.75rem;
   }
 
-  .approach-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
+  .approach-stage-visual {
+    min-height: 240px;
   }
 
-  .approach-card-info {
-    padding: 16px 16px 18px;
+  .approach-visual-frame {
+    min-height: 240px;
   }
 
-  .approach-card-title {
-    font-size: 1.2rem;
+  .approach-editorial-title {
+    font-size: 1.35rem;
   }
 
-  .approach-card-desc {
-    font-size: 0.86rem;
-    margin-bottom: 14px;
+  .approach-editorial-cta {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .approach-editorial-footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .approach-desktop-nav-cluster {
+    justify-content: center;
+    margin-top: 6px;
   }
 }
