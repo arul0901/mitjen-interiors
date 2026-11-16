@@ -1,7 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export default function Footer() {
+  const location = useLocation();
+  if (location.pathname === '/') {
+    return null;
+  }
+
   return <>
 
 <footer className={"cs_footer_style_1 cs_gray_bg"}>

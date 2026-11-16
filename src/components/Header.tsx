@@ -14,6 +14,10 @@ export const Header: React.FC = () => {
   const isProjectsActive = location.pathname.toLowerCase().startsWith('/project') || location.pathname.toLowerCase().startsWith('/portfolio');
   const isHome = location.pathname === '/';
 
+  if (isHome) {
+    return null;
+  }
+
   // State for Desktop Services Dropdown and Mobile Services Accordion
   const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false);
   const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(() => isServicesActive);
