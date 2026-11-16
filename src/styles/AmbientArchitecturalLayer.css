@@ -1,16 +1,16 @@
 /* ==========================================================================
    AMBIENT ARCHITECTURAL MOTION LAYER
    Spaces We’re Proud to Have Built — Ambient Framing Composition
-   Desktop (> 1100px) | Zero Interaction Interference
+   Desktop & Laptop Viewports (> 768px) | Zero Interaction Interference
    ========================================================================== */
 
 :root {
   /* ========================================================================
      THREE EASY CUSTOMISATION CONTROLS
      ======================================================================== */
-  --ambient-opacity: 0.88;     /* Overall decorative image visibility */
+  --ambient-opacity: 0.92;     /* Overall decorative image visibility */
   --ambient-speed: 22s;        /* Base floating animation duration */
-  --ambient-spread: 450px;     /* Horizontal distance from the center of card deck */
+  --ambient-spread: 0px;       /* Horizontal adjustment (+ pushes outward, - pulls inward) */
 }
 
 /* ==========================================================================
@@ -24,15 +24,15 @@
   height: 100%;
   pointer-events: none;
   user-select: none;
-  z-index: 0;
+  z-index: 1; /* Sits above section background, strictly behind photo-deck-container (z-index: 10) */
   overflow: hidden;
   opacity: var(--ambient-opacity);
   transition: opacity 0.5s ease;
   contain: layout style paint;
 }
 
-/* Desktop only: Hidden below 1100px so mobile/tablets remain clean */
-@media (max-width: 1100px) {
+/* Mobile only: Hidden below 768px where mobile card takes full width */
+@media (max-width: 768px) {
   .ambient-motion-layer {
     display: none !important;
   }
@@ -59,7 +59,6 @@
 
 /* ==========================================================================
    3. INDIVIDUAL ARCHITECTURAL FRAGMENTS
-   Anchored relative to screen center via var(--ambient-spread)
    ========================================================================== */
 .ambient-fragment {
   position: absolute;
@@ -89,14 +88,14 @@
   display: flex;
   flex-direction: column;
   background: #FAF8F5;
-  border: 1px solid rgba(139, 115, 85, 0.25);
+  border: 1px solid rgba(139, 115, 85, 0.28);
   border-radius: 6px;
   overflow: hidden;
-  box-shadow: 0 16px 36px -8px rgba(35, 26, 18, 0.16),
+  box-shadow: 0 16px 36px -8px rgba(35, 26, 18, 0.18),
               0 4px 12px -2px rgba(35, 26, 18, 0.08);
 }
 
-/* Aspect-ratio container for smooth crossfades taking all available height */
+/* Aspect-ratio container taking all available card height */
 .ambient-fragment-media {
   position: relative;
   width: 100%;
@@ -132,7 +131,7 @@
     180deg,
     rgba(21, 19, 17, 0.04) 0%,
     transparent 55%,
-    rgba(21, 19, 17, 0.2) 100%
+    rgba(21, 19, 17, 0.22) 100%
   );
   pointer-events: none;
 }
@@ -144,12 +143,12 @@
   align-items: center;
   justify-content: space-between;
   padding: 5px 8px;
-  background: rgba(250, 248, 245, 0.96);
-  border-top: 1px solid rgba(139, 115, 85, 0.18);
+  background: rgba(250, 248, 245, 0.98);
+  border-top: 1px solid rgba(139, 115, 85, 0.2);
   font-family: var(--font-subheading, 'Manrope', sans-serif);
   font-size: 0.58rem;
   font-weight: 700;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: #7A7267;
   white-space: nowrap;
@@ -162,16 +161,16 @@
 /* Depth Styles: Background blurred layers vs Foreground sharp layers */
 .ambient-depth-background .ambient-fragment-frame {
   filter: blur(1.5px);
-  opacity: 0.72;
+  opacity: 0.78;
 }
 
 .ambient-depth-mid .ambient-fragment-frame {
-  opacity: 0.86;
+  opacity: 0.9;
   filter: blur(0.5px);
 }
 
 .ambient-depth-foreground .ambient-fragment-frame {
-  opacity: 0.98;
+  opacity: 1;
   filter: none;
 }
 
@@ -180,7 +179,7 @@
   position: absolute;
   width: 5px;
   height: 5px;
-  border-color: rgba(139, 115, 85, 0.45);
+  border-color: rgba(139, 115, 85, 0.5);
   border-style: solid;
   pointer-events: none;
   z-index: 3;
@@ -199,16 +198,16 @@
 }
 
 /* ==========================================================================
-   4. LEFT SIDE COMPOSITION (Asymmetric Placements)
-   Anchored from screen center (50%) + var(--ambient-spread)
+   4. LEFT SIDE COMPOSITION (Fluid & Visible across all desktop viewports)
+   Anchored cleanly from left edge with responsive clamp
    ========================================================================== */
 
 /* L1: High-level vertical portrait fragment (Joinery / Interior Detail) */
 .ambient-frag-l1 {
-  top: 14%;
-  right: calc(50% + var(--ambient-spread) + 12px);
-  width: 165px;
-  height: 215px;
+  top: 15%;
+  left: calc(clamp(12px, 2.5vw, 60px) + var(--ambient-spread, 0px));
+  width: clamp(120px, 10vw, 165px);
+  height: clamp(155px, 13vw, 215px);
   --p-factor: 0.5;
   animation: ambientFloatA calc(var(--ambient-speed) * 0.95) ease-in-out infinite alternate;
   animation-delay: -3s;
@@ -217,9 +216,9 @@
 /* L2: Mid-level soft background detail (Material Strata / Ceiling Geometry) */
 .ambient-frag-l2 {
   top: 48%;
-  right: calc(50% + var(--ambient-spread) + 48px);
-  width: 140px;
-  height: 185px;
+  left: calc(clamp(20px, 4vw, 90px) + var(--ambient-spread, 0px));
+  width: clamp(105px, 8.5vw, 140px);
+  height: clamp(140px, 11vw, 185px);
   --p-factor: 0.25;
   animation: ambientFloatB calc(var(--ambient-speed) * 1.15) ease-in-out infinite alternate;
   animation-delay: -9s;
@@ -228,25 +227,25 @@
 /* L3: Low-level architectural landscape fragment (Threshold / Floor Transition) */
 .ambient-frag-l3 {
   top: 74%;
-  right: calc(50% + var(--ambient-spread) - 5px);
-  width: 190px;
-  height: 135px;
+  left: calc(clamp(10px, 2vw, 40px) + var(--ambient-spread, 0px));
+  width: clamp(130px, 11vw, 185px);
+  height: clamp(95px, 8vw, 130px);
   --p-factor: 0.4;
   animation: ambientFloatC calc(var(--ambient-speed) * 0.85) ease-in-out infinite alternate;
   animation-delay: -14s;
 }
 
 /* ==========================================================================
-   5. RIGHT SIDE COMPOSITION (Asymmetric Placements)
-   Anchored from screen center (50%) + var(--ambient-spread)
+   5. RIGHT SIDE COMPOSITION (Fluid & Visible across all desktop viewports)
+   Anchored cleanly from right edge with responsive clamp
    ========================================================================== */
 
 /* R1: Upper-mid soft atmospheric fragment (Light / Volumetric Space) */
 .ambient-frag-r1 {
   top: 16%;
-  left: calc(50% + var(--ambient-spread) + 45px);
-  width: 145px;
-  height: 195px;
+  right: calc(clamp(15px, 3vw, 75px) + var(--ambient-spread, 0px));
+  width: clamp(110px, 9vw, 145px);
+  height: clamp(150px, 12vw, 195px);
   --p-factor: 0.3;
   animation: ambientFloatB calc(var(--ambient-speed) * 1.1) ease-in-out infinite alternate;
   animation-delay: -6s;
@@ -255,9 +254,9 @@
 /* R2: Central sharp focal detail (Fluted Wood / Acoustic Texture) */
 .ambient-frag-r2 {
   top: 43%;
-  left: calc(50% + var(--ambient-spread) + 12px);
-  width: 175px;
-  height: 230px;
+  right: calc(clamp(10px, 2vw, 50px) + var(--ambient-spread, 0px));
+  width: clamp(125px, 10.5vw, 175px);
+  height: clamp(165px, 14vw, 230px);
   --p-factor: 0.55;
   animation: ambientFloatA calc(var(--ambient-speed) * 0.9) ease-in-out infinite alternate;
   animation-delay: -11s;
@@ -266,9 +265,9 @@
 /* R3: Lower architectural line fragment (Elevation Datum / Scale Detail) */
 .ambient-frag-r3 {
   top: 72%;
-  left: calc(50% + var(--ambient-spread) + 40px);
-  width: 160px;
-  height: 150px;
+  right: calc(clamp(20px, 3.5vw, 85px) + var(--ambient-spread, 0px));
+  width: clamp(115px, 9.5vw, 160px);
+  height: clamp(110px, 9vw, 150px);
   --p-factor: 0.35;
   animation: ambientFloatC calc(var(--ambient-speed) * 1.25) ease-in-out infinite alternate;
   animation-delay: -2s;
@@ -286,14 +285,14 @@
 /* Left vertical architectural elevation datum ruler */
 .ambient-datum-left {
   top: 26%;
-  right: calc(50% + var(--ambient-spread) + 5px);
-  height: 300px;
+  left: clamp(140px, 12vw, 240px);
+  height: 280px;
   width: 28px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-end;
-  opacity: 0.5;
+  opacity: 0.55;
   animation: ambientDriftSlow calc(var(--ambient-speed) * 1.4) ease-in-out infinite alternate;
   animation-delay: -5s;
 }
@@ -306,8 +305,8 @@
   width: 1px;
   background: repeating-linear-gradient(
     180deg,
-    rgba(139, 115, 85, 0.45) 0px,
-    rgba(139, 115, 85, 0.45) 4px,
+    rgba(139, 115, 85, 0.5) 0px,
+    rgba(139, 115, 85, 0.5) 4px,
     transparent 4px,
     transparent 12px
   );
@@ -325,10 +324,10 @@
 /* Right architectural crosshair with coordinate callout */
 .ambient-crosshair-right {
   top: 36%;
-  left: calc(50% + var(--ambient-spread) + 8px);
+  right: clamp(140px, 11vw, 220px);
   width: 90px;
   height: 40px;
-  opacity: 0.45;
+  opacity: 0.5;
   animation: ambientDriftSlow calc(var(--ambient-speed) * 1.3) ease-in-out infinite alternate;
   animation-delay: -8s;
 }
