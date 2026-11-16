@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import gsap from 'gsap';
-import { ArrowUpRight, ChevronLeft, ChevronRight, MapPin, Layers } from 'lucide-react';
+import { ArrowUpRight, ChevronLeft, ChevronRight, MapPin, Layers, Compass, Sparkles } from 'lucide-react';
 import '../../styles/ProjectsSection.css';
 
 interface ProjectItem {
@@ -11,6 +11,9 @@ interface ProjectItem {
   location: string;
   category: string;
   typeLabel: string;
+  year: string;
+  area: string;
+  materials: string[];
   description: string;
   image: string;
   imageAlt: string;
@@ -21,13 +24,16 @@ const PROJECTS_DATA: ProjectItem[] = [
   {
     id: 'vintage-finish',
     step: '01',
-    numeral: '1',
-    title: 'VINTAGE FINISH INTERIOR, RACE COURSE, COIMBATORE',
+    numeral: '01',
+    title: 'VINTAGE FINISH INTERIOR, RACE COURSE',
     location: 'Race Course, Coimbatore',
     category: 'PU PAINT WORK ↗',
-    typeLabel: 'Residential Space',
+    typeLabel: 'Residential Villa',
+    year: '2024',
+    area: '4,600 SQ.FT',
+    materials: ['Satin PU Lacquer', 'Custom Fluting', 'Brushed Brass Inlays'],
     description:
-      'A vintage-inspired look brought to life with carefully finished PU paint detailing and bespoke custom millwork.',
+      'A bespoke vintage-inspired residence articulated with hand-finished Italian PU coatings, custom architectural joinery, and tailored spatial transitions.',
     image: '/images/Residential/Residential1.jpeg',
     imageAlt: 'Vintage Finish Interior, Race Course, Coimbatore',
     href: '/portfolio',
@@ -35,13 +41,16 @@ const PROJECTS_DATA: ProjectItem[] = [
   {
     id: 'kr-pura',
     step: '02',
-    numeral: '2',
-    title: 'INTERIOR PROJECT, KR PURA, BANGALORE',
+    numeral: '02',
+    title: 'CONTEMPORARY RESIDENCE, KR PURA',
     location: 'KR Pura, Bangalore',
-    category: 'INTERIOR DESIGN ↗',
-    typeLabel: 'Residential Villa',
+    category: 'INTERIOR ARCHITECTURE ↗',
+    typeLabel: 'Luxury Residence',
+    year: '2024',
+    area: '3,850 SQ.FT',
+    materials: ['Fluted Timber', 'Concealed LED Coves', 'Italian Statuario'],
     description:
-      'A well-planned interior featuring clean geometric detailing, warm material palettes, and a cohesive design finish.',
+      'Clean geometric symmetry meets warm architectural materiality, featuring precision wardrobe detailing, bespoke ceiling planes, and integrated ambient lighting.',
     image: '/images/Residential/Residential2.jpeg',
     imageAlt: 'Interior Project, KR Pura, Bangalore',
     href: '/portfolio',
@@ -49,13 +58,16 @@ const PROJECTS_DATA: ProjectItem[] = [
   {
     id: 'tidal-park',
     step: '03',
-    numeral: '3',
-    title: 'OFFICE INTERIOR, TIDAL PARK',
+    numeral: '03',
+    title: 'AGILE TECH WORKSPACE, TIDAL PARK',
     location: 'Tidal Park, Coimbatore',
-    category: 'INTERIOR DESIGN ↗',
-    typeLabel: 'Commercial Office',
+    category: 'COMMERCIAL FIT-OUT ↗',
+    typeLabel: 'Technology Office',
+    year: '2023',
+    area: '14,200 SQ.FT',
+    materials: ['Acoustic Wall Slats', 'German Hardware', 'Modular Workstations'],
     description:
-      'A functional modern workspace planned around agile team dynamics, acoustic comfort, and polished detailing.',
+      'A high-performance modern workspace planned around agile team dynamics, acoustic zoning, ergonomic workstations, and refined corporate craft.',
     image: '/images/Commercial/Commercial1.jpeg',
     imageAlt: 'Office Interior, Tidal Park',
     href: '/portfolio',
@@ -63,43 +75,18 @@ const PROJECTS_DATA: ProjectItem[] = [
   {
     id: 'corporate-site',
     step: '04',
-    numeral: '4',
-    title: 'CORPORATE SITE INTERIOR',
-    location: 'Corporate Workspace',
+    numeral: '04',
+    title: 'HEADQUARTERS SITE & BOARDROOM',
+    location: 'Commercial District, Coimbatore',
     category: 'WORKSPACE DESIGN ↗',
     typeLabel: 'Corporate Headquarters',
+    year: '2023',
+    area: '8,400 SQ.FT',
+    materials: ['Smoked Oak Veneer', 'Architectural Glass', 'Precision Joinery'],
     description:
-      'A professional workspace shaped around functional layouts, integrated ambient lighting, and considered finishes.',
+      'A prestigious executive site balancing private client reception suites, high-spec meeting facilities, and understated luxury architectural finishes.',
     image: '/images/Corporate/Corporate1.jpeg',
     imageAlt: 'Corporate Site Interior',
-    href: '/portfolio',
-  },
-  {
-    id: 'rs-puram',
-    step: '05',
-    numeral: '5',
-    title: 'CONTEMPORARY RESIDENCE, RS PURAM, COIMBATORE',
-    location: 'RS Puram, Coimbatore',
-    category: 'RESIDENTIAL DESIGN ↗',
-    typeLabel: 'Residential Living',
-    description:
-      'Expansive open-plan living articulated with bespoke natural timber panelling, minimal joinery, and tailored spatial zoning.',
-    image: '/images/Residential/Residential3.jpeg',
-    imageAlt: 'Contemporary Residence, RS Puram, Coimbatore',
-    href: '/portfolio',
-  },
-  {
-    id: 'executive-suite',
-    step: '06',
-    numeral: '6',
-    title: 'EXECUTIVE SUITE & BOARDROOM',
-    location: 'Tech Hub, Bengaluru',
-    category: 'COMMERCIAL FIT-OUT ↗',
-    typeLabel: 'Executive Boardroom',
-    description:
-      'A refined corporate boardroom combining precision acoustics, custom conference table craft, and concealed illumination.',
-    image: '/images/Commercial/Commercial2.jpeg',
-    imageAlt: 'Executive Suite & Boardroom, Bengaluru',
     href: '/portfolio',
   },
 ];
@@ -134,10 +121,10 @@ export const ProjectsSection: React.FC = () => {
         const position = getDeckPosition(index, active);
         const isFront = position === 0;
 
-        // Controlled uniform offsets and scaling
-        const offsetY = -position * 12;
-        const scaleVal = Math.max(1 - position * 0.035, 0.82);
-        const opacityVal = isFront ? 1 : Math.max(0.72 - position * 0.09, 0.28);
+        // Controlled uniform offsets and scaling for 4-card deck
+        const offsetY = -position * 14;
+        const scaleVal = Math.max(1 - position * 0.04, 0.86);
+        const opacityVal = isFront ? 1 : Math.max(0.74 - position * 0.12, 0.32);
         const zIndexVal = 30 - position;
 
         if (immediate) {
@@ -186,8 +173,8 @@ export const ProjectsSection: React.FC = () => {
 
   // ==========================================================================
   // CIRCULAR LEFT SWIPE (Next Project):
-  // 01 -> 02 -> 03 -> 04 -> 05 -> 06 -> 01 (Infinite Loop)
-  // Front card (01) animates out left and moves to LAST position (06)
+  // 01 -> 02 -> 03 -> 04 -> 01 (Infinite Loop)
+  // Front card (01) animates out left and moves to LAST position (04)
   // ==========================================================================
   const triggerNext = useCallback(() => {
     if (isAnimatingRef.current) return;
@@ -210,16 +197,16 @@ export const ProjectsSection: React.FC = () => {
           const lastPosition = totalProjects - 1;
           gsap.set(currentCard, {
             x: 0,
-            y: -lastPosition * 12,
+            y: -lastPosition * 14,
             rotation: 0,
-            scale: Math.max(1 - lastPosition * 0.035, 0.82),
+            scale: Math.max(1 - lastPosition * 0.04, 0.86),
             zIndex: 30 - lastPosition,
             opacity: 0,
           });
 
           // Reveal gently at the back of stack
           gsap.to(currentCard, {
-            opacity: Math.max(0.72 - lastPosition * 0.09, 0.28),
+            opacity: Math.max(0.74 - lastPosition * 0.12, 0.32),
             duration: 0.22,
             ease: 'power1.out',
           });
@@ -234,9 +221,9 @@ export const ProjectsSection: React.FC = () => {
         if (!cardEl || index === activeIndex) return;
         const newPosition = getDeckPosition(index, nextActive);
         const isNewFront = newPosition === 0;
-        const offsetY = -newPosition * 12;
-        const scaleVal = Math.max(1 - newPosition * 0.035, 0.82);
-        const opacityVal = isNewFront ? 1 : Math.max(0.72 - newPosition * 0.09, 0.28);
+        const offsetY = -newPosition * 14;
+        const scaleVal = Math.max(1 - newPosition * 0.04, 0.86);
+        const opacityVal = isNewFront ? 1 : Math.max(0.74 - newPosition * 0.12, 0.32);
         const zIndexVal = 30 - newPosition;
 
         gsap.to(cardEl, {
@@ -298,9 +285,9 @@ export const ProjectsSection: React.FC = () => {
       cardRefs.current.forEach((cardEl, index) => {
         if (!cardEl || index === prevActive) return;
         const newPosition = getDeckPosition(index, prevActive);
-        const offsetY = -newPosition * 12;
-        const scaleVal = Math.max(1 - newPosition * 0.035, 0.82);
-        const opacityVal = Math.max(0.72 - newPosition * 0.09, 0.28);
+        const offsetY = -newPosition * 14;
+        const scaleVal = Math.max(1 - newPosition * 0.04, 0.86);
+        const opacityVal = Math.max(0.74 - newPosition * 0.12, 0.32);
         const zIndexVal = 30 - newPosition;
 
         gsap.to(cardEl, {
@@ -331,9 +318,9 @@ export const ProjectsSection: React.FC = () => {
         if (!cardEl) return;
         const position = getDeckPosition(index, targetIndex);
         const isFront = position === 0;
-        const offsetY = -position * 12;
-        const scaleVal = Math.max(1 - position * 0.035, 0.82);
-        const opacityVal = isFront ? 1 : Math.max(0.72 - position * 0.09, 0.28);
+        const offsetY = -position * 14;
+        const scaleVal = Math.max(1 - position * 0.04, 0.86);
+        const opacityVal = isFront ? 1 : Math.max(0.74 - position * 0.12, 0.32);
         const zIndexVal = 30 - position;
 
         gsap.to(cardEl, {
@@ -477,7 +464,7 @@ export const ProjectsSection: React.FC = () => {
         <header className="deck-compact-header">
           <div className="deck-compact-badge">
             <span className="deck-compact-badge-dot" aria-hidden="true" />
-            <span className="deck-compact-eyebrow">OUR SELECTED PROJECTS</span>
+            <span className="deck-compact-eyebrow">OUR SELECTED PROJECTS · 04 CURATED SPACES</span>
           </div>
 
           <h2 className="deck-compact-main-heading">
@@ -493,7 +480,7 @@ export const ProjectsSection: React.FC = () => {
 
         {/* ====================================================================
             2. THE COMPACT CIRCULAR CARD DECK
-            Continuously rotating stack: 01 -> 02 -> 03 -> 04 -> 05 -> 06 -> 01
+            Continuously rotating stack: 01 -> 02 -> 03 -> 04 -> 01
             ==================================================================== */}
         <div 
           className="deck-compact-stage"
@@ -546,8 +533,18 @@ export const ProjectsSection: React.FC = () => {
                   }}
                   aria-hidden={!isFront}
                 >
+                  {/* ARCHITECTURAL TAB STRIP FOR STACKED VIEW */}
+                  <div className="deck-card-stacked-tab" aria-hidden={isFront}>
+                    <div className="deck-stacked-tab-content">
+                      <span className="deck-stacked-num">{item.step}</span>
+                      <span className="deck-stacked-sep">/</span>
+                      <span className="deck-stacked-title">{item.title.split(',')[0]}</span>
+                    </div>
+                    <span className="deck-stacked-area">{item.area}</span>
+                  </div>
+
                   <div className="deck-compact-card-inner">
-                    {/* LEFT COLUMN: Compact Editorial Details */}
+                    {/* LEFT COLUMN: Elevated Architectural Editorial */}
                     <div className="deck-compact-editorial">
                       <div className="deck-compact-editorial-top">
                         {/* Monogram Numeral & Portfolio Meta */}
@@ -556,8 +553,8 @@ export const ProjectsSection: React.FC = () => {
                             {item.numeral}
                           </span>
                           <div className="deck-compact-type-badge">
-                            <span className="deck-compact-phase-tag">PROJECT {item.step} / 0{totalProjects}</span>
-                            <span className="deck-compact-sub-tag">{item.typeLabel}</span>
+                            <span className="deck-compact-phase-tag">PROJECT {item.step} OF 0{totalProjects}</span>
+                            <span className="deck-compact-sub-tag">{item.typeLabel} · {item.year}</span>
                           </div>
                         </div>
 
@@ -576,10 +573,38 @@ export const ProjectsSection: React.FC = () => {
 
                         <div className="deck-compact-gold-divider" aria-hidden="true" />
 
+                        {/* ARCHITECTURAL SPECIFICATIONS STRIP */}
+                        <div className="deck-specs-strip" aria-label="Project architectural specifications">
+                          <div className="deck-spec-cell">
+                            <span className="deck-spec-label">SCALE</span>
+                            <span className="deck-spec-value">{item.area}</span>
+                          </div>
+                          <div className="deck-spec-divider" aria-hidden="true" />
+                          <div className="deck-spec-cell">
+                            <span className="deck-spec-label">TYPOLOGY</span>
+                            <span className="deck-spec-value">{item.typeLabel}</span>
+                          </div>
+                          <div className="deck-spec-divider" aria-hidden="true" />
+                          <div className="deck-spec-cell">
+                            <span className="deck-spec-label">YEAR</span>
+                            <span className="deck-spec-value">{item.year}</span>
+                          </div>
+                        </div>
+
                         {/* Project Description */}
                         <p className="deck-compact-desc">
                           {item.description}
                         </p>
+
+                        {/* MATERIAL CRAFT PALETTE */}
+                        <div className="deck-materials-row" aria-label="Craft and material highlights">
+                          {item.materials.map((material, mIdx) => (
+                            <span key={mIdx} className="deck-material-chip">
+                              <span className="deck-mat-dot" aria-hidden="true" />
+                              {material}
+                            </span>
+                          ))}
+                        </div>
                       </div>
 
                       {/* Bottom Action Row */}
@@ -594,6 +619,7 @@ export const ProjectsSection: React.FC = () => {
                         </a>
 
                         <span className="deck-compact-swipe-hint">
+                          <Compass size={12} className="deck-compass-icon" aria-hidden="true" />
                           <span>SWIPE TO ROTATE</span>
                         </span>
                       </div>
@@ -610,9 +636,20 @@ export const ProjectsSection: React.FC = () => {
                         />
                         <div className="deck-compact-veil" aria-hidden="true" />
 
-                        {/* Floating Frosted Pill */}
+                        {/* Architectural Glass Archive Badge */}
+                        <div className="deck-compact-archive-badge">
+                          <Sparkles size={11} aria-hidden="true" />
+                          <span>CURATED ARCHIVE</span>
+                        </div>
+
+                        {/* Floating Frosted Category Pill */}
                         <div className="deck-compact-floating-pill">
                           <span>{item.category}</span>
+                        </div>
+
+                        {/* Bottom Architectural Watermark */}
+                        <div className="deck-compact-watermark" aria-hidden="true">
+                          <span>MITIJEN INTERIORS · FOLIO {item.step}</span>
                         </div>
 
                         {/* Overlaid Mobile Quick Chevrons */}
@@ -673,7 +710,7 @@ export const ProjectsSection: React.FC = () => {
             ))}
           </div>
 
-          {/* Right: Stepper Chevrons & Minimal Counter (01 / 06) */}
+          {/* Right: Stepper Chevrons & Minimal Counter (01 / 04) */}
           <div className="deck-compact-stepper">
             <button 
               type="button" 
