@@ -1,0 +1,568 @@
+/* ==========================================================================
+   MITIJEN INTERIORS — REDESIGNED "OUR CAPABILITIES" SECTION
+   Warm luxury limestone architectural atelier aesthetic
+   Bg: #F1EDE7 | Secondary: #8B7355
+   ========================================================================== */
+
+.capabilities-section-root {
+  --cap-bg: #F1EDE7;
+  --cap-card-bg: #FFFFFF;
+  --cap-card-active: #FFFFFF;
+  --cap-secondary: #8B7355;
+  --cap-secondary-hover: #725D43;
+  --cap-secondary-soft: rgba(139, 115, 85, 0.12);
+  --cap-secondary-glow: rgba(139, 115, 85, 0.25);
+  --cap-border: rgba(139, 115, 85, 0.22);
+  --cap-border-strong: rgba(139, 115, 85, 0.45);
+  --cap-border-active: #8B7355;
+  --cap-text-title: #1C1A17;
+  --cap-text-body: #544E46;
+  --cap-text-muted: #7A7267;
+  --cap-text-dim: #999083;
+
+  background-color: var(--cap-bg) !important;
+  color: var(--cap-text-title) !important;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  padding-top: clamp(64px, 8vw, 112px);
+  padding-bottom: clamp(64px, 8vw, 112px);
+  position: relative;
+  width: 100%;
+  overflow-x: clip;
+  box-sizing: border-box;
+}
+
+.capabilities-container {
+  width: 100%;
+  max-width: 1360px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(20px, 4vw, 56px);
+  padding-right: clamp(20px, 4vw, 56px);
+  box-sizing: border-box;
+}
+
+/* ==========================================================================
+   1. SECTION HEADER
+   ========================================================================== */
+.capabilities-header {
+  text-align: center;
+  max-width: 840px;
+  margin: 0 auto clamp(40px, 5vw, 68px);
+}
+
+.capabilities-header-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background-color: var(--cap-secondary-soft);
+  border: 1px solid rgba(139, 115, 85, 0.28);
+}
+
+.capabilities-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--cap-secondary);
+}
+
+.capabilities-eyebrow {
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--cap-secondary) !important;
+}
+
+.capabilities-main-heading {
+  font-family: var(--font-heading, 'Cormorant Garamond', serif);
+  font-size: clamp(2.4rem, 4.6vw, 4.2rem);
+  line-height: 1.1;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  color: var(--cap-text-title) !important;
+  margin: 0 0 18px 0;
+  text-wrap: balance;
+}
+
+.capabilities-accent-line {
+  width: 60px;
+  height: 2px;
+  background-color: var(--cap-secondary);
+  margin: 0 auto 20px;
+}
+
+.capabilities-subheading {
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
+  font-size: clamp(0.96rem, 1.25vw, 1.12rem);
+  line-height: 1.7;
+  color: var(--cap-text-body) !important;
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   2. MAIN TWO-COLUMN SHOWCASE GRID
+   ========================================================================== */
+.capabilities-main-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 1.15fr;
+  gap: clamp(32px, 5vw, 64px);
+  align-items: start;
+}
+
+/* Left Column: Visual Canvas & Metrics */
+.capabilities-visual-col {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  position: sticky;
+  top: 100px;
+}
+
+.capabilities-canvas-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 12;
+  overflow: hidden;
+  border-radius: 4px;
+  border: 1px solid var(--cap-border);
+  box-shadow: 0 16px 40px -10px rgba(60, 45, 30, 0.1);
+  background-color: #1C1A17;
+}
+
+.capabilities-canvas-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0.92;
+}
+
+.capabilities-canvas-frame:hover .capabilities-canvas-img {
+  transform: scale(1.03);
+  opacity: 0.98;
+}
+
+.capabilities-canvas-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 32px 24px 20px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(20, 18, 16, 0.88) 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.capabilities-overlay-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cap-secondary);
+}
+
+.capabilities-sparkle-icon {
+  color: var(--cap-secondary);
+}
+
+.capabilities-overlay-title {
+  font-family: var(--font-heading, 'Cormorant Garamond', serif);
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #FFFFFF;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.capabilities-overlay-desc {
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
+  font-size: 0.84rem;
+  color: #DDD7CD;
+  margin: 0;
+  line-height: 1.45;
+}
+
+.capabilities-floating-pill {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(139, 115, 85, 0.28);
+  padding: 6px 14px;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.capabilities-pill-label {
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cap-secondary);
+}
+
+.capabilities-pill-val {
+  font-family: var(--font-special, 'Bebas Neue', sans-serif);
+  font-size: 1.15rem;
+  letter-spacing: 0.04em;
+  color: var(--cap-text-title);
+  line-height: 1.1;
+}
+
+/* Technical Stats Strip */
+.capabilities-stats-strip {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+  align-items: center;
+  background: #FFFFFF;
+  border: 1px solid var(--cap-border);
+  padding: 16px 20px;
+  border-radius: 4px;
+  box-shadow: 0 8px 24px -6px rgba(60, 45, 30, 0.06);
+}
+
+.capabilities-stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.capabilities-stat-val {
+  font-family: var(--font-special, 'Bebas Neue', sans-serif);
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--cap-secondary);
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+
+.capabilities-stat-label {
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--cap-text-body);
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.capabilities-stat-divider {
+  width: 1px;
+  height: 28px;
+  background-color: var(--cap-border);
+}
+
+/* Guarantee Box */
+.capabilities-guarantee-box {
+  background: #FAF7F2;
+  border: 1px solid rgba(139, 115, 85, 0.25);
+  padding: 16px 20px;
+  border-radius: 4px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.capabilities-guarantee-icon {
+  color: var(--cap-secondary);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.capabilities-guarantee-text {
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--cap-text-body) !important;
+  margin: 0;
+}
+
+/* ==========================================================================
+   3. RIGHT COLUMN: ARCHITECTURAL CAPABILITY PILLARS
+   ========================================================================== */
+.capabilities-pillars-col {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.capabilities-pillars-heading-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--cap-border);
+}
+
+.capabilities-pillars-eyebrow {
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--cap-secondary);
+}
+
+.capabilities-pillars-note {
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
+  font-size: 0.74rem;
+  color: var(--cap-text-muted);
+  margin: 0;
+}
+
+.capabilities-pillars-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Pillar Card */
+.capability-pillar-card {
+  background: var(--cap-card-bg);
+  border: 1px solid var(--cap-border);
+  border-radius: 4px;
+  padding: 24px;
+  cursor: pointer;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: 0 4px 16px -4px rgba(60, 45, 30, 0.04);
+}
+
+.capability-pillar-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--cap-secondary);
+  box-shadow: 0 12px 30px rgba(139, 115, 85, 0.12);
+}
+
+.capability-pillar-card.is-active {
+  border-color: var(--cap-secondary);
+  background: #FFFFFF;
+  box-shadow: 0 14px 34px rgba(139, 115, 85, 0.15);
+  position: relative;
+}
+
+.capability-pillar-card.is-active::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 4px;
+  background-color: var(--cap-secondary);
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.capability-pillar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.capability-pillar-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.capability-pillar-step {
+  font-family: var(--font-special, 'Bebas Neue', sans-serif);
+  font-size: 1.35rem;
+  line-height: 1;
+  color: var(--cap-secondary);
+  letter-spacing: 0.05em;
+}
+
+.capability-pillar-icon {
+  color: var(--cap-secondary);
+  display: flex;
+  align-items: center;
+}
+
+.capability-pillar-badge {
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cap-secondary);
+  background: var(--cap-secondary-soft);
+  border: 1px solid rgba(139, 115, 85, 0.25);
+  padding: 4px 10px;
+  border-radius: 2px;
+}
+
+.capability-pillar-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.capability-pillar-title {
+  font-family: var(--font-heading, 'Cormorant Garamond', serif);
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--cap-text-title) !important;
+  margin: 0;
+}
+
+.capability-pillar-subtitle {
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--cap-secondary);
+  margin: 0 0 6px 0;
+}
+
+.capability-pillar-desc {
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: var(--cap-text-body) !important;
+  margin: 0;
+}
+
+/* Specs Chips */
+.capability-pillar-specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.capability-spec-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #FAF7F2;
+  border: 1px solid rgba(139, 115, 85, 0.18);
+  padding: 4px 10px;
+  border-radius: 2px;
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--cap-text-body);
+}
+
+.capability-spec-bullet {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: var(--cap-secondary);
+}
+
+.capability-pillar-footer {
+  margin-top: 2px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--cap-border);
+}
+
+.capability-pillar-action {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cap-secondary);
+}
+
+.capability-pillar-card:hover .capability-pillar-action svg {
+  transform: translateX(4px);
+}
+
+.capability-pillar-action svg {
+  transition: transform 0.25s ease;
+}
+
+/* CTA Row */
+.capabilities-action-row {
+  margin-top: 8px;
+}
+
+.capabilities-cta-btn {
+  width: 100%;
+  background: var(--cap-secondary);
+  color: #FFFFFF;
+  border: 1px solid var(--cap-secondary);
+  padding: 16px 28px;
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  border-radius: 2px;
+}
+
+.capabilities-cta-btn:hover {
+  background: var(--cap-text-title);
+  border-color: var(--cap-text-title);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(28, 26, 23, 0.2);
+}
+
+/* ==========================================================================
+   4. RESPONSIVE DESIGN (Tablets & Mobile)
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .capabilities-main-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .capabilities-visual-col {
+    position: static;
+  }
+}
+
+@media (max-width: 640px) {
+  .capabilities-section-root {
+    padding-top: 52px;
+    padding-bottom: 52px;
+  }
+
+  .capabilities-stats-strip {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    padding: 16px;
+  }
+
+  .capabilities-stat-divider {
+    display: none;
+  }
+
+  .capability-pillar-card {
+    padding: 18px;
+  }
+
+  .capabilities-cta-btn {
+    padding: 14px 20px;
+    font-size: 0.74rem;
+  }
+}
+

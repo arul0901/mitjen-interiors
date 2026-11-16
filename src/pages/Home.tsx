@@ -7,7 +7,7 @@ import ApproachSection from "../components/sections/ApproachSection";
 import WhyChooseSection from "../components/sections/WhyChoose";
 import TestimonialsSection from "../components/sections/Testimonials";
 import ScrollWalkthroughVideoHero from "../components/VideoWalkthroughHero";
-import ArchitecturalProjectPreview from "../components/ArchitecturalShowcase/ArchitecturalProjectPreview";
+import CapabilitiesSection from "../components/sections/CapabilitiesSection";
 
 // Feature flag: set to true to restore legacy text-marquee or legacy hero banner
 const SHOW_LEGACY_MARQUEE = false;
@@ -123,49 +123,7 @@ export default function Home() {
 <AboutSection />
 <ServiceCards />
 <ApproachSection />
-{/* Editorial Architectural Selected Work Preview */}
-<ArchitecturalProjectPreview />
-<section className={"cs_skills_layout_1"}>
-<div className={"container"}>
-<div className={"row cs_gap_y_40 align-items-center"}>
-<div className={"col-lg-6"}>
-<div className={"cs_skill_thumbnail"}>
-<img src={"/assets/images/projects/image9.jpg"} alt={"Mitjen Capabilities - Modern machinery and precision execution"} />
-</div>
-</div>
-<div className={"col-lg-6"}>
-<div className={"cs_skill_info"}>
-<div className={"cs_section_heading_style_1 cs_mb_30"}>
-<p className={"cs_section_subtitle cs_bold cs_accent_color cs_mb_20 text-uppercase"}>OUR CAPABILITIES</p>
-<h2 className={"cs_section_title cs_fs_53 cs_bold cs_mb_16"}>TECHNOLOGY THAT SHAPES QUALITY.</h2>
-<p className={"mb-0"}>Good interiors need the right tools as well as good ideas. The right technology helps us plan clearly, produce accurately and finish every detail with care, so the final space matches what you imagined.</p>
-</div>
-<div className={"cs_skill_progress_wrapper"}>
-<div className={"cs_skill_progress"}>
-<div className={"cs_progress_head cs_fs_24 cs_semibold cs_primary_color cs_primary_font cs_mb_20"}>GERMAN MACHINERY</div>
-<div className={"cs_progress"} data-progress={"98"}>
-<div className={"cs_progress_in"}><span className={"cs_fs_24 cs_semibold cs_primary_color cs_primary_font"}>98%</span></div>
-</div>
-</div>
-<div className={"cs_skill_progress"}>
-<div className={"cs_progress_head cs_fs_24 cs_semibold cs_primary_color cs_primary_font cs_mb_20"}>CNC DETAILING</div>
-<div className={"cs_progress"} data-progress={"96"}>
-<div className={"cs_progress_in"}><span className={"cs_fs_24 cs_semibold cs_primary_color cs_primary_font"}>96%</span></div>
-</div>
-</div>
-<div className={"cs_skill_progress"}>
-<div className={"cs_progress_head cs_fs_24 cs_semibold cs_primary_color cs_primary_font cs_mb_20"}>2D &amp; 3D VISUALS</div>
-<div className={"cs_progress"} data-progress={"94"}>
-<div className={"cs_progress_in"}><span className={"cs_fs_24 cs_semibold cs_primary_color cs_primary_font"}>94%</span></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div className={"cs_height_50 cs_height_lg_40"}></div>
-</div>
-</section>
+<CapabilitiesSection />
 
 {/* Interactive Architectural Before & After Transformations */}
 
