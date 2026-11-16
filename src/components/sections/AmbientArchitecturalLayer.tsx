@@ -19,7 +19,7 @@ interface FragmentConfig {
 // Index 1: Contemporary Residence (KR Pura Villa Millwork & Symmetry)
 // Index 2: Agile Tech Workspace (Tidal Park Acoustic Craft & Benching)
 // Index 3: Corporate Headquarters (Executive Cladding, Glass & Marble)
-// Every plate features a completely unique architectural photograph with zero repeats.
+// Only clean, elegant item names (no "FIG" or numbering).
 const LEFT_FRAGMENTS: FragmentConfig[] = [
   {
     id: 'l1',
@@ -32,10 +32,10 @@ const LEFT_FRAGMENTS: FragmentConfig[] = [
       '/images/Corporate/Corporate2.jpeg',
     ],
     labels: [
-      'FIG. 1.1 · PU JOINERY',
-      'FIG. 2.1 · CEILING GRID',
-      'FIG. 3.1 · ACOUSTIC BAFFLE',
-      'FIG. 4.1 · TIMBER VENEER',
+      'PU JOINERY',
+      'CEILING GRID',
+      'ACOUSTIC BAFFLE',
+      'TIMBER VENEER',
     ],
     altText: 'Architectural joinery detail',
   },
@@ -50,10 +50,10 @@ const LEFT_FRAGMENTS: FragmentConfig[] = [
       '/images/Corporate/Corporate3.jpeg',
     ],
     labels: [
-      'FIG. 1.2 · TIMBER STRATA',
-      'FIG. 2.2 · WALL STRATA',
-      'FIG. 3.2 · GLAZED INTERFACE',
-      'FIG. 4.2 · MINIMAL PROFILE',
+      'TIMBER STRATA',
+      'WALL STRATA',
+      'GLAZED INTERFACE',
+      'MINIMAL PROFILE',
     ],
     altText: 'Interior material strata',
   },
@@ -68,10 +68,10 @@ const LEFT_FRAGMENTS: FragmentConfig[] = [
       '/images/Corporate/Corporate4.jpeg',
     ],
     labels: [
-      'FIG. 1.3 · THRESHOLD',
-      'FIG. 2.3 · FLUTED DETAIL',
-      'FIG. 3.3 · LINEAR LIGHT',
-      'FIG. 4.3 · MARBLE FACING',
+      'SPATIAL THRESHOLD',
+      'FLUTED JOINERY',
+      'LINEAR LIGHTING',
+      'MARBLE FACING',
     ],
     altText: 'Bespoke architectural transition',
   },
@@ -89,10 +89,10 @@ const RIGHT_FRAGMENTS: FragmentConfig[] = [
       '/images/Corporate/Corporate5.jpeg',
     ],
     labels: [
-      'FIG. 1.4 · LUMEN AXIS',
-      'FIG. 2.4 · ARCH AXIS',
-      'FIG. 3.4 · BOARDROOM',
-      'FIG. 4.4 · CONFERENCE SUITE',
+      'AMBIENT LIGHTING',
+      'ARCHWAY DETAIL',
+      'BOARDROOM SUITE',
+      'CONFERENCE ROOM',
     ],
     altText: 'Architectural ambient lighting detail',
   },
@@ -107,10 +107,10 @@ const RIGHT_FRAGMENTS: FragmentConfig[] = [
       '/images/Corporate/Corporate6.jpeg',
     ],
     labels: [
-      'FIG. 1.5 · MILLED CONTOUR',
-      'FIG. 2.5 · VANITY SUITE',
-      'FIG. 3.5 · BREAKOUT SUITE',
-      'FIG. 4.5 · ATRIUM PORTAL',
+      'MILLED CONTOUR',
+      'VANITY SUITE',
+      'BREAKOUT LOUNGE',
+      'ATRIUM PORTAL',
     ],
     altText: 'Bespoke contour geometry',
   },
@@ -125,10 +125,10 @@ const RIGHT_FRAGMENTS: FragmentConfig[] = [
       '/images/Corporate/Corporate7.jpeg',
     ],
     labels: [
-      'FIG. 1.6 · STONE DETAIL',
-      'FIG. 2.6 · JOINERY PLANE',
-      'FIG. 3.6 · STRUCTURAL GRID',
-      'FIG. 4.6 · EXECUTIVE SUITE',
+      'STONE FIXTURE',
+      'WARDROBE PLANE',
+      'EXPOSED CEILING',
+      'EXECUTIVE SUITE',
     ],
     altText: 'Architectural elevation detail',
   },
@@ -240,7 +240,6 @@ export const AmbientArchitecturalLayer: React.FC<AmbientArchitecturalLayerProps>
                   <span className="ambient-meta-title">
                     {frag.labels[activeIndex] || frag.labels[0]}
                   </span>
-                  <span className="ambient-meta-code">PL.0{activeIndex + 1}</span>
                 </div>
               </div>
             </div>
@@ -322,7 +321,6 @@ export const AmbientArchitecturalLayer: React.FC<AmbientArchitecturalLayerProps>
                   <span className="ambient-meta-title">
                     {frag.labels[activeIndex] || frag.labels[0]}
                   </span>
-                  <span className="ambient-meta-code">PL.0{activeIndex + 1}</span>
                 </div>
               </div>
             </div>
