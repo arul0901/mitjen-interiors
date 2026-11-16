@@ -1,14 +1,14 @@
-import React, { useState, useRef } from 'react';
-import { ArrowUpRight, ChevronLeft, ChevronRight, MapPin } from 'lucide-react';
+import React, { useState, useRef, useEffect, TouchEvent, MouseEvent } from 'react';
+import { ArrowUpRight, ChevronLeft, ChevronRight, MapPin, Layers } from 'lucide-react';
 import '../../styles/ProjectsSection.css';
 
 interface ProjectItem {
   id: string;
   step: string;
+  numeral: string;
   title: string;
   location: string;
   category: string;
-  filterType: 'all' | 'residential' | 'commercial' | 'corporate';
   typeLabel: string;
   description: string;
   image: string;
@@ -20,11 +20,11 @@ const PROJECTS_ITEMS: ProjectItem[] = [
   {
     id: 'vintage-finish',
     step: '01',
+    numeral: '1',
     title: 'VINTAGE FINISH INTERIOR, RACE COURSE, COIMBATORE',
     location: 'Race Course, Coimbatore',
     category: 'PU PAINT WORK ↗',
-    filterType: 'residential',
-    typeLabel: 'Residential',
+    typeLabel: 'Residential Space',
     description:
       'A vintage-inspired look brought to life with carefully finished PU paint detailing.',
     image: '/images/Residential/Residential1.jpeg',
@@ -34,11 +34,11 @@ const PROJECTS_ITEMS: ProjectItem[] = [
   {
     id: 'kr-pura',
     step: '02',
+    numeral: '2',
     title: 'INTERIOR PROJECT, KR PURA, BANGALORE',
     location: 'KR Pura, Bangalore',
     category: 'INTERIOR DESIGN ↗',
-    filterType: 'residential',
-    typeLabel: 'Residential',
+    typeLabel: 'Residential Villa',
     description:
       'A well-planned interior featuring clean detailing and a cohesive design finish.',
     image: '/images/Residential/Residential2.jpeg',
@@ -48,11 +48,11 @@ const PROJECTS_ITEMS: ProjectItem[] = [
   {
     id: 'tidal-park',
     step: '03',
+    numeral: '3',
     title: 'OFFICE INTERIOR, TIDAL PARK',
     location: 'Tidal Park, Coimbatore',
     category: 'INTERIOR DESIGN ↗',
-    filterType: 'commercial',
-    typeLabel: 'Commercial',
+    typeLabel: 'Commercial Office',
     description:
       'A functional workspace planned around how teams work, with clean detailing and a polished finish.',
     image: '/images/Commercial/Commercial1.jpeg',
@@ -62,11 +62,11 @@ const PROJECTS_ITEMS: ProjectItem[] = [
   {
     id: 'corporate-site',
     step: '04',
+    numeral: '4',
     title: 'CORPORATE SITE INTERIOR',
     location: 'Corporate Workspace',
     category: 'WORKSPACE DESIGN ↗',
-    filterType: 'corporate',
-    typeLabel: 'Corporate',
+    typeLabel: 'Corporate Headquarters',
     description:
       'A professional workspace shaped around functional layouts and a considered interior finish.',
     image: '/images/Corporate/Corporate1.jpeg',
@@ -75,233 +75,355 @@ const PROJECTS_ITEMS: ProjectItem[] = [
   },
 ];
 
-type FilterCategory = 'all' | 'residential' | 'commercial' | 'corporate';
-
 export const ProjectsSection: React.FC = () => {
-  const [selectedFilter, setSelectedFilter] = useState<FilterCategory>('all');
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const [activeSlideIndex, setActiveSlideIndex] = useState<number>(0);
+  const [activeIndex, setActiveIndex] = useState<number>(0);
+  const [dragOffset, setDragOffset] = useState<number>(0);
+  const [isDragging, setIsDragging] = useState<boolean>(false);
+  const [exitDirection, setExitDirection] = useState<'left' | 'right' | null>(null);
 
-  const filteredProjects = selectedFilter === 'all' 
-    ? PROJECTS_ITEMS 
-    : PROJECTS_ITEMS.filter((item) => item.filterType === selectedFilter);
+  const dragStartXRef = useRef<number | null>(null);
+  const totalProjects = PROJECTS_ITEMS.length;
 
-  const handleScrollPrev = () => {
-    if (scrollContainerRef.current) {
-      const cardWidth = scrollContainerRef.current.firstElementChild?.clientWidth || 360;
-      scrollContainerRef.current.scrollBy({ left: -(cardWidth + 24), behavior: 'smooth' });
-    }
+  const triggerNext = () => {
+    if (exitDirection) return;
+    setExitDirection('left');
+    setTimeout(() => {
+      setActiveIndex((prev) => (prev + 1) % totalProjects);
+      setExitDirection(null);
+      setDragOffset(0);
+    }, 320);
   };
 
-  const handleScrollNext = () => {
-    if (scrollContainerRef.current) {
-      const cardWidth = scrollContainerRef.current.firstElementChild?.clientWidth || 360;
-      scrollContainerRef.current.scrollBy({ left: cardWidth + 24, behavior: 'smooth' });
-    }
+  const triggerPrev = () => {
+    if (exitDirection) return;
+    setExitDirection('right');
+    setTimeout(() => {
+      setActiveIndex((prev) => (prev - 1 + totalProjects) % totalProjects);
+      setExitDirection(null);
+      setDragOffset(0);
+    }, 320);
   };
 
-  const handleScroll = () => {
-    if (scrollContainerRef.current) {
-      const { scrollLeft, clientWidth } = scrollContainerRef.current;
-      const index = Math.round(scrollLeft / (clientWidth * 0.85));
-      setActiveSlideIndex(Math.min(Math.max(index, 0), filteredProjects.length - 1));
+  const jumpToCard = (index: number) => {
+    if (index === activeIndex || exitDirection) return;
+    const direction = index > activeIndex ? 'left' : 'right';
+    setExitDirection(direction);
+    setTimeout(() => {
+      setActiveIndex(index);
+      setExitDirection(null);
+      setDragOffset(0);
+    }, 320);
+  };
+
+  // Touch Swipe Handlers (Mobile)
+  const handleTouchStart = (e: TouchEvent) => {
+    dragStartXRef.current = e.touches[0].clientX;
+    setIsDragging(true);
+  };
+
+  const handleTouchMove = (e: TouchEvent) => {
+    if (dragStartXRef.current === null) return;
+    const diff = e.touches[0].clientX - dragStartXRef.current;
+    // Bound the drag distance
+    setDragOffset(Math.max(Math.min(diff, 140), -140));
+  };
+
+  const handleTouchEnd = () => {
+    if (dragStartXRef.current === null) return;
+    setIsDragging(false);
+    if (dragOffset < -50) {
+      triggerNext();
+    } else if (dragOffset > 50) {
+      triggerPrev();
+    } else {
+      setDragOffset(0);
+    }
+    dragStartXRef.current = null;
+  };
+
+  // Mouse Drag Handlers (Desktop)
+  const handleMouseDown = (e: MouseEvent) => {
+    // Only drag on left click and not on interactive buttons/links
+    if (e.button !== 0) return;
+    const target = e.target as HTMLElement;
+    if (target.closest('a') || target.closest('button')) return;
+    dragStartXRef.current = e.clientX;
+    setIsDragging(true);
+  };
+
+  const handleMouseMove = (e: MouseEvent) => {
+    if (!isDragging || dragStartXRef.current === null) return;
+    const diff = e.clientX - dragStartXRef.current;
+    setDragOffset(Math.max(Math.min(diff, 140), -140));
+  };
+
+  const handleMouseUp = () => {
+    if (!isDragging) return;
+    setIsDragging(false);
+    if (dragOffset < -50) {
+      triggerNext();
+    } else if (dragOffset > 50) {
+      triggerPrev();
+    } else {
+      setDragOffset(0);
+    }
+    dragStartXRef.current = null;
+  };
+
+  const handleMouseLeave = () => {
+    if (isDragging) {
+      handleMouseUp();
     }
   };
 
   return (
     <section 
       id="projects" 
-      className="projects-filmstrip-root" 
+      className="deck-section-root" 
       aria-label="Our Projects - Spaces We’re Proud to Have Built."
     >
-      <div className="projects-filmstrip-container">
+      <div className="deck-container">
         {/* ====================================================================
-            1. SECTION EDITORIAL HEADER & ACTION BAR
+            1. SECTION EDITORIAL HEADER
             ==================================================================== */}
-        <div className="projects-filmstrip-header-row">
-          <div className="projects-filmstrip-title-group">
-            <div className="projects-filmstrip-badge">
-              <span className="projects-filmstrip-dot" aria-hidden="true" />
-              <span className="projects-filmstrip-eyebrow">OUR PROJECTS</span>
-            </div>
-
-            <h2 className="projects-filmstrip-heading">
-              SPACES WE’RE PROUD TO HAVE BUILT.
-            </h2>
+        <header className="deck-header">
+          <div className="deck-badge">
+            <span className="deck-badge-dot" aria-hidden="true" />
+            <span className="deck-eyebrow">OUR PROJECTS</span>
           </div>
 
-          {/* Desktop Right Controls: View All + Slider Chevrons */}
-          <div className="projects-filmstrip-controls-group">
-            <a 
-              href="/portfolio" 
-              className="projects-view-all-link"
-              aria-label="View all projects in portfolio"
-            >
-              <span>VIEW PORTFOLIO</span>
-              <ArrowUpRight size={14} className="projects-view-all-arrow" aria-hidden="true" />
-            </a>
+          <h2 className="deck-main-heading">
+            SPACES WE’RE PROUD TO HAVE BUILT.
+          </h2>
 
-            <div className="projects-slider-arrows-wrap" aria-label="Carousel navigation">
-              <button 
-                type="button" 
-                onClick={handleScrollPrev} 
-                className="projects-slider-arrow-btn"
-                aria-label="Previous project"
-              >
-                <ChevronLeft size={18} />
-              </button>
-              <button 
-                type="button" 
-                onClick={handleScrollNext} 
-                className="projects-slider-arrow-btn"
-                aria-label="Next project"
-              >
-                <ChevronRight size={18} />
-              </button>
-            </div>
-          </div>
-        </div>
+          <div className="deck-gold-line" aria-hidden="true" />
+          
+          <p className="deck-subheading">
+            Swipe or click through our deck of featured residential and corporate transformations.
+          </p>
+        </header>
 
         {/* ====================================================================
-            2. CATEGORY FILTER PILLS (Touch-scrollable on mobile)
-            ==================================================================== */}
-        <div className="projects-filter-bar" role="tablist" aria-label="Project categories">
-          <button
-            type="button"
-            role="tab"
-            aria-selected={selectedFilter === 'all'}
-            onClick={() => setSelectedFilter('all')}
-            className={`projects-filter-btn ${selectedFilter === 'all' ? 'is-active' : ''}`}
-          >
-            <span>ALL SPACES</span>
-            <span className="projects-filter-count">{PROJECTS_ITEMS.length}</span>
-          </button>
-          <button
-            type="button"
-            role="tab"
-            aria-selected={selectedFilter === 'residential'}
-            onClick={() => setSelectedFilter('residential')}
-            className={`projects-filter-btn ${selectedFilter === 'residential' ? 'is-active' : ''}`}
-          >
-            <span>RESIDENTIAL</span>
-            <span className="projects-filter-count">2</span>
-          </button>
-          <button
-            type="button"
-            role="tab"
-            aria-selected={selectedFilter === 'commercial'}
-            onClick={() => setSelectedFilter('commercial')}
-            className={`projects-filter-btn ${selectedFilter === 'commercial' ? 'is-active' : ''}`}
-          >
-            <span>COMMERCIAL</span>
-            <span className="projects-filter-count">1</span>
-          </button>
-          <button
-            type="button"
-            role="tab"
-            aria-selected={selectedFilter === 'corporate'}
-            onClick={() => setSelectedFilter('corporate')}
-            className={`projects-filter-btn ${selectedFilter === 'corporate' ? 'is-active' : ''}`}
-          >
-            <span>CORPORATE</span>
-            <span className="projects-filter-count">1</span>
-          </button>
-        </div>
-
-        {/* ====================================================================
-            3. HORIZONTAL ARCHITECTURAL FILMSTRIP CAROUSEL
-            Touch-snap scroll on mobile, smooth track on desktop
+            2. THE INTERACTIVE STACKED CARD DECK STAGE
+            Cards stack with depth, scale, and vertical offsets
             ==================================================================== */}
         <div 
-          className="projects-filmstrip-track" 
-          ref={scrollContainerRef}
-          onScroll={handleScroll}
+          className="deck-stage-wrapper"
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseLeave}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
           role="region"
-          aria-label="Selected Projects Carousel"
+          aria-label="Stacked Projects Card Deck"
         >
-          {filteredProjects.map((item) => (
-            <article key={item.id} className="project-folio-card">
-              {/* Photo Canvas */}
-              <a 
-                href={item.href} 
-                className="project-folio-canvas"
-                aria-label={`View ${item.title} details`}
-              >
-                <img 
-                  src={item.image} 
-                  alt={item.imageAlt} 
-                  className="project-folio-img" 
-                  loading="lazy" 
-                />
-                <div className="project-folio-canvas-overlay" aria-hidden="true" />
-                
-                {/* Floating Category Pill */}
-                <div className="project-folio-category-floating">
-                  <span className="project-folio-category-pill">{item.category}</span>
-                </div>
+          {/* Top Stack Peak Labels (Clickable tabs behind active card) */}
+          <div className="deck-top-tab-triggers" aria-label="Deck quick jump">
+            {PROJECTS_ITEMS.map((item, index) => {
+              const isActive = index === activeIndex;
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => jumpToCard(index)}
+                  className={`deck-tab-pill ${isActive ? 'is-active' : ''}`}
+                  aria-label={`Jump to project ${item.step}: ${item.title}`}
+                >
+                  <span className="deck-tab-num">{item.step}</span>
+                  <span className="deck-tab-name">{item.location.split(',')[0]}</span>
+                </button>
+              );
+            })}
+          </div>
 
-                {/* Floating Index Badge */}
-                <span className="project-folio-index-badge">{item.step}</span>
-              </a>
+          {/* The Stack Container */}
+          <div className="deck-cards-stack-container">
+            {PROJECTS_ITEMS.map((item, index) => {
+              // Calculate relative stack depth (0 is active card in front)
+              const depth = (index - activeIndex + totalProjects) % totalProjects;
+              const isFront = depth === 0;
 
-              {/* Editorial Content */}
-              <div className="project-folio-body">
-                <div className="project-folio-meta-row">
-                  <div className="project-folio-location">
-                    <MapPin size={12} className="project-folio-loc-icon" aria-hidden="true" />
-                    <span>{item.location}</span>
+              // Compute inline styles based on depth
+              // Stacked cards peek above with vertical offset and slight downscale
+              let translateY = -(depth * 14);
+              let scale = 1 - depth * 0.035;
+              let opacity = depth === 0 ? 1 : Math.max(0.7 - depth * 0.12, 0.4);
+              let zIndex = 20 - depth;
+              let transformString = `translate3d(0, ${translateY}px, 0) scale(${scale})`;
+
+              // If dragging the front card
+              if (isFront && isDragging && dragOffset !== 0) {
+                const rotate = dragOffset * 0.04;
+                transformString = `translate3d(${dragOffset}px, ${translateY}px, 0) rotate(${rotate}deg) scale(${scale})`;
+              } else if (isFront && exitDirection === 'left') {
+                transformString = `translate3d(-115%, ${translateY}px, 0) rotate(-7deg) scale(0.94)`;
+                opacity = 0;
+              } else if (isFront && exitDirection === 'right') {
+                transformString = `translate3d(115%, ${translateY}px, 0) rotate(7deg) scale(0.94)`;
+                opacity = 0;
+              }
+
+              return (
+                <article
+                  key={item.id}
+                  className={`deck-card ${isFront ? 'is-front' : 'is-stacked'} ${isFront && isDragging ? 'is-grabbing' : ''}`}
+                  style={{
+                    transform: transformString,
+                    zIndex,
+                    opacity,
+                    pointerEvents: isFront ? 'auto' : 'auto',
+                  }}
+                  onClick={() => {
+                    if (!isFront) jumpToCard(index);
+                  }}
+                  aria-hidden={!isFront}
+                >
+                  <div className="deck-card-inner">
+                    {/* LEFT COLUMN: Editorial Typography & Project Details */}
+                    <div className="deck-card-content">
+                      {/* Big Monogram Numeral */}
+                      <div className="deck-card-numeral-wrap">
+                        <span className="deck-card-big-num">{item.numeral}</span>
+                        <div className="deck-card-step-badge">
+                          <span className="deck-badge-label">PROJECT {item.step} OF 0{totalProjects}</span>
+                        </div>
+                      </div>
+
+                      <div className="deck-card-location-row">
+                        <MapPin size={13} className="deck-loc-icon" aria-hidden="true" />
+                        <span className="deck-loc-text">{item.location}</span>
+                        <span className="deck-type-tag">{item.typeLabel}</span>
+                      </div>
+
+                      <h3 className="deck-card-title">
+                        <a href={item.href} aria-label={`${item.title} project details`}>
+                          {item.title}
+                        </a>
+                      </h3>
+
+                      <p className="deck-card-desc">
+                        {item.description}
+                      </p>
+
+                      <div className="deck-card-actions">
+                        <a 
+                          href={item.href} 
+                          className="deck-card-cta-btn" 
+                          aria-label={`View ${item.category} in portfolio`}
+                        >
+                          <span>{item.category}</span>
+                          <span className="deck-cta-arrow" aria-hidden="true">
+                            <ArrowUpRight size={14} />
+                          </span>
+                        </a>
+
+                        <span className="deck-swipe-hint-pill">
+                          <span>Swipe Card</span>
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* RIGHT COLUMN: Large Architectural Photography Plate */}
+                    <div className="deck-card-visual">
+                      <div className="deck-visual-frame">
+                        <img 
+                          src={item.image} 
+                          alt={item.imageAlt} 
+                          className="deck-visual-img" 
+                          loading="lazy" 
+                        />
+                        <div className="deck-visual-gradient" aria-hidden="true" />
+
+                        {/* Floating Pill on Photo */}
+                        <div className="deck-visual-category-floating">
+                          <span className="deck-visual-category-pill">{item.category}</span>
+                        </div>
+
+                        {/* Mobile Swipe Buttons Overlaid */}
+                        <div className="deck-visual-mobile-arrows">
+                          <button 
+                            type="button" 
+                            onClick={(e) => { e.stopPropagation(); triggerPrev(); }} 
+                            className="deck-overlay-arrow-btn"
+                            aria-label="Previous project in deck"
+                          >
+                            <ChevronLeft size={18} />
+                          </button>
+                          <button 
+                            type="button" 
+                            onClick={(e) => { e.stopPropagation(); triggerNext(); }} 
+                            className="deck-overlay-arrow-btn"
+                            aria-label="Next project in deck"
+                          >
+                            <ChevronRight size={18} />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <span className="project-folio-type-tag">{item.typeLabel}</span>
-                </div>
-
-                <h3 className="project-folio-title">
-                  <a href={item.href} aria-label={`${item.title} project details`}>
-                    {item.title}
-                  </a>
-                </h3>
-
-                <p className="project-folio-desc">
-                  {item.description}
-                </p>
-
-                <div className="project-folio-footer">
-                  <a 
-                    href={item.href} 
-                    className="project-folio-cta-link" 
-                    aria-label={`Explore ${item.title}`}
-                  >
-                    <span>EXPLORE SPACE</span>
-                    <span className="project-folio-cta-icon" aria-hidden="true">
-                      <ArrowUpRight size={13} />
-                    </span>
-                  </a>
-                </div>
-              </div>
-            </article>
-          ))}
+                </article>
+              );
+            })}
+          </div>
         </div>
 
         {/* ====================================================================
-            4. MOBILE PROGRESS & NAVIGATION BAR
+            3. DECK CONTROLS & BOTTOM NAVIGATION BAR
+            Prev / Next arrows, progress dots, and View Portfolio link
             ==================================================================== */}
-        <div className="projects-mobile-bottom-bar">
-          <div className="projects-mobile-dots" aria-hidden="true">
-            {filteredProjects.map((_, index) => (
-              <span 
-                key={index} 
-                className={`projects-mobile-dot ${index === activeSlideIndex ? 'is-active' : ''}`} 
+        <div className="deck-controls-bottom-bar">
+          {/* Left: View All Portfolio Link */}
+          <div className="deck-bottom-left">
+            <a 
+              href="/portfolio" 
+              className="deck-view-all-link"
+              aria-label="Explore all projects in portfolio"
+            >
+              <Layers size={15} aria-hidden="true" />
+              <span>EXPLORE ALL PROJECTS</span>
+              <ArrowUpRight size={14} aria-hidden="true" />
+            </a>
+          </div>
+
+          {/* Center: Pagination Dots */}
+          <div className="deck-dots-group" aria-label="Deck pagination">
+            {PROJECTS_ITEMS.map((_, index) => (
+              <button
+                key={index}
+                type="button"
+                onClick={() => jumpToCard(index)}
+                className={`deck-dot ${index === activeIndex ? 'is-active' : ''}`}
+                aria-label={`Go to card ${index + 1}`}
               />
             ))}
           </div>
 
-          <a 
-            href="/portfolio" 
-            className="projects-mobile-view-all"
-            aria-label="View all projects in portfolio"
-          >
-            <span>VIEW ALL PROJECTS</span>
-            <ArrowUpRight size={13} aria-hidden="true" />
-          </a>
+          {/* Right: Stepper Navigation Chevrons */}
+          <div className="deck-stepper-cluster">
+            <button 
+              type="button" 
+              onClick={triggerPrev} 
+              className="deck-stepper-btn"
+              aria-label="Previous card in deck"
+            >
+              <ChevronLeft size={18} />
+            </button>
+
+            <span className="deck-counter-text">
+              0{activeIndex + 1} <span className="deck-slash">/</span> 0{totalProjects}
+            </span>
+
+            <button 
+              type="button" 
+              onClick={triggerNext} 
+              className="deck-stepper-btn"
+              aria-label="Next card in deck"
+            >
+              <ChevronRight size={18} />
+            </button>
+          </div>
         </div>
       </div>
     </section>

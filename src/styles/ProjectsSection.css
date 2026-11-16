@@ -1,25 +1,26 @@
 /* ==========================================================================
-   MITIJEN INTERIORS — ARCHITECTURAL FILMSTRIP & FOLIO SHOWCASE
+   MITIJEN INTERIORS — STACKED CARD DECK SHOWCASE
    Spaces We’re Proud to Have Built
-   Luxury European Editorial Filmstrip Reel + Native Mobile Snap
+   Stacked Deck UI with Swipe Gesture & Spring-Smooth Transitions
    Bg: #F1EDE7 | Secondary: #8B7355 | Mobile First Perfection
    ========================================================================== */
 
-.projects-filmstrip-root {
-  --proj-bg: #F1EDE7;
-  --proj-card-bg: #FFFFFF;
-  --proj-secondary: #8B7355;
-  --proj-secondary-hover: #725D43;
-  --proj-secondary-soft: rgba(139, 115, 85, 0.12);
-  --proj-secondary-border: rgba(139, 115, 85, 0.28);
-  --proj-border: rgba(139, 115, 85, 0.22);
-  --proj-border-hover: #8B7355;
-  --proj-text-title: #1C1A17;
-  --proj-text-body: #47413A;
-  --proj-text-muted: #7A7267;
+.deck-section-root {
+  --deck-bg: #F1EDE7;
+  --deck-card-bg: #FFFFFF;
+  --deck-secondary: #8B7355;
+  --deck-secondary-hover: #725D43;
+  --deck-secondary-light: #C4AD8F;
+  --deck-secondary-soft: rgba(139, 115, 85, 0.12);
+  --deck-secondary-border: rgba(139, 115, 85, 0.28);
+  --deck-border: rgba(139, 115, 85, 0.2);
+  --deck-border-hover: #8B7355;
+  --deck-text-title: #1C1A17;
+  --deck-text-body: #47413A;
+  --deck-text-muted: #7A7267;
 
-  background-color: var(--proj-bg) !important;
-  color: var(--proj-text-title) !important;
+  background-color: var(--deck-bg) !important;
+  color: var(--deck-text-title) !important;
   font-family: var(--font-body, 'DM Sans', sans-serif);
   padding-top: clamp(48px, 6vw, 84px);
   padding-bottom: clamp(52px, 6vw, 90px);
@@ -29,9 +30,9 @@
   box-sizing: border-box;
 }
 
-.projects-filmstrip-container {
+.deck-container {
   width: 100%;
-  max-width: 1360px;
+  max-width: 1280px;
   margin-left: auto;
   margin-right: auto;
   padding-left: clamp(16px, 3.5vw, 44px);
@@ -40,114 +41,501 @@
 }
 
 /* ==========================================================================
-   1. EDITORIAL HEADER & ACTION BAR
+   1. EDITORIAL SECTION HEADER
    ========================================================================== */
-.projects-filmstrip-header-row {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 24px;
-  margin-bottom: clamp(24px, 3vw, 36px);
-  flex-wrap: wrap;
+.deck-header {
+  text-align: center;
+  max-width: 820px;
+  margin: 0 auto clamp(28px, 4vw, 48px);
 }
 
-.projects-filmstrip-title-group {
-  max-width: 720px;
-}
-
-.projects-filmstrip-badge {
+.deck-badge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   margin-bottom: 12px;
   padding: 5px 16px;
   border-radius: 999px;
-  background-color: var(--proj-secondary-soft);
-  border: 1px solid var(--proj-secondary-border);
+  background-color: var(--deck-secondary-soft);
+  border: 1px solid var(--deck-secondary-border);
 }
 
-.projects-filmstrip-dot {
+.deck-badge-dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background-color: var(--proj-secondary);
+  background-color: var(--deck-secondary);
 }
 
-.projects-filmstrip-eyebrow {
+.deck-eyebrow {
   font-family: var(--font-subheading, 'Manrope', sans-serif);
   font-size: 0.74rem;
   font-weight: 700;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--proj-secondary) !important;
+  color: var(--deck-secondary) !important;
 }
 
-.projects-filmstrip-heading {
+.deck-main-heading {
   font-family: var(--font-heading, 'Cormorant Garamond', serif);
-  font-size: clamp(2.1rem, 4vw, 3.4rem);
+  font-size: clamp(2.1rem, 4.2vw, 3.5rem);
   line-height: 1.15;
   font-weight: 600;
   letter-spacing: -0.015em;
-  color: var(--proj-text-title) !important;
-  margin: 0;
+  color: var(--deck-text-title) !important;
+  margin: 0 0 14px 0;
   text-transform: uppercase;
 }
 
-/* Right Controls (Desktop) */
-.projects-filmstrip-controls-group {
-  display: inline-flex;
-  align-items: center;
-  gap: 16px;
+.deck-gold-line {
+  width: 52px;
+  height: 2px;
+  background-color: var(--deck-secondary);
+  margin: 0 auto 16px;
 }
 
-.projects-view-all-link {
+.deck-subheading {
+  font-size: clamp(0.92rem, 1.2vw, 1.05rem);
+  line-height: 1.6;
+  color: var(--deck-text-body);
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   2. STACKED CARD DECK STAGE
+   ========================================================================== */
+.deck-stage-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding-top: 48px; /* Room for stacked cards peeking above */
+  user-select: none;
+  cursor: grab;
+}
+
+.deck-stage-wrapper:active {
+  cursor: grabbing;
+}
+
+/* Top Stack Tab Triggers (Quick Jumping) */
+.deck-top-tab-triggers {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.deck-top-tab-triggers::-webkit-scrollbar {
+  display: none;
+}
+
+.deck-tab-pill {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--deck-border);
+  border-radius: 999px;
+  padding: 6px 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--deck-text-muted);
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.deck-tab-pill:hover {
+  background: #FFFFFF;
+  color: var(--deck-text-title);
+  border-color: var(--deck-secondary);
+}
+
+.deck-tab-pill.is-active {
+  background: var(--deck-secondary);
+  color: #FFFFFF;
+  border-color: var(--deck-secondary);
+  box-shadow: 0 4px 12px rgba(139, 115, 85, 0.28);
+}
+
+.deck-tab-num {
+  font-family: var(--font-special, 'Bebas Neue', sans-serif);
+  font-size: 0.95rem;
+  line-height: 1;
+}
+
+/* Stack Container */
+.deck-cards-stack-container {
+  position: relative;
+  width: 100%;
+  min-height: 480px;
+}
+
+/* ==========================================================================
+   INDIVIDUAL DECK CARD (Stacked Card in a Deck)
+   ========================================================================== */
+.deck-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: var(--deck-card-bg);
+  border: 1px solid var(--deck-border);
+  border-radius: 18px;
+  box-shadow: 0 16px 40px -10px rgba(60, 45, 30, 0.1),
+              0 2px 10px rgba(60, 45, 30, 0.04);
+  transform-origin: center top;
+  transition: transform 0.42s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.42s ease,
+              box-shadow 0.42s ease;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.deck-card.is-front {
+  cursor: grab;
+}
+
+.deck-card.is-front.is-grabbing {
+  cursor: grabbing;
+  transition: none; /* Instant follow when dragging */
+}
+
+.deck-card.is-stacked {
+  cursor: pointer;
+}
+
+.deck-card.is-stacked:hover {
+  filter: brightness(1.02);
+  border-color: var(--deck-secondary);
+}
+
+/* Card Interior 2-Column Split */
+.deck-card-inner {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  align-items: stretch;
+  min-height: 480px;
+}
+
+/* --- Left Column: Content --- */
+.deck-card-content {
+  padding: clamp(28px, 4vw, 48px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  background: #FFFFFF;
+}
+
+.deck-card-numeral-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.deck-card-big-num {
+  font-family: var(--font-heading, 'Cormorant Garamond', serif);
+  font-size: clamp(3.2rem, 5vw, 4.8rem);
+  font-weight: 500;
+  line-height: 0.9;
+  color: var(--deck-secondary-light);
+  user-select: none;
+}
+
+.deck-card-step-badge {
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--deck-secondary);
+}
+
+.deck-card-location-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.deck-loc-icon {
+  color: var(--deck-secondary);
+  flex-shrink: 0;
+}
+
+.deck-loc-text {
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--deck-secondary);
+}
+
+.deck-type-tag {
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--deck-text-muted);
+  background: var(--deck-bg);
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.deck-card-title {
+  font-family: var(--font-heading, 'Cormorant Garamond', serif);
+  font-size: clamp(1.6rem, 2.4vw, 2.25rem);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin: 0 0 14px 0;
+  text-transform: uppercase;
+}
+
+.deck-card-title a {
+  color: var(--deck-text-title) !important;
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.deck-card-title a:hover {
+  color: var(--deck-secondary) !important;
+}
+
+.deck-card-desc {
+  font-size: clamp(0.92rem, 1.15vw, 1.02rem);
+  line-height: 1.68;
+  color: var(--deck-text-body) !important;
+  margin: 0 0 28px 0;
+}
+
+.deck-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: auto;
+  flex-wrap: wrap;
+}
+
+.deck-card-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--deck-secondary);
+  color: #FFFFFF !important;
+  text-decoration: none;
+  padding: 11px 22px;
+  border-radius: 999px;
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 14px rgba(139, 115, 85, 0.25);
+}
+
+.deck-card-cta-btn:hover {
+  background: var(--deck-text-title);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(28, 26, 23, 0.2);
+}
+
+.deck-cta-arrow {
+  transition: transform 0.25s ease;
+}
+
+.deck-card-cta-btn:hover .deck-cta-arrow {
+  transform: translate(2px, -2px);
+}
+
+.deck-swipe-hint-pill {
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--deck-text-muted);
+  border: 1px dashed var(--deck-border);
+  padding: 8px 14px;
+  border-radius: 999px;
+}
+
+/* --- Right Column: Photography --- */
+.deck-card-visual {
+  position: relative;
+  background-color: #171513;
+  padding: 14px;
+  box-sizing: border-box;
+}
+
+.deck-visual-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.deck-visual-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.deck-card:hover .deck-visual-img {
+  transform: scale(1.04);
+}
+
+.deck-visual-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(28, 26, 23, 0.2) 0%,
+    transparent 50%,
+    rgba(28, 26, 23, 0.4) 100%
+  );
+  pointer-events: none;
+}
+
+.deck-visual-category-floating {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 2;
+}
+
+.deck-visual-category-pill {
+  display: inline-block;
+  background: rgba(28, 26, 23, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #F1EDE7;
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.deck-visual-mobile-arrows {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  display: inline-flex;
+  gap: 8px;
+  z-index: 2;
+}
+
+.deck-overlay-arrow-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(139, 115, 85, 0.3);
+  color: var(--deck-secondary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.deck-overlay-arrow-btn:hover {
+  background: var(--deck-secondary);
+  color: #FFFFFF;
+  transform: scale(1.08);
+}
+
+/* ==========================================================================
+   3. BOTTOM CONTROLS BAR
+   ========================================================================== */
+.deck-controls-bottom-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 36px;
+  padding-top: 20px;
+  border-top: 1px dashed var(--deck-border);
+  flex-wrap: wrap;
+}
+
+.deck-view-all-link {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   font-family: var(--font-subheading, 'Manrope', sans-serif);
-  font-size: 0.76rem;
+  font-size: 0.74rem;
   font-weight: 700;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--proj-secondary) !important;
+  color: var(--deck-secondary) !important;
   text-decoration: none;
-  padding: 10px 18px;
-  border-radius: 999px;
-  background-color: #FFFFFF;
-  border: 1px solid var(--proj-border);
   transition: all 0.25s ease;
-  box-shadow: 0 2px 8px rgba(60, 45, 30, 0.04);
 }
 
-.projects-view-all-link:hover {
-  background-color: var(--proj-secondary);
-  color: #FFFFFF !important;
-  border-color: var(--proj-secondary);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(139, 115, 85, 0.2);
+.deck-view-all-link:hover {
+  color: var(--deck-text-title) !important;
+  gap: 12px;
 }
 
-.projects-view-all-arrow {
-  transition: transform 0.25s ease;
-}
-
-.projects-view-all-link:hover .projects-view-all-arrow {
-  transform: translate(2px, -2px);
-}
-
-.projects-slider-arrows-wrap {
+.deck-dots-group {
   display: inline-flex;
   align-items: center;
   gap: 8px;
 }
 
-.projects-slider-arrow-btn {
-  width: 42px;
-  height: 42px;
+.deck-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(139, 115, 85, 0.28);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.deck-dot.is-active {
+  width: 24px;
+  background: var(--deck-secondary);
+}
+
+.deck-stepper-cluster {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.deck-stepper-btn {
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   background: #FFFFFF;
-  border: 1px solid var(--proj-border);
-  color: var(--proj-secondary);
+  border: 1px solid var(--deck-border);
+  color: var(--deck-secondary);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -156,421 +544,140 @@
   box-shadow: 0 2px 8px rgba(60, 45, 30, 0.05);
 }
 
-.projects-slider-arrow-btn:hover {
-  background: var(--proj-secondary);
+.deck-stepper-btn:hover {
+  background: var(--deck-secondary);
   color: #FFFFFF;
-  border-color: var(--proj-secondary);
+  border-color: var(--deck-secondary);
   transform: scale(1.08);
 }
 
-/* ==========================================================================
-   2. CATEGORY FILTER BAR
-   ========================================================================== */
-.projects-filter-bar {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: clamp(20px, 2.5vw, 32px);
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  padding-bottom: 4px;
-}
-
-.projects-filter-bar::-webkit-scrollbar {
-  display: none;
-}
-
-.projects-filter-btn {
-  background: #FFFFFF;
-  border: 1px solid var(--proj-border);
-  border-radius: 999px;
-  padding: 8px 16px;
-  font-family: var(--font-subheading, 'Manrope', sans-serif);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--proj-text-muted);
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  white-space: nowrap;
-  transition: all 0.25s ease;
-}
-
-.projects-filter-count {
+.deck-counter-text {
   font-family: var(--font-special, 'Bebas Neue', sans-serif);
-  font-size: 0.88rem;
-  padding: 1px 6px;
-  border-radius: 999px;
-  background-color: var(--proj-secondary-soft);
-  color: var(--proj-secondary);
-  line-height: 1;
+  font-size: 1.15rem;
+  letter-spacing: 0.06em;
+  color: var(--deck-text-title);
 }
 
-.projects-filter-btn:hover {
-  border-color: var(--proj-secondary);
-  color: var(--proj-text-title);
-}
-
-.projects-filter-btn.is-active {
-  background: var(--proj-secondary);
-  border-color: var(--proj-secondary);
-  color: #FFFFFF;
-  box-shadow: 0 4px 14px rgba(139, 115, 85, 0.28);
-}
-
-.projects-filter-btn.is-active .projects-filter-count {
-  background: rgba(255, 255, 255, 0.25);
-  color: #FFFFFF;
+.deck-slash {
+  color: var(--deck-secondary);
+  margin: 0 2px;
 }
 
 /* ==========================================================================
-   3. ARCHITECTURAL FILMSTRIP TRACK & CARDS
+   4. RESPONSIVE BREAKPOINTS (Tablets & Mobile View)
    ========================================================================== */
-.projects-filmstrip-track {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: clamp(16px, 2vw, 24px);
-  width: 100%;
-  box-sizing: border-box;
-}
+@media (max-width: 991px) {
+  .deck-card-inner {
+    grid-template-columns: 1fr;
+  }
 
-.project-folio-card {
-  background: var(--proj-card-bg);
-  border: 1px solid var(--proj-border);
-  border-radius: 10px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 6px 20px -6px rgba(60, 45, 30, 0.06);
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.35s ease,
-              border-color 0.35s ease;
-}
+  .deck-card-visual {
+    order: -1; /* Image on top on tablets/mobile */
+    padding: 10px;
+  }
 
-.project-folio-card:hover {
-  transform: translateY(-5px);
-  border-color: var(--proj-border-hover);
-  box-shadow: 0 16px 36px -8px rgba(139, 115, 85, 0.2);
-}
+  .deck-visual-frame {
+    min-height: 300px;
+  }
 
-/* Photo Canvas */
-.project-folio-canvas {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 11;
-  overflow: hidden;
-  background-color: #171513;
-  display: block;
-  text-decoration: none;
-}
-
-.project-folio-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.project-folio-card:hover .project-folio-img {
-  transform: scale(1.06);
-}
-
-.project-folio-canvas-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(28, 26, 23, 0.2) 0%,
-    transparent 50%,
-    rgba(28, 26, 23, 0.35) 100%
-  );
-  pointer-events: none;
-}
-
-.project-folio-category-floating {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  z-index: 2;
-}
-
-.project-folio-category-pill {
-  display: inline-block;
-  background: rgba(28, 26, 23, 0.85);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  color: #F1EDE7;
-  font-family: var(--font-subheading, 'Manrope', sans-serif);
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  padding: 4px 10px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-.project-folio-index-badge {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  background: #FFFFFF;
-  color: var(--proj-secondary);
-  font-family: var(--font-special, 'Bebas Neue', sans-serif);
-  font-size: 1rem;
-  line-height: 1;
-  padding: 3px 8px;
-  border-radius: 3px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-  z-index: 2;
-}
-
-/* Card Body */
-.project-folio-body {
-  padding: 22px 20px 20px;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  box-sizing: border-box;
-}
-
-.project-folio-meta-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  margin-bottom: 8px;
-}
-
-.project-folio-location {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  font-family: var(--font-subheading, 'Manrope', sans-serif);
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--proj-secondary);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.project-folio-loc-icon {
-  flex-shrink: 0;
-  color: var(--proj-secondary);
-}
-
-.project-folio-type-tag {
-  font-family: var(--font-subheading, 'Manrope', sans-serif);
-  font-size: 0.62rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--proj-text-muted);
-  background: var(--proj-bg);
-  padding: 2px 7px;
-  border-radius: 3px;
-  flex-shrink: 0;
-}
-
-.project-folio-title {
-  font-family: var(--font-heading, 'Cormorant Garamond', serif);
-  font-size: 1.25rem;
-  font-weight: 600;
-  line-height: 1.25;
-  letter-spacing: -0.01em;
-  margin: 0 0 10px 0;
-  text-transform: uppercase;
-}
-
-.project-folio-title a {
-  color: var(--proj-text-title) !important;
-  text-decoration: none;
-  transition: color 0.25s ease;
-}
-
-.project-folio-title a:hover {
-  color: var(--proj-secondary) !important;
-}
-
-.project-folio-desc {
-  font-size: 0.88rem;
-  line-height: 1.62;
-  color: var(--proj-text-body) !important;
-  margin: 0 0 18px 0;
-  flex-grow: 1;
-}
-
-.project-folio-footer {
-  margin-top: auto;
-  padding-top: 14px;
-  border-top: 1px dashed var(--proj-border);
-}
-
-.project-folio-cta-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  font-family: var(--font-subheading, 'Manrope', sans-serif);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--proj-secondary) !important;
-  text-decoration: none;
-  transition: all 0.25s ease;
-}
-
-.project-folio-cta-icon {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: var(--proj-secondary-soft);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--proj-secondary);
-  transition: all 0.25s ease;
-}
-
-.project-folio-card:hover .project-folio-cta-link {
-  color: var(--proj-text-title) !important;
-}
-
-.project-folio-card:hover .project-folio-cta-icon {
-  background: var(--proj-secondary);
-  color: #FFFFFF;
-  transform: translate(2px, -2px);
-}
-
-/* ==========================================================================
-   4. MOBILE BOTTOM BAR
-   ========================================================================== */
-.projects-mobile-bottom-bar {
-  display: none;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  margin-top: 18px;
-}
-
-.projects-mobile-dots {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.projects-mobile-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 999px;
-  background: rgba(139, 115, 85, 0.3);
-  transition: all 0.3s ease;
-}
-
-.projects-mobile-dot.is-active {
-  width: 20px;
-  background: var(--proj-secondary);
-}
-
-.projects-mobile-view-all {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-family: var(--font-subheading, 'Manrope', sans-serif);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--proj-secondary) !important;
-  text-decoration: none;
-}
-
-/* ==========================================================================
-   5. RESPONSIVE BREAKPOINTS (Tablets & Mobile View)
-   ========================================================================== */
-@media (max-width: 1080px) {
-  .projects-filmstrip-track {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+  .deck-cards-stack-container {
+    min-height: 640px;
   }
 }
 
 @media (max-width: 768px) {
-  .projects-filmstrip-root {
+  .deck-section-root {
     padding-top: 36px;
     padding-bottom: 40px;
   }
 
-  .projects-slider-arrows-wrap {
-    display: none; /* Mobile uses natural thumb swipe */
-  }
-
-  .projects-view-all-link {
-    display: none; /* Moved to bottom bar for clean header */
-  }
-
-  .projects-filmstrip-heading {
+  .deck-main-heading {
     font-size: 1.85rem;
   }
 
-  /* NATIVE HORIZONTAL TOUCH-SNAP FILMSTRIP */
-  .projects-filmstrip-track {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    gap: 16px;
-    padding-left: 2px;
-    padding-right: 20px;
-    margin-right: -16px; /* Allows peek off-screen */
+  .deck-subheading {
+    font-size: 0.88rem;
   }
 
-  .projects-filmstrip-track::-webkit-scrollbar {
+  .deck-stage-wrapper {
+    padding-top: 36px;
+  }
+
+  .deck-card {
+    border-radius: 14px;
+  }
+
+  .deck-cards-stack-container {
+    min-height: 580px;
+  }
+
+  .deck-card-content {
+    padding: 20px 18px 22px;
+  }
+
+  .deck-card-big-num {
+    font-size: 2.8rem;
+  }
+
+  .deck-card-title {
+    font-size: 1.35rem;
+    margin-bottom: 10px;
+  }
+
+  .deck-card-desc {
+    font-size: 0.86rem;
+    line-height: 1.62;
+    margin-bottom: 18px;
+  }
+
+  .deck-visual-frame {
+    min-height: 240px;
+  }
+
+  .deck-swipe-hint-pill {
     display: none;
   }
 
-  .project-folio-card {
-    flex: 0 0 84vw;
-    max-width: 330px;
-    scroll-snap-align: start;
-    border-radius: 8px;
+  .deck-controls-bottom-bar {
+    justify-content: center;
+    gap: 20px;
   }
 
-  .project-folio-body {
-    padding: 18px 16px 16px;
+  .deck-bottom-left {
+    width: 100%;
+    text-align: center;
+    order: 3;
   }
 
-  .project-folio-title {
-    font-size: 1.15rem;
-  }
-
-  .project-folio-desc {
-    font-size: 0.84rem;
-    margin-bottom: 14px;
-  }
-
-  .projects-mobile-bottom-bar {
-    display: flex;
+  .deck-view-all-link {
+    justify-content: center;
+    width: 100%;
   }
 }
 
 @media (max-width: 480px) {
-  .projects-filmstrip-heading {
-    font-size: 1.7rem;
+  .deck-main-heading {
+    font-size: 1.65rem;
   }
 
-  .project-folio-card {
-    flex: 0 0 86vw;
-    max-width: 310px;
+  .deck-cards-stack-container {
+    min-height: 540px;
+  }
+
+  .deck-visual-frame {
+    min-height: 210px;
+  }
+
+  .deck-card-content {
+    padding: 16px 14px 18px;
+  }
+
+  .deck-card-title {
+    font-size: 1.25rem;
+  }
+
+  .deck-card-cta-btn {
+    width: 100%;
+    justify-content: center;
   }
 }
