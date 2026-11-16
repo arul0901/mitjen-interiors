@@ -137,6 +137,30 @@ export const ArchitecturalProjectShowcase: React.FC = () => {
         });
       });
 
+      // Subtle Parallax on large photographic canvases (desktop/tablet)
+      if (typeof window !== 'undefined' && window.innerWidth > 768) {
+        const parallaxImages = rootRef.current?.querySelectorAll<HTMLElement>(
+          '.arch-main-canvas-img, .arch-cinematic-canvas-img, .arch-asym-dominant-img, .arch-intro-img'
+        );
+        parallaxImages?.forEach((img) => {
+          activeGsap.fromTo(
+            img,
+            { yPercent: -4, scale: 1.04 },
+            {
+              yPercent: 4,
+              scale: 1,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: img.parentElement || img,
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: 1.2,
+              },
+            }
+          );
+        });
+      }
+
       // Materials section entrance
       activeGsap.from('.arch-materials-card', {
         scrollTrigger: {
@@ -147,6 +171,18 @@ export const ArchitecturalProjectShowcase: React.FC = () => {
         opacity: 0,
         stagger: 0.1,
         duration: 0.75,
+        ease: 'power2.out',
+      });
+
+      // Closing CTA Banner entrance
+      activeGsap.from('.arch-cta-inner', {
+        scrollTrigger: {
+          trigger: '.arch-showcase-cta',
+          start: 'top 85%',
+        },
+        y: 32,
+        opacity: 0,
+        duration: 0.85,
         ease: 'power2.out',
       });
     }, rootRef);

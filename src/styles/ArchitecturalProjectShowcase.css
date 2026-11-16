@@ -262,17 +262,48 @@
   background-color: var(--arch-limestone);
   border: 1px solid var(--arch-border);
   cursor: pointer;
+  border-radius: 4px;
+}
+
+/* Light Sheen Sweep Effect on Canvas Hover */
+.arch-main-canvas-wrap::after,
+.arch-cinematic-canvas-wrap::after,
+.arch-asym-dominant-frame::after,
+.arch-intro-image-frame::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -130%;
+  width: 80%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.09) 50%,
+    transparent 100%
+  );
+  transform: skewX(-25deg);
+  transition: left 0.95s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.arch-main-canvas-wrap:hover::after,
+.arch-cinematic-canvas-wrap:hover::after,
+.arch-asym-dominant-frame:hover::after,
+.arch-intro-image-frame:hover::after {
+  left: 140%;
 }
 
 .arch-main-canvas-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
 }
 
 .arch-main-canvas-wrap:hover .arch-main-canvas-img {
-  transform: scale(1.035);
+  transform: scale(1.04);
 }
 
 .arch-canvas-caption-bar {
@@ -280,31 +311,65 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(18, 17, 16, 0.82) 100%);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(18, 17, 16, 0.88) 100%);
   color: #FFFFFF;
-  padding: 24px 20px 14px;
+  padding: 26px 22px 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 16px;
   font-size: 0.85rem;
+  z-index: 3;
 }
 
 .arch-canvas-caption {
   font-family: var(--font-subheading, 'Manrope', sans-serif);
   letter-spacing: 0.04em;
-  font-weight: 400;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.arch-main-canvas-wrap:hover .arch-canvas-caption {
+  color: #FFFFFF;
 }
 
 .arch-canvas-zoom-hint {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: #E2D9C8;
   opacity: 0.85;
+  background: rgba(28, 27, 25, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.arch-canvas-zoom-hint svg {
+  transition: transform 0.3s ease;
+}
+
+.arch-main-canvas-wrap:hover .arch-canvas-zoom-hint,
+.arch-cinematic-canvas-wrap:hover .arch-canvas-zoom-hint,
+.arch-asym-dominant-frame:hover .arch-canvas-zoom-hint {
+  background: var(--arch-gold);
+  color: #171615;
+  border-color: var(--arch-gold);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 4px 16px rgba(184, 142, 75, 0.4);
+  opacity: 1;
+}
+
+.arch-main-canvas-wrap:hover .arch-canvas-zoom-hint svg,
+.arch-cinematic-canvas-wrap:hover .arch-canvas-zoom-hint svg,
+.arch-asym-dominant-frame:hover .arch-canvas-zoom-hint svg {
+  transform: scale(1.15);
 }
 
 /* Secondary Thumbnail Gallery Strip */
@@ -324,19 +389,31 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  transition: border-color 0.25s ease, opacity 0.25s ease;
-  opacity: 0.7;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s ease,
+              box-shadow 0.3s ease,
+              opacity 0.25s ease;
+  opacity: 0.72;
+  border-radius: 4px;
 }
 
 .arch-thumb-btn:hover {
   opacity: 1;
-  border-color: var(--arch-taupe);
+  border-color: var(--arch-gold);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
 }
 
 .arch-thumb-btn.active {
   opacity: 1;
   border-color: var(--arch-gold);
   border-width: 2px;
+  box-shadow: 0 0 0 1px var(--arch-gold), 0 4px 14px rgba(184, 142, 75, 0.22);
+  transform: translateY(-1px);
+}
+
+.arch-thumb-btn:hover .arch-thumb-img {
+  transform: scale(1.06);
 }
 
 .arch-thumb-img {
@@ -344,6 +421,7 @@
   aspect-ratio: 4 / 3;
   object-fit: cover;
   display: block;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .arch-thumb-label {
@@ -359,6 +437,13 @@
   overflow: hidden;
   text-overflow: ellipsis;
   background-color: var(--arch-limestone);
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.arch-thumb-btn:hover .arch-thumb-label,
+.arch-thumb-btn.active .arch-thumb-label {
+  background-color: var(--arch-ink);
+  color: #FFFFFF;
 }
 
 /* Area Callout & Specifications */
@@ -391,6 +476,14 @@
   border: 1px solid var(--arch-border);
   padding: clamp(20px, 3vw, 32px);
   margin-bottom: 24px;
+  border-radius: 6px;
+  transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
+  position: relative;
+}
+
+.arch-specs-card:hover {
+  border-color: rgba(184, 142, 75, 0.4);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.05);
 }
 
 .arch-specs-card-title {
@@ -414,14 +507,28 @@
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  padding-bottom: 10px;
+  padding: 8px 10px;
   border-bottom: 1px dashed var(--arch-border);
   gap: 16px;
+  border-radius: 4px;
+  transition: background-color 0.22s ease, transform 0.22s ease, padding 0.22s ease;
 }
 
 .arch-specs-row:last-child {
   border-bottom: none;
-  padding-bottom: 0;
+}
+
+.arch-specs-row:hover {
+  background-color: rgba(184, 142, 75, 0.07);
+  transform: translateX(4px);
+}
+
+.arch-specs-row:hover .arch-spec-key {
+  color: var(--arch-gold);
+}
+
+.arch-specs-row:hover .arch-spec-val {
+  color: #000000;
 }
 
 .arch-spec-key {
@@ -432,6 +539,7 @@
   text-transform: uppercase;
   color: var(--arch-taupe);
   margin: 0;
+  transition: color 0.2s ease;
 }
 
 .arch-spec-val {
@@ -441,6 +549,7 @@
   color: var(--arch-ink);
   margin: 0;
   text-align: right;
+  transition: color 0.2s ease, transform 0.2s ease;
 }
 
 /* Consult Button */
@@ -458,15 +567,29 @@
   align-items: center;
   gap: 10px;
   cursor: pointer;
-  transition: all 0.25s ease;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   width: 100%;
   justify-content: space-between;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+}
+
+.arch-consult-btn svg {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .arch-consult-btn:hover {
   background-color: var(--arch-ink);
   color: #FFFFFF;
   border-color: var(--arch-ink);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(28, 27, 25, 0.18);
+}
+
+.arch-consult-btn:hover svg {
+  transform: translateX(6px);
+  color: var(--arch-gold);
 }
 
 /* ==========================================================================
@@ -595,14 +718,26 @@
   align-items: center;
   gap: 10px;
   cursor: pointer;
-  transition: all 0.25s ease;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   width: 100%;
   justify-content: center;
+  border-radius: 4px;
+}
+
+.arch-consult-btn-solid svg {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .arch-consult-btn-solid:hover {
   background-color: var(--arch-gold);
   border-color: var(--arch-gold);
+  color: #171615;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(184, 142, 75, 0.3);
+}
+
+.arch-consult-btn-solid:hover svg {
+  transform: translateX(6px);
 }
 
 /* Cinematic Thumbnail Carousel */
@@ -620,17 +755,26 @@
   cursor: pointer;
   text-align: left;
   overflow: hidden;
-  transition: border-color 0.25s ease, transform 0.25s ease;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s ease,
+              box-shadow 0.3s ease;
+  border-radius: 4px;
 }
 
 .arch-cinematic-thumb-card:hover {
-  border-color: var(--arch-taupe);
-  transform: translateY(-2px);
+  border-color: var(--arch-gold);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
 
 .arch-cinematic-thumb-card.active {
   border-color: var(--arch-gold);
   border-width: 2px;
+  box-shadow: 0 0 0 1px var(--arch-gold), 0 4px 14px rgba(184, 142, 75, 0.22);
+}
+
+.arch-cinematic-thumb-card:hover .arch-cinematic-thumb-img {
+  transform: scale(1.06);
 }
 
 .arch-cinematic-thumb-img {
@@ -638,6 +782,7 @@
   aspect-ratio: 16 / 9;
   object-fit: cover;
   display: block;
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .arch-cinematic-thumb-text {
@@ -651,6 +796,13 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.arch-cinematic-thumb-card:hover .arch-cinematic-thumb-text,
+.arch-cinematic-thumb-card.active .arch-cinematic-thumb-text {
+  background-color: var(--arch-ink);
+  color: #FFFFFF;
 }
 
 /* ==========================================================================
@@ -703,6 +855,14 @@
   background-color: var(--arch-limestone);
   border: 1px solid var(--arch-border);
   cursor: pointer;
+  border-radius: 4px;
+  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.arch-asym-sub-frame:hover {
+  border-color: var(--arch-gold);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
 }
 
 .arch-asym-sub-img {
@@ -786,13 +946,36 @@
   padding: 28px 24px;
   display: flex;
   flex-direction: column;
-  transition: transform 0.3s ease, border-color 0.3s ease;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.35s ease,
+              box-shadow 0.35s ease;
   position: relative;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+/* Elegant gold line that sweeps in at the top on hover */
+.arch-materials-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--arch-gold) 0%, transparent 100%);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.arch-materials-card:hover::before {
+  transform: scaleX(1);
 }
 
 .arch-materials-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--arch-taupe);
+  transform: translateY(-6px);
+  border-color: rgba(184, 142, 75, 0.4);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.07);
 }
 
 .arch-mat-card-header {
@@ -807,6 +990,12 @@
   font-size: 1.5rem;
   color: var(--arch-gold);
   line-height: 1;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.arch-materials-card:hover .arch-mat-num {
+  transform: scale(1.1);
+  color: var(--arch-gold-hover);
 }
 
 .arch-mat-title {
@@ -815,6 +1004,11 @@
   font-weight: 600;
   color: var(--arch-ink);
   margin: 0;
+  transition: color 0.25s ease;
+}
+
+.arch-materials-card:hover .arch-mat-title {
+  color: #000000;
 }
 
 .arch-mat-subtitle {
@@ -856,6 +1050,12 @@
   font-weight: 500;
   position: relative;
   padding-left: 12px;
+  transition: transform 0.22s ease, color 0.22s ease;
+}
+
+.arch-mat-item:hover {
+  transform: translateX(4px);
+  color: #000000;
 }
 
 .arch-mat-item::before {
@@ -863,6 +1063,11 @@
   position: absolute;
   left: 0;
   color: var(--arch-gold);
+  transition: transform 0.22s ease;
+}
+
+.arch-mat-item:hover::before {
+  transform: scale(1.2);
 }
 
 .arch-mat-brands-wrap {
@@ -881,6 +1086,17 @@
   font-weight: 600;
   letter-spacing: 0.04em;
   padding: 4px 9px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: default;
+  border-radius: 3px;
+}
+
+.arch-brand-pill:hover {
+  background: var(--arch-ink);
+  color: #FFFFFF;
+  border-color: var(--arch-gold);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
 .arch-mat-note {
@@ -967,15 +1183,24 @@
   align-items: center;
   gap: 12px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 4px;
+}
+
+.arch-cta-primary-btn svg {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .arch-cta-primary-btn:hover {
   background: #FFFFFF;
   border-color: #FFFFFF;
   color: #181716;
-  transform: translateY(-2px);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+}
+
+.arch-cta-primary-btn:hover svg {
+  transform: translateX(6px);
 }
 
 /* ==========================================================================
