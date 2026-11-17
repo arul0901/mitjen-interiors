@@ -1,26 +1,29 @@
 /* ==========================================================================
    MITJEN INTERIOR DESIGN PORTFOLIO — ULTRA-COMPACT ARCHITECTURAL ATELIER
-   Enhanced, compact, pricing-free residential portfolio showcase.
-   Deep obsidian noir, warm charcoal, and champagne gold aesthetics.
+   Restored authentic light palette (#F9F7F4) with pure white (#FFFFFF) cards.
+   Ultra-compact height, 16:9 letterbox imagery, zero pricing.
    ========================================================================== */
 
 .liv-port-root {
-  --liv-bg: #0B0A09;
-  --liv-bg-surface: #12110F;
-  --liv-bg-card: #171614;
-  --liv-bg-card-hover: #1D1C19;
-  --liv-border: rgba(255, 255, 255, 0.08);
-  --liv-border-subtle: rgba(255, 255, 255, 0.04);
-  --liv-border-hover: rgba(197, 168, 128, 0.35);
-  --liv-gold: #C5A880;
-  --liv-gold-bright: #E2C9A5;
-  --liv-gold-glow: rgba(197, 168, 128, 0.14);
-  --liv-ink: #F7F5F0;
-  --liv-ink-muted: #A39E94;
-  --liv-ink-dim: #6E6960;
-  --liv-green: #68D391;
-  --liv-green-bg: rgba(104, 211, 145, 0.12);
-  --liv-green-border: rgba(104, 211, 145, 0.28);
+  --liv-bg: #F9F7F4;
+  --liv-card-bg: #FFFFFF;
+  --liv-card-alt: #F4EFE9;
+  --liv-border: rgba(30, 26, 22, 0.1);
+  --liv-border-subtle: rgba(30, 26, 22, 0.06);
+  --liv-border-strong: rgba(30, 26, 22, 0.18);
+  --liv-border-hover: rgba(184, 142, 75, 0.45);
+  --liv-ink: #1C1A18;
+  --liv-ink-muted: #615B52;
+  --liv-taupe: #8C8479;
+  --liv-gold: #B88E4B;
+  --liv-gold-bright: #9E7535;
+  --liv-gold-glow: rgba(184, 142, 75, 0.16);
+  --liv-green: #2E7D32;
+  --liv-green-bg: rgba(46, 125, 50, 0.08);
+  --liv-green-border: rgba(46, 125, 50, 0.25);
+  --liv-amber: #C77700;
+  --liv-amber-bg: rgba(199, 119, 0, 0.08);
+  --liv-amber-border: rgba(199, 119, 0, 0.25);
 
   background-color: var(--liv-bg);
   color: var(--liv-ink);
@@ -99,11 +102,12 @@
   display: flex;
   align-items: center;
   gap: clamp(12px, 2vw, 20px);
-  background: var(--liv-bg-surface);
+  background: var(--liv-card-bg);
   border: 1px solid var(--liv-border);
   border-radius: 12px;
   padding: 10px clamp(14px, 2vw, 20px);
   flex-shrink: 0;
+  box-shadow: 0 4px 14px -4px rgba(35, 28, 22, 0.04);
 }
 
 .liv-metric-item {
@@ -125,7 +129,7 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--liv-ink-dim);
+  color: var(--liv-taupe);
 }
 
 .liv-metric-divider {
@@ -138,7 +142,7 @@
    2. UNIFIED COMPACT ARCHITECTURAL CONTROL BAR
    ========================================================================== */
 .liv-control-bar {
-  background: var(--liv-bg-surface);
+  background: var(--liv-card-bg);
   border: 1px solid var(--liv-border);
   border-radius: 14px;
   padding: clamp(10px, 1.5vw, 14px);
@@ -146,7 +150,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  box-shadow: 0 6px 20px -6px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 4px 16px -6px rgba(35, 28, 22, 0.04);
 }
 
 .liv-control-main-row {
@@ -166,7 +170,7 @@
 }
 
 .liv-tab-pill {
-  background: var(--liv-bg-card);
+  background: var(--liv-card-alt);
   border: 1px solid var(--liv-border);
   color: var(--liv-ink-muted);
   padding: 6px 14px;
@@ -182,20 +186,20 @@
 }
 
 .liv-tab-pill:hover {
-  background: var(--liv-bg-card-hover);
+  background: #FFFFFF;
   border-color: var(--liv-border-hover);
   color: var(--liv-ink);
 }
 
 .liv-tab-pill.active {
-  background: var(--liv-gold-glow);
-  border-color: var(--liv-gold);
-  color: var(--liv-gold-bright);
+  background: var(--liv-ink);
+  border-color: var(--liv-ink);
+  color: #FFFFFF;
   font-weight: 700;
 }
 
 .liv-tab-badge {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.06);
   color: inherit;
   font-size: 0.65rem;
   font-weight: 700;
@@ -205,8 +209,8 @@
 }
 
 .liv-tab-pill.active .liv-tab-badge {
-  background: rgba(197, 168, 128, 0.25);
-  color: var(--liv-gold-bright);
+  background: rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
 }
 
 /* Compact Search Box */
@@ -214,7 +218,7 @@
   display: flex;
   align-items: center;
   gap: 7px;
-  background: var(--liv-bg-card);
+  background: var(--liv-card-alt);
   border: 1px solid var(--liv-border);
   border-radius: 999px;
   padding: 5px 12px;
@@ -226,11 +230,11 @@
 .liv-search-box:focus-within {
   border-color: var(--liv-gold);
   box-shadow: 0 0 0 2px var(--liv-gold-glow);
-  background: var(--liv-bg-card-hover);
+  background: #FFFFFF;
 }
 
 .liv-search-icon {
-  color: var(--liv-ink-dim);
+  color: var(--liv-taupe);
   flex-shrink: 0;
 }
 
@@ -245,14 +249,14 @@
 }
 
 .liv-search-field::placeholder {
-  color: var(--liv-ink-dim);
+  color: var(--liv-taupe);
   font-size: 0.74rem;
 }
 
 .liv-search-clear {
   background: transparent;
   border: none;
-  color: var(--liv-ink-muted);
+  color: var(--liv-taupe);
   cursor: pointer;
   padding: 2px;
   display: flex;
@@ -287,7 +291,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--liv-ink-dim);
+  color: var(--liv-taupe);
   margin-right: 2px;
 }
 
@@ -304,12 +308,12 @@
 }
 
 .liv-scope-tag:hover {
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--liv-card-alt);
   color: var(--liv-ink);
 }
 
 .liv-scope-tag.active {
-  background: rgba(197, 168, 128, 0.15);
+  background: var(--liv-gold-glow);
   border-color: var(--liv-gold);
   color: var(--liv-gold-bright);
   font-weight: 600;
@@ -318,14 +322,14 @@
 .liv-results-badge {
   font-size: 0.7rem;
   font-weight: 600;
-  color: var(--liv-ink-dim);
+  color: var(--liv-taupe);
   letter-spacing: 0.04em;
 }
 
 /* ==========================================================================
    3. ULTRA-COMPACT ARCHITECTURAL PROJECTS GRID
-   Compact 2-to-3 column responsive grid with letterbox 16:9 imagery.
-   Vertical card footprint reduced from 720px down to ~360px!
+   Light palette (#FFFFFF cards on #F9F7F4 background).
+   Strict 16:9 letterbox imagery, single-row specs strip, ~350px total height.
    ========================================================================== */
 .liv-projects-grid {
   display: grid;
@@ -335,7 +339,7 @@
 }
 
 .liv-arch-card {
-  background: var(--liv-bg-card);
+  background: var(--liv-card-bg);
   border: 1px solid var(--liv-border);
   border-radius: 14px;
   overflow: hidden;
@@ -343,14 +347,13 @@
   flex-direction: column;
   transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
-  box-shadow: 0 8px 22px -8px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 4px 16px -4px rgba(35, 28, 22, 0.05);
 }
 
 .liv-arch-card:hover {
   transform: translateY(-3px);
   border-color: var(--liv-border-hover);
-  background: var(--liv-bg-card-hover);
-  box-shadow: 0 14px 32px -10px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(197, 168, 128, 0.18);
+  box-shadow: 0 12px 28px -6px rgba(35, 28, 22, 0.12);
 }
 
 /* Media Wrap — Strict Compact 16:9 Letterbox (Max height 220px) */
@@ -361,7 +364,7 @@
   max-height: 220px;
   overflow: hidden;
   cursor: pointer;
-  background-color: #0E0D0B;
+  background-color: #ECE7DF;
 }
 
 .liv-arch-img {
@@ -381,9 +384,9 @@
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(11, 10, 9, 0.2) 0%,
-    rgba(11, 10, 9, 0) 45%,
-    rgba(11, 10, 9, 0.6) 100%
+    rgba(28, 26, 24, 0.15) 0%,
+    rgba(28, 26, 24, 0) 45%,
+    rgba(28, 26, 24, 0.45) 100%
   );
   pointer-events: none;
 }
@@ -393,11 +396,10 @@
   position: absolute;
   top: 10px;
   left: 10px;
-  background: rgba(18, 16, 14, 0.84);
+  background: rgba(28, 26, 24, 0.78);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  color: var(--liv-ink);
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #FFFFFF;
   padding: 3px 8px;
   border-radius: 999px;
   font-size: 0.62rem;
@@ -431,8 +433,8 @@
   position: absolute;
   bottom: 12px;
   right: 12px;
-  background: rgba(197, 168, 128, 0.94);
-  color: #11100E;
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--liv-ink);
   padding: 4px 11px;
   border-radius: 999px;
   font-size: 0.68rem;
@@ -444,6 +446,7 @@
   opacity: 0;
   transform: translateY(4px);
   transition: all 0.22s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .liv-arch-card:hover .liv-media-hover-indicator {
@@ -467,7 +470,7 @@
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--liv-gold);
+  color: var(--liv-gold-bright);
   margin-bottom: 4px;
 }
 
@@ -478,7 +481,7 @@
 }
 
 .liv-meta-separator {
-  color: var(--liv-ink-dim);
+  color: var(--liv-taupe);
 }
 
 .liv-arch-bhk-tag {
@@ -497,12 +500,12 @@
 }
 
 .liv-arch-title:hover {
-  color: var(--liv-gold-bright);
+  color: var(--liv-gold);
 }
 
 .liv-arch-address {
   font-size: 0.74rem;
-  color: var(--liv-ink-dim);
+  color: var(--liv-taupe);
   margin: 0 0 10px 0;
   line-height: 1.35;
 }
@@ -513,7 +516,7 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 8px;
   padding: 8px 10px;
-  background: var(--liv-bg-surface);
+  background: var(--liv-card-alt);
   border: 1px solid var(--liv-border-subtle);
   border-radius: 8px;
   margin-bottom: 12px;
@@ -531,7 +534,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: var(--liv-ink-dim);
+  color: var(--liv-taupe);
 }
 
 .liv-spec-data {
@@ -555,7 +558,7 @@
   flex: 1;
   background: transparent;
   color: var(--liv-ink);
-  border: 1px solid var(--liv-border);
+  border: 1px solid var(--liv-border-strong);
   padding: 7px 12px;
   border-radius: 999px;
   font-size: 0.7rem;
@@ -570,16 +573,15 @@
 }
 
 .liv-btn-view-gallery:hover {
-  background: var(--liv-bg-card-hover);
-  border-color: var(--liv-gold);
-  color: var(--liv-gold-bright);
+  background: var(--liv-card-alt);
+  border-color: var(--liv-ink);
 }
 
 .liv-btn-inquire {
   flex: 1;
-  background: var(--liv-gold);
-  color: #11100E !important;
-  border: 1px solid var(--liv-gold);
+  background: var(--liv-ink);
+  color: #FFFFFF !important;
+  border: 1px solid var(--liv-ink);
   padding: 7px 12px;
   border-radius: 999px;
   font-size: 0.7rem;
@@ -592,13 +594,14 @@
   gap: 6px;
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 3px 10px var(--liv-gold-glow);
+  box-shadow: 0 3px 10px rgba(28, 26, 24, 0.12);
 }
 
 .liv-btn-inquire:hover {
-  background: var(--liv-gold-bright);
-  border-color: var(--liv-gold-bright);
-  box-shadow: 0 5px 14px rgba(197, 168, 128, 0.3);
+  background: var(--liv-gold);
+  border-color: var(--liv-gold);
+  transform: translateY(-1px);
+  box-shadow: 0 5px 14px rgba(184, 142, 75, 0.3);
 }
 
 /* Empty State */
@@ -606,7 +609,7 @@
   grid-column: 1 / -1;
   text-align: center;
   padding: 48px 20px;
-  background: var(--liv-bg-card);
+  background: var(--liv-card-bg);
   border: 1px dashed var(--liv-border);
   border-radius: 14px;
 }
@@ -662,19 +665,20 @@
 }
 
 .liv-material-card {
-  background: var(--liv-bg-card);
+  background: var(--liv-card-bg);
   border: 1px solid var(--liv-border);
   border-radius: 12px;
   padding: clamp(16px, 2vw, 20px);
   display: flex;
   flex-direction: column;
   transition: all 0.22s ease;
+  box-shadow: 0 4px 14px -4px rgba(35, 28, 22, 0.04);
 }
 
 .liv-material-card:hover {
   border-color: var(--liv-border-hover);
-  background: var(--liv-bg-card-hover);
   transform: translateY(-2px);
+  box-shadow: 0 8px 20px -6px rgba(35, 28, 22, 0.08);
 }
 
 .liv-mat-top {
@@ -688,7 +692,7 @@
   font-family: var(--font-heading, 'Cormorant Garamond', serif);
   font-size: 1.4rem;
   font-weight: 700;
-  color: var(--liv-gold-bright);
+  color: var(--liv-gold);
   line-height: 1;
 }
 
@@ -702,7 +706,7 @@
 
 .liv-mat-sub {
   font-size: 0.7rem;
-  color: var(--liv-ink-dim);
+  color: var(--liv-taupe);
   margin: 0;
 }
 
@@ -724,7 +728,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--liv-ink-dim);
+  color: var(--liv-taupe);
 }
 
 .liv-mat-tags {
@@ -734,7 +738,7 @@
 }
 
 .liv-mat-tag {
-  background: var(--liv-bg-surface);
+  background: var(--liv-card-alt);
   border: 1px solid var(--liv-border);
   color: var(--liv-ink-muted);
   font-size: 0.68rem;
@@ -744,14 +748,14 @@
 }
 
 .liv-mat-tag.brand {
-  border-color: rgba(197, 168, 128, 0.25);
+  border-color: rgba(184, 142, 75, 0.3);
   color: var(--liv-gold-bright);
-  background: rgba(197, 168, 128, 0.06);
+  background: rgba(184, 142, 75, 0.08);
 }
 
 .liv-mat-note {
   font-size: 0.68rem;
-  color: var(--liv-ink-dim);
+  color: var(--liv-taupe);
   font-style: italic;
   margin: 2px 0 0 0;
   line-height: 1.35;
@@ -761,8 +765,8 @@
    5. ARCHITECTURAL CONSULTATION BANNER (NO PRICING/QUOTES)
    ========================================================================== */
 .liv-consult-banner {
-  background: linear-gradient(135deg, #181614 0%, #11100E 100%);
-  border: 1px solid var(--liv-border-hover);
+  background: linear-gradient(135deg, #1C1A18 0%, #2A241F 100%);
+  color: #FFFFFF;
   border-radius: 16px;
   padding: clamp(22px, 3.5vw, 36px);
   margin-bottom: clamp(40px, 5vw, 64px);
@@ -772,17 +776,8 @@
   gap: 24px;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 12px 32px -10px rgba(0, 0, 0, 0.5);
-}
-
-.liv-consult-banner::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 3px;
-  height: 100%;
-  background: var(--liv-gold);
+  border-left: 4px solid var(--liv-gold);
+  box-shadow: 0 10px 28px -6px rgba(28, 26, 24, 0.25);
 }
 
 .liv-consult-content {
@@ -793,21 +788,21 @@
   font-family: var(--font-heading, 'Cormorant Garamond', serif);
   font-size: clamp(1.4rem, 2.4vw, 1.9rem);
   font-weight: 600;
-  color: var(--liv-ink);
+  color: #FFFFFF;
   margin: 0 0 6px 0;
   line-height: 1.2;
 }
 
 .liv-consult-desc {
   font-size: 0.82rem;
-  color: var(--liv-ink-muted);
+  color: #D6CFBF;
   line-height: 1.5;
   margin: 0;
 }
 
 .liv-consult-cta {
   background-color: var(--liv-gold);
-  color: #11100E !important;
+  color: #171615 !important;
   padding: 10px 20px;
   border-radius: 999px;
   font-size: 0.74rem;
@@ -820,15 +815,15 @@
   border: none;
   cursor: pointer;
   white-space: nowrap;
-  box-shadow: 0 4px 14px var(--liv-gold-glow);
+  box-shadow: 0 4px 14px rgba(184, 142, 75, 0.35);
   transition: all 0.22s ease;
   flex-shrink: 0;
 }
 
 .liv-consult-cta:hover {
-  background-color: var(--liv-gold-bright);
+  background-color: #D4A75E;
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(197, 168, 128, 0.35);
+  box-shadow: 0 6px 18px rgba(184, 142, 75, 0.45);
 }
 
 /* ==========================================================================
@@ -848,21 +843,20 @@
 }
 
 .liv-faq-item {
-  background: var(--liv-bg-card);
+  background: var(--liv-card-bg);
   border: 1px solid var(--liv-border);
   border-radius: 10px;
   overflow: hidden;
-  transition: border-color 0.18s ease, background 0.18s ease;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
 }
 
 .liv-faq-item:hover {
-  border-color: rgba(197, 168, 128, 0.3);
-  background: var(--liv-bg-card-hover);
+  border-color: rgba(184, 142, 75, 0.4);
 }
 
 .liv-faq-item.open {
   border-color: var(--liv-gold);
-  background: var(--liv-bg-card-hover);
+  box-shadow: 0 4px 14px -4px rgba(35, 28, 22, 0.06);
 }
 
 .liv-faq-question-btn {
@@ -884,7 +878,7 @@
 }
 
 .liv-faq-question-btn:hover {
-  color: var(--liv-gold-bright);
+  color: var(--liv-gold);
 }
 
 .liv-faq-chevron {
@@ -902,7 +896,7 @@
   font-size: 0.78rem;
   line-height: 1.55;
   color: var(--liv-ink-muted);
-  border-top: 1px dashed var(--liv-border);
+  border-top: 1px dashed rgba(30, 26, 22, 0.08);
   padding-top: 10px;
 }
 
@@ -912,9 +906,9 @@
 .liv-lightbox-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(11, 10, 9, 0.92);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: rgba(18, 16, 14, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   z-index: 2000;
   display: flex;
   align-items: center;
@@ -924,14 +918,13 @@
 }
 
 .liv-lightbox-dialog {
-  background: #141311;
-  border: 1px solid var(--liv-border-hover);
+  background: #FFFFFF;
   border-radius: 16px;
   max-width: 920px;
   width: 100%;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
   position: relative;
   display: flex;
   flex-direction: column;
@@ -941,12 +934,12 @@
   position: absolute;
   top: 12px;
   right: 12px;
-  background: rgba(20, 19, 17, 0.85);
-  border: 1px solid var(--liv-border);
+  background: rgba(28, 26, 24, 0.7);
+  border: none;
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  color: var(--liv-ink);
+  color: #FFFFFF;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -957,7 +950,7 @@
 
 .liv-lightbox-close-btn:hover {
   background: var(--liv-gold);
-  color: #11100E;
+  color: #171615;
   transform: scale(1.08);
 }
 
@@ -965,7 +958,7 @@
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 10;
-  background-color: #0B0A09;
+  background-color: #1C1A18;
 }
 
 .liv-lightbox-main-img {
@@ -979,24 +972,20 @@
   position: absolute;
   bottom: 12px;
   left: 12px;
-  background: rgba(18, 16, 14, 0.85);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  color: var(--liv-ink);
+  background: rgba(28, 26, 24, 0.82);
+  color: #FFFFFF;
   padding: 4px 10px;
   border-radius: 999px;
   font-size: 0.68rem;
   font-weight: 600;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .liv-lightbox-thumbs-row {
   display: flex;
   gap: 7px;
   padding: 10px 16px;
-  background: #0E0D0B;
-  border-top: 1px solid var(--liv-border);
-  border-bottom: 1px solid var(--liv-border);
+  background: #F8F5F1;
   overflow-x: auto;
   scrollbar-width: thin;
 }
@@ -1010,7 +999,7 @@
   border: 2px solid transparent;
   padding: 0;
   cursor: pointer;
-  opacity: 0.6;
+  opacity: 0.65;
   transition: all 0.18s ease;
 }
 
@@ -1066,7 +1055,7 @@
   font-size: 0.68rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--liv-gold);
+  color: var(--liv-gold-bright);
   font-weight: 700;
   margin: 0 0 8px 0;
 }
@@ -1099,8 +1088,8 @@
 }
 
 .liv-lightbox-spec-cell {
-  background: var(--liv-bg-surface);
-  border: 1px solid var(--liv-border);
+  background: var(--liv-card-alt);
+  border: 1px solid var(--liv-border-subtle);
   border-radius: 6px;
   padding: 6px 10px;
   display: flex;
@@ -1113,7 +1102,7 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: var(--liv-ink-dim);
+  color: var(--liv-taupe);
 }
 
 .liv-spec-cell-val {
