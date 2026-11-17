@@ -7,6 +7,7 @@ import {
   ChevronLeft,
   ChevronRight,
   MoveHorizontal,
+  ArrowDown,
 } from 'lucide-react';
 import { KINETIC_PROJECTS } from './kineticVaneData';
 import './KineticVaneShowcase.css';
@@ -28,6 +29,10 @@ export const KineticVaneShowcase: React.FC = () => {
   const [activeTypoIdx, setActiveTypoIdx] = useState<number>(0);
   const [isAnimating, setIsAnimating] = useState<boolean>(false);
 
+  // Synchronous ref for event listeners
+  const currentIdxRef = useRef<number>(0);
+  currentIdxRef.current = currentIdx;
+
   // Swipe & Drag Tracking Refs
   const touchStartX = useRef<number>(0);
   const touchStartY = useRef<number>(0);
@@ -48,15 +53,23 @@ export const KineticVaneShowcase: React.FC = () => {
       </span>
     ));
 
+  // Smooth scroll helper to advance to portfolio section below
+  const scrollToPortfolio = useCallback(() => {
+    const target = document.getElementById('livspace-portfolio-section');
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, []);
+
   // Core Programmatic Transition Function
   const goToProject = useCallback(
     (targetIdx: number, direction: 'next' | 'prev' = 'next') => {
-      if (isTransitioningRef.current || targetIdx === currentIdx) return;
+      if (isTransitioningRef.current || targetIdx === currentIdxRef.current) return;
       isTransitioningRef.current = true;
       setIsAnimating(true);
 
-      // Choose which typography to display in the vermilion-red environment
-      const typoIdx = direction === 'next' ? currentIdx : targetIdx;
+      const fromIdx = currentIdxRef.current;
+      const typoIdx = direction === 'next' ? fromIdx : targetIdx;
       setActiveTypoIdx(typoIdx);
       setNextIdx(targetIdx);
 
@@ -72,8 +85,8 @@ export const KineticVaneShowcase: React.FC = () => {
       // Master Kinetic Transition Timeline
       const tl = gsap.timeline({
         onComplete: () => {
-          // Update current state to target project
           setCurrentIdx(targetIdx);
+          currentIdxRef.current = targetIdx;
           setNextIdx((targetIdx + 1) % KINETIC_PROJECTS.length);
 
           // Silently reset blade rotation to 0deg (since Front Face now displays the new project image)
@@ -196,49 +209,117 @@ export const KineticVaneShowcase: React.FC = () => {
         1.1
       );
     },
-    [currentIdx]
+    []
   );
 
   const handleNext = useCallback(() => {
-    const next = (currentIdx + 1) % KINETIC_PROJECTS.length;
-    goToProject(next, 'next');
-  }, [currentIdx, goToProject]);
+    const curr = currentIdxRef.current;
+    if (curr < KINETIC_PROJECTS.length - 1) {
+      // While swiping between projects, WAIT and rotate to next (do not go below!)
+      goToProject(curr + 1, 'next');
+    } else {
+      // All images have been shown! Now scroll down to the portfolio below!
+      scrollToPortfolio();
+    }
+  }, [goToProject, scrollToPortfolio]);
 
   const handlePrev = useCallback(() => {
-    const prev = (currentIdx - 1 + KINETIC_PROJECTS.length) % KINETIC_PROJECTS.length;
-    goToProject(prev, 'prev');
-  }, [currentIdx, goToProject]);
-
-  // Touch Swipe Handlers (Mobile & Tablet)
-  const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0].clientX;
-    touchStartY.current = e.touches[0].clientY;
-  };
-
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    const deltaX = e.changedTouches[0].clientX - touchStartX.current;
-    const deltaY = e.changedTouches[0].clientY - touchStartY.current;
-
-    // Horizontal swipe threshold
-    if (Math.abs(deltaX) > 35) {
-      if (deltaX < 0) {
-        handleNext(); // Swiped left -> Next
-      } else {
-        handlePrev(); // Swiped right -> Previous
-      }
-    } else if (Math.abs(deltaY) > 45) {
-      // Vertical swipe fallback on touch
-      if (deltaY < 0) {
-        handleNext(); // Swiped up -> Next
-      } else {
-        handlePrev(); // Swiped down -> Previous
-      }
+    const curr = currentIdxRef.current;
+    if (curr > 0) {
+      goToProject(curr - 1, 'prev');
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-  };
+  }, [goToProject]);
+
+  // Touch & Swipe Event Tracking (Native Non-Passive Listener for Smooth Lock & Release)
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    let startX = 0;
+    let startY = 0;
+    let isTracking = false;
+
+    const onTouchStart = (e: TouchEvent) => {
+      if (e.touches.length !== 1) return;
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+      isTracking = true;
+    };
+
+    const onTouchMove = (e: TouchEvent) => {
+      if (!isTracking || e.touches.length !== 1) return;
+      const curr = currentIdxRef.current;
+      const dx = e.touches[0].clientX - startX;
+      const dy = e.touches[0].clientY - startY;
+
+      // When all images have NOT yet been shown (Project 1 or 2):
+      // LOCK scroll and WAIT! Do not let the page slip down below!
+      if (curr < KINETIC_PROJECTS.length - 1) {
+        if (Math.abs(dx) > 6 || Math.abs(dy) > 6) {
+          if (e.cancelable) {
+            e.preventDefault();
+          }
+        }
+      } else {
+        // When all images HAVE been shown (Project 3):
+        // Allow the user to scroll down smoothly to the portfolio below!
+        // But if they are swiping downwards (finger moving down, dy > 15), lock and allow returning to Project 2
+        if (dy > 15 && Math.abs(dy) > Math.abs(dx)) {
+          if (e.cancelable) {
+            e.preventDefault();
+          }
+        }
+      }
+    };
+
+    const onTouchEnd = (e: TouchEvent) => {
+      if (!isTracking) return;
+      isTracking = false;
+      const touch = e.changedTouches[0];
+      if (!touch) return;
+      const dx = touch.clientX - startX;
+      const dy = touch.clientY - startY;
+      const absDx = Math.abs(dx);
+      const absDy = Math.abs(dy);
+      const curr = currentIdxRef.current;
+
+      // Detect deliberate swipe gesture (horizontal or vertical)
+      if (absDx > 35 || absDy > 35) {
+        // Swipe forward (swipe left or swipe up)
+        if (dx < -35 || dy < -35) {
+          if (curr < KINETIC_PROJECTS.length - 1) {
+            handleNext();
+          } else {
+            // All images shown -> scroll down to the portfolio below!
+            scrollToPortfolio();
+          }
+        }
+        // Swipe backward (swipe right or swipe down)
+        else if (dx > 35 || dy > 35) {
+          if (curr > 0) {
+            handlePrev();
+          }
+        }
+      }
+    };
+
+    el.addEventListener('touchstart', onTouchStart, { passive: true });
+    el.addEventListener('touchmove', onTouchMove, { passive: false });
+    el.addEventListener('touchend', onTouchEnd, { passive: true });
+
+    return () => {
+      el.removeEventListener('touchstart', onTouchStart);
+      el.removeEventListener('touchmove', onTouchMove);
+      el.removeEventListener('touchend', onTouchEnd);
+    };
+  }, [handleNext, handlePrev, scrollToPortfolio]);
 
   // Mouse Drag Handlers (Desktop Swipe / Drag)
   const handleMouseDown = (e: React.MouseEvent) => {
     touchStartX.current = e.clientX;
+    touchStartY.current = e.clientY;
     isDragging.current = true;
   };
 
@@ -246,30 +327,55 @@ export const KineticVaneShowcase: React.FC = () => {
     if (!isDragging.current) return;
     isDragging.current = false;
     const deltaX = e.clientX - touchStartX.current;
-    if (Math.abs(deltaX) > 45) {
-      if (deltaX < 0) {
+    const deltaY = e.clientY - touchStartY.current;
+    const absX = Math.abs(deltaX);
+    const absY = Math.abs(deltaY);
+
+    if (absX > 35 || absY > 35) {
+      if (deltaX < -35 || deltaY < -35) {
         handleNext();
-      } else {
+      } else if (deltaX > 35 || deltaY > 35) {
         handlePrev();
       }
     }
   };
 
-  // Trackpad / Wheel Swipe Handler
-  const handleWheel = (e: React.WheelEvent) => {
-    const now = Date.now();
-    if (now - lastWheelTime.current < 750) return; // Debounce wheel gestures
+  // Wheel & Trackpad Intercept: Locks and waits while swiping, scrolls down after all images shown
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
 
-    const dominantDelta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
-    if (Math.abs(dominantDelta) > 25) {
-      lastWheelTime.current = now;
-      if (dominantDelta > 0) {
-        handleNext();
-      } else {
-        handlePrev();
+    const handleNativeWheel = (e: WheelEvent) => {
+      const curr = currentIdxRef.current;
+
+      // When on Project 0 or 1 and scrolling down:
+      // PREVENT page scroll from going below! Wait and advance to next project!
+      if (curr < KINETIC_PROJECTS.length - 1 && e.deltaY > 0) {
+        e.preventDefault();
+        const now = Date.now();
+        if (now - lastWheelTime.current > 750) {
+          lastWheelTime.current = now;
+          handleNext();
+        }
+      } else if (curr > 0 && e.deltaY < 0) {
+        // When on Project 1 or 2 and scrolling up:
+        // PREVENT page scroll from jumping away! Go back to previous project!
+        e.preventDefault();
+        const now = Date.now();
+        if (now - lastWheelTime.current > 750) {
+          lastWheelTime.current = now;
+          handlePrev();
+        }
       }
-    }
-  };
+      // If curr === 2 (all images have been shown) and e.deltaY > 0:
+      // Allow natural scroll down into the portfolio below!
+    };
+
+    el.addEventListener('wheel', handleNativeWheel, { passive: false });
+    return () => {
+      el.removeEventListener('wheel', handleNativeWheel);
+    };
+  }, [handleNext, handlePrev]);
 
   // Keyboard Arrow Navigation
   useEffect(() => {
@@ -286,17 +392,15 @@ export const KineticVaneShowcase: React.FC = () => {
   }, [handleNext, handlePrev]);
 
   const activeTypo = KINETIC_PROJECTS[activeTypoIdx].transitionTitle;
+  const isLastProject = currentIdx === KINETIC_PROJECTS.length - 1;
 
   return (
     <section
       ref={sectionRef}
-      className="kinetic-showcase-section"
+      className={`kinetic-showcase-section ${isLastProject ? 'all-images-revealed' : 'swiping-locked'}`}
       aria-label="Kinetic Rotating Vane Showcase"
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
-      onWheel={handleWheel}
     >
       <div className="kinetic-viewport">
         {/* ==================================================================
@@ -385,14 +489,15 @@ export const KineticVaneShowcase: React.FC = () => {
         </div>
 
         {/* ==================================================================
-            3. INTERACTIVE FLOATING ARROWS (PREV / NEXT)
+            3. INTERACTIVE FLOATING ARROWS (PREV / NEXT OR SCROLL DOWN)
             ================================================================== */}
         <button
           type="button"
           onClick={handlePrev}
           className="kinetic-arrow-btn prev"
           aria-label="Previous Architectural Project"
-          disabled={isAnimating}
+          disabled={isAnimating || currentIdx === 0}
+          style={{ opacity: currentIdx === 0 ? 0.35 : 1 }}
         >
           <ChevronLeft size={22} />
         </button>
@@ -401,10 +506,11 @@ export const KineticVaneShowcase: React.FC = () => {
           type="button"
           onClick={handleNext}
           className="kinetic-arrow-btn next"
-          aria-label="Next Architectural Project"
+          aria-label={isLastProject ? 'Scroll down to portfolio' : 'Next Architectural Project'}
           disabled={isAnimating}
+          title={isLastProject ? 'Explore Full Portfolio' : 'Next Space'}
         >
-          <ChevronRight size={22} />
+          {isLastProject ? <ArrowDown size={22} /> : <ChevronRight size={22} />}
         </button>
 
         {/* ==================================================================
@@ -419,10 +525,19 @@ export const KineticVaneShowcase: React.FC = () => {
               <span>{currentProject.category}</span>
             </div>
 
-            {/* Swipe Guide Pill */}
+            {/* Dynamic Swipe / Scroll Indicator */}
             <div className="kinetic-swipe-badge">
-              <MoveHorizontal size={14} className="kinetic-swipe-icon" />
-              <span>SWIPE OR DRAG TO ROTATE</span>
+              {isLastProject ? (
+                <>
+                  <ArrowDown size={14} className="kinetic-swipe-icon" />
+                  <span>ALL IMAGES SHOWN • SWIPE DOWN TO CONTINUE</span>
+                </>
+              ) : (
+                <>
+                  <MoveHorizontal size={14} className="kinetic-swipe-icon" />
+                  <span>SWIPE TO REVEAL NEXT SPACE (WAIT)</span>
+                </>
+              )}
             </div>
 
             <div className="kinetic-status-pill">
@@ -451,19 +566,34 @@ export const KineticVaneShowcase: React.FC = () => {
               <span className="kinetic-specs-tag">Architectural Scope</span>
               <span className="kinetic-specs-val">{currentProject.scope}</span>
 
-              {/* Chapter Navigation Tabs */}
-              <div className="kinetic-nav-strip">
-                {KINETIC_PROJECTS.map((proj, idx) => (
+              {/* Action row on bottom right */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap', justifyContent: 'flex-end' }}>
+                {isLastProject && (
                   <button
-                    key={proj.id}
                     type="button"
-                    onClick={() => goToProject(idx, idx > currentIdx ? 'next' : 'prev')}
-                    className={`kinetic-nav-btn ${idx === currentIdx ? 'active' : ''}`}
-                    disabled={isAnimating}
+                    onClick={scrollToPortfolio}
+                    className="kinetic-explore-cta-pill"
+                    aria-label="Scroll down to authentic portfolio"
                   >
-                    {idx === 0 ? '01 SALON' : idx === 1 ? '02 SUITE' : '03 MILLWORK'}
+                    <span>View All 4 Projects</span>
+                    <ArrowDown size={13} />
                   </button>
-                ))}
+                )}
+
+                {/* Chapter Navigation Tabs */}
+                <div className="kinetic-nav-strip">
+                  {KINETIC_PROJECTS.map((proj, idx) => (
+                    <button
+                      key={proj.id}
+                      type="button"
+                      onClick={() => goToProject(idx, idx > currentIdx ? 'next' : 'prev')}
+                      className={`kinetic-nav-btn ${idx === currentIdx ? 'active' : ''}`}
+                      disabled={isAnimating}
+                    >
+                      {idx === 0 ? '01 SALON' : idx === 1 ? '02 SUITE' : '03 MILLWORK'}
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
           </div>

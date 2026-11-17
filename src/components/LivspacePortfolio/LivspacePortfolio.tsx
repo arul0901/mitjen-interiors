@@ -96,7 +96,7 @@ export const LivspacePortfolio: React.FC = () => {
   };
 
   return (
-    <div className="liv-port-root">
+    <div className="liv-port-root" id="livspace-portfolio-section">
       <div className="liv-port-container">
         {/* ==================================================================
             1. HERO SECTION & PILLARS

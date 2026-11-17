@@ -11,6 +11,13 @@
   cursor: grab;
   user-select: none;
   -webkit-user-select: none;
+}
+
+.kinetic-showcase-section.swiping-locked {
+  touch-action: none;
+}
+
+.kinetic-showcase-section.all-images-revealed {
   touch-action: pan-y pinch-zoom;
 }
 
@@ -546,6 +553,32 @@
 .kinetic-nav-btn.active {
   background: #C5A059;
   color: #0B0A09;
+}
+
+/* Dynamic CTA Pill on last image to scroll down */
+.kinetic-explore-cta-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #C5A059;
+  color: #0B0A09;
+  border: 1px solid #C5A059;
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 8px 24px rgba(197, 160, 89, 0.4);
+}
+
+.kinetic-explore-cta-pill:hover {
+  background: #FFFFFF;
+  border-color: #FFFFFF;
+  color: #0B0A09;
+  transform: translateY(-2px);
 }
 
 /* Scroll Hint Indicator */
