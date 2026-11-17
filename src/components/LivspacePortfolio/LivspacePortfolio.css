@@ -1090,6 +1090,156 @@
 }
 
 /* ==========================================================================
+   8B. MATERIALS & CRAFTSMANSHIP SECTION
+   ========================================================================== */
+.liv-materials-section {
+  padding: 60px 0;
+  border-bottom: 1px solid var(--liv-border);
+}
+
+.liv-materials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.liv-material-card {
+  background: #FFFFFF;
+  border: 1px solid var(--liv-border);
+  border-radius: 14px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  position: relative;
+}
+
+.liv-material-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(28, 26, 24, 0.06);
+  border-color: rgba(197, 160, 89, 0.4);
+}
+
+.liv-mat-num {
+  font-family: var(--font-body, monospace);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--liv-gold);
+  letter-spacing: 0.14em;
+  margin-bottom: 6px;
+}
+
+.liv-mat-title {
+  font-family: var(--font-heading, 'Cormorant Garamond', serif);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--liv-ink);
+  margin: 0 0 4px 0;
+}
+
+.liv-mat-sub {
+  font-size: 0.78rem;
+  color: var(--liv-ink-muted);
+  margin-bottom: 16px;
+  line-height: 1.4;
+}
+
+.liv-mat-block {
+  margin-bottom: 12px;
+}
+
+.liv-mat-label {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--liv-ink-muted);
+  margin-bottom: 6px;
+}
+
+.liv-mat-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.liv-mat-chip {
+  display: inline-block;
+  padding: 3px 9px;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  background: #F8F5F1;
+  color: var(--liv-ink);
+  border: 1px solid rgba(226, 219, 209, 0.6);
+}
+
+.liv-mat-chip.brand {
+  background: rgba(197, 160, 89, 0.1);
+  color: #8C6F34;
+  font-weight: 600;
+  border-color: rgba(197, 160, 89, 0.3);
+}
+
+.liv-mat-note {
+  font-size: 0.72rem;
+  color: #7A756D;
+  font-style: italic;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px dashed var(--liv-border);
+}
+
+/* Lightbox Specifications Grid */
+.liv-lightbox-specs-wrap {
+  margin-bottom: 22px;
+  padding: 16px;
+  background: #F8F5F1;
+  border-radius: 10px;
+  border: 1px solid var(--liv-border);
+}
+
+.liv-lightbox-specs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px 16px;
+}
+
+.liv-lightbox-spec-cell {
+  display: flex;
+  flex-direction: column;
+}
+
+.liv-spec-cell-label {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--liv-ink-muted);
+  font-weight: 600;
+}
+
+.liv-spec-cell-val {
+  font-size: 0.82rem;
+  color: var(--liv-ink);
+  font-weight: 600;
+}
+
+@media (max-width: 1024px) {
+  .liv-materials-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .liv-materials-grid {
+    grid-template-columns: 1fr;
+  }
+  .liv-lightbox-specs-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
    9. RESPONSIVE DESIGN (TABLETS & MOBILE)
    ========================================================================== */
 @media (max-width: 1024px) {

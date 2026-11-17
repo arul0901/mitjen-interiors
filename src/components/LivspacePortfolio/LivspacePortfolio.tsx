@@ -18,6 +18,7 @@ import {
   PORTFOLIO_PROJECTS,
   BUDGET_TIERS,
   PORTFOLIO_FAQS,
+  MATERIAL_SPECIFICATIONS,
   PortfolioProject,
 } from '../../data/livspacePortfolioData';
 import './LivspacePortfolio.css';
@@ -51,10 +52,10 @@ export const LivspacePortfolio: React.FC = () => {
     gridSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
-  // Derived unique cities and scopes
-  const cities = ['All', 'Bangalore', 'Coimbatore', 'Chennai', 'Hyderabad'];
-  const bhkOptions = ['All', '1-BHK', '2-BHK', '3-BHK', '4-BHK / Villa'];
-  const scopeOptions = ['All', 'Full Home', 'Kitchen', 'Kids Bedroom', 'Living Room', 'Wardrobe', 'Pooja Room', 'Space Saving'];
+  // Derived authentic cities, BHKs and scopes from verified projects
+  const cities = ['All', 'Coimbatore', 'Bangalore'];
+  const bhkOptions = ['All', '3-BHK', '4-BHK', '6-BHK / Villa'];
+  const scopeOptions = ['All', 'Full Home', 'Living Room', 'Dining Area', 'Master Bedroom', 'Kitchen', 'Private Study', 'Villa Staircase'];
 
   // Filtered Projects Computation
   const filteredProjects = useMemo(() => {
@@ -174,8 +175,8 @@ export const LivspacePortfolio: React.FC = () => {
                   </span>
                 </div>
                 <p className="liv-pillar-desc">
-                  Proposed project visualizations and floor-plan designs customized for premier residential
-                  societies (Prestige, Sobha, Godrej, Brigade).
+                  Proposed architectural extensions, sky lounges, and garden pavilion designs tailored for our clients
+                  in Coimbatore and Bengaluru.
                 </p>
               </div>
               <div className="liv-pillar-action">
@@ -411,6 +412,55 @@ export const LivspacePortfolio: React.FC = () => {
         </section>
 
         {/* ==================================================================
+            4B. MATERIALS & CRAFTSMANSHIP SPECIFICATIONS
+            ================================================================== */}
+        <section className="liv-materials-section" aria-labelledby="materials-section-title">
+          <div className="liv-budget-header">
+            <span className="liv-port-eyebrow">• CRAFTSMANSHIP &amp; VERIFIED MATERIALS</span>
+            <h2 id="materials-section-title" className="liv-budget-title">
+              Materials. Craftsmanship. Detail.
+            </h2>
+            <p className="liv-budget-subtitle">
+              A closer look at the verified architectural materials and industry-leading brand partners that define our residential spaces.
+            </p>
+          </div>
+
+          <div className="liv-materials-grid">
+            {MATERIAL_SPECIFICATIONS.map((mat) => (
+              <div key={mat.id} className="liv-material-card">
+                <span className="liv-mat-num">{mat.number}</span>
+                <h3 className="liv-mat-title">{mat.title}</h3>
+                <p className="liv-mat-sub">{mat.subtitle}</p>
+
+                <div className="liv-mat-block">
+                  <span className="liv-mat-label">Supplied Materials:</span>
+                  <div className="liv-mat-chips">
+                    {mat.materials.map((m, idx) => (
+                      <span key={idx} className="liv-mat-chip">
+                        {m}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="liv-mat-block">
+                  <span className="liv-mat-label">Verified Brands:</span>
+                  <div className="liv-mat-chips">
+                    {mat.brands.map((b, idx) => (
+                      <span key={idx} className="liv-mat-chip brand">
+                        {b}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {mat.note && <p className="liv-mat-note">{mat.note}</p>}
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ==================================================================
             5. DESIGNS FOR EVERY BUDGET SECTION
             ================================================================== */}
         <section className="liv-budget-section" aria-labelledby="budget-section-title">
@@ -605,6 +655,22 @@ export const LivspacePortfolio: React.FC = () => {
                   </div>
                 ))}
               </div>
+
+              {selectedProject.specifications && selectedProject.specifications.length > 0 && (
+                <div className="liv-lightbox-specs-wrap">
+                  <h4 style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '12px', color: 'var(--liv-ink)' }}>
+                    Architectural Specifications
+                  </h4>
+                  <div className="liv-lightbox-specs-grid">
+                    {selectedProject.specifications.map((spec, sIdx) => (
+                      <div key={sIdx} className="liv-lightbox-spec-cell">
+                        <span className="liv-spec-cell-label">{spec.label}</span>
+                        <span className="liv-spec-cell-val">{spec.value}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               <div className="liv-lightbox-cta-bar">
                 <button
