@@ -40,6 +40,55 @@ export const LivspacePortfolio: React.FC = () => {
   const [activeModalTab, setActiveModalTab] = useState<'materials' | 'gallery'>('materials');
   const [activeImageIndex, setActiveImageIndex] = useState<number>(0);
   const [galleryViewMode, setGalleryViewMode] = useState<'stage' | 'grid'>('grid'); // Default to grid view
+  const [imageLoaded, setImageLoaded] = useState<boolean>(true);
+
+  const filmstripRef = useRef<HTMLDivElement>(null);
+  const touchStartXRef = useRef<number>(0);
+  const touchStartYRef = useRef<number>(0);
+
+  // Preload all high-res photography of the selected project immediately upon opening
+  useEffect(() => {
+    if (selectedProject?.galleryImages) {
+      selectedProject.galleryImages.forEach((img) => {
+        const p = new Image();
+        p.src = img.url;
+      });
+    }
+  }, [selectedProject]);
+
+  // Auto-scroll the filmstrip to ensure the active space thumbnail is always visible in view
+  useEffect(() => {
+    if (activeModalTab === 'gallery' && galleryViewMode === 'stage' && filmstripRef.current) {
+      const activeThumb = filmstripRef.current.querySelector(
+        '.liv-gallery-filmstrip-thumb.active'
+      ) as HTMLElement;
+      if (activeThumb) {
+        activeThumb.scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest',
+          inline: 'center',
+        });
+      }
+    }
+  }, [activeImageIndex, activeModalTab, galleryViewMode]);
+
+  // Touch Swipe Handlers for Mobile & Tablet Walkthrough
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartXRef.current = e.touches[0].clientX;
+    touchStartYRef.current = e.touches[0].clientY;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    const dx = e.changedTouches[0].clientX - touchStartXRef.current;
+    const dy = e.changedTouches[0].clientY - touchStartYRef.current;
+    if (Math.abs(dx) > 35 && Math.abs(dx) > Math.abs(dy)) {
+      if (dx < 0) {
+        handleNextImage();
+      } else {
+        handlePrevImage();
+      }
+    }
+  };
 
   // FAQ Accordion State (first item open by default)
   const [openFaqIndices, setOpenFaqIndices] = useState<number[]>([0]);
@@ -93,10 +142,12 @@ export const LivspacePortfolio: React.FC = () => {
         setSelectedProject(null);
       } else if (activeModalTab === 'gallery' && galleryViewMode === 'stage') {
         if (e.key === 'ArrowLeft') {
+          setImageLoaded(false);
           setActiveImageIndex((prev) =>
             prev === 0 ? selectedProject.galleryImages.length - 1 : prev - 1
           );
         } else if (e.key === 'ArrowRight') {
+          setImageLoaded(false);
           setActiveImageIndex((prev) =>
             prev === selectedProject.galleryImages.length - 1 ? 0 : prev + 1
           );
@@ -183,6 +234,7 @@ export const LivspacePortfolio: React.FC = () => {
 
   const handlePrevImage = () => {
     if (!selectedProject) return;
+    setImageLoaded(false);
     setActiveImageIndex((prev) =>
       prev === 0 ? selectedProject.galleryImages.length - 1 : prev - 1
     );
@@ -190,6 +242,7 @@ export const LivspacePortfolio: React.FC = () => {
 
   const handleNextImage = () => {
     if (!selectedProject) return;
+    setImageLoaded(false);
     setActiveImageIndex((prev) =>
       prev === selectedProject.galleryImages.length - 1 ? 0 : prev + 1
     );
@@ -587,7 +640,9 @@ export const LivspacePortfolio: React.FC = () => {
             aria-modal="true"
           >
             <div
-              className="liv-lightbox-dialog"
+              className={`liv-lightbox-dialog ${
+                activeModalTab === 'gallery' && galleryViewMode === 'stage' ? 'stage-mode' : ''
+              }`}
               onClick={(e) => e.stopPropagation()}
               onWheel={(e) => e.stopPropagation()}
             >
@@ -747,11 +802,30 @@ export const LivspacePortfolio: React.FC = () => {
                   /* --- STAGE WALKTHROUGH VIEW --- */
                   <div className="liv-gallery-stage-view">
                     {/* Stage Screen with Constrained Height, Floating Nav Chevrons & Room Pill */}
-                    <div className="liv-gallery-stage-media">
+                    <div
+                      className="liv-gallery-stage-media"
+                      onTouchStart={handleTouchStart}
+                      onTouchEnd={handleTouchEnd}
+                    >
+                      {/* Atmospheric Ambient Glow behind image */}
+                      <div
+                        className="liv-gallery-stage-ambient-bg"
+                        style={{
+                          backgroundImage: `url("${
+                            selectedProject.galleryImages[activeImageIndex]?.url || selectedProject.coverImage
+                          }")`,
+                        }}
+                      />
+
                       <img
+                        key={activeImageIndex}
                         src={selectedProject.galleryImages[activeImageIndex]?.url || selectedProject.coverImage}
                         alt={selectedProject.galleryImages[activeImageIndex]?.caption || selectedProject.title}
-                        className="liv-gallery-stage-img"
+                        className={`liv-gallery-stage-img ${imageLoaded ? 'loaded' : ''}`}
+                        onLoad={() => setImageLoaded(true)}
+                        onError={(e) => {
+                          (e.currentTarget as HTMLImageElement).src = selectedProject.coverImage;
+                        }}
                       />
                       <div className="liv-gallery-stage-scrim" />
 
@@ -783,7 +857,7 @@ export const LivspacePortfolio: React.FC = () => {
                             onClick={handlePrevImage}
                             className="liv-gallery-nav-btn prev"
                             aria-label="Previous photograph"
-                            title="Previous (Left Arrow)"
+                            title="Previous (Left Arrow / Swipe Right)"
                           >
                             <ChevronLeft size={20} />
                           </button>
@@ -792,7 +866,7 @@ export const LivspacePortfolio: React.FC = () => {
                             onClick={handleNextImage}
                             className="liv-gallery-nav-btn next"
                             aria-label="Next photograph"
-                            title="Next (Right Arrow)"
+                            title="Next (Right Arrow / Swipe Left)"
                           >
                             <ChevronRight size={20} />
                           </button>
@@ -825,16 +899,21 @@ export const LivspacePortfolio: React.FC = () => {
                     </div>
 
                     {/* Filmstrip / Thumbnail Dock (Always visible on screen) */}
-                    <div className="liv-gallery-filmstrip">
+                    <div ref={filmstripRef} className="liv-gallery-filmstrip">
                       {selectedProject.galleryImages.map((img, idx) => (
                         <button
                           key={idx}
                           type="button"
-                          onClick={() => setActiveImageIndex(idx)}
+                          onClick={() => {
+                            if (idx !== activeImageIndex) {
+                              setImageLoaded(false);
+                              setActiveImageIndex(idx);
+                            }
+                          }}
                           className={`liv-gallery-filmstrip-thumb ${idx === activeImageIndex ? 'active' : ''}`}
                           aria-label={`View photo ${idx + 1}: ${img.room}`}
                         >
-                          <img src={img.url} alt={img.caption} />
+                          <img src={img.url} alt={img.caption} loading="lazy" />
                           <div className="liv-filmstrip-overlay">
                             <span className="liv-filmstrip-room-label">{img.room}</span>
                           </div>

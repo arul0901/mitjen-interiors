@@ -1296,31 +1296,123 @@
 }
 
 /* TAB 2: ADVANCED MULTI-IMAGE GALLERY BODY */
+/* ==========================================================================
+   TAB 2: ADVANCED MULTI-IMAGE GALLERY BODY & VIEWPORT-FITTED CINEMA STAGE
+   ========================================================================== */
 .liv-modal-gallery-body {
   display: flex;
   flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+/* STAGE WALKTHROUGH MODE: Pure Viewport Cinema Stage (Zero Vertical Scrolling) */
+.liv-lightbox-dialog.stage-mode {
+  max-width: 1040px;
+  width: 94vw;
+  height: 88vh;
+  height: 88dvh;
+  max-height: 840px;
+  overflow: hidden !important;
+  background: #141311 !important;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  flex-direction: column;
+}
+
+.liv-lightbox-dialog.stage-mode .liv-modal-header-deck {
+  background: #181715;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
+}
+
+.liv-lightbox-dialog.stage-mode .liv-modal-title {
+  color: #FFFFFF;
+}
+
+.liv-lightbox-dialog.stage-mode .liv-modal-address-line {
+  color: #9C9488;
+}
+
+.liv-lightbox-dialog.stage-mode .liv-modal-tabs-group {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.liv-lightbox-dialog.stage-mode .liv-modal-tab-btn {
+  color: #BBB4AA !important;
+}
+
+.liv-lightbox-dialog.stage-mode .liv-modal-tab-btn.active {
+  background: #C5A059 !important;
+  color: #0E0D0B !important;
+}
+
+.liv-lightbox-dialog.stage-mode .liv-header-close-btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: #FFFFFF;
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.liv-lightbox-dialog.stage-mode .liv-header-close-btn:hover {
+  background: #E84545;
+  border-color: #E84545;
 }
 
 /* --- STAGE WALKTHROUGH VIEW --- */
 .liv-gallery-stage-view {
+  flex: 1;
+  min-height: 0;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .liv-gallery-stage-media {
-  position: relative;
+  flex: 1;
+  min-height: 0;
   width: 100%;
-  aspect-ratio: 16 / 10;
-  max-height: 420px;
+  position: relative;
   overflow: hidden;
-  background-color: #141311;
+  background-color: #0B0A09;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Atmospheric Ambient Glow behind main image for cinematic depth */
+.liv-gallery-stage-ambient-bg {
+  position: absolute;
+  inset: -30px;
+  background-size: cover;
+  background-position: center center;
+  filter: blur(40px) brightness(0.2);
+  opacity: 0.65;
+  pointer-events: none;
+  transform: scale(1.15);
 }
 
 .liv-gallery-stage-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
   display: block;
+  z-index: 2;
+  position: relative;
+  opacity: 0;
+  transform: scale(0.985);
+  transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1), transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.liv-gallery-stage-img.loaded {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .liv-gallery-stage-scrim {
@@ -1328,20 +1420,21 @@
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(20, 18, 16, 0.35) 0%,
-    rgba(20, 18, 16, 0) 35%,
-    rgba(20, 18, 16, 0.55) 100%
+    rgba(14, 13, 11, 0.35) 0%,
+    rgba(14, 13, 11, 0) 30%,
+    rgba(14, 13, 11, 0.5) 100%
   );
   pointer-events: none;
+  z-index: 3;
 }
 
 .liv-gallery-counter-badge {
   position: absolute;
   top: 14px;
   left: 14px;
-  background: rgba(20, 18, 16, 0.85);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: rgba(18, 16, 14, 0.82);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   color: #FFFFFF;
   padding: 4px 10px;
   border-radius: 999px;
@@ -1357,10 +1450,10 @@
 .liv-gallery-top-grid-btn {
   position: absolute;
   top: 14px;
-  left: 100px;
+  left: 96px;
   background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   color: var(--liv-ink);
   padding: 4px 12px;
   border-radius: 999px;
@@ -1373,11 +1466,11 @@
   cursor: pointer;
   z-index: 6;
   transition: all 0.2s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 }
 
 .liv-gallery-top-grid-btn:hover {
-  background: var(--liv-gold);
+  background: #C5A059;
   color: #171615;
   transform: translateY(-1px);
 }
@@ -1386,17 +1479,17 @@
   position: absolute;
   top: 14px;
   right: 14px;
-  background: rgba(20, 18, 16, 0.85);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  color: var(--liv-gold-bright);
+  background: rgba(18, 16, 14, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: #C5A059;
   padding: 4px 12px;
   border-radius: 999px;
   font-size: 0.7rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  border: 1px solid rgba(184, 142, 75, 0.35);
+  letter-spacing: 0.08em;
+  border: 1px solid rgba(197, 160, 89, 0.35);
   z-index: 5;
 }
 
@@ -1410,21 +1503,21 @@
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.92);
   border: none;
-  color: var(--liv-ink);
+  color: #1C1A18;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.28);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
   z-index: 10;
 }
 
 .liv-gallery-nav-btn:hover {
   background: #FFFFFF;
-  color: var(--liv-gold);
+  color: #C5A059;
   transform: translateY(-50%) scale(1.1);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.38);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
 }
 
 .liv-gallery-nav-btn.prev {
@@ -1435,34 +1528,36 @@
   right: 16px;
 }
 
-/* Stage Info Bar */
+/* Stage Info Bar (Caption + Grid Return) */
 .liv-gallery-caption-bar {
-  padding: 14px 22px;
-  background: #FFFFFF;
+  flex-shrink: 0;
+  padding: 10px 20px;
+  background: #181715;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 16px;
-  border-bottom: 1px solid var(--liv-border);
-  flex-wrap: wrap;
 }
 
 .liv-gallery-caption-text {
-  max-width: 620px;
+  max-width: 680px;
 }
 
 .liv-gallery-room-title {
   font-family: var(--font-heading, 'Cormorant Garamond', serif);
-  font-size: 1.35rem;
+  font-size: 1.25rem;
   font-weight: 600;
-  color: var(--liv-ink);
+  color: #FFFFFF;
   margin: 0 0 2px 0;
   line-height: 1.2;
+  letter-spacing: -0.01em;
 }
 
 .liv-gallery-room-desc {
-  font-size: 0.8rem;
-  color: var(--liv-ink-muted);
+  font-size: 0.78rem;
+  color: #BBB4AA;
   margin: 0;
   line-height: 1.45;
 }
@@ -1471,12 +1566,13 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  flex-shrink: 0;
 }
 
 .liv-gallery-toggle-btn {
-  background: var(--liv-card-alt);
-  border: 1px solid var(--liv-border);
-  color: var(--liv-ink);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
   padding: 6px 14px;
   border-radius: 999px;
   font-size: 0.72rem;
@@ -1490,33 +1586,45 @@
 
 .liv-gallery-toggle-btn:hover,
 .liv-gallery-toggle-btn.active {
-  background: var(--liv-ink);
-  color: #FFFFFF;
-  border-color: var(--liv-ink);
+  background: #C5A059;
+  color: #0E0D0B;
+  border-color: #C5A059;
 }
 
-/* Filmstrip / Thumbnail Dock */
+/* Filmstrip / Thumbnail Dock (Always Docked & Visible at Bottom) */
 .liv-gallery-filmstrip {
+  flex-shrink: 0;
   display: flex;
   gap: 8px;
-  padding: 12px 20px;
-  background: var(--liv-card-alt);
+  padding: 8px 16px;
+  background: #100F0E;
   overflow-x: auto;
   scrollbar-width: thin;
+  scrollbar-color: rgba(197, 160, 89, 0.3) transparent;
+  -webkit-overflow-scrolling: touch;
+}
+
+.liv-gallery-filmstrip::-webkit-scrollbar {
+  height: 4px;
+}
+
+.liv-gallery-filmstrip::-webkit-scrollbar-thumb {
+  background: rgba(197, 160, 89, 0.35);
+  border-radius: 999px;
 }
 
 .liv-gallery-filmstrip-thumb {
   position: relative;
-  width: 96px;
-  height: 64px;
+  width: 78px;
+  height: 52px;
   flex-shrink: 0;
   border-radius: 6px;
   overflow: hidden;
   border: 2px solid transparent;
   padding: 0;
   cursor: pointer;
-  opacity: 0.7;
-  transition: all 0.2s ease;
+  opacity: 0.65;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   background-color: #0E0D0B;
 }
 
@@ -1528,21 +1636,21 @@
 }
 
 .liv-gallery-filmstrip-thumb:hover {
-  opacity: 1;
+  opacity: 0.95;
   transform: translateY(-2px);
 }
 
 .liv-gallery-filmstrip-thumb.active {
-  border-color: var(--liv-gold);
+  border-color: #C5A059;
   opacity: 1;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(184, 142, 75, 0.35);
+  box-shadow: 0 4px 14px rgba(197, 160, 89, 0.45);
 }
 
 .liv-filmstrip-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 40%, rgba(0, 0, 0, 0.85) 100%);
+  background: linear-gradient(180deg, transparent 40%, rgba(0, 0, 0, 0.88) 100%);
   display: flex;
   align-items: flex-end;
   padding: 3px 4px;
@@ -1761,6 +1869,112 @@
 }
 
 @media (max-width: 768px) {
+  /* Full-bleed immersive modal dialog on mobile */
+  .liv-lightbox-backdrop {
+    padding: 0 !important;
+  }
+
+  .liv-lightbox-dialog,
+  .liv-lightbox-dialog.stage-mode {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    height: 100dvh !important;
+    max-height: 100dvh !important;
+    border-radius: 0 !important;
+    border: none !important;
+  }
+
+  .liv-modal-header-deck {
+    padding: 10px 12px !important;
+    gap: 8px;
+  }
+
+  .liv-modal-title {
+    font-size: 1.15rem !important;
+  }
+
+  .liv-modal-header-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .liv-modal-tabs-group {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .liv-modal-tab-btn {
+    padding: 5px 10px;
+    font-size: 0.68rem;
+  }
+
+  .liv-gallery-stage-media {
+    flex: 1;
+    min-height: 220px;
+  }
+
+  .liv-gallery-room-tag {
+    display: none; /* Hide top duplicate tag on mobile to save vertical space */
+  }
+
+  .liv-gallery-top-grid-btn {
+    left: auto;
+    right: 12px;
+    padding: 4px 10px;
+    font-size: 0.64rem;
+  }
+
+  .liv-gallery-nav-btn {
+    width: 38px;
+    height: 38px;
+  }
+
+  .liv-gallery-nav-btn.prev {
+    left: 8px;
+  }
+
+  .liv-gallery-nav-btn.next {
+    right: 8px;
+  }
+
+  .liv-gallery-caption-bar {
+    padding: 8px 12px !important;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+  }
+
+  .liv-gallery-controls-right {
+    display: none; /* Accessible via top button & tabs */
+  }
+
+  .liv-gallery-room-title {
+    font-size: 1.05rem !important;
+  }
+
+  .liv-gallery-room-desc {
+    font-size: 0.72rem !important;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .liv-gallery-filmstrip {
+    padding: 6px 10px !important;
+    gap: 6px;
+  }
+
+  .liv-gallery-filmstrip-thumb {
+    width: 66px !important;
+    height: 44px !important;
+  }
+
+  .liv-filmstrip-room-label {
+    font-size: 0.52rem !important;
+  }
+
+  /* Grid View Breakpoint on Mobile */
   .liv-gallery-mosaic-grid {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: auto;
@@ -1818,11 +2032,11 @@
   }
 
   .liv-modal-proj-identity {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 6px !important;
   }
 
-  .liv-modal-header-deck {
-    flex-direction: column;
-    align-items: flex-start;
+  .liv-modal-materials-grid {
+    grid-template-columns: 1fr !important;
   }
 }
