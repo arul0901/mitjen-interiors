@@ -1,339 +1,44 @@
-import React, { useLayoutEffect, useRef, useState, useMemo } from 'react';
+import React, { useRef, useState, useMemo, useEffect, useCallback } from 'react';
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { MapPin, ArrowRight, Sparkles, Layers } from 'lucide-react';
+import {
+  MapPin,
+  Sparkles,
+  Layers,
+  ChevronLeft,
+  ChevronRight,
+  MoveHorizontal,
+} from 'lucide-react';
 import { KINETIC_PROJECTS } from './kineticVaneData';
 import './KineticVaneShowcase.css';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const TOTAL_VANES = 20;
 
 export const KineticVaneShowcase: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const viewportRef = useRef<HTMLDivElement>(null);
+  const redStageRef = useRef<HTMLDivElement>(null);
+  const metaRef = useRef<HTMLDivElement>(null);
 
-  // Red Stages
-  const redStage1Ref = useRef<HTMLDivElement>(null);
-  const redStage2Ref = useRef<HTMLDivElement>(null);
+  // Refs for 20 vane blades and lighting overlays
+  const bladeRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const lightRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  // Vane Layers
-  const vanesLayer1Ref = useRef<HTMLDivElement>(null);
-  const vanesLayer2Ref = useRef<HTMLDivElement>(null);
+  // State
+  const [currentIdx, setCurrentIdx] = useState<number>(0);
+  const [nextIdx, setNextIdx] = useState<number>(1);
+  const [activeTypoIdx, setActiveTypoIdx] = useState<number>(0);
+  const [isAnimating, setIsAnimating] = useState<boolean>(false);
 
-  // Vane Blade Refs
-  const vaneBlades1 = useRef<(HTMLDivElement | null)[]>([]);
-  const vaneBlades2 = useRef<(HTMLDivElement | null)[]>([]);
-
-  // Vane Lighting Overlay Refs
-  const lightingOverlays1 = useRef<(HTMLDivElement | null)[]>([]);
-  const lightingOverlays2 = useRef<(HTMLDivElement | null)[]>([]);
-
-  // Metadata Layers
-  const meta1Ref = useRef<HTMLDivElement>(null);
-  const meta2Ref = useRef<HTMLDivElement>(null);
-  const meta3Ref = useRef<HTMLDivElement>(null);
-
-  // Active Project Index for navigation pills (0, 1, 2)
-  const [activeProjectIdx, setActiveProjectIdx] = useState<number>(0);
+  // Swipe & Drag Tracking Refs
+  const touchStartX = useRef<number>(0);
+  const touchStartY = useRef<number>(0);
+  const isDragging = useRef<boolean>(false);
+  const lastWheelTime = useRef<number>(0);
+  const isTransitioningRef = useRef<boolean>(false);
 
   const vanes = useMemo(() => Array.from({ length: TOTAL_VANES }, (_, i) => i), []);
 
-  useLayoutEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-
-    const ctx = gsap.context(() => {
-      const blades1 = vaneBlades1.current.filter((el): el is HTMLDivElement => el !== null);
-      const blades2 = vaneBlades2.current.filter((el): el is HTMLDivElement => el !== null);
-      const lights1 = lightingOverlays1.current.filter((el): el is HTMLDivElement => el !== null);
-      const lights2 = lightingOverlays2.current.filter((el): el is HTMLDivElement => el !== null);
-
-      const chars1 = redStage1Ref.current?.querySelectorAll<HTMLElement>('.char') || [];
-      const chars2 = redStage2Ref.current?.querySelectorAll<HTMLElement>('.char') || [];
-
-      // Initial States
-      gsap.set(blades1, { rotateY: 0 });
-      gsap.set(blades2, { rotateY: 0 });
-      gsap.set(vanesLayer1Ref.current, { autoAlpha: 1 });
-      gsap.set(vanesLayer2Ref.current, { autoAlpha: 0 });
-
-      gsap.set(redStage1Ref.current, { autoAlpha: 0 });
-      gsap.set(redStage2Ref.current, { autoAlpha: 0 });
-
-      gsap.set(meta1Ref.current, { autoAlpha: 1, y: 0 });
-      gsap.set(meta2Ref.current, { autoAlpha: 0, y: 20 });
-      gsap.set(meta3Ref.current, { autoAlpha: 0, y: 20 });
-
-      gsap.set(chars1, { yPercent: 120, opacity: 0 });
-      gsap.set(chars2, { yPercent: 120, opacity: 0 });
-
-      // Master Scrub Timeline
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: 'top top',
-          end: '+=350%',
-          pin: true,
-          scrub: 1.2,
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
-          onUpdate: (self) => {
-            const p = self.progress;
-            if (p < 0.38) {
-              setActiveProjectIdx(0);
-            } else if (p < 0.76) {
-              setActiveProjectIdx(1);
-            } else {
-              setActiveProjectIdx(2);
-            }
-          },
-        },
-      });
-
-      // ======================================================================
-      // STAGE 1: TRANSITION FROM PROJECT 01 -> PROJECT 02 (Timeline: 0 -> 48)
-      // ======================================================================
-
-      // 1. Outgoing Project 01 Metadata
-      tl.to(
-        meta1Ref.current,
-        {
-          autoAlpha: 0,
-          y: -25,
-          duration: 6,
-          ease: 'power2.in',
-        },
-        8
-      );
-
-      // 2. Red Stage 1 Emergence
-      tl.to(
-        redStage1Ref.current,
-        {
-          autoAlpha: 1,
-          duration: 10,
-          ease: 'power1.inOut',
-        },
-        12
-      );
-
-      // 3. Vanes 1 Rotation (Center Outward Ripple)
-      tl.to(
-        blades1,
-        {
-          rotateY: 180,
-          duration: 24,
-          stagger: {
-            each: 0.7,
-            from: 'center',
-            ease: 'power1.inOut',
-          },
-          ease: 'power2.inOut',
-        },
-        14
-      );
-
-      // Dynamic Shutter Lighting Overlay
-      tl.to(
-        lights1,
-        {
-          opacity: 0.65,
-          duration: 12,
-          yoyo: true,
-          repeat: 1,
-          stagger: {
-            each: 0.7,
-            from: 'center',
-          },
-          ease: 'sine.inOut',
-        },
-        14
-      );
-
-      // 4. Kinetic Typography 1 Reveal ("KINETIC ARCHITECTURE")
-      tl.to(
-        chars1,
-        {
-          yPercent: 0,
-          opacity: 1,
-          duration: 9,
-          stagger: 0.3,
-          ease: 'power3.out',
-        },
-        19
-      );
-
-      // 5. Typography 1 Exit
-      tl.to(
-        chars1,
-        {
-          yPercent: -120,
-          opacity: 0,
-          duration: 8,
-          stagger: 0.2,
-          ease: 'power3.in',
-        },
-        33
-      );
-
-      // 6. Red Stage 1 Concealment as Vanes close to 180deg
-      tl.to(
-        redStage1Ref.current,
-        {
-          autoAlpha: 0,
-          duration: 8,
-          ease: 'power1.inOut',
-        },
-        36
-      );
-
-      // 7. Incoming Project 02 Metadata Arrival
-      tl.to(
-        meta2Ref.current,
-        {
-          autoAlpha: 1,
-          y: 0,
-          duration: 7,
-          ease: 'power2.out',
-        },
-        40
-      );
-
-      // ======================================================================
-      // SEAMLESS VANE LAYER HANDOFF AT PROJECT 02 (Timeline: 48 -> 52)
-      // ======================================================================
-      tl.set(
-        vanesLayer1Ref.current,
-        {
-          autoAlpha: 0,
-        },
-        49
-      );
-      tl.set(
-        vanesLayer2Ref.current,
-        {
-          autoAlpha: 1,
-        },
-        49
-      );
-
-      // ======================================================================
-      // STAGE 2: TRANSITION FROM PROJECT 02 -> PROJECT 03 (Timeline: 56 -> 100)
-      // ======================================================================
-
-      // 1. Outgoing Project 02 Metadata
-      tl.to(
-        meta2Ref.current,
-        {
-          autoAlpha: 0,
-          y: -25,
-          duration: 6,
-          ease: 'power2.in',
-        },
-        58
-      );
-
-      // 2. Red Stage 2 Emergence
-      tl.to(
-        redStage2Ref.current,
-        {
-          autoAlpha: 1,
-          duration: 10,
-          ease: 'power1.inOut',
-        },
-        62
-      );
-
-      // 3. Vanes 2 Rotation (Directional Sweeping Wave from Left to Right)
-      tl.to(
-        blades2,
-        {
-          rotateY: 180,
-          duration: 24,
-          stagger: {
-            each: 0.75,
-            from: 'start',
-            ease: 'power1.inOut',
-          },
-          ease: 'power2.inOut',
-        },
-        64
-      );
-
-      // Dynamic Shutter Lighting Overlay
-      tl.to(
-        lights2,
-        {
-          opacity: 0.65,
-          duration: 12,
-          yoyo: true,
-          repeat: 1,
-          stagger: {
-            each: 0.75,
-            from: 'start',
-          },
-          ease: 'sine.inOut',
-        },
-        64
-      );
-
-      // 4. Kinetic Typography 2 Reveal ("SPACES IN MOTION")
-      tl.to(
-        chars2,
-        {
-          yPercent: 0,
-          opacity: 1,
-          duration: 9,
-          stagger: 0.35,
-          ease: 'power3.out',
-        },
-        69
-      );
-
-      // 5. Typography 2 Exit
-      tl.to(
-        chars2,
-        {
-          yPercent: -120,
-          opacity: 0,
-          duration: 8,
-          stagger: 0.25,
-          ease: 'power3.in',
-        },
-        83
-      );
-
-      // 6. Red Stage 2 Concealment as Vanes close to 180deg
-      tl.to(
-        redStage2Ref.current,
-        {
-          autoAlpha: 0,
-          duration: 8,
-          ease: 'power1.inOut',
-        },
-        86
-      );
-
-      // 7. Incoming Project 03 Metadata Arrival
-      tl.to(
-        meta3Ref.current,
-        {
-          autoAlpha: 1,
-          y: 0,
-          duration: 7,
-          ease: 'power2.out',
-        },
-        90
-      );
-    }, section);
-
-    return () => ctx.revert();
-  }, []);
-
-  const p1 = KINETIC_PROJECTS[0];
-  const p2 = KINETIC_PROJECTS[1];
-  const p3 = KINETIC_PROJECTS[2];
+  const currentProject = KINETIC_PROJECTS[currentIdx];
+  const nextProject = KINETIC_PROJECTS[nextIdx];
 
   // Helper to split text into animated character spans
   const renderChars = (text: string) =>
@@ -343,59 +48,286 @@ export const KineticVaneShowcase: React.FC = () => {
       </span>
     ));
 
+  // Core Programmatic Transition Function
+  const goToProject = useCallback(
+    (targetIdx: number, direction: 'next' | 'prev' = 'next') => {
+      if (isTransitioningRef.current || targetIdx === currentIdx) return;
+      isTransitioningRef.current = true;
+      setIsAnimating(true);
+
+      // Choose which typography to display in the vermilion-red environment
+      const typoIdx = direction === 'next' ? currentIdx : targetIdx;
+      setActiveTypoIdx(typoIdx);
+      setNextIdx(targetIdx);
+
+      const blades = bladeRefs.current.filter((el): el is HTMLDivElement => el !== null);
+      const lights = lightRefs.current.filter((el): el is HTMLDivElement => el !== null);
+      const redStage = redStageRef.current;
+      const chars = redStage?.querySelectorAll<HTMLElement>('.char') || [];
+      const meta = metaRef.current;
+
+      const targetRotation = direction === 'next' ? 180 : -180;
+      const staggerOrigin = direction === 'next' ? 'start' : 'end';
+
+      // Master Kinetic Transition Timeline
+      const tl = gsap.timeline({
+        onComplete: () => {
+          // Update current state to target project
+          setCurrentIdx(targetIdx);
+          setNextIdx((targetIdx + 1) % KINETIC_PROJECTS.length);
+
+          // Silently reset blade rotation to 0deg (since Front Face now displays the new project image)
+          gsap.set(blades, { rotateY: 0 });
+          gsap.set(lights, { opacity: 0 });
+          gsap.set(redStage, { autoAlpha: 0 });
+
+          isTransitioningRef.current = false;
+          setIsAnimating(false);
+        },
+      });
+
+      // Phase 01: Outgoing Project metadata exits
+      tl.to(
+        meta,
+        {
+          autoAlpha: 0,
+          y: direction === 'next' ? -20 : 20,
+          duration: 0.35,
+          ease: 'power2.in',
+        },
+        0
+      );
+
+      // Phase 02: Vermilion-Red Environment emerges behind the louvres
+      tl.to(
+        redStage,
+        {
+          autoAlpha: 1,
+          duration: 0.45,
+          ease: 'power1.inOut',
+        },
+        0.08
+      );
+
+      // Phase 03: 3D Rotating Vanes swing open
+      tl.to(
+        blades,
+        {
+          rotateY: targetRotation,
+          duration: 1.35,
+          stagger: {
+            each: 0.024,
+            from: staggerOrigin,
+            ease: 'power1.inOut',
+          },
+          ease: 'power2.inOut',
+        },
+        0.12
+      );
+
+      // Dynamic Shutter Lighting Overlay
+      tl.to(
+        lights,
+        {
+          opacity: 0.7,
+          duration: 0.65,
+          yoyo: true,
+          repeat: 1,
+          stagger: {
+            each: 0.024,
+            from: staggerOrigin,
+          },
+          ease: 'sine.inOut',
+        },
+        0.12
+      );
+
+      // Phase 04: Oversized Typography reveals from hidden clip-paths
+      tl.fromTo(
+        chars,
+        { yPercent: 120, opacity: 0 },
+        {
+          yPercent: 0,
+          opacity: 1,
+          stagger: 0.018,
+          duration: 0.45,
+          ease: 'power3.out',
+        },
+        0.3
+      );
+
+      // Phase 05: Typography exits through upper mask as shutters close
+      tl.to(
+        chars,
+        {
+          yPercent: -120,
+          opacity: 0,
+          stagger: 0.012,
+          duration: 0.38,
+          ease: 'power3.in',
+        },
+        0.82
+      );
+
+      // Phase 06: Red Environment conceals as incoming project image settles
+      tl.to(
+        redStage,
+        {
+          autoAlpha: 0,
+          duration: 0.45,
+          ease: 'power1.inOut',
+        },
+        0.92
+      );
+
+      // Phase 07: Incoming Project metadata arrives
+      tl.fromTo(
+        meta,
+        {
+          autoAlpha: 0,
+          y: direction === 'next' ? 20 : -20,
+        },
+        {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.45,
+          ease: 'power2.out',
+        },
+        1.1
+      );
+    },
+    [currentIdx]
+  );
+
+  const handleNext = useCallback(() => {
+    const next = (currentIdx + 1) % KINETIC_PROJECTS.length;
+    goToProject(next, 'next');
+  }, [currentIdx, goToProject]);
+
+  const handlePrev = useCallback(() => {
+    const prev = (currentIdx - 1 + KINETIC_PROJECTS.length) % KINETIC_PROJECTS.length;
+    goToProject(prev, 'prev');
+  }, [currentIdx, goToProject]);
+
+  // Touch Swipe Handlers (Mobile & Tablet)
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    const deltaX = e.changedTouches[0].clientX - touchStartX.current;
+    const deltaY = e.changedTouches[0].clientY - touchStartY.current;
+
+    // Horizontal swipe threshold
+    if (Math.abs(deltaX) > 35) {
+      if (deltaX < 0) {
+        handleNext(); // Swiped left -> Next
+      } else {
+        handlePrev(); // Swiped right -> Previous
+      }
+    } else if (Math.abs(deltaY) > 45) {
+      // Vertical swipe fallback on touch
+      if (deltaY < 0) {
+        handleNext(); // Swiped up -> Next
+      } else {
+        handlePrev(); // Swiped down -> Previous
+      }
+    }
+  };
+
+  // Mouse Drag Handlers (Desktop Swipe / Drag)
+  const handleMouseDown = (e: React.MouseEvent) => {
+    touchStartX.current = e.clientX;
+    isDragging.current = true;
+  };
+
+  const handleMouseUp = (e: React.MouseEvent) => {
+    if (!isDragging.current) return;
+    isDragging.current = false;
+    const deltaX = e.clientX - touchStartX.current;
+    if (Math.abs(deltaX) > 45) {
+      if (deltaX < 0) {
+        handleNext();
+      } else {
+        handlePrev();
+      }
+    }
+  };
+
+  // Trackpad / Wheel Swipe Handler
+  const handleWheel = (e: React.WheelEvent) => {
+    const now = Date.now();
+    if (now - lastWheelTime.current < 750) return; // Debounce wheel gestures
+
+    const dominantDelta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+    if (Math.abs(dominantDelta) > 25) {
+      lastWheelTime.current = now;
+      if (dominantDelta > 0) {
+        handleNext();
+      } else {
+        handlePrev();
+      }
+    }
+  };
+
+  // Keyboard Arrow Navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+        handleNext();
+      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+        handlePrev();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [handleNext, handlePrev]);
+
+  const activeTypo = KINETIC_PROJECTS[activeTypoIdx].transitionTitle;
+
   return (
-    <section ref={sectionRef} className="kinetic-showcase-section" aria-label="Kinetic Rotating Vane Showcase">
-      <div ref={viewportRef} className="kinetic-viewport">
+    <section
+      ref={sectionRef}
+      className="kinetic-showcase-section"
+      aria-label="Kinetic Rotating Vane Showcase"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+      onMouseDown={handleMouseDown}
+      onMouseUp={handleMouseUp}
+      onWheel={handleWheel}
+    >
+      <div className="kinetic-viewport">
         {/* ==================================================================
-            1. CINEMATIC VERMILION-RED TRANSITION ENVIRONMENT 1
+            1. CINEMATIC VERMILION-RED TRANSITION ENVIRONMENT
             ================================================================== */}
-        <div ref={redStage1Ref} className="kinetic-red-stage">
+        <div ref={redStageRef} className="kinetic-red-stage">
           <div className="kinetic-red-grid-overlay" />
           <div className="kinetic-red-crosshair tl" />
           <div className="kinetic-red-crosshair tr" />
           <div className="kinetic-red-crosshair bl" />
           <div className="kinetic-red-crosshair br" />
 
-          <span className="kinetic-red-meta-tag top-left">SYS. REF // KINETIC-VANE-01</span>
-          <span className="kinetic-red-meta-tag top-right">INDEX 01 &rarr; 02 // PRITHVI</span>
-          <span className="kinetic-red-meta-tag bottom-left">{p1.transitionTitle.coord}</span>
+          <span className="kinetic-red-meta-tag top-left">SYS. REF // KINETIC-VANE-SHUTTER</span>
+          <span className="kinetic-red-meta-tag top-right">
+            INDEX {KINETIC_PROJECTS[currentIdx].number} &rarr; {KINETIC_PROJECTS[nextIdx].number}
+          </span>
+          <span className="kinetic-red-meta-tag bottom-left">{activeTypo.coord}</span>
           <span className="kinetic-red-meta-tag bottom-right">MITJEN ARCHITECTURAL EXHIBITION</span>
 
           <div className="kinetic-typo-container">
-            <span className="kinetic-typo-eyebrow">{p1.transitionTitle.eyebrow}</span>
-            <div className="kinetic-typo-line line-1">{renderChars(p1.transitionTitle.line1)}</div>
-            <div className="kinetic-typo-line line-2">{renderChars(p1.transitionTitle.line2)}</div>
-            <span className="kinetic-typo-sub">{p1.transitionTitle.subtext}</span>
+            <span className="kinetic-typo-eyebrow">{activeTypo.eyebrow}</span>
+            <div className="kinetic-typo-line line-1">{renderChars(activeTypo.line1)}</div>
+            <div className="kinetic-typo-line line-2">{renderChars(activeTypo.line2)}</div>
+            <span className="kinetic-typo-sub">{activeTypo.subtext}</span>
           </div>
         </div>
 
         {/* ==================================================================
-            2. CINEMATIC VERMILION-RED TRANSITION ENVIRONMENT 2
+            2. KINETIC ROTATING VANE LOUVRE MECHANISM
             ================================================================== */}
-        <div ref={redStage2Ref} className="kinetic-red-stage">
-          <div className="kinetic-red-grid-overlay" />
-          <div className="kinetic-red-crosshair tl" />
-          <div className="kinetic-red-crosshair tr" />
-          <div className="kinetic-red-crosshair bl" />
-          <div className="kinetic-red-crosshair br" />
-
-          <span className="kinetic-red-meta-tag top-left">SYS. REF // KINETIC-VANE-02</span>
-          <span className="kinetic-red-meta-tag top-right">INDEX 02 &rarr; 03 // ROYAL NESTO</span>
-          <span className="kinetic-red-meta-tag bottom-left">{p2.transitionTitle.coord}</span>
-          <span className="kinetic-red-meta-tag bottom-right">MITJEN ARCHITECTURAL EXHIBITION</span>
-
-          <div className="kinetic-typo-container">
-            <span className="kinetic-typo-eyebrow">{p2.transitionTitle.eyebrow}</span>
-            <div className="kinetic-typo-line line-1">{renderChars(p2.transitionTitle.line1)}</div>
-            <div className="kinetic-typo-line line-2">{renderChars(p2.transitionTitle.line2)}</div>
-            <span className="kinetic-typo-sub">{p2.transitionTitle.subtext}</span>
-          </div>
-        </div>
-
-        {/* ==================================================================
-            3. VANE LAYER 1 (TRANSITION 1: PROJECT 01 -> PROJECT 02)
-            ================================================================== */}
-        <div ref={vanesLayer1Ref} className="kinetic-vanes-layer">
+        <div className="kinetic-vanes-layer">
           {vanes.map((idx) => {
             const widthPercent = 100 / TOTAL_VANES;
             const leftPercent = idx * widthPercent;
@@ -403,7 +335,7 @@ export const KineticVaneShowcase: React.FC = () => {
 
             return (
               <div
-                key={`vane-layer-1-${idx}`}
+                key={`vane-${idx}`}
                 className="kinetic-vane-unit"
                 style={{
                   left: `${leftPercent}%`,
@@ -412,34 +344,34 @@ export const KineticVaneShowcase: React.FC = () => {
               >
                 <div
                   ref={(el) => {
-                    vaneBlades1.current[idx] = el;
+                    bladeRefs.current[idx] = el;
                   }}
                   className="kinetic-vane-blade"
                 >
-                  {/* Front Face: Project 01 (Grand Salon) */}
+                  {/* Front Face: Current Active Project Image */}
                   <div className="vane-face front">
                     <div
                       className="vane-slice-img"
                       style={{
-                        backgroundImage: `url("${p1.image}")`,
+                        backgroundImage: `url("${currentProject.image}")`,
                         left: offsetLeftPx,
                       }}
                     />
                     <div
                       ref={(el) => {
-                        lightingOverlays1.current[idx] = el;
+                        lightRefs.current[idx] = el;
                       }}
                       className="vane-lighting-overlay"
                     />
                     <div className="vane-edge-bevel" />
                   </div>
 
-                  {/* Back Face: Project 02 (Master Suite) */}
+                  {/* Back Face: Target Incoming Project Image (Unmirrored via scaleX(-1)) */}
                   <div className="vane-face back">
                     <div
                       className="vane-slice-img"
                       style={{
-                        backgroundImage: `url("${p2.image}")`,
+                        backgroundImage: `url("${nextProject.image}")`,
                         left: offsetLeftPx,
                       }}
                     />
@@ -453,75 +385,44 @@ export const KineticVaneShowcase: React.FC = () => {
         </div>
 
         {/* ==================================================================
-            4. VANE LAYER 2 (TRANSITION 2: PROJECT 02 -> PROJECT 03)
+            3. INTERACTIVE FLOATING ARROWS (PREV / NEXT)
             ================================================================== */}
-        <div ref={vanesLayer2Ref} className="kinetic-vanes-layer">
-          {vanes.map((idx) => {
-            const widthPercent = 100 / TOTAL_VANES;
-            const leftPercent = idx * widthPercent;
-            const offsetLeftPx = `calc(-1 * ${idx} * (100vw / ${TOTAL_VANES}))`;
+        <button
+          type="button"
+          onClick={handlePrev}
+          className="kinetic-arrow-btn prev"
+          aria-label="Previous Architectural Project"
+          disabled={isAnimating}
+        >
+          <ChevronLeft size={22} />
+        </button>
 
-            return (
-              <div
-                key={`vane-layer-2-${idx}`}
-                className="kinetic-vane-unit"
-                style={{
-                  left: `${leftPercent}%`,
-                  width: `${widthPercent}%`,
-                }}
-              >
-                <div
-                  ref={(el) => {
-                    vaneBlades2.current[idx] = el;
-                  }}
-                  className="kinetic-vane-blade"
-                >
-                  {/* Front Face: Project 02 (Master Suite) */}
-                  <div className="vane-face front">
-                    <div
-                      className="vane-slice-img"
-                      style={{
-                        backgroundImage: `url("${p2.image}")`,
-                        left: offsetLeftPx,
-                      }}
-                    />
-                    <div
-                      ref={(el) => {
-                        lightingOverlays2.current[idx] = el;
-                      }}
-                      className="vane-lighting-overlay"
-                    />
-                    <div className="vane-edge-bevel" />
-                  </div>
-
-                  {/* Back Face: Project 03 (Bespoke Millwork) */}
-                  <div className="vane-face back">
-                    <div
-                      className="vane-slice-img"
-                      style={{
-                        backgroundImage: `url("${p3.image}")`,
-                        left: offsetLeftPx,
-                      }}
-                    />
-                    <div className="vane-lighting-overlay" />
-                    <div className="vane-edge-bevel" />
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
+        <button
+          type="button"
+          onClick={handleNext}
+          className="kinetic-arrow-btn next"
+          aria-label="Next Architectural Project"
+          disabled={isAnimating}
+        >
+          <ChevronRight size={22} />
+        </button>
 
         {/* ==================================================================
-            5. FLOATING EDITORIAL METADATA & CONTROLS LAYER
+            4. FLOATING EDITORIAL METADATA & CONTROL BAR
             ================================================================== */}
-        <div className="kinetic-meta-layer">
+        <div ref={metaRef} className="kinetic-meta-layer">
           {/* Top Bar */}
           <div className="kinetic-top-row">
             <div className="kinetic-badge-pill">
-              <span className="kinetic-badge-num">{KINETIC_PROJECTS[activeProjectIdx].number}</span>
+              <span className="kinetic-badge-num">{currentProject.number}</span>
               <span className="kinetic-badge-dot">•</span>
-              <span>{KINETIC_PROJECTS[activeProjectIdx].category}</span>
+              <span>{currentProject.category}</span>
+            </div>
+
+            {/* Swipe Guide Pill */}
+            <div className="kinetic-swipe-badge">
+              <MoveHorizontal size={14} className="kinetic-swipe-icon" />
+              <span>SWIPE OR DRAG TO ROTATE</span>
             </div>
 
             <div className="kinetic-status-pill">
@@ -530,89 +431,39 @@ export const KineticVaneShowcase: React.FC = () => {
             </div>
           </div>
 
-          {/* Project 01 Metadata */}
-          <div
-            ref={meta1Ref}
-            className="kinetic-bottom-row"
-            style={{ position: 'absolute', bottom: 'clamp(24px, 4vw, 44px)', left: 'clamp(24px, 4vw, 44px)', right: 'clamp(24px, 4vw, 44px)' }}
-          >
+          {/* Bottom Editorial Details */}
+          <div className="kinetic-bottom-row">
             <div className="kinetic-project-details">
               <span className="kinetic-project-kicker">
                 <Layers size={13} />
-                <span>{p1.category} • {p1.year}</span>
+                <span>{currentProject.category} • {currentProject.year}</span>
               </span>
-              <h2 className="kinetic-project-title">{p1.title}</h2>
+              <h2 className="kinetic-project-title">{currentProject.title}</h2>
               <div className="kinetic-project-location">
                 <MapPin size={14} />
-                <span>{p1.location} • {p1.area}</span>
+                <span>{currentProject.location} • {currentProject.area}</span>
               </div>
-              <p className="kinetic-project-desc">{p1.description}</p>
+              <p className="kinetic-project-desc">{currentProject.description}</p>
             </div>
 
+            {/* Right Scope Box & Interactive Chapter Pills */}
             <div className="kinetic-specs-box">
               <span className="kinetic-specs-tag">Architectural Scope</span>
-              <span className="kinetic-specs-val">{p1.scope}</span>
-              <div className="kinetic-scroll-hint">
-                <div className="kinetic-scroll-line" />
-                <span>SCROLL TO ROTATE VANES</span>
-              </div>
-            </div>
-          </div>
+              <span className="kinetic-specs-val">{currentProject.scope}</span>
 
-          {/* Project 02 Metadata */}
-          <div
-            ref={meta2Ref}
-            className="kinetic-bottom-row"
-            style={{ position: 'absolute', bottom: 'clamp(24px, 4vw, 44px)', left: 'clamp(24px, 4vw, 44px)', right: 'clamp(24px, 4vw, 44px)' }}
-          >
-            <div className="kinetic-project-details">
-              <span className="kinetic-project-kicker">
-                <Layers size={13} />
-                <span>{p2.category} • {p2.year}</span>
-              </span>
-              <h2 className="kinetic-project-title">{p2.title}</h2>
-              <div className="kinetic-project-location">
-                <MapPin size={14} />
-                <span>{p2.location} • {p2.area}</span>
-              </div>
-              <p className="kinetic-project-desc">{p2.description}</p>
-            </div>
-
-            <div className="kinetic-specs-box">
-              <span className="kinetic-specs-tag">Architectural Scope</span>
-              <span className="kinetic-specs-val">{p2.scope}</span>
-              <div className="kinetic-scroll-hint">
-                <div className="kinetic-scroll-line" />
-                <span>SCROLL TO ROTATE VANES</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Project 03 Metadata */}
-          <div
-            ref={meta3Ref}
-            className="kinetic-bottom-row"
-            style={{ position: 'absolute', bottom: 'clamp(24px, 4vw, 44px)', left: 'clamp(24px, 4vw, 44px)', right: 'clamp(24px, 4vw, 44px)' }}
-          >
-            <div className="kinetic-project-details">
-              <span className="kinetic-project-kicker">
-                <Layers size={13} />
-                <span>{p3.category} • {p3.year}</span>
-              </span>
-              <h2 className="kinetic-project-title">{p3.title}</h2>
-              <div className="kinetic-project-location">
-                <MapPin size={14} />
-                <span>{p3.location} • {p3.area}</span>
-              </div>
-              <p className="kinetic-project-desc">{p3.description}</p>
-            </div>
-
-            <div className="kinetic-specs-box">
-              <span className="kinetic-specs-tag">Architectural Scope</span>
-              <span className="kinetic-specs-val">{p3.scope}</span>
-              <div className="kinetic-scroll-hint">
-                <div className="kinetic-scroll-line" />
-                <span>SHOWCASE COMPLETE</span>
+              {/* Chapter Navigation Tabs */}
+              <div className="kinetic-nav-strip">
+                {KINETIC_PROJECTS.map((proj, idx) => (
+                  <button
+                    key={proj.id}
+                    type="button"
+                    onClick={() => goToProject(idx, idx > currentIdx ? 'next' : 'prev')}
+                    className={`kinetic-nav-btn ${idx === currentIdx ? 'active' : ''}`}
+                    disabled={isAnimating}
+                  >
+                    {idx === 0 ? '01 SALON' : idx === 1 ? '02 SUITE' : '03 MILLWORK'}
+                  </button>
+                ))}
               </div>
             </div>
           </div>

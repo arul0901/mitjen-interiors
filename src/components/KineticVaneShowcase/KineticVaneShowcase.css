@@ -8,6 +8,14 @@
   width: 100%;
   background-color: #0B0A09;
   overflow: hidden;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-y pinch-zoom;
+}
+
+.kinetic-showcase-section:active {
+  cursor: grabbing;
 }
 
 .kinetic-viewport {
@@ -431,6 +439,78 @@
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8);
 }
 
+/* Interactive Floating Arrow Controls */
+.kinetic-arrow-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(18, 16, 14, 0.75);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 20;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.kinetic-arrow-btn.prev {
+  left: clamp(16px, 3vw, 36px);
+}
+
+.kinetic-arrow-btn.next {
+  right: clamp(16px, 3vw, 36px);
+}
+
+.kinetic-arrow-btn:hover:not(:disabled) {
+  background: #C5A059;
+  border-color: #C5A059;
+  color: #0B0A09;
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 12px 30px rgba(197, 160, 89, 0.4);
+}
+
+.kinetic-arrow-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Swipe Guide Badge */
+.kinetic-swipe-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(18, 16, 14, 0.65);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.kinetic-swipe-icon {
+  color: #C5A059;
+  animation: kineticSwipeIconShake 2.2s infinite ease-in-out;
+}
+
+@keyframes kineticSwipeIconShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
 /* Interactive Navigation Indicators */
 .kinetic-nav-strip {
   display: flex;
@@ -517,6 +597,24 @@
 @media (max-width: 768px) {
   .kinetic-meta-layer {
     padding: 16px;
+  }
+
+  .kinetic-arrow-btn {
+    width: 42px;
+    height: 42px;
+  }
+
+  .kinetic-arrow-btn.prev {
+    left: 8px;
+  }
+
+  .kinetic-arrow-btn.next {
+    right: 8px;
+  }
+
+  .kinetic-swipe-badge {
+    padding: 5px 10px;
+    font-size: 0.62rem;
   }
 
   .kinetic-badge-pill {
