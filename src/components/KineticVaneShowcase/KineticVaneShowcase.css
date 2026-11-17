@@ -3,28 +3,16 @@
    Awwwards-Level Architectural Interactive Louvre Mechanism & Editorial Typography
    ========================================================================== */
 
+.kinetic-showcase-container,
 .kinetic-showcase-section {
   position: relative;
   width: 100%;
   background-color: #0B0A09;
-  overflow: hidden;
-  cursor: grab;
   user-select: none;
   -webkit-user-select: none;
 }
 
-.kinetic-showcase-section.swiping-locked {
-  touch-action: none;
-}
-
-.kinetic-showcase-section.all-images-revealed {
-  touch-action: pan-y pinch-zoom;
-}
-
-.kinetic-showcase-section:active {
-  cursor: grabbing;
-}
-
+.kinetic-sticky-viewport,
 .kinetic-viewport {
   position: relative;
   width: 100vw;
@@ -487,6 +475,27 @@
 .kinetic-arrow-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+/* Persistent Floating Action Center */
+.kinetic-floating-action-center {
+  position: absolute;
+  bottom: clamp(24px, 4vw, 44px);
+  right: clamp(20px, 4vw, 44px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+  z-index: 25;
+  pointer-events: auto;
+}
+
+.kinetic-actions-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 /* Swipe Guide Badge */
