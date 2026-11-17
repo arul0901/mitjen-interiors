@@ -1,5 +1,4 @@
 import React, { useState, useMemo, useRef } from 'react';
-import { Link } from 'react-router-dom';
 import {
   Search,
   CheckCircle2,
@@ -7,17 +6,14 @@ import {
   ArrowRight,
   Eye,
   X,
-  Clock,
-  ShieldCheck,
-  Building2,
   MapPin,
   Layers,
   Sparkles,
+  SlidersHorizontal,
 } from 'lucide-react';
 import { useInquiry } from '../../context/useInquiry';
 import {
   PORTFOLIO_PROJECTS,
-  BUDGET_TIERS,
   PORTFOLIO_FAQS,
   MATERIAL_SPECIFICATIONS,
   PortfolioProject,
@@ -29,8 +25,7 @@ export const LivspacePortfolio: React.FC = () => {
   const gridSectionRef = useRef<HTMLDivElement>(null);
 
   // Filter States
-  const [activeCity, setActiveCity] = useState<string>('All');
-  const [activeBhk, setActiveBhk] = useState<string>('All');
+  const [activeFilter, setActiveFilter] = useState<string>('All');
   const [activeScope, setActiveScope] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState<string>('');
 
@@ -47,24 +42,43 @@ export const LivspacePortfolio: React.FC = () => {
     );
   };
 
-  // Scroll to grid helper
-  const scrollToGrid = () => {
-    gridSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  };
+  // Primary filter options: All, Coimbatore, Bangalore, Villas
+  const filterTabs = [
+    { id: 'All', label: 'All Residences', count: PORTFOLIO_PROJECTS.length },
+    {
+      id: 'Coimbatore',
+      label: 'Coimbatore',
+      count: PORTFOLIO_PROJECTS.filter((p) => p.city === 'Coimbatore').length,
+    },
+    {
+      id: 'Bangalore',
+      label: 'Bangalore',
+      count: PORTFOLIO_PROJECTS.filter((p) => p.city === 'Bangalore').length,
+    },
+    {
+      id: 'Villa',
+      label: 'Villas',
+      count: PORTFOLIO_PROJECTS.filter((p) => p.bhk.includes('Villa')).length,
+    },
+  ];
 
-  // Derived authentic cities, BHKs and scopes from verified projects
-  const cities = ['All', 'Coimbatore', 'Bangalore'];
-  const bhkOptions = ['All', '3-BHK', '4-BHK', '6-BHK / Villa'];
-  const scopeOptions = ['All', 'Full Home', 'Living Room', 'Dining Area', 'Master Bedroom', 'Kitchen', 'Private Study', 'Villa Staircase'];
+  // Scope tags for targeted interior space filtering
+  const scopeOptions = [
+    'All',
+    'Living Room',
+    'Dining Area',
+    'Master Bedroom',
+    'Kitchen',
+    'Private Study',
+  ];
 
-  // Filtered Projects Computation
+  // Filtered Projects Computation (Strictly verified authentic residences)
   const filteredProjects = useMemo(() => {
     return PORTFOLIO_PROJECTS.filter((p) => {
-      // City match
-      if (activeCity !== 'All' && p.city !== activeCity) return false;
-
-      // BHK match
-      if (activeBhk !== 'All' && p.bhk !== activeBhk) return false;
+      // Primary category filter
+      if (activeFilter === 'Coimbatore' && p.city !== 'Coimbatore') return false;
+      if (activeFilter === 'Bangalore' && p.city !== 'Bangalore') return false;
+      if (activeFilter === 'Villa' && !p.bhk.includes('Villa')) return false;
 
       // Scope match
       if (activeScope !== 'All') {
@@ -83,7 +97,7 @@ export const LivspacePortfolio: React.FC = () => {
 
       return true;
     });
-  }, [activeCity, activeBhk, activeScope, searchQuery]);
+  }, [activeFilter, activeScope, searchQuery]);
 
   // Open Lightbox
   const handleOpenGallery = (project: PortfolioProject) => {
@@ -99,151 +113,104 @@ export const LivspacePortfolio: React.FC = () => {
     <div className="liv-port-root" id="livspace-portfolio-section">
       <div className="liv-port-container">
         {/* ==================================================================
-            1. HERO SECTION & PILLARS
+            1. REFINED COMPACT HERO HEADER
+            Clean architectural atelier introduction without bulky cards.
             ================================================================== */}
         <section className="liv-port-hero" aria-labelledby="portfolio-main-title">
-          <div className="liv-port-hero-header">
-            <span className="liv-port-eyebrow">• 4 COMPLETED RESIDENCES</span>
-            <h2 id="portfolio-main-title" className="liv-port-h1">
-              Residential Portfolio &amp; Spaces
-            </h2>
-            <p className="liv-port-subtitle">
-              Explore our 4 verified client residential projects across Coimbatore and Bangalore:
-              Prithvi, Sampath, Mr. Mahesh – Pilot, and Deepak.
-            </p>
-          </div>
-
-          {/* Quick Regional Pillars (Coimbatore vs Bangalore) */}
-          <div className="liv-port-pillars-grid">
-            {/* Pillar 1: Coimbatore Projects (3) */}
-            <div
-              className={`liv-pillar-card ${activeCity === 'Coimbatore' ? 'active' : ''}`}
-              onClick={() => {
-                setActiveCity(activeCity === 'Coimbatore' ? 'All' : 'Coimbatore');
-                scrollToGrid();
-              }}
-              role="button"
-              tabIndex={0}
-              aria-label="Explore Coimbatore Projects"
-            >
-              <div>
-                <div className="liv-pillar-header">
-                  <h2 className="liv-pillar-title">Coimbatore Residences</h2>
-                  <span className="liv-status-badge liv-status-completed">
-                    <CheckCircle2 size={12} />
-                    3 DELIVERED
-                  </span>
-                </div>
-                <p className="liv-pillar-desc">
-                  Completed luxury residences in Coimbatore: Prithvi (Neelambur · Royal Nesto),
-                  Sampath (Kalapatti · Nehru Nagar West.), and Deepak (Saibaba Colony).
-                </p>
-              </div>
-              <div className="liv-pillar-action">
-                <span>View Coimbatore Homes (3)</span>
-                <ArrowRight size={14} />
-              </div>
+          <div className="liv-port-hero-inner">
+            <div className="liv-port-hero-content">
+              <span className="liv-port-eyebrow">
+                <Sparkles size={13} className="liv-eyebrow-icon" />
+                CURATED RESIDENTIAL ATELIER
+              </span>
+              <h1 id="portfolio-main-title" className="liv-port-h1">
+                Completed Residences &amp; Spaces
+              </h1>
+              <p className="liv-port-subtitle">
+                Authentic turnkey client residences executed across Coimbatore and Bangalore.
+                Meticulously crafted with tailored timber joinery, multi-layer Italian finishes, and bespoke lighting.
+              </p>
             </div>
 
-            {/* Pillar 2: Bangalore Projects (1) */}
-            <div
-              className={`liv-pillar-card ${activeCity === 'Bangalore' ? 'active' : ''}`}
-              onClick={() => {
-                setActiveCity(activeCity === 'Bangalore' ? 'All' : 'Bangalore');
-                scrollToGrid();
-              }}
-              role="button"
-              tabIndex={0}
-              aria-label="Explore Bangalore Projects"
-            >
-              <div>
-                <div className="liv-pillar-header">
-                  <h2 className="liv-pillar-title">Bangalore Residence</h2>
-                  <span className="liv-status-badge liv-status-completed">
-                    <CheckCircle2 size={12} />
-                    1 DELIVERED VILLA
-                  </span>
-                </div>
-                <p className="liv-pillar-desc">
-                  Grand 7,350 sq.ft luxury villa for Mr. Mahesh – Pilot located at Krishna Raja (KR) Puram,
-                  Bangalore with central courtyard flow and island kitchen.
-                </p>
+            {/* Compact Key Architectural Metrics */}
+            <div className="liv-hero-metrics">
+              <div className="liv-metric-item">
+                <span className="liv-metric-val">4</span>
+                <span className="liv-metric-lbl">Delivered Residences</span>
               </div>
-              <div className="liv-pillar-action">
-                <span>View Bangalore Villa (1)</span>
-                <ArrowRight size={14} />
+              <div className="liv-metric-divider" />
+              <div className="liv-metric-item">
+                <span className="liv-metric-val">10-Yr</span>
+                <span className="liv-metric-lbl">Craftsmanship Warranty</span>
+              </div>
+              <div className="liv-metric-divider" />
+              <div className="liv-metric-item">
+                <span className="liv-metric-val">100%</span>
+                <span className="liv-metric-lbl">Turnkey Execution</span>
               </div>
             </div>
           </div>
         </section>
 
         {/* ==================================================================
-            2. TOP CITIES PILL STRIP
+            2. UNIFIED COMPACT ARCHITECTURAL FILTER BAR
+            Streamlined into a single cohesive control deck (Pills + Search).
             ================================================================== */}
-        <div className="liv-port-cities-strip" role="region" aria-label="Filter by City">
-          <span className="liv-cities-label">Top Cities:</span>
-          {cities.map((city) => {
-            const count =
-              city === 'All'
-                ? PORTFOLIO_PROJECTS.length
-                : PORTFOLIO_PROJECTS.filter((p) => p.city === city).length;
-
-            return (
-              <button
-                key={city}
-                type="button"
-                className={`liv-city-pill ${activeCity === city ? 'active' : ''}`}
-                onClick={() => setActiveCity(city)}
-              >
-                <span>{city}</span>
-                <span className="liv-city-count">({count})</span>
-              </button>
-            );
-          })}
-        </div>
-
-        {/* ==================================================================
-            3. FILTER CONTROLS BAR (STICKY / COMPREHENSIVE)
-            ================================================================== */}
-        <div ref={gridSectionRef} className="liv-filter-bar">
-          {/* Top Row: BHK Tabs + Search Box */}
-          <div className="liv-filter-row-top">
-            <div className="liv-bhk-tabs" role="tablist" aria-label="BHK Configuration Tabs">
-              {bhkOptions.map((bhk) => (
+        <div ref={gridSectionRef} className="liv-control-bar">
+          <div className="liv-control-main-row">
+            {/* Primary Category Filter Tabs */}
+            <div className="liv-tabs-group" role="tablist" aria-label="Filter residences by region or typology">
+              {filterTabs.map((tab) => (
                 <button
-                  key={bhk}
+                  key={tab.id}
                   type="button"
                   role="tab"
-                  aria-selected={activeBhk === bhk}
-                  className={`liv-bhk-tab-btn ${activeBhk === bhk ? 'active' : ''}`}
-                  onClick={() => setActiveBhk(bhk)}
+                  aria-selected={activeFilter === tab.id}
+                  className={`liv-tab-pill ${activeFilter === tab.id ? 'active' : ''}`}
+                  onClick={() => setActiveFilter(tab.id)}
                 >
-                  {bhk}
+                  <span>{tab.label}</span>
+                  <span className="liv-tab-badge">{tab.count}</span>
                 </button>
               ))}
             </div>
 
-            <div className="liv-search-wrap">
-              <Search size={15} className="liv-search-icon" aria-hidden="true" />
+            {/* Compact Search Box */}
+            <div className="liv-search-box">
+              <Search size={14} className="liv-search-icon" aria-hidden="true" />
               <input
                 type="text"
-                placeholder="Search by society, locality, or style..."
+                placeholder="Search residence, locality, or space..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="liv-search-input"
-                aria-label="Search interior projects"
+                className="liv-search-field"
+                aria-label="Search residential portfolio"
               />
+              {searchQuery && (
+                <button
+                  type="button"
+                  onClick={() => setSearchQuery('')}
+                  className="liv-search-clear"
+                  aria-label="Clear search"
+                >
+                  <X size={12} />
+                </button>
+              )}
             </div>
           </div>
 
-          {/* Bottom Row: Scope Chips + Results Counter */}
-          <div className="liv-filter-row-bottom">
-            <div className="liv-scope-chips">
+          {/* Sub-row: Space tags & Live counter */}
+          <div className="liv-control-sub-row">
+            <div className="liv-scope-strip">
+              <span className="liv-scope-strip-label">
+                <SlidersHorizontal size={12} />
+                Spaces:
+              </span>
               {scopeOptions.map((scope) => (
                 <button
                   key={scope}
                   type="button"
-                  className={`liv-scope-chip ${activeScope === scope ? 'active' : ''}`}
+                  className={`liv-scope-tag ${activeScope === scope ? 'active' : ''}`}
                   onClick={() => setActiveScope(scope)}
                 >
                   {scope}
@@ -251,313 +218,236 @@ export const LivspacePortfolio: React.FC = () => {
               ))}
             </div>
 
-            <span className="liv-results-count">
-              Showing {filteredProjects.length} of {PORTFOLIO_PROJECTS.length} Homes
+            <span className="liv-results-badge">
+              Showing {filteredProjects.length} of {PORTFOLIO_PROJECTS.length} Residences
             </span>
           </div>
         </div>
 
         {/* ==================================================================
-            4. PROJECTS SHOWCASE GRID (AUTHENTIC LIVSPACE CARDS)
+            3. LUXURY ARCHITECTURAL PROJECTS GRID
+            No pricing, high-end editorial cards with photo lightbox.
             ================================================================== */}
-        <section className="liv-projects-grid" aria-label="Portfolio Projects List">
+        <section className="liv-projects-grid" aria-label="Portfolio Residences">
           {filteredProjects.length > 0 ? (
             filteredProjects.map((project) => (
-              <article key={project.id} className="liv-project-card">
-                {/* Media Wrap with Photo Count & Status */}
+              <article key={project.id} className="liv-arch-card">
+                {/* Media Presentation */}
                 <div
-                  className="liv-card-media-wrap"
+                  className="liv-card-media"
                   onClick={() => handleOpenGallery(project)}
                   role="button"
                   tabIndex={0}
-                  style={{ cursor: 'pointer' }}
+                  aria-label={`View photo gallery for ${project.title}`}
                 >
                   <img
                     src={project.coverImage}
                     alt={project.title}
-                    className="liv-card-img"
+                    className="liv-arch-img"
                     loading="lazy"
                   />
+                  <div className="liv-card-media-overlay" />
 
-                  {/* Photo count badge */}
-                  <span className="liv-card-badge-top-left">
+                  {/* Top Badges */}
+                  <span className="liv-badge-photos">
                     <Layers size={11} />
-                    {project.galleryImages.length} PHOTOS
+                    {project.galleryImages.length} Photos
                   </span>
 
-                  {/* Status badge */}
-                  <div className="liv-card-badge-top-right">
-                    {project.type === 'Delivered' ? (
-                      <span className="liv-status-badge liv-status-completed">
-                        <CheckCircle2 size={11} />
-                        COMPLETED
-                      </span>
-                    ) : (
-                      <span className="liv-status-badge liv-status-upcoming">
-                        <Sparkles size={11} />
-                        UPCOMING
-                      </span>
-                    )}
+                  <span className="liv-badge-status">
+                    <CheckCircle2 size={11} />
+                    {project.type.toUpperCase()}
+                  </span>
+
+                  {/* Quick-view pill on hover */}
+                  <div className="liv-media-hover-indicator">
+                    <Eye size={14} />
+                    <span>View Gallery</span>
                   </div>
                 </div>
 
                 {/* Card Body */}
-                <div className="liv-card-body">
-                  {/* Category Kicker Badge */}
-                  <div className="liv-card-kicker">
-                    <span className="liv-kicker-city">{project.city}</span>
-                    <span className="liv-kicker-dot">•</span>
-                    <span className="liv-kicker-bhk">{project.bhk}</span>
-                  </div>
-
-                  {/* Project Title (Fixed clipping, elegant Cormorant serif) */}
-                  <h3 className="liv-card-title" title={`${project.title} — ${project.society}`}>
-                    {project.title}
-                  </h3>
-
-                  {/* Society & Locality Address */}
-                  <div className="liv-card-society">
-                    <MapPin size={13} className="liv-society-pin" aria-hidden="true" />
-                    <span>
-                      {project.society} · {project.location}
+                <div className="liv-arch-body">
+                  <div className="liv-arch-meta-header">
+                    <span className="liv-arch-loc-tag">
+                      <MapPin size={11} />
+                      {project.city}
                     </span>
+                    <span className="liv-meta-separator">•</span>
+                    <span className="liv-arch-bhk-tag">{project.bhk}</span>
                   </div>
 
-                  {/* Enhanced Architectural Specs Grid */}
-                  <div className="liv-card-specs-grid">
-                    <div className="liv-spec-item">
-                      <span className="liv-spec-label">Scope</span>
-                      <span className="liv-spec-value" title={project.scopeTags.join(', ')}>
+                  <h2 className="liv-arch-title" onClick={() => handleOpenGallery(project)}>
+                    {project.title}
+                  </h2>
+
+                  <p className="liv-arch-address">
+                    {project.society} · {project.location}
+                  </p>
+
+                  {/* Compact 3-Column Architectural Specs Strip (NO PRICING) */}
+                  <div className="liv-arch-specs-row">
+                    <div className="liv-spec-col">
+                      <span className="liv-spec-kicker">Area</span>
+                      <span className="liv-spec-data">{project.carpetArea}</span>
+                    </div>
+
+                    <div className="liv-spec-col">
+                      <span className="liv-spec-kicker">Spaces</span>
+                      <span className="liv-spec-data" title={project.scopeTags.join(', ')}>
                         {project.scopeTags.slice(0, 2).join(', ')}
                         {project.scopeTags.length > 2 ? ' +' : ''}
                       </span>
                     </div>
 
-                    <div className="liv-spec-item">
-                      <span className="liv-spec-label">BHK &amp; Area</span>
-                      <span className="liv-spec-value">
-                        {project.bhk} ({project.carpetArea})
-                      </span>
-                    </div>
-
-                    <div className="liv-spec-item">
-                      <span className="liv-spec-label">Timeline</span>
-                      <span className="liv-spec-value">{project.turnaround}</span>
-                    </div>
-
-                    <div className="liv-spec-item">
-                      <span className="liv-spec-label">Est. Budget</span>
-                      <span className="liv-spec-value liv-spec-budget">{project.budgetBracket}</span>
+                    <div className="liv-spec-col">
+                      <span className="liv-spec-kicker">Handover</span>
+                      <span className="liv-spec-data">{project.turnaround}</span>
                     </div>
                   </div>
 
-                  {/* Action Button Row */}
-                  <div className="liv-card-actions">
+                  {/* Actions Row */}
+                  <div className="liv-arch-actions">
                     <button
                       type="button"
-                      onClick={() =>
-                        openInquiry(`Inquiry for Project: ${project.title} (${project.society}, ${project.city})`)
-                      }
-                      className="liv-btn-primary"
+                      onClick={() => handleOpenGallery(project)}
+                      className="liv-btn-view-gallery"
+                      aria-label={`Open gallery for ${project.title}`}
                     >
-                      <span>Get This Design</span>
-                      <ArrowRight size={13} className="liv-btn-arrow" />
+                      <Eye size={13} />
+                      <span>View Gallery</span>
                     </button>
 
                     <button
                       type="button"
-                      onClick={() => handleOpenGallery(project)}
-                      className="liv-btn-secondary"
-                      aria-label={`View photos of ${project.title}`}
-                      title="View Photo Gallery"
+                      onClick={() =>
+                        openInquiry(`Architectural Consultation for ${project.title} (${project.society}, ${project.city})`)
+                      }
+                      className="liv-btn-inquire"
+                      aria-label={`Inquire about ${project.title}`}
                     >
-                      <Eye size={15} />
-                      <span className="liv-btn-photos-text">Photos</span>
+                      <span>Inquire</span>
+                      <ArrowRight size={12} />
                     </button>
                   </div>
                 </div>
               </article>
             ))
           ) : (
-            <div
-              style={{
-                gridColumn: '1 / -1',
-                textAlign: 'center',
-                padding: '60px 20px',
-                background: '#FFFFFF',
-                borderRadius: '16px',
-                border: '1px dashed var(--liv-border)',
-              }}
-            >
-              <h3 style={{ fontSize: '1.25rem', marginBottom: '8px' }}>No homes match your exact filter</h3>
-              <p style={{ color: 'var(--liv-ink-muted)', fontSize: '0.85rem', marginBottom: '16px' }}>
-                Try adjusting your BHK configuration or clear the search criteria.
+            <div className="liv-no-results">
+              <h3 className="liv-no-results-title">No residences match your current filters</h3>
+              <p className="liv-no-results-desc">
+                Try selecting a different space tag or clearing your search keywords.
               </p>
               <button
                 type="button"
                 onClick={() => {
-                  setActiveCity('All');
-                  setActiveBhk('All');
+                  setActiveFilter('All');
                   setActiveScope('All');
                   setSearchQuery('');
                 }}
-                className="liv-btn-primary"
-                style={{ display: 'inline-flex', width: 'auto', padding: '8px 20px' }}
+                className="liv-btn-inquire"
+                style={{ width: 'auto', margin: '0 auto' }}
               >
-                Reset All Filters
+                Reset Filters
               </button>
             </div>
           )}
         </section>
 
         {/* ==================================================================
-            4B. MATERIALS & CRAFTSMANSHIP SPECIFICATIONS
+            4. COMPACT CRAFTSMANSHIP & VERIFIED MATERIALS SECTION
+            Refined 3-column architectural material specification deck.
             ================================================================== */}
         <section className="liv-materials-section" aria-labelledby="materials-section-title">
-          <div className="liv-budget-header">
-            <span className="liv-port-eyebrow">• CRAFTSMANSHIP &amp; VERIFIED MATERIALS</span>
-            <h2 id="materials-section-title" className="liv-budget-title">
-              Materials. Craftsmanship. Detail.
+          <div className="liv-section-header">
+            <span className="liv-port-eyebrow">• CRAFTSMANSHIP &amp; MATERIALS</span>
+            <h2 id="materials-section-title" className="liv-section-title">
+              Materials. Precision. Detail.
             </h2>
-            <p className="liv-budget-subtitle">
-              A closer look at the verified architectural materials and industry-leading brand partners that define our residential spaces.
+            <p className="liv-section-sub">
+              Industry-leading material partners and master carpentry standards defining our architectural spaces.
             </p>
           </div>
 
           <div className="liv-materials-grid">
             {MATERIAL_SPECIFICATIONS.map((mat) => (
               <div key={mat.id} className="liv-material-card">
-                <span className="liv-mat-num">{mat.number}</span>
-                <h3 className="liv-mat-title">{mat.title}</h3>
-                <p className="liv-mat-sub">{mat.subtitle}</p>
-
-                <div className="liv-mat-block">
-                  <span className="liv-mat-label">Materials:</span>
-                  <div className="liv-mat-chips">
-                    {mat.materials.map((m, idx) => (
-                      <span key={idx} className="liv-mat-chip">
-                        {m}
-                      </span>
-                    ))}
+                <div className="liv-mat-top">
+                  <span className="liv-mat-num">{mat.number}</span>
+                  <div>
+                    <h3 className="liv-mat-title">{mat.title}</h3>
+                    <p className="liv-mat-sub">{mat.subtitle}</p>
                   </div>
                 </div>
 
-                <div className="liv-mat-block">
-                  <span className="liv-mat-label">Brand / Finish:</span>
-                  <div className="liv-mat-chips">
-                    {mat.brandFinishDetails.map((b, idx) => (
-                      <span key={idx} className="liv-mat-chip brand">
-                        {b}
-                      </span>
-                    ))}
+                <div className="liv-mat-content">
+                  <div className="liv-mat-row">
+                    <span className="liv-mat-label">Materials:</span>
+                    <div className="liv-mat-tags">
+                      {mat.materials.map((m, idx) => (
+                        <span key={idx} className="liv-mat-tag">
+                          {m}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                </div>
 
-                {mat.note && <p className="liv-mat-note">{mat.note}</p>}
+                  <div className="liv-mat-row">
+                    <span className="liv-mat-label">Brand / Finish:</span>
+                    <div className="liv-mat-tags">
+                      {mat.brandFinishDetails.map((b, idx) => (
+                        <span key={idx} className="liv-mat-tag brand">
+                          {b}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {mat.note && <p className="liv-mat-note">{mat.note}</p>}
+                </div>
               </div>
             ))}
           </div>
         </section>
 
         {/* ==================================================================
-            5. DESIGNS FOR EVERY BUDGET SECTION
+            5. ARCHITECTURAL CONSULTATION BANNER
+            High-conversion atelier design consultation banner (NO pricing/quotes).
             ================================================================== */}
-        <section className="liv-budget-section" aria-labelledby="budget-section-title">
-          <div className="liv-budget-header">
-            <span className="liv-port-eyebrow">• TRANSPARENT HOME INTERIOR PACKAGES</span>
-            <h2 id="budget-section-title" className="liv-budget-title">
-              Designs for Every Budget
-            </h2>
-            <p className="liv-budget-subtitle">
-              Get your dream home today. Let our interior architects help you calculate exact square-foot
-              costs with zero post-handover surprises.
-            </p>
-          </div>
-
-          <div className="liv-budget-cards-grid">
-            {BUDGET_TIERS.map((tier) => (
-              <div
-                key={tier.id}
-                className={`liv-budget-card ${tier.isPopular ? 'popular' : ''}`}
-              >
-                {tier.isPopular && (
-                  <span className="liv-budget-pill-popular">★ {tier.badge}</span>
-                )}
-
-                <h3 className="liv-budget-tier-name">{tier.name}</h3>
-                <div className="liv-budget-price">{tier.priceStarting}</div>
-                <p className="liv-budget-recom">{tier.recommendedFor}</p>
-
-                <ul className="liv-budget-features-list">
-                  {tier.features.map((feat, fIdx) => (
-                    <li key={fIdx} className="liv-budget-feature-item">
-                      <CheckCircle2 size={15} className="liv-budget-feature-icon" />
-                      <span>{feat}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="liv-budget-meta-badges">
-                  <div className="liv-budget-badge-row">
-                    <Clock size={14} />
-                    <span>{tier.timeline}</span>
-                  </div>
-                  <div className="liv-budget-badge-row">
-                    <ShieldCheck size={14} />
-                    <span>{tier.warranty}</span>
-                  </div>
-                </div>
-
-                <button
-                  type="button"
-                  onClick={() => openInquiry(`Interested in ${tier.name} (${tier.priceStarting})`)}
-                  className="liv-btn-primary"
-                  style={{ width: '100%' }}
-                >
-                  <span>Select {tier.name.split('/')[0]}</span>
-                  <ArrowRight size={13} />
-                </button>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* ==================================================================
-            6. LEAD ESTIMATE BANNER
-            ================================================================== */}
-        <section className="liv-estimate-banner" aria-label="Design Consultation Banner">
-          <div className="liv-estimate-content">
-            <span className="liv-port-eyebrow" style={{ color: '#D4A75E' }}>
-              • START YOUR INTERIOR JOURNEY
+        <section className="liv-consult-banner" aria-label="Architectural Design Consultation">
+          <div className="liv-consult-content">
+            <span className="liv-port-eyebrow" style={{ color: 'var(--liv-gold)' }}>
+              • PRIVATE ATELIER CONSULTATION
             </span>
-            <h2 className="liv-estimate-h2">Want to design a home like this?</h2>
-            <p className="liv-estimate-p">
-              Book a consultation with our senior interior architects to get a customized 3D design concept,
-              precise floor-plan space optimization, and an instant transparent quote.
+            <h2 className="liv-consult-title">Ready to bring bespoke architecture to your residence?</h2>
+            <p className="liv-consult-desc">
+              Schedule a design session with our senior architects for floor plan analysis,
+              tailored 3D visualizations, and complete turnkey execution planning.
             </p>
           </div>
 
           <button
             type="button"
-            onClick={() => openInquiry('Portfolio Free Quote Request')}
-            className="liv-estimate-cta-btn"
+            onClick={() => openInquiry('Private Architectural Design Consultation')}
+            className="liv-consult-cta"
           >
-            <span>Get Free Estimate</span>
-            <ArrowRight size={16} />
+            <span>Book Design Consultation</span>
+            <ArrowRight size={14} />
           </button>
         </section>
 
         {/* ==================================================================
-            7. FAQ ACCORDION SECTION (AUTHENTIC LIVSPACE QUESTIONS)
+            6. REFINED COMPACT FAQ SECTION (NO PRICING REFERENCES)
             ================================================================== */}
         <section className="liv-faq-section" aria-labelledby="faq-section-title">
-          <div className="liv-faq-header">
-            <span className="liv-port-eyebrow">• EVERYTHING YOU NEED TO KNOW</span>
-            <h2 id="faq-section-title" className="liv-faq-title">
-              FAQ About Mitjen Portfolio
+          <div className="liv-section-header">
+            <span className="liv-port-eyebrow">• ARCHITECTURAL FAQ</span>
+            <h2 id="faq-section-title" className="liv-section-title">
+              Frequently Asked Questions
             </h2>
-            <p className="liv-faq-subtitle">
-              Common questions about our delivered projects, warranties, design process, and custom pricing.
+            <p className="liv-section-sub">
+              Key information about our delivered projects, craftsmanship standards, warranties, and design process.
             </p>
           </div>
 
@@ -573,7 +463,7 @@ export const LivspacePortfolio: React.FC = () => {
                     aria-expanded={isOpen}
                   >
                     <span>{faq.question}</span>
-                    <ChevronDown size={18} className="liv-faq-chevron" />
+                    <ChevronDown size={16} className="liv-faq-chevron" />
                   </button>
 
                   {isOpen && <div className="liv-faq-answer">{faq.answer}</div>}
@@ -585,7 +475,7 @@ export const LivspacePortfolio: React.FC = () => {
       </div>
 
       {/* ==================================================================
-          8. INTERACTIVE GALLERY LIGHTBOX MODAL
+          7. HIGH-RESOLUTION INTERACTIVE LIGHTBOX MODAL
           ================================================================== */}
       {selectedProject && (
         <div
@@ -604,7 +494,7 @@ export const LivspacePortfolio: React.FC = () => {
               className="liv-lightbox-close-btn"
               aria-label="Close Gallery Modal"
             >
-              <X size={20} />
+              <X size={18} />
             </button>
 
             {/* Main Stage Media */}
@@ -628,38 +518,55 @@ export const LivspacePortfolio: React.FC = () => {
                   type="button"
                   onClick={() => setActiveImageIndex(idx)}
                   className={`liv-lightbox-thumb-btn ${idx === activeImageIndex ? 'active' : ''}`}
+                  aria-label={`Thumbnail ${idx + 1}`}
                 >
                   <img src={img.url} alt={img.caption} />
                 </button>
               ))}
             </div>
 
-            {/* Info Pane */}
+            {/* Info Pane (NO PRICING) */}
             <div className="liv-lightbox-info-pane">
-              <h3 className="liv-lightbox-title">{selectedProject.title}</h3>
-              <div className="liv-lightbox-sub">
-                {selectedProject.society} · {selectedProject.location} | {selectedProject.bhk} (
-                {selectedProject.carpetArea})
+              <div className="liv-lightbox-header-row">
+                <div>
+                  <h3 className="liv-lightbox-title">{selectedProject.title}</h3>
+                  <div className="liv-lightbox-sub">
+                    {selectedProject.society} · {selectedProject.location} | {selectedProject.bhk} (
+                    {selectedProject.carpetArea})
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    openInquiry(`Inquiry for ${selectedProject.title}`);
+                    handleCloseGallery();
+                  }}
+                  className="liv-btn-inquire"
+                  style={{ width: 'auto', padding: '9px 20px', alignSelf: 'flex-start' }}
+                >
+                  <span>Inquire Design</span>
+                  <ArrowRight size={13} />
+                </button>
               </div>
+
               <p className="liv-lightbox-desc">{selectedProject.description}</p>
 
-              <h4 style={{ fontSize: '0.82rem', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '10px' }}>
-                Key Design Highlights
-              </h4>
-              <div className="liv-lightbox-highlights">
-                {selectedProject.highlights.map((h, i) => (
-                  <div key={i} className="liv-highlight-point">
-                    <CheckCircle2 size={14} />
-                    <span>{h}</span>
-                  </div>
-                ))}
+              <div className="liv-lightbox-highlights-section">
+                <h4 className="liv-lightbox-sec-heading">Key Design Highlights</h4>
+                <div className="liv-lightbox-highlights">
+                  {selectedProject.highlights.map((h, i) => (
+                    <div key={i} className="liv-highlight-point">
+                      <CheckCircle2 size={13} />
+                      <span>{h}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
 
               {selectedProject.specifications && selectedProject.specifications.length > 0 && (
-                <div className="liv-lightbox-specs-wrap">
-                  <h4 style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '12px', color: 'var(--liv-ink)' }}>
-                    Architectural Specifications
-                  </h4>
+                <div className="liv-lightbox-specs-section">
+                  <h4 className="liv-lightbox-sec-heading">Architectural Specifications</h4>
                   <div className="liv-lightbox-specs-grid">
                     {selectedProject.specifications.map((spec, sIdx) => (
                       <div key={sIdx} className="liv-lightbox-spec-cell">
@@ -670,21 +577,6 @@ export const LivspacePortfolio: React.FC = () => {
                   </div>
                 </div>
               )}
-
-              <div className="liv-lightbox-cta-bar">
-                <button
-                  type="button"
-                  onClick={() => {
-                    openInquiry(`Custom design for ${selectedProject.title}`);
-                    handleCloseGallery();
-                  }}
-                  className="liv-btn-primary"
-                  style={{ width: 'auto', padding: '10px 24px' }}
-                >
-                  <span>Get This Design for My Home</span>
-                  <ArrowRight size={14} />
-                </button>
-              </div>
             </div>
           </div>
         </div>

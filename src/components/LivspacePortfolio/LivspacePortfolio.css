@@ -1,26 +1,26 @@
 /* ==========================================================================
-   MITJEN INTERIOR DESIGN PORTFOLIO (LIVSPACE PORTFOLIO EXPERIENCE)
-   High-conversion residential interior design showcase with filters,
-   interactive room galleries, budget tiers, and FAQ accordion.
+   MITJEN INTERIOR DESIGN PORTFOLIO — LUXURY ARCHITECTURAL ATELIER
+   Enhanced, compact, pricing-free residential portfolio showcase.
+   Deep obsidian noir, warm charcoal, and champagne gold aesthetics.
    ========================================================================== */
 
 .liv-port-root {
-  --liv-bg: #F9F7F4;
-  --liv-card-bg: #FFFFFF;
-  --liv-card-alt: #F4EFE9;
-  --liv-border: rgba(30, 26, 22, 0.1);
-  --liv-border-strong: rgba(30, 26, 22, 0.18);
-  --liv-ink: #1C1A18;
-  --liv-ink-muted: #615B52;
-  --liv-taupe: #8C8479;
-  --liv-gold: #B88E4B;
-  --liv-gold-hover: #9E7535;
-  --liv-green: #2E7D32;
-  --liv-green-bg: rgba(46, 125, 50, 0.08);
-  --liv-green-border: rgba(46, 125, 50, 0.25);
-  --liv-amber: #C77700;
-  --liv-amber-bg: rgba(199, 119, 0, 0.08);
-  --liv-amber-border: rgba(199, 119, 0, 0.25);
+  --liv-bg: #0B0A09;
+  --liv-bg-surface: #12110F;
+  --liv-bg-card: #171614;
+  --liv-bg-card-hover: #1D1C19;
+  --liv-border: rgba(255, 255, 255, 0.08);
+  --liv-border-subtle: rgba(255, 255, 255, 0.04);
+  --liv-border-hover: rgba(197, 168, 128, 0.35);
+  --liv-gold: #C5A880;
+  --liv-gold-bright: #E2C9A5;
+  --liv-gold-glow: rgba(197, 168, 128, 0.14);
+  --liv-ink: #F7F5F0;
+  --liv-ink-muted: #A39E94;
+  --liv-ink-dim: #6E6960;
+  --liv-green: #68D391;
+  --liv-green-bg: rgba(104, 211, 145, 0.12);
+  --liv-green-border: rgba(104, 211, 145, 0.28);
 
   background-color: var(--liv-bg);
   color: var(--liv-ink);
@@ -28,899 +28,821 @@
   min-height: 100vh;
   position: relative;
   z-index: 10;
-  padding-top: clamp(64px, 8vw, 110px);
-  padding-bottom: 80px;
+  padding-top: clamp(48px, 6vw, 80px);
+  padding-bottom: clamp(64px, 8vw, 100px);
 }
 
 .liv-port-container {
-  max-width: 1200px;
+  max-width: 1240px;
   margin: 0 auto;
-  padding: 0 clamp(16px, 3.5vw, 36px);
+  padding: 0 clamp(16px, 3.5vw, 40px);
   box-sizing: border-box;
 }
 
 /* ==========================================================================
-   1. HERO SECTION & PILLARS
+   1. REFINED COMPACT HERO HEADER
    ========================================================================== */
 .liv-port-hero {
-  padding-top: clamp(32px, 4.5vw, 56px);
-  padding-bottom: clamp(32px, 5vw, 56px);
+  padding-bottom: clamp(28px, 4vw, 44px);
   border-bottom: 1px solid var(--liv-border);
-  margin-bottom: clamp(28px, 4vw, 44px);
+  margin-bottom: clamp(24px, 3.5vw, 36px);
 }
 
-.liv-port-breadcrumb {
+.liv-port-hero-inner {
   display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.76rem;
-  font-weight: 500;
-  color: var(--liv-taupe);
-  margin-bottom: 16px;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 32px;
+  flex-wrap: wrap;
 }
 
-.liv-port-breadcrumb a {
-  color: var(--liv-ink-muted);
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.liv-port-breadcrumb a:hover {
-  color: var(--liv-gold);
-}
-
-.liv-port-hero-header {
-  margin-bottom: clamp(24px, 4vw, 40px);
-  max-width: 820px;
+.liv-port-hero-content {
+  max-width: 720px;
 }
 
 .liv-port-eyebrow {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
   font-family: var(--font-subheading, 'Manrope', sans-serif);
-  font-size: 0.74rem;
+  font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--liv-gold);
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+}
+
+.liv-eyebrow-icon {
+  color: var(--liv-gold-bright);
 }
 
 .liv-port-h1 {
   font-family: var(--font-heading, 'Cormorant Garamond', serif);
-  font-size: clamp(2.2rem, 4vw, 3.4rem);
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
   font-weight: 600;
   letter-spacing: -0.015em;
   color: var(--liv-ink);
-  line-height: 1.1;
-  margin: 0 0 14px 0;
+  line-height: 1.12;
+  margin: 0 0 12px 0;
 }
 
 .liv-port-subtitle {
-  font-size: clamp(0.92rem, 1.15vw, 1.05rem);
+  font-size: clamp(0.88rem, 1.1vw, 0.98rem);
   line-height: 1.6;
   color: var(--liv-ink-muted);
   margin: 0;
 }
 
-/* Quick Switcher Pillar Cards */
-.liv-port-pillars-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+/* Compact Key Architectural Metrics */
+.liv-hero-metrics {
+  display: flex;
+  align-items: center;
   gap: clamp(16px, 2.5vw, 24px);
+  background: var(--liv-bg-surface);
+  border: 1px solid var(--liv-border);
+  border-radius: 14px;
+  padding: 14px clamp(16px, 2.5vw, 24px);
+  flex-shrink: 0;
 }
 
-.liv-pillar-card {
-  background: var(--liv-card-bg);
-  border: 1px solid var(--liv-border);
-  border-radius: 16px;
-  padding: clamp(20px, 3vw, 28px);
+.liv-metric-item {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  box-shadow: 0 6px 18px -4px rgba(35, 28, 22, 0.04);
-  cursor: pointer;
-  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
-  position: relative;
-  overflow: hidden;
+  gap: 2px;
 }
 
-.liv-pillar-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 3px;
-  background: var(--liv-gold);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.3s ease;
-}
-
-.liv-pillar-card:hover {
-  transform: translateY(-3px);
-  border-color: var(--liv-gold);
-  box-shadow: 0 12px 28px -6px rgba(184, 142, 75, 0.16);
-}
-
-.liv-pillar-card:hover::before {
-  transform: scaleX(1);
-}
-
-.liv-pillar-card.active {
-  border-color: var(--liv-gold);
-  background-color: #FFFFFF;
-  box-shadow: 0 12px 30px -6px rgba(184, 142, 75, 0.2);
-}
-
-.liv-pillar-card.active::before {
-  transform: scaleX(1);
-}
-
-.liv-pillar-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 12px;
-}
-
-.liv-pillar-title {
+.liv-metric-val {
   font-family: var(--font-heading, 'Cormorant Garamond', serif);
-  font-size: clamp(1.35rem, 1.8vw, 1.65rem);
-  font-weight: 600;
-  color: var(--liv-ink);
-  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--liv-gold-bright);
+  line-height: 1;
 }
 
-.liv-status-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  font-family: var(--font-subheading, 'Manrope', sans-serif);
+.liv-metric-lbl {
   font-size: 0.68rem;
-  font-weight: 700;
+  font-weight: 600;
+  text-transform: uppercase;
   letter-spacing: 0.08em;
-  padding: 3px 9px;
-  border-radius: 999px;
-  text-transform: uppercase;
+  color: var(--liv-ink-dim);
 }
 
-.liv-status-completed {
-  background-color: var(--liv-green-bg);
-  color: var(--liv-green);
-  border: 1px solid var(--liv-green-border);
-}
-
-.liv-status-upcoming {
-  background-color: var(--liv-amber-bg);
-  color: var(--liv-amber);
-  border: 1px solid var(--liv-amber-border);
-}
-
-.liv-pillar-desc {
-  font-size: 0.82rem;
-  line-height: 1.55;
-  color: var(--liv-ink-muted);
-  margin: 0 0 18px 0;
-}
-
-.liv-pillar-action {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: var(--liv-gold);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  transition: transform 0.2s ease;
-}
-
-.liv-pillar-card:hover .liv-pillar-action {
-  transform: translateX(4px);
+.liv-metric-divider {
+  width: 1px;
+  height: 28px;
+  background-color: var(--liv-border);
 }
 
 /* ==========================================================================
-   2. TOP CITIES PILL STRIP
+   2. UNIFIED COMPACT ARCHITECTURAL CONTROL BAR
    ========================================================================== */
-.liv-port-cities-strip {
+.liv-control-bar {
+  background: var(--liv-bg-surface);
+  border: 1px solid var(--liv-border);
+  border-radius: 16px;
+  padding: clamp(14px, 2vw, 18px);
+  margin-bottom: clamp(28px, 4vw, 40px);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.35);
+}
+
+.liv-control-main-row {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 24px;
-  overflow-x: auto;
-  padding-bottom: 6px;
-  scrollbar-width: none;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
 }
 
-.liv-port-cities-strip::-webkit-scrollbar {
-  display: none;
+/* Primary Tabs Group */
+.liv-tabs-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
-.liv-cities-label {
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--liv-taupe);
-  white-space: nowrap;
-  margin-right: 4px;
-}
-
-.liv-city-pill {
-  background: var(--liv-card-bg);
+.liv-tab-pill {
+  background: var(--liv-bg-card);
   border: 1px solid var(--liv-border);
-  padding: 6px 14px;
-  border-radius: 999px;
-  font-size: 0.76rem;
-  font-weight: 600;
   color: var(--liv-ink-muted);
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   cursor: pointer;
-  white-space: nowrap;
-  transition: all 0.22s ease;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.liv-city-pill:hover {
-  border-color: var(--liv-gold);
+.liv-tab-pill:hover {
+  background: var(--liv-bg-card-hover);
+  border-color: var(--liv-border-hover);
   color: var(--liv-ink);
   transform: translateY(-1px);
 }
 
-.liv-city-pill.active {
-  background-color: var(--liv-ink);
-  color: #FFFFFF;
-  border-color: var(--liv-ink);
-  box-shadow: 0 4px 12px rgba(28, 26, 24, 0.15);
-}
-
-.liv-city-count {
-  font-size: 0.68rem;
-  opacity: 0.75;
-}
-
-/* ==========================================================================
-   3. FILTER CONTROLS BAR (STICKY & REFINED)
-   ========================================================================== */
-.liv-filter-bar {
-  background: var(--liv-card-bg);
-  border: 1px solid var(--liv-border);
-  border-radius: 16px;
-  padding: 16px 20px;
-  margin-bottom: 32px;
-  box-shadow: 0 6px 20px -6px rgba(35, 28, 22, 0.05);
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.liv-filter-row-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 14px;
-}
-
-/* BHK Switcher Tabs */
-.liv-bhk-tabs {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-
-.liv-bhk-tab-btn {
-  background: #F5F1EB;
-  border: 1px solid transparent;
-  padding: 6px 14px;
-  border-radius: 8px;
-  font-size: 0.76rem;
-  font-weight: 600;
-  color: var(--liv-ink-muted);
-  cursor: pointer;
-  transition: all 0.2s ease;
-  white-space: nowrap;
-}
-
-.liv-bhk-tab-btn:hover {
-  background: #EDE7DE;
-  color: var(--liv-ink);
-}
-
-.liv-bhk-tab-btn.active {
-  background: var(--liv-gold);
-  color: #FFFFFF;
+.liv-tab-pill.active {
+  background: var(--liv-gold-glow);
   border-color: var(--liv-gold);
-  box-shadow: 0 2px 8px rgba(184, 142, 75, 0.28);
+  color: var(--liv-gold-bright);
+  font-weight: 700;
 }
 
-/* Search input */
-.liv-search-wrap {
-  position: relative;
+.liv-tab-badge {
+  background: rgba(255, 255, 255, 0.08);
+  color: inherit;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 999px;
+  line-height: 1.2;
+}
+
+.liv-tab-pill.active .liv-tab-badge {
+  background: rgba(197, 168, 128, 0.25);
+  color: var(--liv-gold-bright);
+}
+
+/* Compact Search Box */
+.liv-search-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--liv-bg-card);
+  border: 1px solid var(--liv-border);
+  border-radius: 999px;
+  padding: 6px 14px;
   min-width: 260px;
-  flex: 1;
-  max-width: 380px;
+  flex: 0 1 340px;
+  transition: all 0.22s ease;
+}
+
+.liv-search-box:focus-within {
+  border-color: var(--liv-gold);
+  box-shadow: 0 0 0 3px var(--liv-gold-glow);
+  background: var(--liv-bg-card-hover);
 }
 
 .liv-search-icon {
-  position: absolute;
-  left: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--liv-taupe);
-  pointer-events: none;
+  color: var(--liv-ink-dim);
+  flex-shrink: 0;
 }
 
-.liv-search-input {
-  width: 100%;
-  background: #FBF9F6;
-  border: 1px solid var(--liv-border);
-  border-radius: 8px;
-  padding: 8px 12px 8px 36px;
-  font-size: 0.8rem;
-  color: var(--liv-ink);
+.liv-search-field {
+  background: transparent;
+  border: none;
   outline: none;
-  box-sizing: border-box;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  color: var(--liv-ink);
+  font-size: 0.8rem;
+  width: 100%;
+  font-family: inherit;
 }
 
-.liv-search-input:focus {
-  border-color: var(--liv-gold);
-  box-shadow: 0 0 0 3px rgba(184, 142, 75, 0.14);
+.liv-search-field::placeholder {
+  color: var(--liv-ink-dim);
+  font-size: 0.78rem;
 }
 
-/* Scope Filters Row */
-.liv-filter-row-bottom {
+.liv-search-clear {
+  background: transparent;
+  border: none;
+  color: var(--liv-ink-muted);
+  cursor: pointer;
+  padding: 2px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
-  padding-top: 10px;
-  border-top: 1px dashed var(--liv-border);
+  justify-content: center;
+  border-radius: 50%;
+  transition: color 0.15s ease;
 }
 
-.liv-scope-chips {
+.liv-search-clear:hover {
+  color: var(--liv-ink);
+}
+
+/* Control Sub-row: Space Tags + Count */
+.liv-control-sub-row {
   display: flex;
-  gap: 6px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--liv-border);
   flex-wrap: wrap;
 }
 
-.liv-scope-chip {
+.liv-scope-strip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.liv-scope-strip-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--liv-ink-dim);
+  margin-right: 4px;
+}
+
+.liv-scope-tag {
   background: transparent;
   border: 1px solid var(--liv-border);
-  padding: 4px 10px;
+  color: var(--liv-ink-muted);
+  padding: 4px 11px;
   border-radius: 6px;
   font-size: 0.72rem;
   font-weight: 500;
-  color: var(--liv-ink-muted);
   cursor: pointer;
   transition: all 0.18s ease;
 }
 
-.liv-scope-chip:hover {
-  border-color: var(--liv-gold);
+.liv-scope-tag:hover {
+  background: rgba(255, 255, 255, 0.04);
   color: var(--liv-ink);
+  border-color: rgba(255, 255, 255, 0.15);
 }
 
-.liv-scope-chip.active {
-  background-color: rgba(184, 142, 75, 0.1);
-  color: var(--liv-gold-hover);
+.liv-scope-tag.active {
+  background: rgba(197, 168, 128, 0.15);
   border-color: var(--liv-gold);
-  font-weight: 700;
+  color: var(--liv-gold-bright);
+  font-weight: 600;
 }
 
-.liv-results-count {
+.liv-results-badge {
   font-size: 0.74rem;
-  color: var(--liv-taupe);
-  font-weight: 500;
-  white-space: nowrap;
+  font-weight: 600;
+  color: var(--liv-ink-dim);
+  letter-spacing: 0.04em;
 }
 
 /* ==========================================================================
-   4. PROJECTS SHOWCASE GRID (AUTHENTIC LIVSPACE CARDS)
+   3. LUXURY ARCHITECTURAL PROJECTS GRID
    ========================================================================== */
 .liv-projects-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(24px, 3vw, 36px);
-  margin-bottom: clamp(48px, 7vw, 84px);
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(20px, 3vw, 32px);
+  margin-bottom: clamp(56px, 8vw, 84px);
 }
 
-.liv-project-card {
-  background: #FFFFFF;
-  border: 1px solid rgba(212, 196, 176, 0.55);
+.liv-arch-card {
+  background: var(--liv-bg-card);
+  border: 1px solid var(--liv-border);
   border-radius: 18px;
   overflow: hidden;
-  box-shadow: 0 10px 30px -10px rgba(35, 28, 22, 0.08);
   display: flex;
   flex-direction: column;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 0.35s ease,
-    border-color 0.35s ease;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
+  box-shadow: 0 10px 28px -10px rgba(0, 0, 0, 0.4);
 }
 
-.liv-project-card:hover {
-  transform: translateY(-6px);
-  border-color: #C5A059;
-  box-shadow: 0 22px 48px -12px rgba(35, 28, 22, 0.16),
-    0 0 0 1px rgba(197, 160, 89, 0.35);
+.liv-arch-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--liv-border-hover);
+  background: var(--liv-bg-card-hover);
+  box-shadow: 0 18px 40px -12px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(197, 168, 128, 0.15);
 }
 
-/* Image Container with Badges & Slide Indicator */
-.liv-card-media-wrap {
+/* Media Wrap */
+.liv-card-media {
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 10;
   overflow: hidden;
-  background-color: #E6E1D8;
+  cursor: pointer;
+  background-color: #0E0D0B;
 }
 
-.liv-card-media-wrap::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.14) 0%, rgba(0, 0, 0, 0) 35%, rgba(0, 0, 0, 0.22) 100%);
-  pointer-events: none;
-  z-index: 1;
-}
-
-.liv-card-img {
+.liv-arch-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.liv-project-card:hover .liv-card-img {
-  transform: scale(1.05);
+.liv-arch-card:hover .liv-arch-img {
+  transform: scale(1.04);
 }
 
-.liv-card-badge-top-left {
+.liv-card-media-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(11, 10, 9, 0.25) 0%,
+    rgba(11, 10, 9, 0) 40%,
+    rgba(11, 10, 9, 0.6) 100%
+  );
+  pointer-events: none;
+}
+
+/* Badges on Media */
+.liv-badge-photos {
   position: absolute;
   top: 14px;
   left: 14px;
-  background: rgba(22, 20, 18, 0.82);
+  background: rgba(18, 16, 14, 0.82);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  color: #FFFFFF;
-  padding: 5px 12px;
+  color: var(--liv-ink);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 4px 10px;
   border-radius: 999px;
   font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.08em;
+  text-transform: uppercase;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  z-index: 2;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  gap: 5px;
 }
 
-.liv-card-badge-top-right {
+.liv-badge-status {
   position: absolute;
   top: 14px;
   right: 14px;
-  z-index: 2;
+  background: var(--liv-green-bg);
+  color: var(--liv-green);
+  border: 1px solid var(--liv-green-border);
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.liv-media-hover-indicator {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  background: rgba(197, 168, 128, 0.92);
+  color: #11100E;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: all 0.25s ease;
+}
+
+.liv-arch-card:hover .liv-media-hover-indicator {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Card Body */
-.liv-card-body {
-  padding: clamp(20px, 2.5vw, 26px);
+.liv-arch-body {
+  padding: clamp(18px, 2.5vw, 24px);
   display: flex;
   flex-direction: column;
   flex: 1;
-  background: #FFFFFF;
 }
 
-/* Architectural Kicker (Category & City) */
-.liv-card-kicker {
-  display: inline-flex;
+.liv-arch-meta-header {
+  display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 0.68rem;
+  font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #9E7B35;
+  color: var(--liv-gold);
   margin-bottom: 6px;
 }
 
-.liv-kicker-dot {
-  color: #D4C4B0;
-  font-size: 0.75rem;
-}
-
-/* Project Card Title — Completely immune to global h3 clipping */
-.liv-card-title {
-  display: block !important;
-  font-family: var(--font-heading, 'Cormorant Garamond', serif) !important;
-  font-size: clamp(1.4rem, 1.8vw, 1.65rem) !important;
-  font-weight: 600 !important;
-  line-height: 1.25 !important;
-  color: #1C1A18 !important;
-  margin: 0 0 6px 0 !important;
-  padding: 0 !important;
-  min-height: unset !important;
-  height: auto !important;
-  overflow: visible !important;
-  white-space: normal !important;
-  letter-spacing: -0.01em !important;
-  text-wrap: normal !important;
-}
-
-/* Society & Locality Address */
-.liv-card-society {
-  font-size: 0.82rem;
-  font-weight: 500;
-  color: #6E685F;
+.liv-arch-loc-tag {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  margin-bottom: 16px;
-  line-height: 1.35;
+  gap: 4px;
 }
 
-.liv-society-pin {
-  color: #C5A059;
-  flex-shrink: 0;
+.liv-meta-separator {
+  color: var(--liv-ink-dim);
 }
 
-/* Enhanced Architectural Specs Grid */
-.liv-card-specs-grid {
+.liv-arch-bhk-tag {
+  color: var(--liv-ink-muted);
+}
+
+.liv-arch-title {
+  font-family: var(--font-heading, 'Cormorant Garamond', serif);
+  font-size: clamp(1.4rem, 2vw, 1.75rem);
+  font-weight: 600;
+  color: var(--liv-ink);
+  line-height: 1.2;
+  margin: 0 0 4px 0;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.liv-arch-title:hover {
+  color: var(--liv-gold-bright);
+}
+
+.liv-arch-address {
+  font-size: 0.8rem;
+  color: var(--liv-ink-dim);
+  margin: 0 0 16px 0;
+  line-height: 1.4;
+}
+
+/* Compact 3-Column Architectural Specs Strip (NO PRICING) */
+.liv-arch-specs-row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px 16px;
-  background-color: #FAF8F5;
-  border: 1px solid rgba(197, 160, 89, 0.25);
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  padding: 12px 14px;
+  background: var(--liv-bg-surface);
+  border: 1px solid var(--liv-border-subtle);
   border-radius: 12px;
-  padding: 12px 16px;
   margin-bottom: 18px;
-  box-shadow: inset 0 1px 2px rgba(35, 28, 22, 0.02);
 }
 
-.liv-spec-item {
+.liv-spec-col {
   display: flex;
   flex-direction: column;
-  min-width: 0;
+  gap: 2px;
+  overflow: hidden;
 }
 
-.liv-spec-label {
-  font-size: 0.64rem;
+.liv-spec-kicker {
+  font-size: 0.65rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: #8C8478;
-  margin-bottom: 3px;
+  letter-spacing: 0.08em;
+  color: var(--liv-ink-dim);
 }
 
-.liv-spec-value {
-  font-size: 0.82rem;
+.liv-spec-data {
+  font-size: 0.78rem;
   font-weight: 600;
-  color: #1C1A18;
-  line-height: 1.35;
+  color: var(--liv-ink);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.liv-spec-value.liv-spec-budget {
-  color: #9E7B35;
-  font-weight: 700;
-}
-
-/* Actions Row */
-.liv-card-actions {
+/* Card Actions */
+.liv-arch-actions {
   display: flex;
   align-items: center;
   gap: 10px;
   margin-top: auto;
-  padding-top: 4px;
 }
 
-.liv-btn-primary {
+.liv-btn-view-gallery {
   flex: 1;
-  background-color: #1C1A18;
-  color: #FFFFFF !important;
-  border: 1px solid #1C1A18;
-  padding: 11px 18px;
-  border-radius: 999px;
-  font-size: 0.74rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  cursor: pointer;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  text-decoration: none;
-  box-shadow: 0 4px 14px rgba(28, 26, 24, 0.12);
-}
-
-.liv-btn-primary:hover {
-  background-color: #B89657;
-  border-color: #B89657;
-  color: #171615 !important;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(184, 150, 87, 0.32);
-}
-
-.liv-btn-arrow {
-  transition: transform 0.2s ease;
-}
-
-.liv-btn-primary:hover .liv-btn-arrow {
-  transform: translateX(3px);
-}
-
-.liv-btn-secondary {
   background: transparent;
-  color: #1C1A18;
-  border: 1px solid rgba(28, 26, 24, 0.22);
-  padding: 11px 16px;
+  color: var(--liv-ink);
+  border: 1px solid var(--liv-border);
+  padding: 9px 16px;
   border-radius: 999px;
   font-size: 0.74rem;
   font-weight: 600;
-  cursor: pointer;
+  letter-spacing: 0.05em;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  transition: all 0.25s ease;
-  white-space: nowrap;
+  gap: 7px;
+  cursor: pointer;
+  transition: all 0.22s ease;
 }
 
-.liv-btn-secondary:hover {
-  background-color: #F4EFEA;
-  border-color: #1C1A18;
-  transform: translateY(-2px);
-}
-
-.liv-btn-photos-text {
-  font-size: 0.74rem;
-  font-weight: 600;
-}
-
-/* ==========================================================================
-   5. DESIGNS FOR EVERY BUDGET SECTION
-   ========================================================================== */
-.liv-budget-section {
-  padding: clamp(40px, 6vw, 64px) 0;
-  border-top: 1px solid var(--liv-border);
-  margin-bottom: clamp(48px, 6vw, 72px);
-}
-
-.liv-budget-header {
-  text-align: center;
-  max-width: 680px;
-  margin: 0 auto clamp(32px, 5vw, 48px);
-}
-
-.liv-budget-title {
-  font-family: var(--font-heading, 'Cormorant Garamond', serif);
-  font-size: clamp(2rem, 3.5vw, 2.8rem);
-  font-weight: 600;
-  color: var(--liv-ink);
-  margin: 0 0 10px 0;
-}
-
-.liv-budget-subtitle {
-  font-size: 0.95rem;
-  color: var(--liv-ink-muted);
-  line-height: 1.5;
-  margin: 0;
-}
-
-.liv-budget-cards-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: clamp(18px, 2.5vw, 28px);
-  align-items: stretch;
-}
-
-.liv-budget-card {
-  background: var(--liv-card-bg);
-  border: 1px solid var(--liv-border);
-  border-radius: 18px;
-  padding: clamp(22px, 3vw, 32px);
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  box-shadow: 0 6px 20px -6px rgba(35, 28, 22, 0.05);
-  transition: all 0.28s ease;
-}
-
-.liv-budget-card.popular {
+.liv-btn-view-gallery:hover {
+  background: var(--liv-bg-card-hover);
   border-color: var(--liv-gold);
-  box-shadow: 0 12px 32px -6px rgba(184, 142, 75, 0.22);
-  transform: translateY(-4px);
+  color: var(--liv-gold-bright);
+  transform: translateY(-1px);
 }
 
-.liv-budget-pill-popular {
-  position: absolute;
-  top: -12px;
-  left: 50%;
-  transform: translateX(-50%);
+.liv-btn-inquire {
+  flex: 1;
   background: var(--liv-gold);
-  color: #FFFFFF;
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  padding: 4px 14px;
+  color: #11100E !important;
+  border: 1px solid var(--liv-gold);
+  padding: 9px 16px;
   border-radius: 999px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  cursor: pointer;
+  transition: all 0.22s ease;
+  box-shadow: 0 4px 12px var(--liv-gold-glow);
 }
 
-.liv-budget-tier-name {
-  font-family: var(--font-heading, 'Cormorant Garamond', serif);
-  font-size: 1.45rem;
+.liv-btn-inquire:hover {
+  background: var(--liv-gold-bright);
+  border-color: var(--liv-gold-bright);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(197, 168, 128, 0.3);
+}
+
+/* Empty State */
+.liv-no-results {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px 24px;
+  background: var(--liv-bg-card);
+  border: 1px dashed var(--liv-border);
+  border-radius: 16px;
+}
+
+.liv-no-results-title {
+  font-size: 1.2rem;
   font-weight: 600;
   color: var(--liv-ink);
-  margin: 0 0 6px 0;
-}
-
-.liv-budget-price {
-  font-family: var(--font-special, 'Bebas Neue', sans-serif);
-  font-size: clamp(2.4rem, 3.5vw, 3rem);
-  color: var(--liv-gold);
-  line-height: 1;
   margin-bottom: 8px;
 }
 
-.liv-budget-recom {
-  font-size: 0.78rem;
+.liv-no-results-desc {
+  font-size: 0.85rem;
   color: var(--liv-ink-muted);
-  line-height: 1.45;
-  margin-bottom: 20px;
-  min-height: 2.9em;
-}
-
-.liv-budget-features-list {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 24px 0;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.liv-budget-feature-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  font-size: 0.8rem;
-  color: var(--liv-ink);
-  line-height: 1.45;
-}
-
-.liv-budget-feature-icon {
-  color: var(--liv-gold);
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-
-.liv-budget-meta-badges {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  padding-top: 14px;
-  border-top: 1px dashed var(--liv-border);
-  margin-top: auto;
-  margin-bottom: 20px;
-}
-
-.liv-budget-badge-row {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.74rem;
-  font-weight: 600;
-  color: var(--liv-taupe);
-}
-
-.liv-budget-badge-row svg {
-  color: var(--liv-gold);
+  margin-bottom: 18px;
 }
 
 /* ==========================================================================
-   6. LEAD CAPTURE ESTIMATE BANNER
+   4. COMPACT CRAFTSMANSHIP & MATERIALS SECTION
    ========================================================================== */
-.liv-estimate-banner {
-  background: linear-gradient(135deg, #1C1A18 0%, #2A241F 100%);
-  color: #FFFFFF;
-  border-radius: 20px;
-  padding: clamp(32px, 5vw, 54px);
-  margin-bottom: clamp(48px, 6vw, 72px);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 32px;
-  position: relative;
-  overflow: hidden;
-  border-left: 4px solid var(--liv-gold);
-}
-
-.liv-estimate-content {
-  max-width: 600px;
-}
-
-.liv-estimate-h2 {
-  font-family: var(--font-heading, 'Cormorant Garamond', serif);
-  font-size: clamp(1.8rem, 3vw, 2.5rem);
-  font-weight: 600;
-  color: #FFFFFF;
-  margin: 0 0 10px 0;
-  line-height: 1.15;
-}
-
-.liv-estimate-p {
-  font-size: 0.92rem;
-  color: #D6CFBF;
-  line-height: 1.55;
-  margin: 0;
-}
-
-.liv-estimate-cta-btn {
-  background-color: var(--liv-gold);
-  color: #171615 !important;
-  padding: 14px 28px;
-  border-radius: 999px;
-  font-size: 0.82rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  border: none;
-  cursor: pointer;
-  white-space: nowrap;
-  box-shadow: 0 6px 18px rgba(184, 142, 75, 0.35);
-  transition: all 0.25s ease;
-}
-
-.liv-estimate-cta-btn:hover {
-  background-color: #D4A75E;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(184, 142, 75, 0.45);
-}
-
-/* ==========================================================================
-   7. FAQ ACCORDION SECTION
-   ========================================================================== */
-.liv-faq-section {
-  padding-top: clamp(36px, 5vw, 56px);
+.liv-materials-section {
+  padding: clamp(36px, 5vw, 56px) 0;
   border-top: 1px solid var(--liv-border);
+  margin-bottom: clamp(48px, 6vw, 72px);
 }
 
-.liv-faq-header {
+.liv-section-header {
   text-align: center;
   max-width: 680px;
-  margin: 0 auto clamp(28px, 4vw, 40px);
+  margin: 0 auto clamp(28px, 4vw, 44px);
 }
 
-.liv-faq-title {
+.liv-section-title {
   font-family: var(--font-heading, 'Cormorant Garamond', serif);
   font-size: clamp(1.9rem, 3.2vw, 2.6rem);
   font-weight: 600;
   color: var(--liv-ink);
-  margin: 0 0 8px 0;
+  margin: 0 0 10px 0;
+  line-height: 1.15;
 }
 
-.liv-faq-subtitle {
-  font-size: 0.92rem;
+.liv-section-sub {
+  font-size: 0.88rem;
   color: var(--liv-ink-muted);
+  line-height: 1.55;
   margin: 0;
+}
+
+.liv-materials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(16px, 2.2vw, 24px);
+}
+
+.liv-material-card {
+  background: var(--liv-bg-card);
+  border: 1px solid var(--liv-border);
+  border-radius: 16px;
+  padding: clamp(20px, 2.5vw, 24px);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.25s ease;
+}
+
+.liv-material-card:hover {
+  border-color: var(--liv-border-hover);
+  background: var(--liv-bg-card-hover);
+  transform: translateY(-2px);
+}
+
+.liv-mat-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.liv-mat-num {
+  font-family: var(--font-heading, 'Cormorant Garamond', serif);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--liv-gold-bright);
+  line-height: 1;
+}
+
+.liv-mat-title {
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--liv-ink);
+  margin: 0 0 2px 0;
+}
+
+.liv-mat-sub {
+  font-size: 0.74rem;
+  color: var(--liv-ink-dim);
+  margin: 0;
+}
+
+.liv-mat-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: auto;
+}
+
+.liv-mat-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.liv-mat-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--liv-ink-dim);
+}
+
+.liv-mat-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.liv-mat-tag {
+  background: var(--liv-bg-surface);
+  border: 1px solid var(--liv-border);
+  color: var(--liv-ink-muted);
+  font-size: 0.7rem;
+  padding: 3px 8px;
+  border-radius: 5px;
+  line-height: 1.3;
+}
+
+.liv-mat-tag.brand {
+  border-color: rgba(197, 168, 128, 0.25);
+  color: var(--liv-gold-bright);
+  background: rgba(197, 168, 128, 0.06);
+}
+
+.liv-mat-note {
+  font-size: 0.72rem;
+  color: var(--liv-ink-dim);
+  font-style: italic;
+  margin: 4px 0 0 0;
+  line-height: 1.4;
+}
+
+/* ==========================================================================
+   5. ARCHITECTURAL CONSULTATION BANNER (NO PRICING/QUOTES)
+   ========================================================================== */
+.liv-consult-banner {
+  background: linear-gradient(135deg, #181614 0%, #11100E 100%);
+  border: 1px solid var(--liv-border-hover);
+  border-radius: 20px;
+  padding: clamp(28px, 4.5vw, 44px);
+  margin-bottom: clamp(56px, 7vw, 80px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 28px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.5);
+}
+
+.liv-consult-banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--liv-gold);
+}
+
+.liv-consult-content {
+  max-width: 680px;
+}
+
+.liv-consult-title {
+  font-family: var(--font-heading, 'Cormorant Garamond', serif);
+  font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+  font-weight: 600;
+  color: var(--liv-ink);
+  margin: 0 0 8px 0;
+  line-height: 1.2;
+}
+
+.liv-consult-desc {
+  font-size: 0.88rem;
+  color: var(--liv-ink-muted);
+  line-height: 1.55;
+  margin: 0;
+}
+
+.liv-consult-cta {
+  background-color: var(--liv-gold);
+  color: #11100E !important;
+  padding: 12px 24px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 6px 18px var(--liv-gold-glow);
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+}
+
+.liv-consult-cta:hover {
+  background-color: var(--liv-gold-bright);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(197, 168, 128, 0.35);
+}
+
+/* ==========================================================================
+   6. REFINED COMPACT FAQ SECTION
+   ========================================================================== */
+.liv-faq-section {
+  padding-top: clamp(28px, 4vw, 44px);
+  border-top: 1px solid var(--liv-border);
 }
 
 .liv-faq-list {
@@ -928,51 +850,52 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
 .liv-faq-item {
-  background: var(--liv-card-bg);
+  background: var(--liv-bg-card);
   border: 1px solid var(--liv-border);
   border-radius: 12px;
   overflow: hidden;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color 0.2s ease, background 0.2s ease;
 }
 
 .liv-faq-item:hover {
-  border-color: rgba(184, 142, 75, 0.4);
+  border-color: rgba(197, 168, 128, 0.3);
+  background: var(--liv-bg-card-hover);
 }
 
 .liv-faq-item.open {
   border-color: var(--liv-gold);
-  box-shadow: 0 6px 16px -4px rgba(35, 28, 22, 0.05);
+  background: var(--liv-bg-card-hover);
 }
 
 .liv-faq-question-btn {
   width: 100%;
   background: transparent;
   border: none;
-  padding: 16px 20px;
+  padding: 14px 18px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
   cursor: pointer;
   text-align: left;
   font-family: var(--font-subheading, 'Manrope', sans-serif);
-  font-size: 0.92rem;
+  font-size: 0.88rem;
   font-weight: 600;
   color: var(--liv-ink);
   transition: color 0.2s ease;
 }
 
 .liv-faq-question-btn:hover {
-  color: var(--liv-gold);
+  color: var(--liv-gold-bright);
 }
 
 .liv-faq-chevron {
   color: var(--liv-gold);
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.25s ease;
   flex-shrink: 0;
 }
 
@@ -981,39 +904,40 @@
 }
 
 .liv-faq-answer {
-  padding: 0 20px 18px 20px;
-  font-size: 0.85rem;
-  line-height: 1.65;
+  padding: 0 18px 16px 18px;
+  font-size: 0.82rem;
+  line-height: 1.6;
   color: var(--liv-ink-muted);
-  border-top: 1px dashed rgba(30, 26, 22, 0.06);
+  border-top: 1px dashed var(--liv-border);
   padding-top: 12px;
 }
 
 /* ==========================================================================
-   8. INTERACTIVE GALLERY LIGHTBOX MODAL
+   7. HIGH-RESOLUTION INTERACTIVE LIGHTBOX MODAL
    ========================================================================== */
 .liv-lightbox-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(18, 16, 14, 0.88);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(11, 10, 9, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   z-index: 2000;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: clamp(12px, 3vw, 28px);
+  padding: clamp(12px, 3vw, 24px);
   box-sizing: border-box;
 }
 
 .liv-lightbox-dialog {
-  background: #FFFFFF;
-  border-radius: 20px;
+  background: #141311;
+  border: 1px solid var(--liv-border-hover);
+  border-radius: 18px;
   max-width: 960px;
   width: 100%;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
   position: relative;
   display: flex;
   flex-direction: column;
@@ -1021,14 +945,14 @@
 
 .liv-lightbox-close-btn {
   position: absolute;
-  top: 16px;
-  right: 16px;
-  background: rgba(28, 26, 24, 0.7);
-  border: none;
-  width: 36px;
-  height: 36px;
+  top: 14px;
+  right: 14px;
+  background: rgba(20, 19, 17, 0.85);
+  border: 1px solid var(--liv-border);
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
-  color: #FFFFFF;
+  color: var(--liv-ink);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1039,7 +963,7 @@
 
 .liv-lightbox-close-btn:hover {
   background: var(--liv-gold);
-  color: #171615;
+  color: #11100E;
   transform: scale(1.08);
 }
 
@@ -1047,7 +971,7 @@
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 10;
-  background-color: #1C1A18;
+  background-color: #0B0A09;
 }
 
 .liv-lightbox-main-img {
@@ -1059,38 +983,47 @@
 
 .liv-lightbox-room-pill {
   position: absolute;
-  bottom: 16px;
-  left: 16px;
-  background: rgba(28, 26, 24, 0.82);
-  color: #FFFFFF;
-  padding: 6px 14px;
+  bottom: 14px;
+  left: 14px;
+  background: rgba(18, 16, 14, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--liv-ink);
+  padding: 5px 12px;
   border-radius: 999px;
-  font-size: 0.74rem;
+  font-size: 0.72rem;
   font-weight: 600;
-  letter-spacing: 0.06em;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .liv-lightbox-thumbs-row {
   display: flex;
-  gap: 10px;
-  padding: 14px 20px;
-  background: #F8F5F1;
+  gap: 8px;
+  padding: 12px 18px;
+  background: #0E0D0B;
+  border-top: 1px solid var(--liv-border);
+  border-bottom: 1px solid var(--liv-border);
   overflow-x: auto;
   scrollbar-width: thin;
 }
 
 .liv-lightbox-thumb-btn {
-  width: 72px;
-  height: 52px;
+  width: 68px;
+  height: 48px;
   flex-shrink: 0;
   border-radius: 6px;
   overflow: hidden;
   border: 2px solid transparent;
   padding: 0;
   cursor: pointer;
-  opacity: 0.7;
+  opacity: 0.6;
   transition: all 0.2s ease;
+}
+
+.liv-lightbox-thumb-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .liv-lightbox-thumb-btn.active {
@@ -1099,272 +1032,150 @@
   transform: scale(1.04);
 }
 
-.liv-lightbox-thumb-btn img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
+.liv-lightbox-info-pane {
+  padding: clamp(20px, 3vw, 28px);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
 }
 
-.liv-lightbox-info-pane {
-  padding: 24px;
+.liv-lightbox-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  flex-wrap: wrap;
 }
 
 .liv-lightbox-title {
-  display: block !important;
-  font-family: var(--font-heading, 'Cormorant Garamond', serif) !important;
-  font-size: 1.65rem !important;
-  font-weight: 600 !important;
-  line-height: 1.25 !important;
-  color: var(--liv-ink) !important;
-  margin: 0 0 6px 0 !important;
-  overflow: visible !important;
+  font-family: var(--font-heading, 'Cormorant Garamond', serif);
+  font-size: clamp(1.6rem, 2.4vw, 2rem);
+  font-weight: 600;
+  color: var(--liv-ink);
+  margin: 0 0 4px 0;
+  line-height: 1.15;
 }
 
 .liv-lightbox-sub {
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: var(--liv-gold-hover);
-  margin-bottom: 14px;
+  font-size: 0.8rem;
+  color: var(--liv-gold-bright);
 }
 
 .liv-lightbox-desc {
   font-size: 0.85rem;
   line-height: 1.6;
   color: var(--liv-ink-muted);
-  margin-bottom: 18px;
+  margin: 0;
+}
+
+.liv-lightbox-sec-heading {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--liv-gold);
+  font-weight: 700;
+  margin: 0 0 10px 0;
 }
 
 .liv-lightbox-highlights {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px 16px;
-  margin-bottom: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 8px;
 }
 
 .liv-highlight-point {
   display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.78rem;
-  color: var(--liv-ink);
-  font-weight: 500;
-}
-
-.liv-highlight-point svg {
-  color: var(--liv-gold);
-  flex-shrink: 0;
-}
-
-.liv-lightbox-cta-bar {
-  display: flex;
-  justify-content: flex-end;
-  gap: 12px;
-  border-top: 1px solid var(--liv-border);
-  padding-top: 16px;
-}
-
-/* ==========================================================================
-   8B. MATERIALS & CRAFTSMANSHIP SECTION
-   ========================================================================== */
-.liv-materials-section {
-  padding: 60px 0;
-  border-bottom: 1px solid var(--liv-border);
-}
-
-.liv-materials-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-}
-
-.liv-material-card {
-  background: #FFFFFF;
-  border: 1px solid var(--liv-border);
-  border-radius: 14px;
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-  position: relative;
-}
-
-.liv-material-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 28px rgba(28, 26, 24, 0.06);
-  border-color: rgba(197, 160, 89, 0.4);
-}
-
-.liv-mat-num {
-  font-family: var(--font-body, monospace);
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: var(--liv-gold);
-  letter-spacing: 0.14em;
-  margin-bottom: 6px;
-}
-
-.liv-mat-title {
-  font-family: var(--font-heading, 'Cormorant Garamond', serif);
-  font-size: 1.35rem;
-  font-weight: 600;
-  color: var(--liv-ink);
-  margin: 0 0 4px 0;
-}
-
-.liv-mat-sub {
+  align-items: flex-start;
+  gap: 8px;
   font-size: 0.78rem;
   color: var(--liv-ink-muted);
-  margin-bottom: 16px;
   line-height: 1.4;
 }
 
-.liv-mat-block {
-  margin-bottom: 12px;
-}
-
-.liv-mat-label {
-  display: block;
-  font-size: 0.68rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--liv-ink-muted);
-  margin-bottom: 6px;
-}
-
-.liv-mat-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
-.liv-mat-chip {
-  display: inline-block;
-  padding: 3px 9px;
-  border-radius: 6px;
-  font-size: 0.72rem;
-  background: #F8F5F1;
-  color: var(--liv-ink);
-  border: 1px solid rgba(226, 219, 209, 0.6);
-}
-
-.liv-mat-chip.brand {
-  background: rgba(197, 160, 89, 0.1);
-  color: #8C6F34;
-  font-weight: 600;
-  border-color: rgba(197, 160, 89, 0.3);
-}
-
-.liv-mat-note {
-  font-size: 0.72rem;
-  color: #7A756D;
-  font-style: italic;
-  margin-top: auto;
-  padding-top: 12px;
-  border-top: 1px dashed var(--liv-border);
-}
-
-/* Lightbox Specifications Grid */
-.liv-lightbox-specs-wrap {
-  margin-bottom: 22px;
-  padding: 16px;
-  background: #F8F5F1;
-  border-radius: 10px;
-  border: 1px solid var(--liv-border);
+.liv-highlight-point svg {
+  color: var(--liv-green);
+  flex-shrink: 0;
+  margin-top: 2px;
 }
 
 .liv-lightbox-specs-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px 16px;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 8px;
 }
 
 .liv-lightbox-spec-cell {
+  background: var(--liv-bg-surface);
+  border: 1px solid var(--liv-border);
+  border-radius: 8px;
+  padding: 8px 12px;
   display: flex;
   flex-direction: column;
+  gap: 2px;
 }
 
 .liv-spec-cell-label {
-  font-size: 0.68rem;
+  font-size: 0.65rem;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: var(--liv-ink-muted);
-  font-weight: 600;
+  color: var(--liv-ink-dim);
 }
 
 .liv-spec-cell-val {
-  font-size: 0.82rem;
-  color: var(--liv-ink);
+  font-size: 0.78rem;
   font-weight: 600;
-}
-
-@media (max-width: 1024px) {
-  .liv-materials-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 768px) {
-  .liv-materials-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .liv-lightbox-specs-grid {
-    grid-template-columns: 1fr;
-  }
+  color: var(--liv-ink);
 }
 
 /* ==========================================================================
-   9. RESPONSIVE DESIGN (TABLETS & MOBILE)
+   RESPONSIVE BREAKPOINTS
    ========================================================================== */
-@media (max-width: 1024px) {
+@media (max-width: 991px) {
   .liv-projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .liv-materials-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .liv-budget-cards-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-
-  .liv-budget-card.popular {
-    transform: none;
+  .liv-consult-banner {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
 
-@media (max-width: 768px) {
-  .liv-port-pillars-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .liv-projects-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .liv-estimate-banner {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 24px 20px;
-    gap: 20px;
-  }
-
-  .liv-estimate-cta-btn {
+@media (max-width: 640px) {
+  .liv-hero-metrics {
     width: 100%;
-    justify-content: center;
+    justify-content: space-around;
   }
 
-  .liv-lightbox-highlights {
+  .liv-control-main-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .liv-search-box {
+    min-width: 100%;
+    flex: 1;
+  }
+
+  .liv-materials-grid {
     grid-template-columns: 1fr;
   }
 
-  .liv-lightbox-cta-bar {
+  .liv-arch-specs-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .liv-arch-actions {
     flex-direction: column;
   }
 
-  .liv-lightbox-cta-bar button,
-  .liv-lightbox-cta-bar a {
+  .liv-btn-view-gallery,
+  .liv-btn-inquire {
     width: 100%;
-    justify-content: center;
   }
 }
