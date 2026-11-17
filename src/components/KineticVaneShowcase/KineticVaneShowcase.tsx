@@ -130,6 +130,8 @@ export const KineticVaneShowcase: React.FC = () => {
 
     const red1 = redStage1Ref.current;
     const red2 = redStage2Ref.current;
+    const spot1 = red1?.querySelector('.kinetic-dark-spotlight');
+    const spot2 = red2?.querySelector('.kinetic-dark-spotlight');
     const chars1 = red1?.querySelectorAll<HTMLElement>('.char') || [];
     const chars2 = red2?.querySelectorAll<HTMLElement>('.char') || [];
 
@@ -141,6 +143,8 @@ export const KineticVaneShowcase: React.FC = () => {
     activeGsap.set(blades, { rotateY: 0 });
     activeGsap.set(lights, { opacity: 0 });
     activeGsap.set([red1, red2], { autoAlpha: 0 });
+    if (spot1) activeGsap.set(spot1, { opacity: 0, scale: 0.85 });
+    if (spot2) activeGsap.set(spot2, { opacity: 0, scale: 0.85 });
     activeGsap.set(chars1, { yPercent: 120, opacity: 0 });
     activeGsap.set(chars2, { yPercent: 120, opacity: 0 });
     activeGsap.set(meta0, { autoAlpha: 1, y: 0 });
@@ -159,11 +163,11 @@ export const KineticVaneShowcase: React.FC = () => {
     });
 
     // =========================================================================
-    // PHASE 01 -> PHASE 02: FIRST ROTATING VANE TRANSITION (Project 01 -> 02)
+    // DARK CINEMATIC INTERLUDE 01: Project 01 -> 02 (6-PHASE CHOREOGRAPHY)
     // Timeline unit: 0.00 -> 1.00
     // =========================================================================
 
-    // 1. Outgoing Project 01 metadata exits
+    // Phase 01: Outgoing Project 01 metadata exits
     tl.to(
       meta0,
       {
@@ -175,7 +179,7 @@ export const KineticVaneShowcase: React.FC = () => {
       0.08
     );
 
-    // 2. Vermilion-Red Stage 1 emerges behind louvres
+    // Phase 02: Dark Architectural Environment emerges behind louvres
     tl.to(
       red1,
       {
@@ -186,20 +190,20 @@ export const KineticVaneShowcase: React.FC = () => {
       0.12
     );
 
-    // 3. Chapter 01 Typography reveals with staggered characters
-    tl.to(
-      chars1,
-      {
-        yPercent: 0,
-        opacity: 1,
-        stagger: 0.012,
-        duration: 0.28,
-        ease: 'power3.out',
-      },
-      0.18
-    );
+    if (spot1) {
+      tl.to(
+        spot1,
+        {
+          opacity: 1,
+          scale: 1,
+          duration: 0.45,
+          ease: 'power2.out',
+        },
+        0.14
+      );
+    }
 
-    // 4. Kinetic Louvre Blades rotate 180° revealing Back Face (Project 02)
+    // Phase 03: 3D Rotating Louvre Blades rotate 180° & Incoming Typography reveals
     tl.to(
       blades,
       {
@@ -215,7 +219,6 @@ export const KineticVaneShowcase: React.FC = () => {
       0.16
     );
 
-    // 5. Specular Lighting overlay flares across louvres during turn
     tl.to(
       lights,
       {
@@ -232,7 +235,30 @@ export const KineticVaneShowcase: React.FC = () => {
       0.18
     );
 
-    // 6. Chapter 01 Typography exits through upper mask
+    tl.to(
+      chars1,
+      {
+        yPercent: 0,
+        opacity: 1,
+        stagger: 0.012,
+        duration: 0.28,
+        ease: 'power3.out',
+      },
+      0.18
+    );
+
+    // Phase 04: Cinematic Typographic Moment (Controlled architectural hold)
+    tl.to(
+      chars1,
+      {
+        letterSpacing: '0.04em',
+        duration: 0.2,
+        ease: 'sine.inOut',
+      },
+      0.46
+    );
+
+    // Phase 05: Typography exits through upper mask & Dark Stage conceals
     tl.to(
       chars1,
       {
@@ -245,7 +271,6 @@ export const KineticVaneShowcase: React.FC = () => {
       0.58
     );
 
-    // 7. Red Stage 1 fades out as Project 02 image settles
     tl.to(
       red1,
       {
@@ -256,7 +281,7 @@ export const KineticVaneShowcase: React.FC = () => {
       0.65
     );
 
-    // 8. Project 02 metadata arrives
+    // Phase 06: Project 02 Image settles & Metadata arrives
     tl.to(
       meta1,
       {
@@ -291,11 +316,11 @@ export const KineticVaneShowcase: React.FC = () => {
     );
 
     // =========================================================================
-    // PHASE 02 -> PHASE 03: SECOND ROTATING VANE TRANSITION (Project 02 -> 03)
+    // DARK CINEMATIC INTERLUDE 02: Project 02 -> 03 (6-PHASE CHOREOGRAPHY)
     // Timeline unit: 1.00 -> 2.00
     // =========================================================================
 
-    // 9. Project 02 metadata exits
+    // Phase 01: Project 02 metadata exits
     tl.to(
       meta1,
       {
@@ -307,7 +332,7 @@ export const KineticVaneShowcase: React.FC = () => {
       1.08
     );
 
-    // 10. Vermilion-Red Stage 2 emerges
+    // Phase 02: Dark Architectural Environment emerges
     tl.to(
       red2,
       {
@@ -318,20 +343,20 @@ export const KineticVaneShowcase: React.FC = () => {
       1.12
     );
 
-    // 11. Chapter 02 Typography reveals
-    tl.to(
-      chars2,
-      {
-        yPercent: 0,
-        opacity: 1,
-        stagger: 0.012,
-        duration: 0.28,
-        ease: 'power3.out',
-      },
-      1.18
-    );
+    if (spot2) {
+      tl.to(
+        spot2,
+        {
+          opacity: 1,
+          scale: 1,
+          duration: 0.45,
+          ease: 'power2.out',
+        },
+        1.14
+      );
+    }
 
-    // 12. Louvre Blades rotate from 180° to 360° revealing Front Face (Project 03)
+    // Phase 03: Louvre Blades rotate from 180° to 360° & Incoming Typography reveals
     tl.to(
       blades,
       {
@@ -347,7 +372,6 @@ export const KineticVaneShowcase: React.FC = () => {
       1.16
     );
 
-    // 13. Specular Lighting overlay flares across louvres
     tl.to(
       lights,
       {
@@ -364,7 +388,30 @@ export const KineticVaneShowcase: React.FC = () => {
       1.18
     );
 
-    // 14. Chapter 02 Typography exits
+    tl.to(
+      chars2,
+      {
+        yPercent: 0,
+        opacity: 1,
+        stagger: 0.012,
+        duration: 0.28,
+        ease: 'power3.out',
+      },
+      1.18
+    );
+
+    // Phase 04: Cinematic Typographic Moment (Controlled architectural hold)
+    tl.to(
+      chars2,
+      {
+        letterSpacing: '0.04em',
+        duration: 0.2,
+        ease: 'sine.inOut',
+      },
+      1.46
+    );
+
+    // Phase 05: Typography exits & Dark Stage conceals
     tl.to(
       chars2,
       {
@@ -377,7 +424,6 @@ export const KineticVaneShowcase: React.FC = () => {
       1.58
     );
 
-    // 15. Red Stage 2 fades out as Project 03 image settles
     tl.to(
       red2,
       {
@@ -388,7 +434,7 @@ export const KineticVaneShowcase: React.FC = () => {
       1.65
     );
 
-    // 16. Project 03 metadata arrives
+    // Phase 06: Project 03 Image settles & Metadata arrives
     tl.to(
       meta2,
       {
@@ -505,63 +551,65 @@ export const KineticVaneShowcase: React.FC = () => {
     >
       <div ref={stickyViewportRef} className="kinetic-sticky-viewport">
         {/* ==================================================================
-            1. CINEMATIC VERMILION-RED TRANSITION ENVIRONMENT (CHAPTER 01)
+            1. DARK CINEMATIC ARCHITECTURAL INTERLUDE (CHAPTER 01)
             ================================================================== */}
-        <div ref={redStage1Ref} className="kinetic-red-stage">
-          <div className="kinetic-red-grid-overlay" />
-          <div className="kinetic-red-center-editorial">
-            <span className="kinetic-red-eyebrow">
+        <div ref={redStage1Ref} className="kinetic-dark-stage">
+          <div className="kinetic-dark-spotlight" />
+          <div className="kinetic-dark-grid-overlay" />
+          <div className="kinetic-dark-center-editorial">
+            <span className="kinetic-dark-eyebrow">
               {KINETIC_PROJECTS[0].transitionTitle.eyebrow}
             </span>
-            <div className="kinetic-red-title-mask">
+            <div className="kinetic-dark-title-mask">
               <h2 className="kinetic-typo-line">
                 {renderChars(KINETIC_PROJECTS[0].transitionTitle.line1)}
               </h2>
             </div>
-            <div className="kinetic-red-title-mask">
+            <div className="kinetic-dark-title-mask">
               <h2 className="kinetic-typo-line italic-accent">
                 {renderChars(KINETIC_PROJECTS[0].transitionTitle.line2)}
               </h2>
             </div>
-            <p className="kinetic-red-subtitle">
+            <p className="kinetic-dark-subtitle">
               {KINETIC_PROJECTS[0].transitionTitle.subtext}
             </p>
           </div>
-          <div className="kinetic-red-meta-tag top-left">
+          <div className="kinetic-dark-meta-tag top-left">
             {KINETIC_PROJECTS[0].transitionTitle.coord}
           </div>
-          <div className="kinetic-red-meta-tag bottom-right">
+          <div className="kinetic-dark-meta-tag bottom-right">
             AXIS-Y ROTATION // MECHANICAL LOUVRES
           </div>
         </div>
 
         {/* ==================================================================
-            2. CINEMATIC VERMILION-RED TRANSITION ENVIRONMENT (CHAPTER 02)
+            2. DARK CINEMATIC ARCHITECTURAL INTERLUDE (CHAPTER 02)
             ================================================================== */}
-        <div ref={redStage2Ref} className="kinetic-red-stage">
-          <div className="kinetic-red-grid-overlay" />
-          <div className="kinetic-red-center-editorial">
-            <span className="kinetic-red-eyebrow">
+        <div ref={redStage2Ref} className="kinetic-dark-stage">
+          <div className="kinetic-dark-spotlight" />
+          <div className="kinetic-dark-grid-overlay" />
+          <div className="kinetic-dark-center-editorial">
+            <span className="kinetic-dark-eyebrow">
               {KINETIC_PROJECTS[1].transitionTitle.eyebrow}
             </span>
-            <div className="kinetic-red-title-mask">
+            <div className="kinetic-dark-title-mask">
               <h2 className="kinetic-typo-line">
                 {renderChars(KINETIC_PROJECTS[1].transitionTitle.line1)}
               </h2>
             </div>
-            <div className="kinetic-red-title-mask">
+            <div className="kinetic-dark-title-mask">
               <h2 className="kinetic-typo-line italic-accent">
                 {renderChars(KINETIC_PROJECTS[1].transitionTitle.line2)}
               </h2>
             </div>
-            <p className="kinetic-red-subtitle">
+            <p className="kinetic-dark-subtitle">
               {KINETIC_PROJECTS[1].transitionTitle.subtext}
             </p>
           </div>
-          <div className="kinetic-red-meta-tag top-left">
+          <div className="kinetic-dark-meta-tag top-left">
             {KINETIC_PROJECTS[1].transitionTitle.coord}
           </div>
-          <div className="kinetic-red-meta-tag bottom-right">
+          <div className="kinetic-dark-meta-tag bottom-right">
             AXIS-Y 360° // TERMINAL CONVERGENCE
           </div>
         </div>
