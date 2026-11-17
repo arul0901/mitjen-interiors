@@ -72,7 +72,7 @@
 }
 
 .vane-face.back {
-  transform: rotateY(180deg) scaleX(-1);
+  transform: rotateY(180deg);
 }
 
 /* Inner Slice Image: Spans the full viewport width and is horizontally offset per slice */
