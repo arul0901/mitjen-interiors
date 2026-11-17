@@ -8,8 +8,10 @@
   position: relative;
   width: 100%;
   background-color: #0B0A09;
+  overflow: hidden;
   user-select: none;
   -webkit-user-select: none;
+  z-index: 2;
 }
 
 .kinetic-sticky-viewport,
@@ -277,9 +279,9 @@
   height: 100%;
   background: linear-gradient(
     90deg,
-    rgba(245, 230, 202, 0.18) 0%,
+    rgba(255, 255, 255, 0.12) 0%,
     rgba(0, 0, 0, 0) 35%,
-    rgba(0, 0, 0, 0.6) 100%
+    rgba(0, 0, 0, 0.55) 100%
   );
   opacity: 0;
   pointer-events: none;
@@ -294,8 +296,8 @@
   bottom: 0;
   right: 0;
   width: 1px;
-  background: rgba(197, 160, 89, 0.35);
-  box-shadow: 0 0 6px rgba(197, 160, 89, 0.25);
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
   z-index: 3;
 }
 

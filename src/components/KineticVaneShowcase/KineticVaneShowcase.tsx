@@ -67,7 +67,7 @@ export const KineticVaneShowcase: React.FC = () => {
   const goToPhase = (phaseIdx: number) => {
     const st = scrollTriggerRef.current;
     if (!st) return;
-    const progressMap = [0.02, 0.50, 0.98];
+    const progressMap = [0.02, 0.40, 0.80];
     const targetProgress = progressMap[Math.min(Math.max(phaseIdx, 0), 2)];
     const targetY = st.start + targetProgress * (st.end - st.start);
     scrollToTarget(targetY);
@@ -400,16 +400,20 @@ export const KineticVaneShowcase: React.FC = () => {
       1.72
     );
 
+    // 17. Generous resting buffer on Project 03 so it remains completely pinned and stable,
+    // preventing any content or boxes from below from encroaching or coming upward into the showcase!
+    tl.to({}, { duration: 0.85 }, 1.75);
+
     // Create the master Pinned ScrollTrigger
     const st = activeScrollTrigger.create({
       id: 'kinetic-vane-pin-trigger',
       trigger: container,
       start: 'top top',
-      end: '+=240%',
+      end: '+=300%',
       pin: viewport,
       scrub: 0.5,
       snap: {
-        snapTo: [0, 0.5, 1],
+        snapTo: [0.02, 0.40, 0.80],
         duration: { min: 0.2, max: 0.45 },
         ease: 'power1.inOut',
       },
@@ -417,9 +421,9 @@ export const KineticVaneShowcase: React.FC = () => {
       onUpdate: (self: { progress: number }) => {
         const p = self.progress;
         let idx = 0;
-        if (p > 0.72) {
+        if (p > 0.62) {
           idx = 2;
-        } else if (p > 0.28) {
+        } else if (p > 0.22) {
           idx = 1;
         }
         if (activeIdxRef.current !== idx) {

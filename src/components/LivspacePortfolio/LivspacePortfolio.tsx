@@ -112,6 +112,69 @@ export const LivspacePortfolio: React.FC = () => {
               Prithvi, Sampath, Mr. Mahesh – Pilot, and Deepak.
             </p>
           </div>
+
+          {/* Quick Regional Pillars (Coimbatore vs Bangalore) */}
+          <div className="liv-port-pillars-grid">
+            {/* Pillar 1: Coimbatore Projects (3) */}
+            <div
+              className={`liv-pillar-card ${activeCity === 'Coimbatore' ? 'active' : ''}`}
+              onClick={() => {
+                setActiveCity(activeCity === 'Coimbatore' ? 'All' : 'Coimbatore');
+                scrollToGrid();
+              }}
+              role="button"
+              tabIndex={0}
+              aria-label="Explore Coimbatore Projects"
+            >
+              <div>
+                <div className="liv-pillar-header">
+                  <h2 className="liv-pillar-title">Coimbatore Residences</h2>
+                  <span className="liv-status-badge liv-status-completed">
+                    <CheckCircle2 size={12} />
+                    3 DELIVERED
+                  </span>
+                </div>
+                <p className="liv-pillar-desc">
+                  Completed luxury residences in Coimbatore: Prithvi (Neelambur · Royal Nesto),
+                  Sampath (Kalapatti · Nehru Nagar West.), and Deepak (Saibaba Colony).
+                </p>
+              </div>
+              <div className="liv-pillar-action">
+                <span>View Coimbatore Homes (3)</span>
+                <ArrowRight size={14} />
+              </div>
+            </div>
+
+            {/* Pillar 2: Bangalore Projects (1) */}
+            <div
+              className={`liv-pillar-card ${activeCity === 'Bangalore' ? 'active' : ''}`}
+              onClick={() => {
+                setActiveCity(activeCity === 'Bangalore' ? 'All' : 'Bangalore');
+                scrollToGrid();
+              }}
+              role="button"
+              tabIndex={0}
+              aria-label="Explore Bangalore Projects"
+            >
+              <div>
+                <div className="liv-pillar-header">
+                  <h2 className="liv-pillar-title">Bangalore Residence</h2>
+                  <span className="liv-status-badge liv-status-completed">
+                    <CheckCircle2 size={12} />
+                    1 DELIVERED VILLA
+                  </span>
+                </div>
+                <p className="liv-pillar-desc">
+                  Grand 7,350 sq.ft luxury villa for Mr. Mahesh – Pilot located at Krishna Raja (KR) Puram,
+                  Bangalore with central courtyard flow and island kitchen.
+                </p>
+              </div>
+              <div className="liv-pillar-action">
+                <span>View Bangalore Villa (1)</span>
+                <ArrowRight size={14} />
+              </div>
+            </div>
+          </div>
         </section>
 
         {/* ==================================================================
