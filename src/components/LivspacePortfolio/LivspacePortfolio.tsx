@@ -801,13 +801,13 @@ export const LivspacePortfolio: React.FC = () => {
                 {galleryViewMode === 'stage' ? (
                   /* --- STAGE WALKTHROUGH VIEW --- */
                   <div className="liv-gallery-stage-view">
-                    {/* Stage Screen with Constrained Height, Floating Nav Chevrons & Room Pill */}
+                    {/* Stage Screen with Constrained Height & Floating Nav Chevrons */}
                     <div
                       className="liv-gallery-stage-media"
                       onTouchStart={handleTouchStart}
                       onTouchEnd={handleTouchEnd}
                     >
-                      {/* Atmospheric Ambient Glow behind image */}
+                      {/* Atmospheric Ambient Glow behind image matching website palette */}
                       <div
                         className="liv-gallery-stage-ambient-bg"
                         style={{
@@ -817,37 +817,27 @@ export const LivspacePortfolio: React.FC = () => {
                         }}
                       />
 
-                      <img
-                        key={activeImageIndex}
-                        src={selectedProject.galleryImages[activeImageIndex]?.url || selectedProject.coverImage}
-                        alt={selectedProject.galleryImages[activeImageIndex]?.caption || selectedProject.title}
-                        className={`liv-gallery-stage-img ${imageLoaded ? 'loaded' : ''}`}
-                        onLoad={() => setImageLoaded(true)}
-                        onError={(e) => {
-                          (e.currentTarget as HTMLImageElement).src = selectedProject.coverImage;
-                        }}
-                      />
-                      <div className="liv-gallery-stage-scrim" />
+                      {/* Framed Architectural Photo Display */}
+                      <div className="liv-gallery-photo-mount">
+                        <img
+                          key={activeImageIndex}
+                          src={selectedProject.galleryImages[activeImageIndex]?.url || selectedProject.coverImage}
+                          alt={selectedProject.galleryImages[activeImageIndex]?.caption || selectedProject.title}
+                          className={`liv-gallery-stage-img ${imageLoaded ? 'loaded' : ''}`}
+                          onLoad={() => setImageLoaded(true)}
+                          onError={(e) => {
+                            (e.currentTarget as HTMLImageElement).src = selectedProject.coverImage;
+                          }}
+                        />
 
-                      {/* Top Floating Badges & Back to Grid button */}
-                      <span className="liv-gallery-counter-badge">
-                        <ImageIcon size={11} />
-                        {activeImageIndex + 1} / {selectedProject.galleryImages.length}
-                      </span>
-
-                      <button
-                        type="button"
-                        onClick={() => setGalleryViewMode('grid')}
-                        className="liv-gallery-top-grid-btn"
-                        title="Return to Grid View"
-                      >
-                        <Grid size={12} />
-                        <span>All Spaces Grid</span>
-                      </button>
-
-                      <span className="liv-gallery-room-tag">
-                        {selectedProject.galleryImages[activeImageIndex]?.room || 'Interior Space'}
-                      </span>
+                        {/* Photo Counter Pill inside mount */}
+                        <div className="liv-gallery-counter-badge">
+                          <ImageIcon size={11} />
+                          <span>
+                            {activeImageIndex + 1} of {selectedProject.galleryImages.length}
+                          </span>
+                        </div>
+                      </div>
 
                       {/* Left & Right Circular Nav Chevrons */}
                       {selectedProject.galleryImages.length > 1 && (
@@ -877,9 +867,14 @@ export const LivspacePortfolio: React.FC = () => {
                     {/* Room Title, Architectural Description & Grid Switcher Bar */}
                     <div className="liv-gallery-caption-bar">
                       <div className="liv-gallery-caption-text">
-                        <h4 className="liv-gallery-room-title">
-                          {selectedProject.galleryImages[activeImageIndex]?.room || 'Architectural Space'}
-                        </h4>
+                        <div className="liv-gallery-caption-header">
+                          <h4 className="liv-gallery-room-title">
+                            {selectedProject.galleryImages[activeImageIndex]?.room || 'Architectural Space'}
+                          </h4>
+                          <span className="liv-gallery-room-pill">
+                            Verified Interior Space
+                          </span>
+                        </div>
                         <p className="liv-gallery-room-desc">
                           {selectedProject.galleryImages[activeImageIndex]?.caption || selectedProject.description}
                         </p>
@@ -893,7 +888,7 @@ export const LivspacePortfolio: React.FC = () => {
                           title="View all spaces in grid layout"
                         >
                           <Grid size={13} />
-                          <span>Back to Grid View ({selectedProject.galleryImages.length})</span>
+                          <span>All Spaces Grid ({selectedProject.galleryImages.length})</span>
                         </button>
                       </div>
                     </div>
