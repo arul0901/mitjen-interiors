@@ -38,7 +38,7 @@ export const LivspacePortfolio: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<PortfolioProject | null>(null);
   const [activeModalTab, setActiveModalTab] = useState<'materials' | 'gallery'>('materials');
   const [activeImageIndex, setActiveImageIndex] = useState<number>(0);
-  const [galleryViewMode, setGalleryViewMode] = useState<'stage' | 'grid'>('stage');
+  const [galleryViewMode, setGalleryViewMode] = useState<'stage' | 'grid'>('grid'); // Default to grid view
 
   // FAQ Accordion State (first item open by default)
   const [openFaqIndices, setOpenFaqIndices] = useState<number[]>([0]);
@@ -48,6 +48,40 @@ export const LivspacePortfolio: React.FC = () => {
       prev.includes(idx) ? prev.filter((i) => i !== idx) : [...prev, idx]
     );
   };
+
+  // Prevent background scroll bleed & stop Lenis smooth scroller when modal is open
+  useEffect(() => {
+    if (!selectedProject) return;
+
+    const originalBodyOverflow = document.body.style.overflow;
+    const originalHtmlOverflow = document.documentElement.style.overflow;
+    const originalBodyPaddingRight = document.body.style.paddingRight;
+
+    // Compensate for scrollbar width to prevent horizontal page jitter
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+    if (scrollbarWidth > 0) {
+      document.body.style.paddingRight = `${scrollbarWidth}px`;
+    }
+
+    document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
+
+    // Pause global Lenis smooth scroller so wheel events inside modal do not move the background
+    const win = window as any;
+    if (win.lenisInstance && typeof win.lenisInstance.stop === 'function') {
+      win.lenisInstance.stop();
+    }
+
+    return () => {
+      document.body.style.overflow = originalBodyOverflow;
+      document.documentElement.style.overflow = originalHtmlOverflow;
+      document.body.style.paddingRight = originalBodyPaddingRight;
+
+      if (win.lenisInstance && typeof win.lenisInstance.start === 'function') {
+        win.lenisInstance.start();
+      }
+    };
+  }, [selectedProject]);
 
   // Keyboard navigation for multi-image gallery
   useEffect(() => {
@@ -132,13 +166,15 @@ export const LivspacePortfolio: React.FC = () => {
   const handleOpenMaterials = (project: PortfolioProject) => {
     setSelectedProject(project);
     setActiveModalTab('materials');
+    setGalleryViewMode('grid');
     setActiveImageIndex(0);
   };
 
-  // Open Gallery directly
+  // Open Gallery directly in Grid View
   const handleOpenGalleryTab = (project: PortfolioProject) => {
     setSelectedProject(project);
     setActiveModalTab('gallery');
+    setGalleryViewMode('grid');
     setActiveImageIndex(0);
   };
 
@@ -535,12 +571,19 @@ export const LivspacePortfolio: React.FC = () => {
         <div
           className="liv-lightbox-backdrop"
           onClick={handleCloseModal}
+          onWheel={(e) => e.stopPropagation()}
+          onTouchMove={(e) => {
+            if (e.target === e.currentTarget) {
+              e.preventDefault();
+            }
+          }}
           role="dialog"
           aria-modal="true"
         >
           <div
             className="liv-lightbox-dialog"
             onClick={(e) => e.stopPropagation()}
+            onWheel={(e) => e.stopPropagation()}
           >
             <button
               type="button"
@@ -585,11 +628,14 @@ export const LivspacePortfolio: React.FC = () => {
                   type="button"
                   role="tab"
                   aria-selected={activeModalTab === 'gallery'}
-                  onClick={() => setActiveModalTab('gallery')}
+                  onClick={() => {
+                    setActiveModalTab('gallery');
+                    setGalleryViewMode('grid');
+                  }}
                   className={`liv-modal-tab-btn ${activeModalTab === 'gallery' ? 'active' : ''}`}
                 >
-                  <ImageIcon size={13} />
-                  <span>Photos ({selectedProject.galleryImages.length})</span>
+                  <Grid size={13} />
+                  <span>Photos Grid ({selectedProject.galleryImages.length})</span>
                 </button>
               </div>
             </div>
@@ -702,11 +748,21 @@ export const LivspacePortfolio: React.FC = () => {
                       />
                       <div className="liv-gallery-stage-scrim" />
 
-                      {/* Top Floating Badges */}
+                      {/* Top Floating Badges & Back to Grid button */}
                       <span className="liv-gallery-counter-badge">
                         <ImageIcon size={11} />
                         {activeImageIndex + 1} / {selectedProject.galleryImages.length}
                       </span>
+
+                      <button
+                        type="button"
+                        onClick={() => setGalleryViewMode('grid')}
+                        className="liv-gallery-top-grid-btn"
+                        title="Return to Grid View"
+                      >
+                        <Grid size={12} />
+                        <span>All Spaces Grid</span>
+                      </button>
 
                       <span className="liv-gallery-room-tag">
                         {selectedProject.galleryImages[activeImageIndex]?.room || 'Interior Space'}
@@ -752,11 +808,11 @@ export const LivspacePortfolio: React.FC = () => {
                         <button
                           type="button"
                           onClick={() => setGalleryViewMode('grid')}
-                          className="liv-gallery-toggle-btn"
+                          className="liv-gallery-toggle-btn active"
                           title="View all spaces in grid layout"
                         >
                           <Grid size={13} />
-                          <span>View All Grid ({selectedProject.galleryImages.length})</span>
+                          <span>Back to Grid View ({selectedProject.galleryImages.length})</span>
                         </button>
                       </div>
                     </div>
@@ -780,16 +836,23 @@ export const LivspacePortfolio: React.FC = () => {
                     </div>
                   </div>
                 ) : (
-                  /* --- EDITORIAL MULTI-IMAGE GRID VIEW --- */
+                  /* --- EDITORIAL MULTI-IMAGE GRID VIEW (DEFAULT) --- */
                   <div className="liv-gallery-grid-view">
                     <div className="liv-gallery-grid-toolbar">
-                      <span className="liv-gallery-grid-count">
-                        All {selectedProject.galleryImages.length} Verified Interior Spaces
-                      </span>
+                      <div className="liv-grid-toolbar-left">
+                        <span className="liv-gallery-grid-count">
+                          {selectedProject.galleryImages.length} Verified Interior Spaces
+                        </span>
+                        <span className="liv-grid-toolbar-sub">Click any space to inspect in full walkthrough</span>
+                      </div>
                       <button
                         type="button"
-                        onClick={() => setGalleryViewMode('stage')}
-                        className="liv-gallery-toggle-btn active"
+                        onClick={() => {
+                          setActiveImageIndex(0);
+                          setGalleryViewMode('stage');
+                        }}
+                        className="liv-gallery-toggle-btn"
+                        title="Start cinematic walkthrough"
                       >
                         <ImageIcon size={13} />
                         <span>Cinematic Walkthrough</span>
@@ -811,7 +874,7 @@ export const LivspacePortfolio: React.FC = () => {
                           <div className="liv-photo-card-media">
                             <img src={img.url} alt={img.caption} loading="lazy" />
                             <span className="liv-photo-room-badge">{img.room}</span>
-                            <span className="liv-photo-index-badge">{idx + 1}</span>
+                            <span className="liv-photo-index-badge">{idx + 1} / {selectedProject.galleryImages.length}</span>
                             <div className="liv-photo-hover-pill">
                               <Eye size={12} />
                               <span>Inspect Space</span>
