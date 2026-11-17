@@ -127,6 +127,9 @@ export const CompattoLanding: React.FC = () => {
             <a href="#why-choose-us" className="compatto-nav-link">
               Why choose us
             </a>
+            <Link to="/portfolio" className="compatto-nav-link">
+              Portfolio
+            </Link>
             <Link to="/projects" className="compatto-nav-link">
               Projects
             </Link>

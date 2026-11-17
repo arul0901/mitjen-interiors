@@ -14,10 +14,6 @@ export const Header: React.FC = () => {
   const isProjectsActive = location.pathname.toLowerCase().startsWith('/project') || location.pathname.toLowerCase().startsWith('/portfolio');
   const isHome = location.pathname === '/';
 
-  if (isHome) {
-    return null;
-  }
-
   // State for Desktop Services Dropdown and Mobile Services Accordion
   const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false);
   const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(() => isServicesActive);
@@ -408,6 +404,13 @@ export const Header: React.FC = () => {
           </div>
 
           <Link
+            to="/portfolio"
+            className={`nav-desktop-link ${location.pathname === '/portfolio' ? 'on' : ''}`}
+            onClick={closeAllMenus}
+          >
+            Portfolio
+          </Link>
+          <Link
             to="/projects"
             className={`nav-desktop-link ${isProjectsActive ? 'on' : ''}`}
             onClick={closeAllMenus}
@@ -500,12 +503,21 @@ export const Header: React.FC = () => {
           </div>
 
           <Link
+            to="/portfolio"
+            className={`mobile-nav-link ${location.pathname === '/portfolio' ? 'on' : ''}`}
+            onClick={closeAllMenus}
+          >
+            <span>Portfolio</span>
+            <span style={{ fontSize: '0.9rem', opacity: 0.5 }}>04</span>
+          </Link>
+
+          <Link
             to="/projects"
             className={`mobile-nav-link ${isProjectsActive ? 'on' : ''}`}
             onClick={closeAllMenus}
           >
             <span>Projects</span>
-            <span style={{ fontSize: '0.9rem', opacity: 0.5 }}>04</span>
+            <span style={{ fontSize: '0.9rem', opacity: 0.5 }}>05</span>
           </Link>
 
           <Link
@@ -514,7 +526,7 @@ export const Header: React.FC = () => {
             onClick={closeAllMenus}
           >
             <span>Contact Us</span>
-            <span style={{ fontSize: '0.9rem', opacity: 0.5 }}>05</span>
+            <span style={{ fontSize: '0.9rem', opacity: 0.5 }}>06</span>
           </Link>
         </div>
 
@@ -584,7 +596,7 @@ export const Header: React.FC = () => {
       {/* Right Actions: Desktop Search + Desktop Gold CTA + Mobile Burger */}
       <div className="header-actions-wrap">
         {/* Search trigger button */}
-        
+
 
         {/* Desktop Gold CTA Button */}
         <Link

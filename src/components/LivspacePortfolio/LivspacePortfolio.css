@@ -1,0 +1,1144 @@
+/* ==========================================================================
+   MITJEN INTERIOR DESIGN PORTFOLIO (LIVSPACE PORTFOLIO EXPERIENCE)
+   High-conversion residential interior design showcase with filters,
+   interactive room galleries, budget tiers, and FAQ accordion.
+   ========================================================================== */
+
+.liv-port-root {
+  --liv-bg: #F9F7F4;
+  --liv-card-bg: #FFFFFF;
+  --liv-card-alt: #F4EFE9;
+  --liv-border: rgba(30, 26, 22, 0.1);
+  --liv-border-strong: rgba(30, 26, 22, 0.18);
+  --liv-ink: #1C1A18;
+  --liv-ink-muted: #615B52;
+  --liv-taupe: #8C8479;
+  --liv-gold: #B88E4B;
+  --liv-gold-hover: #9E7535;
+  --liv-green: #2E7D32;
+  --liv-green-bg: rgba(46, 125, 50, 0.08);
+  --liv-green-border: rgba(46, 125, 50, 0.25);
+  --liv-amber: #C77700;
+  --liv-amber-bg: rgba(199, 119, 0, 0.08);
+  --liv-amber-border: rgba(199, 119, 0, 0.25);
+
+  background-color: var(--liv-bg);
+  color: var(--liv-ink);
+  font-family: var(--font-body, 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
+  min-height: 100vh;
+  padding-bottom: 80px;
+}
+
+.liv-port-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(16px, 3.5vw, 36px);
+  box-sizing: border-box;
+}
+
+/* ==========================================================================
+   1. HERO SECTION & PILLARS
+   ========================================================================== */
+.liv-port-hero {
+  padding-top: clamp(40px, 6vw, 72px);
+  padding-bottom: clamp(32px, 5vw, 56px);
+  border-bottom: 1px solid var(--liv-border);
+  margin-bottom: clamp(28px, 4vw, 44px);
+}
+
+.liv-port-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.76rem;
+  font-weight: 500;
+  color: var(--liv-taupe);
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.liv-port-breadcrumb a {
+  color: var(--liv-ink-muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.liv-port-breadcrumb a:hover {
+  color: var(--liv-gold);
+}
+
+.liv-port-hero-header {
+  margin-bottom: clamp(24px, 4vw, 40px);
+  max-width: 820px;
+}
+
+.liv-port-eyebrow {
+  display: inline-block;
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--liv-gold);
+  margin-bottom: 8px;
+}
+
+.liv-port-h1 {
+  font-family: var(--font-heading, 'Cormorant Garamond', serif);
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--liv-ink);
+  line-height: 1.1;
+  margin: 0 0 14px 0;
+}
+
+.liv-port-subtitle {
+  font-size: clamp(0.92rem, 1.15vw, 1.05rem);
+  line-height: 1.6;
+  color: var(--liv-ink-muted);
+  margin: 0;
+}
+
+/* Quick Switcher Pillar Cards */
+.liv-port-pillars-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(16px, 2.5vw, 24px);
+}
+
+.liv-pillar-card {
+  background: var(--liv-card-bg);
+  border: 1px solid var(--liv-border);
+  border-radius: 16px;
+  padding: clamp(20px, 3vw, 28px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 6px 18px -4px rgba(35, 28, 22, 0.04);
+  cursor: pointer;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.liv-pillar-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--liv-gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.liv-pillar-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--liv-gold);
+  box-shadow: 0 12px 28px -6px rgba(184, 142, 75, 0.16);
+}
+
+.liv-pillar-card:hover::before {
+  transform: scaleX(1);
+}
+
+.liv-pillar-card.active {
+  border-color: var(--liv-gold);
+  background-color: #FFFFFF;
+  box-shadow: 0 12px 30px -6px rgba(184, 142, 75, 0.2);
+}
+
+.liv-pillar-card.active::before {
+  transform: scaleX(1);
+}
+
+.liv-pillar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.liv-pillar-title {
+  font-family: var(--font-heading, 'Cormorant Garamond', serif);
+  font-size: clamp(1.35rem, 1.8vw, 1.65rem);
+  font-weight: 600;
+  color: var(--liv-ink);
+  margin: 0;
+}
+
+.liv-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 3px 9px;
+  border-radius: 999px;
+  text-transform: uppercase;
+}
+
+.liv-status-completed {
+  background-color: var(--liv-green-bg);
+  color: var(--liv-green);
+  border: 1px solid var(--liv-green-border);
+}
+
+.liv-status-upcoming {
+  background-color: var(--liv-amber-bg);
+  color: var(--liv-amber);
+  border: 1px solid var(--liv-amber-border);
+}
+
+.liv-pillar-desc {
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: var(--liv-ink-muted);
+  margin: 0 0 18px 0;
+}
+
+.liv-pillar-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--liv-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  transition: transform 0.2s ease;
+}
+
+.liv-pillar-card:hover .liv-pillar-action {
+  transform: translateX(4px);
+}
+
+/* ==========================================================================
+   2. TOP CITIES PILL STRIP
+   ========================================================================== */
+.liv-port-cities-strip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+  scrollbar-width: none;
+}
+
+.liv-port-cities-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.liv-cities-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--liv-taupe);
+  white-space: nowrap;
+  margin-right: 4px;
+}
+
+.liv-city-pill {
+  background: var(--liv-card-bg);
+  border: 1px solid var(--liv-border);
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--liv-ink-muted);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.22s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.liv-city-pill:hover {
+  border-color: var(--liv-gold);
+  color: var(--liv-ink);
+  transform: translateY(-1px);
+}
+
+.liv-city-pill.active {
+  background-color: var(--liv-ink);
+  color: #FFFFFF;
+  border-color: var(--liv-ink);
+  box-shadow: 0 4px 12px rgba(28, 26, 24, 0.15);
+}
+
+.liv-city-count {
+  font-size: 0.68rem;
+  opacity: 0.75;
+}
+
+/* ==========================================================================
+   3. FILTER CONTROLS BAR (STICKY & REFINED)
+   ========================================================================== */
+.liv-filter-bar {
+  background: var(--liv-card-bg);
+  border: 1px solid var(--liv-border);
+  border-radius: 16px;
+  padding: 16px 20px;
+  margin-bottom: 32px;
+  box-shadow: 0 6px 20px -6px rgba(35, 28, 22, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.liv-filter-row-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+/* BHK Switcher Tabs */
+.liv-bhk-tabs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.liv-bhk-tab-btn {
+  background: #F5F1EB;
+  border: 1px solid transparent;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--liv-ink-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.liv-bhk-tab-btn:hover {
+  background: #EDE7DE;
+  color: var(--liv-ink);
+}
+
+.liv-bhk-tab-btn.active {
+  background: var(--liv-gold);
+  color: #FFFFFF;
+  border-color: var(--liv-gold);
+  box-shadow: 0 2px 8px rgba(184, 142, 75, 0.28);
+}
+
+/* Search input */
+.liv-search-wrap {
+  position: relative;
+  min-width: 260px;
+  flex: 1;
+  max-width: 380px;
+}
+
+.liv-search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--liv-taupe);
+  pointer-events: none;
+}
+
+.liv-search-input {
+  width: 100%;
+  background: #FBF9F6;
+  border: 1px solid var(--liv-border);
+  border-radius: 8px;
+  padding: 8px 12px 8px 36px;
+  font-size: 0.8rem;
+  color: var(--liv-ink);
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.liv-search-input:focus {
+  border-color: var(--liv-gold);
+  box-shadow: 0 0 0 3px rgba(184, 142, 75, 0.14);
+}
+
+/* Scope Filters Row */
+.liv-filter-row-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--liv-border);
+}
+
+.liv-scope-chips {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.liv-scope-chip {
+  background: transparent;
+  border: 1px solid var(--liv-border);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--liv-ink-muted);
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.liv-scope-chip:hover {
+  border-color: var(--liv-gold);
+  color: var(--liv-ink);
+}
+
+.liv-scope-chip.active {
+  background-color: rgba(184, 142, 75, 0.1);
+  color: var(--liv-gold-hover);
+  border-color: var(--liv-gold);
+  font-weight: 700;
+}
+
+.liv-results-count {
+  font-size: 0.74rem;
+  color: var(--liv-taupe);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   4. PROJECTS SHOWCASE GRID (AUTHENTIC LIVSPACE CARDS)
+   ========================================================================== */
+.liv-projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(18px, 2.8vw, 28px);
+  margin-bottom: clamp(48px, 7vw, 84px);
+}
+
+.liv-project-card {
+  background: var(--liv-card-bg);
+  border: 1px solid var(--liv-border);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px -6px rgba(35, 28, 22, 0.06);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s ease,
+              border-color 0.3s ease;
+  position: relative;
+}
+
+.liv-project-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--liv-gold);
+  box-shadow: 0 16px 36px -8px rgba(35, 28, 22, 0.14);
+}
+
+/* Image Container with Badges & Slide Indicator */
+.liv-card-media-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background-color: #E6E1D8;
+}
+
+.liv-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.liv-project-card:hover .liv-card-img {
+  transform: scale(1.05);
+}
+
+.liv-card-badge-top-left {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(24, 22, 20, 0.78);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #FFFFFF;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  z-index: 2;
+}
+
+.liv-card-badge-top-right {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+}
+
+/* Card Body */
+.liv-card-body {
+  padding: clamp(16px, 2.2vw, 22px);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.liv-card-title {
+  font-family: var(--font-heading, 'Cormorant Garamond', serif);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--liv-ink);
+  line-height: 1.25;
+  margin: 0 0 6px 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: 2.5em;
+}
+
+.liv-card-society {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--liv-gold-hover);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 14px;
+}
+
+/* Specs Details Grid */
+.liv-card-specs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 14px;
+  background-color: #F8F5F1;
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin-bottom: 16px;
+}
+
+.liv-spec-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.liv-spec-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--liv-taupe);
+  margin-bottom: 1px;
+}
+
+.liv-spec-value {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--liv-ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Actions Row */
+.liv-card-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.liv-btn-primary {
+  flex: 1;
+  background-color: var(--liv-ink);
+  color: #FFFFFF !important;
+  border: 1px solid var(--liv-ink);
+  padding: 9px 12px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.22s ease;
+  text-decoration: none;
+}
+
+.liv-btn-primary:hover {
+  background-color: var(--liv-gold);
+  border-color: var(--liv-gold);
+  color: #171615 !important;
+  transform: translateY(-1px);
+}
+
+.liv-btn-secondary {
+  background: transparent;
+  color: var(--liv-ink);
+  border: 1px solid var(--liv-border-strong);
+  padding: 9px 12px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.22s ease;
+}
+
+.liv-btn-secondary:hover {
+  background-color: #F0ECE5;
+  border-color: var(--liv-ink);
+}
+
+/* ==========================================================================
+   5. DESIGNS FOR EVERY BUDGET SECTION
+   ========================================================================== */
+.liv-budget-section {
+  padding: clamp(40px, 6vw, 64px) 0;
+  border-top: 1px solid var(--liv-border);
+  margin-bottom: clamp(48px, 6vw, 72px);
+}
+
+.liv-budget-header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto clamp(32px, 5vw, 48px);
+}
+
+.liv-budget-title {
+  font-family: var(--font-heading, 'Cormorant Garamond', serif);
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 600;
+  color: var(--liv-ink);
+  margin: 0 0 10px 0;
+}
+
+.liv-budget-subtitle {
+  font-size: 0.95rem;
+  color: var(--liv-ink-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.liv-budget-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(18px, 2.5vw, 28px);
+  align-items: stretch;
+}
+
+.liv-budget-card {
+  background: var(--liv-card-bg);
+  border: 1px solid var(--liv-border);
+  border-radius: 18px;
+  padding: clamp(22px, 3vw, 32px);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: 0 6px 20px -6px rgba(35, 28, 22, 0.05);
+  transition: all 0.28s ease;
+}
+
+.liv-budget-card.popular {
+  border-color: var(--liv-gold);
+  box-shadow: 0 12px 32px -6px rgba(184, 142, 75, 0.22);
+  transform: translateY(-4px);
+}
+
+.liv-budget-pill-popular {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--liv-gold);
+  color: #FFFFFF;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  padding: 4px 14px;
+  border-radius: 999px;
+  text-transform: uppercase;
+}
+
+.liv-budget-tier-name {
+  font-family: var(--font-heading, 'Cormorant Garamond', serif);
+  font-size: 1.45rem;
+  font-weight: 600;
+  color: var(--liv-ink);
+  margin: 0 0 6px 0;
+}
+
+.liv-budget-price {
+  font-family: var(--font-special, 'Bebas Neue', sans-serif);
+  font-size: clamp(2.4rem, 3.5vw, 3rem);
+  color: var(--liv-gold);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.liv-budget-recom {
+  font-size: 0.78rem;
+  color: var(--liv-ink-muted);
+  line-height: 1.45;
+  margin-bottom: 20px;
+  min-height: 2.9em;
+}
+
+.liv-budget-features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.liv-budget-feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: var(--liv-ink);
+  line-height: 1.45;
+}
+
+.liv-budget-feature-icon {
+  color: var(--liv-gold);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.liv-budget-meta-badges {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--liv-border);
+  margin-top: auto;
+  margin-bottom: 20px;
+}
+
+.liv-budget-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--liv-taupe);
+}
+
+.liv-budget-badge-row svg {
+  color: var(--liv-gold);
+}
+
+/* ==========================================================================
+   6. LEAD CAPTURE ESTIMATE BANNER
+   ========================================================================== */
+.liv-estimate-banner {
+  background: linear-gradient(135deg, #1C1A18 0%, #2A241F 100%);
+  color: #FFFFFF;
+  border-radius: 20px;
+  padding: clamp(32px, 5vw, 54px);
+  margin-bottom: clamp(48px, 6vw, 72px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
+  position: relative;
+  overflow: hidden;
+  border-left: 4px solid var(--liv-gold);
+}
+
+.liv-estimate-content {
+  max-width: 600px;
+}
+
+.liv-estimate-h2 {
+  font-family: var(--font-heading, 'Cormorant Garamond', serif);
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-weight: 600;
+  color: #FFFFFF;
+  margin: 0 0 10px 0;
+  line-height: 1.15;
+}
+
+.liv-estimate-p {
+  font-size: 0.92rem;
+  color: #D6CFBF;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.liv-estimate-cta-btn {
+  background-color: var(--liv-gold);
+  color: #171615 !important;
+  padding: 14px 28px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 6px 18px rgba(184, 142, 75, 0.35);
+  transition: all 0.25s ease;
+}
+
+.liv-estimate-cta-btn:hover {
+  background-color: #D4A75E;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(184, 142, 75, 0.45);
+}
+
+/* ==========================================================================
+   7. FAQ ACCORDION SECTION
+   ========================================================================== */
+.liv-faq-section {
+  padding-top: clamp(36px, 5vw, 56px);
+  border-top: 1px solid var(--liv-border);
+}
+
+.liv-faq-header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto clamp(28px, 4vw, 40px);
+}
+
+.liv-faq-title {
+  font-family: var(--font-heading, 'Cormorant Garamond', serif);
+  font-size: clamp(1.9rem, 3.2vw, 2.6rem);
+  font-weight: 600;
+  color: var(--liv-ink);
+  margin: 0 0 8px 0;
+}
+
+.liv-faq-subtitle {
+  font-size: 0.92rem;
+  color: var(--liv-ink-muted);
+  margin: 0;
+}
+
+.liv-faq-list {
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.liv-faq-item {
+  background: var(--liv-card-bg);
+  border: 1px solid var(--liv-border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.liv-faq-item:hover {
+  border-color: rgba(184, 142, 75, 0.4);
+}
+
+.liv-faq-item.open {
+  border-color: var(--liv-gold);
+  box-shadow: 0 6px 16px -4px rgba(35, 28, 22, 0.05);
+}
+
+.liv-faq-question-btn {
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--liv-ink);
+  transition: color 0.2s ease;
+}
+
+.liv-faq-question-btn:hover {
+  color: var(--liv-gold);
+}
+
+.liv-faq-chevron {
+  color: var(--liv-gold);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  flex-shrink: 0;
+}
+
+.liv-faq-item.open .liv-faq-chevron {
+  transform: rotate(180deg);
+}
+
+.liv-faq-answer {
+  padding: 0 20px 18px 20px;
+  font-size: 0.85rem;
+  line-height: 1.65;
+  color: var(--liv-ink-muted);
+  border-top: 1px dashed rgba(30, 26, 22, 0.06);
+  padding-top: 12px;
+}
+
+/* ==========================================================================
+   8. INTERACTIVE GALLERY LIGHTBOX MODAL
+   ========================================================================== */
+.liv-lightbox-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(18, 16, 14, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(12px, 3vw, 28px);
+  box-sizing: border-box;
+}
+
+.liv-lightbox-dialog {
+  background: #FFFFFF;
+  border-radius: 20px;
+  max-width: 960px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.liv-lightbox-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: rgba(28, 26, 24, 0.7);
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s ease;
+}
+
+.liv-lightbox-close-btn:hover {
+  background: var(--liv-gold);
+  color: #171615;
+  transform: scale(1.08);
+}
+
+.liv-lightbox-main-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background-color: #1C1A18;
+}
+
+.liv-lightbox-main-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.liv-lightbox-room-pill {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  background: rgba(28, 26, 24, 0.82);
+  color: #FFFFFF;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.liv-lightbox-thumbs-row {
+  display: flex;
+  gap: 10px;
+  padding: 14px 20px;
+  background: #F8F5F1;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.liv-lightbox-thumb-btn {
+  width: 72px;
+  height: 52px;
+  flex-shrink: 0;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  padding: 0;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: all 0.2s ease;
+}
+
+.liv-lightbox-thumb-btn.active {
+  border-color: var(--liv-gold);
+  opacity: 1;
+  transform: scale(1.04);
+}
+
+.liv-lightbox-thumb-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.liv-lightbox-info-pane {
+  padding: 24px;
+}
+
+.liv-lightbox-title {
+  font-family: var(--font-heading, 'Cormorant Garamond', serif);
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--liv-ink);
+  margin: 0 0 6px 0;
+}
+
+.liv-lightbox-sub {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--liv-gold-hover);
+  margin-bottom: 14px;
+}
+
+.liv-lightbox-desc {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--liv-ink-muted);
+  margin-bottom: 18px;
+}
+
+.liv-lightbox-highlights {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 16px;
+  margin-bottom: 24px;
+}
+
+.liv-highlight-point {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  color: var(--liv-ink);
+  font-weight: 500;
+}
+
+.liv-highlight-point svg {
+  color: var(--liv-gold);
+  flex-shrink: 0;
+}
+
+.liv-lightbox-cta-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  border-top: 1px solid var(--liv-border);
+  padding-top: 16px;
+}
+
+/* ==========================================================================
+   9. RESPONSIVE DESIGN (TABLETS & MOBILE)
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .liv-projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .liv-budget-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .liv-budget-card.popular {
+    transform: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .liv-port-pillars-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .liv-projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .liv-estimate-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px 20px;
+    gap: 20px;
+  }
+
+  .liv-estimate-cta-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .liv-lightbox-highlights {
+    grid-template-columns: 1fr;
+  }
+
+  .liv-lightbox-cta-bar {
+    flex-direction: column;
+  }
+
+  .liv-lightbox-cta-bar button,
+  .liv-lightbox-cta-bar a {
+    width: 100%;
+    justify-content: center;
+  }
+}
