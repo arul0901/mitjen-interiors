@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
+import { useNavigate } from 'react-router-dom';
 import {
   Search,
   CheckCircle2,
@@ -27,6 +28,7 @@ import {
 import './LivspacePortfolio.css';
 
 export const LivspacePortfolio: React.FC = () => {
+  const navigate = useNavigate();
   const { openInquiry } = useInquiry();
   const gridSectionRef = useRef<HTMLDivElement>(null);
 
@@ -468,9 +470,10 @@ export const LivspacePortfolio: React.FC = () => {
 
                     <button
                       type="button"
-                      onClick={() =>
-                        openInquiry(`Architectural Consultation for ${project.title} (${project.society}, ${project.city})`)
-                      }
+                      onClick={() => {
+                        navigate('/contact');
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                      }}
                       className="liv-btn-inquire"
                       aria-label={`Inquire about ${project.title}`}
                     >
@@ -575,7 +578,10 @@ export const LivspacePortfolio: React.FC = () => {
 
           <button
             type="button"
-            onClick={() => openInquiry('Private Architectural Design Consultation')}
+            onClick={() => {
+              navigate('/contact');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
             className="liv-consult-cta"
           >
             <span>Book Design Consultation</span>
@@ -782,11 +788,11 @@ export const LivspacePortfolio: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => {
-                      openInquiry(`Custom design inquiry for ${selectedProject.title} with verified materials`);
                       handleCloseModal();
+                      navigate('/contact');
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
                     }}
                     className="liv-btn-inquire"
-                    style={{ width: 'auto', padding: '9px 24px' }}
                   >
                     <span>Inquire About This Specification</span>
                     <ArrowRight size={13} />

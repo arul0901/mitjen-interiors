@@ -1290,9 +1290,41 @@
 
 .liv-modal-footer {
   display: flex;
-  justify-content: flex-end;
-  padding-top: 8px;
+  justify-content: center;
+  align-items: center;
+  padding-top: 14px;
+  padding-bottom: 4px;
   border-top: 1px dashed var(--liv-border);
+  width: 100%;
+}
+
+.liv-modal-footer .liv-btn-inquire {
+  flex: none;
+  width: auto;
+  max-width: 90%;
+  background: #FFFFFF;
+  color: var(--liv-ink);
+  border: 1.5px solid rgba(30, 26, 22, 0.22);
+  padding: 10px 32px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 8px rgba(28, 26, 24, 0.04);
+}
+
+.liv-modal-footer .liv-btn-inquire:hover {
+  background: var(--liv-ink);
+  color: #FFFFFF;
+  border-color: var(--liv-ink);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(28, 26, 24, 0.16);
 }
 
 /* TAB 2: ADVANCED MULTI-IMAGE GALLERY BODY */
