@@ -120,7 +120,7 @@ export const LivspacePortfolio: React.FC = () => {
           <div className="liv-port-hero-inner">
             <div className="liv-port-hero-content">
               <span className="liv-port-eyebrow">
-                <Sparkles size={13} className="liv-eyebrow-icon" />
+                <Sparkles size={12} className="liv-eyebrow-icon" />
                 CURATED RESIDENTIAL ATELIER
               </span>
               <h1 id="portfolio-main-title" className="liv-port-h1">
@@ -136,24 +136,24 @@ export const LivspacePortfolio: React.FC = () => {
             <div className="liv-hero-metrics">
               <div className="liv-metric-item">
                 <span className="liv-metric-val">4</span>
-                <span className="liv-metric-lbl">Delivered Residences</span>
+                <span className="liv-metric-lbl">Residences</span>
               </div>
               <div className="liv-metric-divider" />
               <div className="liv-metric-item">
                 <span className="liv-metric-val">10-Yr</span>
-                <span className="liv-metric-lbl">Craftsmanship Warranty</span>
+                <span className="liv-metric-lbl">Warranty</span>
               </div>
               <div className="liv-metric-divider" />
               <div className="liv-metric-item">
                 <span className="liv-metric-val">100%</span>
-                <span className="liv-metric-lbl">Turnkey Execution</span>
+                <span className="liv-metric-lbl">Turnkey</span>
               </div>
             </div>
           </div>
         </section>
 
         {/* ==================================================================
-            2. UNIFIED COMPACT ARCHITECTURAL FILTER BAR
+            2. UNIFIED COMPACT ARCHITECTURAL CONTROL BAR
             Streamlined into a single cohesive control deck (Pills + Search).
             ================================================================== */}
         <div ref={gridSectionRef} className="liv-control-bar">
@@ -177,7 +177,7 @@ export const LivspacePortfolio: React.FC = () => {
 
             {/* Compact Search Box */}
             <div className="liv-search-box">
-              <Search size={14} className="liv-search-icon" aria-hidden="true" />
+              <Search size={13} className="liv-search-icon" aria-hidden="true" />
               <input
                 type="text"
                 placeholder="Search residence, locality, or space..."
@@ -193,7 +193,7 @@ export const LivspacePortfolio: React.FC = () => {
                   className="liv-search-clear"
                   aria-label="Clear search"
                 >
-                  <X size={12} />
+                  <X size={11} />
                 </button>
               )}
             </div>
@@ -203,7 +203,7 @@ export const LivspacePortfolio: React.FC = () => {
           <div className="liv-control-sub-row">
             <div className="liv-scope-strip">
               <span className="liv-scope-strip-label">
-                <SlidersHorizontal size={12} />
+                <SlidersHorizontal size={11} />
                 Spaces:
               </span>
               {scopeOptions.map((scope) => (
@@ -219,20 +219,20 @@ export const LivspacePortfolio: React.FC = () => {
             </div>
 
             <span className="liv-results-badge">
-              Showing {filteredProjects.length} of {PORTFOLIO_PROJECTS.length} Residences
+              {filteredProjects.length} of {PORTFOLIO_PROJECTS.length} Residences
             </span>
           </div>
         </div>
 
         {/* ==================================================================
-            3. LUXURY ARCHITECTURAL PROJECTS GRID
-            No pricing, high-end editorial cards with photo lightbox.
+            3. ULTRA-COMPACT ARCHITECTURAL PROJECTS GRID
+            Compact height, 16:9 cinematic letterbox, sleek specs strip.
             ================================================================== */}
         <section className="liv-projects-grid" aria-label="Portfolio Residences">
           {filteredProjects.length > 0 ? (
             filteredProjects.map((project) => (
               <article key={project.id} className="liv-arch-card">
-                {/* Media Presentation */}
+                {/* Media Presentation — Compact 16:9 Letterbox */}
                 <div
                   className="liv-card-media"
                   onClick={() => handleOpenGallery(project)}
@@ -250,27 +250,27 @@ export const LivspacePortfolio: React.FC = () => {
 
                   {/* Top Badges */}
                   <span className="liv-badge-photos">
-                    <Layers size={11} />
+                    <Layers size={10} />
                     {project.galleryImages.length} Photos
                   </span>
 
                   <span className="liv-badge-status">
-                    <CheckCircle2 size={11} />
+                    <CheckCircle2 size={10} />
                     {project.type.toUpperCase()}
                   </span>
 
                   {/* Quick-view pill on hover */}
                   <div className="liv-media-hover-indicator">
-                    <Eye size={14} />
+                    <Eye size={13} />
                     <span>View Gallery</span>
                   </div>
                 </div>
 
-                {/* Card Body */}
+                {/* Compact Card Body */}
                 <div className="liv-arch-body">
                   <div className="liv-arch-meta-header">
                     <span className="liv-arch-loc-tag">
-                      <MapPin size={11} />
+                      <MapPin size={10} />
                       {project.city}
                     </span>
                     <span className="liv-meta-separator">•</span>
@@ -285,7 +285,7 @@ export const LivspacePortfolio: React.FC = () => {
                     {project.society} · {project.location}
                   </p>
 
-                  {/* Compact 3-Column Architectural Specs Strip (NO PRICING) */}
+                  {/* Ultra-Compact Architectural Specs Bar (Single-Row, NO PRICING) */}
                   <div className="liv-arch-specs-row">
                     <div className="liv-spec-col">
                       <span className="liv-spec-kicker">Area</span>
@@ -306,7 +306,7 @@ export const LivspacePortfolio: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Actions Row */}
+                  {/* Compact Actions Row */}
                   <div className="liv-arch-actions">
                     <button
                       type="button"
@@ -314,8 +314,8 @@ export const LivspacePortfolio: React.FC = () => {
                       className="liv-btn-view-gallery"
                       aria-label={`Open gallery for ${project.title}`}
                     >
-                      <Eye size={13} />
-                      <span>View Gallery</span>
+                      <Eye size={12} />
+                      <span>Photos ({project.galleryImages.length})</span>
                     </button>
 
                     <button
@@ -327,7 +327,7 @@ export const LivspacePortfolio: React.FC = () => {
                       aria-label={`Inquire about ${project.title}`}
                     >
                       <span>Inquire</span>
-                      <ArrowRight size={12} />
+                      <ArrowRight size={11} />
                     </button>
                   </div>
                 </div>
@@ -357,7 +357,6 @@ export const LivspacePortfolio: React.FC = () => {
 
         {/* ==================================================================
             4. COMPACT CRAFTSMANSHIP & VERIFIED MATERIALS SECTION
-            Refined 3-column architectural material specification deck.
             ================================================================== */}
         <section className="liv-materials-section" aria-labelledby="materials-section-title">
           <div className="liv-section-header">
@@ -412,8 +411,7 @@ export const LivspacePortfolio: React.FC = () => {
         </section>
 
         {/* ==================================================================
-            5. ARCHITECTURAL CONSULTATION BANNER
-            High-conversion atelier design consultation banner (NO pricing/quotes).
+            5. ARCHITECTURAL CONSULTATION BANNER (NO PRICING/QUOTES)
             ================================================================== */}
         <section className="liv-consult-banner" aria-label="Architectural Design Consultation">
           <div className="liv-consult-content">
@@ -433,7 +431,7 @@ export const LivspacePortfolio: React.FC = () => {
             className="liv-consult-cta"
           >
             <span>Book Design Consultation</span>
-            <ArrowRight size={14} />
+            <ArrowRight size={13} />
           </button>
         </section>
 
@@ -463,7 +461,7 @@ export const LivspacePortfolio: React.FC = () => {
                     aria-expanded={isOpen}
                   >
                     <span>{faq.question}</span>
-                    <ChevronDown size={16} className="liv-faq-chevron" />
+                    <ChevronDown size={15} className="liv-faq-chevron" />
                   </button>
 
                   {isOpen && <div className="liv-faq-answer">{faq.answer}</div>}
@@ -494,7 +492,7 @@ export const LivspacePortfolio: React.FC = () => {
               className="liv-lightbox-close-btn"
               aria-label="Close Gallery Modal"
             >
-              <X size={18} />
+              <X size={16} />
             </button>
 
             {/* Main Stage Media */}
@@ -543,10 +541,10 @@ export const LivspacePortfolio: React.FC = () => {
                     handleCloseGallery();
                   }}
                   className="liv-btn-inquire"
-                  style={{ width: 'auto', padding: '9px 20px', alignSelf: 'flex-start' }}
+                  style={{ width: 'auto', padding: '8px 18px', alignSelf: 'flex-start' }}
                 >
                   <span>Inquire Design</span>
-                  <ArrowRight size={13} />
+                  <ArrowRight size={12} />
                 </button>
               </div>
 
@@ -557,7 +555,7 @@ export const LivspacePortfolio: React.FC = () => {
                 <div className="liv-lightbox-highlights">
                   {selectedProject.highlights.map((h, i) => (
                     <div key={i} className="liv-highlight-point">
-                      <CheckCircle2 size={13} />
+                      <CheckCircle2 size={12} />
                       <span>{h}</span>
                     </div>
                   ))}

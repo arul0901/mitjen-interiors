@@ -1,5 +1,5 @@
 /* ==========================================================================
-   MITJEN INTERIOR DESIGN PORTFOLIO — LUXURY ARCHITECTURAL ATELIER
+   MITJEN INTERIOR DESIGN PORTFOLIO — ULTRA-COMPACT ARCHITECTURAL ATELIER
    Enhanced, compact, pricing-free residential portfolio showcase.
    Deep obsidian noir, warm charcoal, and champagne gold aesthetics.
    ========================================================================== */
@@ -28,14 +28,14 @@
   min-height: 100vh;
   position: relative;
   z-index: 10;
-  padding-top: clamp(48px, 6vw, 80px);
-  padding-bottom: clamp(64px, 8vw, 100px);
+  padding-top: clamp(36px, 5vw, 64px);
+  padding-bottom: clamp(48px, 6vw, 80px);
 }
 
 .liv-port-container {
   max-width: 1240px;
   margin: 0 auto;
-  padding: 0 clamp(16px, 3.5vw, 40px);
+  padding: 0 clamp(16px, 3vw, 36px);
   box-sizing: border-box;
 }
 
@@ -43,34 +43,34 @@
    1. REFINED COMPACT HERO HEADER
    ========================================================================== */
 .liv-port-hero {
-  padding-bottom: clamp(28px, 4vw, 44px);
+  padding-bottom: clamp(20px, 3vw, 32px);
   border-bottom: 1px solid var(--liv-border);
-  margin-bottom: clamp(24px, 3.5vw, 36px);
+  margin-bottom: clamp(20px, 2.5vw, 28px);
 }
 
 .liv-port-hero-inner {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  gap: 32px;
+  gap: 24px;
   flex-wrap: wrap;
 }
 
 .liv-port-hero-content {
-  max-width: 720px;
+  max-width: 680px;
 }
 
 .liv-port-eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
+  gap: 6px;
   font-family: var(--font-subheading, 'Manrope', sans-serif);
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--liv-gold);
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .liv-eyebrow-icon {
@@ -79,17 +79,17 @@
 
 .liv-port-h1 {
   font-family: var(--font-heading, 'Cormorant Garamond', serif);
-  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-size: clamp(1.8rem, 3.2vw, 2.6rem);
   font-weight: 600;
   letter-spacing: -0.015em;
   color: var(--liv-ink);
-  line-height: 1.12;
-  margin: 0 0 12px 0;
+  line-height: 1.15;
+  margin: 0 0 8px 0;
 }
 
 .liv-port-subtitle {
-  font-size: clamp(0.88rem, 1.1vw, 0.98rem);
-  line-height: 1.6;
+  font-size: clamp(0.82rem, 1vw, 0.92rem);
+  line-height: 1.55;
   color: var(--liv-ink-muted);
   margin: 0;
 }
@@ -98,30 +98,30 @@
 .liv-hero-metrics {
   display: flex;
   align-items: center;
-  gap: clamp(16px, 2.5vw, 24px);
+  gap: clamp(12px, 2vw, 20px);
   background: var(--liv-bg-surface);
   border: 1px solid var(--liv-border);
-  border-radius: 14px;
-  padding: 14px clamp(16px, 2.5vw, 24px);
+  border-radius: 12px;
+  padding: 10px clamp(14px, 2vw, 20px);
   flex-shrink: 0;
 }
 
 .liv-metric-item {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 1px;
 }
 
 .liv-metric-val {
   font-family: var(--font-heading, 'Cormorant Garamond', serif);
-  font-size: 1.5rem;
+  font-size: 1.35rem;
   font-weight: 700;
   color: var(--liv-gold-bright);
   line-height: 1;
 }
 
 .liv-metric-lbl {
-  font-size: 0.68rem;
+  font-size: 0.62rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -130,7 +130,7 @@
 
 .liv-metric-divider {
   width: 1px;
-  height: 28px;
+  height: 24px;
   background-color: var(--liv-border);
 }
 
@@ -140,20 +140,20 @@
 .liv-control-bar {
   background: var(--liv-bg-surface);
   border: 1px solid var(--liv-border);
-  border-radius: 16px;
-  padding: clamp(14px, 2vw, 18px);
-  margin-bottom: clamp(28px, 4vw, 40px);
+  border-radius: 14px;
+  padding: clamp(10px, 1.5vw, 14px);
+  margin-bottom: clamp(20px, 3vw, 28px);
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.35);
+  gap: 10px;
+  box-shadow: 0 6px 20px -6px rgba(0, 0, 0, 0.35);
 }
 
 .liv-control-main-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: 12px;
   flex-wrap: wrap;
 }
 
@@ -161,7 +161,7 @@
 .liv-tabs-group {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   flex-wrap: wrap;
 }
 
@@ -169,23 +169,22 @@
   background: var(--liv-bg-card);
   border: 1px solid var(--liv-border);
   color: var(--liv-ink-muted);
-  padding: 8px 16px;
+  padding: 6px 14px;
   border-radius: 999px;
-  font-size: 0.78rem;
+  font-size: 0.74rem;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  gap: 6px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .liv-tab-pill:hover {
   background: var(--liv-bg-card-hover);
   border-color: var(--liv-border-hover);
   color: var(--liv-ink);
-  transform: translateY(-1px);
 }
 
 .liv-tab-pill.active {
@@ -198,9 +197,9 @@
 .liv-tab-badge {
   background: rgba(255, 255, 255, 0.08);
   color: inherit;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   font-weight: 700;
-  padding: 1px 6px;
+  padding: 1px 5px;
   border-radius: 999px;
   line-height: 1.2;
 }
@@ -214,19 +213,19 @@
 .liv-search-box {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 7px;
   background: var(--liv-bg-card);
   border: 1px solid var(--liv-border);
   border-radius: 999px;
-  padding: 6px 14px;
-  min-width: 260px;
-  flex: 0 1 340px;
-  transition: all 0.22s ease;
+  padding: 5px 12px;
+  min-width: 220px;
+  flex: 0 1 300px;
+  transition: all 0.2s ease;
 }
 
 .liv-search-box:focus-within {
   border-color: var(--liv-gold);
-  box-shadow: 0 0 0 3px var(--liv-gold-glow);
+  box-shadow: 0 0 0 2px var(--liv-gold-glow);
   background: var(--liv-bg-card-hover);
 }
 
@@ -240,14 +239,14 @@
   border: none;
   outline: none;
   color: var(--liv-ink);
-  font-size: 0.8rem;
+  font-size: 0.76rem;
   width: 100%;
   font-family: inherit;
 }
 
 .liv-search-field::placeholder {
   color: var(--liv-ink-dim);
-  font-size: 0.78rem;
+  font-size: 0.74rem;
 }
 
 .liv-search-clear {
@@ -260,20 +259,15 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  transition: color 0.15s ease;
 }
 
-.liv-search-clear:hover {
-  color: var(--liv-ink);
-}
-
-/* Control Sub-row: Space Tags + Count */
+/* Sub-row: Space Tags + Count */
 .liv-control-sub-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  padding-top: 12px;
+  gap: 12px;
+  padding-top: 8px;
   border-top: 1px dashed var(--liv-border);
   flex-wrap: wrap;
 }
@@ -281,38 +275,37 @@
 .liv-scope-strip {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   flex-wrap: wrap;
 }
 
 .liv-scope-strip-label {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  font-size: 0.7rem;
+  gap: 4px;
+  font-size: 0.65rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--liv-ink-dim);
-  margin-right: 4px;
+  margin-right: 2px;
 }
 
 .liv-scope-tag {
   background: transparent;
   border: 1px solid var(--liv-border);
   color: var(--liv-ink-muted);
-  padding: 4px 11px;
-  border-radius: 6px;
-  font-size: 0.72rem;
+  padding: 3px 9px;
+  border-radius: 5px;
+  font-size: 0.68rem;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.18s ease;
+  transition: all 0.16s ease;
 }
 
 .liv-scope-tag:hover {
   background: rgba(255, 255, 255, 0.04);
   color: var(--liv-ink);
-  border-color: rgba(255, 255, 255, 0.15);
 }
 
 .liv-scope-tag.active {
@@ -323,46 +316,49 @@
 }
 
 .liv-results-badge {
-  font-size: 0.74rem;
+  font-size: 0.7rem;
   font-weight: 600;
   color: var(--liv-ink-dim);
   letter-spacing: 0.04em;
 }
 
 /* ==========================================================================
-   3. LUXURY ARCHITECTURAL PROJECTS GRID
+   3. ULTRA-COMPACT ARCHITECTURAL PROJECTS GRID
+   Compact 2-to-3 column responsive grid with letterbox 16:9 imagery.
+   Vertical card footprint reduced from 720px down to ~360px!
    ========================================================================== */
 .liv-projects-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: clamp(20px, 3vw, 32px);
-  margin-bottom: clamp(56px, 8vw, 84px);
+  gap: clamp(16px, 2.2vw, 24px);
+  margin-bottom: clamp(40px, 5vw, 60px);
 }
 
 .liv-arch-card {
   background: var(--liv-bg-card);
   border: 1px solid var(--liv-border);
-  border-radius: 18px;
+  border-radius: 14px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
-  box-shadow: 0 10px 28px -10px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 8px 22px -8px rgba(0, 0, 0, 0.45);
 }
 
 .liv-arch-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-3px);
   border-color: var(--liv-border-hover);
   background: var(--liv-bg-card-hover);
-  box-shadow: 0 18px 40px -12px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(197, 168, 128, 0.15);
+  box-shadow: 0 14px 32px -10px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(197, 168, 128, 0.18);
 }
 
-/* Media Wrap */
+/* Media Wrap — Strict Compact 16:9 Letterbox (Max height 220px) */
 .liv-card-media {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 16 / 9;
+  max-height: 220px;
   overflow: hidden;
   cursor: pointer;
   background-color: #0E0D0B;
@@ -373,7 +369,7 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .liv-arch-card:hover .liv-arch-img {
@@ -385,69 +381,69 @@
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(11, 10, 9, 0.25) 0%,
-    rgba(11, 10, 9, 0) 40%,
+    rgba(11, 10, 9, 0.2) 0%,
+    rgba(11, 10, 9, 0) 45%,
     rgba(11, 10, 9, 0.6) 100%
   );
   pointer-events: none;
 }
 
-/* Badges on Media */
+/* Compact Badges on Media */
 .liv-badge-photos {
   position: absolute;
-  top: 14px;
-  left: 14px;
-  background: rgba(18, 16, 14, 0.82);
+  top: 10px;
+  left: 10px;
+  background: rgba(18, 16, 14, 0.84);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   color: var(--liv-ink);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  padding: 4px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  padding: 3px 8px;
   border-radius: 999px;
-  font-size: 0.68rem;
+  font-size: 0.62rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 4px;
 }
 
 .liv-badge-status {
   position: absolute;
-  top: 14px;
-  right: 14px;
+  top: 10px;
+  right: 10px;
   background: var(--liv-green-bg);
   color: var(--liv-green);
   border: 1px solid var(--liv-green-border);
-  padding: 4px 10px;
+  padding: 3px 8px;
   border-radius: 999px;
-  font-size: 0.66rem;
+  font-size: 0.62rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 4px;
 }
 
 .liv-media-hover-indicator {
   position: absolute;
-  bottom: 16px;
-  right: 16px;
-  background: rgba(197, 168, 128, 0.92);
+  bottom: 12px;
+  right: 12px;
+  background: rgba(197, 168, 128, 0.94);
   color: #11100E;
-  padding: 6px 14px;
+  padding: 4px 11px;
   border-radius: 999px;
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.04em;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   opacity: 0;
-  transform: translateY(6px);
-  transition: all 0.25s ease;
+  transform: translateY(4px);
+  transition: all 0.22s ease;
 }
 
 .liv-arch-card:hover .liv-media-hover-indicator {
@@ -455,9 +451,9 @@
   transform: translateY(0);
 }
 
-/* Card Body */
+/* Compact Card Body */
 .liv-arch-body {
-  padding: clamp(18px, 2.5vw, 24px);
+  padding: clamp(12px, 1.8vw, 16px);
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -466,19 +462,19 @@
 .liv-arch-meta-header {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 0.72rem;
+  gap: 5px;
+  font-size: 0.68rem;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--liv-gold);
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .liv-arch-loc-tag {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 3px;
 }
 
 .liv-meta-separator {
@@ -491,13 +487,13 @@
 
 .liv-arch-title {
   font-family: var(--font-heading, 'Cormorant Garamond', serif);
-  font-size: clamp(1.4rem, 2vw, 1.75rem);
+  font-size: clamp(1.25rem, 1.7vw, 1.5rem);
   font-weight: 600;
   color: var(--liv-ink);
-  line-height: 1.2;
-  margin: 0 0 4px 0;
+  line-height: 1.15;
+  margin: 0 0 2px 0;
   cursor: pointer;
-  transition: color 0.2s ease;
+  transition: color 0.18s ease;
 }
 
 .liv-arch-title:hover {
@@ -505,41 +501,41 @@
 }
 
 .liv-arch-address {
-  font-size: 0.8rem;
+  font-size: 0.74rem;
   color: var(--liv-ink-dim);
-  margin: 0 0 16px 0;
-  line-height: 1.4;
+  margin: 0 0 10px 0;
+  line-height: 1.35;
 }
 
-/* Compact 3-Column Architectural Specs Strip (NO PRICING) */
+/* Ultra-Compact 3-Column Architectural Specs Strip (NO PRICING) */
 .liv-arch-specs-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  padding: 12px 14px;
+  gap: 8px;
+  padding: 8px 10px;
   background: var(--liv-bg-surface);
   border: 1px solid var(--liv-border-subtle);
-  border-radius: 12px;
-  margin-bottom: 18px;
+  border-radius: 8px;
+  margin-bottom: 12px;
 }
 
 .liv-spec-col {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 1px;
   overflow: hidden;
 }
 
 .liv-spec-kicker {
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   color: var(--liv-ink-dim);
 }
 
 .liv-spec-data {
-  font-size: 0.78rem;
+  font-size: 0.74rem;
   font-weight: 600;
   color: var(--liv-ink);
   white-space: nowrap;
@@ -547,11 +543,11 @@
   text-overflow: ellipsis;
 }
 
-/* Card Actions */
+/* Compact Card Actions */
 .liv-arch-actions {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   margin-top: auto;
 }
 
@@ -560,24 +556,23 @@
   background: transparent;
   color: var(--liv-ink);
   border: 1px solid var(--liv-border);
-  padding: 9px 16px;
+  padding: 7px 12px;
   border-radius: 999px;
-  font-size: 0.74rem;
+  font-size: 0.7rem;
   font-weight: 600;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 7px;
+  gap: 6px;
   cursor: pointer;
-  transition: all 0.22s ease;
+  transition: all 0.2s ease;
 }
 
 .liv-btn-view-gallery:hover {
   background: var(--liv-bg-card-hover);
   border-color: var(--liv-gold);
   color: var(--liv-gold-bright);
-  transform: translateY(-1px);
 }
 
 .liv-btn-inquire {
@@ -585,96 +580,95 @@
   background: var(--liv-gold);
   color: #11100E !important;
   border: 1px solid var(--liv-gold);
-  padding: 9px 16px;
+  padding: 7px 12px;
   border-radius: 999px;
-  font-size: 0.74rem;
+  font-size: 0.7rem;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 7px;
+  gap: 6px;
   cursor: pointer;
-  transition: all 0.22s ease;
-  box-shadow: 0 4px 12px var(--liv-gold-glow);
+  transition: all 0.2s ease;
+  box-shadow: 0 3px 10px var(--liv-gold-glow);
 }
 
 .liv-btn-inquire:hover {
   background: var(--liv-gold-bright);
   border-color: var(--liv-gold-bright);
-  transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(197, 168, 128, 0.3);
+  box-shadow: 0 5px 14px rgba(197, 168, 128, 0.3);
 }
 
 /* Empty State */
 .liv-no-results {
   grid-column: 1 / -1;
   text-align: center;
-  padding: 60px 24px;
+  padding: 48px 20px;
   background: var(--liv-bg-card);
   border: 1px dashed var(--liv-border);
-  border-radius: 16px;
+  border-radius: 14px;
 }
 
 .liv-no-results-title {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 600;
   color: var(--liv-ink);
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .liv-no-results-desc {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: var(--liv-ink-muted);
-  margin-bottom: 18px;
+  margin-bottom: 14px;
 }
 
 /* ==========================================================================
    4. COMPACT CRAFTSMANSHIP & MATERIALS SECTION
    ========================================================================== */
 .liv-materials-section {
-  padding: clamp(36px, 5vw, 56px) 0;
+  padding: clamp(28px, 4vw, 44px) 0;
   border-top: 1px solid var(--liv-border);
-  margin-bottom: clamp(48px, 6vw, 72px);
+  margin-bottom: clamp(36px, 5vw, 56px);
 }
 
 .liv-section-header {
   text-align: center;
-  max-width: 680px;
-  margin: 0 auto clamp(28px, 4vw, 44px);
+  max-width: 640px;
+  margin: 0 auto clamp(20px, 3vw, 32px);
 }
 
 .liv-section-title {
   font-family: var(--font-heading, 'Cormorant Garamond', serif);
-  font-size: clamp(1.9rem, 3.2vw, 2.6rem);
+  font-size: clamp(1.7rem, 2.8vw, 2.3rem);
   font-weight: 600;
   color: var(--liv-ink);
-  margin: 0 0 10px 0;
+  margin: 0 0 6px 0;
   line-height: 1.15;
 }
 
 .liv-section-sub {
-  font-size: 0.88rem;
+  font-size: 0.82rem;
   color: var(--liv-ink-muted);
-  line-height: 1.55;
+  line-height: 1.5;
   margin: 0;
 }
 
 .liv-materials-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: clamp(16px, 2.2vw, 24px);
+  gap: clamp(12px, 1.8vw, 18px);
 }
 
 .liv-material-card {
   background: var(--liv-bg-card);
   border: 1px solid var(--liv-border);
-  border-radius: 16px;
-  padding: clamp(20px, 2.5vw, 24px);
+  border-radius: 12px;
+  padding: clamp(16px, 2vw, 20px);
   display: flex;
   flex-direction: column;
-  transition: all 0.25s ease;
+  transition: all 0.22s ease;
 }
 
 .liv-material-card:hover {
@@ -686,13 +680,13 @@
 .liv-mat-top {
   display: flex;
   align-items: flex-start;
-  gap: 14px;
-  margin-bottom: 16px;
+  gap: 12px;
+  margin-bottom: 12px;
 }
 
 .liv-mat-num {
   font-family: var(--font-heading, 'Cormorant Garamond', serif);
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   font-weight: 700;
   color: var(--liv-gold-bright);
   line-height: 1;
@@ -700,14 +694,14 @@
 
 .liv-mat-title {
   font-family: var(--font-subheading, 'Manrope', sans-serif);
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   font-weight: 700;
   color: var(--liv-ink);
   margin: 0 0 2px 0;
 }
 
 .liv-mat-sub {
-  font-size: 0.74rem;
+  font-size: 0.7rem;
   color: var(--liv-ink-dim);
   margin: 0;
 }
@@ -715,18 +709,18 @@
 .liv-mat-content {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
   margin-top: auto;
 }
 
 .liv-mat-row {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
 }
 
 .liv-mat-label {
-  font-size: 0.68rem;
+  font-size: 0.62rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -736,16 +730,16 @@
 .liv-mat-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 5px;
 }
 
 .liv-mat-tag {
   background: var(--liv-bg-surface);
   border: 1px solid var(--liv-border);
   color: var(--liv-ink-muted);
-  font-size: 0.7rem;
-  padding: 3px 8px;
-  border-radius: 5px;
+  font-size: 0.68rem;
+  padding: 2px 7px;
+  border-radius: 4px;
   line-height: 1.3;
 }
 
@@ -756,11 +750,11 @@
 }
 
 .liv-mat-note {
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   color: var(--liv-ink-dim);
   font-style: italic;
-  margin: 4px 0 0 0;
-  line-height: 1.4;
+  margin: 2px 0 0 0;
+  line-height: 1.35;
 }
 
 /* ==========================================================================
@@ -769,16 +763,16 @@
 .liv-consult-banner {
   background: linear-gradient(135deg, #181614 0%, #11100E 100%);
   border: 1px solid var(--liv-border-hover);
-  border-radius: 20px;
-  padding: clamp(28px, 4.5vw, 44px);
-  margin-bottom: clamp(56px, 7vw, 80px);
+  border-radius: 16px;
+  padding: clamp(22px, 3.5vw, 36px);
+  margin-bottom: clamp(40px, 5vw, 64px);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 28px;
+  gap: 24px;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 12px 32px -10px rgba(0, 0, 0, 0.5);
 }
 
 .liv-consult-banner::before {
@@ -786,79 +780,79 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 4px;
+  width: 3px;
   height: 100%;
   background: var(--liv-gold);
 }
 
 .liv-consult-content {
-  max-width: 680px;
+  max-width: 640px;
 }
 
 .liv-consult-title {
   font-family: var(--font-heading, 'Cormorant Garamond', serif);
-  font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+  font-size: clamp(1.4rem, 2.4vw, 1.9rem);
   font-weight: 600;
   color: var(--liv-ink);
-  margin: 0 0 8px 0;
+  margin: 0 0 6px 0;
   line-height: 1.2;
 }
 
 .liv-consult-desc {
-  font-size: 0.88rem;
+  font-size: 0.82rem;
   color: var(--liv-ink-muted);
-  line-height: 1.55;
+  line-height: 1.5;
   margin: 0;
 }
 
 .liv-consult-cta {
   background-color: var(--liv-gold);
   color: #11100E !important;
-  padding: 12px 24px;
+  padding: 10px 20px;
   border-radius: 999px;
-  font-size: 0.78rem;
+  font-size: 0.74rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 7px;
   border: none;
   cursor: pointer;
   white-space: nowrap;
-  box-shadow: 0 6px 18px var(--liv-gold-glow);
-  transition: all 0.25s ease;
+  box-shadow: 0 4px 14px var(--liv-gold-glow);
+  transition: all 0.22s ease;
   flex-shrink: 0;
 }
 
 .liv-consult-cta:hover {
   background-color: var(--liv-gold-bright);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(197, 168, 128, 0.35);
+  box-shadow: 0 6px 18px rgba(197, 168, 128, 0.35);
 }
 
 /* ==========================================================================
    6. REFINED COMPACT FAQ SECTION
    ========================================================================== */
 .liv-faq-section {
-  padding-top: clamp(28px, 4vw, 44px);
+  padding-top: clamp(22px, 3vw, 36px);
   border-top: 1px solid var(--liv-border);
 }
 
 .liv-faq-list {
-  max-width: 860px;
+  max-width: 820px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
 .liv-faq-item {
   background: var(--liv-bg-card);
   border: 1px solid var(--liv-border);
-  border-radius: 12px;
+  border-radius: 10px;
   overflow: hidden;
-  transition: border-color 0.2s ease, background 0.2s ease;
+  transition: border-color 0.18s ease, background 0.18s ease;
 }
 
 .liv-faq-item:hover {
@@ -875,18 +869,18 @@
   width: 100%;
   background: transparent;
   border: none;
-  padding: 14px 18px;
+  padding: 12px 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
   cursor: pointer;
   text-align: left;
   font-family: var(--font-subheading, 'Manrope', sans-serif);
-  font-size: 0.88rem;
+  font-size: 0.84rem;
   font-weight: 600;
   color: var(--liv-ink);
-  transition: color 0.2s ease;
+  transition: color 0.18s ease;
 }
 
 .liv-faq-question-btn:hover {
@@ -895,7 +889,7 @@
 
 .liv-faq-chevron {
   color: var(--liv-gold);
-  transition: transform 0.25s ease;
+  transition: transform 0.22s ease;
   flex-shrink: 0;
 }
 
@@ -904,12 +898,12 @@
 }
 
 .liv-faq-answer {
-  padding: 0 18px 16px 18px;
-  font-size: 0.82rem;
-  line-height: 1.6;
+  padding: 0 16px 14px 16px;
+  font-size: 0.78rem;
+  line-height: 1.55;
   color: var(--liv-ink-muted);
   border-top: 1px dashed var(--liv-border);
-  padding-top: 12px;
+  padding-top: 10px;
 }
 
 /* ==========================================================================
@@ -925,15 +919,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: clamp(12px, 3vw, 24px);
+  padding: clamp(10px, 2.5vw, 20px);
   box-sizing: border-box;
 }
 
 .liv-lightbox-dialog {
   background: #141311;
   border: 1px solid var(--liv-border-hover);
-  border-radius: 18px;
-  max-width: 960px;
+  border-radius: 16px;
+  max-width: 920px;
   width: 100%;
   max-height: 90vh;
   overflow-y: auto;
@@ -945,12 +939,12 @@
 
 .liv-lightbox-close-btn {
   position: absolute;
-  top: 14px;
-  right: 14px;
+  top: 12px;
+  right: 12px;
   background: rgba(20, 19, 17, 0.85);
   border: 1px solid var(--liv-border);
-  width: 34px;
-  height: 34px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   color: var(--liv-ink);
   display: flex;
@@ -958,7 +952,7 @@
   justify-content: center;
   cursor: pointer;
   z-index: 10;
-  transition: all 0.2s ease;
+  transition: all 0.18s ease;
 }
 
 .liv-lightbox-close-btn:hover {
@@ -983,23 +977,23 @@
 
 .liv-lightbox-room-pill {
   position: absolute;
-  bottom: 14px;
-  left: 14px;
+  bottom: 12px;
+  left: 12px;
   background: rgba(18, 16, 14, 0.85);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   color: var(--liv-ink);
-  padding: 5px 12px;
+  padding: 4px 10px;
   border-radius: 999px;
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 600;
   border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .liv-lightbox-thumbs-row {
   display: flex;
-  gap: 8px;
-  padding: 12px 18px;
+  gap: 7px;
+  padding: 10px 16px;
   background: #0E0D0B;
   border-top: 1px solid var(--liv-border);
   border-bottom: 1px solid var(--liv-border);
@@ -1008,16 +1002,16 @@
 }
 
 .liv-lightbox-thumb-btn {
-  width: 68px;
-  height: 48px;
+  width: 64px;
+  height: 44px;
   flex-shrink: 0;
-  border-radius: 6px;
+  border-radius: 5px;
   overflow: hidden;
   border: 2px solid transparent;
   padding: 0;
   cursor: pointer;
   opacity: 0.6;
-  transition: all 0.2s ease;
+  transition: all 0.18s ease;
 }
 
 .liv-lightbox-thumb-btn img {
@@ -1033,63 +1027,63 @@
 }
 
 .liv-lightbox-info-pane {
-  padding: clamp(20px, 3vw, 28px);
+  padding: clamp(16px, 2.5vw, 24px);
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 14px;
 }
 
 .liv-lightbox-header-row {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 16px;
+  gap: 14px;
   flex-wrap: wrap;
 }
 
 .liv-lightbox-title {
   font-family: var(--font-heading, 'Cormorant Garamond', serif);
-  font-size: clamp(1.6rem, 2.4vw, 2rem);
+  font-size: clamp(1.4rem, 2.2vw, 1.8rem);
   font-weight: 600;
   color: var(--liv-ink);
-  margin: 0 0 4px 0;
+  margin: 0 0 3px 0;
   line-height: 1.15;
 }
 
 .liv-lightbox-sub {
-  font-size: 0.8rem;
+  font-size: 0.76rem;
   color: var(--liv-gold-bright);
 }
 
 .liv-lightbox-desc {
-  font-size: 0.85rem;
-  line-height: 1.6;
+  font-size: 0.8rem;
+  line-height: 1.55;
   color: var(--liv-ink-muted);
   margin: 0;
 }
 
 .liv-lightbox-sec-heading {
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   color: var(--liv-gold);
   font-weight: 700;
-  margin: 0 0 10px 0;
+  margin: 0 0 8px 0;
 }
 
 .liv-lightbox-highlights {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 8px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 6px;
 }
 
 .liv-highlight-point {
   display: flex;
   align-items: flex-start;
-  gap: 8px;
-  font-size: 0.78rem;
+  gap: 7px;
+  font-size: 0.74rem;
   color: var(--liv-ink-muted);
-  line-height: 1.4;
+  line-height: 1.35;
 }
 
 .liv-highlight-point svg {
@@ -1100,22 +1094,22 @@
 
 .liv-lightbox-specs-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 8px;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 6px;
 }
 
 .liv-lightbox-spec-cell {
   background: var(--liv-bg-surface);
   border: 1px solid var(--liv-border);
-  border-radius: 8px;
-  padding: 8px 12px;
+  border-radius: 6px;
+  padding: 6px 10px;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 1px;
 }
 
 .liv-spec-cell-label {
-  font-size: 0.65rem;
+  font-size: 0.62rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -1123,7 +1117,7 @@
 }
 
 .liv-spec-cell-val {
-  font-size: 0.78rem;
+  font-size: 0.74rem;
   font-weight: 600;
   color: var(--liv-ink);
 }
