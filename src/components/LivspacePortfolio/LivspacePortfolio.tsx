@@ -10,6 +10,7 @@ import {
   Clock,
   ShieldCheck,
   Building2,
+  MapPin,
   Layers,
   Sparkles,
 } from 'lucide-react';
@@ -309,18 +310,27 @@ export const LivspacePortfolio: React.FC = () => {
 
                 {/* Card Body */}
                 <div className="liv-card-body">
-                  <h3 className="liv-card-title" title={project.title}>
+                  {/* Category Kicker Badge */}
+                  <div className="liv-card-kicker">
+                    <span className="liv-kicker-city">{project.city}</span>
+                    <span className="liv-kicker-dot">•</span>
+                    <span className="liv-kicker-bhk">{project.bhk}</span>
+                  </div>
+
+                  {/* Project Title (Fixed clipping, elegant Cormorant serif) */}
+                  <h3 className="liv-card-title" title={`${project.title} — ${project.society}`}>
                     {project.title}
                   </h3>
 
+                  {/* Society & Locality Address */}
                   <div className="liv-card-society">
-                    <Building2 size={13} />
+                    <MapPin size={13} className="liv-society-pin" aria-hidden="true" />
                     <span>
                       {project.society} · {project.location}
                     </span>
                   </div>
 
-                  {/* Specs Grid */}
+                  {/* Enhanced Architectural Specs Grid */}
                   <div className="liv-card-specs-grid">
                     <div className="liv-spec-item">
                       <span className="liv-spec-label">Scope</span>
@@ -344,7 +354,7 @@ export const LivspacePortfolio: React.FC = () => {
 
                     <div className="liv-spec-item">
                       <span className="liv-spec-label">Est. Budget</span>
-                      <span className="liv-spec-value">{project.budgetBracket}</span>
+                      <span className="liv-spec-value liv-spec-budget">{project.budgetBracket}</span>
                     </div>
                   </div>
 
@@ -353,12 +363,12 @@ export const LivspacePortfolio: React.FC = () => {
                     <button
                       type="button"
                       onClick={() =>
-                        openInquiry(`Inquiry for Project: ${project.title} (${project.society})`)
+                        openInquiry(`Inquiry for Project: ${project.title} (${project.society}, ${project.city})`)
                       }
                       className="liv-btn-primary"
                     >
                       <span>Get This Design</span>
-                      <ArrowRight size={13} />
+                      <ArrowRight size={13} className="liv-btn-arrow" />
                     </button>
 
                     <button
@@ -369,6 +379,7 @@ export const LivspacePortfolio: React.FC = () => {
                       title="View Photo Gallery"
                     >
                       <Eye size={15} />
+                      <span className="liv-btn-photos-text">Photos</span>
                     </button>
                   </div>
                 </div>
