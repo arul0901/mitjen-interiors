@@ -5,7 +5,9 @@
    Project-Specific Materials Modal & "View Materials" Integration.
    ========================================================================== */
 
-.liv-port-root {
+:root,
+.liv-port-root,
+.liv-lightbox-backdrop {
   --liv-bg: #F9F7F4;
   --liv-card-bg: #FFFFFF;
   --liv-card-alt: #F4EFE9;
@@ -25,7 +27,9 @@
   --liv-amber: #C77700;
   --liv-amber-bg: rgba(199, 119, 0, 0.08);
   --liv-amber-border: rgba(199, 119, 0, 0.25);
+}
 
+.liv-port-root {
   background-color: var(--liv-bg);
   color: var(--liv-ink);
   font-family: var(--font-body, 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
@@ -1020,45 +1024,18 @@
 /* Modal View Switcher Tabs */
 .liv-modal-tabs-group {
   display: flex;
-  gap: 6px;
-  background: var(--liv-card-alt);
-  padding: 4px;
+  gap: 3px;
+  background: #F3EFEA;
+  padding: 3px;
   border-radius: 999px;
-  border: 1px solid var(--liv-border);
+  border: 1px solid rgba(30, 26, 22, 0.12);
 }
 
 .liv-modal-tab-btn {
   background: transparent;
   border: none;
-  color: var(--liv-ink-muted);
-  padding: 6px 14px;
-  border-radius: 999px;
-  font-size: 0.72rem;
-  font-weight: 600;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.liv-modal-tab-btn.active {
-  background: var(--liv-ink);
-  color: #FFFFFF;
-}
-
-.liv-modal-header-actions {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.liv-header-close-btn {
-  background: #F5EFE9;
-  border: 1px solid var(--liv-border);
-  color: var(--liv-ink);
-  padding: 6px 14px;
+  color: #615B52 !important;
+  padding: 5px 13px;
   border-radius: 999px;
   font-size: 0.72rem;
   font-weight: 700;
@@ -1067,6 +1044,41 @@
   gap: 5px;
   cursor: pointer;
   transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.liv-modal-tab-btn.active {
+  background: #1C1A18 !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.liv-modal-tab-btn:hover:not(.active) {
+  color: #1C1A18 !important;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.liv-modal-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: nowrap;
+}
+
+.liv-header-close-btn {
+  background: #F5EFE9;
+  border: 1px solid rgba(30, 26, 22, 0.12);
+  color: #1C1A18;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
 }
 
 .liv-header-close-btn:hover {
@@ -1078,41 +1090,41 @@
 
 /* TAB 1: MATERIALS USED BODY */
 .liv-modal-materials-body {
-  padding: clamp(18px, 3vw, 28px);
+  padding: 10px 14px 14px 14px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 8px;
 }
 
 /* Project Location & Identification Table */
 .liv-modal-proj-identity {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-  background: var(--liv-card-alt);
-  border: 1px solid var(--liv-border);
-  border-radius: 10px;
-  padding: 12px 14px;
+  gap: 6px;
+  background: #F4EFE9;
+  border: 1px solid rgba(30, 26, 22, 0.1);
+  border-radius: 8px;
+  padding: 6px 10px;
 }
 
 .liv-identity-cell {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 1px;
 }
 
 .liv-identity-label {
-  font-size: 0.62rem;
+  font-size: 0.58rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: var(--liv-taupe);
+  color: #8C8479;
 }
 
 .liv-identity-val {
-  font-size: 0.78rem;
+  font-size: 0.74rem;
   font-weight: 600;
-  color: var(--liv-ink);
+  color: #1C1A18;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1122,29 +1134,29 @@
 .liv-modal-mat-section {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 6px;
 }
 
 .liv-modal-mat-sec-title-row {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  gap: 10px;
-  border-bottom: 1px solid var(--liv-border);
-  padding-bottom: 8px;
+  gap: 8px;
+  border-bottom: 1px solid rgba(30, 26, 22, 0.1);
+  padding-bottom: 3px;
 }
 
 .liv-modal-mat-sec-title {
   font-family: var(--font-heading, 'Cormorant Garamond', serif);
-  font-size: 1.35rem;
+  font-size: 1.15rem;
   font-weight: 600;
-  color: var(--liv-ink);
+  color: #1C1A18;
   margin: 0;
 }
 
 .liv-modal-mat-sec-sub {
-  font-size: 0.72rem;
-  color: var(--liv-taupe);
+  font-size: 0.62rem;
+  color: #8C8479;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -1152,85 +1164,85 @@
 /* Materials Cards Grid Inside Modal */
 .liv-modal-materials-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 6px;
 }
 
 .liv-modal-mat-card {
   background: #FFFFFF;
-  border: 1px solid var(--liv-border);
-  border-radius: 10px;
-  padding: 14px;
+  border: 1px solid rgba(30, 26, 22, 0.1);
+  border-radius: 8px;
+  padding: 6px 8px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  box-shadow: 0 2px 8px -2px rgba(35, 28, 22, 0.04);
+  gap: 4px;
+  box-shadow: 0 1px 3px rgba(35, 28, 22, 0.03);
 }
 
 .liv-modal-mat-card-header {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 .liv-modal-mat-badge {
   font-family: var(--font-heading, 'Cormorant Garamond', serif);
-  font-size: 1.15rem;
+  font-size: 0.92rem;
   font-weight: 700;
-  color: var(--liv-gold);
+  color: #B88E4B;
   line-height: 1;
 }
 
 .liv-modal-mat-cat-title {
   font-family: var(--font-subheading, 'Manrope', sans-serif);
-  font-size: 0.84rem;
+  font-size: 0.76rem;
   font-weight: 700;
-  color: var(--liv-ink);
+  color: #1C1A18;
   margin: 0;
 }
 
 .liv-modal-mat-content {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 3px;
 }
 
 .liv-modal-mat-field {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 1px;
 }
 
 .liv-modal-field-lbl {
-  font-size: 0.6rem;
+  font-size: 0.55rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--liv-taupe);
+  letter-spacing: 0.05em;
+  color: #8C8479;
 }
 
 .liv-modal-chips-wrap {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px;
+  gap: 3px;
 }
 
 .liv-modal-chip {
-  font-size: 0.68rem;
-  padding: 2px 7px;
-  border-radius: 4px;
-  line-height: 1.3;
+  font-size: 0.62rem;
+  padding: 1px 5px;
+  border-radius: 3px;
+  line-height: 1.25;
 }
 
 .liv-modal-chip.mat {
-  background: var(--liv-card-alt);
-  color: var(--liv-ink);
-  border: 1px solid var(--liv-border);
+  background: #F4EFE9;
+  color: #1C1A18;
+  border: 1px solid rgba(30, 26, 22, 0.08);
 }
 
 .liv-modal-chip.brand {
   background: rgba(184, 142, 75, 0.08);
-  color: var(--liv-gold-bright);
+  color: #9E7535;
   border: 1px solid rgba(184, 142, 75, 0.3);
   font-weight: 600;
 }
