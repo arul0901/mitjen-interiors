@@ -10,6 +10,8 @@ import {
   Layers,
   Sparkles,
   SlidersHorizontal,
+  PackageCheck,
+  Image as ImageIcon,
 } from 'lucide-react';
 import { useInquiry } from '../../context/useInquiry';
 import {
@@ -29,8 +31,9 @@ export const LivspacePortfolio: React.FC = () => {
   const [activeScope, setActiveScope] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState<string>('');
 
-  // Lightbox Modal State
+  // Modal State (Project Specific Materials & Photography)
   const [selectedProject, setSelectedProject] = useState<PortfolioProject | null>(null);
+  const [activeModalTab, setActiveModalTab] = useState<'materials' | 'gallery'>('materials');
   const [activeImageIndex, setActiveImageIndex] = useState<number>(0);
 
   // FAQ Accordion State (first item open by default)
@@ -99,13 +102,21 @@ export const LivspacePortfolio: React.FC = () => {
     });
   }, [activeFilter, activeScope, searchQuery]);
 
-  // Open Lightbox
-  const handleOpenGallery = (project: PortfolioProject) => {
+  // Open Materials Modal (Directly opens the project-specific materials breakdown)
+  const handleOpenMaterials = (project: PortfolioProject) => {
     setSelectedProject(project);
+    setActiveModalTab('materials');
     setActiveImageIndex(0);
   };
 
-  const handleCloseGallery = () => {
+  // Open Gallery tab inside modal
+  const handleOpenGalleryTab = (project: PortfolioProject) => {
+    setSelectedProject(project);
+    setActiveModalTab('gallery');
+    setActiveImageIndex(0);
+  };
+
+  const handleCloseModal = () => {
     setSelectedProject(null);
   };
 
@@ -114,7 +125,6 @@ export const LivspacePortfolio: React.FC = () => {
       <div className="liv-port-container">
         {/* ==================================================================
             1. REFINED COMPACT HERO HEADER
-            Clean architectural atelier introduction without bulky cards.
             ================================================================== */}
         <section className="liv-port-hero" aria-labelledby="portfolio-main-title">
           <div className="liv-port-hero-inner">
@@ -128,7 +138,7 @@ export const LivspacePortfolio: React.FC = () => {
               </h1>
               <p className="liv-port-subtitle">
                 Authentic turnkey client residences executed across Coimbatore and Bangalore.
-                Meticulously crafted with tailored timber joinery, multi-layer Italian finishes, and bespoke lighting.
+                Meticulously crafted with verified materials: Tarkett &amp; Armstrong flooring, Saint-Gobain ceilings, Century &amp; Greenply woodwork, and Philips &amp; Havells lighting.
               </p>
             </div>
 
@@ -154,7 +164,6 @@ export const LivspacePortfolio: React.FC = () => {
 
         {/* ==================================================================
             2. UNIFIED COMPACT ARCHITECTURAL CONTROL BAR
-            Streamlined into a single cohesive control deck (Pills + Search).
             ================================================================== */}
         <div ref={gridSectionRef} className="liv-control-bar">
           <div className="liv-control-main-row">
@@ -226,7 +235,7 @@ export const LivspacePortfolio: React.FC = () => {
 
         {/* ==================================================================
             3. ULTRA-COMPACT ARCHITECTURAL PROJECTS GRID
-            Compact height, 16:9 cinematic letterbox, sleek specs strip.
+            Featuring "View Materials" as requested by user.
             ================================================================== */}
         <section className="liv-projects-grid" aria-label="Portfolio Residences">
           {filteredProjects.length > 0 ? (
@@ -235,10 +244,10 @@ export const LivspacePortfolio: React.FC = () => {
                 {/* Media Presentation — Compact 16:9 Letterbox */}
                 <div
                   className="liv-card-media"
-                  onClick={() => handleOpenGallery(project)}
+                  onClick={() => handleOpenMaterials(project)}
                   role="button"
                   tabIndex={0}
-                  aria-label={`View photo gallery for ${project.title}`}
+                  aria-label={`View materials used in ${project.title}`}
                 >
                   <img
                     src={project.coverImage}
@@ -259,10 +268,10 @@ export const LivspacePortfolio: React.FC = () => {
                     {project.type.toUpperCase()}
                   </span>
 
-                  {/* Quick-view pill on hover */}
+                  {/* Hover indicator: "View Materials" */}
                   <div className="liv-media-hover-indicator">
-                    <Eye size={13} />
-                    <span>View Gallery</span>
+                    <Layers size={12} />
+                    <span>View Materials</span>
                   </div>
                 </div>
 
@@ -277,7 +286,7 @@ export const LivspacePortfolio: React.FC = () => {
                     <span className="liv-arch-bhk-tag">{project.bhk}</span>
                   </div>
 
-                  <h2 className="liv-arch-title" onClick={() => handleOpenGallery(project)}>
+                  <h2 className="liv-arch-title" onClick={() => handleOpenMaterials(project)}>
                     {project.title}
                   </h2>
 
@@ -306,16 +315,16 @@ export const LivspacePortfolio: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Compact Actions Row */}
+                  {/* Compact Actions Row — "View Materials" prominent */}
                   <div className="liv-arch-actions">
                     <button
                       type="button"
-                      onClick={() => handleOpenGallery(project)}
-                      className="liv-btn-view-gallery"
-                      aria-label={`Open gallery for ${project.title}`}
+                      onClick={() => handleOpenMaterials(project)}
+                      className="liv-btn-view-materials"
+                      aria-label={`View materials used in ${project.title}`}
                     >
-                      <Eye size={12} />
-                      <span>Photos ({project.galleryImages.length})</span>
+                      <Layers size={12} />
+                      <span>View Materials</span>
                     </button>
 
                     <button
@@ -356,16 +365,16 @@ export const LivspacePortfolio: React.FC = () => {
         </section>
 
         {/* ==================================================================
-            4. COMPACT CRAFTSMANSHIP & VERIFIED MATERIALS SECTION
+            4. COMPACT CRAFTSMANSHIP & MATERIALS SECTION
             ================================================================== */}
         <section className="liv-materials-section" aria-labelledby="materials-section-title">
           <div className="liv-section-header">
-            <span className="liv-port-eyebrow">• CRAFTSMANSHIP &amp; MATERIALS</span>
+            <span className="liv-port-eyebrow">• VERIFIED ATELIER SPECIFICATIONS</span>
             <h2 id="materials-section-title" className="liv-section-title">
-              Materials. Precision. Detail.
+              Materials Used &amp; Brand Partners
             </h2>
             <p className="liv-section-sub">
-              Industry-leading material partners and master carpentry standards defining our architectural spaces.
+              Direct architectural grade specifications used across Prithvi, Sampath, Mr. Mahesh – Pilot, and Deepak residences.
             </p>
           </div>
 
@@ -436,7 +445,7 @@ export const LivspacePortfolio: React.FC = () => {
         </section>
 
         {/* ==================================================================
-            6. REFINED COMPACT FAQ SECTION (NO PRICING REFERENCES)
+            6. REFINED COMPACT FAQ SECTION
             ================================================================== */}
         <section className="liv-faq-section" aria-labelledby="faq-section-title">
           <div className="liv-section-header">
@@ -473,12 +482,13 @@ export const LivspacePortfolio: React.FC = () => {
       </div>
 
       {/* ==================================================================
-          7. HIGH-RESOLUTION INTERACTIVE LIGHTBOX MODAL
+          7. PROJECT SPECIFIC MATERIALS & GALLERY MODAL
+          Directly triggered by "View Materials".
           ================================================================== */}
       {selectedProject && (
         <div
           className="liv-lightbox-backdrop"
-          onClick={handleCloseGallery}
+          onClick={handleCloseModal}
           role="dialog"
           aria-modal="true"
         >
@@ -488,94 +498,185 @@ export const LivspacePortfolio: React.FC = () => {
           >
             <button
               type="button"
-              onClick={handleCloseGallery}
+              onClick={handleCloseModal}
               className="liv-lightbox-close-btn"
-              aria-label="Close Gallery Modal"
+              aria-label="Close Project Modal"
             >
               <X size={16} />
             </button>
 
-            {/* Main Stage Media */}
-            <div className="liv-lightbox-main-media">
-              <img
-                src={selectedProject.galleryImages[activeImageIndex]?.url || selectedProject.coverImage}
-                alt={selectedProject.galleryImages[activeImageIndex]?.caption || selectedProject.title}
-                className="liv-lightbox-main-img"
-              />
-              <span className="liv-lightbox-room-pill">
-                {selectedProject.galleryImages[activeImageIndex]?.room || 'Project Space'} (
-                {activeImageIndex + 1} of {selectedProject.galleryImages.length})
-              </span>
-            </div>
+            {/* Modal Header Bar with Project Metadata */}
+            <div className="liv-modal-header-deck">
+              <div className="liv-modal-header-left">
+                <span className="liv-modal-eyebrow">
+                  <PackageCheck size={12} />
+                  PROJECT SPECIFIC ATELIER SPECIFICATION
+                </span>
+                <h3 className="liv-modal-title">{selectedProject.title}</h3>
+                <div className="liv-modal-address-line">
+                  <MapPin size={12} />
+                  <span>
+                    {selectedProject.society} · {selectedProject.location}, {selectedProject.city}
+                  </span>
+                  <span className="liv-modal-dot">•</span>
+                  <span>{selectedProject.bhk} ({selectedProject.carpetArea})</span>
+                </div>
+              </div>
 
-            {/* Thumbnails Row */}
-            <div className="liv-lightbox-thumbs-row">
-              {selectedProject.galleryImages.map((img, idx) => (
+              {/* Modal View Switcher Tabs: "Materials Used" vs "Space Photography" */}
+              <div className="liv-modal-tabs-group" role="tablist">
                 <button
-                  key={idx}
                   type="button"
-                  onClick={() => setActiveImageIndex(idx)}
-                  className={`liv-lightbox-thumb-btn ${idx === activeImageIndex ? 'active' : ''}`}
-                  aria-label={`Thumbnail ${idx + 1}`}
+                  role="tab"
+                  aria-selected={activeModalTab === 'materials'}
+                  onClick={() => setActiveModalTab('materials')}
+                  className={`liv-modal-tab-btn ${activeModalTab === 'materials' ? 'active' : ''}`}
                 >
-                  <img src={img.url} alt={img.caption} />
+                  <Layers size={13} />
+                  <span>Materials Used</span>
                 </button>
-              ))}
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected={activeModalTab === 'gallery'}
+                  onClick={() => setActiveModalTab('gallery')}
+                  className={`liv-modal-tab-btn ${activeModalTab === 'gallery' ? 'active' : ''}`}
+                >
+                  <ImageIcon size={13} />
+                  <span>Photos ({selectedProject.galleryImages.length})</span>
+                </button>
+              </div>
             </div>
 
-            {/* Info Pane (NO PRICING) */}
-            <div className="liv-lightbox-info-pane">
-              <div className="liv-lightbox-header-row">
-                <div>
-                  <h3 className="liv-lightbox-title">{selectedProject.title}</h3>
-                  <div className="liv-lightbox-sub">
-                    {selectedProject.society} · {selectedProject.location} | {selectedProject.bhk} (
-                    {selectedProject.carpetArea})
+            {/* TAB 1: PROJECT SPECIFIC MATERIALS USED (DEFAULT ACTIVE) */}
+            {activeModalTab === 'materials' && (
+              <div className="liv-modal-materials-body">
+                {/* Project Location & Identification Table */}
+                <div className="liv-modal-proj-identity">
+                  <div className="liv-identity-cell">
+                    <span className="liv-identity-label">Project / Space</span>
+                    <span className="liv-identity-val">{selectedProject.title}</span>
+                  </div>
+                  <div className="liv-identity-cell">
+                    <span className="liv-identity-label">City</span>
+                    <span className="liv-identity-val">{selectedProject.city}</span>
+                  </div>
+                  <div className="liv-identity-cell">
+                    <span className="liv-identity-label">Area / Locality</span>
+                    <span className="liv-identity-val">{selectedProject.location}</span>
+                  </div>
+                  <div className="liv-identity-cell">
+                    <span className="liv-identity-label">Full Address</span>
+                    <span className="liv-identity-val">{selectedProject.fullAddress}</span>
                   </div>
                 </div>
 
-                <button
-                  type="button"
-                  onClick={() => {
-                    openInquiry(`Inquiry for ${selectedProject.title}`);
-                    handleCloseGallery();
-                  }}
-                  className="liv-btn-inquire"
-                  style={{ width: 'auto', padding: '8px 18px', alignSelf: 'flex-start' }}
-                >
-                  <span>Inquire Design</span>
-                  <ArrowRight size={12} />
-                </button>
-              </div>
+                {/* Main 5 Materials Used Breakdown */}
+                <div className="liv-modal-mat-section">
+                  <div className="liv-modal-mat-sec-title-row">
+                    <h4 className="liv-modal-mat-sec-title">Materials Used &amp; Brand Finishes</h4>
+                    <span className="liv-modal-mat-sec-sub">Verified architectural specifications</span>
+                  </div>
 
-              <p className="liv-lightbox-desc">{selectedProject.description}</p>
+                  <div className="liv-modal-materials-grid">
+                    {MATERIAL_SPECIFICATIONS.map((mat) => (
+                      <div key={mat.id} className="liv-modal-mat-card">
+                        <div className="liv-modal-mat-card-header">
+                          <span className="liv-modal-mat-badge">{mat.number}</span>
+                          <h5 className="liv-modal-mat-cat-title">{mat.title}</h5>
+                        </div>
 
-              <div className="liv-lightbox-highlights-section">
-                <h4 className="liv-lightbox-sec-heading">Key Design Highlights</h4>
-                <div className="liv-lightbox-highlights">
-                  {selectedProject.highlights.map((h, i) => (
-                    <div key={i} className="liv-highlight-point">
-                      <CheckCircle2 size={12} />
-                      <span>{h}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
+                        <div className="liv-modal-mat-content">
+                          <div className="liv-modal-mat-field">
+                            <span className="liv-modal-field-lbl">Materials:</span>
+                            <div className="liv-modal-chips-wrap">
+                              {mat.materials.map((m, mIdx) => (
+                                <span key={mIdx} className="liv-modal-chip mat">{m}</span>
+                              ))}
+                            </div>
+                          </div>
 
-              {selectedProject.specifications && selectedProject.specifications.length > 0 && (
-                <div className="liv-lightbox-specs-section">
-                  <h4 className="liv-lightbox-sec-heading">Architectural Specifications</h4>
-                  <div className="liv-lightbox-specs-grid">
-                    {selectedProject.specifications.map((spec, sIdx) => (
-                      <div key={sIdx} className="liv-lightbox-spec-cell">
-                        <span className="liv-spec-cell-label">{spec.label}</span>
-                        <span className="liv-spec-cell-val">{spec.value}</span>
+                          <div className="liv-modal-mat-field">
+                            <span className="liv-modal-field-lbl">Brand / Finish:</span>
+                            <div className="liv-modal-chips-wrap">
+                              {mat.brandFinishDetails.map((b, bIdx) => (
+                                <span key={bIdx} className="liv-modal-chip brand">{b}</span>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     ))}
                   </div>
                 </div>
-              )}
-            </div>
+
+                {/* Key Design Highlights of the Project */}
+                <div className="liv-modal-highlights-box">
+                  <h5 className="liv-modal-highlights-title">Key Architectural Highlights:</h5>
+                  <div className="liv-modal-highlights-grid">
+                    {selectedProject.highlights.map((h, hIdx) => (
+                      <div key={hIdx} className="liv-modal-highlight-item">
+                        <CheckCircle2 size={13} />
+                        <span>{h}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Modal Footer CTA */}
+                <div className="liv-modal-footer">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      openInquiry(`Custom design inquiry for ${selectedProject.title} with verified materials`);
+                      handleCloseModal();
+                    }}
+                    className="liv-btn-inquire"
+                    style={{ width: 'auto', padding: '9px 24px' }}
+                  >
+                    <span>Inquire About This Specification</span>
+                    <ArrowRight size={13} />
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* TAB 2: ROOM PHOTOGRAPHY GALLERY */}
+            {activeModalTab === 'gallery' && (
+              <div className="liv-modal-gallery-body">
+                {/* Main Stage Media */}
+                <div className="liv-lightbox-main-media">
+                  <img
+                    src={selectedProject.galleryImages[activeImageIndex]?.url || selectedProject.coverImage}
+                    alt={selectedProject.galleryImages[activeImageIndex]?.caption || selectedProject.title}
+                    className="liv-lightbox-main-img"
+                  />
+                  <span className="liv-lightbox-room-pill">
+                    {selectedProject.galleryImages[activeImageIndex]?.room || 'Project Space'} (
+                    {activeImageIndex + 1} of {selectedProject.galleryImages.length})
+                  </span>
+                </div>
+
+                {/* Thumbnails Row */}
+                <div className="liv-lightbox-thumbs-row">
+                  {selectedProject.galleryImages.map((img, idx) => (
+                    <button
+                      key={idx}
+                      type="button"
+                      onClick={() => setActiveImageIndex(idx)}
+                      className={`liv-lightbox-thumb-btn ${idx === activeImageIndex ? 'active' : ''}`}
+                      aria-label={`Thumbnail ${idx + 1}`}
+                    >
+                      <img src={img.url} alt={img.caption} />
+                    </button>
+                  ))}
+                </div>
+
+                <div className="liv-modal-gallery-caption">
+                  <p>{selectedProject.galleryImages[activeImageIndex]?.caption || selectedProject.description}</p>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       )}

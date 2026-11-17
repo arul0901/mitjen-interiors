@@ -2,6 +2,7 @@
    MITJEN INTERIOR DESIGN PORTFOLIO — ULTRA-COMPACT ARCHITECTURAL ATELIER
    Restored authentic light palette (#F9F7F4) with pure white (#FFFFFF) cards.
    Ultra-compact height, 16:9 letterbox imagery, zero pricing.
+   Project-Specific Materials Modal & "View Materials" Integration.
    ========================================================================== */
 
 .liv-port-root {
@@ -330,6 +331,7 @@
    3. ULTRA-COMPACT ARCHITECTURAL PROJECTS GRID
    Light palette (#FFFFFF cards on #F9F7F4 background).
    Strict 16:9 letterbox imagery, single-row specs strip, ~350px total height.
+   Featuring "View Materials" as requested by user.
    ========================================================================== */
 .liv-projects-grid {
   display: grid;
@@ -429,6 +431,7 @@
   gap: 4px;
 }
 
+/* "View Materials" Hover Indicator */
 .liv-media-hover-indicator {
   position: absolute;
   bottom: 12px;
@@ -546,7 +549,7 @@
   text-overflow: ellipsis;
 }
 
-/* Compact Card Actions */
+/* Compact Card Actions — "View Materials" prominent */
 .liv-arch-actions {
   display: flex;
   align-items: center;
@@ -554,31 +557,8 @@
   margin-top: auto;
 }
 
-.liv-btn-view-gallery {
-  flex: 1;
-  background: transparent;
-  color: var(--liv-ink);
-  border: 1px solid var(--liv-border-strong);
-  padding: 7px 12px;
-  border-radius: 999px;
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.liv-btn-view-gallery:hover {
-  background: var(--liv-card-alt);
-  border-color: var(--liv-ink);
-}
-
-.liv-btn-inquire {
-  flex: 1;
+.liv-btn-view-materials {
+  flex: 1.2;
   background: var(--liv-ink);
   color: #FFFFFF !important;
   border: 1px solid var(--liv-ink);
@@ -597,11 +577,34 @@
   box-shadow: 0 3px 10px rgba(28, 26, 24, 0.12);
 }
 
-.liv-btn-inquire:hover {
+.liv-btn-view-materials:hover {
   background: var(--liv-gold);
   border-color: var(--liv-gold);
   transform: translateY(-1px);
   box-shadow: 0 5px 14px rgba(184, 142, 75, 0.3);
+}
+
+.liv-btn-inquire {
+  flex: 0.8;
+  background: transparent;
+  color: var(--liv-ink);
+  border: 1px solid var(--liv-border-strong);
+  padding: 7px 12px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.liv-btn-inquire:hover {
+  background: var(--liv-card-alt);
+  border-color: var(--liv-ink);
 }
 
 /* Empty State */
@@ -901,7 +904,7 @@
 }
 
 /* ==========================================================================
-   7. HIGH-RESOLUTION INTERACTIVE LIGHTBOX MODAL
+   7. PROJECT SPECIFIC MATERIALS & GALLERY MODAL
    ========================================================================== */
 .liv-lightbox-backdrop {
   position: fixed;
@@ -920,7 +923,7 @@
 .liv-lightbox-dialog {
   background: #FFFFFF;
   border-radius: 16px;
-  max-width: 920px;
+  max-width: 960px;
   width: 100%;
   max-height: 90vh;
   overflow-y: auto;
@@ -932,9 +935,9 @@
 
 .liv-lightbox-close-btn {
   position: absolute;
-  top: 12px;
-  right: 12px;
-  background: rgba(28, 26, 24, 0.7);
+  top: 14px;
+  right: 14px;
+  background: rgba(28, 26, 24, 0.75);
   border: none;
   width: 32px;
   height: 32px;
@@ -944,7 +947,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  z-index: 10;
+  z-index: 20;
   transition: all 0.18s ease;
 }
 
@@ -952,6 +955,299 @@
   background: var(--liv-gold);
   color: #171615;
   transform: scale(1.08);
+}
+
+/* Modal Header Bar */
+.liv-modal-header-deck {
+  padding: clamp(16px, 2.5vw, 24px) clamp(18px, 3vw, 28px);
+  background: #FFFFFF;
+  border-bottom: 1px solid var(--liv-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.liv-modal-header-left {
+  max-width: 580px;
+}
+
+.liv-modal-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--liv-gold);
+  margin-bottom: 4px;
+}
+
+.liv-modal-title {
+  font-family: var(--font-heading, 'Cormorant Garamond', serif);
+  font-size: clamp(1.6rem, 2.4vw, 2rem);
+  font-weight: 600;
+  color: var(--liv-ink);
+  margin: 0 0 4px 0;
+  line-height: 1.15;
+}
+
+.liv-modal-address-line {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  color: var(--liv-taupe);
+  flex-wrap: wrap;
+}
+
+.liv-modal-dot {
+  color: var(--liv-border-strong);
+}
+
+/* Modal View Switcher Tabs */
+.liv-modal-tabs-group {
+  display: flex;
+  gap: 6px;
+  background: var(--liv-card-alt);
+  padding: 4px;
+  border-radius: 999px;
+  border: 1px solid var(--liv-border);
+}
+
+.liv-modal-tab-btn {
+  background: transparent;
+  border: none;
+  color: var(--liv-ink-muted);
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.liv-modal-tab-btn.active {
+  background: var(--liv-ink);
+  color: #FFFFFF;
+}
+
+/* TAB 1: MATERIALS USED BODY */
+.liv-modal-materials-body {
+  padding: clamp(18px, 3vw, 28px);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Project Location & Identification Table */
+.liv-modal-proj-identity {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  background: var(--liv-card-alt);
+  border: 1px solid var(--liv-border);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+
+.liv-identity-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.liv-identity-label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--liv-taupe);
+}
+
+.liv-identity-val {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--liv-ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Materials Used Section */
+.liv-modal-mat-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.liv-modal-mat-sec-title-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  border-bottom: 1px solid var(--liv-border);
+  padding-bottom: 8px;
+}
+
+.liv-modal-mat-sec-title {
+  font-family: var(--font-heading, 'Cormorant Garamond', serif);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--liv-ink);
+  margin: 0;
+}
+
+.liv-modal-mat-sec-sub {
+  font-size: 0.72rem;
+  color: var(--liv-taupe);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Materials Cards Grid Inside Modal */
+.liv-modal-materials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+}
+
+.liv-modal-mat-card {
+  background: #FFFFFF;
+  border: 1px solid var(--liv-border);
+  border-radius: 10px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 2px 8px -2px rgba(35, 28, 22, 0.04);
+}
+
+.liv-modal-mat-card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.liv-modal-mat-badge {
+  font-family: var(--font-heading, 'Cormorant Garamond', serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--liv-gold);
+  line-height: 1;
+}
+
+.liv-modal-mat-cat-title {
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--liv-ink);
+  margin: 0;
+}
+
+.liv-modal-mat-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.liv-modal-mat-field {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.liv-modal-field-lbl {
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--liv-taupe);
+}
+
+.liv-modal-chips-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.liv-modal-chip {
+  font-size: 0.68rem;
+  padding: 2px 7px;
+  border-radius: 4px;
+  line-height: 1.3;
+}
+
+.liv-modal-chip.mat {
+  background: var(--liv-card-alt);
+  color: var(--liv-ink);
+  border: 1px solid var(--liv-border);
+}
+
+.liv-modal-chip.brand {
+  background: rgba(184, 142, 75, 0.08);
+  color: var(--liv-gold-bright);
+  border: 1px solid rgba(184, 142, 75, 0.3);
+  font-weight: 600;
+}
+
+/* Highlights Box Inside Modal */
+.liv-modal-highlights-box {
+  background: var(--liv-card-alt);
+  border: 1px solid var(--liv-border);
+  border-radius: 10px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.liv-modal-highlights-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--liv-ink);
+  margin: 0;
+}
+
+.liv-modal-highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 6px;
+}
+
+.liv-modal-highlight-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: 0.74rem;
+  color: var(--liv-ink-muted);
+  line-height: 1.4;
+}
+
+.liv-modal-highlight-item svg {
+  color: var(--liv-green);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.liv-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 8px;
+  border-top: 1px dashed var(--liv-border);
+}
+
+/* TAB 2: ROOM PHOTOGRAPHY GALLERY BODY */
+.liv-modal-gallery-body {
+  display: flex;
+  flex-direction: column;
 }
 
 .liv-lightbox-main-media {
@@ -1015,100 +1311,11 @@
   transform: scale(1.04);
 }
 
-.liv-lightbox-info-pane {
-  padding: clamp(16px, 2.5vw, 24px);
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.liv-lightbox-header-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 14px;
-  flex-wrap: wrap;
-}
-
-.liv-lightbox-title {
-  font-family: var(--font-heading, 'Cormorant Garamond', serif);
-  font-size: clamp(1.4rem, 2.2vw, 1.8rem);
-  font-weight: 600;
-  color: var(--liv-ink);
-  margin: 0 0 3px 0;
-  line-height: 1.15;
-}
-
-.liv-lightbox-sub {
-  font-size: 0.76rem;
-  color: var(--liv-gold-bright);
-}
-
-.liv-lightbox-desc {
-  font-size: 0.8rem;
-  line-height: 1.55;
+.liv-modal-gallery-caption {
+  padding: 14px 20px;
+  font-size: 0.82rem;
   color: var(--liv-ink-muted);
-  margin: 0;
-}
-
-.liv-lightbox-sec-heading {
-  font-size: 0.68rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--liv-gold-bright);
-  font-weight: 700;
-  margin: 0 0 8px 0;
-}
-
-.liv-lightbox-highlights {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 6px;
-}
-
-.liv-highlight-point {
-  display: flex;
-  align-items: flex-start;
-  gap: 7px;
-  font-size: 0.74rem;
-  color: var(--liv-ink-muted);
-  line-height: 1.35;
-}
-
-.liv-highlight-point svg {
-  color: var(--liv-green);
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-
-.liv-lightbox-specs-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  gap: 6px;
-}
-
-.liv-lightbox-spec-cell {
-  background: var(--liv-card-alt);
-  border: 1px solid var(--liv-border-subtle);
-  border-radius: 6px;
-  padding: 6px 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-}
-
-.liv-spec-cell-label {
-  font-size: 0.62rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--liv-taupe);
-}
-
-.liv-spec-cell-val {
-  font-size: 0.74rem;
-  font-weight: 600;
-  color: var(--liv-ink);
+  line-height: 1.5;
 }
 
 /* ==========================================================================
@@ -1120,6 +1327,10 @@
   }
 
   .liv-materials-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .liv-modal-proj-identity {
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -1157,8 +1368,17 @@
     flex-direction: column;
   }
 
-  .liv-btn-view-gallery,
+  .liv-btn-view-materials,
   .liv-btn-inquire {
     width: 100%;
+  }
+
+  .liv-modal-proj-identity {
+    grid-template-columns: 1fr;
+  }
+
+  .liv-modal-header-deck {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
