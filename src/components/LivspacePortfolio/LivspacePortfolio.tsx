@@ -102,18 +102,11 @@ export const LivspacePortfolio: React.FC = () => {
             1. HERO SECTION & PILLARS
             ================================================================== */}
         <section className="liv-port-hero" aria-labelledby="portfolio-main-title">
-          {/* Breadcrumb navigation */}
-          <nav className="liv-port-breadcrumb" aria-label="Breadcrumb">
-            <Link to="/">Home</Link>
-            <span>/</span>
-            <span>Interior Design Portfolio</span>
-          </nav>
-
           <div className="liv-port-hero-header">
             <span className="liv-port-eyebrow">• 4 COMPLETED RESIDENCES</span>
-            <h1 id="portfolio-main-title" className="liv-port-h1">
-              Mitjen Interior Design Portfolio
-            </h1>
+            <h2 id="portfolio-main-title" className="liv-port-h1">
+              Residential Portfolio &amp; Spaces
+            </h2>
             <p className="liv-port-subtitle">
               Explore our 4 verified client residential projects across Coimbatore and Bangalore:
               Prithvi, Sampath, Mr. Mahesh – Pilot, and Deepak.
