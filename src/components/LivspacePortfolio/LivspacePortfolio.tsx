@@ -28,7 +28,6 @@ export const LivspacePortfolio: React.FC = () => {
   const gridSectionRef = useRef<HTMLDivElement>(null);
 
   // Filter States
-  const [activeType, setActiveType] = useState<'All' | 'Delivered' | 'Upcoming'>('All');
   const [activeCity, setActiveCity] = useState<string>('All');
   const [activeBhk, setActiveBhk] = useState<string>('All');
   const [activeScope, setActiveScope] = useState<string>('All');
@@ -60,9 +59,6 @@ export const LivspacePortfolio: React.FC = () => {
   // Filtered Projects Computation
   const filteredProjects = useMemo(() => {
     return PORTFOLIO_PROJECTS.filter((p) => {
-      // Type match
-      if (activeType !== 'All' && p.type !== activeType) return false;
-
       // City match
       if (activeCity !== 'All' && p.city !== activeCity) return false;
 
@@ -80,13 +76,13 @@ export const LivspacePortfolio: React.FC = () => {
       // Search match
       if (searchQuery.trim() !== '') {
         const q = searchQuery.toLowerCase();
-        const haystack = `${p.title} ${p.society} ${p.location} ${p.style} ${p.scopeTags.join(' ')}`.toLowerCase();
+        const haystack = `${p.title} ${p.society} ${p.location} ${p.fullAddress} ${p.style} ${p.scopeTags.join(' ')}`.toLowerCase();
         if (!haystack.includes(q)) return false;
       }
 
       return true;
     });
-  }, [activeType, activeCity, activeBhk, activeScope, searchQuery]);
+  }, [activeCity, activeBhk, activeScope, searchQuery]);
 
   // Open Lightbox
   const handleOpenGallery = (project: PortfolioProject) => {
@@ -113,74 +109,74 @@ export const LivspacePortfolio: React.FC = () => {
           </nav>
 
           <div className="liv-port-hero-header">
-            <span className="liv-port-eyebrow">• REAL HOMES &amp; UPCOMING CONCEPTS</span>
+            <span className="liv-port-eyebrow">• 4 COMPLETED RESIDENCES</span>
             <h1 id="portfolio-main-title" className="liv-port-h1">
               Mitjen Interior Design Portfolio
             </h1>
             <p className="liv-port-subtitle">
-              Proposed and completed residential projects by Mitjen, featuring innovative modular designs,
-              latest global trends, and personalized aesthetics tailored to your lifestyle.
+              Explore our 4 verified client residential projects across Coimbatore and Bangalore:
+              Prithvi, Sampath, Mr. Mahesh – Pilot, and Deepak.
             </p>
           </div>
 
-          {/* Quick Category Pillars (Delivered vs Upcoming) */}
+          {/* Quick Regional Pillars (Coimbatore vs Bangalore) */}
           <div className="liv-port-pillars-grid">
-            {/* Pillar 1: Delivered Projects */}
+            {/* Pillar 1: Coimbatore Projects (3) */}
             <div
-              className={`liv-pillar-card ${activeType === 'Delivered' ? 'active' : ''}`}
+              className={`liv-pillar-card ${activeCity === 'Coimbatore' ? 'active' : ''}`}
               onClick={() => {
-                setActiveType('Delivered');
+                setActiveCity(activeCity === 'Coimbatore' ? 'All' : 'Coimbatore');
                 scrollToGrid();
               }}
               role="button"
               tabIndex={0}
-              aria-label="Explore Delivered Projects"
+              aria-label="Explore Coimbatore Projects"
             >
               <div>
                 <div className="liv-pillar-header">
-                  <h2 className="liv-pillar-title">Delivered Projects</h2>
+                  <h2 className="liv-pillar-title">Coimbatore Residences</h2>
                   <span className="liv-status-badge liv-status-completed">
                     <CheckCircle2 size={12} />
-                    COMPLETED
+                    3 DELIVERED
                   </span>
                 </div>
                 <p className="liv-pillar-desc">
-                  A collection of real, completed residential projects by Mitjen highlighting live craftsmanship,
-                  modular precision, and 45-day move-in quality.
+                  Completed luxury residences in Coimbatore: Prithvi (Neelambur · Royal Nesto),
+                  Sampath (Kalapatti · Nehru Nagar West.), and Deepak (Saibaba Colony).
                 </p>
               </div>
               <div className="liv-pillar-action">
-                <span>Explore Delivered Homes</span>
+                <span>View Coimbatore Homes (3)</span>
                 <ArrowRight size={14} />
               </div>
             </div>
 
-            {/* Pillar 2: Upcoming Properties */}
+            {/* Pillar 2: Bangalore Projects (1) */}
             <div
-              className={`liv-pillar-card ${activeType === 'Upcoming' ? 'active' : ''}`}
+              className={`liv-pillar-card ${activeCity === 'Bangalore' ? 'active' : ''}`}
               onClick={() => {
-                setActiveType('Upcoming');
+                setActiveCity(activeCity === 'Bangalore' ? 'All' : 'Bangalore');
                 scrollToGrid();
               }}
               role="button"
               tabIndex={0}
-              aria-label="Explore Upcoming Concept Homes"
+              aria-label="Explore Bangalore Projects"
             >
               <div>
                 <div className="liv-pillar-header">
-                  <h2 className="liv-pillar-title">Upcoming Properties</h2>
-                  <span className="liv-status-badge liv-status-upcoming">
-                    <Sparkles size={12} />
-                    UPCOMING
+                  <h2 className="liv-pillar-title">Bangalore Residence</h2>
+                  <span className="liv-status-badge liv-status-completed">
+                    <CheckCircle2 size={12} />
+                    1 DELIVERED VILLA
                   </span>
                 </div>
                 <p className="liv-pillar-desc">
-                  Proposed architectural extensions, sky lounges, and garden pavilion designs tailored for our clients
-                  in Coimbatore and Bengaluru.
+                  Grand 7,350 sq.ft luxury villa for Mr. Mahesh – Pilot located at Krishna Raja (KR) Puram,
+                  Bangalore with central courtyard flow and island kitchen.
                 </p>
               </div>
               <div className="liv-pillar-action">
-                <span>Explore Concept Homes</span>
+                <span>View Bangalore Villa (1)</span>
                 <ArrowRight size={14} />
               </div>
             </div>
@@ -396,7 +392,6 @@ export const LivspacePortfolio: React.FC = () => {
               <button
                 type="button"
                 onClick={() => {
-                  setActiveType('All');
                   setActiveCity('All');
                   setActiveBhk('All');
                   setActiveScope('All');
