@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import HowItWorksSection from "../components/HowItWorksSection";
 import MaterialsGallery from "../components/MaterialsGallery";
-import WaveBeamHero from "../components/WaveBeamHero/WaveBeamHero";
 
 const pageTitle = "About Us";
 
@@ -12,8 +11,31 @@ export default function About() {
 
   return (
     <main>
-      {/* 1. Interactive Architectural Wave Beam Hero Banner */}
-      <WaveBeamHero />
+      {/* 1. Page Header */}
+      <section
+        className={"cs_page_header_style_1 cs_bg_filed cs_gray_bg position-relative"}
+        data-src={"/assets/img/page-header-bg1.webp"}
+      >
+        <div className={"cs_overlay cs_primary_bg position-absolute"}></div>
+        <div className={"container"}>
+          <div className={"cs_page_header_content text-center"}>
+            <h1
+              className={"cs_page_header_title cs_fs_80 cs_bold cs_white_color cs_mb_16"}
+              style={{ color: "#ffffff" }}
+            >
+              ABOUT US
+            </h1>
+            <ol className={"breadcrumb cs_center mb-0"}>
+              <li className={"breadcrumb-item"}>
+                <a href={"/"} aria-label={"Back to home button"}>
+                  Home
+                </a>
+              </li>
+              <li className={"breadcrumb-item active"}>About Us</li>
+            </ol>
+          </div>
+        </div>
+      </section>
 
       {/* 2. Text Marquee Slider */}
       <div className={"cs_horizontal_slider cs_type_1 cs_accent_bg cs_primary_font"}>
@@ -50,7 +72,7 @@ export default function About() {
       </div>
 
       {/* 3. Studio Story / Mission & Vision */}
-      <section id="studio-story" className={"cs_about_style_7"}>
+      <section className={"cs_about_style_7"}>
         <div className={"cs_height_120 cs_height_lg_80"}></div>
         <div className={"container"}>
           <div className={"row cs_gap_y_40 align-items-center"}>
