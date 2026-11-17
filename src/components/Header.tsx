@@ -403,13 +403,13 @@ export const Header: React.FC = () => {
             </div>
           </div>
 
-          <Link
+          {/* <Link
             to="/portfolio"
             className={`nav-desktop-link ${location.pathname === '/portfolio' ? 'on' : ''}`}
             onClick={closeAllMenus}
           >
             Portfolio
-          </Link>
+          </Link> */}
           <Link
             to="/projects"
             className={`nav-desktop-link ${isProjectsActive ? 'on' : ''}`}

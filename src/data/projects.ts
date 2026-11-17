@@ -1,6 +1,3 @@
-// PLACEHOLDER: replace with real client testimonials, real numbers and real projects before launch
-// Brand: Mitjen Architecture Studio
-
 export interface ProjectItem {
   id: string;
   slug: string;
@@ -16,69 +13,47 @@ export interface ProjectItem {
 export const projectsData: ProjectItem[] = [
   {
     id: '01',
-    slug: '01-serene',
-    title: 'Serene Sanctuary Residence',
-    subtitle: 'Minimalist lakefront private estate',
+    slug: 'prithvi-royal-nesto',
+    title: 'Prithvi',
+    subtitle: 'Royal Nesto, Neelambur · 3BHK Apartment (3,520 sq.ft)',
     category: 'Residential',
-    location: 'Coimbatore, Tamil Nadu',
+    location: 'Neelambur, Coimbatore',
     year: '2025',
-    image: '/images/projects/01-serene.webp',
-    href: '/projects/details'
+    image: '/images/Residential/Residential1.jpeg',
+    href: '/projects'
   },
   {
     id: '02',
-    slug: '02-urban',
-    title: 'Urban Monolith Penthouse',
-    subtitle: 'High-altitude travertine residence',
+    slug: 'sampath-nehru-nagar',
+    title: 'Sampath',
+    subtitle: 'Nehru Nagar West. · 6BHK Villa (8,060 sq.ft)',
     category: 'Residential',
-    location: 'Bangalore, Karnataka',
+    location: 'Kalapatti, Coimbatore',
     year: '2025',
-    image: '/images/projects/02-urban.webp',
-    href: '/projects/details'
+    image: '/images/Residential/Residential7.jpeg',
+    href: '/projects'
   },
   {
     id: '03',
-    slug: '03-oak-loft',
-    title: 'Oak & Linen Duplex',
-    subtitle: 'Warm timber architectural conversion',
+    slug: 'mr-mahesh-pilot-kr-puram',
+    title: 'Mr. Mahesh – Pilot',
+    subtitle: 'Krishna Raja (KR) Puram · 6BHK Villa (7,350 sq.ft)',
     category: 'Residential',
-    location: 'Chennai, Tamil Nadu',
+    location: 'Bangalore, Karnataka',
     year: '2024',
-    image: '/images/projects/03-oak-loft.webp',
-    href: '/projects/details'
+    image: '/images/Residential/Residential2.jpeg',
+    href: '/projects'
   },
   {
     id: '04',
-    slug: '04-horizon-office',
-    title: 'Horizon Capital Headquarters',
-    subtitle: 'Executive collaborative office studio',
-    category: 'Commercial',
-    location: 'Hyderabad, Telangana',
-    year: '2024',
-    image: '/images/projects/04-horizon-office.webp',
-    href: '/projects/details'
-  },
-  {
-    id: '05',
-    slug: '05-clay-house',
-    title: 'Clay & Terracotta Villa',
-    subtitle: 'Earthy bioclimatic courtyard pavilion',
+    slug: 'deepak-saibaba-colony',
+    title: 'Deepak',
+    subtitle: 'Saibaba Colony · 4BHK Individual Home (6,020 sq.ft)',
     category: 'Residential',
-    location: 'Kochi, Kerala',
+    location: 'Saibaba Colony, Coimbatore',
     year: '2024',
-    image: '/images/projects/05-clay-house.webp',
-    href: '/projects/details'
-  },
-  {
-    id: '06',
-    slug: '06-atelier',
-    title: 'The Design Atelier & Gallery',
-    subtitle: 'Sculptural creative workspace',
-    category: 'Commercial',
-    location: 'Coimbatore, Tamil Nadu',
-    year: '2023',
-    image: '/images/projects/06-atelier.webp',
-    href: '/projects/details'
+    image: '/assets/images/projects/image4.jpg',
+    href: '/projects'
   }
 ];
 

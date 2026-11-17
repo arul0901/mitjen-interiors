@@ -433,7 +433,7 @@ export const LivspacePortfolio: React.FC = () => {
                 <p className="liv-mat-sub">{mat.subtitle}</p>
 
                 <div className="liv-mat-block">
-                  <span className="liv-mat-label">Supplied Materials:</span>
+                  <span className="liv-mat-label">Materials:</span>
                   <div className="liv-mat-chips">
                     {mat.materials.map((m, idx) => (
                       <span key={idx} className="liv-mat-chip">
@@ -444,9 +444,9 @@ export const LivspacePortfolio: React.FC = () => {
                 </div>
 
                 <div className="liv-mat-block">
-                  <span className="liv-mat-label">Verified Brands:</span>
+                  <span className="liv-mat-label">Brand / Finish:</span>
                   <div className="liv-mat-chips">
-                    {mat.brands.map((b, idx) => (
+                    {mat.brandFinishDetails.map((b, idx) => (
                       <span key={idx} className="liv-mat-chip brand">
                         {b}
                       </span>
