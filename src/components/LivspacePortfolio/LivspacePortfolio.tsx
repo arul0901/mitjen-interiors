@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useRef } from 'react';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
 import {
   Search,
   CheckCircle2,
@@ -12,6 +12,9 @@ import {
   SlidersHorizontal,
   PackageCheck,
   Image as ImageIcon,
+  ChevronLeft,
+  ChevronRight,
+  Grid,
 } from 'lucide-react';
 import { useInquiry } from '../../context/useInquiry';
 import {
@@ -35,6 +38,7 @@ export const LivspacePortfolio: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<PortfolioProject | null>(null);
   const [activeModalTab, setActiveModalTab] = useState<'materials' | 'gallery'>('materials');
   const [activeImageIndex, setActiveImageIndex] = useState<number>(0);
+  const [galleryViewMode, setGalleryViewMode] = useState<'stage' | 'grid'>('stage');
 
   // FAQ Accordion State (first item open by default)
   const [openFaqIndices, setOpenFaqIndices] = useState<number[]>([0]);
@@ -44,6 +48,28 @@ export const LivspacePortfolio: React.FC = () => {
       prev.includes(idx) ? prev.filter((i) => i !== idx) : [...prev, idx]
     );
   };
+
+  // Keyboard navigation for multi-image gallery
+  useEffect(() => {
+    if (!selectedProject || activeModalTab !== 'gallery') return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') {
+        setActiveImageIndex((prev) =>
+          prev === 0 ? selectedProject.galleryImages.length - 1 : prev - 1
+        );
+      } else if (e.key === 'ArrowRight') {
+        setActiveImageIndex((prev) =>
+          prev === selectedProject.galleryImages.length - 1 ? 0 : prev + 1
+        );
+      } else if (e.key === 'Escape') {
+        setSelectedProject(null);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedProject, activeModalTab]);
 
   // Primary filter options: All, Coimbatore, Bangalore, Villas
   const filterTabs = [
@@ -109,11 +135,25 @@ export const LivspacePortfolio: React.FC = () => {
     setActiveImageIndex(0);
   };
 
-  // Open Gallery tab inside modal
+  // Open Gallery directly
   const handleOpenGalleryTab = (project: PortfolioProject) => {
     setSelectedProject(project);
     setActiveModalTab('gallery');
     setActiveImageIndex(0);
+  };
+
+  const handlePrevImage = () => {
+    if (!selectedProject) return;
+    setActiveImageIndex((prev) =>
+      prev === 0 ? selectedProject.galleryImages.length - 1 : prev - 1
+    );
+  };
+
+  const handleNextImage = () => {
+    if (!selectedProject) return;
+    setActiveImageIndex((prev) =>
+      prev === selectedProject.galleryImages.length - 1 ? 0 : prev + 1
+    );
   };
 
   const handleCloseModal = () => {
@@ -258,8 +298,15 @@ export const LivspacePortfolio: React.FC = () => {
                   <div className="liv-card-media-overlay" />
 
                   {/* Top Badges */}
-                  <span className="liv-badge-photos">
-                    <Layers size={10} />
+                  <span
+                    className="liv-badge-photos"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleOpenGalleryTab(project);
+                    }}
+                    title="Click to view space photography"
+                  >
+                    <ImageIcon size={10} />
                     {project.galleryImages.length} Photos
                   </span>
 
@@ -482,8 +529,7 @@ export const LivspacePortfolio: React.FC = () => {
       </div>
 
       {/* ==================================================================
-          7. PROJECT SPECIFIC MATERIALS & GALLERY MODAL
-          Directly triggered by "View Materials".
+          7. ADVANCED PROJECT MATERIALS & MULTI-IMAGE GALLERY MODAL
           ================================================================== */}
       {selectedProject && (
         <div
@@ -523,7 +569,7 @@ export const LivspacePortfolio: React.FC = () => {
                 </div>
               </div>
 
-              {/* Modal View Switcher Tabs: "Materials Used" vs "Space Photography" */}
+              {/* Modal View Switcher Tabs: "Materials Used" vs "Photos ({count})" */}
               <div className="liv-modal-tabs-group" role="tablist">
                 <button
                   type="button"
@@ -548,7 +594,7 @@ export const LivspacePortfolio: React.FC = () => {
               </div>
             </div>
 
-            {/* TAB 1: PROJECT SPECIFIC MATERIALS USED (DEFAULT ACTIVE) */}
+            {/* TAB 1: PROJECT SPECIFIC MATERIALS USED */}
             {activeModalTab === 'materials' && (
               <div className="liv-modal-materials-body">
                 {/* Project Location & Identification Table */}
@@ -641,40 +687,145 @@ export const LivspacePortfolio: React.FC = () => {
               </div>
             )}
 
-            {/* TAB 2: ROOM PHOTOGRAPHY GALLERY */}
+            {/* TAB 2: ADVANCED MULTI-IMAGE PHOTOGRAPHY GALLERY */}
             {activeModalTab === 'gallery' && (
               <div className="liv-modal-gallery-body">
-                {/* Main Stage Media */}
-                <div className="liv-lightbox-main-media">
-                  <img
-                    src={selectedProject.galleryImages[activeImageIndex]?.url || selectedProject.coverImage}
-                    alt={selectedProject.galleryImages[activeImageIndex]?.caption || selectedProject.title}
-                    className="liv-lightbox-main-img"
-                  />
-                  <span className="liv-lightbox-room-pill">
-                    {selectedProject.galleryImages[activeImageIndex]?.room || 'Project Space'} (
-                    {activeImageIndex + 1} of {selectedProject.galleryImages.length})
-                  </span>
-                </div>
+                {galleryViewMode === 'stage' ? (
+                  /* --- STAGE WALKTHROUGH VIEW --- */
+                  <div className="liv-gallery-stage-view">
+                    {/* Stage Screen with Constrained Height, Floating Nav Chevrons & Room Pill */}
+                    <div className="liv-gallery-stage-media">
+                      <img
+                        src={selectedProject.galleryImages[activeImageIndex]?.url || selectedProject.coverImage}
+                        alt={selectedProject.galleryImages[activeImageIndex]?.caption || selectedProject.title}
+                        className="liv-gallery-stage-img"
+                      />
+                      <div className="liv-gallery-stage-scrim" />
 
-                {/* Thumbnails Row */}
-                <div className="liv-lightbox-thumbs-row">
-                  {selectedProject.galleryImages.map((img, idx) => (
-                    <button
-                      key={idx}
-                      type="button"
-                      onClick={() => setActiveImageIndex(idx)}
-                      className={`liv-lightbox-thumb-btn ${idx === activeImageIndex ? 'active' : ''}`}
-                      aria-label={`Thumbnail ${idx + 1}`}
-                    >
-                      <img src={img.url} alt={img.caption} />
-                    </button>
-                  ))}
-                </div>
+                      {/* Top Floating Badges */}
+                      <span className="liv-gallery-counter-badge">
+                        <ImageIcon size={11} />
+                        {activeImageIndex + 1} / {selectedProject.galleryImages.length}
+                      </span>
 
-                <div className="liv-modal-gallery-caption">
-                  <p>{selectedProject.galleryImages[activeImageIndex]?.caption || selectedProject.description}</p>
-                </div>
+                      <span className="liv-gallery-room-tag">
+                        {selectedProject.galleryImages[activeImageIndex]?.room || 'Interior Space'}
+                      </span>
+
+                      {/* Left & Right Circular Nav Chevrons */}
+                      {selectedProject.galleryImages.length > 1 && (
+                        <>
+                          <button
+                            type="button"
+                            onClick={handlePrevImage}
+                            className="liv-gallery-nav-btn prev"
+                            aria-label="Previous photograph"
+                            title="Previous (Left Arrow)"
+                          >
+                            <ChevronLeft size={20} />
+                          </button>
+                          <button
+                            type="button"
+                            onClick={handleNextImage}
+                            className="liv-gallery-nav-btn next"
+                            aria-label="Next photograph"
+                            title="Next (Right Arrow)"
+                          >
+                            <ChevronRight size={20} />
+                          </button>
+                        </>
+                      )}
+                    </div>
+
+                    {/* Room Title, Architectural Description & Grid Switcher Bar */}
+                    <div className="liv-gallery-caption-bar">
+                      <div className="liv-gallery-caption-text">
+                        <h4 className="liv-gallery-room-title">
+                          {selectedProject.galleryImages[activeImageIndex]?.room || 'Architectural Space'}
+                        </h4>
+                        <p className="liv-gallery-room-desc">
+                          {selectedProject.galleryImages[activeImageIndex]?.caption || selectedProject.description}
+                        </p>
+                      </div>
+
+                      <div className="liv-gallery-controls-right">
+                        <button
+                          type="button"
+                          onClick={() => setGalleryViewMode('grid')}
+                          className="liv-gallery-toggle-btn"
+                          title="View all spaces in grid layout"
+                        >
+                          <Grid size={13} />
+                          <span>View All Grid ({selectedProject.galleryImages.length})</span>
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Filmstrip / Thumbnail Dock (Always visible on screen) */}
+                    <div className="liv-gallery-filmstrip">
+                      {selectedProject.galleryImages.map((img, idx) => (
+                        <button
+                          key={idx}
+                          type="button"
+                          onClick={() => setActiveImageIndex(idx)}
+                          className={`liv-gallery-filmstrip-thumb ${idx === activeImageIndex ? 'active' : ''}`}
+                          aria-label={`View photo ${idx + 1}: ${img.room}`}
+                        >
+                          <img src={img.url} alt={img.caption} />
+                          <div className="liv-filmstrip-overlay">
+                            <span className="liv-filmstrip-room-label">{img.room}</span>
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  /* --- EDITORIAL MULTI-IMAGE GRID VIEW --- */
+                  <div className="liv-gallery-grid-view">
+                    <div className="liv-gallery-grid-toolbar">
+                      <span className="liv-gallery-grid-count">
+                        All {selectedProject.galleryImages.length} Verified Interior Spaces
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => setGalleryViewMode('stage')}
+                        className="liv-gallery-toggle-btn active"
+                      >
+                        <ImageIcon size={13} />
+                        <span>Cinematic Walkthrough</span>
+                      </button>
+                    </div>
+
+                    <div className="liv-gallery-photos-grid">
+                      {selectedProject.galleryImages.map((img, idx) => (
+                        <div
+                          key={idx}
+                          className="liv-gallery-photo-card"
+                          onClick={() => {
+                            setActiveImageIndex(idx);
+                            setGalleryViewMode('stage');
+                          }}
+                          role="button"
+                          tabIndex={0}
+                        >
+                          <div className="liv-photo-card-media">
+                            <img src={img.url} alt={img.caption} loading="lazy" />
+                            <span className="liv-photo-room-badge">{img.room}</span>
+                            <span className="liv-photo-index-badge">{idx + 1}</span>
+                            <div className="liv-photo-hover-pill">
+                              <Eye size={12} />
+                              <span>Inspect Space</span>
+                            </div>
+                          </div>
+                          <div className="liv-photo-card-caption">
+                            <h5 className="liv-photo-card-room">{img.room}</h5>
+                            <p className="liv-photo-card-desc">{img.caption}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             )}
           </div>
