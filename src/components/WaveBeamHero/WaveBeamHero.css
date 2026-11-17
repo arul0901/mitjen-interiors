@@ -1,0 +1,525 @@
+/* ==========================================================================
+   WAVE BEAM HERO BANNER — MITJEN ARCHITECTURAL ATELIER
+   Luxury kinetic wave beam lighting banner for the About page.
+   High-contrast obsidian canvas, golden champagne laser ribbons,
+   editorial typography, and responsive touch/mouse deflection.
+   ========================================================================== */
+
+.wave-beam-hero {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-color: #0E0F0D;
+  color: #FAF8F5;
+  padding: clamp(100px, 14vh, 140px) clamp(20px, 5vw, 64px) clamp(48px, 8vh, 80px);
+  box-sizing: border-box;
+  isolation: isolate;
+  user-select: none;
+}
+
+/* 1. Hardware Accelerated Wave Canvas */
+.wave-beam-hero__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  display: block;
+}
+
+/* 2. Atmosphere Overlays */
+.wave-beam-hero__vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 40%, rgba(14, 15, 13, 0) 30%, rgba(14, 15, 13, 0.72) 100%);
+}
+
+.wave-beam-hero__bottom-blend {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 140px;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgba(14, 15, 13, 0) 0%, #0E0F0D 100%);
+}
+
+/* 3. Hero Content Container */
+.wave-beam-hero__container {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* 4. Atelier Eyebrow Badge & Interactive Pill */
+.wave-beam-hero__badge-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: clamp(16px, 2.5vw, 24px);
+}
+
+.wave-beam-hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 18px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(197, 160, 89, 0.35);
+  border-radius: 999px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.wave-beam-hero__badge:hover {
+  border-color: rgba(197, 160, 89, 0.7);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.wave-beam-hero__beacon {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #C5A059;
+  box-shadow: 0 0 12px #E4B869, 0 0 20px #C5A059;
+  animation: waveBeaconPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes waveBeaconPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.85);
+  }
+}
+
+.wave-beam-hero__badge-text {
+  font-family: inherit;
+  font-size: clamp(11px, 1.2vw, 13px);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #E2B76D;
+}
+
+.wave-beam-hero__interactive-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.5);
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+}
+
+.wave-beam-hero__hint-icon {
+  color: #C5A059;
+  font-size: 10px;
+}
+
+/* 5. Master Editorial Headline */
+.wave-beam-hero__title {
+  margin: 0 0 clamp(16px, 2.8vw, 26px);
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(38px, 6vw, 76px);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: #FAF8F5;
+  text-wrap: balance;
+  max-width: 960px;
+}
+
+.wave-beam-hero__title-accent {
+  font-style: italic;
+  font-weight: 400;
+  background: linear-gradient(135deg, #FFF9EA 10%, #E8C172 50%, #C5A059 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  padding-right: 4px;
+}
+
+/* 6. Narrative Subtitle */
+.wave-beam-hero__subtitle {
+  margin: 0 auto clamp(24px, 3.2vw, 36px);
+  font-size: clamp(14px, 1.5vw, 17px);
+  font-weight: 300;
+  line-height: 1.7;
+  color: #CBC4B8;
+  max-width: 780px;
+  text-wrap: pretty;
+}
+
+/* 7. Architectural Pillars Chip Bar */
+.wave-beam-hero__pillars {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: clamp(28px, 4vw, 42px);
+  max-width: 880px;
+}
+
+.wave-beam-hero__pillar-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  font-size: clamp(11.5px, 1.1vw, 13px);
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  color: #E6E1D8;
+  backdrop-filter: blur(10px);
+  transition: all 0.25s ease;
+}
+
+.wave-beam-hero__pillar-chip:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(197, 160, 89, 0.4);
+  transform: translateY(-1px);
+}
+
+/* 8. Action CTAs */
+.wave-beam-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: clamp(36px, 5vw, 56px);
+}
+
+.wave-beam-hero__btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 28px;
+  background: #C5A059;
+  color: #0E0F0D;
+  font-size: clamp(12.5px, 1.2vw, 14px);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 999px;
+  border: 1px solid #D8B772;
+  box-shadow: 0 4px 24px rgba(197, 160, 89, 0.35);
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.wave-beam-hero__btn-primary:hover {
+  background: #D8B772;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(197, 160, 89, 0.5);
+  color: #0E0F0D;
+}
+
+.wave-beam-hero__btn-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(14, 15, 13, 0.12);
+  transition: transform 0.25s ease;
+}
+
+.wave-beam-hero__btn-primary:hover .wave-beam-hero__btn-arrow {
+  transform: translateX(3px);
+}
+
+.wave-beam-hero__btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 26px;
+  background: rgba(255, 255, 255, 0.04);
+  color: #FAF8F5;
+  font-size: clamp(12.5px, 1.2vw, 14px);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.25s ease;
+}
+
+.wave-beam-hero__btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 255, 255, 0.35);
+  transform: translateY(-2px);
+  color: #FFFFFF;
+}
+
+.wave-beam-hero__btn-arrow-down {
+  font-size: 14px;
+  transition: transform 0.25s ease;
+}
+
+.wave-beam-hero__btn-secondary:hover .wave-beam-hero__btn-arrow-down {
+  transform: translateY(3px);
+}
+
+/* 9. Atelier Metrics Strip */
+.wave-beam-hero__metrics-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(16px, 3.5vw, 48px);
+  padding: clamp(16px, 2.5vw, 24px) clamp(20px, 4vw, 40px);
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 16px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  width: 100%;
+  max-width: 980px;
+  box-sizing: border-box;
+}
+
+.wave-beam-hero__metric-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 4px;
+}
+
+.wave-beam-hero__metric-number {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(28px, 3.5vw, 38px);
+  font-weight: 600;
+  line-height: 1;
+  color: #FAF8F5;
+  background: linear-gradient(180deg, #FFFFFF 0%, #D8B772 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.wave-beam-hero__metric-label {
+  font-size: clamp(10.5px, 1vw, 12px);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #9E978C;
+}
+
+.wave-beam-hero__metric-divider {
+  width: 1px;
+  height: 38px;
+  background: rgba(255, 255, 255, 0.09);
+}
+
+/* 10. Clean Breadcrumb */
+.wave-beam-hero__breadcrumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 24px;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+}
+
+.wave-beam-hero__breadcrumb-link {
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.wave-beam-hero__breadcrumb-link:hover {
+  color: #C5A059;
+}
+
+.wave-beam-hero__breadcrumb-sep {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.wave-beam-hero__breadcrumb-current {
+  color: #E2B76D;
+  font-weight: 500;
+}
+
+/* 11. Floating Scroll Cue */
+.wave-beam-hero__scroll-cue {
+  position: absolute;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  opacity: 0.75;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.wave-beam-hero__scroll-cue:hover {
+  opacity: 1;
+  transform: translateX(-50%) translateY(2px);
+}
+
+.wave-beam-hero__scroll-mouse {
+  width: 18px;
+  height: 28px;
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  padding-top: 4px;
+}
+
+.wave-beam-hero__scroll-wheel {
+  width: 3px;
+  height: 6px;
+  border-radius: 2px;
+  background: #C5A059;
+  animation: scrollWheelPulse 2s ease-in-out infinite;
+}
+
+@keyframes scrollWheelPulse {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  60% {
+    transform: translateY(8px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.wave-beam-hero__scroll-text {
+  font-size: 9.5px;
+  letter-spacing: 0.2em;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* ==========================================================================
+   RESPONSIVE OPTIMIZATIONS
+   ========================================================================== */
+
+@media (max-width: 991px) {
+  .wave-beam-hero {
+    padding-top: clamp(90px, 12vh, 120px);
+    padding-bottom: 60px;
+    min-height: auto;
+  }
+
+  .wave-beam-hero__metrics-bar {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .wave-beam-hero__metric-divider {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .wave-beam-hero {
+    padding-top: 86px;
+    padding-bottom: 48px;
+  }
+
+  .wave-beam-hero__badge-wrapper {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .wave-beam-hero__title {
+    font-size: clamp(32px, 8.5vw, 44px);
+    line-height: 1.15;
+  }
+
+  .wave-beam-hero__subtitle {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+
+  .wave-beam-hero__pillars {
+    gap: 6px;
+    margin-bottom: 24px;
+  }
+
+  .wave-beam-hero__pillar-chip {
+    padding: 6px 12px;
+    font-size: 11px;
+  }
+
+  .wave-beam-hero__actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .wave-beam-hero__btn-primary,
+  .wave-beam-hero__btn-secondary {
+    width: 100%;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+
+  .wave-beam-hero__metrics-bar {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px 12px;
+    padding: 16px 12px;
+  }
+
+  .wave-beam-hero__metric-number {
+    font-size: 26px;
+  }
+
+  .wave-beam-hero__metric-label {
+    font-size: 9.5px;
+  }
+
+  .wave-beam-hero__scroll-cue {
+    display: none;
+  }
+}
