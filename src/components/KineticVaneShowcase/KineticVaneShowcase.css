@@ -1,0 +1,559 @@
+/* ==========================================================================
+   ADVANCED KINETIC ROTATING VANE SHOWCASE
+   Awwwards-Level Architectural Interactive Louvre Mechanism & Editorial Typography
+   ========================================================================== */
+
+.kinetic-showcase-section {
+  position: relative;
+  width: 100%;
+  background-color: #0B0A09;
+  overflow: hidden;
+}
+
+.kinetic-viewport {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+  background-color: #0B0A09;
+}
+
+/* ==========================================================================
+   1. CINEMATIC VERMILION-RED TRANSITION ENVIRONMENT (STAGE 1 & 2)
+   ========================================================================== */
+
+.kinetic-red-stage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 50%, #E8341A 0%, #C9240C 50%, #8A1402 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  overflow: hidden;
+}
+
+/* Architectural Grid & Technical Coordinate Markings */
+.kinetic-red-grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 80px 80px;
+  pointer-events: none;
+}
+
+.kinetic-red-crosshair {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  pointer-events: none;
+}
+
+.kinetic-red-crosshair::before,
+.kinetic-red-crosshair::after {
+  content: '';
+  position: absolute;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.kinetic-red-crosshair::before {
+  top: 5px;
+  left: 0;
+  width: 12px;
+  height: 1px;
+}
+
+.kinetic-red-crosshair::after {
+  top: 0;
+  left: 5px;
+  width: 1px;
+  height: 12px;
+}
+
+.kinetic-red-crosshair.tl { top: 32px; left: 32px; }
+.kinetic-red-crosshair.tr { top: 32px; right: 32px; }
+.kinetic-red-crosshair.bl { bottom: 32px; left: 32px; }
+.kinetic-red-crosshair.br { bottom: 32px; right: 32px; }
+
+/* Micro Technical Metadata in Red Scene */
+.kinetic-red-meta-tag {
+  position: absolute;
+  font-family: var(--font-body, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.kinetic-red-meta-tag.top-left {
+  top: 28px;
+  left: 48px;
+}
+
+.kinetic-red-meta-tag.top-right {
+  top: 28px;
+  right: 48px;
+}
+
+.kinetic-red-meta-tag.bottom-left {
+  bottom: 28px;
+  left: 48px;
+}
+
+.kinetic-red-meta-tag.bottom-right {
+  bottom: 28px;
+  right: 48px;
+}
+
+/* ==========================================================================
+   2. OVERSIZED EDITORIAL TYPOGRAPHY IN RED ENVIRONMENT
+   ========================================================================== */
+
+.kinetic-typo-container {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: 90vw;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.kinetic-typo-eyebrow {
+  display: inline-block;
+  font-size: clamp(0.7rem, 1.2vw, 0.9rem);
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: clamp(12px, 2vw, 24px);
+  overflow: hidden;
+}
+
+.kinetic-typo-line {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  font-family: var(--font-heading, 'Cormorant Garamond', 'Cinzel', serif);
+  font-size: clamp(4rem, 12vw, 13rem);
+  font-weight: 700;
+  line-height: 0.85;
+  letter-spacing: -0.025em;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  text-shadow: 0 4px 40px rgba(0, 0, 0, 0.45);
+  user-select: none;
+}
+
+.kinetic-typo-line .char {
+  display: inline-block;
+  transform: translateY(120%);
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.kinetic-typo-sub {
+  margin-top: clamp(16px, 2.5vw, 28px);
+  font-size: clamp(0.72rem, 1.1vw, 0.88rem);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.8);
+  overflow: hidden;
+}
+
+/* ==========================================================================
+   3. KINETIC ROTATING VANE MECHANISM (ARCHITECTURAL SHUTTER PANELS)
+   ========================================================================== */
+
+.kinetic-vanes-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  perspective: 1200px;
+  perspective-origin: 50% 50%;
+  pointer-events: none;
+}
+
+.kinetic-vane-unit {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.kinetic-vane-blade {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+/* Front & Back Faces of the Vane */
+.vane-face {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.vane-face.front {
+  transform: rotateY(0deg);
+}
+
+.vane-face.back {
+  transform: rotateY(180deg) scaleX(-1);
+}
+
+/* Inner Slice Image: Spans the full viewport width and is offset */
+.vane-slice-img {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100vw;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  will-change: transform;
+}
+
+/* Lighting and Depth Shadows on the Rotating Vane */
+.vane-lighting-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(0, 0, 0, 0) 35%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.1s ease;
+  z-index: 2;
+}
+
+/* Subtle Architectural Bevel Edge */
+.vane-edge-bevel {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+  z-index: 3;
+}
+
+/* ==========================================================================
+   4. FLOATING EDITORIAL METADATA & CONTROL BAR
+   ========================================================================== */
+
+.kinetic-meta-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(24px, 4vw, 44px);
+  box-sizing: border-box;
+}
+
+/* Top Meta Row */
+.kinetic-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  pointer-events: auto;
+}
+
+.kinetic-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(18, 16, 14, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  padding: 8px 16px;
+  border-radius: 999px;
+  color: #FFFFFF;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.kinetic-badge-num {
+  color: #C5A059;
+  font-weight: 800;
+}
+
+.kinetic-badge-dot {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.kinetic-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(18, 16, 14, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(197, 160, 89, 0.3);
+  padding: 8px 16px;
+  border-radius: 999px;
+  color: #C5A059;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Bottom Editorial Area */
+.kinetic-bottom-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  width: 100%;
+  gap: 24px;
+}
+
+.kinetic-project-details {
+  max-width: 540px;
+  pointer-events: auto;
+}
+
+.kinetic-project-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #C5A059;
+  margin-bottom: 8px;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8);
+}
+
+.kinetic-project-title {
+  font-family: var(--font-heading, 'Cormorant Garamond', 'Cinzel', serif) !important;
+  font-size: clamp(2.4rem, 4.2vw, 4rem) !important;
+  font-weight: 600 !important;
+  line-height: 1.08 !important;
+  color: #FFFFFF !important;
+  margin: 0 0 10px 0 !important;
+  letter-spacing: -0.015em;
+  text-shadow: 0 4px 28px rgba(0, 0, 0, 0.9), 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.kinetic-project-location {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 12px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+.kinetic-project-location svg {
+  color: #C5A059;
+}
+
+.kinetic-project-desc {
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.75);
+  margin: 0;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.85);
+  max-width: 480px;
+}
+
+/* Right Scope & Specs Box */
+.kinetic-specs-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  max-width: 360px;
+  pointer-events: auto;
+}
+
+.kinetic-specs-tag {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #C5A059;
+  margin-bottom: 4px;
+}
+
+.kinetic-specs-val {
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: #FFFFFF;
+  line-height: 1.4;
+  margin-bottom: 12px;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8);
+}
+
+/* Interactive Navigation Indicators */
+.kinetic-nav-strip {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(18, 16, 14, 0.75);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 6px 14px;
+  border-radius: 999px;
+  pointer-events: auto;
+}
+
+.kinetic-nav-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 6px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.kinetic-nav-btn:hover {
+  color: #FFFFFF;
+}
+
+.kinetic-nav-btn.active {
+  background: #C5A059;
+  color: #0B0A09;
+}
+
+/* Scroll Hint Indicator */
+.kinetic-scroll-hint {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  pointer-events: none;
+}
+
+.kinetic-scroll-line {
+  width: 28px;
+  height: 1px;
+  background: #C5A059;
+  animation: kineticPulse 2s infinite ease-in-out;
+}
+
+@keyframes kineticPulse {
+  0%, 100% { opacity: 0.3; transform: scaleX(0.7); }
+  50% { opacity: 1; transform: scaleX(1); }
+}
+
+/* ==========================================================================
+   5. RESPONSIVE OPTIMIZATIONS
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+  .kinetic-meta-layer {
+    padding: 24px;
+  }
+
+  .kinetic-bottom-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .kinetic-specs-box {
+    align-items: flex-start;
+    text-align: left;
+  }
+}
+
+@media (max-width: 768px) {
+  .kinetic-meta-layer {
+    padding: 16px;
+  }
+
+  .kinetic-badge-pill {
+    padding: 6px 12px;
+    font-size: 0.65rem;
+  }
+
+  .kinetic-status-pill {
+    padding: 6px 12px;
+    font-size: 0.65rem;
+  }
+
+  .kinetic-project-title {
+    font-size: 2rem !important;
+  }
+
+  .kinetic-project-desc {
+    font-size: 0.78rem;
+    line-height: 1.45;
+  }
+
+  .kinetic-typo-line {
+    font-size: clamp(2.6rem, 11vw, 4.8rem);
+  }
+
+  .kinetic-red-meta-tag {
+    display: none;
+  }
+}
+
+/* Accessibility: Prefers Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .kinetic-vane-blade {
+    transition: none !important;
+  }
+  .kinetic-typo-line .char {
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}

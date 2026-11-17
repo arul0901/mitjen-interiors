@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
+import KineticVaneShowcase from "../components/KineticVaneShowcase/KineticVaneShowcase";
 import LivspacePortfolio from "../components/LivspacePortfolio/LivspacePortfolio";
 
 export default function Projects() {
@@ -81,7 +82,10 @@ export default function Projects() {
         </div>
       </div>
 
-      {/* 3. Authentic Projects Showcase & Materials */}
+      {/* 3. Advanced Kinetic Rotating Vane Showcase — Cinematic Architectural Transitions */}
+      <KineticVaneShowcase />
+
+      {/* 4. Authentic Client Residences Portfolio, Materials & Specifications */}
       <LivspacePortfolio />
     </main>
   );
