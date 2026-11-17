@@ -64,6 +64,16 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
         room: 'Modular Kitchen',
         caption: 'High-gloss acrylic modular kitchen with quartz countertop and concealed handle profiles.',
       },
+      {
+        url: '/assets/images/projects/image15.jpg',
+        room: 'Walk-in Dressing Suite',
+        caption: 'Tailored wardrobe cabinetry with integrated LED lighting and acoustic backing.',
+      },
+      {
+        url: '/assets/images/projects/image18.jpg',
+        room: 'Foyer & Private Lounge',
+        caption: 'Architectural entrance gallery with bespoke console joinery.',
+      },
     ],
     description:
       'Articulated for Prithvi at Royal Nesto, Neelambur, Coimbatore. Features an expansive open-format living salon, custom fluted millwork, multi-layer Italian PU coatings, and bespoke ceiling planes with ambient magnetic track lighting.',
@@ -119,6 +129,16 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
         url: '/assets/images/projects/image14.jpg',
         room: 'Dining & Family Lounge',
         caption: 'Open family dining salon connected directly to the outdoor landscaped courtyard.',
+      },
+      {
+        url: '/assets/images/projects/image7.jpg',
+        room: 'Villa Terrace Pavilion',
+        caption: 'Upper-level open entertainment pavilion overlooking manicured courtyard greenery.',
+      },
+      {
+        url: '/assets/images/projects/image9.jpg',
+        room: 'Gourmet Bar & Pantry',
+        caption: 'Bespoke bar cabinet with tinted fluted glass and ambient backlighting.',
       },
     ],
     description:
@@ -176,6 +196,16 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
         room: 'Upper Guest Suite',
         caption: 'Minimalist upper-level bedroom suite with tailored wardrobe joinery and soft neutral palette.',
       },
+      {
+        url: '/assets/images/projects/image17.jpg',
+        room: 'Sky Lounge & Gallery',
+        caption: 'Top-tier entertainment lounge with acoustic ceiling design.',
+      },
+      {
+        url: '/assets/images/projects/image19.jpg',
+        room: 'Private Bath Sanctuary',
+        caption: 'Calacatta marble slab washroom with bespoke vanity millwork.',
+      },
     ],
     description:
       'Articulated for Mr. Mahesh – Pilot at Krishna Raja (KR) Puram, Bangalore. A 7,350 sq.ft luxury villa defined by central courtyard spatial flow, hand-finished Italian PU coatings, custom architectural joinery, and Calacatta marble slab washroom vanities.',
@@ -231,6 +261,16 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
         url: '/assets/images/projects/image2.jpg',
         room: 'Master Suite & Dressing Hall',
         caption: 'Full-height custom wardrobes with fabric-finish panel inserts and warm sensor LED lights.',
+      },
+      {
+        url: '/assets/images/projects/image3.jpg',
+        room: 'Architectural Foyer',
+        caption: 'Entrance foyer with custom fluted timber backdrop and soft warm cove illumination.',
+      },
+      {
+        url: '/assets/images/projects/image16.jpg',
+        room: "Chef's Island Kitchen",
+        caption: 'High-performance modular kitchen with seamless quartz island and soft-close cabinetry.',
       },
     ],
     description:

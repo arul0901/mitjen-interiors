@@ -83,27 +83,29 @@ export const LivspacePortfolio: React.FC = () => {
     };
   }, [selectedProject]);
 
-  // Keyboard navigation for multi-image gallery
+  // Global ESC key listener & keyboard navigation to exit or navigate modal
   useEffect(() => {
-    if (!selectedProject || activeModalTab !== 'gallery') return;
+    if (!selectedProject) return;
 
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowLeft') {
-        setActiveImageIndex((prev) =>
-          prev === 0 ? selectedProject.galleryImages.length - 1 : prev - 1
-        );
-      } else if (e.key === 'ArrowRight') {
-        setActiveImageIndex((prev) =>
-          prev === selectedProject.galleryImages.length - 1 ? 0 : prev + 1
-        );
-      } else if (e.key === 'Escape') {
+      if (e.key === 'Escape') {
         setSelectedProject(null);
+      } else if (activeModalTab === 'gallery' && galleryViewMode === 'stage') {
+        if (e.key === 'ArrowLeft') {
+          setActiveImageIndex((prev) =>
+            prev === 0 ? selectedProject.galleryImages.length - 1 : prev - 1
+          );
+        } else if (e.key === 'ArrowRight') {
+          setActiveImageIndex((prev) =>
+            prev === selectedProject.galleryImages.length - 1 ? 0 : prev + 1
+          );
+        }
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [selectedProject, activeModalTab]);
+  }, [selectedProject, activeModalTab, galleryViewMode]);
 
   // Primary filter options: All, Coimbatore, Bangalore, Villas
   const filterTabs = [
@@ -594,16 +596,16 @@ export const LivspacePortfolio: React.FC = () => {
               <X size={16} />
             </button>
 
-            {/* Modal Header Bar with Project Metadata */}
+            {/* Modal Header Bar with Project Metadata & Direct Close Action */}
             <div className="liv-modal-header-deck">
               <div className="liv-modal-header-left">
                 <span className="liv-modal-eyebrow">
-                  <PackageCheck size={12} />
+                  <PackageCheck size={11} />
                   PROJECT SPECIFIC ATELIER SPECIFICATION
                 </span>
                 <h3 className="liv-modal-title">{selectedProject.title}</h3>
                 <div className="liv-modal-address-line">
-                  <MapPin size={12} />
+                  <MapPin size={11} />
                   <span>
                     {selectedProject.society} · {selectedProject.location}, {selectedProject.city}
                   </span>
@@ -612,30 +614,43 @@ export const LivspacePortfolio: React.FC = () => {
                 </div>
               </div>
 
-              {/* Modal View Switcher Tabs: "Materials Used" vs "Photos ({count})" */}
-              <div className="liv-modal-tabs-group" role="tablist">
+              {/* Modal Right Actions: Tabs + Obvious Close Button */}
+              <div className="liv-modal-header-actions">
+                <div className="liv-modal-tabs-group" role="tablist">
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-selected={activeModalTab === 'materials'}
+                    onClick={() => setActiveModalTab('materials')}
+                    className={`liv-modal-tab-btn ${activeModalTab === 'materials' ? 'active' : ''}`}
+                  >
+                    <Layers size={12} />
+                    <span>Materials</span>
+                  </button>
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-selected={activeModalTab === 'gallery'}
+                    onClick={() => {
+                      setActiveModalTab('gallery');
+                      setGalleryViewMode('grid');
+                    }}
+                    className={`liv-modal-tab-btn ${activeModalTab === 'gallery' ? 'active' : ''}`}
+                  >
+                    <Grid size={12} />
+                    <span>Photos Grid ({selectedProject.galleryImages.length})</span>
+                  </button>
+                </div>
+
                 <button
                   type="button"
-                  role="tab"
-                  aria-selected={activeModalTab === 'materials'}
-                  onClick={() => setActiveModalTab('materials')}
-                  className={`liv-modal-tab-btn ${activeModalTab === 'materials' ? 'active' : ''}`}
+                  onClick={handleCloseModal}
+                  className="liv-header-close-btn"
+                  title="Close (ESC)"
+                  aria-label="Close Project Modal"
                 >
-                  <Layers size={13} />
-                  <span>Materials Used</span>
-                </button>
-                <button
-                  type="button"
-                  role="tab"
-                  aria-selected={activeModalTab === 'gallery'}
-                  onClick={() => {
-                    setActiveModalTab('gallery');
-                    setGalleryViewMode('grid');
-                  }}
-                  className={`liv-modal-tab-btn ${activeModalTab === 'gallery' ? 'active' : ''}`}
-                >
-                  <Grid size={13} />
-                  <span>Photos Grid ({selectedProject.galleryImages.length})</span>
+                  <X size={15} />
+                  <span>Close</span>
                 </button>
               </div>
             </div>
@@ -836,56 +851,71 @@ export const LivspacePortfolio: React.FC = () => {
                     </div>
                   </div>
                 ) : (
-                  /* --- EDITORIAL MULTI-IMAGE GRID VIEW (DEFAULT) --- */
+                  /* --- REFERENCE MOSAIC COLLAGE GRID (NO CONTENT BELOW IMAGES) --- */
                   <div className="liv-gallery-grid-view">
                     <div className="liv-gallery-grid-toolbar">
                       <div className="liv-grid-toolbar-left">
                         <span className="liv-gallery-grid-count">
                           {selectedProject.galleryImages.length} Verified Interior Spaces
                         </span>
-                        <span className="liv-grid-toolbar-sub">Click any space to inspect in full walkthrough</span>
                       </div>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setActiveImageIndex(0);
-                          setGalleryViewMode('stage');
-                        }}
-                        className="liv-gallery-toggle-btn"
-                        title="Start cinematic walkthrough"
-                      >
-                        <ImageIcon size={13} />
-                        <span>Cinematic Walkthrough</span>
-                      </button>
+                      <div className="liv-grid-toolbar-right">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setActiveImageIndex(0);
+                            setGalleryViewMode('stage');
+                          }}
+                          className="liv-gallery-toggle-btn"
+                          title="Start cinematic walkthrough"
+                        >
+                          <ImageIcon size={12} />
+                          <span>Walkthrough</span>
+                        </button>
+                      </div>
                     </div>
 
-                    <div className="liv-gallery-photos-grid">
+                    {/* Exact Asymmetric Collage Mosaic Grid — Zero Text Under Images */}
+                    <div className="liv-gallery-mosaic-grid">
                       {selectedProject.galleryImages.map((img, idx) => (
                         <div
                           key={idx}
-                          className="liv-gallery-photo-card"
+                          className={`liv-mosaic-item liv-mosaic-item-${idx + 1}`}
                           onClick={() => {
                             setActiveImageIndex(idx);
                             setGalleryViewMode('stage');
                           }}
                           role="button"
                           tabIndex={0}
+                          title={`${img.room} — Click to inspect`}
                         >
-                          <div className="liv-photo-card-media">
-                            <img src={img.url} alt={img.caption} loading="lazy" />
-                            <span className="liv-photo-room-badge">{img.room}</span>
-                            <span className="liv-photo-index-badge">{idx + 1} / {selectedProject.galleryImages.length}</span>
-                            <div className="liv-photo-hover-pill">
-                              <Eye size={12} />
-                              <span>Inspect Space</span>
-                            </div>
-                          </div>
-                          <div className="liv-photo-card-caption">
-                            <h5 className="liv-photo-card-room">{img.room}</h5>
-                            <p className="liv-photo-card-desc">{img.caption}</p>
+                          <img
+                            src={img.url}
+                            alt={img.room}
+                            className="liv-mosaic-img"
+                            loading="lazy"
+                          />
+                          <div className="liv-mosaic-overlay">
+                            <span className="liv-mosaic-room-pill">{img.room}</span>
+                            <span className="liv-mosaic-inspect-icon">
+                              <Eye size={13} />
+                            </span>
                           </div>
                         </div>
                       ))}
+                    </div>
+
+                    {/* Compact Exit Bar */}
+                    <div className="liv-gallery-bottom-bar">
+                      <span className="liv-gallery-esc-hint">Tip: Press ESC or click outside anywhere to close</span>
+                      <button
+                        type="button"
+                        onClick={handleCloseModal}
+                        className="liv-gallery-close-pill"
+                      >
+                        <X size={12} />
+                        <span>Close Screen</span>
+                      </button>
                     </div>
                   </div>
                 )}
