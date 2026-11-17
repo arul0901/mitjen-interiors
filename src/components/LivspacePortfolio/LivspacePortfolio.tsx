@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import {
   Search,
   CheckCircle2,
@@ -568,92 +569,83 @@ export const LivspacePortfolio: React.FC = () => {
 
       {/* ==================================================================
           7. ADVANCED PROJECT MATERIALS & MULTI-IMAGE GALLERY MODAL
+          Rendered via React Portal directly into document.body to ensure
+          it sits ABOVE all page headers, navbars & stacking contexts.
           ================================================================== */}
-      {selectedProject && (
-        <div
-          className="liv-lightbox-backdrop"
-          onClick={handleCloseModal}
-          onWheel={(e) => e.stopPropagation()}
-          onTouchMove={(e) => {
-            if (e.target === e.currentTarget) {
-              e.preventDefault();
-            }
-          }}
-          role="dialog"
-          aria-modal="true"
-        >
+      {selectedProject &&
+        createPortal(
           <div
-            className="liv-lightbox-dialog"
-            onClick={(e) => e.stopPropagation()}
+            className="liv-lightbox-backdrop"
+            onClick={handleCloseModal}
             onWheel={(e) => e.stopPropagation()}
+            onTouchMove={(e) => {
+              if (e.target === e.currentTarget) {
+                e.preventDefault();
+              }
+            }}
+            role="dialog"
+            aria-modal="true"
           >
-            <button
-              type="button"
-              onClick={handleCloseModal}
-              className="liv-lightbox-close-btn"
-              aria-label="Close Project Modal"
+            <div
+              className="liv-lightbox-dialog"
+              onClick={(e) => e.stopPropagation()}
+              onWheel={(e) => e.stopPropagation()}
             >
-              <X size={16} />
-            </button>
-
-            {/* Modal Header Bar with Project Metadata & Direct Close Action */}
-            <div className="liv-modal-header-deck">
-              <div className="liv-modal-header-left">
-                <span className="liv-modal-eyebrow">
-                  <PackageCheck size={11} />
-                  PROJECT SPECIFIC ATELIER SPECIFICATION
-                </span>
-                <h3 className="liv-modal-title">{selectedProject.title}</h3>
-                <div className="liv-modal-address-line">
-                  <MapPin size={11} />
-                  <span>
-                    {selectedProject.society} · {selectedProject.location}, {selectedProject.city}
-                  </span>
-                  <span className="liv-modal-dot">•</span>
-                  <span>{selectedProject.bhk} ({selectedProject.carpetArea})</span>
-                </div>
-              </div>
-
-              {/* Modal Right Actions: Tabs + Obvious Close Button */}
-              <div className="liv-modal-header-actions">
-                <div className="liv-modal-tabs-group" role="tablist">
-                  <button
-                    type="button"
-                    role="tab"
-                    aria-selected={activeModalTab === 'materials'}
-                    onClick={() => setActiveModalTab('materials')}
-                    className={`liv-modal-tab-btn ${activeModalTab === 'materials' ? 'active' : ''}`}
-                  >
-                    <Layers size={12} />
-                    <span>Materials</span>
-                  </button>
-                  <button
-                    type="button"
-                    role="tab"
-                    aria-selected={activeModalTab === 'gallery'}
-                    onClick={() => {
-                      setActiveModalTab('gallery');
-                      setGalleryViewMode('grid');
-                    }}
-                    className={`liv-modal-tab-btn ${activeModalTab === 'gallery' ? 'active' : ''}`}
-                  >
-                    <Grid size={12} />
-                    <span>Photos Grid ({selectedProject.galleryImages.length})</span>
-                  </button>
+              {/* Modal Header Bar - Ultra-Compact */}
+              <div className="liv-modal-header-deck">
+                <div className="liv-modal-header-left">
+                  <div className="liv-modal-title-row">
+                    <h3 className="liv-modal-title">{selectedProject.title}</h3>
+                    <span className="liv-modal-bhk-tag">{selectedProject.bhk}</span>
+                  </div>
+                  <div className="liv-modal-address-line">
+                    <MapPin size={10} />
+                    <span>
+                      {selectedProject.society} · {selectedProject.location}, {selectedProject.city}
+                    </span>
+                  </div>
                 </div>
 
-                <button
-                  type="button"
-                  onClick={handleCloseModal}
-                  className="liv-header-close-btn"
-                  title="Close (ESC)"
-                  aria-label="Close Project Modal"
-                >
-                  <X size={15} />
-                  <span>Close</span>
-                </button>
+                {/* Modal Right Actions: Tabs + Obvious Close Button */}
+                <div className="liv-modal-header-actions">
+                  <div className="liv-modal-tabs-group" role="tablist">
+                    <button
+                      type="button"
+                      role="tab"
+                      aria-selected={activeModalTab === 'materials'}
+                      onClick={() => setActiveModalTab('materials')}
+                      className={`liv-modal-tab-btn ${activeModalTab === 'materials' ? 'active' : ''}`}
+                    >
+                      <Layers size={11} />
+                      <span>Materials</span>
+                    </button>
+                    <button
+                      type="button"
+                      role="tab"
+                      aria-selected={activeModalTab === 'gallery'}
+                      onClick={() => {
+                        setActiveModalTab('gallery');
+                        setGalleryViewMode('grid');
+                      }}
+                      className={`liv-modal-tab-btn ${activeModalTab === 'gallery' ? 'active' : ''}`}
+                    >
+                      <Grid size={11} />
+                      <span>Photos ({selectedProject.galleryImages.length})</span>
+                    </button>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={handleCloseModal}
+                    className="liv-header-close-btn"
+                    title="Close (ESC)"
+                    aria-label="Close Project Modal"
+                  >
+                    <X size={13} />
+                    <span>Close</span>
+                  </button>
+                </div>
               </div>
-            </div>
 
             {/* TAB 1: PROJECT SPECIFIC MATERIALS USED */}
             {activeModalTab === 'materials' && (
@@ -921,9 +913,10 @@ export const LivspacePortfolio: React.FC = () => {
                 )}
               </div>
             )}
-          </div>
-        </div>
-      )}
+            </div>
+          </div>,
+          document.body
+        )}
     </div>
   );
 };

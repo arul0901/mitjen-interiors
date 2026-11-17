@@ -909,14 +909,14 @@
 .liv-lightbox-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(14, 12, 10, 0.88);
+  background: rgba(10, 9, 8, 0.9);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  z-index: 2000;
+  z-index: 999999;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: clamp(20px, 4vw, 44px);
+  padding: clamp(16px, 3vw, 36px);
   box-sizing: border-box;
   overscroll-behavior: contain;
   touch-action: pan-y;
@@ -925,14 +925,14 @@
 
 .liv-lightbox-dialog {
   background: #FFFFFF;
-  border-radius: 16px;
-  max-width: 880px;
+  border-radius: 14px;
+  max-width: 760px;
   width: 100%;
-  max-height: 88vh;
+  max-height: 85vh;
   overflow-y: auto;
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
   position: relative;
   display: flex;
   flex-direction: column;
@@ -941,12 +941,12 @@
 
 .liv-lightbox-close-btn {
   position: absolute;
-  top: 14px;
-  right: 14px;
+  top: 10px;
+  right: 10px;
   background: rgba(28, 26, 24, 0.8);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   color: #FFFFFF;
   display: flex;
@@ -963,50 +963,54 @@
   transform: scale(1.08);
 }
 
-/* Modal Header Bar */
+/* Modal Header Bar - Ultra Compact */
 .liv-modal-header-deck {
-  padding: 14px 22px;
+  padding: 8px 14px;
   background: #FFFFFF;
   border-bottom: 1px solid var(--liv-border);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   flex-wrap: wrap;
 }
 
 .liv-modal-header-left {
-  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
 }
 
-.liv-modal-eyebrow {
-  display: inline-flex;
+.liv-modal-title-row {
+  display: flex;
   align-items: center;
-  gap: 5px;
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--liv-gold);
-  margin-bottom: 4px;
+  gap: 6px;
 }
 
 .liv-modal-title {
   font-family: var(--font-heading, 'Cormorant Garamond', serif);
-  font-size: clamp(1.6rem, 2.4vw, 2rem);
+  font-size: 1.25rem;
   font-weight: 600;
   color: var(--liv-ink);
-  margin: 0 0 4px 0;
+  margin: 0;
   line-height: 1.15;
+}
+
+.liv-modal-bhk-tag {
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: var(--liv-gold-bright);
+  background: rgba(184, 142, 75, 0.12);
+  padding: 1px 5px;
+  border-radius: 4px;
 }
 
 .liv-modal-address-line {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 0.78rem;
+  gap: 4px;
+  font-size: 0.68rem;
   color: var(--liv-taupe);
-  flex-wrap: wrap;
 }
 
 .liv-modal-dot {
@@ -1543,48 +1547,48 @@
   text-align: center;
 }
 
-/* --- REFERENCE MOSAIC COLLAGE GRID (COMPACT & ZERO TEXT BELOW) --- */
+/* --- REFERENCE MOSAIC COLLAGE GRID (ULTRA COMPACT & ZERO TEXT BELOW) --- */
 .liv-gallery-grid-view {
-  padding: 14px 20px 18px 20px;
+  padding: 8px 12px 10px 12px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
 }
 
 .liv-gallery-grid-toolbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 8px;
+  padding-bottom: 5px;
   border-bottom: 1px solid var(--liv-border);
-  gap: 12px;
+  gap: 8px;
 }
 
 .liv-gallery-grid-count {
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   color: var(--liv-taupe);
 }
 
 /* Exact Asymmetric Mosaic Collage matching user reference (6 items) */
 .liv-gallery-mosaic-grid {
   display: grid;
-  grid-template-columns: 1fr 1.7fr 1fr;
-  grid-template-rows: 180px 92px 92px;
-  gap: 12px;
+  grid-template-columns: 1fr 1.6fr 1fr;
+  grid-template-rows: 130px 65px 65px;
+  gap: 8px;
   width: 100%;
 }
 
 .liv-mosaic-item {
   position: relative;
-  border-radius: 14px;
+  border-radius: 10px;
   overflow: hidden;
   background-color: #ECE7DF;
   cursor: pointer;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
 }
 
 .liv-mosaic-item:hover {
@@ -1691,13 +1695,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 4px 4px 4px;
+  padding: 6px 2px 2px 2px;
   border-top: 1px dashed var(--liv-border);
-  margin-top: 4px;
+  margin-top: 2px;
 }
 
 .liv-gallery-esc-hint {
-  font-size: 0.68rem;
+  font-size: 0.65rem;
   color: var(--liv-taupe);
   letter-spacing: 0.02em;
 }
@@ -1706,13 +1710,13 @@
   background: var(--liv-card-alt);
   border: 1px solid var(--liv-border);
   color: var(--liv-ink);
-  padding: 5px 14px;
+  padding: 3px 10px;
   border-radius: 999px;
-  font-size: 0.7rem;
+  font-size: 0.66rem;
   font-weight: 600;
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 4px;
   cursor: pointer;
   transition: all 0.18s ease;
 }
