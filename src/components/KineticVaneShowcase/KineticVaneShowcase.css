@@ -1,6 +1,8 @@
 /* ==========================================================================
    ADVANCED KINETIC ROTATING VANE SHOWCASE
-   Clean Architectural 20-Vane Rotating Mechanism (No Overlay Content)
+   Architectural 3D Triangular Prism Louvre Mechanism
+   Flawless unmirrored images, smooth continuous scroll-driven reveals,
+   subpixel seam elimination, and responsive mobile optimization.
    ========================================================================== */
 
 .kinetic-showcase-container {
@@ -23,7 +25,7 @@
 }
 
 /* ==========================================================================
-   20-VANE 3D ROTATING LOUVRE MECHANISM
+   3D TRIANGULAR PRISM LOUVRE MECHANISM
    ========================================================================== */
 
 .kinetic-vanes-layer {
@@ -32,7 +34,7 @@
   width: 100%;
   height: 100%;
   z-index: 5;
-  perspective: 1200px;
+  perspective: 1400px;
   perspective-origin: 50% 50%;
   pointer-events: none;
 }
@@ -56,23 +58,17 @@
   will-change: transform;
 }
 
-/* Front & Back Faces of the Vane */
+/* 3 Permanent Faces of the Equilateral Triangular Prism */
 .vane-face {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   overflow: hidden;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-}
-
-.vane-face.front {
-  transform: rotateY(0deg);
-}
-
-.vane-face.back {
-  transform: rotateY(180deg);
+  transform-style: preserve-3d;
 }
 
 /* Inner Slice Image: Spans the full viewport width and is horizontally offset per slice */
@@ -95,32 +91,322 @@
   height: 100%;
   background: linear-gradient(
     90deg,
-    rgba(241, 238, 232, 0.18) 0%,
-    rgba(0, 0, 0, 0) 40%,
-    rgba(16, 16, 16, 0.85) 100%
+    rgba(255, 255, 255, 0.28) 0%,
+    rgba(197, 160, 89, 0.12) 30%,
+    rgba(0, 0, 0, 0) 55%,
+    rgba(10, 10, 10, 0.85) 100%
   );
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.1s ease;
-  z-index: 2;
+  z-index: 6;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
-/* Architectural Bevel Edge */
-.vane-edge-bevel {
+/* ==========================================================================
+   ATMOSPHERIC OVERLAYS & VIGNETTES
+   ========================================================================== */
+
+.kinetic-vignette-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(11, 10, 9, 0) 45%,
+    rgba(11, 10, 9, 0.55) 100%
+  );
+}
+
+.kinetic-top-shade {
   position: absolute;
   top: 0;
-  bottom: 0;
+  left: 0;
   right: 0;
-  width: 1px;
-  background: rgba(241, 238, 232, 0.25);
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.8);
-  z-index: 3;
+  height: 140px;
+  z-index: 6;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    rgba(11, 10, 9, 0.75) 0%,
+    rgba(11, 10, 9, 0) 100%
+  );
 }
 
-/* Responsive Handling */
-@media (max-width: 768px) {
+/* ==========================================================================
+   EDITORIAL ARCHITECTURAL UI OVERLAY
+   ========================================================================== */
+
+.kinetic-editorial-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(96px, 12vh, 120px) clamp(24px, 5vw, 64px) clamp(32px, 5vh, 48px);
+  box-sizing: border-box;
+}
+
+/* Top Left Atelier Badge */
+.kinetic-atelier-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  background: rgba(14, 15, 13, 0.72);
+  border: 1px solid rgba(197, 160, 89, 0.35);
+  border-radius: 999px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  pointer-events: auto;
+  align-self: flex-start;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.kinetic-beacon {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #C5A059;
+  box-shadow: 0 0 10px #E4B869;
+}
+
+.kinetic-badge-text {
+  font-size: clamp(10.5px, 1.1vw, 12px);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #E2B76D;
+}
+
+/* Bottom Left Project Card */
+.kinetic-project-card {
+  align-self: flex-start;
+  max-width: 540px;
+  background: rgba(14, 15, 13, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 14px;
+  padding: clamp(20px, 3vw, 28px);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  pointer-events: auto;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6);
+  transition: all 0.3s ease;
+}
+
+.kinetic-project-category {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #C5A059;
+  margin-bottom: 6px;
+}
+
+.kinetic-project-title {
+  margin: 0 0 6px;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(28px, 3.2vw, 42px);
+  font-weight: 500;
+  line-height: 1.15;
+  color: #FAF8F5;
+}
+
+.kinetic-project-subtitle {
+  margin: 0 0 14px;
+  font-size: clamp(13px, 1.3vw, 15px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: #CBC4B8;
+}
+
+.kinetic-project-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.kinetic-meta-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  font-size: 11.5px;
+  font-weight: 500;
+  color: #E6E1D8;
+}
+
+/* Bottom Right Navigation & Scroll Prompt */
+.kinetic-nav-controls {
+  position: absolute;
+  bottom: clamp(32px, 5vh, 48px);
+  right: clamp(24px, 5vw, 64px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 14px;
+  pointer-events: auto;
+}
+
+.kinetic-pills-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px;
+  background: rgba(14, 15, 13, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.kinetic-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  cursor: pointer;
+  color: #9E978C;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  transition: all 0.25s ease;
+}
+
+.kinetic-pill-btn:hover {
+  color: #FAF8F5;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.kinetic-pill-btn.active {
+  background: #C5A059;
+  color: #0E0F0D;
+  font-weight: 600;
+  border-color: #D8B772;
+  box-shadow: 0 2px 14px rgba(197, 160, 89, 0.4);
+}
+
+.kinetic-pill-num {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.kinetic-scroll-prompt {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(14, 15, 13, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition: all 0.25s ease;
+}
+
+.kinetic-scroll-prompt:hover {
+  color: #FAF8F5;
+  border-color: rgba(197, 160, 89, 0.5);
+  background: rgba(14, 15, 13, 0.9);
+  transform: translateY(2px);
+}
+
+.kinetic-scroll-icon {
+  font-size: 13px;
+  color: #C5A059;
+  animation: kineticBounce 1.8s ease-in-out infinite;
+}
+
+@keyframes kineticBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (MOBILE & TABLET)
+   ========================================================================== */
+
+@media (max-width: 991px) {
+  .kinetic-editorial-overlay {
+    padding: 88px 20px 24px;
+  }
+
+  .kinetic-nav-controls {
+    bottom: 24px;
+    right: 20px;
+  }
+
+  .kinetic-project-card {
+    max-width: 440px;
+    padding: 18px 20px;
+  }
+}
+
+@media (max-width: 640px) {
   .kinetic-sticky-viewport {
     height: 100svh;
+  }
+
+  .kinetic-editorial-overlay {
+    padding: 82px 14px 18px;
+  }
+
+  .kinetic-project-card {
+    max-width: 100%;
+    padding: 14px 16px;
+    margin-bottom: 70px;
+  }
+
+  .kinetic-project-title {
+    font-size: 24px;
+  }
+
+  .kinetic-project-subtitle {
+    font-size: 12.5px;
+    margin-bottom: 10px;
+  }
+
+  .kinetic-nav-controls {
+    bottom: 16px;
+    right: 14px;
+    left: 14px;
+    align-items: center;
+  }
+
+  .kinetic-pills-bar {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .kinetic-pill-btn {
+    padding: 6px 12px;
+    font-size: 11px;
+    flex: 1;
+    justify-content: center;
+  }
+
+  .kinetic-scroll-prompt {
+    display: none;
   }
 }
 

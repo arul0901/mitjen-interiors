@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState, useCallback } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
@@ -10,20 +10,37 @@ if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 }
 
-const TOTAL_VANES = 20;
-
 export const KineticVaneShowcase: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const stickyViewportRef = useRef<HTMLDivElement>(null);
 
-  // Vane blade, face, and specular lighting refs
+  // Responsive vane count: 20 on desktop, 12 on mobile/tablet for silky 60/120fps performance
+  const [isMobile, setIsMobile] = useState<boolean>(() =>
+    typeof window !== 'undefined' ? window.innerWidth <= 768 : false
+  );
+  const totalVanes = isMobile ? 12 : 20;
+
+  // Active project index (0, 1, or 2)
+  const [activeIdx, setActiveIdx] = useState<number>(0);
+
+  // Vane blade and specular light refs
   const bladeRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const frontFaceRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const backFaceRefs = useRef<(HTMLDivElement | null)[]>([]);
   const lightRefs = useRef<(HTMLDivElement | null)[]>([]);
   const scrollTriggerRef = useRef<ScrollTrigger | null>(null);
 
-  // Preload all 3 architectural project images to prevent flicker during transitions
+  // Handle responsive resize for mobile breakpoint
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth <= 768;
+      if (mobile !== isMobile) {
+        setIsMobile(mobile);
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [isMobile]);
+
+  // Preload all 3 architectural project images
   useEffect(() => {
     KINETIC_PROJECTS.slice(0, 3).forEach((proj) => {
       const img = new Image();
@@ -31,7 +48,7 @@ export const KineticVaneShowcase: React.FC = () => {
     });
   }, []);
 
-  // Master GSAP ScrollTrigger Setup
+  // Master GSAP ScrollTrigger Setup with 3D Triangular Prisms
   useEffect(() => {
     const container = containerRef.current;
     const viewport = stickyViewportRef.current;
@@ -52,145 +69,120 @@ export const KineticVaneShowcase: React.FC = () => {
       });
     }
 
-    const blades = bladeRefs.current.filter((el): el is HTMLDivElement => el !== null);
-    const frontFaces = frontFaceRefs.current.filter((el): el is HTMLDivElement => el !== null);
-    const lights = lightRefs.current.filter((el): el is HTMLDivElement => el !== null);
+    const blades = bladeRefs.current.slice(0, totalVanes).filter((el): el is HTMLDivElement => el !== null);
+    const lights = lightRefs.current.slice(0, totalVanes).filter((el): el is HTMLDivElement => el !== null);
 
-    // Initial vane states: all face camera at 0° with Image 1
+    // Initial state: blades face camera at 0° (Face 1 / Image 1)
     activeGsap.set(blades, { rotateY: 0 });
     activeGsap.set(lights, { opacity: 0 });
-    activeGsap.set(frontFaces, {
-      backgroundImage: `url("${KINETIC_PROJECTS[0].image}")`,
-    });
-    activeGsap.set(backFaceRefs.current.filter((el): el is HTMLDivElement => el !== null), {
-      backgroundImage: `url("${KINETIC_PROJECTS[1].image}")`,
-    });
 
     // =========================================================================
-    // NATURAL CONTINUOUS SCROLL-DRIVEN TIMELINE
-    // Total duration: 2.2 units
-    // Stage 1 (0.05 -> 0.90): Image 1 -> Image 2 via 180° rotation
-    // Stage 1 Plateau (0.90 -> 1.15): Clean view of Image 2 (front face swaps to Image 3)
-    // Stage 2 (1.15 -> 2.00): Image 2 -> Image 3 via 360° rotation
-    // Stage 2 Plateau (2.00 -> 2.25): Clean view of Image 3 -> natural release to content
+    // 3D TRIANGULAR PRISM CONTINUOUS SCROLL TIMELINE
+    // Total duration: 2.4 units
+    //
+    // - 0.00 -> 0.15: Intro buffer on Image 1
+    // - 0.15 -> 0.85: Transition 1: Rotate 0° -> 120° (Reveals Image 2 on Face 2)
+    // - 0.85 -> 1.25: Plateau buffer on Image 2
+    // - 1.25 -> 1.95: Transition 2: Rotate 120° -> 240° (Reveals Image 3 on Face 3)
+    // - 1.95 -> 2.40: Plateau buffer on Image 3 -> natural release to content
     // =========================================================================
     const tl = activeGsap.timeline({
       paused: true,
       defaults: { ease: 'power1.inOut' },
     });
 
-    // --- TRANSITION 1: Image 1 -> Image 2 (0.05 -> 0.90) ---
+    // --- TRANSITION 1: Image 1 -> Image 2 (0.15 -> 0.85) ---
     tl.to(
       blades,
       {
-        rotateY: 180,
-        duration: 0.55,
+        rotateY: 120,
+        duration: 0.65,
         stagger: {
-          each: 0.015,
+          each: 0.016,
           from: 'start',
           ease: 'power1.inOut',
         },
         ease: 'power2.inOut',
       },
-      0.05
+      0.15
     );
 
-    // Subtle specular reflection as vanes catch directional lighting
+    // Specular lighting reflection on first rotation
     tl.to(
       lights,
       {
-        opacity: 0.45,
+        opacity: 0.4,
         duration: 0.3,
         yoyo: true,
         repeat: 1,
         stagger: {
-          each: 0.015,
+          each: 0.016,
           from: 'start',
         },
         ease: 'sine.inOut',
       },
-      0.1
+      0.2
     );
 
-    // --- MIDPOINT PLATEAU (1.0): Front faces facing away (at 180°) ---
-    // Swap front face image to Image 3 completely invisibly while facing away
-    tl.set(
-      frontFaces,
-      {
-        backgroundImage: `url("${KINETIC_PROJECTS[2].image}")`,
-      },
-      1.0
-    );
+    // Plateau for Image 2 (holding at 120°)
+    tl.to({}, { duration: 0.35 }, 0.85);
 
-    // When scrolling backwards past 0.99, restore Image 1
-    tl.set(
-      frontFaces,
-      {
-        backgroundImage: `url("${KINETIC_PROJECTS[0].image}")`,
-      },
-      0.99
-    );
-
-    // --- TRANSITION 2: Image 2 -> Image 3 (1.15 -> 2.00) ---
+    // --- TRANSITION 2: Image 2 -> Image 3 (1.25 -> 1.95) ---
     tl.to(
       blades,
       {
-        rotateY: 360,
-        duration: 0.55,
+        rotateY: 240,
+        duration: 0.65,
         stagger: {
-          each: 0.015,
+          each: 0.016,
           from: 'start',
           ease: 'power1.inOut',
         },
         ease: 'power2.inOut',
       },
-      1.15
+      1.25
     );
 
-    // Specular lighting reflection on second transition
+    // Specular lighting reflection on second rotation
     tl.to(
       lights,
       {
-        opacity: 0.45,
+        opacity: 0.4,
         duration: 0.3,
         yoyo: true,
         repeat: 1,
         stagger: {
-          each: 0.015,
+          each: 0.016,
           from: 'start',
         },
         ease: 'sine.inOut',
       },
-      1.2
+      1.3
     );
 
-    // Resting buffer on Image 3 (2.00 -> 2.25)
-    tl.to({}, { duration: 0.25 }, 2.0);
+    // Resting buffer on Image 3
+    tl.to({}, { duration: 0.4 }, 1.95);
 
     // =========================================================================
-    // PINNED SCROLLTRIGGER: Natural Continuous Scroll Scrub (Reveals by Scrolling)
-    // No hijacking, no forced swipes, no snap locks.
+    // PINNED SCROLLTRIGGER: Natural Continuous Scroll Scrub
+    // Pinned for 160% scroll height so it feels responsive and unhurried
     // =========================================================================
     const st = activeScrollTrigger.create({
       id: 'kinetic-vane-pin-trigger',
       trigger: container,
       start: 'top top',
-      end: '+=200%',
+      end: '+=160%',
       pin: viewport,
-      scrub: 0.8, // Fluid responsive scrub that follows scroll naturally
+      scrub: 0.7, // Smooth fluid scrub following user scroll
       animation: tl,
       onUpdate: (self: { progress: number }) => {
-        // Deterministic guard for bi-directional scrub:
-        // Before midpoint, front faces are guaranteed to be Image 1
-        // After midpoint, front faces are guaranteed to be Image 3
-        if (self.progress < 0.46) {
-          activeGsap.set(frontFaces, {
-            backgroundImage: `url("${KINETIC_PROJECTS[0].image}")`,
-          });
-        } else if (self.progress > 0.54) {
-          activeGsap.set(frontFaces, {
-            backgroundImage: `url("${KINETIC_PROJECTS[2].image}")`,
-          });
+        // Update active project index for UI overlay
+        if (self.progress < 0.38) {
+          setActiveIdx(0);
+        } else if (self.progress < 0.76) {
+          setActiveIdx(1);
+        } else {
+          setActiveIdx(2);
         }
       },
     });
@@ -207,7 +199,44 @@ export const KineticVaneShowcase: React.FC = () => {
       st.kill();
       tl.kill();
     };
+  }, [totalVanes]);
+
+  // Clickable indicator to jump directly to any of the 3 projects
+  const handleJumpToProject = useCallback(
+    (targetIndex: number) => {
+      const st = scrollTriggerRef.current;
+      if (!st) return;
+
+      const totalDistance = st.end - st.start;
+      // Target progress positions corresponding to plateau centers
+      const targetProgress = targetIndex === 0 ? 0.05 : targetIndex === 1 ? 0.52 : 0.95;
+      const targetY = st.start + totalDistance * targetProgress;
+
+      window.scrollTo({
+        top: targetY,
+        behavior: 'smooth',
+      });
+    },
+    []
+  );
+
+  // Scroll down to the portfolio content below
+  const handleScrollToContent = useCallback(() => {
+    const st = scrollTriggerRef.current;
+    const targetEl = document.getElementById('livspace-portfolio-section');
+    const targetY = targetEl
+      ? targetEl.getBoundingClientRect().top + window.scrollY
+      : st
+      ? st.end + 20
+      : window.innerHeight * 1.5;
+
+    window.scrollTo({
+      top: targetY,
+      behavior: 'smooth',
+    });
   }, []);
+
+  const currentProject = KINETIC_PROJECTS[activeIdx] || KINETIC_PROJECTS[0];
 
   return (
     <div
@@ -217,21 +246,26 @@ export const KineticVaneShowcase: React.FC = () => {
     >
       <div ref={stickyViewportRef} className="kinetic-sticky-viewport">
         {/* ==================================================================
-            20-VANE 3D ROTATING LOUVRE MECHANISM (CLEAN ARCHITECTURAL BANNER)
-            No text overlays, no titles, no buttons, no captions.
-            Pure mechanical louvre transition between the 3 project images.
+            TRIANGULAR KINETIC ROTATING LOUVRE MECHANISM
+            3 permanent faces per blade:
+            - Face 1 (0°): Image 1 (Living Salon & Atrium)
+            - Face 2 (-120°): Image 2 (Master Bedroom Suite)
+            - Face 3 (-240°): Image 3 (Bespoke Millwork & Joinery)
+            No runtime image swapping, no reverse-mirroring, zero Z-fighting!
             ================================================================== */}
         <div className="kinetic-vanes-layer">
-          {Array.from({ length: TOTAL_VANES }).map((_, i) => {
-            const vaneWidthPercent = 100 / TOTAL_VANES;
+          {Array.from({ length: totalVanes }).map((_, i) => {
+            const vaneWidthPercent = 100 / totalVanes;
             const vaneLeftPercent = i * vaneWidthPercent;
+            // 0.2887 is the apothem factor for an equilateral triangle: w / (2 * tan(60°))
+            const apothemVw = (100 / totalVanes) * 0.2887;
 
             return (
               <div
                 key={i}
                 className="kinetic-vane-unit"
                 style={{
-                  width: `${vaneWidthPercent}%`,
+                  width: `calc(${vaneWidthPercent}% + 0.5px)`,
                   left: `${vaneLeftPercent}%`,
                 }}
               >
@@ -241,48 +275,128 @@ export const KineticVaneShowcase: React.FC = () => {
                   }}
                   className="kinetic-vane-blade"
                 >
-                  {/* Front Face: Starts with Image 1, swaps to Image 3 at midpoint */}
-                  <div className="vane-face front">
+                  {/* FACE 1: Image 1 (0°) */}
+                  <div
+                    className="vane-face face-1"
+                    style={{
+                      transform: `rotateY(0deg) translateZ(${apothemVw}vw)`,
+                    }}
+                  >
                     <div
-                      ref={(el) => {
-                        frontFaceRefs.current[i] = el;
-                      }}
                       className="vane-slice-img"
                       style={{
                         backgroundImage: `url("${KINETIC_PROJECTS[0].image}")`,
-                        left: `-${i * (100 / TOTAL_VANES)}vw`,
+                        left: `-${i * (100 / totalVanes)}vw`,
                       }}
                     />
                   </div>
 
-                  {/* Back Face: Image 2 */}
-                  <div className="vane-face back">
+                  {/* FACE 2: Image 2 (-120°) — Rotates clockwise into view at 120° */}
+                  <div
+                    className="vane-face face-2"
+                    style={{
+                      transform: `rotateY(-120deg) translateZ(${apothemVw}vw)`,
+                    }}
+                  >
                     <div
-                      ref={(el) => {
-                        backFaceRefs.current[i] = el;
-                      }}
                       className="vane-slice-img"
                       style={{
                         backgroundImage: `url("${KINETIC_PROJECTS[1].image}")`,
-                        left: `-${i * (100 / TOTAL_VANES)}vw`,
+                        left: `-${i * (100 / totalVanes)}vw`,
                       }}
                     />
                   </div>
 
-                  {/* Specular Lighting Overlay */}
+                  {/* FACE 3: Image 3 (-240°) — Rotates clockwise into view at 240° */}
+                  <div
+                    className="vane-face face-3"
+                    style={{
+                      transform: `rotateY(-240deg) translateZ(${apothemVw}vw)`,
+                    }}
+                  >
+                    <div
+                      className="vane-slice-img"
+                      style={{
+                        backgroundImage: `url("${KINETIC_PROJECTS[2].image}")`,
+                        left: `-${i * (100 / totalVanes)}vw`,
+                      }}
+                    />
+                  </div>
+
+                  {/* Specular Lighting Overlay during rotation */}
                   <div
                     ref={(el) => {
                       lightRefs.current[i] = el;
                     }}
                     className="vane-lighting-overlay"
                   />
-
-                  {/* Architectural Bevel Edge */}
-                  <div className="vane-edge-bevel" />
                 </div>
               </div>
             );
           })}
+        </div>
+
+        {/* Ambient Vignette & Header Protection Gradient */}
+        <div className="kinetic-vignette-overlay" aria-hidden="true" />
+        <div className="kinetic-top-shade" aria-hidden="true" />
+
+        {/* ==================================================================
+            EDITORIAL ARCHITECTURAL UI OVERLAY
+            Provides clear identity, project context, and interactive controls
+            ================================================================== */}
+        <div className="kinetic-editorial-overlay">
+          {/* Top Left: Atelier Identity & Chapter Eyebrow */}
+          <div className="kinetic-atelier-badge">
+            <span className="kinetic-beacon" aria-hidden="true" />
+            <span className="kinetic-badge-text">
+              FEATURED RESIDENCE // CHAPTER {currentProject.number}
+            </span>
+          </div>
+
+          {/* Bottom Left: Project Title, Subtitle, and Scope Details */}
+          <div className="kinetic-project-card">
+            <span className="kinetic-project-category">{currentProject.category}</span>
+            <h2 className="kinetic-project-title">{currentProject.title}</h2>
+            <p className="kinetic-project-subtitle">{currentProject.subtitle}</p>
+            <div className="kinetic-project-meta">
+              <span className="kinetic-meta-chip">
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <path d="M8 2C5.24 2 3 4.24 3 7C3 10.5 8 14 8 14C8 14 13 10.5 13 7C13 4.24 10.76 2 8 2Z" stroke="#C5A059" strokeWidth="1.5" />
+                </svg>
+                {currentProject.location}
+              </span>
+              <span className="kinetic-meta-chip">{currentProject.area}</span>
+            </div>
+          </div>
+
+          {/* Bottom Right: Interactive Project Jump Navigation */}
+          <div className="kinetic-nav-controls">
+            <div className="kinetic-pills-bar">
+              {KINETIC_PROJECTS.slice(0, 3).map((proj, idx) => (
+                <button
+                  key={proj.id}
+                  type="button"
+                  onClick={() => handleJumpToProject(idx)}
+                  className={`kinetic-pill-btn ${activeIdx === idx ? 'active' : ''}`}
+                  aria-label={`View ${proj.title}`}
+                >
+                  <span className="kinetic-pill-num">{proj.number.slice(0, 2)}</span>
+                  <span className="kinetic-pill-label">{proj.title.split(' ')[0]}</span>
+                </button>
+              ))}
+            </div>
+
+            {/* Scroll/Down Prompt */}
+            <button
+              type="button"
+              onClick={handleScrollToContent}
+              className="kinetic-scroll-prompt"
+              aria-label="Scroll down to browse full portfolio"
+            >
+              <span>Scroll to Explore</span>
+              <span className="kinetic-scroll-icon" aria-hidden="true">↓</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
