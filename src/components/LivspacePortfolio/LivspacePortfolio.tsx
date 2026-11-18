@@ -275,24 +275,6 @@ export const LivspacePortfolio: React.FC = () => {
                 Meticulously crafted with verified materials: Tarkett &amp; Armstrong flooring, Saint-Gobain ceilings, Century &amp; Greenply woodwork, and Philips &amp; Havells lighting.
               </p>
             </div>
-
-            {/* Compact Key Architectural Metrics */}
-            <div className="liv-hero-metrics">
-              <div className="liv-metric-item">
-                <span className="liv-metric-val">4</span>
-                <span className="liv-metric-lbl">Residences</span>
-              </div>
-              <div className="liv-metric-divider" />
-              <div className="liv-metric-item">
-                <span className="liv-metric-val">10-Yr</span>
-                <span className="liv-metric-lbl">Warranty</span>
-              </div>
-              <div className="liv-metric-divider" />
-              <div className="liv-metric-item">
-                <span className="liv-metric-val">100%</span>
-                <span className="liv-metric-lbl">Turnkey</span>
-              </div>
-            </div>
           </div>
         </section>
 
