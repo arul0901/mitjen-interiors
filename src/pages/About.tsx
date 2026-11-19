@@ -4,6 +4,7 @@ import MaterialsGallery from "../components/MaterialsGallery";
 import AboutVaneBanner from "../components/AboutVaneBanner/AboutVaneBanner";
 import ProjectsReflectOurRange from "../components/ProjectsReflectOurRange/ProjectsReflectOurRange";
 import ArchitecturalParticleLogo from "../components/ArchitecturalParticleLogo/ArchitecturalParticleLogo";
+import FooterParticleBanner from "../components/FooterParticleBanner/FooterParticleBanner";
 
 const pageTitle = "About Us";
 
@@ -17,8 +18,7 @@ export default function About() {
       {/* 1. Kinetic Vane Hero Banner (2 Images) */}
       <AboutVaneBanner />
 
-      {/* 2. Interactive Architectural Particle Wordmark Banner */}
-      <ArchitecturalParticleLogo />
+      
 
       {/* 3. Text Marquee Slider */}
       <div className={"cs_horizontal_slider cs_type_1 cs_accent_bg cs_primary_font"}>
@@ -519,6 +519,10 @@ export default function About() {
         </div>
         <div className={"cs_height_120 cs_height_lg_80"}></div>
       </section>
+
+      {/* ── Footer Particle Banner — Interactive dot-matrix typography ── */}
+      <FooterParticleBanner />
+
     </main>
   );
 }
