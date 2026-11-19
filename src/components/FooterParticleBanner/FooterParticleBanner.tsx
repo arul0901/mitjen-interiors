@@ -7,11 +7,12 @@ import './FooterParticleBanner.css';
  * Full-width dot-matrix typography particle banner positioned above
  * the site footer on the About page.
  *
- * Uses the site's official primary brand typography:
- *   - "Cormorant Garamond" (700 Bold, with Georgia serif fallback)
- *   - Exactly matches the site's --font-heading and --primary-font design token.
- *   - 100% crisp circular dots, with particle size reduced by ~20% for
- *     refined luxury scale and razor-sharp serif fidelity.
+ * Design updates:
+ *   - Grand, prominent font size filling the horizontal span.
+ *   - Dot size REDUCED to delicate, fine micro-particles (radius 1.25px / dia 2.5px)
+ *     with high-density sampling for silky, razor-sharp serif definition.
+ *   - Stylish and aesthetic architectural serif typography:
+ *     "Cinzel", "Cormorant Garamond", "Playfair Display", Georgia, serif.
  */
 
 interface Particle {
@@ -54,12 +55,12 @@ export const FooterParticleBanner: React.FC = () => {
     targetX: -9999,
     targetY: -9999,
     isActive: false,
-    radius: 92,
+    radius: 96,
   });
 
   const isFormedRef = useRef(false);
 
-  // ─── Particle initialisation (Site Typography: Cormorant Garamond) ─────────
+  // ─── Particle initialisation (Grand, Stylish & Aesthetic Typography) ───────
   const initParticles = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -74,11 +75,11 @@ export const FooterParticleBanner: React.FC = () => {
     canvas.height = Math.round(height * dpr);
 
     const isMobile = width < 640;
-    // Dot radius reduced by 20% for elegant luxury scale: 2.0px desktop (4.0px dia), 1.5px mobile (3.0px dia)
-    const dotRadius = isMobile ? 1.5 : 2.0;
+    // Delicate, fine micro-dots: 1.25px radius on desktop (2.5px dia), 1.0px on mobile (2.0px dia)
+    const dotRadius = isMobile ? 1.0 : 1.25;
 
     // Pre-render antialiased crisp dot sprite at exact physical size
-    dotSpriteRef.current = createDotSprite(dotRadius, '#151412', dpr);
+    dotSpriteRef.current = createDotSprite(dotRadius, '#161513', dpr);
 
     // Offscreen canvas for text raster sampling
     const off = document.createElement('canvas');
@@ -91,17 +92,17 @@ export const FooterParticleBanner: React.FC = () => {
 
     const text = isMobile ? 'MITJEN' : 'MITJEN INTERIORS';
 
-    // Site's primary brand font: Cormorant Garamond
-    const fontStack = '"Cormorant Garamond", Georgia, serif';
-    const letterSpacingRatio = isMobile ? 0.08 : 0.06;
+    // Stylish & aesthetic architectural typography
+    const fontStack = '"Cinzel", "Cormorant Garamond", "Playfair Display", Georgia, serif';
+    const letterSpacingRatio = isMobile ? 0.12 : 0.09;
 
-    let lo = 24;
-    let hi = Math.round(height * 0.95);
+    let lo = 28;
+    let hi = Math.round(height * 0.85);
     let bestSize = lo;
 
     for (let iter = 0; iter < 20; iter++) {
       const mid = Math.round((lo + hi) / 2);
-      offCtx.font = `700 ${mid}px ${fontStack}`;
+      offCtx.font = `600 ${mid}px ${fontStack}`;
       if ('letterSpacing' in offCtx) {
         (offCtx as unknown as { letterSpacing: string }).letterSpacing =
           `${Math.round(mid * letterSpacingRatio)}px`;
@@ -116,7 +117,7 @@ export const FooterParticleBanner: React.FC = () => {
     }
 
     const fontSize = bestSize;
-    offCtx.font = `700 ${fontSize}px ${fontStack}`;
+    offCtx.font = `600 ${fontSize}px ${fontStack}`;
     if ('letterSpacing' in offCtx) {
       (offCtx as unknown as { letterSpacing: string }).letterSpacing =
         `${Math.round(fontSize * letterSpacingRatio)}px`;
@@ -129,9 +130,9 @@ export const FooterParticleBanner: React.FC = () => {
     const textY = height * 0.52;
     offCtx.fillText(text, width / 2, textY);
 
-    // Grid sampling tuned for delicate serif curves & hairlines (4.8px stride desktop, 3.8px mobile)
-    const stride = isMobile ? 3.8 : 4.8;
-    const step = Math.max(3, Math.round(stride * dpr));
+    // High-density sampling stride for razor-sharp serif fidelity (3.2px desktop / 2.5px mobile)
+    const stride = isMobile ? 2.5 : 3.2;
+    const step = Math.max(2, Math.round(stride * dpr));
 
     const imgData = offCtx.getImageData(0, 0, off.width, off.height);
     const data = imgData.data;
@@ -144,8 +145,7 @@ export const FooterParticleBanner: React.FC = () => {
         const idx = (py * off.width + px) * 4;
         const alpha = data[idx + 3];
 
-        // Low threshold so fine serifs and tapered strokes are cleanly captured
-        if (alpha > 80) {
+        if (alpha > 75) {
           const ox = px / dpr;
           const oy = py / dpr;
 
@@ -172,11 +172,13 @@ export const FooterParticleBanner: React.FC = () => {
   useEffect(() => {
     initParticles();
 
-    // Re-sample once Cormorant Garamond is verified ready in the browser
     if (document.fonts) {
-      document.fonts.load('700 80px "Cormorant Garamond"').then(() => {
+      Promise.all([
+        document.fonts.load('600 80px "Cinzel"').catch(() => {}),
+        document.fonts.load('700 80px "Cormorant Garamond"').catch(() => {}),
+      ]).then(() => {
         initParticles();
-      }).catch(() => {});
+      });
 
       if (document.fonts.ready) {
         document.fonts.ready.then(() => {
@@ -246,7 +248,7 @@ export const FooterParticleBanner: React.FC = () => {
           const dy2 = Math.round((p.y - offset) * dpr);
           ctx.drawImage(spriteInfo.canvas, dx2, dy2);
         } else {
-          ctx.fillStyle = '#151412';
+          ctx.fillStyle = '#161513';
           ctx.beginPath();
           ctx.arc(p.x * dpr, p.y * dpr, p.radius * dpr, 0, Math.PI * 2);
           ctx.fill();
@@ -265,14 +267,14 @@ export const FooterParticleBanner: React.FC = () => {
         const ry = mouse.y * dpr;
         ctx.save();
         ctx.strokeStyle = '#181715';
-        ctx.lineWidth = 1.3 * dpr;
+        ctx.lineWidth = 1.2 * dpr;
         ctx.beginPath();
         ctx.arc(rx, ry, 28 * dpr, 0, Math.PI * 2);
         ctx.stroke();
 
         ctx.fillStyle = '#181715';
         ctx.beginPath();
-        ctx.arc(rx, ry, 2.4 * dpr, 0, Math.PI * 2);
+        ctx.arc(rx, ry, 2.2 * dpr, 0, Math.PI * 2);
         ctx.fill();
         ctx.restore();
       }

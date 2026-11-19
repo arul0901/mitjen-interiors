@@ -80,7 +80,7 @@
 
 .arch-particle-canvas-wrapper {
   width: 100%;
-  height: 260px;
+  height: clamp(230px, 18vw, 290px);
   position: relative;
   display: flex;
   align-items: center;

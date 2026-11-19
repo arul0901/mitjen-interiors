@@ -4,13 +4,15 @@ import './ArchitecturalParticleLogo.css';
 /**
  * ArchitecturalParticleLogo
  * -------------------------------------------------------------------
- * Pure dot-matrix particle composition spelling "MITJEN INTERIORS"
- * and subtitle "ARCHITECTURE & INTERIOR DESIGN".
+ * Pure dot-matrix particle composition spelling "MITJEN INTERIORS".
  *
- * Uses the site's official primary brand typography:
- *   - "Cormorant Garamond" (700 Bold, with Georgia serif fallback)
- *   - Subtitle: "Manrope" (600 SemiBold)
- *   - 100% crisp dots reduced by 20% for refined luxury scale.
+ * Design updates:
+ *   - Subtitle REMOVED completely for clean, focused majesty.
+ *   - Font size substantially INCREASED to span the canvas prominently.
+ *   - Dot size REDUCED to delicate, fine micro-particles (radius 1.25px / dia 2.5px)
+ *     with high-density sampling for razor-sharp serif definition.
+ *   - Stylish and aesthetic architectural serif typography:
+ *     "Cinzel", "Cormorant Garamond", "Playfair Display", Georgia, serif.
  */
 interface Particle {
   x: number;
@@ -19,7 +21,6 @@ interface Particle {
   originY: number;
   vx: number;
   vy: number;
-  isSubtitle: boolean;
   radius: number;
 }
 
@@ -47,10 +48,9 @@ export const ArchitecturalParticleLogo: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const animFrameId = useRef<number | null>(null);
 
-  // Particles state (pure dots only)
+  // Particles state (pure dots only, no subtitle)
   const particlesRef = useRef<Particle[]>([]);
-  const charcoalDotSpriteRef = useRef<{ canvas: HTMLCanvasElement; size: number } | null>(null);
-  const bronzeDotSpriteRef = useRef<{ canvas: HTMLCanvasElement; size: number } | null>(null);
+  const dotSpriteRef = useRef<{ canvas: HTMLCanvasElement; size: number } | null>(null);
 
   // Mouse / Pointer State
   const mouseRef = useRef<{
@@ -66,12 +66,12 @@ export const ArchitecturalParticleLogo: React.FC = () => {
     targetX: -9999,
     targetY: -9999,
     isActive: false,
-    radius: 80,
+    radius: 88,
   });
 
   const [, setIsHovered] = useState<boolean>(false);
 
-  // Initialize particles from rendered text (Site Typography: Cormorant Garamond)
+  // Initialize particles from rendered text (Grand, Stylish & Aesthetic Typography)
   const initParticles = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -86,13 +86,11 @@ export const ArchitecturalParticleLogo: React.FC = () => {
     canvas.height = Math.round(height * dpr);
 
     const isMobile = width < 680;
-    // Dot radius reduced by 20%: 1.9px on desktop (3.8px diameter), 1.4px on mobile (2.8px diameter)
-    const titleDotRadius = isMobile ? 1.4 : 1.9;
-    const subDotRadius = isMobile ? 1.0 : 1.2;
+    // Delicate, fine micro-dots: 1.25px radius on desktop (2.5px dia), 1.0px on mobile (2.0px dia)
+    const dotRadius = isMobile ? 1.0 : 1.25;
 
-    // 1. Pre-render Dot sprites at exact DPR-scaled size
-    charcoalDotSpriteRef.current = createDotSprite(titleDotRadius, '#151412', dpr);
-    bronzeDotSpriteRef.current = createDotSprite(subDotRadius, '#B88E4B', dpr);
+    // 1. Pre-render Dot sprite at exact DPR size
+    dotSpriteRef.current = createDotSprite(dotRadius, '#161513', dpr);
 
     // 2. Offscreen Canvas for Typographic Sampling
     const offCanvas = document.createElement('canvas');
@@ -104,89 +102,75 @@ export const ArchitecturalParticleLogo: React.FC = () => {
     offCtx.scale(dpr, dpr);
 
     const titleText = isMobile ? 'MITJEN' : 'MITJEN INTERIORS';
-    const titleFontSize = Math.max(38, Math.min(94, Math.round(width * (isMobile ? 0.13 : 0.084))));
-    const subtitleFontSize = Math.max(10, Math.min(15, Math.round(titleFontSize * 0.17)));
+
+    // Stylish & aesthetic architectural typography
+    const fontStack = '"Cinzel", "Cormorant Garamond", "Playfair Display", Georgia, serif';
+    const letterSpacingRatio = isMobile ? 0.12 : 0.09;
+
+    // Binary search for grand, prominent font size filling ~90% of canvas width
+    let lo = 28;
+    let hi = Math.round(height * 0.75);
+    let bestSize = lo;
+
+    for (let iter = 0; iter < 20; iter++) {
+      const mid = Math.round((lo + hi) / 2);
+      offCtx.font = `600 ${mid}px ${fontStack}`;
+      if ('letterSpacing' in offCtx) {
+        (offCtx as unknown as { letterSpacing: string }).letterSpacing =
+          `${Math.round(mid * letterSpacingRatio)}px`;
+      }
+      const measured = offCtx.measureText(titleText).width;
+      if (measured <= width * 0.90) {
+        bestSize = mid;
+        lo = mid + 1;
+      } else {
+        hi = mid - 1;
+      }
+    }
+
+    const titleFontSize = bestSize;
+    offCtx.font = `600 ${titleFontSize}px ${fontStack}`;
+    if ('letterSpacing' in offCtx) {
+      (offCtx as unknown as { letterSpacing: string }).letterSpacing =
+        `${Math.round(titleFontSize * letterSpacingRatio)}px`;
+    }
 
     const centerX = width / 2;
-    const centerY = height / 2;
+    // Perfectly vertically centered in canvas (no subtitle below)
+    const centerY = height * 0.52;
 
-    const titleY = centerY - titleFontSize * 0.12;
-    const subtitleY = titleY + titleFontSize * 0.62;
-
-    // Draw primary wordmark using site's primary font: Cormorant Garamond
     offCtx.fillStyle = '#000000';
     offCtx.textAlign = 'center';
     offCtx.textBaseline = 'middle';
-    offCtx.font = `700 ${titleFontSize}px "Cormorant Garamond", Georgia, serif`;
+    offCtx.fillText(titleText, centerX, centerY);
 
-    if ('letterSpacing' in offCtx) {
-      (offCtx as unknown as { letterSpacing: string }).letterSpacing = `${Math.round(titleFontSize * (isMobile ? 0.10 : 0.08))}px`;
-    }
-    offCtx.fillText(titleText, centerX, titleY);
-
-    // Grid stride calibrated for delicate serif curves & hairlines
-    const sampleGrid = isMobile ? 3.6 : 4.4;
-    const step = Math.max(3, Math.round(sampleGrid * dpr));
+    // High-density sampling stride for razor-sharp serif fidelity (3.2px desktop / 2.5px mobile)
+    const stride = isMobile ? 2.5 : 3.2;
+    const step = Math.max(2, Math.round(stride * dpr));
 
     const imageData = offCtx.getImageData(0, 0, offCanvas.width, offCanvas.height);
     const data = imageData.data;
 
     const newParticles: Particle[] = [];
 
-    // 3. Primary Title: 100% Pure Crisp Dots
     for (let py = 0; py < offCanvas.height; py += step) {
       for (let px = 0; px < offCanvas.width; px += step) {
         const index = (py * offCanvas.width + px) * 4;
         const alpha = data[index + 3];
 
-        if (alpha > 80) {
+        // Low threshold so fine serifs, brackets, and tapers are captured
+        if (alpha > 75) {
           const posX = px / dpr;
           const posY = py / dpr;
 
           newParticles.push({
-            x: posX + (Math.random() - 0.5) * 0.4,
-            y: posY + (Math.random() - 0.5) * 0.4,
+            x: posX + (Math.random() - 0.5) * 0.3,
+            y: posY + (Math.random() - 0.5) * 0.3,
             originX: posX,
             originY: posY,
             vx: 0,
             vy: 0,
-            isSubtitle: false,
-            radius: titleDotRadius,
-          });
-        }
-      }
-    }
-
-    // 4. Subtitle: "ARCHITECTURE & INTERIOR DESIGN" (Site's subheading font: Manrope)
-    offCtx.clearRect(0, 0, offCanvas.width, offCanvas.height);
-    offCtx.font = `600 ${subtitleFontSize}px "Manrope", "DM Sans", sans-serif`;
-    if ('letterSpacing' in offCtx) {
-      (offCtx as unknown as { letterSpacing: string }).letterSpacing = `${Math.round(subtitleFontSize * 0.36)}px`;
-    }
-    offCtx.fillText('ARCHITECTURE & INTERIOR DESIGN', centerX, subtitleY);
-
-    const subImageData = offCtx.getImageData(0, 0, offCanvas.width, offCanvas.height);
-    const subData = subImageData.data;
-    const subStep = Math.max(3, Math.round((isMobile ? 3.2 : 3.6) * dpr));
-
-    for (let py = 0; py < offCanvas.height; py += subStep) {
-      for (let px = 0; px < offCanvas.width; px += subStep) {
-        const index = (py * offCanvas.width + px) * 4;
-        const alpha = subData[index + 3];
-
-        if (alpha > 80) {
-          const posX = px / dpr;
-          const posY = py / dpr;
-
-          newParticles.push({
-            x: posX + (Math.random() - 0.5) * 0.4,
-            y: posY + (Math.random() - 0.5) * 0.4,
-            originX: posX,
-            originY: posY,
-            vx: 0,
-            vy: 0,
-            isSubtitle: true,
-            radius: subDotRadius,
+            radius: dotRadius,
           });
         }
       }
@@ -200,9 +184,12 @@ export const ArchitecturalParticleLogo: React.FC = () => {
     initParticles();
 
     if (document.fonts) {
-      document.fonts.load('700 80px "Cormorant Garamond"').then(() => {
+      Promise.all([
+        document.fonts.load('600 80px "Cinzel"').catch(() => {}),
+        document.fonts.load('700 80px "Cormorant Garamond"').catch(() => {}),
+      ]).then(() => {
         initParticles();
-      }).catch(() => {});
+      });
 
       if (document.fonts.ready) {
         document.fonts.ready.then(() => {
@@ -233,8 +220,7 @@ export const ArchitecturalParticleLogo: React.FC = () => {
       mouse.y += (mouse.targetY - mouse.y) * 0.24;
 
       const particles = particlesRef.current;
-      const charcoalDot = charcoalDotSpriteRef.current;
-      const bronzeDot = bronzeDotSpriteRef.current;
+      const spriteInfo = dotSpriteRef.current;
       const radius = mouse.radius;
       const radiusSq = radius * radius;
 
@@ -249,7 +235,7 @@ export const ArchitecturalParticleLogo: React.FC = () => {
 
           if (distSq < radiusSq && distSq > 0.01) {
             const dist = Math.sqrt(distSq);
-            const force = Math.pow(1 - dist / radius, 1.35) * 9.0;
+            const force = Math.pow(1 - dist / radius, 1.35) * 9.2;
             const angle = Math.atan2(dy, dx);
             p.vx += Math.cos(angle) * force;
             p.vy += Math.sin(angle) * force;
@@ -269,14 +255,13 @@ export const ArchitecturalParticleLogo: React.FC = () => {
         p.y += p.vy;
 
         // 3. Render 1:1 Pixel-Accurate Crisp Dots
-        const dotSprite = p.isSubtitle ? bronzeDot : charcoalDot;
-        if (dotSprite) {
-          const offset = dotSprite.size / 2;
+        if (spriteInfo) {
+          const offset = spriteInfo.size / 2;
           const drawX = Math.round((p.x - offset) * dpr);
           const drawY = Math.round((p.y - offset) * dpr);
-          ctx.drawImage(dotSprite.canvas, drawX, drawY);
+          ctx.drawImage(spriteInfo.canvas, drawX, drawY);
         } else {
-          ctx.fillStyle = p.isSubtitle ? '#B88E4B' : '#151412';
+          ctx.fillStyle = '#161513';
           ctx.beginPath();
           ctx.arc(p.x * dpr, p.y * dpr, p.radius * dpr, 0, Math.PI * 2);
           ctx.fill();
@@ -291,14 +276,14 @@ export const ArchitecturalParticleLogo: React.FC = () => {
 
         ctx.save();
         ctx.strokeStyle = '#181715';
-        ctx.lineWidth = 1.3 * dpr;
+        ctx.lineWidth = 1.2 * dpr;
         ctx.beginPath();
         ctx.arc(ringX, ringY, ringRadius, 0, Math.PI * 2);
         ctx.stroke();
 
         ctx.fillStyle = '#181715';
         ctx.beginPath();
-        ctx.arc(ringX, ringY, 2.4 * dpr, 0, Math.PI * 2);
+        ctx.arc(ringX, ringY, 2.2 * dpr, 0, Math.PI * 2);
         ctx.fill();
         ctx.restore();
       }
@@ -422,7 +407,7 @@ export const ArchitecturalParticleLogo: React.FC = () => {
             aria-label="Interactive particle typography of MITJEN INTERIORS composed of 100% crisp dot-matrix particles"
           />
 
-          <h2 className="arch-particle-sr-only">MITJEN INTERIORS — ARCHITECTURE &amp; INTERIOR DESIGN</h2>
+          <h2 className="arch-particle-sr-only">MITJEN INTERIORS</h2>
         </div>
       </div>
     </section>
