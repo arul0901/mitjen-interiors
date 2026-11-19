@@ -8,14 +8,15 @@ import './FooterParticleBanner.css';
  * the site footer on the About page, faithful to the United Carriers
  * reference animation.
  *
- * 100% Crisp Dots — Absolutely NO interior objects or icons.
+ * 100% Crisp, Prominent Dots — Perfectly sized dot-matrix letterforms.
  *
  * Key behaviours:
  *  - Full-width edge-to-edge dot-matrix letterforms ("MITJEN INTERIORS").
+ *  - Substantially larger, bold, crisp dots (radius ~2.75px, diameter ~5.5px).
  *  - Particles form smoothly on scroll into viewport.
  *  - Cursor proximity disperses dots radially with natural spring physics.
  *  - Custom circular cursor ring (circle + center dot) replaces system cursor.
- *  - High-performance antialiased canvas rendering.
+ *  - High-performance 1:1 pixel-accurate antialiased canvas rendering.
  */
 
 interface Particle {
@@ -28,19 +29,20 @@ interface Particle {
   radius: number;
 }
 
-function createDotSprite(color: string, dpr: number): HTMLCanvasElement {
+function createDotSprite(radius: number, color: string, dpr: number): { canvas: HTMLCanvasElement; size: number } {
+  const size = Math.ceil(radius * 2 + 2);
   const c = document.createElement('canvas');
-  c.width = 12 * dpr;
-  c.height = 12 * dpr;
+  c.width = Math.round(size * dpr);
+  c.height = Math.round(size * dpr);
   const ctx = c.getContext('2d');
-  if (!ctx) return c;
+  if (!ctx) return { canvas: c, size };
 
   ctx.scale(dpr, dpr);
   ctx.fillStyle = color;
   ctx.beginPath();
-  ctx.arc(6, 6, 2.5, 0, Math.PI * 2);
+  ctx.arc(size / 2, size / 2, radius, 0, Math.PI * 2);
   ctx.fill();
-  return c;
+  return { canvas: c, size };
 }
 
 export const FooterParticleBanner: React.FC = () => {
@@ -49,7 +51,7 @@ export const FooterParticleBanner: React.FC = () => {
   const rafIdRef = useRef<number | null>(null);
 
   const particlesRef = useRef<Particle[]>([]);
-  const dotSpriteRef = useRef<HTMLCanvasElement | null>(null);
+  const dotSpriteRef = useRef<{ canvas: HTMLCanvasElement; size: number } | null>(null);
 
   const mouseRef = useRef({
     x: -9999,
@@ -57,12 +59,12 @@ export const FooterParticleBanner: React.FC = () => {
     targetX: -9999,
     targetY: -9999,
     isActive: false,
-    radius: 96,
+    radius: 104,
   });
 
   const isFormedRef = useRef(false);
 
-  // ─── Particle initialisation (100% dots) ──────────────────────────────────
+  // ─── Particle initialisation (100% Bold Crisp Dots) ───────────────────────
   const initParticles = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -76,8 +78,12 @@ export const FooterParticleBanner: React.FC = () => {
     canvas.width = Math.round(width * dpr);
     canvas.height = Math.round(height * dpr);
 
-    // Pre-render antialiased crisp dot sprite
-    dotSpriteRef.current = createDotSprite('#151412', dpr);
+    const isMobile = width < 640;
+    // Bold, prominent dots: radius 2.75px on desktop (5.5px diameter), 2.1px on mobile (4.2px diameter)
+    const dotRadius = isMobile ? 2.1 : 2.75;
+
+    // Pre-render antialiased crisp dot sprite at exact size (no stretching)
+    dotSpriteRef.current = createDotSprite(dotRadius, '#151412', dpr);
 
     // Offscreen canvas for text raster sampling
     const off = document.createElement('canvas');
@@ -88,11 +94,10 @@ export const FooterParticleBanner: React.FC = () => {
 
     offCtx.scale(dpr, dpr);
 
-    const isMobile = width < 640;
     const text = isMobile ? 'MITJEN' : 'MITJEN INTERIORS';
 
-    // Calibrate font size so text spans ~90-92% of the canvas width
-    let lo = 20;
+    // Calibrate font size so text spans ~90-93% of the canvas width
+    let lo = 24;
     let hi = Math.round(height * 0.95);
     let bestSize = lo;
 
@@ -126,8 +131,8 @@ export const FooterParticleBanner: React.FC = () => {
     const textY = height * 0.52;
     offCtx.fillText(text, width / 2, textY);
 
-    // Grid sampling matching United Carriers dot-matrix density (~5-6 px stride)
-    const stride = isMobile ? 4.6 : 5.4;
+    // Grid sampling matching United Carriers dot-matrix density (~6.8px stride on desktop)
+    const stride = isMobile ? 5.2 : 6.8;
     const step = Math.max(3, Math.round(stride * dpr));
 
     const imgData = offCtx.getImageData(0, 0, off.width, off.height);
@@ -141,11 +146,10 @@ export const FooterParticleBanner: React.FC = () => {
         const idx = (py * off.width + px) * 4;
         const alpha = data[idx + 3];
 
-        if (alpha > 110) {
+        if (alpha > 100) {
           const ox = px / dpr;
           const oy = py / dpr;
 
-          // Initial position: formed at origin or scattered randomly
           const scatterX = Math.random() * width;
           const scatterY = Math.random() * height;
 
@@ -156,7 +160,7 @@ export const FooterParticleBanner: React.FC = () => {
             originY: oy,
             vx: 0,
             vy: 0,
-            radius: isMobile ? 1.3 : 1.55,
+            radius: dotRadius,
           });
         }
       }
@@ -165,7 +169,7 @@ export const FooterParticleBanner: React.FC = () => {
     particlesRef.current = newParticles;
   }, []);
 
-  // ─── RAF animation loop (100% dots) ─────────────────────────────────────────
+  // ─── RAF animation loop (100% Bold Dots) ──────────────────────────────────
   useEffect(() => {
     initParticles();
 
@@ -191,7 +195,7 @@ export const FooterParticleBanner: React.FC = () => {
       mouse.y += (mouse.targetY - mouse.y) * 0.22;
 
       const particles = particlesRef.current;
-      const dotSprite = dotSpriteRef.current;
+      const spriteInfo = dotSpriteRef.current;
       const repRadius = mouse.radius;
       const repRadiusSq = repRadius * repRadius;
 
@@ -206,7 +210,7 @@ export const FooterParticleBanner: React.FC = () => {
 
           if (dSq < repRadiusSq && dSq > 0.01) {
             const dist = Math.sqrt(dSq);
-            const force = Math.pow(1 - dist / repRadius, 1.35) * 9.0;
+            const force = Math.pow(1 - dist / repRadius, 1.35) * 9.5;
             const ang = Math.atan2(dy, dx);
             p.vx += Math.cos(ang) * force;
             p.vy += Math.sin(ang) * force;
@@ -216,25 +220,19 @@ export const FooterParticleBanner: React.FC = () => {
         // Home spring return
         const hx = p.originX - p.x;
         const hy = p.originY - p.y;
-        p.vx += hx * 0.078;
-        p.vy += hy * 0.078;
+        p.vx += hx * 0.082;
+        p.vy += hy * 0.082;
         p.vx *= 0.865;
         p.vy *= 0.865;
         p.x += p.vx;
         p.y += p.vy;
 
-        // Render pure crisp dot
-        if (dotSprite) {
-          const sz = p.radius * 2;
-          const dx2 = Math.round((p.x - p.radius) * dpr);
-          const dy2 = Math.round((p.y - p.radius) * dpr);
-          ctx.drawImage(
-            dotSprite,
-            dx2,
-            dy2,
-            Math.round(sz * dpr),
-            Math.round(sz * dpr)
-          );
+        // Render bold crisp dot (1:1 sprite blit for max performance and sharpness)
+        if (spriteInfo) {
+          const offset = spriteInfo.size / 2;
+          const dx2 = Math.round((p.x - offset) * dpr);
+          const dy2 = Math.round((p.y - offset) * dpr);
+          ctx.drawImage(spriteInfo.canvas, dx2, dy2);
         } else {
           ctx.fillStyle = '#151412';
           ctx.beginPath();
@@ -255,14 +253,14 @@ export const FooterParticleBanner: React.FC = () => {
         const ry = mouse.y * dpr;
         ctx.save();
         ctx.strokeStyle = '#181715';
-        ctx.lineWidth = 1.2 * dpr;
+        ctx.lineWidth = 1.4 * dpr;
         ctx.beginPath();
-        ctx.arc(rx, ry, 28 * dpr, 0, Math.PI * 2);
+        ctx.arc(rx, ry, 30 * dpr, 0, Math.PI * 2);
         ctx.stroke();
 
         ctx.fillStyle = '#181715';
         ctx.beginPath();
-        ctx.arc(rx, ry, 2.4 * dpr, 0, Math.PI * 2);
+        ctx.arc(rx, ry, 2.8 * dpr, 0, Math.PI * 2);
         ctx.fill();
         ctx.restore();
       }

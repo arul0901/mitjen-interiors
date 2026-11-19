@@ -6,7 +6,7 @@ import './ArchitecturalParticleLogo.css';
  * -------------------------------------------------------------------
  * Pure dot-matrix particle composition spelling "MITJEN INTERIORS"
  * and subtitle "ARCHITECTURE & INTERIOR DESIGN".
- * 100% authentic crisp dots — absolutely no interior objects or icons.
+ * 100% authentic crisp, prominent dots — perfectly sized and legible.
  */
 interface Particle {
   x: number;
@@ -20,21 +20,22 @@ interface Particle {
 }
 
 /**
- * Pre-rendered Crisp Dot Sprite (High-DPR antialiased circular particle)
+ * Pre-rendered Crisp Dot Sprite at exact physical size (High-DPR antialiased circular particle)
  */
-function createDotSprite(color: string, dpr: number): HTMLCanvasElement {
+function createDotSprite(radius: number, color: string, dpr: number): { canvas: HTMLCanvasElement; size: number } {
+  const size = Math.ceil(radius * 2 + 2);
   const canvas = document.createElement('canvas');
-  canvas.width = 12 * dpr;
-  canvas.height = 12 * dpr;
+  canvas.width = Math.round(size * dpr);
+  canvas.height = Math.round(size * dpr);
   const ctx = canvas.getContext('2d');
-  if (!ctx) return canvas;
+  if (!ctx) return { canvas, size };
 
   ctx.scale(dpr, dpr);
   ctx.fillStyle = color;
   ctx.beginPath();
-  ctx.arc(6, 6, 2.5, 0, Math.PI * 2);
+  ctx.arc(size / 2, size / 2, radius, 0, Math.PI * 2);
   ctx.fill();
-  return canvas;
+  return { canvas, size };
 }
 
 export const ArchitecturalParticleLogo: React.FC = () => {
@@ -44,8 +45,8 @@ export const ArchitecturalParticleLogo: React.FC = () => {
 
   // Particles state (pure dots only)
   const particlesRef = useRef<Particle[]>([]);
-  const charcoalDotSpriteRef = useRef<HTMLCanvasElement | null>(null);
-  const bronzeDotSpriteRef = useRef<HTMLCanvasElement | null>(null);
+  const charcoalDotSpriteRef = useRef<{ canvas: HTMLCanvasElement; size: number } | null>(null);
+  const bronzeDotSpriteRef = useRef<{ canvas: HTMLCanvasElement; size: number } | null>(null);
 
   // Mouse / Pointer State
   const mouseRef = useRef<{
@@ -61,12 +62,12 @@ export const ArchitecturalParticleLogo: React.FC = () => {
     targetX: -9999,
     targetY: -9999,
     isActive: false,
-    radius: 76,
+    radius: 86,
   });
 
   const [, setIsHovered] = useState<boolean>(false);
 
-  // Initialize particles from rendered text (100% dots)
+  // Initialize particles from rendered text (100% bold dots)
   const initParticles = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -80,9 +81,14 @@ export const ArchitecturalParticleLogo: React.FC = () => {
     canvas.width = Math.round(width * dpr);
     canvas.height = Math.round(height * dpr);
 
-    // 1. Pre-render Dot sprites
-    charcoalDotSpriteRef.current = createDotSprite('#151412', dpr);
-    bronzeDotSpriteRef.current = createDotSprite('#B88E4B', dpr);
+    const isMobile = width < 680;
+    // Prominent, clear dot sizes: 2.5px radius (5.0px diameter) on desktop
+    const titleDotRadius = isMobile ? 1.9 : 2.5;
+    const subDotRadius = isMobile ? 1.3 : 1.6;
+
+    // 1. Pre-render Dot sprites at exact DPR-scaled size
+    charcoalDotSpriteRef.current = createDotSprite(titleDotRadius, '#151412', dpr);
+    bronzeDotSpriteRef.current = createDotSprite(subDotRadius, '#B88E4B', dpr);
 
     // 2. Offscreen Canvas for Typographic Sampling
     const offCanvas = document.createElement('canvas');
@@ -93,10 +99,9 @@ export const ArchitecturalParticleLogo: React.FC = () => {
 
     offCtx.scale(dpr, dpr);
 
-    const isMobile = width < 680;
     const titleText = isMobile ? 'MITJEN' : 'MITJEN INTERIORS';
-    const titleFontSize = Math.max(34, Math.min(84, Math.round(width * (isMobile ? 0.12 : 0.076))));
-    const subtitleFontSize = Math.max(9, Math.min(16, Math.round(titleFontSize * 0.18)));
+    const titleFontSize = Math.max(38, Math.min(88, Math.round(width * (isMobile ? 0.12 : 0.08))));
+    const subtitleFontSize = Math.max(10, Math.min(16, Math.round(titleFontSize * 0.18)));
 
     const centerX = width / 2;
     const centerY = height / 2;
@@ -115,8 +120,8 @@ export const ArchitecturalParticleLogo: React.FC = () => {
     }
     offCtx.fillText(titleText, centerX, titleY);
 
-    // Sample grid stride for crisp dot-matrix appearance
-    const sampleGrid = isMobile ? 4.8 : 5.4;
+    // Sample grid stride calibrated to larger dot size
+    const sampleGrid = isMobile ? 5.0 : 6.2;
     const step = Math.max(3, Math.round(sampleGrid * dpr));
 
     const imageData = offCtx.getImageData(0, 0, offCanvas.width, offCanvas.height);
@@ -124,13 +129,13 @@ export const ArchitecturalParticleLogo: React.FC = () => {
 
     const newParticles: Particle[] = [];
 
-    // 3. Primary Title: 100% Pure Crisp Dots
+    // 3. Primary Title: 100% Pure Crisp, Prominent Dots
     for (let py = 0; py < offCanvas.height; py += step) {
       for (let px = 0; px < offCanvas.width; px += step) {
         const index = (py * offCanvas.width + px) * 4;
         const alpha = data[index + 3];
 
-        if (alpha > 120) {
+        if (alpha > 110) {
           const posX = px / dpr;
           const posY = py / dpr;
 
@@ -142,13 +147,13 @@ export const ArchitecturalParticleLogo: React.FC = () => {
             vx: 0,
             vy: 0,
             isSubtitle: false,
-            radius: isMobile ? 1.3 : 1.55,
+            radius: titleDotRadius,
           });
         }
       }
     }
 
-    // 4. Subtitle: "ARCHITECTURE & INTERIOR DESIGN" (100% Pure Dots)
+    // 4. Subtitle: "ARCHITECTURE & INTERIOR DESIGN"
     offCtx.clearRect(0, 0, offCanvas.width, offCanvas.height);
     offCtx.font = `700 ${subtitleFontSize}px "Plus Jakarta Sans", "Montserrat", sans-serif`;
     if ('letterSpacing' in offCtx) {
@@ -158,14 +163,14 @@ export const ArchitecturalParticleLogo: React.FC = () => {
 
     const subImageData = offCtx.getImageData(0, 0, offCanvas.width, offCanvas.height);
     const subData = subImageData.data;
-    const subStep = Math.max(3, Math.round((isMobile ? 4.0 : 4.6) * dpr));
+    const subStep = Math.max(3, Math.round((isMobile ? 4.2 : 4.8) * dpr));
 
     for (let py = 0; py < offCanvas.height; py += subStep) {
       for (let px = 0; px < offCanvas.width; px += subStep) {
         const index = (py * offCanvas.width + px) * 4;
         const alpha = subData[index + 3];
 
-        if (alpha > 120) {
+        if (alpha > 110) {
           const posX = px / dpr;
           const posY = py / dpr;
 
@@ -177,7 +182,7 @@ export const ArchitecturalParticleLogo: React.FC = () => {
             vx: 0,
             vy: 0,
             isSubtitle: true,
-            radius: isMobile ? 1.1 : 1.3,
+            radius: subDotRadius,
           });
         }
       }
@@ -186,7 +191,7 @@ export const ArchitecturalParticleLogo: React.FC = () => {
     particlesRef.current = newParticles;
   }, []);
 
-  // Animation Loop: Pure Dot Physics & Rendering
+  // Animation Loop: Pure Dot Physics & 1:1 Sharp Rendering
   useEffect(() => {
     initParticles();
 
@@ -228,7 +233,7 @@ export const ArchitecturalParticleLogo: React.FC = () => {
 
           if (distSq < radiusSq && distSq > 0.01) {
             const dist = Math.sqrt(distSq);
-            const force = Math.pow(1 - dist / radius, 1.35) * 8.6;
+            const force = Math.pow(1 - dist / radius, 1.35) * 9.0;
             const angle = Math.atan2(dy, dx);
             p.vx += Math.cos(angle) * force;
             p.vy += Math.sin(angle) * force;
@@ -247,15 +252,13 @@ export const ArchitecturalParticleLogo: React.FC = () => {
         p.x += p.vx;
         p.y += p.vy;
 
-        // 3. Render 100% Crisp Dots
+        // 3. Render 1:1 Pixel-Accurate Crisp Dots
         const dotSprite = p.isSubtitle ? bronzeDot : charcoalDot;
         if (dotSprite) {
-          const drawSize = p.radius * 2;
-          const drawX = Math.round((p.x - p.radius) * dpr);
-          const drawY = Math.round((p.y - p.radius) * dpr);
-          const targetW = Math.round(drawSize * dpr);
-          const targetH = Math.round(drawSize * dpr);
-          ctx.drawImage(dotSprite, drawX, drawY, targetW, targetH);
+          const offset = dotSprite.size / 2;
+          const drawX = Math.round((p.x - offset) * dpr);
+          const drawY = Math.round((p.y - offset) * dpr);
+          ctx.drawImage(dotSprite.canvas, drawX, drawY);
         } else {
           ctx.fillStyle = p.isSubtitle ? '#B88E4B' : '#151412';
           ctx.beginPath();
@@ -268,7 +271,7 @@ export const ArchitecturalParticleLogo: React.FC = () => {
       if (mouse.isActive && mouse.x > 0 && mouse.x < width && mouse.y > 0 && mouse.y < height) {
         const ringX = mouse.x * dpr;
         const ringY = mouse.y * dpr;
-        const ringRadius = 26 * dpr;
+        const ringRadius = 28 * dpr;
 
         ctx.save();
         ctx.strokeStyle = '#181715';
@@ -279,7 +282,7 @@ export const ArchitecturalParticleLogo: React.FC = () => {
 
         ctx.fillStyle = '#181715';
         ctx.beginPath();
-        ctx.arc(ringX, ringY, 2.2 * dpr, 0, Math.PI * 2);
+        ctx.arc(ringX, ringY, 2.6 * dpr, 0, Math.PI * 2);
         ctx.fill();
         ctx.restore();
       }
