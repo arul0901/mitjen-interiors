@@ -3,7 +3,6 @@ import HowItWorksSection from "../components/HowItWorksSection";
 import MaterialsGallery from "../components/MaterialsGallery";
 import AboutVaneBanner from "../components/AboutVaneBanner/AboutVaneBanner";
 import ProjectsReflectOurRange from "../components/ProjectsReflectOurRange/ProjectsReflectOurRange";
-import ArchitecturalParticleLogo from "../components/ArchitecturalParticleLogo/ArchitecturalParticleLogo";
 
 const pageTitle = "About Us";
 
@@ -17,10 +16,7 @@ export default function About() {
       {/* 1. Kinetic Vane Hero Banner (2 Images) */}
       <AboutVaneBanner />
 
-      {/* 2. Interactive Architectural Particle Wordmark Banner */}
-      <ArchitecturalParticleLogo />
-
-      {/* 3. Text Marquee Slider */}
+      {/* 2. Text Marquee Slider */}
       <div className={"cs_horizontal_slider cs_type_1 cs_accent_bg cs_primary_font"}>
         <div className={"cs_slider_inner"}>
           <div className={"cs_sliding_content cs_fs_24 cs_bold cs_white_color"}>
@@ -423,6 +419,9 @@ export default function About() {
 
       {/* Interior Craft & Detail — Materials & Millwork Gallery */}
       <MaterialsGallery />
+
+      {/* Projects That Reflect Our Range (Horizontal Accordion & Mobile Grid) */}
+      <ProjectsReflectOurRange />
 
       {/* 7. Call To Action Strip */}
       <section
