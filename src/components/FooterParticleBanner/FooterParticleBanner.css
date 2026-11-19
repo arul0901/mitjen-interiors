@@ -1,6 +1,6 @@
 /* ─── FooterParticleBanner.css ────────────────────────────────────────────────
    Scoped styles for the footer-level dot-matrix particle typography banner.
-   Matches the United Carriers reference visual:
+   Faithful to the United Carriers reference visual:
      • Full viewport width, edge-to-edge
      • Ivory/off-white background (#FAF8F5) matching the existing page
      • Canvas fills the section height (~280-320 px on desktop)
@@ -8,19 +8,16 @@
      • Custom cursor: none on the canvas (replaced by in-canvas ring)
    ─────────────────────────────────────────────────────────────────────────── */
 
-/* ── Section wrapper ─────────────────────────────────────────────────────── */
 .fpb-section {
   position: relative;
   width: 100%;
   background-color: #FAF8F5;
   overflow: hidden;
-
-  /* Breathing room above and below so the banner feels like a deliberate pause */
   padding: 0;
   margin: 0;
+  user-select: none;
 }
 
-/* ── Thin hairline rules (top / bottom of the interactive area) ──────────── */
 .fpb-rule-top,
 .fpb-rule-bottom {
   width: 100%;
@@ -28,25 +25,21 @@
   background-color: rgba(21, 20, 18, 0.10);
 }
 
-/* ── Canvas wrapper ──────────────────────────────────────────────────────── */
 .fpb-canvas-wrap {
   position: relative;
   width: 100%;
-  /* Height matches reference video proportion (2506×292 px ≈ ~11.6 %) */
-  height: clamp(240px, 18vw, 320px);
+  height: clamp(220px, 18vw, 320px);
 }
 
-/* ── Canvas element ──────────────────────────────────────────────────────── */
 .fpb-canvas {
   display: block;
   width: 100%;
   height: 100%;
-  cursor: none;           /* System cursor hidden; replaced by canvas ring  */
-  touch-action: none;     /* Allow pointer events without scroll hijack      */
+  cursor: none;
+  touch-action: none;
   -webkit-tap-highlight-color: transparent;
 }
 
-/* ── Screen-reader only text ─────────────────────────────────────────────── */
 .fpb-sr-only {
   position: absolute;
   width: 1px;
@@ -59,13 +52,10 @@
   border: 0;
 }
 
-/* ── Responsive overrides ────────────────────────────────────────────────── */
 @media (max-width: 767px) {
   .fpb-canvas-wrap {
     height: clamp(140px, 28vw, 220px);
   }
-
-  /* Restore default cursor on touch devices — no hover to hide it for */
   .fpb-canvas {
     cursor: default;
   }
