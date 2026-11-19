@@ -9,6 +9,7 @@ interface RangeProject {
   title: string;
   subtitle: string;
   description: string;
+  expertiseHighlights: string[];
   image: string;
   slug: string;
   shortLabel: string;
@@ -18,45 +19,69 @@ const RANGE_PROJECTS: RangeProject[] = [
   {
     id: 'modular-kitchen',
     num: '01',
-    title: 'MODULAR KITCHEN',
-    subtitle: 'Precision in Every Detail',
+    title: 'MODULAR KITCHENS & MILLWORK',
+    subtitle: 'German & Italian Precision Engineering',
     description:
-      'A carefully crafted kitchen where storage, fittings and finishes come together with clean lines, accurate proportions and smooth functionality.',
+      'Turnkey culinary workspaces engineered around ergonomic workflow zones, high-durability BWP marine-grade carcasses, anti-scratch quartz worktops, and multi-layer Italian PU coatings with zero-tolerance alignment.',
+    expertiseHighlights: [
+      'Multi-layer Italian PU coatings on bespoke cabinetry',
+      'Concealed soft-close Blum tandem runners & hinges',
+      'Engineered BWP marine-grade plywood (10-Yr Warranty)',
+      'Integrated task lighting with hidden dimmer profiles',
+    ],
     image: '/assets/mitijen/kitchen.jpeg',
-    slug: '/projects',
+    slug: '/services',
     shortLabel: 'Kitchen',
   },
   {
-    id: 'office-conference',
+    id: 'corporate-workspaces',
     num: '02',
-    title: 'OFFICE & CONFERENCE HALL',
-    subtitle: 'Designed for a Professional Standard',
+    title: 'CORPORATE & EXECUTIVE OFFICES',
+    subtitle: 'High-Performance Acoustic Environments',
     description:
-      'A refined workplace environment with considered layouts, precise detailing and a finish that reflects the quality of the business.',
-    image: '/assets/mitijen/commercial4.jpeg',
-    slug: '/projects',
+      'Corporate headquarters, boardrooms, and collaborative studios crafted with acoustic timber wall baffling, cable-free conference integration, circadian task illumination, and executive finishings.',
+    expertiseHighlights: [
+      'Acoustic wall baffling & speech privacy decoupling',
+      'Discreet cable-free smart conference AV integration',
+      'Ergonomic zoning for focused & collaborative work',
+      'American Walnut & architectural bronze transitions',
+    ],
+    image: '/images/Corporate/Corporate1.jpeg',
+    slug: '/services/corporate-interior-design',
     shortLabel: 'Corporate',
   },
   {
     id: 'theatre-media',
     num: '03',
-    title: 'THEATRE & MEDIA ROOM',
-    subtitle: 'Built Around the Experience',
+    title: 'THEATRES & MEDIA ROOMS',
+    subtitle: 'Immersive Acoustics & Calibrated Illumination',
     description:
-      'A detailed entertainment setting where layout, lighting, finishes and custom elements come together to create an immersive environment.',
+      'Dedicated private screening environments engineered with calibrated multi-channel sound decoupling, acoustic suede wall wrap assemblies, stepped ambient cove lighting, and bespoke luxury seating.',
+    expertiseHighlights: [
+      'Acoustic fabric baffling & reverberation control',
+      'Architectural stepped cove & scene dimmer automation',
+      'Optimal sightline geometry & motorized recliner layout',
+      'Concealed sub-bass decoupling & projector niche',
+    ],
     image: '/assets/mitijen/commercial2.jpeg',
-    slug: '/projects',
+    slug: '/services/commercial-interior-design',
     shortLabel: 'Theatre',
   },
   {
-    id: 'bedroom',
+    id: 'residential-bedroom',
     num: '04',
-    title: 'BEDROOM',
-    subtitle: 'Crafted for Everyday Comfort',
+    title: 'RESIDENTIAL & BEDROOM SUITES',
+    subtitle: 'Diurnal Spatial Planning & Restorative Sanctuary',
     description:
-      'A refined personal setting combining tailored storage, balanced finishes and carefully executed details for a calm and complete interior.',
-    image: '/assets/mitijen/bedroom.jpeg',
-    slug: '/projects',
+      'Serene private sanctuaries shaped by natural diurnal light, custom walk-in dressing cabinetry, hand-buffed fluted timber headboards, and circadian illumination for deep relaxation and living permanence.',
+    expertiseHighlights: [
+      'Tailored walk-in dressing suites with sensor LED lighting',
+      'Hand-buffed fluted joinery with acoustic sound dampening',
+      'Circadian lighting scenes for natural diurnal rhythm',
+      'Multi-generational solid timber & honed stone craft',
+    ],
+    image: '/images/Residential/Residential5.jpeg',
+    slug: '/services/residential-interior-design',
     shortLabel: 'Residential',
   },
 ];
@@ -75,7 +100,7 @@ export const ProjectsReflectOurRange: React.FC = () => {
     <section
       className="renova-transformations"
       id="transformations"
-      aria-label="A Glimpse Into Our Work"
+      aria-label="A Glimpse Into Our Architectural Expertise"
     >
       <div className="renova-trans-container">
         {/* ==============================================================
@@ -86,19 +111,19 @@ export const ProjectsReflectOurRange: React.FC = () => {
             <div>
               <span className="renova-eyebrow-text">
                 <span className="renova-eyebrow-bullet" />
-                A GLIMPSE INTO OUR WORK
+                OUR ARCHITECTURAL EXPERTISE
               </span>
               <h2 className="renova-trans-title">PROJECTS THAT REFLECT OUR RANGE.</h2>
             </div>
             <p className="renova-trans-subtitle">
-              From personal interiors to professional environments, our portfolio brings together work shaped by different requirements, settings and ideas.
+              From private residential sanctuaries to high-performance corporate environments and turnkey millwork, our multidisciplinary expertise transforms architectural vision into living permanence.
             </p>
           </div>
 
           <div
             className="renova-expand-accordion"
             role="tablist"
-            aria-label="Projects Reflecting Our Range Showcase"
+            aria-label="Architectural Expertise and Projects Showcase"
           >
             {RANGE_PROJECTS.map((proj, idx) => {
               const isActive = activeId === proj.id;
@@ -164,6 +189,16 @@ export const ProjectsReflectOurRange: React.FC = () => {
                     <h3 className="renova-acc-heading">{proj.title}</h3>
                     <p className="renova-acc-desc">{proj.description}</p>
 
+                    {/* Architectural Highlights / Expertise Chips */}
+                    <div className="renova-acc-highlights">
+                      {proj.expertiseHighlights.map((hl, hlIdx) => (
+                        <span key={hlIdx} className="renova-acc-chip">
+                          <span className="renova-acc-chip-icon">✓</span>
+                          <span>{hl}</span>
+                        </span>
+                      ))}
+                    </div>
+
                     <div className="renova-acc-actions">
                       <button
                         type="button"
@@ -181,7 +216,7 @@ export const ProjectsReflectOurRange: React.FC = () => {
                         className="renova-acc-spec-link"
                         onClick={(e) => e.stopPropagation()}
                       >
-                        <span>Explore Projects</span>
+                        <span>Explore Expertise</span>
                         <span aria-hidden="true">→</span>
                       </Link>
                     </div>
@@ -206,10 +241,10 @@ export const ProjectsReflectOurRange: React.FC = () => {
           <div className="renova-mob-header">
             <span className="renova-mob-eyebrow">
               <span className="renova-mob-bullet" />
-              A GLIMPSE INTO OUR WORK
+              OUR ARCHITECTURAL EXPERTISE
             </span>
             <h2 className="renova-mob-title">PROJECTS THAT REFLECT OUR RANGE.</h2>
-            <p className="renova-mob-subtitle">Tap a project to view it.</p>
+            <p className="renova-mob-subtitle">Tap a discipline to view our craftsmanship.</p>
           </div>
 
           <div className="renova-mob-featured-card">
@@ -235,6 +270,17 @@ export const ProjectsReflectOurRange: React.FC = () => {
             >
               Enquire
             </button>
+          </div>
+
+          <p className="renova-mob-full-desc">{currentProject.description}</p>
+
+          <div className="renova-mob-highlights">
+            {currentProject.expertiseHighlights.map((hl, hlIdx) => (
+              <div key={hlIdx} className="renova-mob-chip">
+                <span className="renova-mob-chip-check">✓</span>
+                <span>{hl}</span>
+              </div>
+            ))}
           </div>
 
           <div

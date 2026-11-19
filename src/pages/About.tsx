@@ -119,9 +119,10 @@ export default function About() {
         </div>
         <div className={"cs_height_120 cs_height_lg_80"}></div>
       </section>
-
+      {/* Projects That Reflect Our Range (Horizontal Accordion & Mobile Grid) */}
+      <ProjectsReflectOurRange />
       {/* 4. Core Services Showcase Strip */}
-      <section className={"cs_gray_bg"}>
+      {/* <section className={"cs_gray_bg"}>
         <div className={"cs_height_120 cs_height_lg_80"}></div>
         <div className={"container-fluid"}>
           <div className={"cs_section_heading_style_1 cs_center_column text-center"}>
@@ -206,7 +207,7 @@ export default function About() {
           </div>
         </div>
         <div className={"cs_height_120 cs_height_lg_80"}></div>
-      </section>
+      </section> */}
 
       {/* 5. Why Choose Us / Craftsmanship Standards */}
       <section className={"cs_about_style_1 cs_type_1"}>
@@ -418,9 +419,6 @@ export default function About() {
 
       {/* Interior Craft & Detail — Materials & Millwork Gallery */}
       <MaterialsGallery />
-
-      {/* Projects That Reflect Our Range (Horizontal Accordion & Mobile Grid) */}
-      <ProjectsReflectOurRange />
 
       {/* 7. Call To Action Strip */}
       <section
