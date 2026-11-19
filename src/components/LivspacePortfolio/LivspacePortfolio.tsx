@@ -772,9 +772,17 @@ export const LivspacePortfolio: React.FC = () => {
                     onClick={() => {
                       handleCloseModal();
                       navigate('/contact');
-                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                      setTimeout(() => {
+                        const formEl = document.getElementById('cs_form');
+                        if (formEl) {
+                          formEl.scrollIntoView({ behavior: 'smooth' });
+                        } else {
+                          window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }
+                      }, 100);
                     }}
                     className="liv-btn-inquire"
+                    aria-label="Inquire about this specification on the contact page"
                   >
                     <span>Inquire About This Specification</span>
                     <ArrowRight size={13} />

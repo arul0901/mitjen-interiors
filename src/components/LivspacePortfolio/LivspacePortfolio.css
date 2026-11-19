@@ -1259,10 +1259,11 @@
 }
 
 .liv-modal-highlights-title {
-  font-size: 0.72rem;
+  font-family: var(--liv-serif, 'Cinzel', 'Playfair Display', serif);
+  font-size: 0.85rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;
   color: var(--liv-ink);
   margin: 0;
 }
@@ -1270,44 +1271,46 @@
 .liv-modal-highlights-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 6px;
+  gap: 8px 16px;
 }
 
 .liv-modal-highlight-item {
   display: flex;
   align-items: flex-start;
-  gap: 6px;
-  font-size: 0.74rem;
+  gap: 8px;
+  font-size: 0.76rem;
   color: var(--liv-ink-muted);
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
 .liv-modal-highlight-item svg {
-  color: var(--liv-green);
+  color: #2e7d32;
   flex-shrink: 0;
-  margin-top: 1px;
+  margin-top: 2px;
 }
 
 .liv-modal-footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 14px;
-  padding-bottom: 4px;
+  padding-top: 18px;
+  padding-bottom: 6px;
   border-top: 1px dashed var(--liv-border);
   width: 100%;
+  margin-top: 10px;
 }
 
 .liv-modal-footer .liv-btn-inquire {
+  margin: 0 auto;
   flex: none;
   width: auto;
   max-width: 90%;
   background: #FFFFFF;
   color: var(--liv-ink);
   border: 1.5px solid rgba(30, 26, 22, 0.22);
-  padding: 10px 32px;
+  padding: 11px 36px;
   border-radius: 999px;
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.03em;
   display: inline-flex;
