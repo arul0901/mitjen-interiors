@@ -9,7 +9,6 @@ interface RangeProject {
   title: string;
   subtitle: string;
   description: string;
-  expertiseHighlights: string[];
   image: string;
   slug: string;
   shortLabel: string;
@@ -19,76 +18,70 @@ const RANGE_PROJECTS: RangeProject[] = [
   {
     id: 'modular-kitchen',
     num: '01',
-    title: 'MODULAR KITCHENS & MILLWORK',
-    subtitle: 'German & Italian Precision Engineering',
+    title: 'MODULAR KITCHEN',
+    subtitle: 'Precision in Every Detail',
     description:
-      'Turnkey culinary workspaces engineered around ergonomic workflow zones, high-durability BWP marine-grade carcasses, anti-scratch quartz worktops, and multi-layer Italian PU coatings with zero-tolerance alignment.',
-    expertiseHighlights: [
-      'Multi-layer Italian PU coatings on bespoke cabinetry',
-      'Concealed soft-close Blum tandem runners & hinges',
-      'Engineered BWP marine-grade plywood (10-Yr Warranty)',
-      'Integrated task lighting with hidden dimmer profiles',
-    ],
+      'A carefully crafted kitchen where storage, fittings and finishes come together with clean lines, accurate proportions and smooth functionality.',
     image: '/assets/mitijen/kitchen.jpeg',
-    slug: '/services',
+    slug: '/projects',
     shortLabel: 'Kitchen',
   },
   {
-    id: 'corporate-workspaces',
+    id: 'office-conference',
     num: '02',
-    title: 'CORPORATE & EXECUTIVE OFFICES',
-    subtitle: 'High-Performance Acoustic Environments',
+    title: 'OFFICE & CONFERENCE HALL',
+    subtitle: 'Designed for a Professional Standard',
     description:
-      'Corporate headquarters, boardrooms, and collaborative studios crafted with acoustic timber wall baffling, cable-free conference integration, circadian task illumination, and executive finishings.',
-    expertiseHighlights: [
-      'Acoustic wall baffling & speech privacy decoupling',
-      'Discreet cable-free smart conference AV integration',
-      'Ergonomic zoning for focused & collaborative work',
-      'American Walnut & architectural bronze transitions',
-    ],
-    image: '/images/Corporate/Corporate1.jpeg',
-    slug: '/services/corporate-interior-design',
+      'A refined workplace environment with considered layouts, precise detailing and a finish that reflects the quality of the business.',
+    image: '/assets/mitijen/commercial4.jpeg',
+    slug: '/projects',
     shortLabel: 'Corporate',
   },
   {
     id: 'theatre-media',
     num: '03',
-    title: 'THEATRES & MEDIA ROOMS',
-    subtitle: 'Immersive Acoustics & Calibrated Illumination',
+    title: 'THEATRE & MEDIA ROOM',
+    subtitle: 'Built Around the Experience',
     description:
-      'Dedicated private screening environments engineered with calibrated multi-channel sound decoupling, acoustic suede wall wrap assemblies, stepped ambient cove lighting, and bespoke luxury seating.',
-    expertiseHighlights: [
-      'Acoustic fabric baffling & reverberation control',
-      'Architectural stepped cove & scene dimmer automation',
-      'Optimal sightline geometry & motorized recliner layout',
-      'Concealed sub-bass decoupling & projector niche',
-    ],
+      'A detailed entertainment setting where layout, lighting, finishes and custom elements come together to create an immersive environment.',
     image: '/assets/mitijen/commercial2.jpeg',
-    slug: '/services/commercial-interior-design',
+    slug: '/projects',
     shortLabel: 'Theatre',
   },
   {
-    id: 'residential-bedroom',
+    id: 'bedroom',
     num: '04',
-    title: 'RESIDENTIAL & BEDROOM SUITES',
-    subtitle: 'Diurnal Spatial Planning & Restorative Sanctuary',
+    title: 'BEDROOM',
+    subtitle: 'Crafted for Everyday Comfort',
     description:
-      'Serene private sanctuaries shaped by natural diurnal light, custom walk-in dressing cabinetry, hand-buffed fluted timber headboards, and circadian illumination for deep relaxation and living permanence.',
-    expertiseHighlights: [
-      'Tailored walk-in dressing suites with sensor LED lighting',
-      'Hand-buffed fluted joinery with acoustic sound dampening',
-      'Circadian lighting scenes for natural diurnal rhythm',
-      'Multi-generational solid timber & honed stone craft',
-    ],
-    image: '/images/Residential/Residential5.jpeg',
-    slug: '/services/residential-interior-design',
+      'A refined personal setting combining tailored storage, balanced finishes and carefully executed details for a calm and complete interior.',
+    image: '/assets/mitijen/bedroom.jpeg',
+    slug: '/projects',
     shortLabel: 'Residential',
   },
 ];
 
 export const ProjectsReflectOurRange: React.FC = () => {
   const [activeId, setActiveId] = useState<string>(RANGE_PROJECTS[0].id);
+  const activeIdRef = React.useRef<string>(activeId);
+  activeIdRef.current = activeId;
+  const rafRef = React.useRef<number | null>(null);
+
   const { openInquiry } = useInquiry();
+
+  const handleCardHover = React.useCallback((id: string) => {
+    if (activeIdRef.current === id) return;
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    rafRef.current = requestAnimationFrame(() => {
+      setActiveId(id);
+    });
+  }, []);
+
+  React.useEffect(() => {
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, []);
 
   const handleEnquire = (projectName: string) => {
     openInquiry();
@@ -100,7 +93,7 @@ export const ProjectsReflectOurRange: React.FC = () => {
     <section
       className="renova-transformations"
       id="transformations"
-      aria-label="A Glimpse Into Our Architectural Expertise"
+      aria-label="A Glimpse Into Our Work"
     >
       <div className="renova-trans-container">
         {/* ==============================================================
@@ -111,19 +104,19 @@ export const ProjectsReflectOurRange: React.FC = () => {
             <div>
               <span className="renova-eyebrow-text">
                 <span className="renova-eyebrow-bullet" />
-                OUR ARCHITECTURAL EXPERTISE
+                A GLIMPSE INTO OUR WORK
               </span>
               <h2 className="renova-trans-title">PROJECTS THAT REFLECT OUR RANGE.</h2>
             </div>
             <p className="renova-trans-subtitle">
-              From private residential sanctuaries to high-performance corporate environments and turnkey millwork, our multidisciplinary expertise transforms architectural vision into living permanence.
+              From personal interiors to professional environments, our portfolio brings together work shaped by different requirements, settings and ideas.
             </p>
           </div>
 
           <div
             className="renova-expand-accordion"
             role="tablist"
-            aria-label="Architectural Expertise and Projects Showcase"
+            aria-label="Projects Reflecting Our Range Showcase"
           >
             {RANGE_PROJECTS.map((proj, idx) => {
               const isActive = activeId === proj.id;
@@ -136,23 +129,23 @@ export const ProjectsReflectOurRange: React.FC = () => {
                   aria-controls={`acc-content-${proj.id}`}
                   tabIndex={0}
                   className={`renova-acc-card ${isActive ? 'is-active' : ''}`}
-                  onClick={() => setActiveId(proj.id)}
-                  onMouseEnter={() => setActiveId(proj.id)}
-                  onFocus={() => setActiveId(proj.id)}
+                  onClick={() => handleCardHover(proj.id)}
+                  onMouseEnter={() => handleCardHover(proj.id)}
+                  onFocus={() => handleCardHover(proj.id)}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter' || e.key === ' ') {
                       e.preventDefault();
-                      setActiveId(proj.id);
+                      handleCardHover(proj.id);
                     } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
                       e.preventDefault();
                       const next = RANGE_PROJECTS[(idx + 1) % RANGE_PROJECTS.length];
-                      setActiveId(next.id);
+                      handleCardHover(next.id);
                       document.getElementById(`acc-panel-${next.id}`)?.focus();
                     } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
                       e.preventDefault();
                       const prev =
                         RANGE_PROJECTS[(idx - 1 + RANGE_PROJECTS.length) % RANGE_PROJECTS.length];
-                      setActiveId(prev.id);
+                      handleCardHover(prev.id);
                       document.getElementById(`acc-panel-${prev.id}`)?.focus();
                     }
                   }}
@@ -189,16 +182,6 @@ export const ProjectsReflectOurRange: React.FC = () => {
                     <h3 className="renova-acc-heading">{proj.title}</h3>
                     <p className="renova-acc-desc">{proj.description}</p>
 
-                    {/* Architectural Highlights / Expertise Chips */}
-                    <div className="renova-acc-highlights">
-                      {proj.expertiseHighlights.map((hl, hlIdx) => (
-                        <span key={hlIdx} className="renova-acc-chip">
-                          <span className="renova-acc-chip-icon">✓</span>
-                          <span>{hl}</span>
-                        </span>
-                      ))}
-                    </div>
-
                     <div className="renova-acc-actions">
                       <button
                         type="button"
@@ -216,7 +199,7 @@ export const ProjectsReflectOurRange: React.FC = () => {
                         className="renova-acc-spec-link"
                         onClick={(e) => e.stopPropagation()}
                       >
-                        <span>Explore Expertise</span>
+                        <span>Explore Projects</span>
                         <span aria-hidden="true">→</span>
                       </Link>
                     </div>
@@ -241,10 +224,10 @@ export const ProjectsReflectOurRange: React.FC = () => {
           <div className="renova-mob-header">
             <span className="renova-mob-eyebrow">
               <span className="renova-mob-bullet" />
-              OUR ARCHITECTURAL EXPERTISE
+              A GLIMPSE INTO OUR WORK
             </span>
             <h2 className="renova-mob-title">PROJECTS THAT REFLECT OUR RANGE.</h2>
-            <p className="renova-mob-subtitle">Tap a discipline to view our craftsmanship.</p>
+            <p className="renova-mob-subtitle">Tap a project to view it.</p>
           </div>
 
           <div className="renova-mob-featured-card">
@@ -270,17 +253,6 @@ export const ProjectsReflectOurRange: React.FC = () => {
             >
               Enquire
             </button>
-          </div>
-
-          <p className="renova-mob-full-desc">{currentProject.description}</p>
-
-          <div className="renova-mob-highlights">
-            {currentProject.expertiseHighlights.map((hl, hlIdx) => (
-              <div key={hlIdx} className="renova-mob-chip">
-                <span className="renova-mob-chip-check">✓</span>
-                <span>{hl}</span>
-              </div>
-            ))}
           </div>
 
           <div

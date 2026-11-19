@@ -106,7 +106,7 @@ export const MaterialsGallery: React.FC = () => {
                 className="corporate-desk-card"
                 role="listitem"
                 tabIndex={0}
-                aria-label={`${item.editorialTitle} — Hover to inspect details`}
+                aria-label={item.editorialTitle}
               >
                 <div className="corporate-desk-media">
                   <img

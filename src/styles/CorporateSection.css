@@ -118,143 +118,66 @@
   align-items: stretch;
   border-top: 1px solid rgba(36, 37, 34, 0.22);
   padding-top: 1.3rem;
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.8rem;
   position: relative;
-  overflow: hidden;
-  cursor: pointer;
-  outline: none;
   width: 100%;
   box-sizing: border-box;
+  gap: clamp(1.4rem, 2vw, 2.2rem);
 }
 
-/* Image container: defaultly takes 100% width, shrinks to 38% on hover */
+/* Image container: always visible at standard proportions, with overflow: hidden */
 .corporate-desk-media {
-  flex: 0 0 100%;
-  width: 100%;
-  max-width: 100%;
-  height: clamp(270px, 22vw, 310px);
+  flex: 0 0 46%;
+  width: 46%;
+  max-width: 46%;
+  height: clamp(240px, 20vw, 290px);
   border-radius: 10px;
   overflow: hidden;
   background: var(--sand, #D8C8B4);
   position: relative;
   box-sizing: border-box;
-  transition: flex-basis 0.65s cubic-bezier(0.2, 0.8, 0.2, 1),
-              max-width 0.65s cubic-bezier(0.2, 0.8, 0.2, 1),
-              width 0.65s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-.corporate-desk-card:hover .corporate-desk-media,
-.corporate-desk-card:focus-within .corporate-desk-media {
-  flex: 0 0 38%;
-  max-width: 38%;
-  width: 38%;
-}
-
+/* Image zoom on hover: subtle scale(1.06), completely smooth with GPU transform */
 .corporate-desk-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
   display: block;
-  transition: transform 0.85s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transform: scale(1);
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .corporate-desk-card:hover .corporate-desk-img,
 .corporate-desk-card:focus-within .corporate-desk-img {
-  transform: scale(1.05);
+  transform: scale(1.06);
 }
 
-/* Default corner badge on image that gracefully hides on hover */
-
-.corporate-desk-media-badge .badge-num {
-  font-family: var(--font-special, 'Bebas Neue', sans-serif) !important;
-  font-size: 15px;
-  font-weight: 400;
-  letter-spacing: 0.05em;
-}
-
+/* Media badge: hidden on desktop as full title and category are always visible beside image */
 .corporate-desk-media-badge {
-  position: absolute;
-  bottom: 14px;
-  left: 14px;
-  z-index: 2;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: rgba(21, 22, 20, 0.72);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  color: #FAF8F5;
-  font-family: var(--font-subheading, 'Manrope', sans-serif);
-  font-size: 0.62rem;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  padding: 6px 12px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  pointer-events: none;
-  transition: opacity 0.35s ease, transform 0.35s ease;
+  display: none;
 }
 
-.corporate-desk-media-badge .badge-sep {
-  opacity: 0.5;
-}
-
-.corporate-desk-card:hover .corporate-desk-media-badge,
-.corporate-desk-card:focus-within 
-.corporate-desk-media-badge .badge-num {
-  font-family: var(--font-special, 'Bebas Neue', sans-serif) !important;
-  font-size: 15px;
-  font-weight: 400;
-  letter-spacing: 0.05em;
-}
-
-.corporate-desk-media-badge {
-  opacity: 0;
-  transform: translateY(6px);
-}
-
-/* Text area body: defaultly max-width 0 & hidden, smoothly expands and reveals on hover */
+/* Text area body: always visible by default, completely stationary during hover */
 .corporate-desk-body {
-  flex: 1 1 62%;
+  flex: 1 1 54%;
   min-width: 0;
-  max-width: 0;
-  opacity: 0;
-  overflow: hidden;
-  padding-left: 0;
-  pointer-events: none;
+  max-width: 100%;
+  opacity: 1;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   box-sizing: border-box;
-  transition: max-width 0.65s cubic-bezier(0.2, 0.8, 0.2, 1),
-              padding-left 0.65s cubic-bezier(0.2, 0.8, 0.2, 1),
-              opacity 0.45s ease;
-}
-
-.corporate-desk-card:hover .corporate-desk-body,
-.corporate-desk-card:focus-within .corporate-desk-body {
-  max-width: 62%;
-  padding-left: clamp(1.2rem, 1.6vw, 1.6rem);
-  opacity: 1;
   pointer-events: auto;
-  transition-delay: 0.05s;
 }
 
-/* Inner text container with natural min-width to avoid squishing during expansion */
+/* Inner text container: completely stationary with zero transform or shift */
 .corporate-desk-body-inner {
   width: 100%;
-  min-width: 260px;
   display: flex;
   flex-direction: column;
-  transform: translateX(20px);
-  transition: transform 0.65s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-.corporate-desk-card:hover .corporate-desk-body-inner,
-.corporate-desk-card:focus-within .corporate-desk-body-inner {
-  transform: translateX(0);
+  transform: none;
 }
 
 .corporate-desk-tag {
@@ -388,18 +311,6 @@
 
   .corporate-desk-media {
     height: 270px;
-  }
-
-  .corporate-desk-card:hover .corporate-desk-media,
-  .corporate-desk-card:focus-within .corporate-desk-media {
-    flex: 0 0 34%;
-    max-width: 34%;
-    width: 34%;
-  }
-
-  .corporate-desk-card:hover .corporate-desk-body,
-  .corporate-desk-card:focus-within .corporate-desk-body {
-    max-width: 66%;
   }
 
   .corporate-desk-cta {

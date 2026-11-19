@@ -420,6 +420,9 @@ export default function About() {
       {/* Interior Craft & Detail — Materials & Millwork Gallery */}
       <MaterialsGallery />
 
+      {/* Projects That Reflect Our Range (Horizontal Accordion & Mobile Grid) */}
+      <ProjectsReflectOurRange />
+
       {/* 7. Call To Action Strip */}
       <section
         className={"cs_cta_style_1 cs_primary_bg cs_bg_fixed position-relative"}
