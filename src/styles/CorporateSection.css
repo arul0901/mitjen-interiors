@@ -120,12 +120,13 @@
   padding-top: 1.3rem;
   padding-bottom: 0.8rem;
   position: relative;
+  overflow: hidden;
+  cursor: pointer;
   width: 100%;
   box-sizing: border-box;
-  gap: clamp(1.4rem, 2vw, 2.2rem);
 }
 
-/* Image container: always visible at standard proportions, with overflow: hidden */
+/* Image container: default 46% width side-by-side with text; expands to 100% on hover */
 .corporate-desk-media {
   flex: 0 0 46%;
   width: 46%;
@@ -136,9 +137,20 @@
   background: var(--sand, #D8C8B4);
   position: relative;
   box-sizing: border-box;
+  transition: flex-basis 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+              width 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+              max-width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Image zoom on hover: subtle scale(1.06), completely smooth with GPU transform */
+/* Hover state: image smoothly enlarges and expands across the full card width */
+.corporate-desk-card:hover .corporate-desk-media,
+.corporate-desk-card:focus-within .corporate-desk-media {
+  flex: 0 0 100%;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Image zoom on hover: subtle scale(1.05) */
 .corporate-desk-img {
   width: 100%;
   height: 100%;
@@ -146,38 +158,92 @@
   object-position: center;
   display: block;
   transform: scale(1);
-  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .corporate-desk-card:hover .corporate-desk-img,
 .corporate-desk-card:focus-within .corporate-desk-img {
-  transform: scale(1.06);
+  transform: scale(1.05);
 }
 
-/* Media badge: hidden on desktop as full title and category are always visible beside image */
+/* Media badge: appears on expanded image to reveal project identity */
 .corporate-desk-media-badge {
-  display: none;
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(21, 22, 20, 0.76);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #FAF8F5;
+  font-family: var(--font-subheading, 'Manrope', sans-serif);
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.4s ease 0.15s, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1) 0.15s;
 }
 
-/* Text area body: always visible by default, completely stationary during hover */
+.corporate-desk-card:hover .corporate-desk-media-badge,
+.corporate-desk-card:focus-within .corporate-desk-media-badge {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Text area body: visible by default (54%), smoothly collapses and disappears on hover */
 .corporate-desk-body {
   flex: 1 1 54%;
+  width: 54%;
+  max-width: 54%;
   min-width: 0;
-  max-width: 100%;
   opacity: 1;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   box-sizing: border-box;
+  overflow: hidden;
+  padding-left: clamp(1.4rem, 2vw, 2.2rem);
   pointer-events: auto;
+  transition: flex-basis 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+              max-width 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+              width 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+              padding-left 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 0.35s ease;
 }
 
-/* Inner text container: completely stationary with zero transform or shift */
+.corporate-desk-card:hover .corporate-desk-body,
+.corporate-desk-card:focus-within .corporate-desk-body {
+  flex: 0 0 0%;
+  width: 0%;
+  max-width: 0%;
+  padding-left: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Inner text container: smoothly shifts and fades out */
 .corporate-desk-body-inner {
   width: 100%;
+  min-width: clamp(240px, 20vw, 320px);
   display: flex;
   flex-direction: column;
-  transform: none;
+  transform: translateX(0);
+  transition: opacity 0.35s ease, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.corporate-desk-card:hover .corporate-desk-body-inner,
+.corporate-desk-card:focus-within .corporate-desk-body-inner {
+  opacity: 0;
+  transform: translateX(20px);
 }
 
 .corporate-desk-tag {
