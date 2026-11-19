@@ -7,8 +7,10 @@ import './ArchitecturalParticleLogo.css';
  * Pure dot-matrix particle composition spelling "MITJEN INTERIORS"
  * and subtitle "ARCHITECTURE & INTERIOR DESIGN".
  *
- * 100% crisp dots — reduced by 20% for refined architectural scale.
- * Typography updated to architectural condensed display ("Bebas Neue" / "Manrope").
+ * Uses the site's official primary brand typography:
+ *   - "Cormorant Garamond" (700 Bold, with Georgia serif fallback)
+ *   - Subtitle: "Manrope" (600 SemiBold)
+ *   - 100% crisp dots reduced by 20% for refined luxury scale.
  */
 interface Particle {
   x: number;
@@ -69,7 +71,7 @@ export const ArchitecturalParticleLogo: React.FC = () => {
 
   const [, setIsHovered] = useState<boolean>(false);
 
-  // Initialize particles from rendered text (Typography & 20% smaller dots)
+  // Initialize particles from rendered text (Site Typography: Cormorant Garamond)
   const initParticles = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -84,9 +86,9 @@ export const ArchitecturalParticleLogo: React.FC = () => {
     canvas.height = Math.round(height * dpr);
 
     const isMobile = width < 680;
-    // Dot radius reduced by 20%: 2.0px on desktop (4.0px diameter), 1.5px on mobile (3.0px diameter)
-    const titleDotRadius = isMobile ? 1.5 : 2.0;
-    const subDotRadius = isMobile ? 1.05 : 1.3;
+    // Dot radius reduced by 20%: 1.9px on desktop (3.8px diameter), 1.4px on mobile (2.8px diameter)
+    const titleDotRadius = isMobile ? 1.4 : 1.9;
+    const subDotRadius = isMobile ? 1.0 : 1.2;
 
     // 1. Pre-render Dot sprites at exact DPR-scaled size
     charcoalDotSpriteRef.current = createDotSprite(titleDotRadius, '#151412', dpr);
@@ -102,28 +104,28 @@ export const ArchitecturalParticleLogo: React.FC = () => {
     offCtx.scale(dpr, dpr);
 
     const titleText = isMobile ? 'MITJEN' : 'MITJEN INTERIORS';
-    const titleFontSize = Math.max(38, Math.min(92, Math.round(width * (isMobile ? 0.13 : 0.082))));
+    const titleFontSize = Math.max(38, Math.min(94, Math.round(width * (isMobile ? 0.13 : 0.084))));
     const subtitleFontSize = Math.max(10, Math.min(15, Math.round(titleFontSize * 0.17)));
 
     const centerX = width / 2;
     const centerY = height / 2;
 
     const titleY = centerY - titleFontSize * 0.12;
-    const subtitleY = titleY + titleFontSize * 0.60;
+    const subtitleY = titleY + titleFontSize * 0.62;
 
-    // Draw primary wordmark in offscreen buffer using Bebas Neue / architectural typography
+    // Draw primary wordmark using site's primary font: Cormorant Garamond
     offCtx.fillStyle = '#000000';
     offCtx.textAlign = 'center';
     offCtx.textBaseline = 'middle';
-    offCtx.font = `400 ${titleFontSize}px "Bebas Neue", "Space Grotesk", "Manrope", sans-serif`;
+    offCtx.font = `700 ${titleFontSize}px "Cormorant Garamond", Georgia, serif`;
 
     if ('letterSpacing' in offCtx) {
-      (offCtx as unknown as { letterSpacing: string }).letterSpacing = `${Math.round(titleFontSize * (isMobile ? 0.16 : 0.12))}px`;
+      (offCtx as unknown as { letterSpacing: string }).letterSpacing = `${Math.round(titleFontSize * (isMobile ? 0.10 : 0.08))}px`;
     }
     offCtx.fillText(titleText, centerX, titleY);
 
-    // Grid stride calibrated to the 20% smaller dot size
-    const sampleGrid = isMobile ? 4.0 : 5.0;
+    // Grid stride calibrated for delicate serif curves & hairlines
+    const sampleGrid = isMobile ? 3.6 : 4.4;
     const step = Math.max(3, Math.round(sampleGrid * dpr));
 
     const imageData = offCtx.getImageData(0, 0, offCanvas.width, offCanvas.height);
@@ -137,13 +139,13 @@ export const ArchitecturalParticleLogo: React.FC = () => {
         const index = (py * offCanvas.width + px) * 4;
         const alpha = data[index + 3];
 
-        if (alpha > 105) {
+        if (alpha > 80) {
           const posX = px / dpr;
           const posY = py / dpr;
 
           newParticles.push({
-            x: posX + (Math.random() - 0.5) * 0.5,
-            y: posY + (Math.random() - 0.5) * 0.5,
+            x: posX + (Math.random() - 0.5) * 0.4,
+            y: posY + (Math.random() - 0.5) * 0.4,
             originX: posX,
             originY: posY,
             vx: 0,
@@ -155,24 +157,24 @@ export const ArchitecturalParticleLogo: React.FC = () => {
       }
     }
 
-    // 4. Subtitle: "ARCHITECTURE & INTERIOR DESIGN"
+    // 4. Subtitle: "ARCHITECTURE & INTERIOR DESIGN" (Site's subheading font: Manrope)
     offCtx.clearRect(0, 0, offCanvas.width, offCanvas.height);
     offCtx.font = `600 ${subtitleFontSize}px "Manrope", "DM Sans", sans-serif`;
     if ('letterSpacing' in offCtx) {
-      (offCtx as unknown as { letterSpacing: string }).letterSpacing = `${Math.round(subtitleFontSize * 0.38)}px`;
+      (offCtx as unknown as { letterSpacing: string }).letterSpacing = `${Math.round(subtitleFontSize * 0.36)}px`;
     }
     offCtx.fillText('ARCHITECTURE & INTERIOR DESIGN', centerX, subtitleY);
 
     const subImageData = offCtx.getImageData(0, 0, offCanvas.width, offCanvas.height);
     const subData = subImageData.data;
-    const subStep = Math.max(3, Math.round((isMobile ? 3.4 : 3.8) * dpr));
+    const subStep = Math.max(3, Math.round((isMobile ? 3.2 : 3.6) * dpr));
 
     for (let py = 0; py < offCanvas.height; py += subStep) {
       for (let px = 0; px < offCanvas.width; px += subStep) {
         const index = (py * offCanvas.width + px) * 4;
         const alpha = subData[index + 3];
 
-        if (alpha > 105) {
+        if (alpha > 80) {
           const posX = px / dpr;
           const posY = py / dpr;
 
@@ -197,10 +199,16 @@ export const ArchitecturalParticleLogo: React.FC = () => {
   useEffect(() => {
     initParticles();
 
-    if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(() => {
+    if (document.fonts) {
+      document.fonts.load('700 80px "Cormorant Garamond"').then(() => {
         initParticles();
-      });
+      }).catch(() => {});
+
+      if (document.fonts.ready) {
+        document.fonts.ready.then(() => {
+          initParticles();
+        });
+      }
     }
 
     const canvas = canvasRef.current;

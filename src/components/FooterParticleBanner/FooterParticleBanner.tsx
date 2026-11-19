@@ -5,12 +5,13 @@ import './FooterParticleBanner.css';
  * FooterParticleBanner
  * -------------------------------------------------------------------
  * Full-width dot-matrix typography particle banner positioned above
- * the site footer on the About page, faithful to the United Carriers
- * reference animation.
+ * the site footer on the About page.
  *
- * 100% Crisp Dots — Reduced by 20% for refined architectural scale.
- * Typography updated to architectural condensed display ("Bebas Neue" / "Manrope")
- * with tracked-out editorial letter-spacing.
+ * Uses the site's official primary brand typography:
+ *   - "Cormorant Garamond" (700 Bold, with Georgia serif fallback)
+ *   - Exactly matches the site's --font-heading and --primary-font design token.
+ *   - 100% crisp circular dots, with particle size reduced by ~20% for
+ *     refined luxury scale and razor-sharp serif fidelity.
  */
 
 interface Particle {
@@ -53,12 +54,12 @@ export const FooterParticleBanner: React.FC = () => {
     targetX: -9999,
     targetY: -9999,
     isActive: false,
-    radius: 96,
+    radius: 92,
   });
 
   const isFormedRef = useRef(false);
 
-  // ─── Particle initialisation (Typography & 20% Smaller Dots) ─────────────
+  // ─── Particle initialisation (Site Typography: Cormorant Garamond) ─────────
   const initParticles = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -73,8 +74,8 @@ export const FooterParticleBanner: React.FC = () => {
     canvas.height = Math.round(height * dpr);
 
     const isMobile = width < 640;
-    // Dot radius reduced by 20%: 2.2px on desktop (4.4px diameter), 1.7px on mobile (3.4px diameter)
-    const dotRadius = isMobile ? 1.7 : 2.2;
+    // Dot radius reduced by 20% for elegant luxury scale: 2.0px desktop (4.0px dia), 1.5px mobile (3.0px dia)
+    const dotRadius = isMobile ? 1.5 : 2.0;
 
     // Pre-render antialiased crisp dot sprite at exact physical size
     dotSpriteRef.current = createDotSprite(dotRadius, '#151412', dpr);
@@ -90,9 +91,9 @@ export const FooterParticleBanner: React.FC = () => {
 
     const text = isMobile ? 'MITJEN' : 'MITJEN INTERIORS';
 
-    // Architectural typography: Bebas Neue with tracked letterforms
-    const fontStack = '"Bebas Neue", "Space Grotesk", "Manrope", sans-serif';
-    const letterSpacingRatio = isMobile ? 0.14 : 0.10;
+    // Site's primary brand font: Cormorant Garamond
+    const fontStack = '"Cormorant Garamond", Georgia, serif';
+    const letterSpacingRatio = isMobile ? 0.08 : 0.06;
 
     let lo = 24;
     let hi = Math.round(height * 0.95);
@@ -100,13 +101,13 @@ export const FooterParticleBanner: React.FC = () => {
 
     for (let iter = 0; iter < 20; iter++) {
       const mid = Math.round((lo + hi) / 2);
-      offCtx.font = `400 ${mid}px ${fontStack}`;
+      offCtx.font = `700 ${mid}px ${fontStack}`;
       if ('letterSpacing' in offCtx) {
         (offCtx as unknown as { letterSpacing: string }).letterSpacing =
           `${Math.round(mid * letterSpacingRatio)}px`;
       }
       const measured = offCtx.measureText(text).width;
-      if (measured <= width * 0.92) {
+      if (measured <= width * 0.90) {
         bestSize = mid;
         lo = mid + 1;
       } else {
@@ -115,7 +116,7 @@ export const FooterParticleBanner: React.FC = () => {
     }
 
     const fontSize = bestSize;
-    offCtx.font = `400 ${fontSize}px ${fontStack}`;
+    offCtx.font = `700 ${fontSize}px ${fontStack}`;
     if ('letterSpacing' in offCtx) {
       (offCtx as unknown as { letterSpacing: string }).letterSpacing =
         `${Math.round(fontSize * letterSpacingRatio)}px`;
@@ -128,8 +129,8 @@ export const FooterParticleBanner: React.FC = () => {
     const textY = height * 0.52;
     offCtx.fillText(text, width / 2, textY);
 
-    // Grid sampling matching the 20% smaller particle radius (~5.6px stride desktop, 4.4px mobile)
-    const stride = isMobile ? 4.4 : 5.6;
+    // Grid sampling tuned for delicate serif curves & hairlines (4.8px stride desktop, 3.8px mobile)
+    const stride = isMobile ? 3.8 : 4.8;
     const step = Math.max(3, Math.round(stride * dpr));
 
     const imgData = offCtx.getImageData(0, 0, off.width, off.height);
@@ -143,7 +144,8 @@ export const FooterParticleBanner: React.FC = () => {
         const idx = (py * off.width + px) * 4;
         const alpha = data[idx + 3];
 
-        if (alpha > 105) {
+        // Low threshold so fine serifs and tapered strokes are cleanly captured
+        if (alpha > 80) {
           const ox = px / dpr;
           const oy = py / dpr;
 
@@ -170,11 +172,17 @@ export const FooterParticleBanner: React.FC = () => {
   useEffect(() => {
     initParticles();
 
-    // Re-sample once web fonts are fully loaded and ready
-    if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(() => {
+    // Re-sample once Cormorant Garamond is verified ready in the browser
+    if (document.fonts) {
+      document.fonts.load('700 80px "Cormorant Garamond"').then(() => {
         initParticles();
-      });
+      }).catch(() => {});
+
+      if (document.fonts.ready) {
+        document.fonts.ready.then(() => {
+          initParticles();
+        });
+      }
     }
 
     const canvas = canvasRef.current;
