@@ -8,15 +8,9 @@ import './FooterParticleBanner.css';
  * the site footer on the About page, faithful to the United Carriers
  * reference animation.
  *
- * 100% Crisp, Prominent Dots — Perfectly sized dot-matrix letterforms.
- *
- * Key behaviours:
- *  - Full-width edge-to-edge dot-matrix letterforms ("MITJEN INTERIORS").
- *  - Substantially larger, bold, crisp dots (radius ~2.75px, diameter ~5.5px).
- *  - Particles form smoothly on scroll into viewport.
- *  - Cursor proximity disperses dots radially with natural spring physics.
- *  - Custom circular cursor ring (circle + center dot) replaces system cursor.
- *  - High-performance 1:1 pixel-accurate antialiased canvas rendering.
+ * 100% Crisp Dots — Reduced by 20% for refined architectural scale.
+ * Typography updated to architectural condensed display ("Bebas Neue" / "Manrope")
+ * with tracked-out editorial letter-spacing.
  */
 
 interface Particle {
@@ -59,12 +53,12 @@ export const FooterParticleBanner: React.FC = () => {
     targetX: -9999,
     targetY: -9999,
     isActive: false,
-    radius: 104,
+    radius: 96,
   });
 
   const isFormedRef = useRef(false);
 
-  // ─── Particle initialisation (100% Bold Crisp Dots) ───────────────────────
+  // ─── Particle initialisation (Typography & 20% Smaller Dots) ─────────────
   const initParticles = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -79,10 +73,10 @@ export const FooterParticleBanner: React.FC = () => {
     canvas.height = Math.round(height * dpr);
 
     const isMobile = width < 640;
-    // Bold, prominent dots: radius 2.75px on desktop (5.5px diameter), 2.1px on mobile (4.2px diameter)
-    const dotRadius = isMobile ? 2.1 : 2.75;
+    // Dot radius reduced by 20%: 2.2px on desktop (4.4px diameter), 1.7px on mobile (3.4px diameter)
+    const dotRadius = isMobile ? 1.7 : 2.2;
 
-    // Pre-render antialiased crisp dot sprite at exact size (no stretching)
+    // Pre-render antialiased crisp dot sprite at exact physical size
     dotSpriteRef.current = createDotSprite(dotRadius, '#151412', dpr);
 
     // Offscreen canvas for text raster sampling
@@ -96,17 +90,20 @@ export const FooterParticleBanner: React.FC = () => {
 
     const text = isMobile ? 'MITJEN' : 'MITJEN INTERIORS';
 
-    // Calibrate font size so text spans ~90-93% of the canvas width
+    // Architectural typography: Bebas Neue with tracked letterforms
+    const fontStack = '"Bebas Neue", "Space Grotesk", "Manrope", sans-serif';
+    const letterSpacingRatio = isMobile ? 0.14 : 0.10;
+
     let lo = 24;
     let hi = Math.round(height * 0.95);
     let bestSize = lo;
 
     for (let iter = 0; iter < 20; iter++) {
       const mid = Math.round((lo + hi) / 2);
-      offCtx.font = `900 ${mid}px "Plus Jakarta Sans", "Montserrat", Arial, sans-serif`;
+      offCtx.font = `400 ${mid}px ${fontStack}`;
       if ('letterSpacing' in offCtx) {
         (offCtx as unknown as { letterSpacing: string }).letterSpacing =
-          `${Math.round(mid * 0.045)}px`;
+          `${Math.round(mid * letterSpacingRatio)}px`;
       }
       const measured = offCtx.measureText(text).width;
       if (measured <= width * 0.92) {
@@ -118,10 +115,10 @@ export const FooterParticleBanner: React.FC = () => {
     }
 
     const fontSize = bestSize;
-    offCtx.font = `900 ${fontSize}px "Plus Jakarta Sans", "Montserrat", Arial, sans-serif`;
+    offCtx.font = `400 ${fontSize}px ${fontStack}`;
     if ('letterSpacing' in offCtx) {
       (offCtx as unknown as { letterSpacing: string }).letterSpacing =
-        `${Math.round(fontSize * 0.045)}px`;
+        `${Math.round(fontSize * letterSpacingRatio)}px`;
     }
 
     offCtx.fillStyle = '#000000';
@@ -131,8 +128,8 @@ export const FooterParticleBanner: React.FC = () => {
     const textY = height * 0.52;
     offCtx.fillText(text, width / 2, textY);
 
-    // Grid sampling matching United Carriers dot-matrix density (~6.8px stride on desktop)
-    const stride = isMobile ? 5.2 : 6.8;
+    // Grid sampling matching the 20% smaller particle radius (~5.6px stride desktop, 4.4px mobile)
+    const stride = isMobile ? 4.4 : 5.6;
     const step = Math.max(3, Math.round(stride * dpr));
 
     const imgData = offCtx.getImageData(0, 0, off.width, off.height);
@@ -146,7 +143,7 @@ export const FooterParticleBanner: React.FC = () => {
         const idx = (py * off.width + px) * 4;
         const alpha = data[idx + 3];
 
-        if (alpha > 100) {
+        if (alpha > 105) {
           const ox = px / dpr;
           const oy = py / dpr;
 
@@ -169,9 +166,16 @@ export const FooterParticleBanner: React.FC = () => {
     particlesRef.current = newParticles;
   }, []);
 
-  // ─── RAF animation loop (100% Bold Dots) ──────────────────────────────────
+  // ─── RAF animation loop ───────────────────────────────────────────────────
   useEffect(() => {
     initParticles();
+
+    // Re-sample once web fonts are fully loaded and ready
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => {
+        initParticles();
+      });
+    }
 
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -210,7 +214,7 @@ export const FooterParticleBanner: React.FC = () => {
 
           if (dSq < repRadiusSq && dSq > 0.01) {
             const dist = Math.sqrt(dSq);
-            const force = Math.pow(1 - dist / repRadius, 1.35) * 9.5;
+            const force = Math.pow(1 - dist / repRadius, 1.35) * 9.2;
             const ang = Math.atan2(dy, dx);
             p.vx += Math.cos(ang) * force;
             p.vy += Math.sin(ang) * force;
@@ -227,7 +231,7 @@ export const FooterParticleBanner: React.FC = () => {
         p.x += p.vx;
         p.y += p.vy;
 
-        // Render bold crisp dot (1:1 sprite blit for max performance and sharpness)
+        // Render crisp dot (1:1 sprite blit)
         if (spriteInfo) {
           const offset = spriteInfo.size / 2;
           const dx2 = Math.round((p.x - offset) * dpr);
@@ -253,14 +257,14 @@ export const FooterParticleBanner: React.FC = () => {
         const ry = mouse.y * dpr;
         ctx.save();
         ctx.strokeStyle = '#181715';
-        ctx.lineWidth = 1.4 * dpr;
+        ctx.lineWidth = 1.3 * dpr;
         ctx.beginPath();
-        ctx.arc(rx, ry, 30 * dpr, 0, Math.PI * 2);
+        ctx.arc(rx, ry, 28 * dpr, 0, Math.PI * 2);
         ctx.stroke();
 
         ctx.fillStyle = '#181715';
         ctx.beginPath();
-        ctx.arc(rx, ry, 2.8 * dpr, 0, Math.PI * 2);
+        ctx.arc(rx, ry, 2.4 * dpr, 0, Math.PI * 2);
         ctx.fill();
         ctx.restore();
       }
