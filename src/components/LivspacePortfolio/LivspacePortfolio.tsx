@@ -628,9 +628,8 @@ export const LivspacePortfolio: React.FC = () => {
             aria-modal="true"
           >
             <div
-              className={`liv-lightbox-dialog ${
-                activeModalTab === 'gallery' && galleryViewMode === 'stage' ? 'stage-mode' : ''
-              }`}
+              className={`liv-lightbox-dialog ${activeModalTab === 'gallery' && galleryViewMode === 'stage' ? 'stage-mode' : ''
+                }`}
               onClick={(e) => e.stopPropagation()}
               onWheel={(e) => e.stopPropagation()}
             >
@@ -690,291 +689,290 @@ export const LivspacePortfolio: React.FC = () => {
                 </div>
               </div>
 
-            {/* TAB 1: PROJECT SPECIFIC MATERIALS USED */}
-            {activeModalTab === 'materials' && (
-              <div className="liv-modal-materials-body">
-                {/* Project Location & Identification Table */}
-                <div className="liv-modal-proj-identity">
-                  <div className="liv-identity-cell">
-                    <span className="liv-identity-label">Project / Space</span>
-                    <span className="liv-identity-val">{selectedProject.title}</span>
-                  </div>
-                  <div className="liv-identity-cell">
-                    <span className="liv-identity-label">City</span>
-                    <span className="liv-identity-val">{selectedProject.city}</span>
-                  </div>
-                  <div className="liv-identity-cell">
-                    <span className="liv-identity-label">Area / Locality</span>
-                    <span className="liv-identity-val">{selectedProject.location}</span>
-                  </div>
-                  <div className="liv-identity-cell">
-                    <span className="liv-identity-label">Full Address</span>
-                    <span className="liv-identity-val">{selectedProject.fullAddress}</span>
-                  </div>
-                </div>
-
-                {/* Main 5 Materials Used Breakdown */}
-                <div className="liv-modal-mat-section">
-                  <div className="liv-modal-mat-sec-title-row">
-                    <h4 className="liv-modal-mat-sec-title">Materials Used &amp; Brand Finishes</h4>
-                    <span className="liv-modal-mat-sec-sub">Verified architectural specifications</span>
+              {/* TAB 1: PROJECT SPECIFIC MATERIALS USED */}
+              {activeModalTab === 'materials' && (
+                <div className="liv-modal-materials-body">
+                  {/* Project Location & Identification Table */}
+                  <div className="liv-modal-proj-identity">
+                    <div className="liv-identity-cell">
+                      <span className="liv-identity-label">Project / Space</span>
+                      <span className="liv-identity-val">{selectedProject.title}</span>
+                    </div>
+                    <div className="liv-identity-cell">
+                      <span className="liv-identity-label">City</span>
+                      <span className="liv-identity-val">{selectedProject.city}</span>
+                    </div>
+                    <div className="liv-identity-cell">
+                      <span className="liv-identity-label">Area / Locality</span>
+                      <span className="liv-identity-val">{selectedProject.location}</span>
+                    </div>
+                    <div className="liv-identity-cell">
+                      <span className="liv-identity-label">Full Address</span>
+                      <span className="liv-identity-val">{selectedProject.fullAddress}</span>
+                    </div>
                   </div>
 
-                  <div className="liv-modal-materials-grid">
-                    {MATERIAL_SPECIFICATIONS.map((mat) => (
-                      <div key={mat.id} className="liv-modal-mat-card">
-                        <div className="liv-modal-mat-card-header">
-                          <span className="liv-modal-mat-badge">{mat.number}</span>
-                          <h5 className="liv-modal-mat-cat-title">{mat.title}</h5>
-                        </div>
+                  {/* Main 5 Materials Used Breakdown */}
+                  <div className="liv-modal-mat-section">
+                    <div className="liv-modal-mat-sec-title-row">
+                      <h4 className="liv-modal-mat-sec-title">Materials Used &amp; Brand Finishes</h4>
+                      <span className="liv-modal-mat-sec-sub">Verified architectural specifications</span>
+                    </div>
 
-                        <div className="liv-modal-mat-content">
-                          <div className="liv-modal-mat-field">
-                            <span className="liv-modal-field-lbl">Materials:</span>
-                            <div className="liv-modal-chips-wrap">
-                              {mat.materials.map((m, mIdx) => (
-                                <span key={mIdx} className="liv-modal-chip mat">{m}</span>
-                              ))}
-                            </div>
+                    <div className="liv-modal-materials-grid">
+                      {MATERIAL_SPECIFICATIONS.map((mat) => (
+                        <div key={mat.id} className="liv-modal-mat-card">
+                          <div className="liv-modal-mat-card-header">
+                            <span className="liv-modal-mat-badge">{mat.number}</span>
+                            <h5 className="liv-modal-mat-cat-title">{mat.title}</h5>
                           </div>
 
-                          <div className="liv-modal-mat-field">
-                            <span className="liv-modal-field-lbl">Brand / Finish:</span>
-                            <div className="liv-modal-chips-wrap">
-                              {mat.brandFinishDetails.map((b, bIdx) => (
-                                <span key={bIdx} className="liv-modal-chip brand">{b}</span>
-                              ))}
+                          <div className="liv-modal-mat-content">
+                            <div className="liv-modal-mat-field">
+                              <span className="liv-modal-field-lbl">Materials:</span>
+                              <div className="liv-modal-chips-wrap">
+                                {mat.materials.map((m, mIdx) => (
+                                  <span key={mIdx} className="liv-modal-chip mat">{m}</span>
+                                ))}
+                              </div>
+                            </div>
+
+                            <div className="liv-modal-mat-field">
+                              <span className="liv-modal-field-lbl">Brand / Finish:</span>
+                              <div className="liv-modal-chips-wrap">
+                                {mat.brandFinishDetails.map((b, bIdx) => (
+                                  <span key={bIdx} className="liv-modal-chip brand">{b}</span>
+                                ))}
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
-                </div>
 
-                {/* Key Design Highlights of the Project */}
-                <div className="liv-modal-highlights-box">
-                  <h5 className="liv-modal-highlights-title">Key Architectural Highlights:</h5>
-                  <div className="liv-modal-highlights-grid">
-                    {selectedProject.highlights.map((h, hIdx) => (
-                      <div key={hIdx} className="liv-modal-highlight-item">
-                        <CheckCircle2 size={13} />
-                        <span>{h}</span>
-                      </div>
-                    ))}
+                  {/* Key Design Highlights of the Project */}
+                  <div className="liv-modal-highlights-box">
+                    <h5 className="liv-modal-highlights-title">Key Architectural Highlights:</h5>
+                    <div className="liv-modal-highlights-grid">
+                      {selectedProject.highlights.map((h, hIdx) => (
+                        <div key={hIdx} className="liv-modal-highlight-item">
+                          <CheckCircle2 size={13} />
+                          <span>{h}</span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                </div>
 
-                {/* Modal Footer CTA */}
-                <div className="liv-modal-footer">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      handleCloseModal();
-                      navigate('/contact');
-                      window.scrollTo({ top: 0, behavior: 'smooth' });
-                    }}
-                    className="liv-btn-inquire"
-                  >
-                    <span>Inquire About This Specification</span>
-                    <ArrowRight size={13} />
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {/* TAB 2: ADVANCED MULTI-IMAGE PHOTOGRAPHY GALLERY */}
-            {activeModalTab === 'gallery' && (
-              <div className="liv-modal-gallery-body">
-                {galleryViewMode === 'stage' ? (
-                  /* --- STAGE WALKTHROUGH VIEW --- */
-                  <div className="liv-gallery-stage-view">
-                    {/* Stage Screen with Constrained Height & Floating Nav Chevrons */}
-                    <div
-                      className="liv-gallery-stage-media"
-                      onTouchStart={handleTouchStart}
-                      onTouchEnd={handleTouchEnd}
+                  {/* Modal Footer CTA */}
+                  <div className="liv-modal-footer">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        handleCloseModal();
+                        navigate('/contact');
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                      }}
+                      className="liv-btn-inquire"
                     >
-                      {/* Atmospheric Ambient Glow behind image matching website palette */}
-                      <div
-                        className="liv-gallery-stage-ambient-bg"
-                        style={{
-                          backgroundImage: `url("${
-                            selectedProject.galleryImages[activeImageIndex]?.url || selectedProject.coverImage
-                          }")`,
-                        }}
-                      />
+                      <span>Inquire About This Specification</span>
+                      <ArrowRight size={13} />
+                    </button>
+                  </div>
+                </div>
+              )}
 
-                      {/* Framed Architectural Photo Display */}
-                      <div className="liv-gallery-photo-mount">
-                        <img
-                          key={activeImageIndex}
-                          src={selectedProject.galleryImages[activeImageIndex]?.url || selectedProject.coverImage}
-                          alt={selectedProject.galleryImages[activeImageIndex]?.caption || selectedProject.title}
-                          className={`liv-gallery-stage-img ${imageLoaded ? 'loaded' : ''}`}
-                          onLoad={() => setImageLoaded(true)}
-                          onError={(e) => {
-                            (e.currentTarget as HTMLImageElement).src = selectedProject.coverImage;
+              {/* TAB 2: ADVANCED MULTI-IMAGE PHOTOGRAPHY GALLERY */}
+              {activeModalTab === 'gallery' && (
+                <div className="liv-modal-gallery-body">
+                  {galleryViewMode === 'stage' ? (
+                    /* --- STAGE WALKTHROUGH VIEW --- */
+                    <div className="liv-gallery-stage-view">
+                      {/* Stage Screen with Constrained Height & Floating Nav Chevrons */}
+                      <div
+                        className="liv-gallery-stage-media"
+                        onTouchStart={handleTouchStart}
+                        onTouchEnd={handleTouchEnd}
+                      >
+                        {/* Atmospheric Ambient Glow behind image matching website palette */}
+                        <div
+                          className="liv-gallery-stage-ambient-bg"
+                          style={{
+                            backgroundImage: `url("${selectedProject.galleryImages[activeImageIndex]?.url || selectedProject.coverImage
+                              }")`,
                           }}
                         />
 
-                        {/* Photo Counter Pill inside mount */}
-                        <div className="liv-gallery-counter-badge">
-                          <ImageIcon size={11} />
-                          <span>
-                            {activeImageIndex + 1} of {selectedProject.galleryImages.length}
-                          </span>
-                        </div>
-                      </div>
-
-                      {/* Left & Right Circular Nav Chevrons */}
-                      {selectedProject.galleryImages.length > 1 && (
-                        <>
-                          <button
-                            type="button"
-                            onClick={handlePrevImage}
-                            className="liv-gallery-nav-btn prev"
-                            aria-label="Previous photograph"
-                            title="Previous (Left Arrow / Swipe Right)"
-                          >
-                            <ChevronLeft size={20} />
-                          </button>
-                          <button
-                            type="button"
-                            onClick={handleNextImage}
-                            className="liv-gallery-nav-btn next"
-                            aria-label="Next photograph"
-                            title="Next (Right Arrow / Swipe Left)"
-                          >
-                            <ChevronRight size={20} />
-                          </button>
-                        </>
-                      )}
-                    </div>
-
-                    {/* Room Title, Architectural Description & Grid Switcher Bar */}
-                    <div className="liv-gallery-caption-bar">
-                      <div className="liv-gallery-caption-text">
-                        <div className="liv-gallery-caption-header">
-                          <h4 className="liv-gallery-room-title">
-                            {selectedProject.galleryImages[activeImageIndex]?.room || 'Architectural Space'}
-                          </h4>
-                          <span className="liv-gallery-room-pill">
-                            Verified Interior Space
-                          </span>
-                        </div>
-                        <p className="liv-gallery-room-desc">
-                          {selectedProject.galleryImages[activeImageIndex]?.caption || selectedProject.description}
-                        </p>
-                      </div>
-
-                      <div className="liv-gallery-controls-right">
-                        <button
-                          type="button"
-                          onClick={() => setGalleryViewMode('grid')}
-                          className="liv-gallery-toggle-btn active"
-                          title="View all spaces in grid layout"
-                        >
-                          <Grid size={13} />
-                          <span>All Spaces Grid ({selectedProject.galleryImages.length})</span>
-                        </button>
-                      </div>
-                    </div>
-
-                    {/* Filmstrip / Thumbnail Dock (Always visible on screen) */}
-                    <div ref={filmstripRef} className="liv-gallery-filmstrip">
-                      {selectedProject.galleryImages.map((img, idx) => (
-                        <button
-                          key={idx}
-                          type="button"
-                          onClick={() => {
-                            if (idx !== activeImageIndex) {
-                              setImageLoaded(false);
-                              setActiveImageIndex(idx);
-                            }
-                          }}
-                          className={`liv-gallery-filmstrip-thumb ${idx === activeImageIndex ? 'active' : ''}`}
-                          aria-label={`View photo ${idx + 1}: ${img.room}`}
-                        >
-                          <img src={img.url} alt={img.caption} loading="lazy" />
-                          <div className="liv-filmstrip-overlay">
-                            <span className="liv-filmstrip-room-label">{img.room}</span>
-                          </div>
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                ) : (
-                  /* --- REFERENCE MOSAIC COLLAGE GRID (NO CONTENT BELOW IMAGES) --- */
-                  <div className="liv-gallery-grid-view">
-                    <div className="liv-gallery-grid-toolbar">
-                      <div className="liv-grid-toolbar-left">
-                        <span className="liv-gallery-grid-count">
-                          {selectedProject.galleryImages.length} Verified Interior Spaces
-                        </span>
-                      </div>
-                      <div className="liv-grid-toolbar-right">
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setActiveImageIndex(0);
-                            setGalleryViewMode('stage');
-                          }}
-                          className="liv-gallery-toggle-btn"
-                          title="Start cinematic walkthrough"
-                        >
-                          <ImageIcon size={12} />
-                          <span>Walkthrough</span>
-                        </button>
-                      </div>
-                    </div>
-
-                    {/* Exact Asymmetric Collage Mosaic Grid — Zero Text Under Images */}
-                    <div className="liv-gallery-mosaic-grid">
-                      {selectedProject.galleryImages.map((img, idx) => (
-                        <div
-                          key={idx}
-                          className={`liv-mosaic-item liv-mosaic-item-${idx + 1}`}
-                          onClick={() => {
-                            setActiveImageIndex(idx);
-                            setGalleryViewMode('stage');
-                          }}
-                          role="button"
-                          tabIndex={0}
-                          title={`${img.room} — Click to inspect`}
-                        >
+                        {/* Framed Architectural Photo Display */}
+                        <div className="liv-gallery-photo-mount">
                           <img
-                            src={img.url}
-                            alt={img.room}
-                            className="liv-mosaic-img"
-                            loading="lazy"
+                            key={activeImageIndex}
+                            src={selectedProject.galleryImages[activeImageIndex]?.url || selectedProject.coverImage}
+                            alt={selectedProject.galleryImages[activeImageIndex]?.caption || selectedProject.title}
+                            className={`liv-gallery-stage-img ${imageLoaded ? 'loaded' : ''}`}
+                            onLoad={() => setImageLoaded(true)}
+                            onError={(e) => {
+                              (e.currentTarget as HTMLImageElement).src = selectedProject.coverImage;
+                            }}
                           />
-                          <div className="liv-mosaic-overlay">
-                            <span className="liv-mosaic-room-pill">{img.room}</span>
-                            <span className="liv-mosaic-inspect-icon">
-                              <Eye size={13} />
+
+                          {/* Photo Counter Pill inside mount */}
+                          <div className="liv-gallery-counter-badge">
+                            <ImageIcon size={11} />
+                            <span>
+                              {activeImageIndex + 1} of {selectedProject.galleryImages.length}
                             </span>
                           </div>
                         </div>
-                      ))}
-                    </div>
 
-                    {/* Compact Exit Bar */}
-                    <div className="liv-gallery-bottom-bar">
-                      <span className="liv-gallery-esc-hint">Tip: Press ESC or click outside anywhere to close</span>
-                      <button
-                        type="button"
-                        onClick={handleCloseModal}
-                        className="liv-gallery-close-pill"
-                      >
-                        <X size={12} />
-                        <span>Close Screen</span>
-                      </button>
+                        {/* Left & Right Circular Nav Chevrons */}
+                        {selectedProject.galleryImages.length > 1 && (
+                          <>
+                            <button
+                              type="button"
+                              onClick={handlePrevImage}
+                              className="liv-gallery-nav-btn prev"
+                              aria-label="Previous photograph"
+                              title="Previous (Left Arrow / Swipe Right)"
+                            >
+                              <ChevronLeft size={20} />
+                            </button>
+                            <button
+                              type="button"
+                              onClick={handleNextImage}
+                              className="liv-gallery-nav-btn next"
+                              aria-label="Next photograph"
+                              title="Next (Right Arrow / Swipe Left)"
+                            >
+                              <ChevronRight size={20} />
+                            </button>
+                          </>
+                        )}
+                      </div>
+
+                      {/* Room Title, Architectural Description & Grid Switcher Bar */}
+                      <div className="liv-gallery-caption-bar">
+                        <div className="liv-gallery-caption-text">
+                          <div className="liv-gallery-caption-header">
+                            <h4 className="liv-gallery-room-title">
+                              {selectedProject.galleryImages[activeImageIndex]?.room || 'Architectural Space'}
+                            </h4>
+                            <span className="liv-gallery-room-pill">
+                              Verified Interior Space
+                            </span>
+                          </div>
+                          <p className="liv-gallery-room-desc">
+                            {selectedProject.galleryImages[activeImageIndex]?.caption || selectedProject.description}
+                          </p>
+                        </div>
+
+                        <div className="liv-gallery-controls-right">
+                          <button
+                            type="button"
+                            onClick={() => setGalleryViewMode('grid')}
+                            className="liv-gallery-toggle-btn active"
+                            title="View all spaces in grid layout"
+                          >
+                            <Grid size={13} />
+                            <span>All Spaces Grid ({selectedProject.galleryImages.length})</span>
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Filmstrip / Thumbnail Dock (Always visible on screen) */}
+                      <div ref={filmstripRef} className="liv-gallery-filmstrip">
+                        {selectedProject.galleryImages.map((img, idx) => (
+                          <button
+                            key={idx}
+                            type="button"
+                            onClick={() => {
+                              if (idx !== activeImageIndex) {
+                                setImageLoaded(false);
+                                setActiveImageIndex(idx);
+                              }
+                            }}
+                            className={`liv-gallery-filmstrip-thumb ${idx === activeImageIndex ? 'active' : ''}`}
+                            aria-label={`View photo ${idx + 1}: ${img.room}`}
+                          >
+                            <img src={img.url} alt={img.caption} loading="lazy" />
+                            <div className="liv-filmstrip-overlay">
+                              <span className="liv-filmstrip-room-label">{img.room}</span>
+                            </div>
+                          </button>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                )}
-              </div>
-            )}
+                  ) : (
+                    /* --- REFERENCE MOSAIC COLLAGE GRID (NO CONTENT BELOW IMAGES) --- */
+                    <div className="liv-gallery-grid-view">
+                      <div className="liv-gallery-grid-toolbar">
+                        <div className="liv-grid-toolbar-left">
+                          <span className="liv-gallery-grid-count">
+                            {selectedProject.galleryImages.length} Verified Interior Spaces
+                          </span>
+                        </div>
+                        <div className="liv-grid-toolbar-right">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setActiveImageIndex(0);
+                              setGalleryViewMode('stage');
+                            }}
+                            className="liv-gallery-toggle-btn"
+                            title="Start cinematic walkthrough"
+                          >
+                            <ImageIcon size={12} />
+                            <span>Walkthrough</span>
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Exact Asymmetric Collage Mosaic Grid — Zero Text Under Images */}
+                      <div className="liv-gallery-mosaic-grid">
+                        {selectedProject.galleryImages.map((img, idx) => (
+                          <div
+                            key={idx}
+                            className={`liv-mosaic-item liv-mosaic-item-${idx + 1}`}
+                            onClick={() => {
+                              setActiveImageIndex(idx);
+                              setGalleryViewMode('stage');
+                            }}
+                            role="button"
+                            tabIndex={0}
+                            title={`${img.room} — Click to inspect`}
+                          >
+                            <img
+                              src={img.url}
+                              alt={img.room}
+                              className="liv-mosaic-img"
+                              loading="lazy"
+                            />
+                            <div className="liv-mosaic-overlay">
+                              <span className="liv-mosaic-room-pill">{img.room}</span>
+                              <span className="liv-mosaic-inspect-icon">
+                                <Eye size={13} />
+                              </span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Compact Exit Bar */}
+                      <div className="liv-gallery-bottom-bar">
+                        <span className="liv-gallery-esc-hint">Tip: Press ESC or click outside anywhere to close</span>
+                        <button
+                          type="button"
+                          onClick={handleCloseModal}
+                          className="liv-gallery-close-pill"
+                        >
+                          <X size={12} />
+                          <span>Close Screen</span>
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           </div>,
           document.body
