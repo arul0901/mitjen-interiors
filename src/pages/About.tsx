@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import HowItWorksSection from "../components/HowItWorksSection";
 import MaterialsGallery from "../components/MaterialsGallery";
+import AboutVaneBanner from "../components/AboutVaneBanner/AboutVaneBanner";
+import ProjectsReflectOurRange from "../components/ProjectsReflectOurRange/ProjectsReflectOurRange";
 
 const pageTitle = "About Us";
 
@@ -11,31 +13,8 @@ export default function About() {
 
   return (
     <main>
-      {/* 1. Page Header */}
-      <section
-        className={"cs_page_header_style_1 cs_bg_filed cs_gray_bg position-relative"}
-        data-src={"/assets/img/page-header-bg1.webp"}
-      >
-        <div className={"cs_overlay cs_primary_bg position-absolute"}></div>
-        <div className={"container"}>
-          <div className={"cs_page_header_content text-center"}>
-            <h1
-              className={"cs_page_header_title cs_fs_80 cs_bold cs_white_color cs_mb_16"}
-              style={{ color: "#ffffff" }}
-            >
-              ABOUT US
-            </h1>
-            <ol className={"breadcrumb cs_center mb-0"}>
-              <li className={"breadcrumb-item"}>
-                <a href={"/"} aria-label={"Back to home button"}>
-                  Home
-                </a>
-              </li>
-              <li className={"breadcrumb-item active"}>About Us</li>
-            </ol>
-          </div>
-        </div>
-      </section>
+      {/* 1. Kinetic Vane Hero Banner (2 Images) */}
+      <AboutVaneBanner />
 
       {/* 2. Text Marquee Slider */}
       <div className={"cs_horizontal_slider cs_type_1 cs_accent_bg cs_primary_font"}>
@@ -439,6 +418,9 @@ export default function About() {
 
       {/* Interior Craft & Detail — Materials & Millwork Gallery */}
       <MaterialsGallery />
+
+      {/* Projects That Reflect Our Range (Horizontal Accordion & Mobile Grid) */}
+      <ProjectsReflectOurRange />
 
       {/* 7. Call To Action Strip */}
       <section

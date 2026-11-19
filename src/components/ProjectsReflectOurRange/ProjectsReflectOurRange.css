@@ -1,0 +1,718 @@
+/* ==========================================================================
+   PROJECTS THAT REFLECT OUR RANGE - RENOVA TRANSFORMATIONS
+   Desktop: Horizontal Expanding Accordion (flex 5.6 active, flex 1 collapsed)
+   Mobile: Featured Preview Card + 4-Column Thumbnail Selector
+   ========================================================================== */
+
+:root {
+  --renova-ink: #151614;
+  --renova-ivory: #faf8f5;
+  --renova-sand: #d8c8b4;
+  --renova-olive: #777b61;
+}
+
+@keyframes renovaFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(1.02);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes renovaDotPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.85);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Container & Section Wrapper
+   -------------------------------------------------------------------------- */
+.renova-transformations {
+  background-color: var(--renova-ink, #151614);
+  color: var(--renova-ivory, #faf8f5);
+  padding: clamp(56px, 7vh, 96px) clamp(20px, 4vw, 48px);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.renova-trans-container {
+  max-width: 1360px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   Desktop / Mobile Visibility Switch
+   -------------------------------------------------------------------------- */
+.renova-desktop-view {
+  display: block;
+}
+
+.renova-mobile-view {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .renova-desktop-view {
+    display: none !important;
+  }
+  .renova-mobile-view {
+    display: flex !important;
+    flex-direction: column;
+    box-sizing: border-box;
+    width: 100%;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Desktop Header
+   -------------------------------------------------------------------------- */
+.renova-trans-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  margin-bottom: clamp(28px, 4vh, 44px);
+  padding-bottom: 24px;
+  display: flex;
+}
+
+.renova-eyebrow-text {
+  font-family: var(--font-architectural, "Space Grotesk", sans-serif);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--renova-sand, #d8c8b4);
+  align-items: center;
+  gap: 10px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  display: inline-flex;
+}
+
+.renova-eyebrow-bullet {
+  background-color: var(--renova-sand, #d8c8b4);
+  border-radius: 50%;
+  width: 6px;
+  height: 6px;
+  display: inline-block;
+  box-shadow: 0 0 8px rgba(216, 200, 180, 0.5);
+}
+
+.renova-trans-title {
+  font-family: var(--font-heading, "Cormorant Garamond", serif);
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+  color: #faf8f5;
+  margin: 10px 0 0;
+  font-size: clamp(2.2rem, 3.4vw, 3.4rem);
+  font-weight: 400;
+  line-height: 1.05;
+}
+
+.renova-trans-subtitle {
+  font-family: var(--font-content, "Manrope", sans-serif);
+  color: rgba(250, 248, 245, 0.72);
+  max-width: 480px;
+  margin: 0;
+  font-size: clamp(0.92rem, 1.1vw, 1.02rem);
+  line-height: 1.65;
+}
+
+/* --------------------------------------------------------------------------
+   Desktop Horizontal Accordion
+   -------------------------------------------------------------------------- */
+.renova-expand-accordion {
+  box-sizing: border-box;
+  gap: 14px;
+  width: 100%;
+  height: clamp(460px, 54vh, 560px);
+  display: flex;
+  position: relative;
+}
+
+.renova-acc-card {
+  contain: paint;
+  cursor: pointer;
+  will-change: flex;
+  background-color: #0d0f11;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  outline: none;
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  transition: flex 0.72s cubic-bezier(0.25, 1, 0.3, 1),
+              box-shadow 0.5s cubic-bezier(0.25, 1, 0.3, 1),
+              border-color 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.renova-acc-card:focus-visible {
+  outline: 2px solid var(--renova-sand, #d8c8b4);
+  outline-offset: 3px;
+}
+
+.renova-acc-card.is-active {
+  cursor: default;
+  border-color: rgba(216, 200, 180, 0.4);
+  flex: 5.6;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.52);
+}
+
+.renova-acc-accent-line {
+  background: linear-gradient(90deg, var(--renova-olive, #777b61) 0%, var(--renova-sand, #d8c8b4) 100%);
+  transform-origin: 0 50%;
+  opacity: 0;
+  z-index: 5;
+  pointer-events: none;
+  height: 3px;
+  transition: transform 0.65s cubic-bezier(0.25, 1, 0.3, 1) 0.15s,
+              opacity 0.4s 0.1s;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  transform: scaleX(0);
+}
+
+.renova-acc-card.is-active .renova-acc-accent-line {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+.renova-acc-bg {
+  object-fit: cover;
+  object-position: center;
+  filter: brightness(0.65) contrast(1.08) saturate(0.9);
+  will-change: transform, filter;
+  width: 108%;
+  height: 108%;
+  transition: transform 0.95s cubic-bezier(0.25, 1, 0.3, 1),
+              filter 0.6s ease;
+  position: absolute;
+  inset: -4%;
+  transform: scale(1.06);
+}
+
+.renova-acc-card:hover .renova-acc-bg {
+  filter: brightness(0.76) contrast(1.1) saturate(1);
+  transform: scale(1.03);
+}
+
+.renova-acc-card.is-active .renova-acc-bg {
+  filter: brightness(0.95) contrast(1.05) saturate(1);
+  transform: scale(1);
+}
+
+.renova-acc-tint {
+  pointer-events: none;
+  z-index: 1;
+  background: rgba(10, 13, 15, 0.35);
+  transition: opacity 0.5s ease;
+  position: absolute;
+  inset: 0;
+}
+
+.renova-acc-card.is-active .renova-acc-tint {
+  opacity: 0;
+}
+
+.renova-acc-vignette {
+  opacity: 0;
+  pointer-events: none;
+  z-index: 2;
+  background: linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(8, 10, 12, 0.15) 30%, rgba(8, 10, 12, 0.64) 60%, rgba(8, 10, 12, 0.94) 100%);
+  transition: opacity 0.65s cubic-bezier(0.25, 1, 0.3, 1);
+  position: absolute;
+  inset: 0;
+}
+
+.renova-acc-card.is-active .renova-acc-vignette {
+  opacity: 1;
+}
+
+/* Collapsed Bar (visible when card is not active) */
+.renova-acc-collapsed-bar {
+  z-index: 3;
+  pointer-events: none;
+  opacity: 1;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 34px 14px;
+  transition: opacity 0.35s, transform 0.45s cubic-bezier(0.25, 1, 0.3, 1);
+  display: flex;
+  position: absolute;
+  inset: 0;
+  transform: translateY(0);
+}
+
+.renova-acc-card.is-active .renova-acc-collapsed-bar {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-16px);
+}
+
+.renova-acc-collapsed-num {
+  font-family: var(--font-architectural, "Space Grotesk", sans-serif);
+  letter-spacing: 0.18em;
+  color: var(--renova-sand, #d8c8b4);
+  font-size: 0.88rem;
+  font-weight: 600;
+  transition: transform 0.35s, color 0.3s;
+}
+
+.renova-acc-card:hover .renova-acc-collapsed-num {
+  color: #fff;
+  transform: scale(1.1);
+}
+
+.renova-acc-collapsed-title {
+  font-family: var(--font-heading, "Cormorant Garamond", serif);
+  letter-spacing: 0.05em;
+  color: #faf8f5;
+  writing-mode: vertical-rl;
+  white-space: nowrap;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+  margin-bottom: 8px;
+  font-size: 1.25rem;
+  font-weight: 400;
+  transition: letter-spacing 0.35s, color 0.3s;
+  transform: rotate(180deg);
+}
+
+.renova-acc-card:hover .renova-acc-collapsed-title {
+  letter-spacing: 0.08em;
+  color: #fff;
+}
+
+.renova-acc-mobile-cue {
+  display: none;
+}
+
+/* Expanded Card Content */
+.renova-acc-content {
+  z-index: 4;
+  pointer-events: none;
+  box-sizing: border-box;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  max-width: 100%;
+  padding: clamp(28px, 4.5vw, 48px);
+  display: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.renova-acc-card.is-active .renova-acc-content {
+  pointer-events: auto;
+  display: flex;
+}
+
+.renova-acc-kicker-wrap,
+.renova-acc-heading,
+.renova-acc-desc,
+.renova-acc-actions {
+  opacity: 0;
+  transition: opacity 0.25s, transform 0.25s;
+  transform: translateY(18px);
+}
+
+.renova-acc-card.is-active .renova-acc-kicker-wrap {
+  opacity: 1;
+  transition: opacity 0.5s 0.16s, transform 0.6s cubic-bezier(0.25, 1, 0.3, 1) 0.16s;
+  transform: translateY(0);
+}
+
+.renova-acc-card.is-active .renova-acc-heading {
+  opacity: 1;
+  transition: opacity 0.55s 0.24s, transform 0.65s cubic-bezier(0.25, 1, 0.3, 1) 0.24s;
+  transform: translateY(0);
+}
+
+.renova-acc-card.is-active .renova-acc-desc {
+  opacity: 1;
+  transition: opacity 0.55s 0.32s, transform 0.65s cubic-bezier(0.25, 1, 0.3, 1) 0.32s;
+  transform: translateY(0);
+}
+
+.renova-acc-card.is-active .renova-acc-actions {
+  opacity: 1;
+  transition: opacity 0.55s 0.4s, transform 0.65s cubic-bezier(0.25, 1, 0.3, 1) 0.4s;
+  transform: translateY(0);
+}
+
+.renova-acc-kicker-wrap {
+  align-items: center;
+  gap: 10px;
+  display: flex;
+}
+
+.renova-acc-num {
+  font-family: var(--font-architectural, "Space Grotesk", sans-serif);
+  letter-spacing: 0.18em;
+  color: var(--renova-sand, #d8c8b4);
+  font-size: 0.84rem;
+  font-weight: 600;
+}
+
+.renova-acc-kicker-dot {
+  background: var(--renova-sand, #d8c8b4);
+  opacity: 0.7;
+  border-radius: 50%;
+  width: 4px;
+  height: 4px;
+}
+
+.renova-acc-kicker-tag {
+  font-family: var(--font-architectural, "Space Grotesk", sans-serif);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(250, 248, 245, 0.7);
+  font-size: 0.72rem;
+}
+
+.renova-acc-heading {
+  font-family: var(--font-heading, "Cormorant Garamond", serif);
+  letter-spacing: -0.015em;
+  color: #faf8f5;
+  margin: 0;
+  font-size: clamp(2.1rem, 3.8vw, 3.2rem);
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.renova-acc-desc {
+  font-family: var(--font-content, "Manrope", sans-serif);
+  color: rgba(250, 248, 245, 0.88);
+  max-width: 540px;
+  margin: 2px 0 16px;
+  font-size: clamp(0.88rem, 1.2vw, 0.98rem);
+  line-height: 1.68;
+}
+
+.renova-acc-actions {
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px;
+  display: flex;
+}
+
+.renova-acc-enquire-btn {
+  color: #121412;
+  font-family: var(--font-architectural, "Space Grotesk", sans-serif);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  background: #faf8f5;
+  border: none;
+  border-radius: 999px;
+  padding: 10px 24px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: all 0.25s;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+.renova-acc-enquire-btn:hover {
+  background: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.55);
+}
+
+.renova-acc-spec-link {
+  color: var(--renova-sand, #d8c8b4);
+  font-family: var(--font-architectural, "Space Grotesk", sans-serif);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  text-decoration: none;
+  transition: color 0.25s, transform 0.25s;
+  display: inline-flex;
+}
+
+.renova-acc-spec-link:hover {
+  color: #fff;
+  transform: translateX(3px);
+}
+
+.renova-trans-footer-cta {
+  text-align: center;
+  margin-top: clamp(40px, 6vh, 64px);
+}
+
+.renova-btn-outline {
+  color: #faf8f5;
+  font-family: var(--font-architectural, "Space Grotesk", sans-serif);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: transparent;
+  border: 1px solid rgba(250, 248, 245, 0.28);
+  border-radius: 999px;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 28px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+}
+
+.renova-btn-outline:hover {
+  background: var(--renova-sand, #d8c8b4);
+  color: var(--renova-ink, #151614);
+  border-color: var(--renova-sand, #d8c8b4);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* --------------------------------------------------------------------------
+   Mobile View Styles
+   -------------------------------------------------------------------------- */
+.renova-mob-header {
+  text-align: left;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 20px;
+  display: flex;
+}
+
+.renova-mob-eyebrow {
+  font-family: var(--font-architectural, "Space Grotesk", sans-serif);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--renova-sand, #d8c8b4);
+  align-items: center;
+  gap: 8px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  display: inline-flex;
+}
+
+.renova-mob-bullet {
+  background-color: var(--renova-sand, #d8c8b4);
+  border-radius: 50%;
+  width: 6px;
+  height: 6px;
+  display: inline-block;
+  box-shadow: 0 0 8px rgba(216, 200, 180, 0.4);
+}
+
+.renova-mob-title {
+  font-family: var(--font-heading, "Cormorant Garamond", serif);
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+  color: #faf8f5;
+  margin: 0;
+  font-size: clamp(1.75rem, 6.8vw, 2.35rem);
+  font-weight: 400;
+  line-height: 1.12;
+}
+
+.renova-mob-subtitle {
+  font-family: var(--font-content, "Manrope", sans-serif);
+  color: rgba(250, 248, 245, 0.65);
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.renova-mob-featured-card {
+  aspect-ratio: 1 / 1.05;
+  background-color: #1a1b18;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.5);
+}
+
+.renova-mob-featured-img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  animation: 0.35s ease-out renovaFadeIn;
+  display: block;
+}
+
+.renova-mob-featured-vignette {
+  pointer-events: none;
+  background: linear-gradient(rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0) 45%, rgba(18, 19, 16, 0.65) 100%);
+  position: absolute;
+  inset: 0;
+}
+
+.renova-mob-info-row {
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  margin-top: 18px;
+  padding: 0 2px;
+  display: flex;
+}
+
+.renova-mob-info-text {
+  flex-direction: column;
+  flex: 1;
+  gap: 4px;
+  min-width: 0;
+  display: flex;
+}
+
+.renova-mob-project-title {
+  font-family: var(--font-heading, "Cormorant Garamond", serif);
+  letter-spacing: -0.01em;
+  color: #faf8f5;
+  text-transform: capitalize;
+  margin: 0;
+  font-size: clamp(1.25rem, 4.2vw, 1.48rem);
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.renova-mob-project-desc {
+  font-family: var(--font-content, "Manrope", sans-serif);
+  color: #a09d95;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin: 0;
+  font-size: 0.84rem;
+  line-height: 1.45;
+  overflow: hidden;
+}
+
+.renova-mob-enquire-btn {
+  color: #151614;
+  font-family: var(--font-content, "Manrope", sans-serif);
+  cursor: pointer;
+  background-color: #faf8f5;
+  border: none;
+  border-radius: 9999px;
+  flex-shrink: 0;
+  padding: 9px 22px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  transition: all 0.2s;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+.renova-mob-enquire-btn:active {
+  background-color: #e2dfd8;
+  transform: scale(0.96);
+}
+
+.renova-mob-thumbnails-grid {
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(8px, 2.4vw, 12px);
+  margin-top: 22px;
+  display: grid;
+}
+
+.renova-mob-thumb-btn {
+  cursor: pointer;
+  text-align: center;
+  background: transparent;
+  border: none;
+  outline: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.renova-mob-thumb-img-wrap {
+  aspect-ratio: 1;
+  box-sizing: border-box;
+  background-color: #1c1d1a;
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  width: 100%;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.renova-mob-thumb-img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.35s ease;
+  display: block;
+}
+
+.renova-mob-thumb-btn.is-active .renova-mob-thumb-img-wrap {
+  border-color: var(--renova-sand, #d8c8b4);
+  transform: translateY(-2px);
+  box-shadow: 0 0 0 2px var(--renova-sand, #d8c8b4), 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+.renova-mob-thumb-btn.is-active .renova-mob-thumb-img {
+  transform: scale(1.05);
+}
+
+.renova-mob-thumb-label {
+  font-family: var(--font-architectural, "Space Grotesk", sans-serif);
+  letter-spacing: 0.03em;
+  color: #8c8a84;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  font-size: 0.68rem;
+  transition: color 0.2s;
+  overflow: hidden;
+}
+
+.renova-mob-thumb-btn.is-active .renova-mob-thumb-label {
+  color: #faf8f5;
+  font-weight: 600;
+}
+
+.renova-mob-view-all-btn {
+  color: #faf8f5;
+  width: 100%;
+  font-family: var(--font-content, "Manrope", sans-serif);
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 9999px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 24px;
+  padding: 13px 20px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s;
+  display: flex;
+}
+
+.renova-mob-view-all-btn:active {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-1px);
+}
