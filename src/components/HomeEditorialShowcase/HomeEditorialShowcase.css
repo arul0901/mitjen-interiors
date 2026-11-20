@@ -1,99 +1,252 @@
 /* ==========================================================================
-   HOME PAGE LARGE IMAGE EDITORIAL SHOWCASE
-   Large-scale architectural photography, high-contrast typography,
-   editorial visual hierarchy connecting to /projects.
+   HOME PAGE EDITORIAL SHOWCASE & CONTINUOUS IMAGE SCROLLING SECTION
+   Clean White Background (#FFFFFF) with high-contrast, visible dark fonts.
+   Continuous dual-row infinite image scroll as requested in video reference.
    ========================================================================== */
 
-.home-editorial-showcase-section {
+/* Force clean white background and dark text, overriding home-dark-theme */
+.home-editorial-showcase-section,
+body.home-dark-theme .home-editorial-showcase-section,
+html.home-dark-theme .home-editorial-showcase-section {
   width: 100%;
-  background-color: #111111;
-  color: #ffffff;
-  padding: clamp(80px, 9vw, 150px) 0 clamp(64px, 8vw, 120px) 0;
+  background-color: #ffffff !important;
+  color: #171717 !important;
+  padding: clamp(72px, 8vw, 120px) 0 clamp(64px, 7vw, 100px) 0;
   position: relative;
   overflow: hidden;
   box-sizing: border-box;
+  z-index: 10;
 }
 
 /* --------------------------------------------------------------------------
-   1. SECTION HEADER
+   1. SECTION HEADER (Centered & High Contrast On Pure White)
+   Matches the video reference: "Design in Its Finest Details"
    -------------------------------------------------------------------------- */
 .home-editorial-header-container {
   width: 100%;
-  max-width: 1600px;
+  max-width: 1440px;
   margin: 0 auto;
   padding: 0 clamp(20px, 4vw, 64px);
-  margin-bottom: clamp(48px, 6vw, 88px);
+  margin-bottom: clamp(36px, 4vw, 56px);
+  text-align: center;
   box-sizing: border-box;
 }
 
-.home-editorial-header-row {
-  display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  gap: clamp(32px, 5vw, 80px);
-  align-items: flex-end;
+.home-editorial-header-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
-.home-editorial-kicker {
+.home-editorial-kicker,
+body.home-dark-theme .home-editorial-showcase-section .home-editorial-kicker {
   font-family: 'Manrope', sans-serif;
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #b88e4b;
+  color: #b88e4b !important;
   display: block;
-  margin-bottom: 16px;
 }
 
-.home-editorial-heading {
+.home-editorial-heading,
+body.home-dark-theme .home-editorial-showcase-section .home-editorial-heading {
   font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
-  font-size: clamp(28px, 3.8vw, 54px);
-  font-weight: 500;
-  line-height: 1.15;
-  letter-spacing: -0.01em;
-  color: #ffffff;
+  font-size: clamp(36px, 4.8vw, 68px);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  color: #171717 !important;
   margin: 0;
-  text-transform: uppercase;
 }
 
-.home-editorial-header-right {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  align-items: flex-start;
-}
-
-.home-editorial-statement {
+.home-editorial-statement,
+body.home-dark-theme .home-editorial-showcase-section .home-editorial-statement {
   font-family: 'DM Sans', 'Manrope', sans-serif;
-  font-size: clamp(15px, 1.1vw, 17px);
-  line-height: 1.7;
-  color: rgba(255, 255, 255, 0.7);
-  margin: 0;
+  font-size: clamp(15px, 1.15vw, 18px);
+  line-height: 1.65;
+  color: #555555 !important;
+  margin: 4px 0 16px 0;
+  max-width: 680px;
 }
 
-.home-editorial-header-link {
+.home-editorial-header-link,
+body.home-dark-theme .home-editorial-showcase-section .home-editorial-header-link {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  color: #b88e4b;
+  gap: 8px;
+  color: #171717 !important;
   font-family: 'Manrope', sans-serif;
   font-size: 13px;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   text-decoration: none;
-  transition: color 0.3s ease, transform 0.2s ease;
+  transition: color 0.3s ease, transform 0.2s ease, border-color 0.3s ease;
   padding-bottom: 4px;
-  border-bottom: 1px solid rgba(184, 142, 75, 0.4);
+  border-bottom: 1.5px solid rgba(23, 23, 23, 0.3) !important;
 }
 
-.home-editorial-header-link:hover {
-  color: #ffffff;
-  border-color: #ffffff;
+.home-editorial-header-link:hover,
+body.home-dark-theme .home-editorial-showcase-section .home-editorial-header-link:hover {
+  color: #b88e4b !important;
+  border-bottom-color: #b88e4b !important;
   transform: translateX(4px);
 }
 
 /* --------------------------------------------------------------------------
-   2. LARGE-SCALE EDITORIAL GALLERY CONTAINER
+   2. DUAL-ROW CONTINUOUS IMAGE SCROLLING SECTION (VIDEO RECREATION)
+   Smooth infinite 60fps marquee with hover pause and click interaction.
+   -------------------------------------------------------------------------- */
+.home-marquee-scroll-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(16px, 2vw, 24px);
+  margin-bottom: clamp(64px, 8vw, 110px);
+  overflow: hidden;
+  user-select: none;
+}
+
+.home-marquee-track-row {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+}
+
+.home-marquee-track {
+  display: flex;
+  gap: clamp(16px, 2vw, 24px);
+  width: max-content;
+  will-change: transform;
+}
+
+/* Row 1: Smooth Leftward Infinite Scroll */
+.track-left .home-marquee-track {
+  animation: scrollTrackLeft 50s linear infinite;
+}
+
+/* Row 2: Smooth Rightward Infinite Scroll */
+.track-right .home-marquee-track {
+  animation: scrollTrackRight 50s linear infinite;
+}
+
+.home-marquee-track-row:hover .home-marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes scrollTrackLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes scrollTrackRight {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Individual Marquee Item */
+.home-marquee-item {
+  position: relative;
+  flex-shrink: 0;
+  cursor: pointer;
+  overflow: hidden;
+  background-color: #f4efe9;
+  border: 1px solid rgba(23, 23, 23, 0.08);
+  height: clamp(260px, 24vw, 380px);
+}
+
+.home-marquee-item.aspect-landscape {
+  width: clamp(340px, 32vw, 500px);
+}
+
+.home-marquee-item.aspect-portrait {
+  width: clamp(220px, 20vw, 300px);
+}
+
+.home-marquee-item.aspect-wide {
+  width: clamp(400px, 38vw, 600px);
+}
+
+.home-marquee-media {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.home-marquee-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.home-marquee-item:hover .home-marquee-img {
+  transform: scale(1.04);
+}
+
+.home-marquee-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(18, 16, 14, 0.88) 0%,
+    rgba(18, 16, 14, 0.3) 50%,
+    rgba(18, 16, 14, 0.05) 100%
+  );
+  padding: clamp(16px, 2vw, 24px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.home-marquee-item:hover .home-marquee-overlay {
+  opacity: 1;
+}
+
+.home-marquee-tag {
+  font-family: 'Manrope', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #b88e4b;
+  margin-bottom: 4px;
+}
+
+.home-marquee-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(20px, 2vw, 28px);
+  font-weight: 600;
+  color: #ffffff !important;
+  margin: 0 0 2px 0;
+  line-height: 1.15;
+}
+
+.home-marquee-space {
+  font-family: 'Manrope', sans-serif;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.75) !important;
+  letter-spacing: 0.04em;
+}
+
+/* --------------------------------------------------------------------------
+   3. LARGE-SCALE EDITORIAL GALLERY CONTAINER
    -------------------------------------------------------------------------- */
 .home-editorial-gallery-container {
   width: 100%;
@@ -111,8 +264,9 @@
   position: relative;
   overflow: hidden;
   cursor: pointer;
-  background-color: #1a1a1a;
+  background-color: #f4efe9;
   outline: none;
+  border: 1px solid rgba(23, 23, 23, 0.08);
 }
 
 .home-editorial-media {
@@ -143,7 +297,7 @@
     to top,
     rgba(14, 12, 11, 0.88) 0%,
     rgba(14, 12, 11, 0.35) 45%,
-    rgba(14, 12, 11, 0.1) 100%
+    rgba(14, 12, 11, 0.05) 100%
   );
   padding: clamp(24px, 4vw, 56px);
   display: flex;
@@ -157,7 +311,7 @@
     to top,
     rgba(14, 12, 11, 0.94) 0%,
     rgba(14, 12, 11, 0.45) 50%,
-    rgba(14, 12, 11, 0.15) 100%
+    rgba(14, 12, 11, 0.1) 100%
   );
 }
 
@@ -188,7 +342,7 @@
   font-size: clamp(24px, 3.2vw, 46px);
   font-weight: 500;
   line-height: 1.15;
-  color: #ffffff;
+  color: #ffffff !important;
   margin: 0;
   letter-spacing: -0.01em;
 }
@@ -197,21 +351,21 @@
   font-family: 'Manrope', sans-serif;
   font-size: 13px;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(255, 255, 255, 0.8) !important;
 }
 
 .home-editorial-arrow-btn {
   width: 52px;
   height: 52px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.35);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #ffffff;
+  color: #ffffff !important;
   transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
   flex-shrink: 0;
 }
@@ -219,7 +373,7 @@
 .home-editorial-card:hover .home-editorial-arrow-btn {
   background-color: #b88e4b;
   border-color: #b88e4b;
-  color: #ffffff;
+  color: #ffffff !important;
   transform: scale(1.08) rotate(45deg);
 }
 
@@ -251,7 +405,7 @@
 }
 
 /* --------------------------------------------------------------------------
-   3. STUDIO PHILOSOPHY STRIP
+   4. STUDIO PHILOSOPHY STRIP
    -------------------------------------------------------------------------- */
 .home-editorial-footer-container {
   width: 100%;
@@ -262,7 +416,7 @@
 }
 
 .home-editorial-footer-box {
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  border-top: 1px solid rgba(23, 23, 23, 0.12);
   padding-top: clamp(36px, 5vw, 64px);
   display: flex;
   align-items: center;
@@ -270,25 +424,27 @@
   gap: 40px;
 }
 
-.home-editorial-footer-quote {
+.home-editorial-footer-quote,
+body.home-dark-theme .home-editorial-showcase-section .home-editorial-footer-quote {
   font-family: 'Cormorant Garamond', Georgia, serif;
   font-size: clamp(20px, 2.2vw, 30px);
   font-style: italic;
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.85);
+  color: #171717 !important;
   margin: 0;
   max-width: 800px;
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
-.home-editorial-footer-btn {
+.home-editorial-footer-btn,
+body.home-dark-theme .home-editorial-showcase-section .home-editorial-footer-btn {
   display: inline-flex;
   align-items: center;
   gap: 12px;
   padding: 16px 32px;
   background-color: transparent;
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #171717 !important;
+  border: 1px solid rgba(23, 23, 23, 0.35) !important;
   font-family: 'Manrope', sans-serif;
   font-size: 13px;
   font-weight: 700;
@@ -299,36 +455,61 @@
   transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
-.home-editorial-footer-btn:hover {
-  background-color: #b88e4b;
-  border-color: #b88e4b;
-  color: #ffffff;
+.home-editorial-footer-btn:hover,
+body.home-dark-theme .home-editorial-showcase-section .home-editorial-footer-btn:hover {
+  background-color: #171717 !important;
+  border-color: #171717 !important;
+  color: #ffffff !important;
 }
 
 /* --------------------------------------------------------------------------
-   4. RESPONSIVE MEDIA QUERIES (TABLET & MOBILE)
+   5. IMMEDIATE NEXT SECTION PADDING INCREASE (+20px)
+   -------------------------------------------------------------------------- */
+.cs_skills_layout_1,
+body.home-dark-theme .cs_skills_layout_1 {
+  padding-top: 80px !important;
+}
+
+/* --------------------------------------------------------------------------
+   6. RESPONSIVE MEDIA QUERIES (TABLET & MOBILE)
    -------------------------------------------------------------------------- */
 @media (max-width: 1024px) {
-  .home-editorial-header-row {
-    grid-template-columns: 1fr;
-    gap: 28px;
-  }
-
   .home-editorial-split-row {
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: 28px;
   }
 
   .home-editorial-footer-box {
     flex-direction: column;
     align-items: flex-start;
-    gap: 28px;
+    gap: 24px;
   }
 }
 
 @media (max-width: 768px) {
-  .home-editorial-showcase-section {
-    padding: 60px 0 48px 0;
+  .home-editorial-showcase-section,
+  body.home-dark-theme .home-editorial-showcase-section {
+    padding: 56px 0 44px 0 !important;
+  }
+
+  .home-editorial-heading {
+    font-size: 32px;
+  }
+
+  .home-marquee-item {
+    height: 220px;
+  }
+
+  .home-marquee-item.aspect-landscape {
+    width: 290px;
+  }
+
+  .home-marquee-item.aspect-portrait {
+    width: 180px;
+  }
+
+  .home-marquee-item.aspect-wide {
+    width: 320px;
   }
 
   .home-editorial-card.panoramic-hero .home-editorial-media,
@@ -339,11 +520,11 @@
   }
 
   .home-editorial-overlay {
-    padding: 24px;
+    padding: 20px;
   }
 
   .home-editorial-card-content {
-    max-width: 82%;
+    max-width: 85%;
   }
 
   .home-editorial-card-title {
@@ -353,5 +534,10 @@
   .home-editorial-arrow-btn {
     width: 42px;
     height: 42px;
+  }
+
+  .cs_skills_layout_1,
+  body.home-dark-theme .cs_skills_layout_1 {
+    padding-top: 60px !important;
   }
 }

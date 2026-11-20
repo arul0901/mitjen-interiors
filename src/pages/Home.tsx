@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import BeforeAfterTransformation from "../components/BeforeAfterTransformation";
 import PanoramaViewer from "../components/PanoramaViewer";
 import AboutSection from "../components/sections/About";
@@ -15,15 +16,29 @@ const SHOW_LEGACY_MARQUEE = false;
 const SHOW_LEGACY_HERO_BANNER = false;
 
 export default function Home() {
+  const location = useLocation();
+
   useEffect(() => {
     document.title = "Mitjen Interiors";
     document.body.classList.add("home-dark-theme");
     document.documentElement.classList.add("home-dark-theme");
+
+    if (location.hash) {
+      const id = location.hash.replace("#", "");
+      const timer = setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: "instant", block: "start" });
+        }
+      }, 400);
+      return () => clearTimeout(timer);
+    }
+
     return () => {
       document.body.classList.remove("home-dark-theme");
       document.documentElement.classList.remove("home-dark-theme");
     };
-  }, []);
+  }, [location.hash]);
 
   return <>
 <main className="cs_home_main">
@@ -126,7 +141,7 @@ export default function Home() {
 <ApproachSection />
 <ProjectsSection />
 <HomeEditorialShowcase />
-<section className={"cs_skills_layout_1"}>
+<section className={"cs_skills_layout_1"} style={{ paddingTop: "clamp(60px, 6vw, 90px)" }}>
 <div className={"container"}>
 <div className={"row cs_gap_y_40 align-items-center"}>
 <div className={"col-lg-6"}>

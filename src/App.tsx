@@ -41,7 +41,16 @@ function LegacyPageEffects() {
 
       // Dispose page-scoped animation triggers before the next React route is initialized.
       legacyWindow.gsapAnimationCleanup?.();
-      if (legacyWindow.lenisInstance) {
+      if (location.hash) {
+        const el = document.querySelector(location.hash);
+        if (el) {
+          el.scrollIntoView({ behavior: "instant" });
+        } else if (legacyWindow.lenisInstance) {
+          legacyWindow.lenisInstance.scrollTo(0, { immediate: true });
+        } else {
+          window.scrollTo({ top: 0, behavior: "auto" });
+        }
+      } else if (legacyWindow.lenisInstance) {
         legacyWindow.lenisInstance.scrollTo(0, { immediate: true });
       } else {
         window.scrollTo({ top: 0, behavior: "auto" });
