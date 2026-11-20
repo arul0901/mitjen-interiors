@@ -1,0 +1,357 @@
+/* ==========================================================================
+   HOME PAGE LARGE IMAGE EDITORIAL SHOWCASE
+   Large-scale architectural photography, high-contrast typography,
+   editorial visual hierarchy connecting to /projects.
+   ========================================================================== */
+
+.home-editorial-showcase-section {
+  width: 100%;
+  background-color: #111111;
+  color: #ffffff;
+  padding: clamp(80px, 9vw, 150px) 0 clamp(64px, 8vw, 120px) 0;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* --------------------------------------------------------------------------
+   1. SECTION HEADER
+   -------------------------------------------------------------------------- */
+.home-editorial-header-container {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 64px);
+  margin-bottom: clamp(48px, 6vw, 88px);
+  box-sizing: border-box;
+}
+
+.home-editorial-header-row {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: clamp(32px, 5vw, 80px);
+  align-items: flex-end;
+}
+
+.home-editorial-kicker {
+  font-family: 'Manrope', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #b88e4b;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.home-editorial-heading {
+  font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+  font-size: clamp(28px, 3.8vw, 54px);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.home-editorial-header-right {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.home-editorial-statement {
+  font-family: 'DM Sans', 'Manrope', sans-serif;
+  font-size: clamp(15px, 1.1vw, 17px);
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+}
+
+.home-editorial-header-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #b88e4b;
+  font-family: 'Manrope', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: color 0.3s ease, transform 0.2s ease;
+  padding-bottom: 4px;
+  border-bottom: 1px solid rgba(184, 142, 75, 0.4);
+}
+
+.home-editorial-header-link:hover {
+  color: #ffffff;
+  border-color: #ffffff;
+  transform: translateX(4px);
+}
+
+/* --------------------------------------------------------------------------
+   2. LARGE-SCALE EDITORIAL GALLERY CONTAINER
+   -------------------------------------------------------------------------- */
+.home-editorial-gallery-container {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 64px);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(32px, 4vw, 56px);
+  box-sizing: border-box;
+}
+
+/* Card Common */
+.home-editorial-card {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  background-color: #1a1a1a;
+  outline: none;
+}
+
+.home-editorial-media {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.home-editorial-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.home-editorial-card:hover .home-editorial-img {
+  transform: scale(1.03);
+}
+
+/* Overlay & Content */
+.home-editorial-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(14, 12, 11, 0.88) 0%,
+    rgba(14, 12, 11, 0.35) 45%,
+    rgba(14, 12, 11, 0.1) 100%
+  );
+  padding: clamp(24px, 4vw, 56px);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  transition: background 0.4s ease;
+}
+
+.home-editorial-card:hover .home-editorial-overlay {
+  background: linear-gradient(
+    to top,
+    rgba(14, 12, 11, 0.94) 0%,
+    rgba(14, 12, 11, 0.45) 50%,
+    rgba(14, 12, 11, 0.15) 100%
+  );
+}
+
+.home-editorial-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 75%;
+  transform: translateY(6px);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.home-editorial-card:hover .home-editorial-card-content {
+  transform: translateY(0);
+}
+
+.home-editorial-badge {
+  font-family: 'Manrope', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #b88e4b;
+}
+
+.home-editorial-card-title {
+  font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+  font-size: clamp(24px, 3.2vw, 46px);
+  font-weight: 500;
+  line-height: 1.15;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.home-editorial-card-loc {
+  font-family: 'Manrope', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.home-editorial-arrow-btn {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+  flex-shrink: 0;
+}
+
+.home-editorial-card:hover .home-editorial-arrow-btn {
+  background-color: #b88e4b;
+  border-color: #b88e4b;
+  color: #ffffff;
+  transform: scale(1.08) rotate(45deg);
+}
+
+/* 1. Panoramic Hero Aspect Ratio */
+.home-editorial-card.panoramic-hero .home-editorial-media {
+  aspect-ratio: 21 / 9;
+  max-height: 640px;
+}
+
+/* 2. Asymmetric Split Row */
+.home-editorial-split-row {
+  display: grid;
+  grid-template-columns: 1fr 1.35fr;
+  gap: clamp(32px, 4vw, 56px);
+}
+
+.home-editorial-card.editorial-portrait .home-editorial-media {
+  aspect-ratio: 4 / 5;
+}
+
+.home-editorial-card.editorial-landscape .home-editorial-media {
+  aspect-ratio: 16 / 11;
+}
+
+/* 3. Full Monument Aspect Ratio */
+.home-editorial-card.full-monument .home-editorial-media {
+  aspect-ratio: 16 / 8.5;
+  max-height: 600px;
+}
+
+/* --------------------------------------------------------------------------
+   3. STUDIO PHILOSOPHY STRIP
+   -------------------------------------------------------------------------- */
+.home-editorial-footer-container {
+  width: 100%;
+  max-width: 1600px;
+  margin: clamp(48px, 6vw, 88px) auto 0 auto;
+  padding: 0 clamp(20px, 4vw, 64px);
+  box-sizing: border-box;
+}
+
+.home-editorial-footer-box {
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding-top: clamp(36px, 5vw, 64px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.home-editorial-footer-quote {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(20px, 2.2vw, 30px);
+  font-style: italic;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
+  max-width: 800px;
+  line-height: 1.4;
+}
+
+.home-editorial-footer-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 32px;
+  background-color: transparent;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  font-family: 'Manrope', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.home-editorial-footer-btn:hover {
+  background-color: #b88e4b;
+  border-color: #b88e4b;
+  color: #ffffff;
+}
+
+/* --------------------------------------------------------------------------
+   4. RESPONSIVE MEDIA QUERIES (TABLET & MOBILE)
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .home-editorial-header-row {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .home-editorial-split-row {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .home-editorial-footer-box {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 28px;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-editorial-showcase-section {
+    padding: 60px 0 48px 0;
+  }
+
+  .home-editorial-card.panoramic-hero .home-editorial-media,
+  .home-editorial-card.editorial-portrait .home-editorial-media,
+  .home-editorial-card.editorial-landscape .home-editorial-media,
+  .home-editorial-card.full-monument .home-editorial-media {
+    aspect-ratio: 16 / 10;
+  }
+
+  .home-editorial-overlay {
+    padding: 24px;
+  }
+
+  .home-editorial-card-content {
+    max-width: 82%;
+  }
+
+  .home-editorial-card-title {
+    font-size: 22px;
+  }
+
+  .home-editorial-arrow-btn {
+    width: 42px;
+    height: 42px;
+  }
+}

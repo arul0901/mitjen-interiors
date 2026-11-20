@@ -5,12 +5,12 @@ export default function Footer() {
   return <>
 
 <footer className={"cs_footer_style_1 cs_gray_bg"}>
-<div className={"cs_height_120 cs_height_lg_80"}></div>
-<div className={"container"}>
+{/* <div className={"cs_height_120 cs_height_lg_80"}></div> */}
+{/* <div className={"container"}>
 <div className={"cs_footer_logo cs_center_column text-center position-relative"}>
 <img alt={"Mitjen Interiors Footer Logo"} src={"/assets/img/footer-logo.svg"} />
 </div>
-</div>
+</div> */}
 <div className={"cs_footer_main"}>
 <div className={"container-fluid"}>
 <div className={"cs_footer_rows"}>

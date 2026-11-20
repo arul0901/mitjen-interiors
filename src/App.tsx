@@ -13,6 +13,7 @@ import ResidentialInteriorDesign from "./pages/ResidentialInteriorDesign";
 import Projects from "./pages/Projects";
 import Portfolio from "./pages/Portfolio";
 import PortfolioDetails from "./pages/PortfolioDetails";
+import ProjectDetails from "./pages/ProjectDetails";
 import Team from "./pages/Team";
 import TeamDetails from "./pages/TeamDetails";
 import Blog from "./pages/Blog";
@@ -91,7 +92,8 @@ export default function App() {
           <Route path="/services/corporate-interior-design" element={<CorporateInteriorDesign />} />
           <Route path="/services/residential-interior-design" element={<ResidentialInteriorDesign />} />
           <Route path="/projects" element={<Projects />} />
-          <Route path="/projects/details" element={<PortfolioDetails />} />
+          <Route path="/projects/:id" element={<ProjectDetails />} />
+          <Route path="/projects/details" element={<ProjectDetails />} />
           <Route path="/portfolio" element={<Navigate to="/projects" replace />} />
           <Route path="/portfolio/details" element={<Navigate to="/projects/details" replace />} />
           <Route path="/team" element={<Team />} />

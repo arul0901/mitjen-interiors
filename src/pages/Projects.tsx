@@ -1,13 +1,23 @@
-import React, { useEffect } from "react";
-import { useLocation, Link } from "react-router-dom";
-import KineticVaneShowcase from "../components/KineticVaneShowcase/KineticVaneShowcase";
-import LivspacePortfolio from "../components/LivspacePortfolio/LivspacePortfolio";
+import React, { useEffect, useMemo } from "react";
+import { useLocation } from "react-router-dom";
+import EditorialWorkGrid from "../components/EditorialWork/EditorialWorkGrid";
+import { ProjectCategory } from "../data/editorialProjectsData";
 
 export default function Projects() {
   const location = useLocation();
 
+  // Parse category from URL query parameters (e.g. ?category=residential)
+  const initialCategory = useMemo(() => {
+    const params = new URLSearchParams(location.search);
+    const catParam = params.get("category")?.toLowerCase();
+    if (catParam === "residential") return "Residential" as ProjectCategory;
+    if (catParam === "commercial") return "Commercial" as ProjectCategory;
+    if (catParam === "corporate") return "Corporate" as ProjectCategory;
+    return "All Projects" as const;
+  }, [location.search]);
+
   useEffect(() => {
-    document.title = "Our Projects | Mitjen Interior Design Portfolio";
+    document.title = "Selected Works — Architecture & Interior Portfolio | Mitjen";
 
     if (location.hash) {
       const id = location.hash.replace("#", "");
@@ -24,12 +34,13 @@ export default function Projects() {
   }, [location.hash]);
 
   return (
-    <main className="cs_projects_page_main">
-      {/* Advanced Kinetic Rotating Vane Showcase — Cinematic Architectural Transitions */}
-      <KineticVaneShowcase />
-
-      {/* Authentic Client Residences Portfolio, Materials & Specifications */}
-      <LivspacePortfolio />
+    <main className="cs_projects_page_main" style={{ minHeight: "100vh", backgroundColor: "#f9f7f4" }}>
+      {/* ------------------------------------------------------------- */}
+      {/* WARP ARCHITECTS REFERENCE-DRIVEN EDITORIAL WORK SHOWCASE      */}
+      {/* Top category navigation: All Projects / Residential /          */}
+      {/* Commercial / Corporate. Hover reveals ONLY project name.      */}
+      {/* ------------------------------------------------------------- */}
+      <EditorialWorkGrid initialCategory={initialCategory} />
     </main>
   );
 }

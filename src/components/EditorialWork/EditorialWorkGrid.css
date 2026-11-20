@@ -1,0 +1,359 @@
+/* ==========================================================================
+   WARP ARCHITECTS REFERENCE-INSPIRED EDITORIAL WORK SHOWCASE
+   Ultra-sophisticated, minimal typography, asymmetric image grid.
+   Hover reveals ONLY the project title in elegant serif/sans typography.
+   ========================================================================== */
+
+.editorial-work-section {
+  width: 100%;
+  background-color: #f9f7f4;
+  color: #171717;
+  padding-top: clamp(48px, 6vw, 80px);
+  padding-bottom: clamp(80px, 10vw, 140px);
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* --------------------------------------------------------------------------
+   1. TOP CATEGORY NAVIGATION
+   Minimalist, sophisticated typography navigation.
+   No oversized pill badges.
+   -------------------------------------------------------------------------- */
+.editorial-nav-header {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 64px);
+  margin-bottom: clamp(40px, 5vw, 64px);
+  box-sizing: border-box;
+}
+
+.editorial-nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border-bottom: 1px solid rgba(23, 23, 23, 0.12);
+  padding-bottom: 16px;
+}
+
+.editorial-category-nav-wrapper {
+  overflow-x: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+  width: 100%;
+}
+
+.editorial-category-nav-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.editorial-category-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(24px, 4vw, 56px);
+  position: relative;
+  white-space: nowrap;
+}
+
+.editorial-nav-btn {
+  background: none;
+  border: none;
+  padding: 8px 0 12px 0;
+  margin: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  color: rgba(23, 23, 23, 0.45);
+  font-family: 'Manrope', 'DM Sans', -apple-system, sans-serif;
+  font-size: clamp(13px, 1.1vw, 15px);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: color 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  outline: none;
+  position: relative;
+}
+
+.editorial-nav-btn:hover {
+  color: #171717;
+}
+
+.editorial-nav-btn.is-active {
+  color: #171717;
+  font-weight: 700;
+}
+
+.editorial-nav-label {
+  display: inline-block;
+}
+
+.editorial-nav-count {
+  font-size: 0.8em;
+  font-weight: 500;
+  opacity: 0.65;
+  letter-spacing: 0.02em;
+}
+
+/* Sliding line indicator below active button */
+.editorial-nav-indicator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background-color: #171717;
+  pointer-events: none;
+  transition: transform 0.38s cubic-bezier(0.25, 1, 0.5, 1),
+              width 0.38s cubic-bezier(0.25, 1, 0.5, 1),
+              opacity 0.25s ease;
+  opacity: 0;
+}
+
+/* --------------------------------------------------------------------------
+   2. ASYMMETRIC EDITORIAL PROJECT GRID
+   varied image proportions and carefully balanced spacing.
+   -------------------------------------------------------------------------- */
+.editorial-grid-container {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 64px);
+  box-sizing: border-box;
+}
+
+.editorial-project-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(28px, 4vw, 56px);
+  transition: opacity 0.25s cubic-bezier(0.25, 1, 0.5, 1),
+              transform 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.editorial-project-grid.is-animating-out {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.editorial-project-grid.is-animating-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Item Spans for visual rhythm */
+.editorial-project-item {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #ece8e1;
+}
+
+/* Full Hero Span */
+.editorial-project-item.span-hero {
+  grid-column: span 2;
+}
+
+.editorial-project-item.span-hero .editorial-image-wrapper {
+  aspect-ratio: 16 / 9;
+}
+
+/* Wide Span */
+.editorial-project-item.span-wide {
+  grid-column: span 2;
+}
+
+.editorial-project-item.span-wide .editorial-image-wrapper {
+  aspect-ratio: 16 / 9.5;
+}
+
+/* Tall Portrait Span */
+.editorial-project-item.span-tall .editorial-image-wrapper {
+  aspect-ratio: 4 / 5;
+}
+
+/* Standard Landscape Span */
+.editorial-project-item.span-standard .editorial-image-wrapper {
+  aspect-ratio: 4 / 3;
+}
+
+/* --------------------------------------------------------------------------
+   3. IMAGE WRAPPER & HOVER REVEAL
+   Clean photograph initially. Hover reveals ONLY project name.
+   -------------------------------------------------------------------------- */
+.editorial-image-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background-color: #ece8e1;
+}
+
+.editorial-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.editorial-project-item:hover .editorial-image {
+  transform: scale(1.025);
+}
+
+/* The Hover Scrim: Minimal contrast veil */
+.editorial-hover-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(18, 16, 14, 0.36);
+  backdrop-filter: blur(1.5px);
+  -webkit-backdrop-filter: blur(1.5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(24px, 4vw, 56px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  z-index: 2;
+}
+
+.editorial-hover-overlay.is-hovered,
+.editorial-project-item:hover .editorial-hover-overlay {
+  opacity: 1;
+}
+
+/* Title container with gentle slide-up reveal */
+.editorial-title-container {
+  text-align: center;
+  max-width: 90%;
+  transform: translateY(10px);
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.editorial-hover-overlay.is-hovered .editorial-title-container,
+.editorial-project-item:hover .editorial-title-container {
+  transform: translateY(0);
+}
+
+/* Project Title: ONLY item displayed on hover */
+.editorial-project-title-reveal {
+  font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+  font-size: clamp(24px, 3.2vw, 44px);
+  font-weight: 500;
+  line-height: 1.15;
+  color: #ffffff;
+  letter-spacing: 0.02em;
+  margin: 0;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.45);
+  transition: color 0.3s ease;
+}
+
+/* --------------------------------------------------------------------------
+   4. MOBILE / TOUCH FALLBACK
+   Project names must remain accessible without hover on touch devices.
+   -------------------------------------------------------------------------- */
+.editorial-mobile-caption {
+  display: none;
+  padding: 14px 4px 6px 4px;
+  justify-content: space-between;
+  align-items: baseline;
+  background-color: transparent;
+}
+
+.editorial-mobile-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 19px;
+  font-weight: 600;
+  color: #171717;
+  letter-spacing: 0.01em;
+}
+
+.editorial-mobile-category {
+  font-family: 'Manrope', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(23, 23, 23, 0.5);
+}
+
+/* --------------------------------------------------------------------------
+   5. RESPONSIVE MEDIA QUERIES (TABLET & MOBILE)
+   Mandatory responsive design: no horizontal overflow, clean touch UI.
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .editorial-project-grid {
+    gap: clamp(20px, 3vw, 36px);
+  }
+
+  .editorial-project-title-reveal {
+    font-size: clamp(20px, 3vw, 32px);
+  }
+}
+
+@media (max-width: 768px) {
+  .editorial-work-section {
+    padding-top: 36px;
+    padding-bottom: 64px;
+  }
+
+  .editorial-nav-header {
+    margin-bottom: 28px;
+    padding: 0 20px;
+  }
+
+  .editorial-nav-inner {
+    padding-bottom: 12px;
+  }
+
+  .editorial-category-nav {
+    gap: 20px;
+  }
+
+  .editorial-nav-btn {
+    font-size: 13px;
+    padding-bottom: 8px;
+  }
+
+  /* Single Column on mobile for maximum photography impact */
+  .editorial-project-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .editorial-project-item.span-hero,
+  .editorial-project-item.span-wide,
+  .editorial-project-item.span-tall,
+  .editorial-project-item.span-standard {
+    grid-column: span 1;
+  }
+
+  .editorial-project-item.span-hero .editorial-image-wrapper,
+  .editorial-project-item.span-wide .editorial-image-wrapper {
+    aspect-ratio: 16 / 10;
+  }
+
+  .editorial-project-item.span-tall .editorial-image-wrapper {
+    aspect-ratio: 4 / 5;
+  }
+
+  .editorial-project-item.span-standard .editorial-image-wrapper {
+    aspect-ratio: 4 / 3;
+  }
+
+  /* Show mobile title caption permanently */
+  .editorial-mobile-caption {
+    display: flex;
+  }
+
+  /* Keep hover overlay subtle on mobile or tap */
+  .editorial-hover-overlay {
+    background: rgba(18, 16, 14, 0.25);
+  }
+
+  .editorial-project-title-reveal {
+    font-size: 24px;
+  }
+}
