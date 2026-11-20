@@ -5,7 +5,7 @@ import {
   EditorialProject,
   ProjectCategory,
 } from '../../data/editorialProjectsData';
-import { LayoutGrid, Grid3X3, Rows3 } from 'lucide-react';
+import { LayoutGrid, Grid3X3, Rows3, ArrowUp } from 'lucide-react';
 import './EditorialWorkGrid.css';
 
 type FilterCategory = 'All Projects' | ProjectCategory;
@@ -30,11 +30,27 @@ export const EditorialWorkGrid: React.FC<EditorialWorkGridProps> = ({
   const [activeCategory, setActiveCategory] = useState<FilterCategory>(initialCategory);
   const [gridMode, setGridMode] = useState<GridMode>(initialGridMode);
   const [isTransitioning, setIsTransitioning] = useState<boolean>(false);
+  const [isStickyVisible, setIsStickyVisible] = useState<boolean>(false);
   const [hoveredProjectId, setHoveredProjectId] = useState<string | null>(null);
   const navigate = useNavigate();
   const navContainerRef = useRef<HTMLDivElement>(null);
   const navIndicatorRef = useRef<HTMLSpanElement>(null);
   const buttonRefs = useRef<Map<FilterCategory, HTMLButtonElement>>(new Map());
+
+  // Scroll listener: Dock floating glass filter bar when user scrolls past top header
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      setIsStickyVisible(scrollY > 220);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   // Filter projects dynamically
   const filteredProjects = useMemo(() => {
@@ -133,7 +149,7 @@ export const EditorialWorkGrid: React.FC<EditorialWorkGridProps> = ({
             </div>
           </div>
 
-          {/* Grid Layout Switcher Controls: Minimal Icon-Only Mode (Content/Labels Removed) */}
+          {/* Top Grid Layout Switcher Controls: Minimal Icon-Only Mode */}
           <div className="editorial-grid-switcher" role="group" aria-label="Choose grid layout">
             <button
               type="button"
@@ -142,7 +158,7 @@ export const EditorialWorkGrid: React.FC<EditorialWorkGridProps> = ({
               title="Editorial Masonry Grid"
               aria-label="Editorial Masonry Grid"
             >
-              <LayoutGrid size={16} />
+              <LayoutGrid size={15} />
             </button>
             <button
               type="button"
@@ -151,7 +167,7 @@ export const EditorialWorkGrid: React.FC<EditorialWorkGridProps> = ({
               title="3-Column Architecture Grid"
               aria-label="3-Column Architecture Grid"
             >
-              <Grid3X3 size={16} />
+              <Grid3X3 size={15} />
             </button>
             <button
               type="button"
@@ -160,19 +176,20 @@ export const EditorialWorkGrid: React.FC<EditorialWorkGridProps> = ({
               title="Cinematic Wide Grid"
               aria-label="Cinematic Wide Grid"
             >
-              <Rows3 size={16} />
+              <Rows3 size={15} />
             </button>
           </div>
         </div>
       </header>
 
       {/* ------------------------------------------------------------- */}
-      {/* 2. DYNAMIC PROJECT IMAGE GRID (3 ADAPTIVE MODES)              */}
-      {/* Zero stretched empty beige boxes; seamless layout in all tabs */}
+      {/* 2. DYNAMIC PROJECT IMAGE GRID WITH STAGGERED FADE-UP          */}
+      {/* 40ms stagger per card, seamless masonry & responsive modes     */}
       {/* ------------------------------------------------------------- */}
       <div className="editorial-grid-container">
         <div
           id="editorial-project-grid"
+          key={`${activeCategory}-${gridMode}`}
           className={`editorial-project-grid mode-${gridMode} ${isTransitioning ? 'is-animating-out' : 'is-animating-in'}`}
           role="region"
           aria-live="polite"
@@ -182,6 +199,9 @@ export const EditorialWorkGrid: React.FC<EditorialWorkGridProps> = ({
               <article
                 key={project.id}
                 className={`editorial-project-item item-aspect-${project.aspectRatio}`}
+                style={{
+                  animationDelay: `${Math.min(index * 40, 480)}ms`,
+                }}
                 onMouseEnter={() => setHoveredProjectId(project.id)}
                 onMouseLeave={() => setHoveredProjectId(null)}
                 onClick={() => handleProjectClick(project)}
@@ -224,6 +244,84 @@ export const EditorialWorkGrid: React.FC<EditorialWorkGridProps> = ({
           })}
         </div>
       </div>
+
+      {/* ------------------------------------------------------------- */}
+      {/* 3. STICKY FLOATING GLASS FILTER DOCK (SCROLL-TRIGGERED)       */}
+      {/* Compact glassmorphic pill bar (backdrop-filter: blur(16px))   */}
+      {/* Docks smoothly when user scrolls down through the portfolio   */}
+      {/* ------------------------------------------------------------- */}
+      <aside
+        className={`editorial-floating-dock ${isStickyVisible ? 'is-visible' : ''}`}
+        aria-label="Floating Portfolio Navigation Dock"
+        role="toolbar"
+      >
+        <div className="editorial-floating-dock-inner">
+          {/* Floating Category Pills */}
+          <div className="editorial-floating-categories">
+            {CATEGORIES.map((cat) => {
+              const isActive = activeCategory === cat;
+              return (
+                <button
+                  key={cat}
+                  type="button"
+                  className={`editorial-floating-cat-btn ${isActive ? 'is-active' : ''}`}
+                  onClick={() => handleCategoryChange(cat)}
+                  aria-pressed={isActive}
+                >
+                  <span className="floating-cat-label">{cat === 'All Projects' ? 'All' : cat}</span>
+                  <span className="floating-cat-count">({categoryCounts[cat]})</span>
+                </button>
+              );
+            })}
+          </div>
+
+          <span className="editorial-floating-divider" aria-hidden="true" />
+
+          {/* Quick Grid Mode Switcher */}
+          <div className="editorial-floating-grid-modes" role="group" aria-label="Grid layout toggle">
+            <button
+              type="button"
+              className={`editorial-floating-mode-btn ${gridMode === 'editorial' ? 'is-active' : ''}`}
+              onClick={() => handleGridModeChange('editorial')}
+              title="Editorial Masonry Grid"
+              aria-label="Editorial Masonry Grid"
+            >
+              <LayoutGrid size={15} />
+            </button>
+            <button
+              type="button"
+              className={`editorial-floating-mode-btn ${gridMode === 'three-col' ? 'is-active' : ''}`}
+              onClick={() => handleGridModeChange('three-col')}
+              title="3-Column Architecture Grid"
+              aria-label="3-Column Architecture Grid"
+            >
+              <Grid3X3 size={15} />
+            </button>
+            <button
+              type="button"
+              className={`editorial-floating-mode-btn ${gridMode === 'cinematic' ? 'is-active' : ''}`}
+              onClick={() => handleGridModeChange('cinematic')}
+              title="Cinematic Wide Grid"
+              aria-label="Cinematic Wide Grid"
+            >
+              <Rows3 size={15} />
+            </button>
+          </div>
+
+          <span className="editorial-floating-divider" aria-hidden="true" />
+
+          {/* Quick Back to Top Scroll */}
+          <button
+            type="button"
+            className="editorial-floating-top-btn"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            title="Scroll to Top"
+            aria-label="Scroll to top of portfolio"
+          >
+            <ArrowUp size={14} />
+          </button>
+        </div>
+      </aside>
     </section>
   );
 };
