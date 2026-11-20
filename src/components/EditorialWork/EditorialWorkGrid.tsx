@@ -133,7 +133,7 @@ export const EditorialWorkGrid: React.FC<EditorialWorkGridProps> = ({
             </div>
           </div>
 
-          {/* Grid Layout Switcher Controls: Masonry, 3-Column, Cinematic */}
+          {/* Grid Layout Switcher Controls: Minimal Icon-Only Mode (Content/Labels Removed) */}
           <div className="editorial-grid-switcher" role="group" aria-label="Choose grid layout">
             <button
               type="button"
@@ -142,8 +142,7 @@ export const EditorialWorkGrid: React.FC<EditorialWorkGridProps> = ({
               title="Editorial Masonry Grid"
               aria-label="Editorial Masonry Grid"
             >
-              <LayoutGrid size={15} />
-              <span className="editorial-grid-mode-text">Editorial</span>
+              <LayoutGrid size={16} />
             </button>
             <button
               type="button"
@@ -152,8 +151,7 @@ export const EditorialWorkGrid: React.FC<EditorialWorkGridProps> = ({
               title="3-Column Architecture Grid"
               aria-label="3-Column Architecture Grid"
             >
-              <Grid3X3 size={15} />
-              <span className="editorial-grid-mode-text">3-Col</span>
+              <Grid3X3 size={16} />
             </button>
             <button
               type="button"
@@ -162,8 +160,7 @@ export const EditorialWorkGrid: React.FC<EditorialWorkGridProps> = ({
               title="Cinematic Wide Grid"
               aria-label="Cinematic Wide Grid"
             >
-              <Rows3 size={15} />
-              <span className="editorial-grid-mode-text">Cinematic</span>
+              <Rows3 size={16} />
             </button>
           </div>
         </div>

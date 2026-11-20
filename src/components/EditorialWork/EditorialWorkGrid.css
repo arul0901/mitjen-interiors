@@ -126,32 +126,27 @@
 .editorial-grid-mode-btn {
   background: transparent;
   border: none;
-  border-radius: 30px;
-  padding: 6px 12px;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  padding: 0;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  justify-content: center;
   cursor: pointer;
-  font-family: 'Manrope', 'DM Sans', sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
   color: rgba(23, 23, 23, 0.55);
   transition: all 0.25s ease;
 }
 
 .editorial-grid-mode-btn:hover {
   color: #171717;
+  background: rgba(23, 23, 23, 0.06);
 }
 
 .editorial-grid-mode-btn.is-active {
   background: #171717;
   color: #ffffff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-}
-
-.editorial-grid-mode-text {
-  display: inline-block;
 }
 
 /* --------------------------------------------------------------------------
@@ -484,11 +479,8 @@
 }
 
 @media (max-width: 480px) {
-  .editorial-grid-mode-text {
-    display: none;
-  }
-
   .editorial-grid-mode-btn {
-    padding: 6px 10px;
+    width: 28px;
+    height: 28px;
   }
 }
