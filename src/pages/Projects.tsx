@@ -6,14 +6,22 @@ import { ProjectCategory } from "../data/editorialProjectsData";
 export default function Projects() {
   const location = useLocation();
 
-  // Parse category from URL query parameters (e.g. ?category=residential)
-  const initialCategory = useMemo(() => {
+  // Parse category & grid mode from URL query parameters (e.g. ?category=residential&grid=three-col)
+  const { initialCategory, initialGridMode } = useMemo(() => {
     const params = new URLSearchParams(location.search);
     const catParam = params.get("category")?.toLowerCase();
-    if (catParam === "residential") return "Residential" as ProjectCategory;
-    if (catParam === "commercial") return "Commercial" as ProjectCategory;
-    if (catParam === "corporate") return "Corporate" as ProjectCategory;
-    return "All Projects" as const;
+    const gridParam = params.get("grid")?.toLowerCase() || params.get("mode")?.toLowerCase();
+
+    let cat: ProjectCategory | "All Projects" = "All Projects";
+    if (catParam === "residential") cat = "Residential";
+    if (catParam === "commercial") cat = "Commercial";
+    if (catParam === "corporate") cat = "Corporate";
+
+    let mode: "editorial" | "three-col" | "cinematic" = "editorial";
+    if (gridParam === "three-col" || gridParam === "three" || gridParam === "3") mode = "three-col";
+    if (gridParam === "cinematic" || gridParam === "wide") mode = "cinematic";
+
+    return { initialCategory: cat, initialGridMode: mode };
   }, [location.search]);
 
   useEffect(() => {
@@ -40,7 +48,7 @@ export default function Projects() {
       {/* Top category navigation: All Projects / Residential /          */}
       {/* Commercial / Corporate. Hover reveals ONLY project name.      */}
       {/* ------------------------------------------------------------- */}
-      <EditorialWorkGrid initialCategory={initialCategory} />
+      <EditorialWorkGrid initialCategory={initialCategory} initialGridMode={initialGridMode} />
     </main>
   );
 }

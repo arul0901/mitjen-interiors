@@ -264,9 +264,10 @@ body.home-dark-theme .home-editorial-showcase-section .home-editorial-header-lin
   position: relative;
   overflow: hidden;
   cursor: pointer;
-  background-color: #f4efe9;
+  background-color: transparent !important;
   outline: none;
   border: 1px solid rgba(23, 23, 23, 0.08);
+  height: fit-content;
 }
 
 .home-editorial-media {
@@ -388,6 +389,7 @@ body.home-dark-theme .home-editorial-showcase-section .home-editorial-header-lin
   display: grid;
   grid-template-columns: 1fr 1.35fr;
   gap: clamp(32px, 4vw, 56px);
+  align-items: start;
 }
 
 .home-editorial-card.editorial-portrait .home-editorial-media {

@@ -5,9 +5,11 @@ import {
   EditorialProject,
   ProjectCategory,
 } from '../../data/editorialProjectsData';
+import { LayoutGrid, Grid3X3, Rows3 } from 'lucide-react';
 import './EditorialWorkGrid.css';
 
 type FilterCategory = 'All Projects' | ProjectCategory;
+type GridMode = 'editorial' | 'three-col' | 'cinematic';
 
 const CATEGORIES: FilterCategory[] = [
   'All Projects',
@@ -18,12 +20,15 @@ const CATEGORIES: FilterCategory[] = [
 
 interface EditorialWorkGridProps {
   initialCategory?: FilterCategory;
+  initialGridMode?: GridMode;
 }
 
 export const EditorialWorkGrid: React.FC<EditorialWorkGridProps> = ({
   initialCategory = 'All Projects',
+  initialGridMode = 'editorial',
 }) => {
   const [activeCategory, setActiveCategory] = useState<FilterCategory>(initialCategory);
+  const [gridMode, setGridMode] = useState<GridMode>(initialGridMode);
   const [isTransitioning, setIsTransitioning] = useState<boolean>(false);
   const [hoveredProjectId, setHoveredProjectId] = useState<string | null>(null);
   const navigate = useNavigate();
@@ -78,6 +83,16 @@ export const EditorialWorkGrid: React.FC<EditorialWorkGridProps> = ({
     }, 180);
   };
 
+  // Handle grid mode change with smooth transition
+  const handleGridModeChange = (mode: GridMode) => {
+    if (mode === gridMode) return;
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setGridMode(mode);
+      setIsTransitioning(false);
+    }, 150);
+  };
+
   // Handle click on a project card to open dedicated details
   const handleProjectClick = (project: EditorialProject) => {
     navigate(`/projects/${project.slug}`);
@@ -87,11 +102,11 @@ export const EditorialWorkGrid: React.FC<EditorialWorkGridProps> = ({
   return (
     <section className="editorial-work-section" aria-label="Mitjen Architecture & Interior Design Portfolio">
       {/* ------------------------------------------------------------- */}
-      {/* 1. TOP EDITORIAL CATEGORY NAVIGATION                          */}
-      {/* Minimal, sophisticated typography navigation with active line */}
+      {/* 1. TOP EDITORIAL NAVIGATION & GRID TYPE SWITCHER              */}
       {/* ------------------------------------------------------------- */}
       <header className="editorial-nav-header">
         <div className="editorial-nav-inner">
+          {/* Category Tabs */}
           <div className="editorial-category-nav-wrapper" ref={navContainerRef} role="tablist">
             <div className="editorial-category-nav">
               {CATEGORIES.map((cat) => {
@@ -117,36 +132,59 @@ export const EditorialWorkGrid: React.FC<EditorialWorkGridProps> = ({
               <span className="editorial-nav-indicator" ref={navIndicatorRef} aria-hidden="true" />
             </div>
           </div>
+
+          {/* Grid Layout Switcher Controls: Masonry, 3-Column, Cinematic */}
+          <div className="editorial-grid-switcher" role="group" aria-label="Choose grid layout">
+            <button
+              type="button"
+              className={`editorial-grid-mode-btn ${gridMode === 'editorial' ? 'is-active' : ''}`}
+              onClick={() => handleGridModeChange('editorial')}
+              title="Editorial Masonry Grid"
+              aria-label="Editorial Masonry Grid"
+            >
+              <LayoutGrid size={15} />
+              <span className="editorial-grid-mode-text">Editorial</span>
+            </button>
+            <button
+              type="button"
+              className={`editorial-grid-mode-btn ${gridMode === 'three-col' ? 'is-active' : ''}`}
+              onClick={() => handleGridModeChange('three-col')}
+              title="3-Column Architecture Grid"
+              aria-label="3-Column Architecture Grid"
+            >
+              <Grid3X3 size={15} />
+              <span className="editorial-grid-mode-text">3-Col</span>
+            </button>
+            <button
+              type="button"
+              className={`editorial-grid-mode-btn ${gridMode === 'cinematic' ? 'is-active' : ''}`}
+              onClick={() => handleGridModeChange('cinematic')}
+              title="Cinematic Wide Grid"
+              aria-label="Cinematic Wide Grid"
+            >
+              <Rows3 size={15} />
+              <span className="editorial-grid-mode-text">Cinematic</span>
+            </button>
+          </div>
         </div>
       </header>
 
       {/* ------------------------------------------------------------- */}
-      {/* 2. EDITORIAL PROJECT IMAGE GRID                               */}
-      {/* Asymmetric magazine-style rhythm with hover reveal of ONLY   */}
-      {/* the project title.                                            */}
+      {/* 2. DYNAMIC PROJECT IMAGE GRID (3 ADAPTIVE MODES)              */}
+      {/* Zero stretched empty beige boxes; seamless layout in all tabs */}
       {/* ------------------------------------------------------------- */}
       <div className="editorial-grid-container">
         <div
           id="editorial-project-grid"
-          className={`editorial-project-grid ${isTransitioning ? 'is-animating-out' : 'is-animating-in'}`}
+          className={`editorial-project-grid mode-${gridMode} ${isTransitioning ? 'is-animating-out' : 'is-animating-in'}`}
           role="region"
           aria-live="polite"
         >
           {filteredProjects.map((project, index) => {
-            // Apply varied visual rhythm classes based on index & project specs
-            const isWide = project.aspectRatio === 'wide' || project.aspectRatio === 'hero';
-            const isTall = project.aspectRatio === 'portrait' || project.aspectRatio === 'tall';
-            const isHero = project.aspectRatio === 'hero' || (index === 0 && activeCategory === 'All Projects');
-
-            let spanClass = 'span-standard';
-            if (isHero) spanClass = 'span-hero';
-            else if (isWide) spanClass = 'span-wide';
-            else if (isTall) spanClass = 'span-tall';
-
             return (
               <article
                 key={project.id}
-                className={`editorial-project-item ${spanClass}`}
+                className={`editorial-project-item item-aspect-${project.aspectRatio}`}
                 onMouseEnter={() => setHoveredProjectId(project.id)}
                 onMouseLeave={() => setHoveredProjectId(null)}
                 onClick={() => handleProjectClick(project)}
@@ -168,7 +206,7 @@ export const EditorialWorkGrid: React.FC<EditorialWorkGridProps> = ({
                     className="editorial-image"
                   />
 
-                  {/* Clean, pure hover overlay: Reveals ONLY the project name */}
+                  {/* Clean hover overlay: Reveals ONLY the project name */}
                   <div
                     className={`editorial-hover-overlay ${hoveredProjectId === project.id ? 'is-hovered' : ''}`}
                     aria-hidden="true"
@@ -179,7 +217,7 @@ export const EditorialWorkGrid: React.FC<EditorialWorkGridProps> = ({
                   </div>
                 </div>
 
-                {/* Mobile / Touch fallback caption (displays cleanly below the photograph without needing hover) */}
+                {/* Mobile / Touch fallback caption */}
                 <div className="editorial-mobile-caption" aria-hidden="true">
                   <span className="editorial-mobile-title">{project.title}</span>
                   <span className="editorial-mobile-category">{project.category}</span>

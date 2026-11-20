@@ -1,7 +1,8 @@
 /* ==========================================================================
    WARP ARCHITECTS REFERENCE-INSPIRED EDITORIAL WORK SHOWCASE
-   Ultra-sophisticated, minimal typography, asymmetric image grid.
+   Ultra-sophisticated, minimal typography, asymmetric & multi-mode image grid.
    Hover reveals ONLY the project title in elegant serif/sans typography.
+   Zero empty card boxes; zero blank columns.
    ========================================================================== */
 
 .editorial-work-section {
@@ -15,7 +16,7 @@
 }
 
 /* --------------------------------------------------------------------------
-   1. TOP CATEGORY NAVIGATION
+   1. TOP CATEGORY NAVIGATION & GRID SWITCHER BAR
    Minimalist, sophisticated typography navigation.
    No oversized pill badges.
    -------------------------------------------------------------------------- */
@@ -31,16 +32,17 @@
 .editorial-nav-inner {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   border-bottom: 1px solid rgba(23, 23, 23, 0.12);
   padding-bottom: 16px;
+  gap: 24px;
 }
 
 .editorial-category-nav-wrapper {
   overflow-x: auto;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE/Edge */
-  width: 100%;
+  flex: 1;
 }
 
 .editorial-category-nav-wrapper::-webkit-scrollbar {
@@ -50,7 +52,7 @@
 .editorial-category-nav {
   display: inline-flex;
   align-items: center;
-  gap: clamp(24px, 4vw, 56px);
+  gap: clamp(20px, 3.5vw, 48px);
   position: relative;
   white-space: nowrap;
 }
@@ -109,9 +111,52 @@
   opacity: 0;
 }
 
+/* Grid Layout Switcher Controls */
+.editorial-grid-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(23, 23, 23, 0.04);
+  padding: 4px;
+  border-radius: 40px;
+  border: 1px solid rgba(23, 23, 23, 0.08);
+  flex-shrink: 0;
+}
+
+.editorial-grid-mode-btn {
+  background: transparent;
+  border: none;
+  border-radius: 30px;
+  padding: 6px 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-family: 'Manrope', 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: rgba(23, 23, 23, 0.55);
+  transition: all 0.25s ease;
+}
+
+.editorial-grid-mode-btn:hover {
+  color: #171717;
+}
+
+.editorial-grid-mode-btn.is-active {
+  background: #171717;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.editorial-grid-mode-text {
+  display: inline-block;
+}
+
 /* --------------------------------------------------------------------------
-   2. ASYMMETRIC EDITORIAL PROJECT GRID
-   varied image proportions and carefully balanced spacing.
+   2. DYNAMIC PROJECT IMAGE GRID (3 ADAPTIVE MODES)
+   Zero stretched empty beige boxes; seamless layout in all tabs
    -------------------------------------------------------------------------- */
 .editorial-grid-container {
   width: 100%;
@@ -122,9 +167,7 @@
 }
 
 .editorial-project-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: clamp(28px, 4vw, 56px);
+  width: 100%;
   transition: opacity 0.25s cubic-bezier(0.25, 1, 0.5, 1),
               transform 0.25s cubic-bezier(0.25, 1, 0.5, 1);
 }
@@ -139,53 +182,116 @@
   transform: translateY(0);
 }
 
-/* Item Spans for visual rhythm */
+/* Base item - strictly transparent background to avoid beige void bugs */
 .editorial-project-item {
   position: relative;
   cursor: pointer;
-  display: flex;
-  flex-direction: column;
   overflow: hidden;
-  background: #ece8e1;
+  background: transparent !important;
+  box-sizing: border-box;
 }
 
-/* Full Hero Span */
-.editorial-project-item.span-hero {
-  grid-column: span 2;
+/* ==========================================================================
+   MODE 1: EDITORIAL MASONRY (True CSS multi-column)
+   Packs cards vertically into 2 balanced columns with zero gaps & zero stretching.
+   ========================================================================== */
+.editorial-project-grid.mode-editorial {
+  display: block;
+  column-count: 2;
+  column-gap: clamp(24px, 3.5vw, 48px);
 }
 
-.editorial-project-item.span-hero .editorial-image-wrapper {
-  aspect-ratio: 16 / 9;
+.editorial-project-grid.mode-editorial .editorial-project-item {
+  break-inside: avoid;
+  margin-bottom: clamp(24px, 3.5vw, 48px);
+  display: block;
+  width: 100%;
 }
 
-/* Wide Span */
-.editorial-project-item.span-wide {
-  grid-column: span 2;
-}
-
-.editorial-project-item.span-wide .editorial-image-wrapper {
-  aspect-ratio: 16 / 9.5;
-}
-
-/* Tall Portrait Span */
-.editorial-project-item.span-tall .editorial-image-wrapper {
+/* Distinct aspect ratios for visual rhythm in Editorial Masonry */
+.editorial-project-grid.mode-editorial .item-aspect-portrait .editorial-image-wrapper {
   aspect-ratio: 4 / 5;
 }
 
-/* Standard Landscape Span */
-.editorial-project-item.span-standard .editorial-image-wrapper {
+.editorial-project-grid.mode-editorial .item-aspect-tall .editorial-image-wrapper {
+  aspect-ratio: 3 / 4;
+}
+
+.editorial-project-grid.mode-editorial .item-aspect-landscape .editorial-image-wrapper {
+  aspect-ratio: 16 / 11;
+}
+
+.editorial-project-grid.mode-editorial .item-aspect-wide .editorial-image-wrapper {
+  aspect-ratio: 16 / 10;
+}
+
+.editorial-project-grid.mode-editorial .item-aspect-hero .editorial-image-wrapper {
+  aspect-ratio: 16 / 9.5;
+}
+
+/* ==========================================================================
+   MODE 2: 3-COLUMN ARCHITECTURE GRID
+   Geometric, balanced, gallery presentation.
+   align-items: start ensures items never stretch into empty blocks.
+   ========================================================================== */
+.editorial-project-grid.mode-three-col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(20px, 2.5vw, 36px);
+  align-items: start;
+}
+
+.editorial-project-grid.mode-three-col .editorial-project-item {
+  display: block;
+  width: 100%;
+}
+
+.editorial-project-grid.mode-three-col .editorial-image-wrapper {
   aspect-ratio: 4 / 3;
+}
+
+/* Subtle architectural rhythm in 3-column view */
+.editorial-project-grid.mode-three-col .editorial-project-item:nth-child(5n + 1) .editorial-image-wrapper {
+  aspect-ratio: 4 / 5;
+}
+
+.editorial-project-grid.mode-three-col .editorial-project-item:nth-child(5n + 3) .editorial-image-wrapper {
+  aspect-ratio: 16 / 11;
+}
+
+/* ==========================================================================
+   MODE 3: CINEMATIC WIDE GRID
+   Panoramic monumental spreads for immersive photography appreciation.
+   ========================================================================== */
+.editorial-project-grid.mode-cinematic {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(36px, 4.5vw, 64px);
+}
+
+.editorial-project-grid.mode-cinematic .editorial-project-item {
+  width: 100%;
+}
+
+.editorial-project-grid.mode-cinematic .editorial-image-wrapper {
+  aspect-ratio: 21 / 9;
+  max-height: 640px;
+}
+
+.editorial-project-grid.mode-cinematic .editorial-project-item:nth-child(even) .editorial-image-wrapper {
+  aspect-ratio: 16 / 9;
 }
 
 /* --------------------------------------------------------------------------
    3. IMAGE WRAPPER & HOVER REVEAL
    Clean photograph initially. Hover reveals ONLY project name.
+   Zero descriptions, categories, or buttons on hover per specification.
    -------------------------------------------------------------------------- */
 .editorial-image-wrapper {
   position: relative;
   width: 100%;
   overflow: hidden;
-  background-color: #ece8e1;
+  background-color: transparent !important;
 }
 
 .editorial-image {
@@ -199,14 +305,14 @@
 }
 
 .editorial-project-item:hover .editorial-image {
-  transform: scale(1.025);
+  transform: scale(1.028);
 }
 
 /* The Hover Scrim: Minimal contrast veil */
 .editorial-hover-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(18, 16, 14, 0.36);
+  background: rgba(18, 16, 14, 0.4);
   backdrop-filter: blur(1.5px);
   -webkit-backdrop-filter: blur(1.5px);
   display: flex;
@@ -228,7 +334,7 @@
 .editorial-title-container {
   text-align: center;
   max-width: 90%;
-  transform: translateY(10px);
+  transform: translateY(12px);
   transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -284,8 +390,17 @@
    Mandatory responsive design: no horizontal overflow, clean touch UI.
    -------------------------------------------------------------------------- */
 @media (max-width: 1024px) {
-  .editorial-project-grid {
-    gap: clamp(20px, 3vw, 36px);
+  .editorial-project-grid.mode-editorial {
+    column-gap: 28px;
+  }
+
+  .editorial-project-grid.mode-editorial .editorial-project-item {
+    margin-bottom: 28px;
+  }
+
+  .editorial-project-grid.mode-three-col {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
   }
 
   .editorial-project-title-reveal {
@@ -305,7 +420,14 @@
   }
 
   .editorial-nav-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
     padding-bottom: 12px;
+  }
+
+  .editorial-category-nav-wrapper {
+    width: 100%;
   }
 
   .editorial-category-nav {
@@ -317,33 +439,36 @@
     padding-bottom: 8px;
   }
 
+  .editorial-grid-switcher {
+    align-self: flex-start;
+  }
+
   /* Single Column on mobile for maximum photography impact */
-  .editorial-project-grid {
+  .editorial-project-grid.mode-editorial {
+    column-count: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .editorial-project-grid.mode-editorial .editorial-project-item {
+    margin-bottom: 0;
+  }
+
+  .editorial-project-grid.mode-three-col {
     grid-template-columns: 1fr;
     gap: 28px;
   }
 
-  .editorial-project-item.span-hero,
-  .editorial-project-item.span-wide,
-  .editorial-project-item.span-tall,
-  .editorial-project-item.span-standard {
-    grid-column: span 1;
+  .editorial-project-grid.mode-cinematic {
+    gap: 28px;
   }
 
-  .editorial-project-item.span-hero .editorial-image-wrapper,
-  .editorial-project-item.span-wide .editorial-image-wrapper {
+  .editorial-project-grid.mode-cinematic .editorial-image-wrapper {
     aspect-ratio: 16 / 10;
   }
 
-  .editorial-project-item.span-tall .editorial-image-wrapper {
-    aspect-ratio: 4 / 5;
-  }
-
-  .editorial-project-item.span-standard .editorial-image-wrapper {
-    aspect-ratio: 4 / 3;
-  }
-
-  /* Show mobile title caption permanently */
+  /* Show mobile title caption permanently on touch devices */
   .editorial-mobile-caption {
     display: flex;
   }
@@ -355,5 +480,15 @@
 
   .editorial-project-title-reveal {
     font-size: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .editorial-grid-mode-text {
+    display: none;
+  }
+
+  .editorial-grid-mode-btn {
+    padding: 6px 10px;
   }
 }
