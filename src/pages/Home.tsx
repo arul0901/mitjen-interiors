@@ -6,7 +6,7 @@ import AboutSection from "../components/sections/About";
 import ServiceCards from "../components/sections/ServiceCards";
 import ApproachSection from "../components/sections/ApproachSection";
 import ProjectsSection from "../components/sections/ProjectsSection";
-import HomeEditorialShowcase from "../components/HomeEditorialShowcase/HomeEditorialShowcase";
+import DestinationShowcase from "../components/DestinationShowcase";
 import WhyChooseSection from "../components/sections/WhyChoose";
 import TestimonialsSection from "../components/sections/Testimonials";
 import ScrollWalkthroughVideoHero from "../components/VideoWalkthroughHero";
@@ -140,7 +140,7 @@ export default function Home() {
 <ServiceCards />
 <ApproachSection />
 <ProjectsSection />
-<HomeEditorialShowcase />
+<DestinationShowcase />
 <section className={"cs_skills_layout_1"} style={{ paddingTop: "clamp(60px, 6vw, 90px)" }}>
 <div className={"container"}>
 <div className={"row cs_gap_y_40 align-items-center"}>
