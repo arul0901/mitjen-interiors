@@ -16,7 +16,12 @@ export function ScrollWalkthroughVideoHero() {
   const [useCanvasMode, setUseCanvasMode] = useState<boolean>(false);
   const [isReducedMotion, setIsReducedMotion] = useState<boolean>(false);
   const [hasScrolledPastHint, setHasScrolledPastHint] = useState<boolean>(false);
-  const [isMobile, setIsMobile] = useState<boolean>(false);
+  const [isMobile, setIsMobile] = useState<boolean>(() =>
+    typeof window !== "undefined" ? window.matchMedia("(max-width: 768px)").matches : false
+  );
+
+  const videoSrc = isMobile ? "/hero/banner_mobile.mp4" : "/hero/banner_desktop.mp4";
+  const posterSrc = isMobile ? "/hero/poster-mobile.webp" : "/hero/poster.webp";
 
   // 1. Check prefers-reduced-motion
   useEffect(() => {
@@ -28,60 +33,46 @@ export function ScrollWalkthroughVideoHero() {
     return () => mq.removeEventListener("change", handler);
   }, []);
 
-  // 2. Mobile detection & Canvas mode evaluation (iOS Safari, saveData, slow 3G/2G)
+  // 2. Mobile detection (responsive) & Canvas mode evaluation (iOS Safari, saveData, slow 3G/2G)
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    const checkMobile = window.matchMedia("(max-width: 768px)").matches;
-    setIsMobile(checkMobile);
+    const mq = window.matchMedia("(max-width: 768px)");
+    setIsMobile(mq.matches);
+    const onViewportChange = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener("change", onViewportChange);
 
-    const ua = navigator.userAgent;
-    const isIOS =
-      /iPad|iPhone|iPod/.test(ua) ||
-      (navigator.maxTouchPoints > 1 && /Macintosh/.test(ua));
-
-    // Network connection status
+    // Network connection status (only fall back to static canvas on explicit Save-Data)
     const navConn = (navigator as unknown as {
-      connection?: { saveData?: boolean; effectiveType?: string };
+      connection?: { saveData?: boolean };
     }).connection;
-    const isSlowConnection =
-      navConn &&
-      (navConn.saveData ||
-        (navConn.effectiveType && navConn.effectiveType !== "4g"));
-
-    if (isIOS || isSlowConnection) {
+    if (navConn?.saveData) {
       setUseCanvasMode(true);
     }
+
+    return () => mq.removeEventListener("change", onViewportChange);
   }, []);
 
-  // 3. Fallback timer: if video fails to report metadata within 6s, switch to canvas
+  // Reload video cleanly if breakpoint switches between desktop and mobile
   useEffect(() => {
-    if (useCanvasMode || isReducedMotion) return;
-    const timer = setTimeout(() => {
-      const vid = videoRef.current;
-      if (!vid || vid.readyState < 1 || !vid.duration) {
-        console.warn("Video metadata timeout (6s) — activating canvas frame mode.");
-        setUseCanvasMode(true);
-      }
-    }, 6000);
-    return () => clearTimeout(timer);
-  }, [useCanvasMode, isReducedMotion]);
+    const vid = videoRef.current;
+    if (vid && !useCanvasMode) {
+      vid.load();
+    }
+  }, [videoSrc, useCanvasMode]);
 
-  // 4. Hook: Video Scrubbing
-  const { duration } = useScrollScrubVideo({
+  // 3. Hook: Video Scrubbing (start at 0.75s to skip leading black fade-in frame)
+  useScrollScrubVideo({
     containerRef,
     videoRef,
     enabled: !isReducedMotion,
     smoothing: 6,
+    startTime: 0.75,
     onProgress: (p) => {
       setProgress(p);
       if (p > 0.04) {
         setHasScrolledPastHint(true);
       }
-    },
-    onJankDetected: () => {
-      console.warn("Jank detected (>3 dropped steps/sec) — switching to canvas mode.");
-      setUseCanvasMode(true);
     },
   });
 
@@ -207,7 +198,7 @@ export function ScrollWalkthroughVideoHero() {
       <div className="hero-walkthrough-viewport">
         {/* Underlay Poster fallback: guarantees high-fidelity visual content at all times */}
         <img
-          src="/hero/poster.webp"
+          src={posterSrc}
           alt="Cinematic architectural residence interior"
           className="hero-walkthrough-poster-bg"
           fetchPriority="high"
@@ -225,18 +216,13 @@ export function ScrollWalkthroughVideoHero() {
           <video
             ref={videoRef}
             className="hero-walkthrough-media"
+            src={videoSrc}
             muted
             playsInline
             preload="auto"
-            poster="/hero/poster.webp"
+            poster={posterSrc}
             aria-hidden="true"
-          >
-            <source
-              src={isMobile ? "/hero/walkthrough-mobile.mp4" : "/hero/walkthrough.mp4"}
-              type="video/mp4"
-            />
-            <source src="/hero/walkthrough-mobile.mp4" type="video/mp4" />
-          </video>
+          />
         )}
 
         {/* Ambient Overlays: Top & Bottom Legibility Gradients & Film Grain */}

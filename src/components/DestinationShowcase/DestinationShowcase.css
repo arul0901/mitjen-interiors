@@ -948,7 +948,11 @@ button.bento-tile:focus-visible,
     order: 2;
     min-height: auto !important;
     height: auto !important;
-    padding: 12px 14px;
+    padding: 0;
+  }
+
+  .bento-tile-intro .bento-tile {
+    padding: 14px 16px;
   }
 
   .bento-intro-headline {
@@ -1008,7 +1012,11 @@ button.bento-tile:focus-visible,
     order: 5;
     min-height: auto !important;
     height: auto !important;
-    padding: 12px 14px;
+    padding: 0;
+  }
+
+  .bento-tile-explore .bento-tile {
+    padding: 14px 16px;
   }
 
   .bento-tile-explore .bento-accent-title {
@@ -1059,8 +1067,13 @@ button.bento-tile:focus-visible,
     grid-column: span 2 !important;
     order: 8;
     min-height: 42px !important;
-    height: 42px !important;
-    padding: 10px 14px;
+    height: auto !important;
+    padding: 0;
+  }
+
+  .bento-tile-stay .bento-tile {
+    min-height: 42px !important;
+    padding: 10px 16px;
   }
 
   .bento-tile-stay .bento-accent-title {

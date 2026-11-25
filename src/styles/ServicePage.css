@@ -1254,12 +1254,11 @@
   }
 
   .clinic-mobile-practice-chips {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 8px;
-    overflow-x: auto;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: 2px;
+    width: 100%;
+    overflow: visible;
   }
 
   .clinic-mobile-practice-chips::-webkit-scrollbar {
@@ -1267,20 +1266,22 @@
   }
 
   .clinic-mobile-chip {
-    flex-shrink: 0;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 8px 16px;
-    font-size: 0.82rem;
+    width: 100%;
+    padding: 8px 6px;
+    font-size: 0.78rem;
     font-weight: 600;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+    text-align: center;
     border-radius: 9999px;
     border: 1px solid #e7e2d8;
     background: #faf8f5;
     color: #3b4048;
     text-decoration: none;
-    min-height: 44px;
+    min-height: 42px;
     box-sizing: border-box;
     transition: all 0.2s ease;
   }

@@ -1329,10 +1329,17 @@
       $(".cs_team_style_1").off(".socialAnimation");
       $(".cs_text_btn_style_2").off(".buttonAnimation");
 
-      //Kill all legacy ScrollTriggers (preserve React component triggers like hero-walkthrough)
+      //Kill all legacy ScrollTriggers (preserve React component triggers like hero-walkthrough and vane banners)
       if (typeof ScrollTrigger !== "undefined") {
         ScrollTrigger.getAll().forEach((trigger) => {
-          if (trigger.vars?.id !== "hero-walkthrough" && !trigger.trigger?.classList?.contains("hero-walkthrough-section")) {
+          const id = trigger.vars?.id;
+          if (
+            id !== "hero-walkthrough" &&
+            id !== "about-vane-pin-trigger" &&
+            id !== "projects-vane-pin-trigger" &&
+            id !== "kinetic-vane-pin-trigger" &&
+            !trigger.trigger?.classList?.contains("hero-walkthrough-section")
+          ) {
             trigger.kill();
           }
         });

@@ -460,63 +460,7 @@ export default function About() {
       </section>
 
       {/* 8. Testimonials Section */}
-      <section>
-        <div className={"cs_height_120 cs_height_lg_80"}></div>
-        <div className={"container"}>
-          <div className={"cs_section_heading_style_1"}>
-            <p className={"cs_section_subtitle cs_bold cs_accent_color text-uppercase cs_mb_20"}>
-              TESTIMONIALS
-            </p>
-            <h2 className={"cs_section_title cs_fs_53 cs_semibold text-uppercase mb-0"}>
-              HERE’S WHAT WARM WORDS <br /> OUR CLIENTS SAY
-            </h2>
-          </div>
-          <div className={"cs_height_60 cs_height_lg_50"}></div>
-          <div className={"cs_testimonial_style_2"}>
-            <div className={"cs_testimonial_thumbnail cs_radius_10"}>
-              <img src={"/assets/images/projects/image3.jpg"} alt={"Client testimonial interior - Classical dining salon"} />
-            </div>
-            <div className={"cs_testimonial_content"}>
-              <div className={"cs_testimonial_rating cs_mb_30"}>
-                <h3 className={"cs_rating_summery cs_fs_64 cs_bold mb-0"}>4.80</h3>
-                <div className={"cs_rating_star_wrap"}>
-                  <div className={"cs_rating_star cs_center cs_accent_bg cs_fs_20 cs_white_color cs_radius_50 cs_mb_10"}>
-                    <i className={"fa-solid fa-star"}></i>
-                    <i className={"fa-solid fa-star"}></i>
-                    <i className={"fa-solid fa-star"}></i>
-                    <i className={"fa-solid fa-star"}></i>
-                    <i className={"fa-solid fa-star"}></i>
-                  </div>
-                  <div className={"cs_rating_number cs_fs_18 cs_semibold cs_primary_color cs_primary_font"}>
-                    2,688 REVIEWS
-                  </div>
-                </div>
-              </div>
-              <div className={"cs_client_review cs_mb_40"}>
-                <blockquote>
-                  Architecture and interior design blend creativity with functionality, shaping spaces that
-                  inspire and elevate everyday life.
-                </blockquote>
-                <blockquote>
-                  Mitjen transformed our residence into a light-filled sanctuary. Every detail—from the acoustic
-                  quietness of the bedrooms to the tailored grain matching of the cabinetry—reflects unmatched
-                  refinement and care.
-                </blockquote>
-              </div>
-              <div className={"cs_avatar_style_1"}>
-                <span className={"cs_avatar_icon cs_center cs_radius_100"}>
-                  <img src={"/assets/img/avatar-2.webp"} alt={"Client avatar"} />
-                </span>
-                <div className={"cs_avatar_info"}>
-                  <h3 className={"cs_avatar_title cs_fs_20 cs_bold cs_mb_10"}>MORGAN DUFRESNE</h3>
-                  <p className={"cs_avatar_subtitle mb-0"}>Private Residence Owner, Montreal</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className={"cs_height_120 cs_height_lg_80"}></div>
-      </section>
+      
     </main>
   );
 }

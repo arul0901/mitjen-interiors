@@ -1,0 +1,647 @@
+/* ==========================================================================
+   MITIJEN INTERIORS — ADVANCED ARCHITECTURAL LUXURY FOOTER
+   Dark obsidian base (#0b0a09), hairline architectural grid,
+   champagne gold (#c59d5f) accents, Outfit & Cinzel typography.
+   ========================================================================== */
+
+.mitjen-footer {
+  position: relative;
+  background-color: #0b0a09;
+  color: #f5f2ec;
+  font-family: 'Outfit', sans-serif;
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Subtle Ambient Architectural Glow */
+.mitjen-footer-glow {
+  position: absolute;
+  top: -180px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(900px, 90vw);
+  height: 360px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(197, 157, 95, 0.12) 0%,
+    rgba(197, 157, 95, 0.03) 45%,
+    transparent 75%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.mitjen-footer-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: clamp(48px, 6vw, 84px) clamp(20px, 4vw, 48px) 0;
+}
+
+/* --------------------------------------------------------------------------
+   1. Top Pre-Footer Architectural CTA Band
+   -------------------------------------------------------------------------- */
+.mitjen-footer-cta-band {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+  padding-bottom: clamp(36px, 5vw, 56px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  flex-wrap: wrap;
+}
+
+.mitjen-footer-cta-copy {
+  max-width: 680px;
+}
+
+.mitjen-footer-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #c59d5f;
+  margin-bottom: 14px;
+}
+
+.mitjen-footer-eyebrow-line {
+  display: inline-block;
+  width: 28px;
+  height: 1px;
+  background: linear-gradient(90deg, #c59d5f, transparent);
+}
+
+.mitjen-footer-cta-heading {
+  margin: 0;
+  font-family: 'Cinzel', 'Cormorant Garamond', Georgia, serif !important;
+  font-size: clamp(26px, 3.4vw, 44px);
+  font-weight: 500;
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  color: #faf8f5;
+}
+
+.mitjen-footer-cta-heading em {
+  font-style: italic;
+  color: #c59d5f;
+  font-weight: 400;
+}
+
+.mitjen-footer-cta-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.mitjen-footer-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 28px;
+  border-radius: 50px;
+  border: none;
+  background: linear-gradient(135deg, #c59d5f 0%, #9b773d 100%);
+  color: #0b0a09;
+  font-family: 'Outfit', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease, filter 0.25s ease;
+  box-shadow: 0 10px 28px rgba(197, 157, 95, 0.22);
+}
+
+.mitjen-footer-btn-primary:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+  box-shadow: 0 14px 34px rgba(197, 157, 95, 0.34);
+}
+
+.mitjen-footer-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 24px;
+  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(10px);
+  color: #f5f2ec;
+  font-family: 'Outfit', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background-color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+
+.mitjen-footer-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(197, 157, 95, 0.5);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* --------------------------------------------------------------------------
+   2. Main 12-Column Architectural Grid
+   -------------------------------------------------------------------------- */
+.mitjen-footer-grid {
+  display: grid;
+  grid-template-columns: 1.45fr 0.85fr 0.95fr 1.25fr;
+  gap: clamp(28px, 3.5vw, 52px);
+  padding: clamp(40px, 5vw, 64px) 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Brand Column */
+.mitjen-footer-brand-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: #ffffff;
+  margin-bottom: 18px;
+}
+
+.mitjen-footer-monogram {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid rgba(197, 157, 95, 0.5);
+  background: linear-gradient(145deg, rgba(197, 157, 95, 0.16), rgba(197, 157, 95, 0.04));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cinzel', Georgia, serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #c59d5f;
+}
+
+.mitjen-footer-brand-name {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #faf8f5;
+}
+
+.mitjen-footer-brand-desc {
+  margin: 0 0 22px 0;
+  font-size: 14px;
+  line-height: 1.65;
+  color: #9e978e;
+  max-width: 340px;
+  font-weight: 300;
+}
+
+/* Live Studio Status Pill */
+.mitjen-studio-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 24px;
+}
+
+.mitjen-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #4ade80;
+  box-shadow: 0 0 10px rgba(74, 222, 128, 0.7);
+  flex-shrink: 0;
+  animation: mitjenPulse 2.4s ease-in-out infinite;
+}
+
+@keyframes mitjenPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.55;
+    transform: scale(0.85);
+  }
+}
+
+.mitjen-status-text {
+  font-size: 11.5px;
+  color: #d4cdc3;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+/* Social / Quick Contact Row */
+.mitjen-footer-socials {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mitjen-social-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.03);
+  color: #d4cdc3;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.mitjen-social-btn:hover {
+  border-color: #c59d5f;
+  background: rgba(197, 157, 95, 0.14);
+  color: #c59d5f;
+  transform: translateY(-2px);
+}
+
+/* Navigation Columns */
+.mitjen-footer-col-title {
+  margin: 0 0 20px 0;
+  font-family: 'Outfit', sans-serif !important;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #c59d5f;
+}
+
+.mitjen-footer-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mitjen-footer-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14.5px;
+  font-weight: 400;
+  color: #c9c3ba;
+  text-decoration: none;
+  transition: color 0.22s ease, transform 0.22s ease;
+}
+
+.mitjen-footer-link-arrow {
+  opacity: 0;
+  transform: translateX(-4px);
+  color: #c59d5f;
+  transition: opacity 0.22s ease, transform 0.22s ease;
+}
+
+.mitjen-footer-link:hover {
+  color: #ffffff;
+  transform: translateX(4px);
+}
+
+.mitjen-footer-link:hover .mitjen-footer-link-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Studio Card & Newsletter Column */
+.mitjen-studio-card {
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.015) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 16px 18px;
+  margin-bottom: 20px;
+}
+
+.mitjen-studio-card-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #c59d5f;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.mitjen-studio-address {
+  display: block;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: #e6e1d8;
+  text-decoration: none;
+  margin-bottom: 12px;
+  transition: color 0.2s ease;
+}
+
+.mitjen-studio-address:hover {
+  color: #c59d5f;
+}
+
+.mitjen-studio-contact-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  flex-wrap: wrap;
+}
+
+.mitjen-studio-phone {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: color 0.2s ease;
+}
+
+.mitjen-studio-phone:hover {
+  color: #c59d5f;
+}
+
+.mitjen-studio-map-link {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #c59d5f;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.mitjen-studio-map-link:hover {
+  text-decoration: underline;
+}
+
+/* Newsletter Form */
+.mitjen-newsletter-label {
+  display: block;
+  font-size: 12.5px;
+  color: #9e978e;
+  margin-bottom: 10px;
+  font-weight: 300;
+}
+
+.mitjen-newsletter-form {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50px;
+  padding: 4px 4px 4px 16px;
+  transition: border-color 0.25s ease, background-color 0.25s ease;
+}
+
+.mitjen-newsletter-form:focus-within {
+  border-color: #c59d5f;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.mitjen-newsletter-input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  padding: 8px 8px 8px 0;
+}
+
+.mitjen-newsletter-input::placeholder {
+  color: #77716a;
+}
+
+.mitjen-newsletter-submit {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, #c59d5f, #9b773d);
+  color: #0b0a09;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.mitjen-newsletter-submit:hover {
+  transform: scale(1.06);
+  filter: brightness(1.08);
+}
+
+.mitjen-newsletter-success {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: rgba(74, 222, 128, 0.08);
+  border: 1px solid rgba(74, 222, 128, 0.25);
+  color: #86efac;
+  font-size: 12.5px;
+}
+
+/* --------------------------------------------------------------------------
+   3. Oversized Architectural Wordmark Signature
+   -------------------------------------------------------------------------- */
+.mitjen-footer-wordmark-wrap {
+  padding: clamp(24px, 3.5vw, 42px) 0 clamp(16px, 2.5vw, 28px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  user-select: none;
+}
+
+.mitjen-footer-wordmark {
+  font-family: 'Cinzel', Georgia, serif !important;
+  font-size: clamp(36px, 8.2vw, 124px);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  line-height: 0.95;
+  text-transform: uppercase;
+  text-align: center;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.14) 0%,
+    rgba(197, 157, 95, 0.18) 50%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  transition: opacity 0.4s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.mitjen-footer-wordmark-wrap:hover .mitjen-footer-wordmark {
+  transform: scale(1.015);
+}
+
+/* --------------------------------------------------------------------------
+   4. Bottom Legal & Coordinates Bar
+   -------------------------------------------------------------------------- */
+.mitjen-footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 0 28px;
+  flex-wrap: wrap;
+  font-size: 12.5px;
+  color: #7d776f;
+}
+
+.mitjen-footer-copyright strong {
+  color: #c59d5f;
+  font-weight: 500;
+}
+
+.mitjen-footer-coords {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #6b655e;
+  font-variant-numeric: tabular-nums;
+}
+
+.mitjen-footer-bottom-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.mitjen-footer-bottom-link {
+  color: #8f8980;
+  text-decoration: none;
+  font-size: 12.5px;
+  transition: color 0.2s ease;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.mitjen-footer-bottom-link:hover {
+  color: #c59d5f;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Breakpoints
+   -------------------------------------------------------------------------- */
+@media (max-width: 1100px) {
+  .mitjen-footer-grid {
+    grid-template-columns: 1.2fr 0.9fr 1fr;
+  }
+
+  .mitjen-footer-col-studio {
+    grid-column: span 3;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+}
+
+@media (max-width: 768px) {
+  .mitjen-footer-inner {
+    padding: 40px 18px 0;
+  }
+
+  .mitjen-footer-cta-band {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 22px;
+    padding-bottom: 32px;
+  }
+
+  .mitjen-footer-cta-actions {
+    width: 100%;
+  }
+
+  .mitjen-footer-btn-primary,
+  .mitjen-footer-btn-secondary {
+    flex: 1;
+    justify-content: center;
+    min-height: 46px;
+    padding: 12px 18px;
+    font-size: 11px;
+  }
+
+  .mitjen-footer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 18px;
+    padding: 32px 0;
+  }
+
+  .mitjen-footer-col-brand {
+    grid-column: span 2;
+  }
+
+  .mitjen-footer-col-title {
+    font-size: 10.5px !important;
+    letter-spacing: 0.08em !important;
+    margin-bottom: 14px !important;
+    white-space: nowrap;
+  }
+
+  .mitjen-footer-col-studio {
+    grid-column: span 2;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding-top: 12px;
+  }
+
+  .mitjen-footer-wordmark {
+    font-size: clamp(28px, 10vw, 54px);
+    letter-spacing: 0.1em;
+  }
+
+  .mitjen-footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 18px 0 24px;
+  }
+
+  .mitjen-footer-coords {
+    order: 3;
+  }
+}
+
+@media (max-width: 480px) {
+  .mitjen-footer-cta-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .mitjen-footer-btn-primary,
+  .mitjen-footer-btn-secondary {
+    width: 100%;
+  }
+}

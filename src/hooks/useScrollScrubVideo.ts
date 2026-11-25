@@ -7,6 +7,7 @@ export interface UseScrollScrubVideoOptions {
   videoRef: React.RefObject<HTMLVideoElement | null>;
   enabled?: boolean;
   smoothing?: number; // e.g. 6 (default), tuned up to 10 if laggy
+  startTime?: number; // skip leading black/fade-in frames (seconds)
   onProgress?: (progress: number) => void;
   onDurationChange?: (duration: number) => void;
   onJankDetected?: () => void;
@@ -17,6 +18,7 @@ export function useScrollScrubVideo({
   videoRef,
   enabled = true,
   smoothing = 6,
+  startTime = 0,
   onProgress,
   onDurationChange,
   onJankDetected,
@@ -54,8 +56,18 @@ export function useScrollScrubVideo({
     const handleLoadedMetadata = () => {
       const dur = video.duration;
       if (dur && !isNaN(dur) && isFinite(dur)) {
+        const clampedStart = Math.min(startTime, Math.max(0, dur - 0.1));
         setDuration(dur);
         durationRef.current = dur;
+        if (clampedStart > 0) {
+          if (currentRef.current < clampedStart) {
+            currentRef.current = clampedStart;
+          }
+          lastSetRef.current = currentRef.current;
+          if (video.currentTime < clampedStart) {
+            video.currentTime = currentRef.current;
+          }
+        }
         setIsReady(true);
         onDurationChange?.(dur);
       }
@@ -78,7 +90,7 @@ export function useScrollScrubVideo({
       video.removeEventListener("loadedmetadata", handleLoadedMetadata);
       video.removeEventListener("canplay", handleCanPlay);
     };
-  }, [videoRef, onDurationChange]);
+  }, [videoRef, onDurationChange, startTime]);
 
   // Main GSAP ScrollTrigger + rAF lerp engine
   useEffect(() => {
@@ -209,7 +221,8 @@ export function useScrollScrubVideo({
         const dur = durationRef.current;
         if (!dur || dur <= 0) return;
 
-        let targetTime = progressRef.current * dur;
+        const minT = Math.min(startTime, Math.max(0, dur - 0.1));
+        let targetTime = minT + progressRef.current * (dur - minT);
 
         // Check buffered range so we hold at buffered edge instead of stalling
         try {
@@ -232,21 +245,12 @@ export function useScrollScrubVideo({
         const factor = 1 - Math.exp(-smoothing * dt);
         currentRef.current += (targetTime - currentRef.current) * factor;
 
-        // Clamp between 0 and duration
-        currentRef.current = Math.max(0, Math.min(dur, currentRef.current));
+        // Clamp between minT and duration
+        currentRef.current = Math.max(minT, Math.min(dur, currentRef.current));
 
-        // Apply to video only when |next - lastSet| > 1/60s (approx 0.0167s)
+        // Apply to video only when |next - lastSet| > 1/60s and decoder is ready
         const diff = Math.abs(currentRef.current - lastSetRef.current);
-        if (diff > 1 / 60) {
-          // Jank / stall detector: if seeking is currently busy while requests accumulate
-          if (video.seeking) {
-            jankDropsRef.current.push(now);
-            jankDropsRef.current = jankDropsRef.current.filter((t) => now - t <= 1000);
-            if (jankDropsRef.current.length > 3) {
-              onJankDetectedRef.current?.();
-            }
-          }
-
+        if (diff > 1 / 60 && !video.seeking) {
           video.currentTime = currentRef.current;
           lastSetRef.current = currentRef.current;
         }

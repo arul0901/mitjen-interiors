@@ -16,48 +16,48 @@ interface RangeProject {
 
 const RANGE_PROJECTS: RangeProject[] = [
   {
-    id: 'modular-kitchen',
+    id: 'prithvi-residence',
     num: '01',
-    title: 'MODULAR KITCHEN',
-    subtitle: 'Precision in Every Detail',
+    title: 'PRITHVI RESIDENCE',
+    subtitle: 'Royal Nesto · Neelambur, Coimbatore',
     description:
-      'A carefully crafted kitchen where storage, fittings and finishes come together with clean lines, accurate proportions and smooth functionality.',
-    image: '/assets/mitijen/kitchen.jpeg',
-    slug: '/projects',
-    shortLabel: 'Kitchen',
+      'A bespoke Coimbatore residence crafted with Green ply & Century ply woodwork, IVAS & Kridha laminates, Saint Gobain gypsum ceilings, and Philips & Havells architectural lighting.',
+    image: '/images/projects/Mitjen-Racecourse-PU-Paint/Residential4.jpeg',
+    slug: '/projects/prithvi-residence',
+    shortLabel: 'Prithvi',
   },
   {
-    id: 'office-conference',
+    id: 'sampath-villa',
     num: '02',
-    title: 'OFFICE & CONFERENCE HALL',
-    subtitle: 'Designed for a Professional Standard',
+    title: 'SAMPATH VILLA',
+    subtitle: 'Nehru Nagar West · Kalapatti, Coimbatore',
     description:
-      'A refined workplace environment with considered layouts, precise detailing and a finish that reflects the quality of the business.',
-    image: '/assets/mitijen/commercial4.jpeg',
-    slug: '/projects',
-    shortLabel: 'Corporate',
+      'A spacious Kalapatti residence combining Tarkett & Armstrong wooden flooring, Vox & PVC fluted ceilings, high-gloss acrylic joinery, and layered LED strip illumination.',
+    image: '/images/projects/Mitjen-Racecourse-PU-Paint/Residential7.jpeg',
+    slug: '/projects/sampath-villa',
+    shortLabel: 'Sampath',
   },
   {
-    id: 'theatre-media',
+    id: 'mr-mahesh-villa',
     num: '03',
-    title: 'THEATRE & MEDIA ROOM',
-    subtitle: 'Built Around the Experience',
+    title: 'MR. MAHESH – PILOT',
+    subtitle: 'Krishna Raja (KR) Puram · Bangalore',
     description:
-      'A detailed entertainment setting where layout, lighting, finishes and custom elements come together to create an immersive environment.',
-    image: '/assets/mitijen/commercial2.jpeg',
-    slug: '/projects',
-    shortLabel: 'Theatre',
+      'A contemporary Bangalore residence executed with Duracare & Armstrong flooring, aluminum & gypsum partitions, Century & Advance laminates, and Legrand & Philips lighting.',
+    image: '/images/projects/Mitjen-Racecourse-PU-Paint/Residential2.jpeg',
+    slug: '/projects/mr-mahesh-villa',
+    shortLabel: 'Mahesh',
   },
   {
-    id: 'bedroom',
+    id: 'deepak-residence',
     num: '04',
-    title: 'BEDROOM',
-    subtitle: 'Crafted for Everyday Comfort',
+    title: 'DEEPAK RESIDENCE',
+    subtitle: 'Saibaba Colony · Coimbatore',
     description:
-      'A refined personal setting combining tailored storage, balanced finishes and carefully executed details for a calm and complete interior.',
-    image: '/assets/mitijen/bedroom.jpeg',
-    slug: '/projects',
-    shortLabel: 'Residential',
+      'A tailored Saibaba Colony home featuring Kit ply & Green ply custom cabinetry, high-gloss & acrylic surfaces, Saint Gobain acoustic ceilings, and concealed spot lighting.',
+    image: '/images/projects/image4.jpg',
+    slug: '/projects/deepak-residence',
+    shortLabel: 'Deepak',
   },
 ];
 
@@ -109,7 +109,7 @@ export const ProjectsReflectOurRange: React.FC = () => {
               <h2 className="renova-trans-title">PROJECTS THAT REFLECT OUR RANGE.</h2>
             </div>
             <p className="renova-trans-subtitle">
-              From personal interiors to professional environments, our portfolio brings together work shaped by different requirements, settings and ideas.
+              Executed residences across Coimbatore and Bangalore—crafted with certified plywoods, branded laminates, acoustic ceilings, and layered architectural lighting.
             </p>
           </div>
 

@@ -1,7 +1,33 @@
 import React, { useEffect, useMemo } from "react";
 import { useLocation } from "react-router-dom";
+import AboutVaneBanner, { type BannerSlide } from "../components/AboutVaneBanner/AboutVaneBanner";
 import EditorialWorkGrid from "../components/EditorialWork/EditorialWorkGrid";
 import { ProjectCategory } from "../data/editorialProjectsData";
+
+const PROJECTS_BANNER_SLIDES: readonly [BannerSlide, BannerSlide] = [
+  {
+    id: "projects-slide-portfolio",
+    num: "01",
+    tabLabel: "PORTFOLIO",
+    kicker: "CURATED PORTFOLIO // 04 SIGNATURE RESIDENCES",
+    title: "SELECTED WORKS",
+    desc: "Architectural residences, experiential retail studios, and high-performance corporate headquarters across South India.",
+    image: "/images/projects/Mitjen-Racecourse-PU-Paint/Residential1.jpeg",
+    ctaText: "BROWSE PROJECTS",
+    ctaLink: "#projects-grid",
+  },
+  {
+    id: "projects-slide-execution",
+    num: "02",
+    tabLabel: "EXECUTION",
+    kicker: "PRECISION MILLWORK // TURNKEY DELIVERY",
+    title: "CRAFTED IN EVERY DETAIL",
+    desc: "From German CNC joinery to acoustic corporate environments, explore spaces engineered for longevity and poise.",
+    image: "/images/projects/Mitjen-Corporate/Corporate1.jpeg",
+    ctaText: "BOOK A CONSULTATION",
+    ctaLink: "/contact",
+  },
+];
 
 export default function Projects() {
   const location = useLocation();
@@ -43,12 +69,23 @@ export default function Projects() {
 
   return (
     <main className="cs_projects_page_main" style={{ minHeight: "100vh", backgroundColor: "#f9f7f4" }}>
+      {/* Kinetic Vane Hero Banner */}
+      <AboutVaneBanner
+        slides={PROJECTS_BANNER_SLIDES}
+        breadcrumbLabel="Projects"
+        badgeText="PORTFOLIO // CBE & BLR"
+        ariaLabel="Mitjen Selected Works Kinetic Banner"
+        triggerId="projects-vane-pin-trigger"
+      />
+
       {/* ------------------------------------------------------------- */}
       {/* WARP ARCHITECTS REFERENCE-DRIVEN EDITORIAL WORK SHOWCASE      */}
       {/* Top category navigation: All Projects / Residential /          */}
       {/* Commercial / Corporate. Hover reveals ONLY project name.      */}
       {/* ------------------------------------------------------------- */}
-      <EditorialWorkGrid initialCategory={initialCategory} initialGridMode={initialGridMode} />
+      <div id="projects-grid">
+        <EditorialWorkGrid initialCategory={initialCategory} initialGridMode={initialGridMode} />
+      </div>
     </main>
   );
 }

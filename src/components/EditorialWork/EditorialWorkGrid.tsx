@@ -37,11 +37,15 @@ export const EditorialWorkGrid: React.FC<EditorialWorkGridProps> = ({
   const navIndicatorRef = useRef<HTMLSpanElement>(null);
   const buttonRefs = useRef<Map<FilterCategory, HTMLButtonElement>>(new Map());
 
-  // Scroll listener: Dock floating glass filter bar when user scrolls past top header
+  // Scroll listener: Dock floating glass filter bar only after scrolling past the inline filter bar
   useEffect(() => {
     const handleScroll = () => {
-      const scrollY = window.scrollY;
-      setIsStickyVisible(scrollY > 220);
+      if (navContainerRef.current) {
+        const rect = navContainerRef.current.getBoundingClientRect();
+        setIsStickyVisible(rect.bottom < 80);
+      } else {
+        setIsStickyVisible(window.scrollY > 220);
+      }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });

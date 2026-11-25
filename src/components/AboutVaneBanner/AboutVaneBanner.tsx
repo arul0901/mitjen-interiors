@@ -9,9 +9,10 @@ if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-interface BannerSlide {
+export interface BannerSlide {
   id: string;
   num: string;
+  tabLabel?: string;
   kicker: string;
   title: string;
   desc: string;
@@ -20,10 +21,19 @@ interface BannerSlide {
   ctaLink: string;
 }
 
-const ABOUT_SLIDES: BannerSlide[] = [
+export interface AboutVaneBannerProps {
+  slides?: readonly [BannerSlide, BannerSlide];
+  breadcrumbLabel?: string;
+  badgeText?: string;
+  ariaLabel?: string;
+  triggerId?: string;
+}
+
+const ABOUT_SLIDES: readonly [BannerSlide, BannerSlide] = [
   {
     id: 'slide-atelier',
     num: '01',
+    tabLabel: 'ATELIER',
     kicker: 'ARCHITECTURAL ATELIER // CRAFTED SANCTUARY',
     title: 'ABOUT MITJEN',
     desc: 'Pioneering bespoke architectural interiors, conscious spatial planning, and turnkey craftsmanship across luxury residential and corporate environments.',
@@ -34,6 +44,7 @@ const ABOUT_SLIDES: BannerSlide[] = [
   {
     id: 'slide-craft',
     num: '02',
+    tabLabel: 'CRAFT',
     kicker: 'UNCOMPROMISING PRECISION // BESPOKE MILLWORK',
     title: 'THE ARCHITECTURE OF LIVING',
     desc: 'Where visionary aesthetics meet artisanal joinery, authentic materials, and zero-tolerance engineering to create timeless spaces.',
@@ -43,7 +54,13 @@ const ABOUT_SLIDES: BannerSlide[] = [
   },
 ];
 
-export const AboutVaneBanner: React.FC = () => {
+export const AboutVaneBanner: React.FC<AboutVaneBannerProps> = ({
+  slides = ABOUT_SLIDES,
+  breadcrumbLabel = 'About Us',
+  badgeText = 'ATELIER PRACTICE // COIMBATORE',
+  ariaLabel = 'About Mitjen Kinetic Banner',
+  triggerId = 'about-vane-pin-trigger',
+}) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const stickyViewportRef = useRef<HTMLDivElement>(null);
 
@@ -74,11 +91,11 @@ export const AboutVaneBanner: React.FC = () => {
 
   // Preload both banner images
   useEffect(() => {
-    ABOUT_SLIDES.forEach((slide) => {
+    slides.forEach((slide) => {
       const img = new Image();
       img.src = slide.image;
     });
-  }, []);
+  }, [slides]);
 
   // GSAP 180° Vane Scroll Scrub Setup
   useEffect(() => {
@@ -93,6 +110,14 @@ export const AboutVaneBanner: React.FC = () => {
     try {
       activeGsap.registerPlugin(activeScrollTrigger);
     } catch {}
+
+    // Link global Lenis smooth scroll if present
+    const onLenisScroll = () => {
+      activeScrollTrigger.update();
+    };
+    if (win.lenisInstance && typeof win.lenisInstance.on === 'function') {
+      win.lenisInstance.on('scroll', onLenisScroll);
+    }
 
     const blades = bladeRefs.current.slice(0, totalVanes).filter((el): el is HTMLDivElement => el !== null);
     const lights = lightRefs.current.slice(0, totalVanes).filter((el): el is HTMLDivElement => el !== null);
@@ -145,7 +170,7 @@ export const AboutVaneBanner: React.FC = () => {
 
     // Pinned ScrollTrigger
     const st = activeScrollTrigger.create({
-      id: 'about-vane-pin-trigger',
+      id: triggerId,
       trigger: container,
       start: 'top top',
       end: '+=120%',
@@ -163,12 +188,21 @@ export const AboutVaneBanner: React.FC = () => {
     });
 
     scrollTriggerRef.current = st;
+    activeScrollTrigger.refresh();
+
+    const refreshTimer = setTimeout(() => {
+      activeScrollTrigger.refresh();
+    }, 100);
 
     return () => {
+      clearTimeout(refreshTimer);
+      if (win.lenisInstance && typeof win.lenisInstance.off === 'function') {
+        win.lenisInstance.off('scroll', onLenisScroll);
+      }
       st.kill();
       tl.kill();
     };
-  }, [totalVanes]);
+  }, [totalVanes, triggerId]);
 
   const scrollToSlide = useCallback((targetIdx: number) => {
     const st = scrollTriggerRef.current;
@@ -193,13 +227,13 @@ export const AboutVaneBanner: React.FC = () => {
     });
   }, []);
 
-  const currentSlide = ABOUT_SLIDES[activeIdx];
+  const currentSlide = slides[activeIdx] ?? slides[0];
 
   return (
     <div
       ref={containerRef}
       className="about-vane-container"
-      aria-label="About Mitjen Kinetic Banner"
+      aria-label={ariaLabel}
     >
       <div ref={stickyViewportRef} className="about-vane-viewport">
         {/* 3D Louvre Layer */}
@@ -228,7 +262,7 @@ export const AboutVaneBanner: React.FC = () => {
                     <div
                       className="about-vane-slice-img"
                       style={{
-                        backgroundImage: `url("${ABOUT_SLIDES[0].image}")`,
+                        backgroundImage: `url("${slides[0].image}")`,
                         left: `-${i * (100 / totalVanes)}vw`,
                       }}
                     />
@@ -239,7 +273,7 @@ export const AboutVaneBanner: React.FC = () => {
                     <div
                       className="about-vane-slice-img"
                       style={{
-                        backgroundImage: `url("${ABOUT_SLIDES[1].image}")`,
+                        backgroundImage: `url("${slides[1].image}")`,
                         left: `-${i * (100 / totalVanes)}vw`,
                       }}
                     />
@@ -268,12 +302,12 @@ export const AboutVaneBanner: React.FC = () => {
             <nav className="about-vane-breadcrumbs" aria-label="Breadcrumb">
               <Link to="/">Home</Link>
               <span className="about-vane-sep">/</span>
-              <span className="about-vane-active-crumb">About Us</span>
+              <span className="about-vane-active-crumb">{breadcrumbLabel}</span>
             </nav>
 
             <div className="about-vane-badge">
               <span className="about-vane-badge-pulse" />
-              <span>ATELIER PRACTICE // COIMBATORE</span>
+              <span>{badgeText}</span>
             </div>
           </div>
 
@@ -317,7 +351,7 @@ export const AboutVaneBanner: React.FC = () => {
           {/* Bottom Bar: Indicators & Counter */}
           <div className="about-vane-bottom-bar">
             <div className="about-vane-indicators">
-              {ABOUT_SLIDES.map((slide, idx) => (
+              {slides.map((slide, idx) => (
                 <button
                   key={slide.id}
                   type="button"
@@ -326,7 +360,7 @@ export const AboutVaneBanner: React.FC = () => {
                   aria-label={`Jump to slide ${slide.num}: ${slide.title}`}
                 >
                   <span className="about-vane-tab-num">{slide.num}</span>
-                  <span>{idx === 0 ? 'ATELIER' : 'CRAFT'}</span>
+                  <span>{slide.tabLabel ?? (idx === 0 ? 'ATELIER' : 'CRAFT')}</span>
                 </button>
               ))}
             </div>

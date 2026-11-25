@@ -53,7 +53,7 @@ const APPROACH_ITEMS: ApproachItem[] = [
     title: 'PROJECT EXECUTION & HANDOVER',
     description:
       'We take the approved design through execution, working towards a finished space that reflects the agreed plan.',
-    image: '/assets/images/projects/image3.jpg',
+    image: '/images/projects/Mitjen-Racecourse-PU-Paint/Residential7.jpeg',
     imageAlt: 'Project Execution & Handover - Approved design through execution',
     href: '#',
     focus: ['Turnkey Site Supervision', 'Timeline Adherence', 'Final Snagging & Walkthrough'],

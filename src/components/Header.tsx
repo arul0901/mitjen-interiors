@@ -502,14 +502,14 @@ export const Header: React.FC = () => {
             </div>
           </div>
 
-          <Link
+          {/* <Link
             to="/portfolio"
             className={`mobile-nav-link ${location.pathname === '/portfolio' ? 'on' : ''}`}
             onClick={closeAllMenus}
           >
             <span>Portfolio</span>
             <span style={{ fontSize: '0.9rem', opacity: 0.5 }}>04</span>
-          </Link>
+          </Link> */}
 
           <Link
             to="/projects"
