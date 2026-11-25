@@ -68,6 +68,7 @@ export function ScrollWalkthroughVideoHero() {
     enabled: !isReducedMotion,
     smoothing: 6,
     startTime: 0.75,
+    endOffset: 0.9,
     onProgress: (p) => {
       setProgress(p);
       if (p > 0.04) {

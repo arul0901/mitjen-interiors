@@ -175,6 +175,8 @@ export const AboutVaneBanner: React.FC<AboutVaneBannerProps> = ({
       start: 'top top',
       end: '+=120%',
       pin: viewport,
+      anticipatePin: 1,
+      invalidateOnRefresh: true,
       scrub: 0.6,
       animation: tl,
       onUpdate: (self: { progress: number }) => {

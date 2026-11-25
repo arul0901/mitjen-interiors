@@ -9,7 +9,7 @@
   position: relative;
   width: 100%;
   background-color: #0b0a09;
-  overflow: hidden;
+  overflow-x: clip;
   user-select: none;
   -webkit-user-select: none;
   z-index: 2;

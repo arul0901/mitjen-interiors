@@ -8,6 +8,7 @@ export interface UseScrollScrubVideoOptions {
   enabled?: boolean;
   smoothing?: number; // e.g. 6 (default), tuned up to 10 if laggy
   startTime?: number; // skip leading black/fade-in frames (seconds)
+  endOffset?: number; // skip trailing fade-out/black frames (seconds from end)
   onProgress?: (progress: number) => void;
   onDurationChange?: (duration: number) => void;
   onJankDetected?: () => void;
@@ -19,6 +20,7 @@ export function useScrollScrubVideo({
   enabled = true,
   smoothing = 6,
   startTime = 0,
+  endOffset = 0,
   onProgress,
   onDurationChange,
   onJankDetected,
@@ -222,7 +224,8 @@ export function useScrollScrubVideo({
         if (!dur || dur <= 0) return;
 
         const minT = Math.min(startTime, Math.max(0, dur - 0.1));
-        let targetTime = minT + progressRef.current * (dur - minT);
+        const maxT = Math.max(minT + 0.1, dur - endOffset);
+        let targetTime = minT + progressRef.current * (maxT - minT);
 
         // Check buffered range so we hold at buffered edge instead of stalling
         try {
@@ -246,7 +249,7 @@ export function useScrollScrubVideo({
         currentRef.current += (targetTime - currentRef.current) * factor;
 
         // Clamp between minT and duration
-        currentRef.current = Math.max(minT, Math.min(dur, currentRef.current));
+        currentRef.current = Math.max(minT, Math.min(maxT, currentRef.current));
 
         // Apply to video only when |next - lastSet| > 1/60s and decoder is ready
         const diff = Math.abs(currentRef.current - lastSetRef.current);
